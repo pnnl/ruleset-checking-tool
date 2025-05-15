@@ -7,42 +7,37 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-2",
-            "ruleset_reference": "(previously 6-2)Table G3.1 (6)(e)",
-            "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2",
-            "applicable_rmr": "Proposed RMR",
+            "ruleset_reference": "Table G3.1 (6)(e)",
+            "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2.",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
-            "comparison_value": "User RMR",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "comparison_value": "User Design",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 85.47079679999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 11.947940562547794
                                                             }
                                                         ],
@@ -51,11 +46,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Required Schedule 1",
                                                                 "power_per_area": 9.902797583372946
                                                             }
                                                         ],
@@ -67,36 +60,32 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 85.47079679999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 11.947940562547794
                                                             }
                                                         ],
@@ -105,11 +94,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Required Schedule 1",
                                                                 "power_per_area": 9.902797583372946
                                                             }
                                                         ],
@@ -121,7 +108,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -135,42 +123,37 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-2",
-            "ruleset_reference": "(previously 6-2)Table G3.1 (6)(e)",
-            "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2",
-            "applicable_rmr": "Proposed RMR",
+            "ruleset_reference": "Table G3.1 (6)(e)",
+            "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2.",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
-            "comparison_value": "User RMR",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "comparison_value": "User Design",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 85.47079679999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 11.947940562547794
                                                             }
                                                         ],
@@ -179,11 +162,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Required Schedule 1",
                                                                 "power_per_area": 9.902797583372946
                                                             }
                                                         ],
@@ -195,36 +176,32 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 85.47079679999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 13.024331604218766
                                                             }
                                                         ],
@@ -233,11 +210,9 @@
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Required Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
-                                                                "lighting_multiplier_schedule": "Required Schedule 1",
                                                                 "power_per_area": 10.87154952087682
                                                             }
                                                         ],
@@ -249,7 +224,240 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-6-2-c": {
+        "Section": 6,
+        "Rule": 2,
+        "Test": "c",
+        "test_description": "Project has one building segment with two spaces. Both lighting power per area and lighting power allowance have been specified. The proposed building lighting power per area equals the maximum value of the proposed building's lighting power allowance and user building's lighting power per area.  The space type is \"Dwelling Unit\".",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "6-2",
+            "ruleset_reference": "Table G3.1 (6)(e)",
+            "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2.",
+            "applicable_rmr": "Proposed Design",
+            "rule_assertion": "<=",
+            "comparison_value": "User Design",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 85.47079679999999,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Space 1 Lighting 1",
+                                                                "power_per_area": 6.458346250025834
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 92.90303999999999,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Space 2 Lighting 1",
+                                                                "power_per_area": 9.687519375038752
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 85.47079679999999,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Space 1 Lighting 1",
+                                                                "power_per_area": 6.458346250025834
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 92.90303999999999,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Space 2 Lighting 1",
+                                                                "power_per_area": 9.687519375038752
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "DWELLING_UNIT"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-6-2-d": {
+        "Section": 6,
+        "Rule": 2,
+        "Test": "d",
+        "test_description": "Project has one building segment with two spaces. Both spaces have the lighting space type defined as library reading area. None of the applicable space types are in the project.",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "6-2",
+            "ruleset_reference": "Table G3.1 (6)(e)",
+            "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2.",
+            "applicable_rmr": "Proposed Design",
+            "rule_assertion": "<=",
+            "comparison_value": "User Design",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 85.47079679999999,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Space 1 Lighting 1",
+                                                                "power_per_area": 6.458346250025834
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "LIBRARY_READING_AREA"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 92.90303999999999,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Space 2 Lighting 1",
+                                                                "power_per_area": 9.687519375038752
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "LIBRARY_READING_AREA"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "USER"
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 85.47079679999999,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Space 1 Lighting 1",
+                                                                "power_per_area": 6.458346250025834
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "LIBRARY_READING_AREA"
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 92.90303999999999,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Space 2 Lighting 1",
+                                                                "power_per_area": 9.687519375038752
+                                                            }
+                                                        ],
+                                                        "lighting_space_type": "LIBRARY_READING_AREA"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }

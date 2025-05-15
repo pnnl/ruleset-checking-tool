@@ -7,11 +7,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.is_baseline_system_2 import (
     is_baseline_system_2,
 )
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.validate import schema_validate_rpd
 
 SYS_2_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -41,11 +41,11 @@ SYS_2_TEST_RMD = {
                                     "id": "PTHP 1",
                                     "cooling_system": {
                                         "id": "HP Cooling Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "heating_system": {
                                         "id": "HP Heating Coil 1",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 1",
@@ -58,13 +58,22 @@ SYS_2_TEST_RMD = {
                     ],
                 }
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 
 def test__TEST_RMD_baseline_system_2__is_valid():
-    schema_validation_result = schema_validate_rmr(SYS_2_TEST_RMD)
+    schema_validation_result = schema_validate_rpd(SYS_2_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -73,7 +82,7 @@ def test__TEST_RMD_baseline_system_2__is_valid():
 def test__is_baseline_system_2__true():
     assert (
         is_baseline_system_2(
-            SYS_2_TEST_RMD["ruleset_model_instances"][0],
+            SYS_2_TEST_RMD["ruleset_model_descriptions"][0],
             "PTHP 1",
             ["PTHP Terminal 1"],
             ["Thermal Zone 1"],
@@ -85,7 +94,9 @@ def test__is_baseline_system_2__true():
 def test__is_baseline_system_2__test_json_true():
     assert (
         is_baseline_system_2(
-            load_system_test_file("System_2_PTHP.json")["ruleset_model_instances"][0],
+            load_system_test_file("System_2_PTHP.json")["ruleset_model_descriptions"][
+                0
+            ],
             "PTHP 1",
             ["PTHP Terminal 1"],
             ["Thermal Zone 1"],

@@ -1,10 +1,10 @@
-def is_hvac_system_multizone(rmi_b, zone_id_list):
+def is_hvac_system_multizone(rmd_b, zone_id_list):
     """
     Returns TRUE if the HVAC system serves multiple zones. Returns FALSE if the HVAC system serves a single or no zones.
 
     Parameters
     ----------
-    rmi_b: json
+    rmd_b: json
     zone_id_list: list[string] zone ids
 
     Returns

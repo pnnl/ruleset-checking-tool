@@ -3,46 +3,42 @@
         "Section": 5,
         "Rule": 38,
         "Test": "a",
-        "test_description": "Building is located in climate zone 4A. It includes an exterior residential conditioned zone and one roof surface that has skylight whose area is in the building is 0%-2.0%. The baseline skylight solar heat gain coefficient is established correctly.",
-        "expected_rule_outcome": "pass",
+        "test_description": "Project has one building segment with one space that does not include any floor surfaces adjacent to ground. This rule does not apply to the project.",
+        "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "5-38",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(14) Proposed Building Performance (b)",
+            "rule_description": "It is acceptable to use either an annual average ground temperature or monthly average ground temperatures for calculation of heat loss through basement floors.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "primary_rule": "Applicability",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ6A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "volume": 21.237634943999996,
+                                                "volume": 42.47526988799999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -56,18 +52,12 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
+                                                        "tilt": 120,
                                                         "area": 929.0303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 4.6451519999999995,
-                                                                "opaque_area": 0.9290303999999999,
-                                                                "u_factor": 3.293393197897507,
-                                                                "solar_heat_gain_coefficient": 0.36
-                                                            }
-                                                        ]
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 1.5331313162626328
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -88,7 +78,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -98,46 +89,44 @@
         "Section": 5,
         "Rule": 38,
         "Test": "b",
-        "test_description": "Building is located in climate zone 4A. It includes an exterior residential conditioned zone and one roof surface that has skylight whose area is in the building is 0%-2.0%. The baseline skylight solar heat gain coefficient is established incorrectly.",
-        "expected_rule_outcome": "fail",
+        "test_description": "Project has one building segment with one space that includes floor surfaces adjacent to ground. The ruleset project description specifies a ground temperature schedule, but cannot be determined if it is representative of the project climate or if it was used in the calculation of heat loss.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "It cannot be determined if the ground temperature schedule for the project is representative of the project climate.",
         "standard": {
             "rule_id": "5-38",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(14) Proposed Building Performance (b)",
+            "rule_description": "It is acceptable to use either an annual average ground temperature or monthly average ground temperatures for calculation of heat loss through basement floors.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "primary_rule": "Applicability",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ6A",
+                            "data_source_type": "OTHER",
+                            "ground_temperature_schedule": "Ground Temp Schedule 1"
+                        },
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "volume": 21.237634943999996,
+                                                "volume": 42.47526988799999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -150,19 +139,13 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 120,
                                                         "area": 929.0303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 4.6451519999999995,
-                                                                "opaque_area": 0.9290303999999999,
-                                                                "u_factor": 3.918002252671172,
-                                                                "solar_heat_gain_coefficient": 0.49
-                                                            }
-                                                        ]
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 1.5331313162626328
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -183,7 +166,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -193,45 +177,42 @@
         "Section": 5,
         "Rule": 38,
         "Test": "c",
-        "test_description": "Building is located in climate zone 4A. It includes an exterior nonresidential conditioned zone and one roof surface that has skylight whose area is in the building is 0%-2.0%. The baseline skylight solar heat gain coefficient is established correctly.",
-        "expected_rule_outcome": "pass",
+        "test_description": "Project has one building segment with one space that includes floor surfaces adjacent to ground. The ruleset project description does not specify a ground temperature schedule.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "A ground temperature schedule was not found for the project.",
         "standard": {
             "rule_id": "5-38",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(14) Proposed Building Performance (b)",
+            "rule_description": "It is acceptable to use either an annual average ground temperature or monthly average ground temperatures for calculation of heat loss through basement floors.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "primary_rule": "Applicability",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ6A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "volume": 21.237634943999996,
+                                                "volume": 42.47526988799999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 23.225759999999998
                                                     }
@@ -245,19 +226,13 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 120,
                                                         "area": 929.0303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 4.6451519999999995,
-                                                                "opaque_area": 0.9290303999999999,
-                                                                "u_factor": 3.918002252671172,
-                                                                "solar_heat_gain_coefficient": 0.49
-                                                            }
-                                                        ]
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 1.5331313162626328
+                                                        }
                                                     }
                                                 ]
                                             }
@@ -278,298 +253,8 @@
                                     }
                                 ]
                             }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-38-d": {
-        "Section": 5,
-        "Rule": 38,
-        "Test": "d",
-        "test_description": "Building is located in climate zone 4A. It includes an exterior nonresidential conditioned zone and one roof surface that has skylight whose area is in the building is 0%-2.0%. The baseline skylight solar heat gain coefficient is established incorrectly.",
-        "expected_rule_outcome": "fail",
-        "standard": {
-            "rule_id": "5-38",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "volume": 21.237634943999996,
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "OFFICE_ENCLOSED",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
-                                                        "area": 929.0303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 4.6451519999999995,
-                                                                "opaque_area": 0.9290303999999999,
-                                                                "u_factor": 5.110437720875442,
-                                                                "solar_heat_gain_coefficient": 0.36
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 35170.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 9378.275555555556
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-38-e": {
-        "Section": 5,
-        "Rule": 38,
-        "Test": "e",
-        "test_description": "Building is located in climate zone 4A. It includes a semi-exterior conditioned zone and one roof surface that has skylight whose area is in the building is 0%-2.0%. The baseline skylight solar heat gain coefficient is established correctly.",
-        "expected_rule_outcome": "pass",
-        "standard": {
-            "rule_id": "5-38",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "volume": 21.237634943999996,
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
-                                                        "area": 929.0303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 4.6451519999999995,
-                                                                "opaque_area": 0.9290303999999999,
-                                                                "u_factor": 7.722439222656224,
-                                                                "solar_heat_gain_coefficient": 0.55
-                                                            }
-                                                        ],
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 0.7041047526539498
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 0.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 699.8538133333334
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-38-f": {
-        "Section": 5,
-        "Rule": 38,
-        "Test": "f",
-        "test_description": "Building is located in climate zone 4A. It includes a semi-exterior conditioned zone and one roof surface that has skylight whose area is in the building is 0%-2.0%. The baseline skylight solar heat gain coefficient is established incorrectly.",
-        "expected_rule_outcome": "fail",
-        "standard": {
-            "rule_id": "5-38",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": "Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "volume": 21.237634943999996,
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
-                                                        "area": 929.0303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "classification": "SKYLIGHT",
-                                                                "glazed_area": 4.6451519999999995,
-                                                                "opaque_area": 0.9290303999999999,
-                                                                "u_factor": 3.293393197897507,
-                                                                "solar_heat_gain_coefficient": 0.49
-                                                            }
-                                                        ],
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 0.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 699.8538133333334
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

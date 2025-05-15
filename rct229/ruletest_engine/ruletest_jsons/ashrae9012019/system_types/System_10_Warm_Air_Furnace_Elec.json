@@ -1,6 +1,6 @@
 {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -20,11 +20,7 @@
                                             "id": "Air Terminal",
                                             "is_supply_ducted": true,
                                             "type": "CONSTANT_AIR_VOLUME",
-                                            "served_by_heating_ventilating_air_conditioning_system": "System 10",
-                                            "heating_source": "ELECTRIC",
-                                            "fan": {
-                                                "id": "Terminal Fan 1"
-                                            }
+                                            "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                         }
                                     ]
                                 }
@@ -34,8 +30,17 @@
                                     "id": "System 10",
                                     "heating_system": {
                                         "id": "Furnace Coil 1",
-                                        "heating_system_type": "FURNACE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                         "energy_source_type": "ELECTRICITY"
+                                    },
+                                    "fan_system": {
+                                        "id": "Fan System 1",
+                                        "fan_control": "CONSTANT",
+                                        "supply_fans": [
+                                            {
+                                                "id": "Fan 1"
+                                            }
+                                        ]
                                     }
                                 }
                             ]

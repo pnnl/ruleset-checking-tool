@@ -1,5 +1,5 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -24,49 +24,51 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section22Rule33(RuleDefinitionBase):
+class PRM9012019Rule88r57(RuleDefinitionBase):
     """Rule 33 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule33, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+        super(PRM9012019Rule88r57, self).__init__(
+            rmds_used=produce_ruleset_model_description(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             id="22-33",
-            description="Baseline chilled water system that does not use purchased chilled water must have no more than one CHW plant.",
+            description="Baseline chilled water systems that do not use purchased chilled water shall have only one set of primary/secondary chilled water loops.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmd_context="ruleset_model_descriptions/0",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
+            for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
-        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
+        # There is no point to check primary secondary loop in the applicable function
+        # because the get_primary_secondary_loops_dict returns nothing if any cooling loop is
+        # modeled as a primary only loop
+        # primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
 
-        return (
-            any(
-                [
-                    available_type in APPLICABLE_SYS_TYPES
-                    for available_type in available_type_list
-                ]
-            )
-            and primary_secondary_loop_dict
+        return any(
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_list
+            ]
         )
 
     def get_calc_vals(self, context, data=None):
-        rmi_b = context.baseline
-        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
+        rmd_b = context.BASELINE_0
+        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
         num_primary_loops = len(primary_secondary_loop_dict)
         num_secondary_loops = sum(
             [
                 len(primary_secondary_loop_dict[primary_loop])
-                for primary_loop in primary_secondary_loop_dict.keys()
+                for primary_loop in primary_secondary_loop_dict
             ]
         )
 

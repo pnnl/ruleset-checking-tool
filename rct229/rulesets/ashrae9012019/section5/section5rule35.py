@@ -1,107 +1,134 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_skylight_roof_areas_dict import (
-    get_building_segment_skylight_roof_areas_dict,
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
 )
-from rct229.utils.pint_utils import ZERO
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
+    ZoneConditioningCategory as ZCC,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
+    get_zone_conditioning_category_dict,
+)
+from rct229.schema.config import ureg
+from rct229.utils.assertions import getattr_
+from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
-SKYLIGHT_THRESHOLD = 0.03
+TARGET_AIR_LEAKAGE_COEFF = 1.0 * ureg("cfm / foot**2")
+TOTAL_AIR_LEAKAGE_FACTOR = 0.112
 
 
-class Section5Rule35(RuleDefinitionListIndexedBase):
+class PRM9012019Rule39k65(RuleDefinitionListIndexedBase):
     """Rule 35 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule35, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
+        super(PRM9012019Rule39k65, self).__init__(
+            rmds_used=produce_ruleset_model_description(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule35.BuildingRule(),
-            index_rmr="baseline",
+            each_rule=PRM9012019Rule39k65.BuildingRule(),
+            index_rmd=BASELINE_0,
             id="5-35",
-            description="If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased in all roof components in which skylights are located to reach 3%.",
+            description="The baseline air leakage rate of the building envelope (I_75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.",
             ruleset_section_title="Envelope",
-            standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
+            standard_section="Section G3.1-5(h) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            list_path="ruleset_model_descriptions[0].buildings[*]",
         )
 
-    class BuildingRule(RuleDefinitionListIndexedBase):
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
+
+    class BuildingRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section5Rule35.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
-                each_rule=Section5Rule35.BuildingRule.BuildingSegmentRule(),
-                index_rmr="baseline",
-                list_path="building_segments[*]",
+            super(PRM9012019Rule39k65.BuildingRule, self).__init__(
+                rmds_used=produce_ruleset_model_description(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
+                required_fields={"$.building_segments[*].zones[*]": ["surfaces"]},
+                precision={
+                    "building_total_air_leakage_rate": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    }
+                },
             )
 
-        def create_data(self, context, data=None):
-            building_b = context.baseline
-            building_p = context.proposed
+        def get_calc_vals(self, context, data=None):
+            building_b = context.BASELINE_0
+
+            scc_dict_b = get_surface_conditioning_category_dict(
+                data["climate_zone"], building_b
+            )
+            zcc_dict_b = get_zone_conditioning_category_dict(
+                data["climate_zone"], building_b
+            )
+
+            building_total_air_leakage_rate = ZERO.FLOW
+
+            building_total_envelope_area = sum(
+                [
+                    getattr_(surface, "surface", "area")
+                    for surface in find_all(
+                        "$.building_segments[*].zones[*].surfaces[*]", building_b
+                    )
+                    if scc_dict_b[surface["id"]] != SCC.UNREGULATED
+                ],
+                ZERO.AREA,
+            )
+
+            target_air_leakage_rate_75pa_b = (
+                TARGET_AIR_LEAKAGE_COEFF
+            ) * building_total_envelope_area
+
+            for zone in find_all("$.building_segments[*].zones[*]", building_b):
+                if zcc_dict_b[zone["id"]] in [
+                    ZCC.CONDITIONED_RESIDENTIAL,
+                    ZCC.CONDITIONED_NON_RESIDENTIAL,
+                    ZCC.CONDITIONED_MIXED,
+                    ZCC.SEMI_HEATED,
+                ]:
+                    building_total_air_leakage_rate += getattr_(
+                        zone["infiltration"], "infiltration", "flow_rate"
+                    )
+
             return {
-                "skylight_roof_areas_dictionary_b": get_building_segment_skylight_roof_areas_dict(
-                    data["climate_zone"], building_b
+                "building_total_air_leakage_rate": CalcQ(
+                    "air_flow_rate", building_total_air_leakage_rate
                 ),
-                "skylight_roof_areas_dictionary_p": get_building_segment_skylight_roof_areas_dict(
-                    data["climate_zone"], building_p
+                "target_air_leakage_rate_75pa_b": CalcQ(
+                    "air_flow_rate", target_air_leakage_rate_75pa_b
                 ),
             }
 
-        class BuildingSegmentRule(RuleDefinitionBase):
-            def __init__(self):
-                super(Section5Rule35.BuildingRule.BuildingSegmentRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, True),
-                )
+        def rule_check(self, context, calc_vals=None, data=None):
+            building_total_air_leakage_rate = calc_vals[
+                "building_total_air_leakage_rate"
+            ]
+            target_air_leakage_rate_75pa_b = calc_vals["target_air_leakage_rate_75pa_b"]
+            return self.precision_comparison["building_total_air_leakage_rate"](
+                building_total_air_leakage_rate,
+                target_air_leakage_rate_75pa_b * TOTAL_AIR_LEAKAGE_FACTOR,
+            )
 
-            def is_applicable(self, context, data=None):
-                building_p = context.proposed
-                skylight_roof_areas_dictionary_p = data[
-                    "skylight_roof_areas_dictionary_p"
-                ]
-                total_skylight_area = skylight_roof_areas_dictionary_p[
-                    building_p["id"]
-                ]["total_skylight_area"]
-                total_envelope_roof_area = skylight_roof_areas_dictionary_p[
-                    building_p["id"]
-                ]["total_envelope_roof_area"]
-                # avoid zero division
-                return (
-                    total_envelope_roof_area > ZERO.AREA
-                    and total_skylight_area / total_envelope_roof_area
-                    > SKYLIGHT_THRESHOLD
-                )
-
-            def get_calc_vals(self, context, data=None):
-                building_segment_b = context.baseline
-                skylight_roof_areas_dictionary_b = data[
-                    "skylight_roof_areas_dictionary_b"
-                ]
-                skylight_roof_areas_dictionary_p = data[
-                    "skylight_roof_areas_dictionary_p"
-                ]
-
-                return {
-                    "skylight_roof_ratio_b": skylight_roof_areas_dictionary_b[
-                        building_segment_b["id"]
-                    ]["total_skylight_area"]
-                    / skylight_roof_areas_dictionary_b[building_segment_b["id"]][
-                        "total_envelope_roof_area"
-                    ],
-                    "skylight_total_roof_ratio_p": sum(
-                        component["total_skylight_area"]
-                        for component in skylight_roof_areas_dictionary_p.values()
-                    )
-                    / sum(
-                        component["total_envelope_roof_area"]
-                        for component in skylight_roof_areas_dictionary_p.values()
-                    ),
-                }
-
-            def rule_check(self, context, calc_vals=None, data=None):
-                skylight_roof_ratio_b = calc_vals["skylight_roof_ratio_b"]
-                return std_equal(skylight_roof_ratio_b, 0.03)
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            building_total_air_leakage_rate = calc_vals[
+                "building_total_air_leakage_rate"
+            ]
+            target_air_leakage_rate_75pa_b = calc_vals["target_air_leakage_rate_75pa_b"]
+            return std_equal(
+                target_air_leakage_rate_75pa_b * TOTAL_AIR_LEAKAGE_FACTOR,
+                building_total_air_leakage_rate,
+            )

@@ -1,4 +1,6 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from typing import TypedDict
+
+from pint import Quantity
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
@@ -9,16 +11,20 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     SurfaceConditioningCategory as SCC,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    ZoneConditioningDataDict,
     get_surface_conditioning_category_dict,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 
-DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
+DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 
 
-def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
+def get_building_scc_skylight_roof_ratios_dict(
+    climate_zone: str, building: dict
+) -> ZoneConditioningDataDict:
     """Gets a dictionary mapping skylight and envelope roof ratios for a building for residential, non-residential,
     mixed and semi-heated surface conditioning categories
             Parameters
@@ -31,7 +37,7 @@ def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
             -------
             dict
                 A dictionary that saves each surface conditioning category (residential, non-residential, mixed and semi-heated)
-                with its skylight-roof-ratios for each building in RMR.
+                with its skylight-roof-ratios for each building in rmd.
                 {
                     "building_id": {"EXTERIOR RESIDENTIAL": srr_res, "EXTERIOR NON-RESIDENTIAL": srr_nonres,
                     "EXTERIOR MIXED": srr_mixed, "SEMI-EXTERIOR": srr_semiheated},
@@ -79,16 +85,16 @@ def get_building_scc_skylight_roof_ratios_dict(climate_zone, building):
         srr_semiheated = total_semiheated_skylight_area / total_semiheated_roof_area
 
     return {
-        SCC.EXTERIOR_RESIDENTIAL: srr_res,
-        SCC.EXTERIOR_NON_RESIDENTIAL: srr_nonres,
-        SCC.EXTERIOR_MIXED: srr_mixed,
-        SCC.SEMI_EXTERIOR: srr_semiheated,
+        getattr(SCC, "EXTERIOR_RESIDENTIAL"): srr_res,
+        getattr(SCC, "EXTERIOR_NON_RESIDENTIAL"): srr_nonres,
+        getattr(SCC, "EXTERIOR_MIXED"): srr_mixed,
+        getattr(SCC, "SEMI_EXTERIOR"): srr_semiheated,
     }
 
 
-def _helper_calculate_skylight_area(surface):
+def _helper_calculate_skylight_area(surface: dict) -> Quantity:
     total_glazed_area = ZERO.AREA
-    for subsurface in find_all("subsurfaces[*]", surface):
+    for subsurface in find_all("$.subsurfaces[*]", surface):
         glazed_area = getattr_(subsurface, "subsurface", "glazed_area")
         opaque_area = getattr_(subsurface, "subsurface", "opaque_area")
         if getattr_(subsurface, "subsurface", "classification") == DOOR:

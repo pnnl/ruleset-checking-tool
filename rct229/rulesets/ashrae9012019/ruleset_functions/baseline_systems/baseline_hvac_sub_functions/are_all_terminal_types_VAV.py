@@ -1,18 +1,16 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_terminal_unit,
-)
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.utility_functions import find_exactly_one_terminal_unit
 
-TERMINAL_TYPE = schema_enums["TerminalOptions"]
+TERMINAL_TYPE = SchemaEnums.schema_enums["TerminalOptions"]
 
 
-def are_all_terminal_types_VAV(rmi_b, terminal_unit_id_list):
-    """Returns TRUE if all of the terminal unit types input to this function are variable air volume (VAV). It returns FALSE if any of the terminal units are of a type other than variable air volume (VAV).
+def are_all_terminal_types_VAV(rmd: dict, terminal_unit_id_list: list[str]) -> bool:
+    """It returns FALSE if no terminal unit in the list or any of the terminal units are of a type other than variable air volume (VAV) or null.
 
     Parameters
     ----------
-    rmi_b : json
-        RMD at RuleSetModelInstance level
+    rmd : dict
+        RMD at RuleSetModelDescription level
     terminal_unit_id_list : list
         List of terminal units IDs
 
@@ -22,12 +20,11 @@ def are_all_terminal_types_VAV(rmi_b, terminal_unit_id_list):
         True: all of the terminal unit types input to this function are variable air volume (VAV)
         False: any of the terminal units are of a type other than variable air volume (VAV)
     """
-    are_all_terminal_types_VAV_flag = True
 
-    for terminal_b_id in terminal_unit_id_list:
-        terminal_b = find_exactly_one_terminal_unit(rmi_b, terminal_b_id)
-        if terminal_b.get("type") != TERMINAL_TYPE.VARIABLE_AIR_VOLUME:
-            are_all_terminal_types_VAV_flag = False
-            break
-
-    return are_all_terminal_types_VAV_flag
+    return len(terminal_unit_id_list) > 0 and all(
+        [
+            find_exactly_one_terminal_unit(rmd, terminal_id).get("type")
+            in [None, TERMINAL_TYPE.VARIABLE_AIR_VOLUME]
+            for terminal_id in terminal_unit_id_list
+        ]
+    )

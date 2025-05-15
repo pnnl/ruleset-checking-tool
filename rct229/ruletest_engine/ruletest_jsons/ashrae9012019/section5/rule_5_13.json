@@ -3,84 +3,110 @@
         "Section": 5,
         "Rule": 13,
         "Test": "a",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
+        "test_description": "Project has one building segment and includes one space with an unregulated exterior wall surface. The space is unconditioned based on heating and cooling capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface correctly matches the proposed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 120,
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 0.21577403710362977
+                                                            "id": "Construction 1",
+                                                            "u_factor": 7.097830167882559
                                                         }
                                                     }
                                                 ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 17585.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 9378.275555555556
-                                                }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 7.097830167882559
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -90,84 +116,110 @@
         "Section": 5,
         "Rule": 13,
         "Test": "b",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on cooling capacity of the HVAC system that servies the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
-        "expected_rule_outcome": "pass",
+        "test_description": "Project has one building segment and includes one space with an unregulated exterior wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface does not match the proposed.",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 120,
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 0.21577403710362977
+                                                            "id": "Construction 1",
+                                                            "u_factor": 7.097830167882559
                                                         }
                                                     }
                                                 ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 42204.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 8792.133333333333
-                                                }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 7.665656581313163
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -177,62 +229,54 @@
         "Section": 5,
         "Rule": 13,
         "Test": "c",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
-        "expected_rule_outcome": "fail",
+        "test_description": "Project has one building segment and includes a space with an unregulated exterior wall surface. The space is semiheated based on heating capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface correctly matches the proposed.",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 56.63369318399999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 120,
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 7.029690998270886
+                                                            "id": "Construction 1",
+                                                            "u_factor": 7.097830167882559
                                                         }
                                                     }
                                                 ]
@@ -243,18 +287,80 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 17585.0
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 9378.275555555556
+                                                    "design_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 56.63369318399999,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 7.097830167882559
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 0.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 699.8538133333334
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -264,62 +370,54 @@
         "Section": 5,
         "Rule": 13,
         "Test": "d",
-        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline floor U-factor for the zone is established correctly.\n\n",
-        "expected_rule_outcome": "pass",
+        "test_description": "Project has one building segment and includes a space with an unregulated exterior wall surface. The space is semiheated based on heating capacity of the HVAC system that serves the parent zone. The baseline exterior envelope U-factor for the surface does not match the proposed.",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 56.63369318399999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 120,
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 0.2952697349839144
+                                                            "id": "Construction 1",
+                                                            "u_factor": 7.097830167882559
                                                         }
                                                     }
                                                 ]
@@ -330,18 +428,80 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 17585.0
+                                                    "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 9378.275555555556
+                                                    "design_capacity": 699.8538133333334
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 56.63369318399999,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 7.665656581313163
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 0.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 699.8538133333334
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -351,84 +511,110 @@
         "Section": 5,
         "Rule": 13,
         "Test": "e",
-        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline floor U-factor for the zone is not established correctly.\n\n",
-        "expected_rule_outcome": "fail",
+        "test_description": "Project has one building segment and includes a space with an unregulated below-grade wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor correctly matches the proposed.",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 120,
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
                                                         "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 7.029690998270886
+                                                            "id": "Construction 1",
+                                                            "c_factor": 7.097830167882559
                                                         }
                                                     }
                                                 ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 17585.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 9378.275555555556
-                                                }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "c_factor": 7.097830167882559
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -438,85 +624,110 @@
         "Section": 5,
         "Rule": 13,
         "Test": "f",
-        "test_description": "A zone is semiheated based on heating and cooling capacity of the HVAC system that servies the parent zone. Building is located in climate zone 4A. The baseline floor U-factor for the zone is established correctly.\n\n",
-        "expected_rule_outcome": "pass",
+        "test_description": "Project has one building segment and includes a space with an unregulated below-grade wall surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor does not match the proposed.",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-13",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 120,
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
                                                         "area": 9.290303999999999,
                                                         "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 0.3918002252671173
+                                                            "id": "Construction 1",
+                                                            "c_factor": 7.097830167882559
                                                         }
                                                     }
                                                 ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 0.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 699.8538133333334
-                                                }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "c_factor": 7.665656581313163
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -526,63 +737,54 @@
         "Section": 5,
         "Rule": 13,
         "Test": "g",
-        "test_description": "A zone is semiheated based on heating and cooling capacity of the HVAC system that servies the parent zone. Building is located in climate zone 4A. The baseline floor U-factor for the zone is not established correctly.\n\n",
-        "expected_rule_outcome": "fail",
+        "test_description": "Project has one building segment and includes a space with an unregulated below-grade wall surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor correctly matches the proposed.",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-13",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline floor assemblies must  match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 56.63369318399999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                                                         "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
                                                     }
                                                 ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 120,
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
                                                         "area": 9.290303999999999,
                                                         "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 3.9974979505514567
+                                                            "id": "Construction 1",
+                                                            "c_factor": 7.097830167882559
                                                         }
                                                     }
                                                 ]
@@ -604,7 +806,666 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 56.63369318399999,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "c_factor": 7.097830167882559
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 0.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 699.8538133333334
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-13-h": {
+        "Section": 5,
+        "Rule": 13,
+        "Test": "h",
+        "test_description": "Project has one building segment and includes a space with an unregulated below-grade wall surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline below-grade wall C-factor does not match the proposed.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-13",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 56.63369318399999,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "c_factor": 7.097830167882559
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 0.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 699.8538133333334
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 56.63369318399999,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "c_factor": 7.665656581313163
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 0.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 699.8538133333334
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-13-i": {
+        "Section": 5,
+        "Rule": 13,
+        "Test": "i",
+        "test_description": "Project has one building segment and includes a space with an unregulated slab-on-grade floor surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor correctly matches the proposed.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-13",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "f_factor": 2.1634186351706037
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "f_factor": 2.1634186351706037
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-13-j": {
+        "Section": 5,
+        "Rule": 13,
+        "Test": "j",
+        "test_description": "Project has one building segment and includes a space with an unregulated slab-on-grade floor surface. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor does not match the proposed.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-13",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "f_factor": 2.1634186351706037
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "f_factor": 2.336492125984252
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-13-k": {
+        "Section": 5,
+        "Rule": 13,
+        "Test": "k",
+        "test_description": "Project has one building segment and includes a space with an unregulated slab-on-grade floor surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor correctly matches the proposed.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-13",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 56.63369318399999,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "f_factor": 2.1634186351706037
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 56.63369318399999,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "f_factor": 2.1634186351706037
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-13-l": {
+        "Section": 5,
+        "Rule": 13,
+        "Test": "l",
+        "test_description": "Project has one building segment and includes a space with an unregulated slab-on-grade floor surface. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline slab-on-grade F-factor does not match the proposed.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-13",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 56.63369318399999,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "f_factor": 2.1634186351706037
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 56.63369318399999,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "f_factor": 2.336492125984252
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

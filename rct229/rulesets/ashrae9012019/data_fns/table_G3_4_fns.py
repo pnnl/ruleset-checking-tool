@@ -17,6 +17,14 @@ SURFACE_TYPE_TO_CONSTRUCTION_MAP = {
     OST.BELOW_GRADE_WALL: "GroundContactWall",
     "VERTICAL GLAZING": "ExteriorWindow",
     "SKYLIGHT": "Skylight",
+    "DOOR": "ExteriorDoor",
+}
+
+DOOR_SUBCLASSIFICATION_TYPE_TO_STANDARD_CONSTRUCTION_MAP = {
+    "METAL_COILING_DOOR": "NonSwinging",
+    "NONSWINGING_DOOR": "NonSwinging",
+    "SECTIONAL_GARAGE_DOOR": "NonSwinging",
+    "SWINGING_DOOR": "Swinging",
 }
 
 # This dictionary maps surface conditioning categories as returned from get_surface_conditioning_category_dict()
@@ -56,6 +64,7 @@ CLIMATE_ZONE_ENUMERATION_TO_CLIMATE_ZONE_SET_MAP = {
 
 
 # Helper function to add WWR to the search criteria for getting the correct
+
 
 # Exterior windows, skylight and glass doors
 def wwr_to_search_criteria(wwr):
@@ -97,9 +106,10 @@ def table_G34_lookup(
     opaque_surface_type,
     wwr=None,
     skylit_wwr=None,
+    classification=None,
 ):
-    """Returns the assembly maxiumum values for a given climate zone, surface conditoning category
-     and opaque sruface type as required by ASHRAE 90.1 Table G3.4-1 through G3.4-8
+    """Returns the assembly maximum values for a given climate zone, surface conditioning category
+     and opaque surface type as required by ASHRAE 90.1 Table G3.4-1 through G3.4-8
 
     Parameters
     ----------
@@ -111,6 +121,8 @@ def table_G34_lookup(
         An opaque surface type as returned by get_opaque_surfact_type()
     wwr: float
         Window to wall ratio of the building, default to None, required for searching transparent
+    classification: string
+        Used for specifying particular construction type from database
     Returns
     -------
     dict
@@ -153,6 +165,16 @@ def table_G34_lookup(
 
     if skylit_wwr is not None:  # when `skylit_wwr ==0`, `if skylit_wwr:` becomes False
         search_criteria.extend(skylit_to_search_criteria(skylit_wwr))
+
+    if classification is not None:
+        search_criteria.append(
+            (
+                "standards_construction_type",
+                DOOR_SUBCLASSIFICATION_TYPE_TO_STANDARD_CONSTRUCTION_MAP[
+                    classification
+                ],
+            )
+        )
 
     osstd_entry = find_osstd_table_entry(
         search_criteria,

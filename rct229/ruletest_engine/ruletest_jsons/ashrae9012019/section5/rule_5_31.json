@@ -3,90 +3,86 @@
         "Section": 5,
         "Rule": 31,
         "Test": "a",
-        "test_description": "A space has vertical fenestration that is correctly modeled with the same manual interior shades in the baseline and proposed models.",
+        "test_description": "Project has one building segment and includes a space with a roof surface. The baseline roof emittance is correctly set to 0.9",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-31",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance a.4 \nTable G3.1(5) Baseline Building Performance (d)",
-            "rule_description": "Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance",
+            "rule_description": "The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
-            "proposed": {
-                "id": "ASHRAE229",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "SubSurface 1",
-                                                                "has_manual_interior_shades": true
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
+        "rmd_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
-                "ruleset_model_instances": [
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "SubSurface 1",
-                                                                "has_manual_interior_shades": true
-                                                            }
-                                                        ]
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 50,
+                                                        "area": 929.0303999999999,
+                                                        "optical_properties": {
+                                                            "id": "Surface Optical Properties 1",
+                                                            "absorptance_solar_exterior": 0.7
+                                                        },
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 0.0
+                                                }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -96,90 +92,86 @@
         "Section": 5,
         "Rule": 31,
         "Test": "b",
-        "test_description": "A space has vertical fenestration that is incorrectly modeled with the same manual interior shades in the baseline and proposed models.",
+        "test_description": "Project has one building segment and includes a space with a roof surface. The baseline roof emittance is incorrectly set to 0.5 ",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-31",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance a.4 \nTable G3.1(5) Baseline Building Performance (d)",
-            "rule_description": "Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance",
+            "rule_description": "The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
-            "proposed": {
-                "id": "ASHRAE229",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "SubSurface 1",
-                                                                "has_manual_interior_shades": true
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
+        "rmd_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
-                "ruleset_model_instances": [
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "SubSurface 1",
-                                                                "has_manual_interior_shades": false
-                                                            }
-                                                        ]
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 50,
+                                                        "area": 929.0303999999999,
+                                                        "optical_properties": {
+                                                            "id": "Surface Optical Properties 1",
+                                                            "absorptance_solar_exterior": 0.5
+                                                        },
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
                                                     }
                                                 ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 35170.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 0.0
+                                                }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

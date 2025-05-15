@@ -3,128 +3,50 @@
         "Section": 5,
         "Rule": 35,
         "Test": "a",
-        "test_description": "Building includes a conditioned zone that has two roof surfaces one of which has skylights. Skylight area in the proposed design is greater than 3% of the total roof area. Baseline skylight area ratio reduced to 3%.",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate @75PA is established correctly.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-35",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": " If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4. ",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
-            "proposed": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "volume": 21.237634943999996,
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
-                                                        "area": 92.90303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "glazed_area": 8.361273599999999,
-                                                                "opaque_area": 1.8580607999999998,
-                                                                "u_factor": 3.2366105565544463,
-                                                                "solar_heat_gain_coefficient": 0.5
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "id": "Surface 2",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 50,
-                                                        "area": 185.80607999999998
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 42204.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 10257.488888888889
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
+        "rmd_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "measured_infiltration_pressure_difference": 75,
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "volume": 21.237634943999996,
+                                                "volume": 1415.8423295999996,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 464.51519999999994
                                                     }
                                                 ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "flow_rate": 528.5811363839998
+                                                },
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
@@ -134,24 +56,16 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
+                                                        "azimuth": 180,
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
-                                                        "area": 92.90303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "glazed_area": 6.503212799999999,
-                                                                "opaque_area": 1.8580607999999998,
-                                                                "u_factor": 3.2366105565544463,
-                                                                "solar_heat_gain_coefficient": 0.5
-                                                            }
-                                                        ]
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994
                                                     },
                                                     {
                                                         "id": "Surface 2",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 50,
-                                                        "area": 185.80607999999998
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994
                                                     }
                                                 ]
                                             }
@@ -161,18 +75,19 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 42204.0
+                                                    "design_sensible_cool_capacity": 7034.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 10257.488888888889
+                                                    "design_capacity": 17584.266666666666
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -182,48 +97,50 @@
         "Section": 5,
         "Rule": 35,
         "Test": "b",
-        "test_description": "Building includes a conditioned zone that has two roof surfaces one of which has skylights. Skylight area in the proposed design is greater than 3% of the total roof area. Baseline skylight area ratio is higher than 3%.",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate @75PA is not established correctly.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-35",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
-            "rule_description": " If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.",
-            "applicable_rmr": "Baseline RMR",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4. ",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "Proposed RMR",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
-            "proposed": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "measured_infiltration_pressure_difference": 75,
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "volume": 21.237634943999996,
+                                                "volume": 1415.8423295999996,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 464.51519999999994
                                                     }
                                                 ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "flow_rate": 2359.737215999999
+                                                },
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
@@ -233,24 +150,16 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
+                                                        "azimuth": 180,
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
-                                                        "area": 92.90303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "glazed_area": 8.361273599999999,
-                                                                "opaque_area": 1.8580607999999998,
-                                                                "u_factor": 3.2366105565544463,
-                                                                "solar_heat_gain_coefficient": 0.5
-                                                            }
-                                                        ]
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994
                                                     },
                                                     {
                                                         "id": "Surface 2",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 50,
-                                                        "area": 185.80607999999998
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994
                                                     }
                                                 ]
                                             }
@@ -260,50 +169,71 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 42204.0
+                                                    "design_sensible_cool_capacity": 7034.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 10257.488888888889
+                                                    "design_capacity": 17584.266666666666
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
-            },
+            }
+        }
+    },
+    "rule-5-35-c": {
+        "Section": 5,
+        "Rule": 35,
+        "Test": "c",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate at wind pressure is established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-35",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4. ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "volume": 21.237634943999996,
+                                                "volume": 1415.8423295999996,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "floor_area": 23.225759999999998
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 464.51519999999994
                                                     }
                                                 ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "flow_rate": 528.5811363839998
+                                                },
                                                 "terminals": [
                                                     {
                                                         "id": "Terminal 1",
@@ -314,23 +244,14 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 30,
-                                                        "area": 92.90303999999999,
-                                                        "subsurfaces": [
-                                                            {
-                                                                "id": "Subsurface 1",
-                                                                "glazed_area": 8.361273599999999,
-                                                                "opaque_area": 1.8580607999999998,
-                                                                "u_factor": 3.2366105565544463,
-                                                                "solar_heat_gain_coefficient": 0.5
-                                                            }
-                                                        ]
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994
                                                     },
                                                     {
                                                         "id": "Surface 2",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 50,
-                                                        "area": 185.80607999999998
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994
                                                     }
                                                 ]
                                             }
@@ -340,18 +261,513 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 42204.0
+                                                    "design_sensible_cool_capacity": 7034.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 10257.488888888889
+                                                    "design_capacity": 17584.266666666666
                                                 }
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-35-d": {
+        "Section": 5,
+        "Rule": 35,
+        "Test": "d",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate at wind pressure is not established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-35",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4. ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 1415.8423295999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 464.51519999999994
+                                                    }
+                                                ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "flow_rate": 1057.1622727679996
+                                                },
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 7034.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 17584.266666666666
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-35-e": {
+        "Section": 5,
+        "Rule": 35,
+        "Test": "e",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate @75PA is established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-35",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4. ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "measured_infiltration_pressure_difference": 75,
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 1415.8423295999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "floor_area": 464.51519999999994
+                                                    }
+                                                ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "flow_rate": 528.5811363839998
+                                                },
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 180,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 7034.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 699.8538133333334
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-35-f": {
+        "Section": 5,
+        "Rule": 35,
+        "Test": "f",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate @75PA is not established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-35",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4. ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "measured_infiltration_pressure_difference": 75,
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 1415.8423295999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                                                        "floor_area": 464.51519999999994
+                                                    }
+                                                ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "flow_rate": 2359.737215999999
+                                                },
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "azimuth": 180,
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 7034.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 699.8538133333334
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-35-g": {
+        "Section": 5,
+        "Rule": 35,
+        "Test": "g",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate at wind pressure is established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-35",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4. ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 1415.8423295999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 464.51519999999994
+                                                    }
+                                                ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "flow_rate": 528.5811363839998
+                                                },
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 7034.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 699.8538133333334
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-35-h": {
+        "Section": 5,
+        "Rule": 35,
+        "Test": "h",
+        "test_description": "Project has one building segment with one space that includes two surfaces - one adjacent to exterior and another adjacent to ground. The space is semiheated based on the heating capacity of the HVAC system that serves the parent zone. The baseline infiltration flow rate at wind pressure is not established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-35",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (h)",
+            "rule_description": "The baseline air leakage rate of the building envelope (I75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2.  The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section Table G3.1.1.4. ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 1415.8423295999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 464.51519999999994
+                                                    }
+                                                ],
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "flow_rate": 1057.1622727679996
+                                                },
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 90,
+                                                        "area": 464.51519999999994,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 7034.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 699.8538133333334
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

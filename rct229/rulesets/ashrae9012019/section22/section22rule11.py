@@ -1,6 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -26,35 +27,37 @@ APPLICABLE_SYS_TYPES = [
 REQUIRED_PUMP_FLOW_RATE = 13 * ureg("W/gpm")
 
 
-class Section22Rule11(RuleDefinitionListIndexedBase):
+class PRM9012019Rule57w94(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule11, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section22Rule11.ChillerFluidLoopRule(),
-            index_rmr="baseline",
+        super(PRM9012019Rule57w94, self).__init__(
+            rmds_used=produce_ruleset_model_description(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
+            each_rule=PRM9012019Rule57w94.ChillerFluidLoopRule(),
+            index_rmd=BASELINE_0,
             id="22-11",
-            description="For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions.",
+            description="Baseline chilled water systems that do not use purchased chilled water shall have a variable-flow secondary pump power of 13 W/gpm at design conditions.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$.fluid_loops[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
+        rmd_b = context.BASELINE_0
 
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list contains all HVAC systems that are modeled in the rmi_b
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list contains all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
+            for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
 
-        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
+        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
 
         return (
             any(
@@ -67,40 +70,51 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
+        rmd_b = context.BASELINE_0
 
-        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmi_b)
+        primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
 
         return {"primary_secondary_loop_dict": primary_secondary_loop_dict}
 
     def list_filter(self, context_item, data):
-        fluid_loop_b = context_item.baseline
+        fluid_loop_b = context_item.BASELINE_0
         primary_secondary_loop_dict = data["primary_secondary_loop_dict"]
 
-        return fluid_loop_b["id"] in primary_secondary_loop_dict.keys()
+        return fluid_loop_b["id"] in primary_secondary_loop_dict
 
     class ChillerFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section22Rule11.ChillerFluidLoopRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
-                each_rule=Section22Rule11.ChillerFluidLoopRule.SecondaryChildLoopRule(),
-                index_rmr="baseline",
+            super(PRM9012019Rule57w94.ChillerFluidLoopRule, self).__init__(
+                rmds_used=produce_ruleset_model_description(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
+                each_rule=PRM9012019Rule57w94.ChillerFluidLoopRule.SecondaryChildLoopRule(),
+                index_rmd=BASELINE_0,
                 list_path="$.child_loops[*]",
             )
 
         class SecondaryChildLoopRule(RuleDefinitionBase):
             def __init__(self):
                 super(
-                    Section22Rule11.ChillerFluidLoopRule.SecondaryChildLoopRule, self
+                    PRM9012019Rule57w94.ChillerFluidLoopRule.SecondaryChildLoopRule,
+                    self,
                 ).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
+                    rmds_used=produce_ruleset_model_description(
+                        USER=False, BASELINE_0=True, PROPOSED=False
+                    ),
                     required_fields={
                         "$": ["pump_power_per_flow_rate"],
+                    },
+                    precision={
+                        "secondary_loop_pump_power_per_flow_rate": {
+                            "precision": 1,
+                            "unit": "W/gpm",
+                        },
                     },
                 )
 
             def get_calc_vals(self, context, data=None):
-                child_loop_b = context.baseline
+                child_loop_b = context.BASELINE_0
                 secondary_loop_pump_power_per_flow_rate = child_loop_b[
                     "pump_power_per_flow_rate"
                 ]
@@ -108,15 +122,28 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
 
                 return {
                     "secondary_loop_pump_power_per_flow_rate": CalcQ(
-                        "power_per_volumetric_flow_rate",
+                        "power_per_liquid_flow_rate",
                         secondary_loop_pump_power_per_flow_rate,
                     ),
                     "req_pump_flow_rate": CalcQ(
-                        "power_per_volumetric_flow_rate", req_pump_flow_rate
+                        "power_per_liquid_flow_rate", req_pump_flow_rate
                     ),
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
+                secondary_loop_pump_power_per_flow_rate = calc_vals[
+                    "secondary_loop_pump_power_per_flow_rate"
+                ]
+                req_pump_flow_rate = calc_vals["req_pump_flow_rate"]
+
+                return self.precision_comparison[
+                    "secondary_loop_pump_power_per_flow_rate"
+                ](
+                    secondary_loop_pump_power_per_flow_rate,
+                    req_pump_flow_rate,
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 secondary_loop_pump_power_per_flow_rate = calc_vals[
                     "secondary_loop_pump_power_per_flow_rate"
                 ]

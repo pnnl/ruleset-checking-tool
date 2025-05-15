@@ -1,44 +1,43 @@
-
 # Envelope - Rule 5-22  
-
-**Schema Version:** 0.0.23
+**Schema Version** 0.0.23  
+**Primary Rule:** True
 **Rule ID:** 5-22  
-**Rule Description:** The baseline fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work.  
-**Rule Assertion:** B-RMR total (subsurface.glazed_area+subsurface.opaque_area) = expected value  
-**Appendix G Section:** Section 5 Envelope  
-**Appendix G Section Reference:** Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building  
+**Rule Description:** Baseline vertical fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.
+**Appendix G Section:** Section G3.1-5(d) Building Modeling Requirements for the Baseline building  
+**Appendix G Section Reference:**  None  
 
-**Data Lookup:** None  
+**Applicability:** All required data elements exist for B_RMR  
+**Applicability Checks:** None  
+
 **Evaluation Context:**  Each Data Element  
-
-**Applicability Checks:** 
-
-1. The baseline building has existing or altered spaces
-
-**Manual Checks:** Yes  
-**Function Call:**  None  
+**Data Lookup:** None  
+**Function Call:**
+  1. get_opaque_surface_type()
+  2. get_surface_conditioning_category()
 
 ## Rule Logic:
-- create undetermined_zone_list: `undetermined_zone_list = []`
 
-- For each zone in B_RMR: `for zone_b in B_RMR...zones:`
+- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category(B_RMR)```
 
-  - For each space in zone: `for space_b in zone_b.spaces:`
+- For each building segment in the Baseline model: ```for building_segment_b in B_RMR.building.building_segments:```
 
-    - Check if space is existing or altered, set rule applicability check to True: `if ( space_b.status_type == EXISTING ) OR ( space_b.status_type == ALTERED ): rule_applicability_check = TRUE`
+  - For each zone in building segment: ```for zone_b in building_segment_b.zones:```
 
-      - Add to total number of existing or altered spaces in zone: `num_space_existing_altered += 1`
+    - For each surface in zone: ```for surface_b in zone_b.surfaces:```
 
-      - Add to array of zones with existing or altered spaces if not already saved: `if NOT zone_b in undetermined_zone_list: undetermined_zone_list.append(zone_b)`
+      - Check if surface is above-grade wall and is exterior: ```if ( get_opaque_surface_type(surface_b) == "ABOVE-GRADE WALL" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):```
 
-**Rule Assertion - Component:**
+        - For each subsurface in surface: ```for subsurface_b in surface_b.subsurfaces:```
 
-    - For each zone, if any space in zone is existing or altered: `if num_space_existing_altered > 0: UNDETERMINED"`
+          **Rule Assertion:**
 
-**Rule Assertion - RMR:**
+          - Case 1: For each subsurface, if subsurface is flush with the exterior wall, and no shading projections are modeled or projection depth is 0, outcome is PASS: ```if ( subsurface_b.has_shading_overhang is False or subsurface_b.depth_of_overhang == ZERO.LENGTH ) AND ( subsurface_b.has_shading_sidefins is False ): outcome = PASS```
 
-- Case 1: If any zone in B-RMR is ruled as "UNDETERMINED": `UNDETERMINED and raise_message "PART OR ALL OF ZONES LISTED BELOW IS EXISTING OR ALTERED. THE BASELINE VERTICAL FENESTRATION AREA FOR EXISTING ZONES MUST EQUAL TO THE FENESTRATION AREA PRIOR TO THE PROPOSED SCOPE OF WORK. THE BASELINE FENESTRATION AREA IN ZONE MUST BE CHECKED MANUALLY. ${undetermined_zone_list}"`
+          - Case 2: Else, outcome is FAIL: ```else: outcome = FAIL and raise_warning "BASELINE FENESTRATION WAS MODELED WITH SHADING PROJECTIONS AND/OR OVERHANGS, WHICH IS INCORRECT."```
 
-**Applicability Check:** For each building, if no space is existing or altered, rule is not applicable: `if NOT rule_applicability_check: is_applicable = FALSE`
+**Notes:**
+
+1. Update Rule ID from 5-29 to 5-22 on 10/26/2023
+
 
 **[Back](../_toc.md)**

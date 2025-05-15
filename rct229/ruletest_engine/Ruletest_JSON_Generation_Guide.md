@@ -106,7 +106,7 @@ The next step would be to write this interpretation into a Test JSON. The user, 
         "Section": 15,
         "Rule": 1,
         "Test": "a",
-        "test_description": "Number of transformers modeled in User RMR and Baseline RMR are the same",
+        "test_description": "Number of transformers modeled in User RMD and Baseline RMR are the same",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "15-1",
@@ -122,7 +122,7 @@ The next step would be to write this interpretation into a Test JSON. The user, 
         "rmr_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -141,7 +141,7 @@ The next step would be to write this interpretation into a Test JSON. The user, 
             },
             "baseline": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [

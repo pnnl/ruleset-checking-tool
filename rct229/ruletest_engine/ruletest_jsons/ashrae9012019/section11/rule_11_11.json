@@ -1,0 +1,217 @@
+{
+    "rule-11-11-a": {
+        "Section": 11,
+        "Rule": 11,
+        "Test": "a",
+        "test_description": "A one story single zone building has service water heating systems. The proposed and baseline building have no service water heating loads.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "11-11",
+            "ruleset_reference": "Table G3.1 #11, baseline column, c",
+            "rule_description": "For buildings that will have no service water-heating loads, no service water-heating shall be modeled in baseline building model",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-11-b": {
+        "Section": 11,
+        "Rule": 11,
+        "Test": "b",
+        "test_description": "A one story single zone building has service water heating systems. The proposed system has no loads but the baseline building does have service water heating loads.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "11-11",
+            "ruleset_reference": "Table G3.1 #11, baseline column, c",
+            "rule_description": "For buildings that will have no service water-heating loads, no service water-heating shall be modeled in baseline building model",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.0.34"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "service_water_heating_uses": [
+                                                            {
+                                                                "id": "SHW 1",
+                                                                "served_by_distribution_system": "SHW Distribution 1",
+                                                                "use": 100
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

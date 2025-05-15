@@ -3,7 +3,7 @@
 **Description:** Get the fan power associated with a fan object.  
 
 **Inputs:**  
-- **B-RMI,P-RMI**: To calculate and return the fan power associated with the fan object sent to this function.   
+- **B-RMD,P-RMD**: To calculate and return the fan power associated with the fan object sent to this function.   
 - **fan_obj**: The fan object sent to this function.  
 
 **Returns:**  

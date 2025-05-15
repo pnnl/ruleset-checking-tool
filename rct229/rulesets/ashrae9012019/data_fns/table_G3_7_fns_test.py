@@ -12,6 +12,7 @@ feet = ureg("feet")
 squarefeet = ureg("feet * feet")
 watts_per_sqft = ureg("watt / foot**2")
 
+
 # Testing table_G3_7_lookup() ----------------------------------------
 def test__table_G3_7_lookup__with_w_per_ft_null():
     assert table_G3_7_lookup(

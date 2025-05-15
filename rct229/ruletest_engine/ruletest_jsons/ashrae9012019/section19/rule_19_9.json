@@ -3,36 +3,33 @@
         "Section": 19,
         "Rule": 9,
         "Test": "a",
-        "test_description": "System 9 without air economizer.",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. The system does not include an air economizer.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-9",
             "ruleset_reference": "G3.1.2.6",
             "rule_description": "Air economizers shall not be included in baseline HVAC Systems 1, 2, 9, and 10.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -48,7 +45,7 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -70,7 +67,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -80,36 +78,33 @@
         "Section": 19,
         "Rule": 9,
         "Test": "b",
-        "test_description": "System 9 with FIXED_FRACTION air economizer.",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. The system includes an air economizer but operates as fixed-fraction (does not operate as an air economizer).",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-9",
             "ruleset_reference": "G3.1.2.6",
             "rule_description": "Air economizers shall not be included in baseline HVAC Systems 1, 2, 9, and 10.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -125,7 +120,7 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -151,7 +146,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -161,36 +157,33 @@
         "Section": 19,
         "Rule": 9,
         "Test": "c",
-        "test_description": "System 9 with ENTHALPY air economizer.",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. The system includes an air economizer which operates based on an enthalpy setpoint.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "19-9",
             "ruleset_reference": "G3.1.2.6",
             "rule_description": "Air economizers shall not be included in baseline HVAC Systems 1, 2, 9, and 10.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmd": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "Air Terminal",
@@ -206,7 +199,7 @@
                                                 "id": "System 9",
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
-                                                    "heating_system_type": "FURNACE",
+                                                    "type": "FURNACE",
                                                     "energy_source_type": "NATURAL_GAS"
                                                 },
                                                 "fan_system": {
@@ -232,7 +225,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

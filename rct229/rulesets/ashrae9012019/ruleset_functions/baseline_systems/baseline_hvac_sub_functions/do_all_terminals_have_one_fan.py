@@ -1,15 +1,13 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_terminal_unit,
-)
+from rct229.utils.utility_functions import find_exactly_one_terminal_unit
 
 
-def do_all_terminals_have_one_fan(rmi_b, terminal_unit_id_list):
+def do_all_terminals_have_one_fan(rmd_b, terminal_unit_id_list):
     """Returns TRUE if a fan data element associated with all terminal units input to this function.
      It returns FALSE if any terminal unit has no fan data element not equal to one.
 
     ----------
-    rmi_b : json
-        RMD at RuleSetModelInstance level
+    rmd_b : json
+        RMD at RuleSetModelDescription level
     terminal_unit_id_list : list
         List of terminal units IDs
     Returns
@@ -21,7 +19,7 @@ def do_all_terminals_have_one_fan(rmi_b, terminal_unit_id_list):
 
     return all(
         [
-            find_exactly_one_terminal_unit(rmi_b, terminal_b_id).get("fan") is not None
+            find_exactly_one_terminal_unit(rmd_b, terminal_b_id).get("fan") is not None
             for terminal_b_id in terminal_unit_id_list
         ]
     )

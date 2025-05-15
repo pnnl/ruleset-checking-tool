@@ -1,0 +1,626 @@
+{
+    "rule-10-7-a": {
+        "Section": 10,
+        "Rule": 7,
+        "Test": "a",
+        "test_description": "A one story building includes a baseline system 3. The capacity is 70 kBtu/hr and the cooling efficiency of the system matches the expected efficiency based on the capacity range from Table G3.5.1.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "10-7",
+            "ruleset_reference": "G3.1.2.1",
+            "rule_description": "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_3_PSZ_AC_Gas_Furnace - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_3_PSZ_AC_Gas_Furnace"
+                                                    }
+                                                ],
+                                                "aggregation_factor": 1
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_3_PSZ_AC_Gas_Furnace",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_total_cool_capacity": 20514.977777777778,
+                                                    "efficiency_metric_values": [
+                                                        3.5
+                                                    ],
+                                                    "efficiency_metric_types": [
+                                                        "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
+                                                    ]
+                                                },
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "FURNACE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_3_PSZ_AC_Gas_Furnace Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_3_PSZ_AC_Gas_Furnace Return Fan"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-10-7-b": {
+        "Section": 10,
+        "Rule": 7,
+        "Test": "b",
+        "test_description": "A one story building includes a baseline system 4. The capacity is 70 kBtu/hr and the cooling efficiency of the system matches the expected efficiency based on the capacity range from Table G3.5.2.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "10-7",
+            "ruleset_reference": "G3.1.2.1",
+            "rule_description": "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
+                                                    }
+                                                ],
+                                                "aggregation_factor": 1
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_total_cool_capacity": 20514.977777777778,
+                                                    "efficiency_metric_values": [
+                                                        3.4
+                                                    ],
+                                                    "efficiency_metric_types": [
+                                                        "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
+                                                    ]
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Return Fan"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-10-7-c": {
+        "Section": 10,
+        "Rule": 7,
+        "Test": "c",
+        "test_description": "A one story building includes a baseline system 4. The cooling capacity is 150 kBtu/hr and the cooling efficiency of the system matches the expected efficiency based on the capacity range from Table G3.5.2.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "10-7",
+            "ruleset_reference": "G3.1.2.1",
+            "rule_description": "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
+                                                    }
+                                                ],
+                                                "aggregation_factor": 1
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_total_cool_capacity": 43960.666666666664,
+                                                    "efficiency_metric_values": [
+                                                        3.2
+                                                    ],
+                                                    "efficiency_metric_types": [
+                                                        "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
+                                                    ]
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Return Fan"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-10-7-d": {
+        "Section": 10,
+        "Rule": 7,
+        "Test": "d",
+        "test_description": "A one story building includes a baseline system 4. The cooling capacity is 150 kBtu/hr and the cooling efficiency of the system does not match the expected efficiency based on the capacity range from Table G3.5.2.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "10-7",
+            "ruleset_reference": "G3.1.2.1",
+            "rule_description": "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
+                                                    }
+                                                ],
+                                                "aggregation_factor": 1
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "design_total_cool_capacity": 43960.666666666664,
+                                                    "efficiency_metric_values": [
+                                                        2.4
+                                                    ],
+                                                    "efficiency_metric_types": [
+                                                        "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
+                                                    ]
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Return Fan"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-10-7-e": {
+        "Section": 10,
+        "Rule": 7,
+        "Test": "e",
+        "test_description": "A one story building includes a baseline system 4. The cooling capacity is undefined and the cooling efficiency of the system does not match the most conservative cooling efficiency from Table G3.5.2.",
+        "expected_rule_outcome": "undetermined",
+        "standard": {
+            "rule_id": "10-7",
+            "ruleset_reference": "G3.1.2.1",
+            "rule_description": "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "efficiency_metric_values": [
+                                                        2.8
+                                                    ],
+                                                    "efficiency_metric_types": [
+                                                        "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
+                                                    ]
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Return Fan"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-10-7-f": {
+        "Section": 10,
+        "Rule": 7,
+        "Test": "f",
+        "test_description": "A two story building includes a baseline system 5. The system serves more than 1 floor.",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "10-7",
+            "ruleset_reference": "G3.1.2.1",
+            "rule_description": "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_5_PVAV_HW_Reheat - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_5_PVAV_HW_Reheat",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "floor_name": "Floor2",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_5_PVAV_HW_Reheat - Terminal for Thermal Zone 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_5_PVAV_HW_Reheat",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_5_PVAV_HW_Reheat",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION",
+                                                    "efficiency_metric_values": [
+                                                        3.6
+                                                    ],
+                                                    "efficiency_metric_types": [
+                                                        "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
+                                                    ]
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_5_PVAV_HW_Reheat Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_5_PVAV_HW_Reheat Return Fan"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -3,36 +3,33 @@
         "Section": 22,
         "Rule": 9,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the primary/secondary loops, child loop, and child loop's minimum_flow_fraction",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system.  The chilled water system has a 400 ton cooling capacity and the secondary chilled water loop has a minimum flow of 25% of the design flow rate.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-9",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary loop modeled with a minimum flow of 25% of the design flow rate.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -46,8 +43,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -65,12 +60,12 @@
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Cooling Child Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -120,7 +115,7 @@
                             },
                             {
                                 "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "loop_or_piping": "Cooling Child Loop 1",
                                 "speed_control": "VARIABLE_SPEED"
                             }
                         ],
@@ -143,7 +138,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -153,36 +149,33 @@
         "Section": 22,
         "Rule": 9,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the primary/secondary loops, child loop, and child loop's minimum_flow_fraction",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system.  The chilled water system has a 400 ton cooling capacity and the secondary chilled water loop has a minimum flow of 35% of the design flow rate.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-9",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary loop modeled with a minimum flow of 25% of the design flow rate.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -196,8 +189,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -215,12 +206,12 @@
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Cooling Child Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -270,7 +261,7 @@
                             },
                             {
                                 "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "loop_or_piping": "Cooling Child Loop 1",
                                 "speed_control": "VARIABLE_SPEED"
                             }
                         ],
@@ -293,7 +284,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -303,36 +295,33 @@
         "Section": 22,
         "Rule": 9,
         "Test": "c",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the minimum CHW primary loop total cooling capacity",
-        "expected_rule_outcome": "undetermined",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water loop.  The chilled water system has a 299 ton cooling capacity.",
+        "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "22-9",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For Baseline chilled water system with cooling capacity of 300 tons or more, the secondary loop shall be modeled with a minimum flow of 25% of the design flow rate.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary loop modeled with a minimum flow of 25% of the design flow rate.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -346,8 +335,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -365,12 +352,12 @@
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Cooling Child Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -404,7 +391,7 @@
                             {
                                 "id": "Chiller 1",
                                 "cooling_loop": "Chiller Loop 1",
-                                "rated_capacity": 879250.0
+                                "rated_capacity": 1051583.0
                             }
                         ],
                         "pumps": [
@@ -420,7 +407,7 @@
                             },
                             {
                                 "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "loop_or_piping": "Cooling Child Loop 1",
                                 "speed_control": "VARIABLE_SPEED"
                             }
                         ],
@@ -443,7 +430,236 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-9-d": {
+        "Section": 22,
+        "Rule": 9,
+        "Test": "d",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 13 with a chilled water system. The chilled water system has a 400 ton cooling capacity and the secondary chilled water loop has a minimum flow of 25% of the design flow rate.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-9",
+            "ruleset_reference": "G3.1.3.10",
+            "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary loop modeled with a minimum flow of 25% of the design flow rate.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "CAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 13"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 13",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1",
+                                "rated_capacity": 1406800.0
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING",
+                                        "cooling_or_condensing_design_and_control": {
+                                            "id": "CCDC 1",
+                                            "minimum_flow_fraction": 0.25
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-9-e": {
+        "Section": 22,
+        "Rule": 9,
+        "Test": "e",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 13 with a chilled water system. The chilled water system has a 400 ton cooling capacity and the secondary chilled water loop has a minimum flow of 35% of the design flow rate.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-9",
+            "ruleset_reference": "G3.1.3.10",
+            "rule_description": "Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary loop modeled with a minimum flow of 25% of the design flow rate.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "CAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 13"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 13",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1",
+                                "rated_capacity": 1406800.0
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING",
+                                        "cooling_or_condensing_design_and_control": {
+                                            "id": "CCDC 1",
+                                            "minimum_flow_fraction": 0.35
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

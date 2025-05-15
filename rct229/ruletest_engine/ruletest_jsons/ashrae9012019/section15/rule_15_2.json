@@ -3,23 +3,23 @@
         "Section": 15,
         "Rule": 2,
         "Test": "a",
-        "test_description": "Number of transformers modeled in User RMR and Proposed RMR are the same",
+        "test_description": "Number of transformers modeled in User RMD and Proposed RMD are the same",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "15-2",
             "ruleset_reference": "-",
-            "rule_description": "Number of transformers modeled in User RMR and Proposed RMR are the same",
-            "applicable_rmr": "Proposed RMR",
+            "rule_description": "Number of transformers modeled in User RMD and Proposed RMD are the same",
+            "applicable_RMD": "Proposed RMD",
             "rule_assertion": "=",
-            "comparison_value": "User RMR",
+            "comparison_value": "User RMD",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -32,13 +32,14 @@
                             {
                                 "id": "Transformer_3"
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -51,7 +52,8 @@
                             {
                                 "id": "Transformer_3"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -61,23 +63,23 @@
         "Section": 15,
         "Rule": 2,
         "Test": "b",
-        "test_description": "Number of transformers modeled in User RMR > Proposed RMR ",
+        "test_description": "Number of transformers modeled in User RMD > Proposed RMD ",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "15-2",
             "ruleset_reference": "-",
-            "rule_description": "Number of transformers modeled in User RMR and Proposed RMR are the same",
-            "applicable_rmr": "Proposed RMR",
+            "rule_description": "Number of transformers modeled in User RMD and Proposed RMD are the same",
+            "applicable_RMD": "Proposed RMD",
             "rule_assertion": "=",
-            "comparison_value": "User RMR",
+            "comparison_value": "User RMD",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -90,13 +92,14 @@
                             {
                                 "id": "Transformer_3"
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -106,7 +109,8 @@
                             {
                                 "id": "Transformer_2"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -116,23 +120,23 @@
         "Section": 15,
         "Rule": 2,
         "Test": "c",
-        "test_description": "Number of transformers modeled in User RMR < Proposed RMR",
+        "test_description": "Number of transformers modeled in User RMD < Proposed RMD",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "15-2",
             "ruleset_reference": "-",
-            "rule_description": "Number of transformers modeled in User RMR and Proposed RMR are the same",
-            "applicable_rmr": "Proposed RMR",
+            "rule_description": "Number of transformers modeled in User RMD and Proposed RMD are the same",
+            "applicable_RMD": "Proposed RMD",
             "rule_assertion": "=",
-            "comparison_value": "User RMR",
+            "comparison_value": "User RMD",
             "rule_dependency": "none",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -142,13 +146,14 @@
                             {
                                 "id": "Transformer_2"
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
             "proposed": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -161,7 +166,8 @@
                             {
                                 "id": "Transformer_3"
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             }

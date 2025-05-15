@@ -7,11 +7,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.is_baseline_system_3 import (
     is_baseline_system_3,
 )
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.validate import schema_validate_rpd
 
 SYS_3_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -80,11 +80,11 @@ SYS_3_TEST_RMD = {
                                     "id": "System Type 3",
                                     "cooling_system": {
                                         "id": "DX Coil 3",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "heating_system": {
                                         "id": "Furnace Coil 3",
-                                        "heating_system_type": "FURNACE",
+                                        "type": "FURNACE",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 3",
@@ -96,12 +96,12 @@ SYS_3_TEST_RMD = {
                                     "id": "System Type 3a",
                                     "cooling_system": {
                                         "id": "Cooling Coil 3a",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Purchased CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "Furnace Coil 3a",
-                                        "heating_system_type": "FURNACE",
+                                        "type": "FURNACE",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 3a",
@@ -113,11 +113,11 @@ SYS_3_TEST_RMD = {
                                     "id": "System Type 3b",
                                     "cooling_system": {
                                         "id": "DX Coil 3b",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "heating_system": {
                                         "id": "Heating Coil 3b",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
@@ -130,12 +130,12 @@ SYS_3_TEST_RMD = {
                                     "id": "System Type 3c",
                                     "cooling_system": {
                                         "id": "Cooling Coil 3c",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Purchased CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "Heating Coil 3c",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
@@ -159,7 +159,7 @@ SYS_3_TEST_RMD = {
                     "type": "COOLING",
                 },
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased HW",
                     "loop": "Purchased HW Loop 1",
@@ -171,14 +171,23 @@ SYS_3_TEST_RMD = {
                     "type": "CHILLED_WATER",
                 },
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 
 SYS_3_TEST_UNMATCHED_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -208,12 +217,12 @@ SYS_3_TEST_UNMATCHED_RMD = {
                                     "id": "System Type Unmatched",
                                     "cooling_system": {
                                         "id": "Cooling Coil",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Purchased CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "Heating Coil",
-                                        "heating_system_type": "OTHER",
+                                        "type": "OTHER",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System",
@@ -232,27 +241,36 @@ SYS_3_TEST_UNMATCHED_RMD = {
                     "type": "COOLING",
                 },
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased CHW",
                     "loop": "Purchased CHW Loop 1",
                     "type": "CHILLED_WATER",
                 },
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 
 def test__TEST_RMD_baseline_system_3__is_valid():
-    schema_validation_result = schema_validate_rmr(SYS_3_TEST_RMD)
+    schema_validation_result = schema_validate_rpd(SYS_3_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_baseline_system_3__is_unmatched_valid():
-    schema_validation_result = schema_validate_rmr(SYS_3_TEST_UNMATCHED_RMD)
+    schema_validation_result = schema_validate_rpd(SYS_3_TEST_UNMATCHED_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -261,7 +279,7 @@ def test__TEST_RMD_baseline_system_3__is_unmatched_valid():
 def test__is_baseline_system_3__true():
     assert (
         is_baseline_system_3(
-            SYS_3_TEST_RMD["ruleset_model_instances"][0],
+            SYS_3_TEST_RMD["ruleset_model_descriptions"][0],
             "System Type 3",
             ["Air Terminal 3"],
             ["Thermal Zone 3"],
@@ -274,7 +292,7 @@ def test__is_baseline_system_3__test_json_true():
     assert (
         is_baseline_system_3(
             load_system_test_file("System_3_PSZ_AC_Gas_Furnace.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System Type 3",
             ["Air Terminal"],
@@ -287,7 +305,7 @@ def test__is_baseline_system_3__test_json_true():
 def test__is_baseline_system_3A__true():
     assert (
         is_baseline_system_3(
-            SYS_3_TEST_RMD["ruleset_model_instances"][0],
+            SYS_3_TEST_RMD["ruleset_model_descriptions"][0],
             "System Type 3a",
             ["Air Terminal 3a"],
             ["Thermal Zone 3a"],
@@ -300,7 +318,7 @@ def test__is_baseline_system_3A__test_json_true():
     assert (
         is_baseline_system_3(
             load_system_test_file("System_3a_PSZ_AC_Gas_Furnace.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System Type 3",
             ["Air Terminal"],
@@ -313,7 +331,7 @@ def test__is_baseline_system_3A__test_json_true():
 def test__is_baseline_system_3B__true():
     assert (
         is_baseline_system_3(
-            SYS_3_TEST_RMD["ruleset_model_instances"][0],
+            SYS_3_TEST_RMD["ruleset_model_descriptions"][0],
             "System Type 3b",
             ["Air Terminal 3b"],
             ["Thermal Zone 3b"],
@@ -326,7 +344,7 @@ def test__is_baseline_system_3B__test_json_true():
     assert (
         is_baseline_system_3(
             load_system_test_file("System_3b_PSZ_AC_Gas_Furnace.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System Type 3",
             ["Air Terminal"],
@@ -339,7 +357,7 @@ def test__is_baseline_system_3B__test_json_true():
 def test__is_baseline_system_3C__true():
     assert (
         is_baseline_system_3(
-            SYS_3_TEST_RMD["ruleset_model_instances"][0],
+            SYS_3_TEST_RMD["ruleset_model_descriptions"][0],
             "System Type 3c",
             ["Air Terminal 3c"],
             ["Thermal Zone 3c"],
@@ -352,7 +370,7 @@ def test__is_baseline_system_3C_test__json_true():
     assert (
         is_baseline_system_3(
             load_system_test_file("System_3c_PSZ_AC_Gas_Furnace.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System Type 3",
             ["Air Terminal"],
@@ -365,7 +383,7 @@ def test__is_baseline_system_3C_test__json_true():
 def test__is_baseline_system_unmatched__true():
     assert (
         is_baseline_system_3(
-            SYS_3_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            SYS_3_TEST_UNMATCHED_RMD["ruleset_model_descriptions"][0],
             "System Type Unmatched",
             ["Air Terminal 3"],
             ["Thermal Zone 3"],

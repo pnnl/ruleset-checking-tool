@@ -7,11 +7,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.is_baseline_system_11_2 import (
     is_baseline_system_11_2,
 )
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.validate import schema_validate_rpd
 
 SYS_11_2_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -54,12 +54,12 @@ SYS_11_2_TEST_RMD = {
                                     "id": "System Type 11.2",
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Secondary Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "fan_system": {
@@ -73,12 +73,12 @@ SYS_11_2_TEST_RMD = {
                                     "id": "System Type 11.2A",
                                     "cooling_system": {
                                         "id": "CHW Coil 1A",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Purchased CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1A",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "fan_system": {
@@ -107,7 +107,7 @@ SYS_11_2_TEST_RMD = {
                     "energy_source_type": "ELECTRICITY",
                 }
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased CHW 1",
                     "loop": "Purchased CHW Loop 1",
@@ -142,13 +142,22 @@ SYS_11_2_TEST_RMD = {
                 },
                 {"id": "Purchased CHW Loop 1", "type": "COOLING"},
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 SYS_11_2_TEST_UNMATCHED_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -178,12 +187,12 @@ SYS_11_2_TEST_UNMATCHED_RMD = {
                                     "id": "System Type Unmatched",
                                     "cooling_system": {
                                         "id": "CHW Coil 1A",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "CHW Loop 1",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1A",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "fan_system": {
@@ -240,20 +249,29 @@ SYS_11_2_TEST_UNMATCHED_RMD = {
                 },
                 {"id": "CHW Loop 1", "type": "COOLING"},
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 
 def test__TEST_RMD_baseline_system_11_2__is_valid():
-    schema_validation_result = schema_validate_rmr(SYS_11_2_TEST_RMD)
+    schema_validation_result = schema_validate_rpd(SYS_11_2_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_baseline_system_11_2__is_unmatched_valid():
-    schema_validation_result = schema_validate_rmr(SYS_11_2_TEST_UNMATCHED_RMD)
+    schema_validation_result = schema_validate_rpd(SYS_11_2_TEST_UNMATCHED_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -262,7 +280,7 @@ def test__TEST_RMD_baseline_system_11_2__is_unmatched_valid():
 def test__is_baseline_system_11_2__true():
     assert (
         is_baseline_system_11_2(
-            SYS_11_2_TEST_RMD["ruleset_model_instances"][0],
+            SYS_11_2_TEST_RMD["ruleset_model_descriptions"][0],
             "System Type 11.2",
             ["VAV Air Terminal 1"],
             ["Thermal Zone 1"],
@@ -274,9 +292,9 @@ def test__is_baseline_system_11_2__true():
 def test__is_baseline_system_11_2__test_json_true():
     assert (
         is_baseline_system_11_2(
-            load_system_test_file("System_11.2_VAV_SZ.json")["ruleset_model_instances"][
-                0
-            ],
+            load_system_test_file("System_11.2_VAV_SZ.json")[
+                "ruleset_model_descriptions"
+            ][0],
             "System 11",
             ["VAV Air Terminal 1"],
             ["Thermal Zone 1"],
@@ -288,7 +306,7 @@ def test__is_baseline_system_11_2__test_json_true():
 def test__is_baseline_system_11_2A__true():
     assert (
         is_baseline_system_11_2(
-            SYS_11_2_TEST_RMD["ruleset_model_instances"][0],
+            SYS_11_2_TEST_RMD["ruleset_model_descriptions"][0],
             "System Type 11.2A",
             ["VAV Air Terminal 1A"],
             ["Thermal Zone 1A"],
@@ -301,7 +319,7 @@ def test__is_baseline_system_11_2A__test_json_true():
     assert (
         is_baseline_system_11_2(
             load_system_test_file("System_11.2a_VAV_SZ.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 11",
             ["VAV Air Terminal 1"],
@@ -314,7 +332,7 @@ def test__is_baseline_system_11_2A__test_json_true():
 def test__is_baseline_system_unmatched__true():
     assert (
         is_baseline_system_11_2(
-            SYS_11_2_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            SYS_11_2_TEST_UNMATCHED_RMD["ruleset_model_descriptions"][0],
             "System Type Unmatched",
             ["Air Terminal 1"],
             ["Thermal Zone 1"],

@@ -3,51 +3,46 @@
         "Section": 21,
         "Rule": 3,
         "Test": "a",
-        "test_description": "The baseline building's purchased hot water system's sizing is based on coincident loads",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a boiler. The baseline building's hot water system sizing is based on coincident loads.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "21-3",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -65,7 +60,7 @@
                                                 "id": "System 7",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -84,7 +79,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1"
                                                 }
                                             }
@@ -142,7 +137,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -152,51 +148,46 @@
         "Section": 21,
         "Rule": 3,
         "Test": "b",
-        "test_description": "The baseline building's purchased hot water system's sizing is not based on coincident loads",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a boiler. The baseline building's hot water system sizing is not based on coincident loads.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "21-3",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
                                                         "is_supply_ducted": true,
                                                         "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1",
                                                         "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_from_loop": "Boiler Loop 1"
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7"
                                                     }
                                                 ]
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -214,7 +205,7 @@
                                                 "id": "System 7",
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -233,7 +224,7 @@
                                                 },
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Secondary CHW Loop 1"
                                                 }
                                             }
@@ -291,7 +282,317 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-3-c": {
+        "Section": 21,
+        "Rule": 3,
+        "Test": "c",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a boiler. The baseline building's hot water system sizing is based on coincident loads.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-3",
+            "ruleset_reference": "G3.1.2.2",
+            "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 5",
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                },
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING",
+                                "heating_design_and_control": {
+                                    "id": "DAC 1",
+                                    "is_sized_using_coincident_load": true
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-3-d": {
+        "Section": 21,
+        "Rule": 3,
+        "Test": "d",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a boiler. The baseline building's hot water system sizing is not based on coincident loads.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-3",
+            "ruleset_reference": "G3.1.2.2",
+            "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 5",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 5",
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                },
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING",
+                                "heating_design_and_control": {
+                                    "id": "DAC 1",
+                                    "is_sized_using_coincident_load": false
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-3-e": {
+        "Section": 21,
+        "Rule": 3,
+        "Test": "e",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 2. There are no plant systems.",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "21-3",
+            "ruleset_reference": "G3.1.2.2",
+            "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "PTHP Terminal 1",
+                                                        "is_supply_ducted": false,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "PTHP 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "PTHP 1",
+                                                "heating_system": {
+                                                    "id": "HP Heating Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ]
+                                                },
+                                                "cooling_system": {
+                                                    "id": "HP Cooling Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

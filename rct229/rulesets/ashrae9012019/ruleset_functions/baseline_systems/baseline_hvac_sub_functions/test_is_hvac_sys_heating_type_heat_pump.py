@@ -1,7 +1,7 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_heating_type_heat_pump import (
     is_hvac_sys_heating_type_heat_pump,
 )
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -16,7 +16,7 @@ TEST_RMD = {
                             "id": "hvac_1",
                             "heating_system": {
                                 "id": "heating_1",
-                                "heating_system_type": "HEAT_PUMP",
+                                "type": "HEAT_PUMP",
                                 "hot_water_loop": "HW_Loop_1",
                             },
                         },
@@ -25,7 +25,7 @@ TEST_RMD = {
                             "id": "hvac_2",
                             "heating_system": {
                                 "id": "heating_2",
-                                "heating_system_type": "FLUID_LOOP",
+                                "type": "FLUID_LOOP",
                                 "hot_water_loop": "HW_Loop_2",
                             },
                         },
@@ -50,13 +50,25 @@ TEST_RMD = {
             "type": "HEATING",
         }
     ],
+    "type": "BASELINE_0",
 }
 
-TEST_RMD_FULL = {"id": "229_01", "ruleset_model_instances": [TEST_RMD]}
+TEST_RPD_FULL = {
+    "id": "229_01",
+    "ruleset_model_descriptions": [TEST_RMD],
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
+}
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD_FULL)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rpd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

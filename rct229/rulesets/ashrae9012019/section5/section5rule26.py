@@ -1,11 +1,9 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_4_fns import table_G34_lookup
-from rct229.rulesets.ashrae9012019.ruleset_functions.compare_standard_val import std_le
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
-    get_building_scc_window_wall_ratios_dict,
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_skylight_roof_areas_dict import (
+    get_building_segment_skylight_roof_areas_dict,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
@@ -20,262 +18,226 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO
-
-DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
-MANUAL_CHECK_REQUIRED_MSG = "Manual review is requested to verify vertical fenestration meets SHGC requirement as per Table G3.4. "
+from rct229.utils.pint_utils import ZERO, CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 
-class Section5Rule26(RuleDefinitionListIndexedBase):
+class PRM9012019Rule34b75(RuleDefinitionListIndexedBase):
     """Rule 26 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule26, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+        super(PRM9012019Rule34b75, self).__init__(
+            rmds_used=produce_ruleset_model_description(
+                USER=False, BASELINE_0=True, PROPOSED=True
+            ),
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule26.BuildingRule(),
-            index_rmr="baseline",
+            each_rule=PRM9012019Rule34b75.BuildingRule(),
+            index_rmd=BASELINE_0,
             id="5-26",
-            description="Vertical fenestration SHGC shall match the appropriate requirements in Tables G3.4-1 through G3.4-8.",
+            description="Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design.",
             ruleset_section_title="Envelope",
-            standard_section="Section G3.1-5(d) Building Envelope Modeling Requirements for the Baseline building",
+            standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
+            list_path="ruleset_model_descriptions[0].buildings[*]",
         )
 
     def create_data(self, context, data=None):
-        rmr_baseline = context.baseline
-        climate_zone = rmr_baseline["weather"]["climate_zone"]
-
-        # TODO It is determined that later we will modify this function to RMD level -
-        # This implementation is temporary
-        bldg_scc_wwr_ratio_dict = {
-            building_b["id"]: get_building_scc_window_wall_ratios_dict(
-                climate_zone, building_b
-            )
-            for building_b in find_all(self.list_path, rmr_baseline)
-        }
-
-        return {
-            "climate_zone": rmr_baseline["weather"]["climate_zone"],
-            "bldg_scc_wwr_ratio_dict": bldg_scc_wwr_ratio_dict,
-        }
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule26.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
-                each_rule=Section5Rule26.BuildingRule.AboveGradeWallRule(),
-                index_rmr="baseline",
-                list_path="$..surfaces[*]",
+            super(PRM9012019Rule34b75.BuildingRule, self).__init__(
+                rmds_used=produce_ruleset_model_description(
+                    USER=False, BASELINE_0=True, PROPOSED=True
+                ),
+                each_rule=PRM9012019Rule34b75.BuildingRule.BuildingSegmentRule(),
+                index_rmd=BASELINE_0,
+                list_path="building_segments[*]",
             )
 
         def create_data(self, context, data=None):
-            building_b = context.baseline
-            climate_zone = data["climate_zone"]
-            bldg_scc_wwr_ratio = data["bldg_scc_wwr_ratio_dict"][building_b["id"]]
-            # manual flag required?
-            manual_check_required_flag = bldg_scc_wwr_ratio[
-                SCC.EXTERIOR_MIXED
-            ] > 0 and not (
-                (
-                    table_G34_lookup(
-                        climate_zone,
-                        SCC.EXTERIOR_RESIDENTIAL,
-                        "VERTICAL GLAZING",
-                        wwr=0.1,
-                    )["solar_heat_gain_coefficient"]
-                    == table_G34_lookup(
-                        climate_zone,
-                        SCC.EXTERIOR_RESIDENTIAL,
-                        "VERTICAL GLAZING",
-                        wwr=10.1,
-                    )["solar_heat_gain_coefficient"]
-                    == table_G34_lookup(
-                        climate_zone,
-                        SCC.EXTERIOR_RESIDENTIAL,
-                        "VERTICAL GLAZING",
-                        wwr=20.1,
-                    )["solar_heat_gain_coefficient"]
-                    == table_G34_lookup(
-                        climate_zone,
-                        SCC.EXTERIOR_RESIDENTIAL,
-                        "VERTICAL GLAZING",
-                        wwr=30.1,
-                    )["solar_heat_gain_coefficient"]
-                )
-                and (
-                    table_G34_lookup(
-                        climate_zone,
-                        SCC.EXTERIOR_NON_RESIDENTIAL,
-                        "VERTICAL GLAZING",
-                        wwr=0.1,
-                    )["solar_heat_gain_coefficient"]
-                    == table_G34_lookup(
-                        climate_zone,
-                        SCC.EXTERIOR_NON_RESIDENTIAL,
-                        "VERTICAL GLAZING",
-                        wwr=10.1,
-                    )["solar_heat_gain_coefficient"]
-                    == table_G34_lookup(
-                        climate_zone,
-                        SCC.EXTERIOR_NON_RESIDENTIAL,
-                        "VERTICAL GLAZING",
-                        wwr=20.1,
-                    )["solar_heat_gain_coefficient"]
-                    == table_G34_lookup(
-                        climate_zone,
-                        SCC.EXTERIOR_NON_RESIDENTIAL,
-                        "VERTICAL GLAZING",
-                        wwr=30.1,
-                    )["solar_heat_gain_coefficient"]
-                )
-                and (
-                    table_G34_lookup(
-                        climate_zone,
-                        SCC.EXTERIOR_RESIDENTIAL,
-                        "VERTICAL GLAZING",
-                        wwr=0.1,
-                    )["solar_heat_gain_coefficient"]
-                    == table_G34_lookup(
-                        climate_zone,
-                        SCC.EXTERIOR_NON_RESIDENTIAL,
-                        "VERTICAL GLAZING",
-                        wwr=0.1,
-                    )["solar_heat_gain_coefficient"]
-                )
-            )
-            # get standard code data
-            target_shgc_mix = (
-                table_G34_lookup(
-                    climate_zone,
-                    SCC.EXTERIOR_RESIDENTIAL,
-                    "VERTICAL GLAZING",
-                    wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED],
-                )["solar_heat_gain_coefficient"]
-                if bldg_scc_wwr_ratio[SCC.EXTERIOR_MIXED] > 0
-                else None
-            )
-            target_shgc_res = (
-                table_G34_lookup(
-                    climate_zone,
-                    SCC.EXTERIOR_RESIDENTIAL,
-                    "VERTICAL GLAZING",
-                    wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_RESIDENTIAL],
-                )["solar_heat_gain_coefficient"]
-                if bldg_scc_wwr_ratio[SCC.EXTERIOR_RESIDENTIAL] > 0
-                else None
-            )
-            target_shgc_nonres = (
-                table_G34_lookup(
-                    climate_zone,
-                    SCC.EXTERIOR_NON_RESIDENTIAL,
-                    "VERTICAL GLAZING",
-                    wwr=bldg_scc_wwr_ratio[SCC.EXTERIOR_NON_RESIDENTIAL],
-                )["solar_heat_gain_coefficient"]
-                if bldg_scc_wwr_ratio[SCC.EXTERIOR_NON_RESIDENTIAL] > 0
-                else None
-            )
-            target_shgc_semiheated = (
-                table_G34_lookup(
-                    climate_zone,
-                    SCC.SEMI_EXTERIOR,
-                    "VERTICAL GLAZING",
-                    wwr=bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR],
-                )["solar_heat_gain_coefficient"]
-                if bldg_scc_wwr_ratio[SCC.SEMI_EXTERIOR] > 0
-                else None
-            )
+            building_b = context.BASELINE_0
+            building_p = context.PROPOSED
             return {
-                # TODO this function will likely need to be revised to RMD level later.
                 "scc_dict_b": get_surface_conditioning_category_dict(
-                    climate_zone, building_b
+                    data["climate_zone"], building_b
                 ),
-                "manual_check_required_flag": manual_check_required_flag,
-                "target_shgc_mix": target_shgc_mix,
-                "target_shgc_res": target_shgc_res,
-                "target_shgc_nonres": target_shgc_nonres,
-                "target_shgc_semiheated": target_shgc_semiheated,
+                "skylight_roof_areas_dictionary_b": get_building_segment_skylight_roof_areas_dict(
+                    data["climate_zone"], building_b
+                ),
+                "skylight_roof_areas_dictionary_p": get_building_segment_skylight_roof_areas_dict(
+                    data["climate_zone"], building_p
+                ),
             }
 
-        def list_filter(self, context_item, data=None):
-            surface_b = context_item.baseline
-            scc_dict_b = data["scc_dict_b"]
-            return (get_opaque_surface_type(surface_b) == OST.ABOVE_GRADE_WALL) and (
-                scc_dict_b[surface_b["id"]] != SCC.UNREGULATED
-            )
-
-        class AboveGradeWallRule(RuleDefinitionListIndexedBase):
+        class BuildingSegmentRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section5Rule26.BuildingRule.AboveGradeWallRule, self).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, False),
-                    each_rule=Section5Rule26.BuildingRule.AboveGradeWallRule.SubsurfaceRule(),
-                    index_rmr="baseline",
-                    list_path="subsurfaces[*]",
-                    required_fields={
-                        "$.subsurfaces[*]": [
-                            "classification",
-                            "solar_heat_gain_coefficient",
-                        ]
-                    },
-                    manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
+                super(
+                    PRM9012019Rule34b75.BuildingRule.BuildingSegmentRule, self
+                ).__init__(
+                    rmds_used=produce_ruleset_model_description(
+                        USER=False, BASELINE_0=True, PROPOSED=True
+                    ),
+                    each_rule=PRM9012019Rule34b75.BuildingRule.BuildingSegmentRule.RoofRule(),
+                    index_rmd=BASELINE_0,
+                    list_path="$.zones[*].surfaces[*]",
                 )
 
-            def manual_check_required(self, context, calc_vals=None, data=None):
-                scc_dict_b = data["scc_dict_b"]
-                manual_check_required_flag = data["manual_check_required_flag"]
-                surface_b = context.baseline
-                # if exterior mixed and required manual check
+            def is_applicable(self, context, data=None):
+                building_segment_p = context.PROPOSED
+                skylight_roof_areas_dictionary_p = data[
+                    "skylight_roof_areas_dictionary_p"
+                ]
+                # Add applicability check to make sure the building segment contains
+                # skylight elements
+                total_skylight_area_p = skylight_roof_areas_dictionary_p[
+                    building_segment_p["id"]
+                ]["total_skylight_area"]
+                total_envelope_roof_area_p = skylight_roof_areas_dictionary_p[
+                    building_segment_p["id"]
+                ]["total_envelope_roof_area"]
+                # avoid zero division
                 return (
-                    scc_dict_b[surface_b["id"]] == SCC.EXTERIOR_MIXED
-                    and manual_check_required_flag
+                    total_envelope_roof_area_p > ZERO.AREA
+                    and total_skylight_area_p / total_envelope_roof_area_p > 0
                 )
 
             def create_data(self, context, data=None):
-                surface_b = context.baseline
-                scc_dict_b = data["scc_dict_b"]
-                return {"scc": scc_dict_b[surface_b["id"]]}
+                building_segment_b = context.BASELINE_0
+                building_segment_p = context.PROPOSED
+                return {
+                    "scc_dict_b": data["scc_dict_b"],
+                    "total_skylight_area_b": data["skylight_roof_areas_dictionary_b"][
+                        building_segment_b["id"]
+                    ]["total_skylight_area"],
+                    "total_skylight_area_p": data["skylight_roof_areas_dictionary_p"][
+                        building_segment_p["id"]
+                    ]["total_skylight_area"],
+                }
 
             def list_filter(self, context_item, data=None):
-                subsurface_b = context_item.baseline
-                return subsurface_b["classification"] != DOOR or subsurface_b.get(
-                    ["glazed_area"], ZERO.AREA
-                ) > subsurface_b.get(["opaque_area"], ZERO.AREA)
+                scc = data["scc_dict_b"]
+                surface_b = context_item.BASELINE_0
+                return (
+                    get_opaque_surface_type(surface_b) == OST.ROOF
+                    and scc[surface_b["id"]] != SCC.UNREGULATED
+                )
 
-            class SubsurfaceRule(RuleDefinitionBase):
+            class RoofRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section5Rule26.BuildingRule.AboveGradeWallRule.SubsurfaceRule,
+                        PRM9012019Rule34b75.BuildingRule.BuildingSegmentRule.RoofRule,
                         self,
                     ).__init__(
-                        rmrs_used=UserBaselineProposedVals(False, True, False),
+                        rmds_used=produce_ruleset_model_description(
+                            USER=False, BASELINE_0=True, PROPOSED=True
+                        ),
+                        precision={
+                            "total_skylight_area_surface_b / total_skylight_area_b": {
+                                "precision": 0.01,
+                                "unit": "",
+                            }
+                        },
                     )
 
                 def get_calc_vals(self, context, data=None):
-                    scc = data["scc"]
-                    subsurface_b = context.baseline
-                    target_shgc = 0.0
-                    if scc == SCC.EXTERIOR_MIXED:
-                        target_shgc = data["target_shgc_mix"]
-                    elif scc == SCC.EXTERIOR_RESIDENTIAL:
-                        target_shgc = data["target_shgc_res"]
-                    elif scc == SCC.EXTERIOR_NON_RESIDENTIAL:
-                        target_shgc = data["target_shgc_nonres"]
-                    elif scc == SCC.SEMI_EXTERIOR:
-                        target_shgc = data["target_shgc_semiheated"]
-                    else:
-                        assert f"Severe Error: No matching surface category for: {scc}"
+                    total_skylight_area_b = data["total_skylight_area_b"]
+                    total_skylight_area_p = data["total_skylight_area_p"]
+
+                    roof_b = context.BASELINE_0
+                    roof_p = context.PROPOSED
+
+                    total_skylight_area_surface_b = sum(
+                        [
+                            subsurface.get("glazed_area", ZERO.AREA)
+                            + subsurface.get("opaque_area", ZERO.AREA)
+                            for subsurface in find_all("subsurfaces[*]", roof_b)
+                        ],
+                        ZERO.AREA,
+                    )
+                    total_skylight_area_surface_p = sum(
+                        [
+                            subsurface.get("glazed_area", ZERO.AREA)
+                            + subsurface.get("opaque_area", ZERO.AREA)
+                            for subsurface in find_all("subsurfaces[*]", roof_p)
+                        ],
+                        ZERO.AREA,
+                    )
+
                     return {
-                        "subsurface_shgc": subsurface_b["solar_heat_gain_coefficient"],
-                        "target_shgc": target_shgc,
+                        "total_skylight_area_b": CalcQ("area", total_skylight_area_b),
+                        "total_skylight_area_p": CalcQ("area", total_skylight_area_p),
+                        "total_skylight_area_surface_b": CalcQ(
+                            "area", total_skylight_area_surface_b
+                        ),
+                        "total_skylight_area_surface_p": CalcQ(
+                            "area", total_skylight_area_surface_p
+                        ),
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
-                    target_shgc = calc_vals["target_shgc"]
-                    subsurface_shgc = calc_vals["subsurface_shgc"]
-                    return target_shgc is not None and std_le(
-                        std_val=target_shgc, val=subsurface_shgc
+                    total_skylight_area_b = calc_vals["total_skylight_area_b"]
+                    total_skylight_area_p = calc_vals["total_skylight_area_p"]
+                    total_skylight_area_surface_b = calc_vals[
+                        "total_skylight_area_surface_b"
+                    ]
+                    total_skylight_area_surface_p = calc_vals[
+                        "total_skylight_area_surface_p"
+                    ]
+
+                    return (
+                        # both segments have no skylight area
+                        total_skylight_area_b == 0
+                        and total_skylight_area_p == 0
+                        and total_skylight_area_surface_b == 0
+                        and total_skylight_area_surface_p == 0
+                    ) or (
+                        # product to ensure neither is 0 & short-circuit logic if either of them is 0.
+                        total_skylight_area_b * total_skylight_area_p > 0
+                        # both segments' skylight area ratios are the same
+                        and self.precision_comparison[
+                            "total_skylight_area_surface_b / total_skylight_area_b"
+                        ](
+                            (
+                                total_skylight_area_surface_b / total_skylight_area_b
+                            ).magnitude,
+                            (
+                                total_skylight_area_surface_p / total_skylight_area_p
+                            ).magnitude,
+                        )
+                    )
+
+                def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                    total_skylight_area_b = calc_vals["total_skylight_area_b"]
+                    total_skylight_area_p = calc_vals["total_skylight_area_p"]
+                    total_skylight_area_surface_b = calc_vals[
+                        "total_skylight_area_surface_b"
+                    ]
+                    total_skylight_area_surface_p = calc_vals[
+                        "total_skylight_area_surface_p"
+                    ]
+
+                    return (
+                        # both segments have no skylight area
+                        total_skylight_area_b == 0
+                        and total_skylight_area_p == 0
+                        and total_skylight_area_surface_b == 0
+                        and total_skylight_area_surface_p == 0
+                    ) or (
+                        # product to ensure neither is 0 & short-circuit logic if either of them is 0.
+                        total_skylight_area_b * total_skylight_area_p > 0
+                        # both segments' skylight area ratios are the same
+                        and std_equal(
+                            (
+                                total_skylight_area_surface_b / total_skylight_area_b
+                            ).magnitude,
+                            (
+                                total_skylight_area_surface_p / total_skylight_area_p
+                            ).magnitude,
+                        )
                     )

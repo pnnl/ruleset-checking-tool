@@ -1,156 +1,77 @@
-from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
-    OpaqueSurfaceType as OST,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
-    get_opaque_surface_type,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
-    SurfaceConditioningCategory as SCC,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
-    get_surface_conditioning_category_dict,
-)
-from rct229.utils.assertions import getattr_
-from rct229.utils.pint_utils import CalcQ
-from rct229.utils.std_comparisons import std_equal
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.jsonpath_utils import find_all
+
+GENERAL_STATUS = SchemaEnums.schema_enums["StatusOptions"]
+
+APPLICABLE_GENERAL_STATUS = [
+    GENERAL_STATUS.EXISTING,
+    GENERAL_STATUS.ALTERED,
+]
 
 
-class Section5Rule17(RuleDefinitionListIndexedBase):
+class PRM9012019Rule87g56(RuleDefinitionListIndexedBase):
     """Rule 17 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule17, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, True),
-            required_fields={
-                "$": ["weather"],
-                "weather": ["climate_zone"],
-            },
-            each_rule=Section5Rule17.BuildingRule(),
-            index_rmr="baseline",
+        super(PRM9012019Rule87g56, self).__init__(
+            rmds_used=produce_ruleset_model_description(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             id="5-17",
-            description="Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same in the baseline as in the proposed design. ",
+            description="The baseline fenestration area for an existing building shall equal the existing "
+            "fenestration area prior to the proposed work.",
             ruleset_section_title="Envelope",
-            standard_section="Section G3.1-5 Building Envelope Modeling Requirements for the Baseline building",
-            is_primary_rule=True,
-            list_path="ruleset_model_instances[0].buildings[*]",
-            data_items={"climate_zone": ("baseline", "weather/climate_zone")},
+            standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
+            is_primary_rule=False,
+            each_rule=PRM9012019Rule87g56.ZoneRule(),
+            index_rmd=BASELINE_0,
+            list_path="ruleset_model_descriptions[0].buildings[*].building_segments[*].zones[*]",
         )
 
-    class BuildingRule(RuleDefinitionListIndexedBase):
+    class ZoneRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section5Rule17.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, True),
-                required_fields={},
-                each_rule=Section5Rule17.BuildingRule.UnregulatedSurfaceRule(),
-                index_rmr="baseline",
-                list_path="$..surfaces[*]",
+            super(PRM9012019Rule87g56.ZoneRule, self).__init__(
+                rmds_used=produce_ruleset_model_description(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
             )
 
-        def create_data(self, context, data=None):
-            building = context.baseline
+        def is_applicable(self, context, data=None):
+            zone_b = context.BASELINE_0
+            return any(
+                [
+                    status_type_b in APPLICABLE_GENERAL_STATUS
+                    for status_type_b in find_all("$.spaces[*].status_type", zone_b)
+                ]
+            )
+
+        def get_calc_vals(self, context, data=None):
+            zone_b = context.BASELINE_0
+
+            existing_or_altered_space_list_b = [
+                space_b["id"]
+                for space_b in find_all("$.spaces[*]", zone_b)
+                if space_b.get("status_type") in APPLICABLE_GENERAL_STATUS
+            ]
+
             return {
-                "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building
-                ),
+                "existing_or_altered_space_list_b": existing_or_altered_space_list_b
             }
 
-        def list_filter(self, context_item, data=None):
-            scc = data["surface_conditioning_category_dict"]
-            surface_b = context_item.baseline
-            return scc[surface_b["id"]] == SCC.UNREGULATED
+        def applicability_check(self, context, calc_vals, data):
+            existing_or_altered_space_list_b = calc_vals[
+                "existing_or_altered_space_list_b"
+            ]
 
-        class UnregulatedSurfaceRule(RuleDefinitionBase):
-            def __init__(self):
-                super(
-                    Section5Rule17.BuildingRule.UnregulatedSurfaceRule, self
-                ).__init__(
-                    rmrs_used=UserBaselineProposedVals(False, True, True),
-                    required_fields={"$": ["construction"]},
-                )
+            return len(existing_or_altered_space_list_b) > 0
 
-            def get_calc_vals(self, context, data=None):
-                surface_b = context.baseline
-                surface_p = context.proposed
+        def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+            existing_or_altered_space_list_b = calc_vals[
+                "existing_or_altered_space_list_b"
+            ]
 
-                surface_b_type = get_opaque_surface_type(surface_b)
-                surface_b_construction = surface_b["construction"]
-                surface_p_type = get_opaque_surface_type(surface_p)
-                surface_p_construction = surface_p["construction"]
-
-                calc_vals = {
-                    "baseline_surface_type": surface_b_type,
-                    "proposed_surface_type": surface_p_type,
-                }
-
-                if surface_b_type in [OST.ABOVE_GRADE_WALL, OST.FLOOR, OST.ROOF]:
-                    return {
-                        **calc_vals,
-                        "baseline_surface_u_factor": getattr_(
-                            surface_b_construction, "construction", "u_factor"
-                        ),
-                        "proposed_surface_u_factor": getattr_(
-                            surface_p_construction, "construction", "u_factor"
-                        ),
-                    }
-                elif surface_b_type in [OST.UNHEATED_SOG, OST.HEATED_SOG]:
-                    return {
-                        **calc_vals,
-                        "baseline_surface_f_factor": getattr_(
-                            surface_b_construction, "construction", "f_factor"
-                        ),
-                        "proposed_surface_f_factor": getattr_(
-                            surface_p_construction, "construction", "f_factor"
-                        ),
-                    }
-                elif surface_b_type == OST.BELOW_GRADE_WALL:
-                    return {
-                        **calc_vals,
-                        "baseline_surface_c_factor": CalcQ(
-                            "thermal_transmittance",
-                            getattr_(
-                                surface_b_construction, "construction", "c_factor"
-                            ),
-                        ),
-                        "proposed_surface_c_factor": CalcQ(
-                            "thermal_transmittance",
-                            getattr_(
-                                surface_p_construction, "construction", "c_factor"
-                            ),
-                        ),
-                    }
-                else:
-                    # Will never reach this line
-                    # The OST defaults all unidentifiable surfaces to above wall grade
-                    # Serve code completeness
-                    raise Exception(f"Unrecognized surface type: {surface_b_type}")
-
-            def rule_check(self, context, calc_vals=None, data=None):
-                baseline_surface_type = calc_vals["baseline_surface_type"]
-                proposed_surface_type = calc_vals["proposed_surface_type"]
-                # Check 1. surface type needs to be matched
-                if (
-                    proposed_surface_type is None
-                    or baseline_surface_type != proposed_surface_type
-                ):
-                    return False
-
-                if baseline_surface_type in [OST.ABOVE_GRADE_WALL, OST.FLOOR, OST.ROOF]:
-                    return std_equal(
-                        calc_vals["baseline_surface_u_factor"],
-                        calc_vals["proposed_surface_u_factor"],
-                    )
-                elif baseline_surface_type in [OST.UNHEATED_SOG, OST.HEATED_SOG]:
-                    return std_equal(
-                        calc_vals["baseline_surface_f_factor"],
-                        calc_vals["proposed_surface_f_factor"],
-                    )
-                elif baseline_surface_type == OST.BELOW_GRADE_WALL:
-                    return std_equal(
-                        calc_vals["baseline_surface_c_factor"],
-                        calc_vals["proposed_surface_c_factor"],
-                    )
-                else:
-                    return False
+            return f"Part or all of spaces listed below is existing or altered. The baseline vertical fenestration area for a existing zone must equal to the fenestration area prior to the proposed scope of work. The baseline fenestration area in zone must be checked manually. ${existing_or_altered_space_list_b}"

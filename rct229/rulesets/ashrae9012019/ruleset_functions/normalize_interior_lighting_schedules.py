@@ -5,8 +5,11 @@ from rct229.rulesets.ashrae9012019.data_fns.table_G3_7_fns import (
     PARTIAL_AUTO_ON,
     table_G3_7_lookup,
 )
-from rct229.utils.assertions import assert_, assert_required_fields, getattr_
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+from rct229.utils.assertions import assert_, getattr_
+from rct229.utils.jsonpath_utils import (
+    find_exactly_one_with_field_value,
+    find_exactly_required_fields,
+)
 
 # Intended for internal use
 from rct229.utils.pint_utils import ZERO
@@ -20,8 +23,11 @@ GET_NORMALIZE_SPACE_SCHEDULE__REQUIRED_FIELDS = {
 
 
 def normalize_interior_lighting_schedules(
-    space, space_height, schedules, adjust_for_credit=True
-):
+    space: dict,
+    space_height: [float | int],
+    schedules: list[float | int],
+    adjust_for_credit: bool = True,
+) -> list[float | int]:
     """This function would determine a normalized schedule for a data element in space.
     NOTE: The function currently only works for interior lighting
     Parameters
@@ -32,20 +38,33 @@ def normalize_interior_lighting_schedules(
     adjust_for_credit: Boolean - indicate whether the function needs to adjust schedule value by control credit
     Returns
     -------
-    A list containing 8760/8784 hourly values of a noralized schedule of the space data element
+    A list containing 8760/8784 hourly values of a normalized schedule of the space data element
     """
-    assert_required_fields(
+
+    # Implementation note:
+    # Because performing arithmetic on 8760-length lists of Pint Quantities is costly,
+    # we will pull the units out of the lists. The easiest way to do that is to
+    # express each power_per_area value as a number in W/m2.
+    # Since the units
+    # cancel in the final result, an array of plain numbers can be returned, and the choice
+    # of units for power_per_area does not matter.
+
+    find_exactly_required_fields(
         GET_NORMALIZE_SPACE_SCHEDULE__REQUIRED_FIELDS["space"], space
     )
 
-    space_total_power_per_area = ZERO.POWER_PER_AREA
+    space_total_power_per_area = 0
     space_total_hourly_use_per_area_array = []
 
     for interior_lighting in space.get("interior_lighting", []):
-        power_per_area = interior_lighting.get("power_per_area", ZERO.POWER_PER_AREA)
+        power_per_area = (
+            interior_lighting.get("power_per_area", ZERO.POWER_PER_AREA)
+            .to("W/m2")
+            .magnitude
+        )
         # Ensure non-zero power
         assert_(
-            power_per_area > ZERO.POWER_PER_AREA,
+            power_per_area > 0,
             f'{interior_lighting["id"]} power_per_area is either missing or set to 0.0',
         )
         space_total_power_per_area += power_per_area

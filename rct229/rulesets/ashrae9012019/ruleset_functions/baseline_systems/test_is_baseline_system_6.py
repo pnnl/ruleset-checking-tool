@@ -7,11 +7,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.is_baseline_system_6 import (
     is_baseline_system_6,
 )
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.validate import schema_validate_rpd
 
 SYS_6_TEST_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -65,11 +65,11 @@ SYS_6_TEST_RMD = {
                                     "id": "System 6",
                                     "cooling_system": {
                                         "id": "DX Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
-                                        "heating_system_type": "ELECTRIC_RESISTANCE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 1",
@@ -82,11 +82,11 @@ SYS_6_TEST_RMD = {
                                     "id": "System 6B",
                                     "cooling_system": {
                                         "id": "DX Coil 2",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 2",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "fan_system": {
@@ -101,7 +101,7 @@ SYS_6_TEST_RMD = {
                     ],
                 }
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased HW 1",
                     "loop": "Purchased HW Loop 1",
@@ -116,13 +116,22 @@ SYS_6_TEST_RMD = {
                 }
             ],
             "fluid_loops": [{"id": "Purchased HW Loop 1", "type": "HEATING"}],
+            "type": "BASELINE_0",
         }
     ],
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 SYS_6_TEST_UNMATCHED_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -157,11 +166,11 @@ SYS_6_TEST_UNMATCHED_RMD = {
                                     "id": "System 6 Unmatched",
                                     "cooling_system": {
                                         "id": "DX Coil 2",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 3",
-                                        "heating_system_type": "OTHER",
+                                        "type": "OTHER",
                                     },
                                     "fan_system": {
                                         "id": "VAV Fan System 3",
@@ -175,20 +184,29 @@ SYS_6_TEST_UNMATCHED_RMD = {
                     ],
                 }
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 
 def test__TEST_RMD_baseline_system_6__is_valid():
-    schema_validation_result = schema_validate_rmr(SYS_6_TEST_RMD)
+    schema_validation_result = schema_validate_rpd(SYS_6_TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_RMD_baseline_system_6__is_unmatched_valid():
-    schema_validation_result = schema_validate_rmr(SYS_6_TEST_UNMATCHED_RMD)
+    schema_validation_result = schema_validate_rpd(SYS_6_TEST_UNMATCHED_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -197,7 +215,7 @@ def test__TEST_RMD_baseline_system_6__is_unmatched_valid():
 def test__is_baseline_system_6__true():
     assert (
         is_baseline_system_6(
-            SYS_6_TEST_RMD["ruleset_model_instances"][0],
+            SYS_6_TEST_RMD["ruleset_model_descriptions"][0],
             "System 6",
             ["VAV Air Terminal 1"],
             ["Thermal Zone 1"],
@@ -210,7 +228,7 @@ def test__is_baseline_system_6_test_json__true():
     assert (
         is_baseline_system_6(
             load_system_test_file("System_6_PVAV_Elec_Reheat.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 6",
             ["VAV Air Terminal 1"],
@@ -223,7 +241,7 @@ def test__is_baseline_system_6_test_json__true():
 def test__is_baseline_system_6B__true():
     assert (
         is_baseline_system_6(
-            SYS_6_TEST_RMD["ruleset_model_instances"][0],
+            SYS_6_TEST_RMD["ruleset_model_descriptions"][0],
             "System 6B",
             ["VAV Air Terminal 2"],
             ["Thermal Zone 2"],
@@ -236,7 +254,7 @@ def test_is_baseline_system_6B__test_json_true():
     assert (
         is_baseline_system_6(
             load_system_test_file("System_6b_PVAV_Elec_Reheat.json")[
-                "ruleset_model_instances"
+                "ruleset_model_descriptions"
             ][0],
             "System 6",
             ["VAV Air Terminal 1"],
@@ -249,7 +267,7 @@ def test_is_baseline_system_6B__test_json_true():
 def test__is_baseline_system_unmatched__true():
     assert (
         is_baseline_system_6(
-            SYS_6_TEST_UNMATCHED_RMD["ruleset_model_instances"][0],
+            SYS_6_TEST_UNMATCHED_RMD["ruleset_model_descriptions"][0],
             "System 6 Unmatched",
             ["VAV Air Terminal 3"],
             ["Thermal Zone 3"],

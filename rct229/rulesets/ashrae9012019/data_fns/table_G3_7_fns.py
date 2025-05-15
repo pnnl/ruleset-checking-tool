@@ -1,7 +1,7 @@
 from rct229.rulesets.ashrae9012019.data import data
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entry
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 
 # This dictionary maps the LightingSpaceOptions2019ASHRAE901TG37 enumerations to
 # the corresponding lpd_space_type values in the OSSTD file
@@ -114,11 +114,14 @@ lighting_space_enumeration_to_lpd_space_type_map = {
     "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS": "warehouse - fine storage",
 }
 
-FULL_AUTO_ON = schema_enums["LightingOccupancyControlOptions"].FULL_AUTO_ON
-PARTIAL_AUTO_ON = schema_enums["LightingOccupancyControlOptions"].PARTIAL_AUTO_ON
-MANUAL_ON = schema_enums["LightingOccupancyControlOptions"].MANUAL_ON
-OTHER = schema_enums["LightingOccupancyControlOptions"].OTHER
-NONE = schema_enums["LightingOccupancyControlOptions"].NONE
+FULL_AUTO_ON = SchemaEnums.schema_enums["LightingOccupancyControlOptions"].FULL_AUTO_ON
+PARTIAL_AUTO_ON = SchemaEnums.schema_enums[
+    "LightingOccupancyControlOptions"
+].PARTIAL_AUTO_ON
+MANUAL_ON = SchemaEnums.schema_enums["LightingOccupancyControlOptions"].MANUAL_ON
+OTHER = SchemaEnums.schema_enums["LightingOccupancyControlOptions"].OTHER
+NONE = SchemaEnums.schema_enums["LightingOccupancyControlOptions"].NONE
+
 
 # ATRIUM_LOW_MEDIUM
 def table_G3_7_lookup(lighting_space_type, space_height, space_area):

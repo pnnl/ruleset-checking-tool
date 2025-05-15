@@ -1,13 +1,13 @@
-from rct229.schema.config import ureg
-from rct229.utils.assertions import assert_, assert_required_fields
-from rct229.utils.jsonpath_utils import find_all
+from pint import Quantity
+from rct229.utils.assertions import assert_
+from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields
 from rct229.utils.pint_utils import ZERO
 
 # Intended for internal use
 GET_AVG_ZONE_HEIGHT__REQUIRED_FIELDS = {"zone": {"$": ["spaces", "volume"]}}
 
 
-def get_avg_zone_height(zone):
+def get_avg_zone_height(zone: dict) -> Quantity:
     """Determines average height of a zone as volume/floor area
 
     Parameters
@@ -29,10 +29,10 @@ def get_avg_zone_height(zone):
     Quantity
         A Pint Quantity representing a length
     """
-    assert_required_fields(GET_AVG_ZONE_HEIGHT__REQUIRED_FIELDS["zone"], zone)
+    find_exactly_required_fields(GET_AVG_ZONE_HEIGHT__REQUIRED_FIELDS["zone"], zone)
 
     zone_volume = zone["volume"]
-    zone_floor_area = sum(find_all("spaces[*].floor_area", zone))
+    zone_floor_area = sum(find_all("$.spaces[*].floor_area", zone))
 
     assert_(
         zone_floor_area > ZERO.AREA, f"zone:{zone['id']} has zero total floor area."

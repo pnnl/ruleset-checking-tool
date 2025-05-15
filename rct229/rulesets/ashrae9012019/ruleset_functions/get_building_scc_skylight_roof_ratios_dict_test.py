@@ -12,8 +12,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
     CRAWLSPACE_HEIGHT_THRESHOLD as CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY,
 )
 from rct229.schema.config import ureg
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 CLIMATE_ZONE = "CZ0A"
 POWER_DELTA = 1
@@ -29,9 +29,9 @@ POWER_THRESHOLD_100 = (CAPACITY_THRESHOLD_QUANTITY * 100 * ureg("m2")).to("W").m
 CRAWLSPACE_HEIGHT_THRESHOLD = CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY.to("m").magnitude
 
 
-# This single RMR is intended to exercise all the get_building_scc_skylight_roof_ratios_dict function
-TEST_RMR = {
-    "id": "test_rmr",
+# This single rmd is intended to exercise all the get_building_scc_skylight_roof_ratios_dict function
+TEST_rmd = {
+    "id": "test_rmd",
     "buildings": [
         {
             "id": "bldg_1",
@@ -520,15 +520,21 @@ TEST_RMR = {
             ],
         }
     ],
+    "type": "BASELINE_0",
 }
 
-TEST_RMR_12 = {"id": "229_01", "ruleset_model_instances": [TEST_RMR]}
+TEST_RMD_12 = {
+    "id": "229_01",
+    "ruleset_model_descriptions": [TEST_rmd],
+}
 
-TEST_BUILDING = quantify_rmr(TEST_RMR_12)["ruleset_model_instances"][0]["buildings"][0]
+TEST_BUILDING = quantify_rmd(TEST_RMD_12)["ruleset_model_descriptions"][0]["buildings"][
+    0
+]
 
 # The purpose of below is to test out when all the summed areas equal 0.
-TEST_RMR_BRANCH_COVERAGE = {
-    "id": "test_rmr_branch_coverage",
+TEST_RMD_BRANCH_COVERAGE = {
+    "id": "test_rmd_branch_coverage",
     "buildings": [
         {
             "id": "bldg_1",
@@ -599,18 +605,18 @@ TEST_RMR_BRANCH_COVERAGE = {
     ],
 }
 
-TEST_RMR_BRANCH_COVERAGE = {
+TEST_RMD_BRANCH_COVERAGE = {
     "id": "229_01",
-    "ruleset_model_instances": [TEST_RMR_BRANCH_COVERAGE],
+    "ruleset_model_descriptions": [TEST_RMD_BRANCH_COVERAGE],
 }
 
-TEST_BUILDING_BRANCH_COVERAGE = quantify_rmr(TEST_RMR_BRANCH_COVERAGE)[
-    "ruleset_model_instances"
+TEST_BUILDING_BRANCH_COVERAGE = quantify_rmd(TEST_RMD_BRANCH_COVERAGE)[
+    "ruleset_model_descriptions"
 ][0]["buildings"][0]
 
 
-TEST_RMR_BRANCH_COVERAGE2 = {
-    "id": "test_rmr_branch_coverage2",
+TEST_RMD_BRANCH_COVERAGE2 = {
+    "id": "test_rmd_branch_coverage2",
     "buildings": [
         {
             "id": "bldg_1",
@@ -678,18 +684,26 @@ TEST_RMR_BRANCH_COVERAGE2 = {
 }
 
 
-TEST_RMR_BRANCH_COVERAGE2 = {
+TEST_RMD_BRANCH_COVERAGE2 = {
     "id": "229_01",
-    "ruleset_model_instances": [TEST_RMR_BRANCH_COVERAGE2],
+    "ruleset_model_descriptions": [TEST_RMD_BRANCH_COVERAGE2],
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
-TEST_BUILDING_BRANCH_COVERAGE2 = quantify_rmr(TEST_RMR_BRANCH_COVERAGE2)[
-    "ruleset_model_instances"
+TEST_BUILDING_BRANCH_COVERAGE2 = quantify_rmd(TEST_RMD_BRANCH_COVERAGE2)[
+    "ruleset_model_descriptions"
 ][0]["buildings"][0]
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMR_12)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rpd(TEST_RMD_12)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

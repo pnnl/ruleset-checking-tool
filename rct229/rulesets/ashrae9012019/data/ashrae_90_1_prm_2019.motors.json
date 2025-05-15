@@ -137,7 +137,7 @@
       "synchronous_speed": "Any",
       "minimum_capacity": 50.0,
       "maximum_capacity": 59.999,
-      "nominal_full_load_efficiency": 0.9359999999999999,
+      "nominal_full_load_efficiency": 0.93,
       "notes": "From 90.1-2019 Table G3.9.1, applied to all number of poles, type, and Synchronous Speed"
     },
     {

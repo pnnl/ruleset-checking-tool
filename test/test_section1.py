@@ -1,5 +1,6 @@
 # from rct229.rules.rule_section1 import section1_rule1
 
+
 # content of test_assert1.py
 def f():
     return 4

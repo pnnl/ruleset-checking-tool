@@ -28,14 +28,14 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.7'
-          cache: 'pipenv'
-      - name: Install pipenv
-        run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
-      - name: Install dependencies
-        run: pipenv install --dev
+          python-version: '3.10'
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 - --version 1.8.4
+      - name: Install venv
+        run: poetry install
       - name: Run pytests
         # This will halt the action if any of the tests fail
-        run: pipenv run pytest -v
+        run: poetry run pytest -v
       - name: Run rule tests
-        run: pipenv run rct229 test -rs ashrae9012019
+        run: poetry run rct229 test -rs ashrae9012019

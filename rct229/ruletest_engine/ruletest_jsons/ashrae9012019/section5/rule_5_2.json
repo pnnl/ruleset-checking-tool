@@ -3,88 +3,71 @@
         "Section": 5,
         "Rule": 2,
         "Test": "a",
-        "test_description": "U-RMR includes two surfaces. Azimuth of each surface in P-RMR is the same as in U-RMR.",
+        "test_description": "Project has one building segment with two zones. Zones include both interior and exterior surfaces. All exterior surfaces are correctly modeled as not casting shade in the baseline.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "5-2",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (a) ",
-            "rule_description": "Orientation is the same in user model and proposed model",
-            "applicable_rmr": "Proposed RMR",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (a)",
+            "rule_description": "Baseline building must be modeled so that it doesn't shade itself",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "User RMR",
-            "primary_rule": "N",
-            "schema_version": "0.0.18"
+            "comparison_value": "Expected Value",
+            "primary_rule": "Applicability",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
-            "user": {
-                "id": "ASHRAE229",
-                "ruleset_model_instances": [
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "azimuth": 20
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "does_cast_shade": false
                                                     },
                                                     {
                                                         "id": "Surface 2",
-                                                        "azimuth": 190
+                                                        "adjacent_to": "INTERIOR",
+                                                        "adjacent_zone": "Zone 2",
+                                                        "does_cast_shade": false
+                                                    },
+                                                    {
+                                                        "id": "Surface 3",
+                                                        "adjacent_to": "IDENTICAL",
+                                                        "does_cast_shade": false
+                                                    },
+                                                    {
+                                                        "id": "Surface 4",
+                                                        "adjacent_to": "GROUND",
+                                                        "does_cast_shade": false
+                                                    },
+                                                    {
+                                                        "id": "Surface 5",
+                                                        "adjacent_to": "UNDEFINED",
+                                                        "does_cast_shade": false
                                                     }
                                                 ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            "proposed": {
-                "id": "ASHRAE229",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
+                                            },
                                             {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "azimuth": 20
-                                                    },
-                                                    {
-                                                        "id": "Surface 2",
-                                                        "azimuth": 190
-                                                    }
-                                                ]
+                                                "id": "Zone 2"
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -94,88 +77,71 @@
         "Section": 5,
         "Rule": 2,
         "Test": "b",
-        "test_description": "U-RMR includes two surfaces. Azimuth of one surface in P-RMR is different U-RMR.",
+        "test_description": "Project has one building segment with two zones. Zones include both interior and exterior surfaces. One exterior surface is incorrectly modeled as casting shade in the baseline.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "5-2",
-            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (a) ",
-            "rule_description": "Orientation is the same in user model and proposed model",
-            "applicable_rmr": "Proposed RMR",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (a)",
+            "rule_description": "Baseline building must be modeled so that it doesn't shade itself",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
-            "comparison_value": "User RMR",
-            "primary_rule": "N",
-            "schema_version": "0.0.18"
+            "comparison_value": "Expected Value",
+            "primary_rule": "Applicability",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
-            "user": {
-                "id": "ASHRAE229",
-                "ruleset_model_instances": [
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "azimuth": 20
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "does_cast_shade": true
                                                     },
                                                     {
                                                         "id": "Surface 2",
-                                                        "azimuth": 190
+                                                        "adjacent_to": "INTERIOR",
+                                                        "adjacent_zone": "Zone 2",
+                                                        "does_cast_shade": true
+                                                    },
+                                                    {
+                                                        "id": "Surface 3",
+                                                        "adjacent_to": "IDENTICAL",
+                                                        "does_cast_shade": true
+                                                    },
+                                                    {
+                                                        "id": "Surface 4",
+                                                        "adjacent_to": "GROUND",
+                                                        "does_cast_shade": true
+                                                    },
+                                                    {
+                                                        "id": "Surface 5",
+                                                        "adjacent_to": "UNDEFINED",
+                                                        "does_cast_shade": true
                                                     }
                                                 ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            "proposed": {
-                "id": "ASHRAE229",
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
+                                            },
                                             {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "azimuth": 30
-                                                    },
-                                                    {
-                                                        "id": "Surface 2",
-                                                        "azimuth": 190
-                                                    }
-                                                ]
+                                                "id": "Zone 2"
                                             }
                                         ]
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

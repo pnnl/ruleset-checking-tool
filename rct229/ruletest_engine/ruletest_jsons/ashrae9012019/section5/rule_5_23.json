@@ -1,0 +1,192 @@
+{
+    "rule-5-23-a": {
+        "Section": 5,
+        "Rule": 23,
+        "Test": "a",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space has vertical fenestration with manual interior shading.  Manual interior shades are correctly modeled the same in the baseline and proposed models.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-23",
+            "ruleset_reference": "Table G3.1(5) Proposed Building Performance a.4 \nTable G3.1(5) Baseline Building Performance (d)",
+            "rule_description": "Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "has_manual_interior_shades": true
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "has_manual_interior_shades": true
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-23-b": {
+        "Section": 5,
+        "Rule": 23,
+        "Test": "b",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface and window. The space has vertical fenestration with manual interior shading.  Manual interior shades are not correctly modeled the same in the baseline and proposed models.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-23",
+            "ruleset_reference": "Table G3.1(5) Proposed Building Performance a.4 \nTable G3.1(5) Baseline Building Performance (d)",
+            "rule_description": "Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "has_manual_interior_shades": true
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "has_manual_interior_shades": false
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

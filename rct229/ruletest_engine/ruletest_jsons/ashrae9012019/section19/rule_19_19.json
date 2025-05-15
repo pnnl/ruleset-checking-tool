@@ -1,0 +1,787 @@
+{
+    "rule-19-19-a": {
+        "Section": 19,
+        "Rule": 19,
+        "Test": "a",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 9. The system has one of each of a supply, return, exhaust, and relief fan as well as a zonal exhaust fan. Each of the 5 fans has 59 W design electric power for a total of 295 W with 1000 cfm of design supply airflow.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-19",
+            "ruleset_reference": "G3.1.2.9",
+            "rule_description": "For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc \u00d7 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling. ",
+            "applicable_rmd": "Baseline RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 9"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 9",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "FURNACE",
+                                                    "energy_source_type": "NATURAL_GAS"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 9"
+                                                    }
+                                                ],
+                                                "zonal_exhaust_fan": {
+                                                    "id": "Zone exhaust fan 1",
+                                                    "specification_method": "SIMPLE",
+                                                    "design_electric_power": 59
+                                                }
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 9",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "FURNACE",
+                                                    "energy_source_type": "NATURAL_GAS"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 59,
+                                                            "design_airflow": 471.94744319999984
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 59
+                                                        }
+                                                    ],
+                                                    "relief_fans": [
+                                                        {
+                                                            "id": "Relief fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 59
+                                                        }
+                                                    ],
+                                                    "exhaust_fans": [
+                                                        {
+                                                            "id": "Exhaust fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 59
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-19-19-b": {
+        "Section": 19,
+        "Rule": 19,
+        "Test": "b",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 10. The system has one of each of a supply, return, exhaust, and relief fan as well as a zonal exhaust fan. Each of the 5 fans has 80 W design electric power for a total of 400 W with 800 cfm of design supply airflow.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "19-19",
+            "ruleset_reference": "G3.1.2.9",
+            "rule_description": "For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc \u00d7 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling. ",
+            "applicable_rmd": "Baseline RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
+                                                    }
+                                                ],
+                                                "zonal_exhaust_fan": {
+                                                    "id": "Zone exhaust fan 1",
+                                                    "specification_method": "SIMPLE",
+                                                    "design_electric_power": 80
+                                                }
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 80,
+                                                            "design_airflow": 377.55795455999987
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 80
+                                                        }
+                                                    ],
+                                                    "relief_fans": [
+                                                        {
+                                                            "id": "Relief fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 80
+                                                        }
+                                                    ],
+                                                    "exhaust_fans": [
+                                                        {
+                                                            "id": "Exhaust fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 80
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-19-19-c": {
+        "Section": 19,
+        "Rule": 19,
+        "Test": "c",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 10. There is more than one supply fan in the baseline HVAC system.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "has more than one supply fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC sytem. Conduct manual check for compliance with G3.1.2.9.",
+        "standard": {
+            "rule_id": "19-19",
+            "ruleset_reference": "G3.1.2.9",
+            "rule_description": "For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc \u00d7 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling. ",
+            "applicable_rmd": "Baseline RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
+                                                    }
+                                                ],
+                                                "zonal_exhaust_fan": {
+                                                    "id": "Zone exhaust fan 1",
+                                                    "specification_method": "SIMPLE",
+                                                    "design_electric_power": 60
+                                                }
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 60,
+                                                            "design_airflow": 471.94744319999984
+                                                        },
+                                                        {
+                                                            "id": "Supply Fan 2",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 360,
+                                                            "design_airflow": 566.3369318399998
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 60
+                                                        }
+                                                    ],
+                                                    "relief_fans": [
+                                                        {
+                                                            "id": "Relief fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 60
+                                                        }
+                                                    ],
+                                                    "exhaust_fans": [
+                                                        {
+                                                            "id": "Exhaust fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 60
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-19-19-d": {
+        "Section": 19,
+        "Rule": 19,
+        "Test": "d",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 10. There is non-mechanical cooling associated with the zone served by the baseline HVAC system in the proposed model.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "has zone(s) with non-mechanical cooling in the proposed design, conduct a manual check that the baseline building design includes a fan power allowance of",
+        "standard": {
+            "rule_id": "19-19",
+            "ruleset_reference": "G3.1.2.9",
+            "rule_description": "For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc \u00d7 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling. ",
+            "applicable_rmd": "Baseline RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
+                                                    }
+                                                ],
+                                                "non_mechanical_cooling_fan_airflow": 117.98686079999996
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
+                                                    }
+                                                ],
+                                                "zonal_exhaust_fan": {
+                                                    "id": "Zone exhaust fan 1",
+                                                    "specification_method": "SIMPLE",
+                                                    "design_electric_power": 60
+                                                }
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 60,
+                                                            "design_airflow": 471.94744319999984
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 60
+                                                        }
+                                                    ],
+                                                    "relief_fans": [
+                                                        {
+                                                            "id": "Relief fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 60
+                                                        }
+                                                    ],
+                                                    "exhaust_fans": [
+                                                        {
+                                                            "id": "Exhaust fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 60
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-19-19-e": {
+        "Section": 19,
+        "Rule": 19,
+        "Test": "e",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 10. The system has one of each of a supply, return, exhaust, and relief fan as well as a zonal exhaust fan. Each of the 5 fans has 80 W design electric power for a total of 400 W with 2000 cfm of design supply airflow.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "fails with a conservative outcome. The fan power airflow (W/cfm) for",
+        "standard": {
+            "rule_id": "19-19",
+            "ruleset_reference": "G3.1.2.9",
+            "rule_description": "For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be CFMs \u00d7 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. If modeling a non-mechanical cooling fan is required by Section G3.1.2.8.2, there is a fan power allowance of Pfan = CFMnmc \u00d7 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling. ",
+            "applicable_rmd": "Baseline RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 10"
+                                                    }
+                                                ],
+                                                "zonal_exhaust_fan": {
+                                                    "id": "Zone exhaust fan 1",
+                                                    "specification_method": "SIMPLE",
+                                                    "design_electric_power": 80
+                                                }
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 10",
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE",
+                                                    "energy_source_type": "ELECTRICITY"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 80,
+                                                            "design_airflow": 943.8948863999997
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 80
+                                                        }
+                                                    ],
+                                                    "relief_fans": [
+                                                        {
+                                                            "id": "Relief fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 80
+                                                        }
+                                                    ],
+                                                    "exhaust_fans": [
+                                                        {
+                                                            "id": "Exhaust fan 1",
+                                                            "specification_method": "SIMPLE",
+                                                            "design_electric_power": 80
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

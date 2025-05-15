@@ -9,8 +9,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
     get_zone_conditioning_category_dict,
 )
 from rct229.schema.config import ureg
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 CLIMATE_ZONE = "CZ0A"
 POWER_DELTA = 1
@@ -25,9 +25,9 @@ SYSTEM_MIN_HEATING_OUTPUT = (
 POWER_THRESHOLD_100 = (CAPACITY_THRESHOLD_QUANTITY * 100 * ureg("m2")).to("W").magnitude
 CRAWLSPACE_HEIGHT_THRESHOLD = CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY.to("m").magnitude
 
-# This single RMR is intended to exercise all the get_zone_conditioning_category_dict() code
-TEST_RMR = {
-    "id": "test_rmr",
+# This single RMD is intended to exercise all the get_zone_conditioning_category_dict() code
+TEST_RMD = {
+    "id": "test_rmd",
     "buildings": [
         {
             "id": "bldg_1",
@@ -196,8 +196,8 @@ TEST_RMR = {
                         # More strongly thermally connected to directly conditioned zones
                         #   => indirectly_conditioned_zone
                         # building_segment_is_residential
-                        # zone has no spaces with with specified lighting_space_type
-                        #   AND buliding_segment_is_residential
+                        # zone has no spaces with specified lighting_space_type
+                        #   AND building_segment_is_residential
                         #   => zone_has_residential_spaces
                         # NOT zone_has_nonresidential_spaces
                         #   AND zone_has_residential_spaces
@@ -709,14 +709,28 @@ TEST_RMR = {
             ],
         }
     ],
+    "type": "BASELINE_0",
 }
 
-TEST_RMR_12 = {"id": "229_01", "ruleset_model_instances": [TEST_RMR]}
-TEST_BUILDING = quantify_rmr(TEST_RMR_12)["ruleset_model_instances"][0]["buildings"][0]
+TEST_RPD_12 = {
+    "id": "229_01",
+    "ruleset_model_descriptions": [TEST_RMD],
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
+}
+TEST_BUILDING = quantify_rmd(TEST_RPD_12)["ruleset_model_descriptions"][0]["buildings"][
+    0
+]
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMR_12)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rpd(TEST_RPD_12)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

@@ -1,6 +1,6 @@
 {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -30,11 +30,11 @@
                                     "id": "System Type 4",
                                     "cooling_system": {
                                         "id": "DX Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION"
+                                        "type": "DIRECT_EXPANSION"
                                     },
                                     "heating_system": {
                                         "id": "HP Coil 1",
-                                        "heating_system_type": "HEAT_PUMP"
+                                        "type": "HEAT_PUMP"
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 1",

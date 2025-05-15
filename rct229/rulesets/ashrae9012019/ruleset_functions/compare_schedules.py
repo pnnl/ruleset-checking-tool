@@ -1,8 +1,21 @@
+from typing import TypedDict
+
 from rct229.rule_engine.rulesets import LeapYear
 from rct229.utils.assertions import assert_
 
 
-def compare_schedules(schedule_1, schedule_2, mask_schedule, is_leap_year: bool):
+class CompareSchedulesEFLHDifference(TypedDict):
+    total_hours_compared: int
+    total_hours_matched: int
+    eflh_difference: float
+
+
+def compare_schedules(
+    schedule_1: list[float],
+    schedule_2: list[float],
+    mask_schedule: list[float],
+    is_leap_year: bool,
+) -> CompareSchedulesEFLHDifference:
     """Compare two schedules and determine if they match with or without a comparison factor when applicable
     NOTE: The function only works with hourly schedule for now.
 
@@ -14,7 +27,7 @@ def compare_schedules(schedule_1, schedule_2, mask_schedule, is_leap_year: bool)
         if hourly value is 1, schedule_1 is evaluated to be equal to schedule_2;
         if hourly value is 2, schedule_1 is evaluated to be equal to schedule_2 times the comparison factor;
         if hourly value is 0, comparison was skipped for that particular hour
-        (example when evaluating shut off controls, only he building closed hrs are evaluated) exmaple: [1,1,1,1,1...]
+        (example when evaluating shut off controls, only he building closed hrs are evaluated) example: [1,1,1,1,1...]
     is_leap_year: bool, indicate whether the comparison is in a leap year or not. True / False
 
     Returns
@@ -23,8 +36,8 @@ def compare_schedules(schedule_1, schedule_2, mask_schedule, is_leap_year: bool)
     the number of hours schedule_1 matches schedule_2 with the comparison_factor,
     EFLH difference for schedule_1 and schedule_2,
     i.e. {
-        "total_hour_compared": total_hours_compared,
-        "total_hour_matched": total_hours_match,
+        "total_hours_compared": total_hours_compared,
+        "total_hours_matched": total_hours_match,
         "eflh_difference: EFLH_difference
         }
     """

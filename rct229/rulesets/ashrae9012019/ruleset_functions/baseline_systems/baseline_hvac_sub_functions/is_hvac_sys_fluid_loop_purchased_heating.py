@@ -1,19 +1,17 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_hvac_system,
-)
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all, find_one
+from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
-EXTERNAL_FLUID_SOURCE = schema_enums["ExternalFluidSourceOptions"]
+EXTERNAL_FLUID_SOURCE = SchemaEnums.schema_enums["ExternalFluidSourceOptions"]
 
 
-def is_hvac_sys_fluid_loop_purchased_heating(rmi_b, hvac_b_id):
+def is_hvac_sys_fluid_loop_purchased_heating(rmd_b, hvac_b_id):
     """Returns TRUE if the fluid loop associated with the heating system associated with the HVAC system is attached to an external purchased heating loop. Returns FALSE if this is not the case.
 
     Parameters
     ----------
-    rmi_b : json
-        RMD at RuleSetModelInstance level
+    rmd_b : json
+        RMD at RuleSetModelDescription level
     hvac_b_id : str
         The HVAC system ID.
 
@@ -25,12 +23,12 @@ def is_hvac_sys_fluid_loop_purchased_heating(rmi_b, hvac_b_id):
     """
     # Get a list of loop ids in external fluid sources whose type are either hot water or steam
     purchased_heating_loop_id_list_b = find_all(
-        f'$.external_fluid_source[*][?(@.type="{EXTERNAL_FLUID_SOURCE.HOT_WATER}"), ?(@.type="{EXTERNAL_FLUID_SOURCE.STEAM}")].loop',
-        rmi_b,
+        f'$.external_fluid_sources[*][?(@.type="{EXTERNAL_FLUID_SOURCE.HOT_WATER}"), ?(@.type="{EXTERNAL_FLUID_SOURCE.STEAM}")].loop',
+        rmd_b,
     )
 
     # Get the hvac system
-    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
+    hvac_b = find_exactly_one_hvac_system(rmd_b, hvac_b_id)
 
     # the hvac_sys has a heating system and the heating system has a hot_water_loop and
     # the loop id is in the purchased_heating_loop_id_list

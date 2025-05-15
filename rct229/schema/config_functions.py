@@ -6,7 +6,6 @@ import pint
 
 # Initialize pint ureg
 def get_pint_unit_registry():
-
     # Import unit definitions from text file
     path_to_units = os.path.join(
         os.path.dirname(__file__), "resources", "unit_registry.txt"
@@ -14,6 +13,24 @@ def get_pint_unit_registry():
     ureg = pint.UnitRegistry(path_to_units, autoconvert_offset_to_baseunit=True)
 
     return ureg
+
+
+def get_schema_version():
+    """Returns ASHRAE229 schema version as a string
+
+     Returns
+    -------
+    schema_version: string
+        Version of the ASHRAE229 schema
+
+    """
+    file_dir = os.path.dirname(__file__)
+    json_schema_path = os.path.join(file_dir, "ASHRAE229.schema.json")
+    with open(json_schema_path) as f:
+        schema_dictionary = json.load(f)
+        schema_version = schema_dictionary["version"]
+
+    return schema_version
 
 
 def get_schema_definitions_dictionary():

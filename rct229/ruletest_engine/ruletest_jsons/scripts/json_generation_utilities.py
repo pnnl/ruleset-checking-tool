@@ -1,6 +1,9 @@
 import json
 import os
 import re
+from collections import OrderedDict
+
+from rct229.rulesets.ashrae9012019 import rules_dict
 
 
 def get_nested_dict(dic, keys):
@@ -22,24 +25,32 @@ def get_nested_dict(dic, keys):
     """
 
     last_key, last_index = parse_key_string(keys[-1])
+    first_key, first_index = parse_key_string(keys[0])
 
     # Generate a nested dictionary, slowly building on a reference nested dictionary each iteration through the loop.
     for key in keys:
         # Parse key and determine if this key references a list or a value. If list_index returns an integer (i.e., a
         # reference index in a list) this key represents a list in the dictionary and needs to be set differently
         # EXAMPLE: The key "buildings[0]" implies the "buildings" key represents a list. We set the value at
-        # element 0 in the this list
+        # element 0 in this list
 
         key, list_index = parse_key_string(key)
         is_list = isinstance(list_index, int)
 
         # If this is the first key, set the reference dictionary to the highest level dictionary and work down from
         # there.
-        if key == keys[0]:
-            # If first key isnt initialized, set it as a dictionary
+        if key == first_key:
+            # If first key isn't initialized, set it as a dictionary
             if key not in dic:
-                dic[key] = {}
-            reference_dict = dic[key]
+                if first_index == None:
+                    dic[key] = {}
+                else:
+                    dic[key] = []
+
+            if is_list:
+                reference_dict = dic[key][first_index]
+            else:
+                reference_dict = dic[key]
 
         # If the final key, return the referenced final, nested dictionary
         elif key == last_key:
@@ -59,6 +70,73 @@ def get_nested_dict(dic, keys):
                     reference_dict[key] = [{}]
                 else:
                     reference_dict[key] = {}
+
+            # If this element in the key_list references a list, index the value defined in 'list_index', else reference
+            # the single value specified by the key.
+            if is_list:
+                # If list isn't long enough, append a new dictionary to it to avoid index out of bounds
+                # print(reference_dict[key])
+                while len(reference_dict[key]) < list_index + 1:
+                    reference_dict[key].append({})
+                reference_dict = reference_dict[key][list_index]
+            else:
+                reference_dict = reference_dict[key]
+
+
+def get_nested_dic_from_key_list(dic, keys):
+    nested_dict = get_nested_dict(dic, keys)
+
+    # Parse final key to see if it's a list or dictionary/key value
+    key, list_index = parse_key_string(keys[-1])
+
+    # Set value. If list_index is None, this is just a key/value pair
+    if list_index == None:
+        return nested_dict[key]
+
+    # If list_index is not None, return element, not list
+    else:
+        return nested_dict[key][list_index]
+
+
+# Determines if a dictionary has an element after at a particular key list address
+def element_exists_at_key_address_in_dictionary(dic, keys):
+
+    last_key, last_index = parse_key_string(keys[-1])
+    first_key, first_index = parse_key_string(keys[0])
+
+    # Determine if a nested dictionary exists, slowly building on a reference nested dictionary each iteration through the loop.
+    for key in keys:
+        # Parse key and determine if this key references a list or a value. If list_index returns an integer (i.e., a
+        # reference index in a list) this key represents a list in the dictionary and needs to be set differently
+        # EXAMPLE: The key "buildings[0]" implies the "buildings" key represents a list. We set the value at
+        # element 0 in this list
+
+        key, list_index = parse_key_string(key)
+        is_list = isinstance(list_index, int)
+
+        # If this is the first key, set the reference dictionary to the highest level dictionary and work down from
+        # there.
+        if key == first_key:
+            # If first key isn't initialized, return False
+            if key not in dic:
+                return False
+
+            if is_list:
+                reference_dict = dic[key][first_index]
+            else:
+                reference_dict = dic[key]
+
+        # If the final key and something is found, return True
+        elif key == last_key:
+            if key not in reference_dict:
+                return False
+
+            return True
+
+        # If neither the first nor final key in list, continue drilling down through nested dictionaries.
+        else:
+            if key not in reference_dict:
+                return False
 
             # If this element in the key_list references a list, index the value defined in 'list_index', else reference
             # the single value specified by the key.
@@ -182,6 +260,26 @@ def inject_json_path_from_enumeration(key_list, json_path_ref_string):
     key_list.extend(enumeration_list)
 
 
+def get_json_path_key_list_from_enumeration(json_path_enumeration):
+    # JSON path enumerations. Used to simplify JSON path references in test spreadsheets
+    file_dir = os.path.dirname(__file__)
+    json_path_enums_file_path = os.path.join(
+        file_dir, "resources", "json_pointer_enumerations.json"
+    )
+
+    with open(json_path_enums_file_path) as f:
+        # Construct dictionary to map shorthand names for JSON Paths
+        # (e.g., path_enum_dict['spaces] = 'buildings/building_segments/thermal_blocks/zones/spaces')
+        path_enum_dict = json.load(f)
+
+    # Split enumeration path into a list and append it to existing key_list
+    # (e.g. 'buildings/building_segments/thermal_blocks/zones/spaces' ->
+    #       ['buildings', 'building_segments', 'thermal_blocks', 'zones', 'spaces']
+    enumeration_list = path_enum_dict[json_path_enumeration].split("/")
+
+    return enumeration_list
+
+
 def clean_value(value):
     """Used to change strings to numerics, if possible.
 
@@ -203,7 +301,7 @@ def clean_value(value):
                 return value.lower() == "true"
 
             # If the value references a schedule, parse string to create the list
-            if "SCHEDULE" in value:
+            if "SCHEDULE:" in value:
                 return create_schedule_list(value)
 
             try:
@@ -293,6 +391,11 @@ def create_schedule_list(schedule_str):
         schedule_list = [float(schedule_parameter)] * 8760
         return schedule_list
 
+    elif schedule_name == "CONSTANT_DAY":
+        # Return the schedule parameter 24 times
+        schedule_list = [float(schedule_parameter)] * 24
+        return schedule_list
+
     # If utilizing a predefined schedule from the schedule library, load it here
     elif schedule_name == "LIBRARY":
         # Load schedule JSON
@@ -359,10 +462,19 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
     master_json_path = os.path.join(
         file_dir, "..", ruleset_doc, master_json_name
     )  # os.path.join(file_dir, "..", ruleset_doc, master_json_name)
+    master_dict = None
+    try:
+        # Check if the master JSON file exists
+        if not os.path.exists(master_json_path):
+            raise FileNotFoundError(f"File not found: {master_json_path}")
 
-    # Initialize master JSON dictionary
-    with open(master_json_path) as f:
-        master_dict = json.load(f)
+        # Initialize master JSON dictionary
+        with open(master_json_path) as f:
+            master_dict = json.load(f)
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
     # Initialize dictionary used to break out master dictionary into sections and rules
     rule_dictionary = {}
@@ -394,11 +506,34 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
         # Initialize this ruletest's dictionary
         ruletest_dict = master_dict[ruletest]
 
-        # Pull out rule and section
-        section = ruletest_dict["Section"]
-        rule = ruletest_dict["Rule"]
+        if len(ruletest.split("-")) != 3:
+            raise ValueError(
+                f"Ruletest {ruletest} does not have a valid rule id format. Expected format, for example: rule-73j65-a"
+            )
+
+        # Map the rule ID to the rule name
+        rule_name = rules_dict.get(f"prm9012019rule{ruletest.split('-')[1]}")
+
+        if not rule_name:
+            raise ValueError(f"Rule {ruletest.split('-')[1]} not found in rule_map")
+
+        # Extract section and rule number from rule name
+        section = int(rule_name.split("rule")[0].split("section")[1])
+        rule = int(rule_name.split("rule")[1])
         test_case = ruletest_dict["Test"]
 
+        ordered_ruletest_dict = OrderedDict()
+        ordered_ruletest_dict["Section"] = section
+        ordered_ruletest_dict["Rule"] = rule
+        ordered_ruletest_dict["Test"] = test_case
+
+        # Add remaining keys, preserving their original order
+        for key, value in ruletest_dict.items():
+            if key not in {"Test", "Section", "Rule"}:  # Avoid duplicating keys
+                ordered_ruletest_dict[key] = value
+
+        # Replace the standard rule_id
+        ordered_ruletest_dict["standard"]["rule_id"] = f"{section}-{rule}"
         # Create unique ID for this rule and previous
         rule_id = f"{section}-{rule}"
         prev_rule_id = f"{prev_section}-{prev_rule}"
@@ -413,7 +548,7 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
                 rule_dictionary = {}
 
         # Add this test case to the existing rule_dictionary
-        rule_dictionary[f"rule-{rule_id}-{test_case}"] = ruletest_dict
+        rule_dictionary[f"rule-{rule_id}-{test_case}"] = ordered_ruletest_dict
 
         # Record previous section
         prev_section = section
@@ -423,7 +558,7 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
     write_ruletest_json(prev_section, prev_rule, ruleset_doc)
 
 
-def disaggregate_master_rmd_json(master_json_name, output_dir):
+def disaggregate_master_rmd_json(master_json_name, output_dir, ruleset_doc):
     """Ingests a string representing a JSON file name from rct229/ruletest_engine/ruletest_jsons. JSONs in that
     directory contain either ALL ruletests for a particular grouping of rules (e.g., 'envelope_tests.json' has every
     test case for envelope based rules) or sometimes just RMDs. This scripts breaks out master JSONs without test
@@ -445,7 +580,7 @@ def disaggregate_master_rmd_json(master_json_name, output_dir):
     file_dir = os.path.dirname(__file__)
 
     # master JSON should be in the ruletest_jsons directory
-    master_json_path = os.path.join(file_dir, "..", master_json_name)
+    master_json_path = os.path.join(file_dir, "..", ruleset_doc, master_json_name)
 
     # Initialize master JSON dictionary
     with open(master_json_path) as f:
@@ -455,7 +590,7 @@ def disaggregate_master_rmd_json(master_json_name, output_dir):
     def write_ruletest_json(rmd_dict, json_name, output_dir):
         # Initialize json name and pathing
         json_name = os.path.join(f"{output_dir}", f"{json_name}")
-        json_file_path = os.path.join(file_dir, "..", json_name)
+        json_file_path = os.path.join(file_dir, "..", ruleset_doc, json_name)
 
         # Dump JSON to string for writing
         json_string = json.dumps(rmd_dict, indent=4)

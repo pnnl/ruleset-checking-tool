@@ -5,6 +5,7 @@ __all__ = [
     "section12rule1",
     "section12rule2",
     "section12rule3",
+    "section12rule4",
 ]
 
 

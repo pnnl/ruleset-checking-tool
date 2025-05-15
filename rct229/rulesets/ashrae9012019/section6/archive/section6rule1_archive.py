@@ -1,10 +1,8 @@
-from rct229.rule_engine.rule_base import (
-    RuleDefinitionBase,
-    RuleDefinitionListIndexedBase,
-)
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.rule_base import RuleDefinitionBase
+from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import pint_sum
 
 
 class Section6Rule1(RuleDefinitionListIndexedBase):
@@ -12,20 +10,24 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
 
     def __init__(self):
         super(Section6Rule1, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, False, True),
+            rmds_used=produce_ruleset_model_description(
+                USER=True, BASELINE_0=False, PROPOSED=True
+            ),
             each_rule=Section6Rule1.BuildingRule(),
-            index_rmr="proposed",
+            index_rmd=PROPOSED,
             id="6-1",
-            description="For the proposed building, each space has the same lighting power as the corresponding space in the U-RMR",
-            rmr_context="ruleset_model_instances/0/buildings",
+            description="For the proposed building, each space has the same lighting power as the corresponding space in the U-RMD",
+            rmd_context="ruleset_model_descriptions/0/buildings",
         )
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(Section6Rule1.BuildingRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(True, False, True),
+                rmds_used=produce_ruleset_model_description(
+                    USER=True, BASELINE_0=False, PROPOSED=True
+                ),
                 each_rule=Section6Rule1.BuildingRule.SpaceRule(),
-                index_rmr="proposed",
+                index_rmd=PROPOSED,
                 list_path="$..spaces[*]",  # All spaces inside the building
             )
 
@@ -36,25 +38,27 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                         "$": ["interior_lighting", "floor_area"],
                         "interior_lighting[*]": ["power_per_area"],
                     },
-                    rmrs_used=UserBaselineProposedVals(True, False, True),
+                    rmds_used=produce_ruleset_model_description(
+                        USER=True, BASELINE_0=False, PROPOSED=True
+                    ),
                 )
 
             def get_calc_vals(self, context, data=None):
-                space_lighting_power_per_area_user = pint_sum(
-                    find_all("interior_lighting[*].power_per_area", context.user)
+                space_lighting_power_per_area_user = sum(
+                    find_all("$.interior_lighting[*].power_per_area", context.USER)
                 )
-                space_lighting_power_per_area_proposed = pint_sum(
-                    find_all("interior_lighting[*].power_per_area", context.proposed)
+                space_lighting_power_per_area_proposed = sum(
+                    find_all("$.interior_lighting[*].power_per_area", context.PROPOSED)
                 )
                 space_lighting_power_user = (
-                    space_lighting_power_per_area_user * context.user["floor_area"]
+                    space_lighting_power_per_area_user * context.USER["floor_area"]
                 )
 
                 return {
                     "space_lighting_power_user": space_lighting_power_per_area_user
-                    * context.user["floor_area"],
+                    * context.USER["floor_area"],
                     "space_lighting_power_proposed": space_lighting_power_per_area_proposed
-                    * context.proposed["floor_area"],
+                    * context.PROPOSED["floor_area"],
                 }
 
             def rule_check(self, context, calc_vals, data=None):

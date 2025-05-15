@@ -3,23 +3,23 @@
         "Section": 15,
         "Rule": 5,
         "Test": "a",
-        "test_description": "Dry Single-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMR equals Table 8.4.4",
+        "test_description": "Dry Single-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMD equals Table 8.4.4",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "15-5",
             "ruleset_reference": "-",
-            "rule_description": "Transformer efficiency reported in Baseline RMR equals Table 8.4.4",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Transformer efficiency reported in Baseline RMD equals Table 8.4.4",
+            "applicable_RMD": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
+            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMD is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.23"
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -30,13 +30,14 @@
                                 "capacity": 25000,
                                 "efficiency": 0.99
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -47,7 +48,8 @@
                                 "capacity": 25000,
                                 "efficiency": 0.989
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -57,23 +59,23 @@
         "Section": 15,
         "Rule": 5,
         "Test": "b",
-        "test_description": "Dry Single-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMR does not equal Table 8.4.4",
+        "test_description": "Dry Single-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMD does not equal Table 8.4.4",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "15-5",
             "ruleset_reference": "-",
-            "rule_description": "Transformer efficiency reported in Baseline RMR equals Table 8.4.4",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Transformer efficiency reported in Baseline RMD equals Table 8.4.4",
+            "applicable_RMD": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
+            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMD is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.23"
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -84,13 +86,14 @@
                                 "capacity": 25000,
                                 "efficiency": 0.99
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -101,7 +104,8 @@
                                 "capacity": 25000,
                                 "efficiency": 0.99
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -111,23 +115,23 @@
         "Section": 15,
         "Rule": 5,
         "Test": "c",
-        "test_description": "Dry Three-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMR matches Table 8.4.4",
+        "test_description": "Dry Three-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMD matches Table 8.4.4",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "15-5",
             "ruleset_reference": "-",
-            "rule_description": "Transformer efficiency reported in Baseline RMR equals Table 8.4.4",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Transformer efficiency reported in Baseline RMD equals Table 8.4.4",
+            "applicable_RMD": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
+            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMD is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.23"
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -138,13 +142,14 @@
                                 "capacity": 30000,
                                 "efficiency": 0.9928
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -155,7 +160,8 @@
                                 "capacity": 30000,
                                 "efficiency": 0.9823
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -165,23 +171,23 @@
         "Section": 15,
         "Rule": 5,
         "Test": "d",
-        "test_description": "Dry Three-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMR does not match Table 8.4.4",
+        "test_description": "Dry Three-Phase transformer modeled in the User Model whose efficiency is > than Table 8.4.4. Baseline RMD does not match Table 8.4.4",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "15-5",
             "ruleset_reference": "-",
-            "rule_description": "Transformer efficiency reported in Baseline RMR equals Table 8.4.4",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Transformer efficiency reported in Baseline RMD equals Table 8.4.4",
+            "applicable_RMD": "Baseline RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
+            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMD is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.23"
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -192,13 +198,14 @@
                                 "capacity": 30000,
                                 "efficiency": 0.9928
                             }
-                        ]
+                        ],
+                        "type": "USER"
                     }
                 ]
             },
             "baseline": {
                 "id": "ashrae229",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "transformers": [
@@ -209,7 +216,8 @@
                                 "capacity": 30000,
                                 "efficiency": 0.98
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

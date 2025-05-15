@@ -1,14 +1,14 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_primary_secondary_loops_dict import (
     get_primary_secondary_loops_dict,
 )
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rpd
 
-TEST_RMD = {
+TEST_RPD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
-            "id": "RMI 1",
+            "id": "RMD 1",
             "buildings": [
                 {
                     "id": "Building 1",
@@ -53,12 +53,12 @@ TEST_RMD = {
                                     "id": "System 7",
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "cooling_system": {
                                         "id": "CHW Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Chilled Water Loop 1",
                                     },
                                     "fan_system": {
@@ -101,22 +101,31 @@ TEST_RMD = {
                     "child_loops": [{"id": "Chilled Water Loop 1", "type": "COOLING"}],
                 },
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 
-TEST_RMI = quantify_rmr(TEST_RMD)["ruleset_model_instances"][0]
+TEST_RMD = quantify_rmd(TEST_RPD)["ruleset_model_descriptions"][0]
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rpd(TEST_RPD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__get_primary_secondary_loops_dict():
-    assert get_primary_secondary_loops_dict(TEST_RMI) == {
+    assert get_primary_secondary_loops_dict(TEST_RMD) == {
         "Chiller Loop 1": ["Chilled Water Loop 1"]
     }

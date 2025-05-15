@@ -1,11 +1,10 @@
 import pydash
-
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.schema.schema_enums import SchemaEnums
 
 HOURS_IN_DAY = 24
 DAYS_IN_WEEK = 7
 
-DAY_OF_WEEK = schema_enums["DayOfWeekOptions"]
+DAY_OF_WEEK = SchemaEnums.schema_enums["DayOfWeekOptions"]
 
 DATE_NUMBER_MAP = {
     DAY_OF_WEEK.MONDAY: 0,
@@ -18,7 +17,9 @@ DATE_NUMBER_MAP = {
 }
 
 
-def get_most_used_weekday_hourly_schedule(hourly_data: list, day_of_week_for_jan_first):
+def get_most_used_weekday_hourly_schedule(
+    hourly_data: list, day_of_week_for_jan_first: str
+) -> list[float | int]:
     """
     Get the most used weekday hourly schedule from an annual 8760/8784 schedule as list of hourly values for a 24
     hour period.

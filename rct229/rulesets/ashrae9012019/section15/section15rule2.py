@@ -1,5 +1,5 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 
 
 class Section15Rule2(RuleDefinitionBase):
@@ -7,22 +7,24 @@ class Section15Rule2(RuleDefinitionBase):
 
     def __init__(self):
         super(Section15Rule2, self).__init__(
-            rmrs_used=UserBaselineProposedVals(True, False, True),
+            rmds_used=produce_ruleset_model_description(
+                USER=True, BASELINE_0=False, PROPOSED=True
+            ),
             id="15-2",
-            description="Number of transformers modeled in User RMR and Proposed RMR are the same",
+            description="Number of transformers modeled in User RMD and Proposed RMD are the same",
             ruleset_section_title="Transformer",
             standard_section="Transformers",
             is_primary_rule=False,
-            rmr_context="ruleset_model_instances/0/transformers",
+            rmd_context="ruleset_model_descriptions/0/transformers",
         )
 
     def is_applicable(self, context, data=None):
-        return len(context.user) > 0
+        return len(context.USER) > 0
 
     def get_calc_vals(self, context, data=None):
         return {
-            "num_user_transformers": len(context.user),
-            "num_proposed_transformers": len(context.proposed),
+            "num_user_transformers": len(context.USER),
+            "num_proposed_transformers": len(context.PROPOSED),
         }
 
     def rule_check(self, context, calc_vals=None, data=None):

@@ -2,14 +2,14 @@ import json
 import os
 from pathlib import Path
 
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rpd
+from rct229.utils.utility_functions import (
     has_cooling_system,
     has_fan_system,
     has_heating_system,
     has_preheat_system,
 )
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
 
 SYSTEM_TYPE_TEST_FILE_PATH = os.path.join(
     Path(os.path.dirname(__file__)).parent.parent.parent.parent,
@@ -25,12 +25,12 @@ def load_system_test_file(file_name: str):
         system_test_json = json.load(f)
 
     assert system_test_json, f"Error loading system testing json file: #{file_name}"
-    return quantify_rmr(system_test_json)
+    return quantify_rmd(system_test_json)
 
 
 TEST_RMD_PASS = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -60,15 +60,15 @@ TEST_RMD_PASS = {
                                     "id": "PTHP 1",
                                     "cooling_system": {
                                         "id": "HP Cooling Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
-                                        "heating_system_type": "ELECTRIC_RESISTANCE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                     },
                                     "heating_system": {
                                         "id": "HP Heating Coil 1",
-                                        "heating_system_type": "HEAT_PUMP",
+                                        "type": "HEAT_PUMP",
                                     },
                                     "fan_system": {
                                         "id": "CAV Fan System 1",
@@ -87,7 +87,7 @@ TEST_RMD_PASS = {
 
 TEST_RMD_FAIL = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -126,8 +126,8 @@ TEST_RMD_FAIL = {
 }
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(TEST_RMD_PASS)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rpd(TEST_RMD_PASS)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -135,51 +135,54 @@ def test__TEST_RMD__is_valid():
 
 def test_has_heating_system_true():
     assert (
-        has_heating_system(TEST_RMD_PASS["ruleset_model_instances"][0], "PTHP 1")
+        has_heating_system(TEST_RMD_PASS["ruleset_model_descriptions"][0], "PTHP 1")
         == True
     )
 
 
 def test_has_heating_system_fail():
     assert (
-        has_heating_system(TEST_RMD_FAIL["ruleset_model_instances"][0], "PTHP 1")
+        has_heating_system(TEST_RMD_FAIL["ruleset_model_descriptions"][0], "PTHP 1")
         == False
     )
 
 
 def test_has_cooling_system_true():
     assert (
-        has_cooling_system(TEST_RMD_PASS["ruleset_model_instances"][0], "PTHP 1")
+        has_cooling_system(TEST_RMD_PASS["ruleset_model_descriptions"][0], "PTHP 1")
         == True
     )
 
 
 def test_has_cooling_system_fail():
     assert (
-        has_cooling_system(TEST_RMD_FAIL["ruleset_model_instances"][0], "PTHP 1")
+        has_cooling_system(TEST_RMD_FAIL["ruleset_model_descriptions"][0], "PTHP 1")
         == False
     )
 
 
 def test_has_preheat_system_true():
     assert (
-        has_preheat_system(TEST_RMD_PASS["ruleset_model_instances"][0], "PTHP 1")
+        has_preheat_system(TEST_RMD_PASS["ruleset_model_descriptions"][0], "PTHP 1")
         == True
     )
 
 
 def test_has_preheat_system_fail():
     assert (
-        has_preheat_system(TEST_RMD_FAIL["ruleset_model_instances"][0], "PTHP 1")
+        has_preheat_system(TEST_RMD_FAIL["ruleset_model_descriptions"][0], "PTHP 1")
         == False
     )
 
 
 def test_has_fan_system_true():
-    assert has_fan_system(TEST_RMD_PASS["ruleset_model_instances"][0], "PTHP 1") == True
+    assert (
+        has_fan_system(TEST_RMD_PASS["ruleset_model_descriptions"][0], "PTHP 1") == True
+    )
 
 
 def test_has_fan_system_fail():
     assert (
-        has_fan_system(TEST_RMD_FAIL["ruleset_model_instances"][0], "PTHP 1") == False
+        has_fan_system(TEST_RMD_FAIL["ruleset_model_descriptions"][0], "PTHP 1")
+        == False
     )

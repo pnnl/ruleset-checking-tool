@@ -1,4 +1,3 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
@@ -9,13 +8,14 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     SurfaceConditioningCategory as SCC,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    ZoneConditioningDataDict,
     get_surface_conditioning_category_dict,
 )
-from rct229.utils.assertions import assert_required_fields
-from rct229.utils.jsonpath_utils import find_all
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields
 from rct229.utils.pint_utils import ZERO
 
-DOOR = schema_enums["SubsurfaceClassificationOptions"].DOOR
+DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 
 # Intended for internal use
 GET_BUILDING_SCC_WINDOW_WALL_RATIO_DICT__REQUIRED_FIELDS = {
@@ -28,7 +28,9 @@ GET_BUILDING_SCC_WINDOW_WALL_RATIO_DICT__REQUIRED_FIELDS = {
 }
 
 
-def get_building_scc_window_wall_ratios_dict(climate_zone, building):
+def get_building_scc_window_wall_ratios_dict(
+    climate_zone: str, building: dict
+) -> ZoneConditioningDataDict:
     """Determines the window to wall ratio for each surface conditioning category
     in a building
 
@@ -45,7 +47,7 @@ def get_building_scc_window_wall_ratios_dict(climate_zone, building):
         A dictionary that maps each surface conditioning category to its average
         window to wall ratio
     """
-    assert_required_fields(
+    find_exactly_required_fields(
         GET_BUILDING_SCC_WINDOW_WALL_RATIO_DICT__REQUIRED_FIELDS["building"], building
     )
 
@@ -72,7 +74,7 @@ def get_building_scc_window_wall_ratios_dict(climate_zone, building):
         if get_opaque_surface_type(surface) == OST.ABOVE_GRADE_WALL:
             surface_area = surface["area"]
             surface_window_area = ZERO.AREA
-            for subsurface in find_all("subsurfaces[*]", surface):
+            for subsurface in find_all("$.subsurfaces[*]", surface):
                 glazed_area = subsurface.get("glazed_area", ZERO.AREA)
                 opaque_area = subsurface.get("opaque_area", ZERO.AREA)
                 surface_window_area += (
@@ -99,16 +101,18 @@ def get_building_scc_window_wall_ratios_dict(climate_zone, building):
                 assert scc == SCC.UNREGULATED
 
     return {
-        SCC.EXTERIOR_RESIDENTIAL: total_res_window_area / total_res_wall_area
+        getattr(SCC, "EXTERIOR_RESIDENTIAL"): total_res_window_area
+        / total_res_wall_area
         if total_res_wall_area > 0
         else 0,
-        SCC.EXTERIOR_NON_RESIDENTIAL: total_nonres_window_area / total_nonres_wall_area
+        getattr(SCC, "EXTERIOR_NON_RESIDENTIAL"): total_nonres_window_area
+        / total_nonres_wall_area
         if total_nonres_wall_area > 0
         else 0,
-        SCC.EXTERIOR_MIXED: total_mixed_window_area / total_mixed_wall_area
+        getattr(SCC, "EXTERIOR_MIXED"): total_mixed_window_area / total_mixed_wall_area
         if total_mixed_wall_area > 0
         else 0,
-        SCC.SEMI_EXTERIOR: total_semi_exterior_window_area
+        getattr(SCC, "SEMI_EXTERIOR"): total_semi_exterior_window_area
         / total_semi_exterior_wall_area
         if total_semi_exterior_wall_area > 0
         else 0,

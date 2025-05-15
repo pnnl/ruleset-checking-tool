@@ -1,9 +1,9 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
 from rct229.rulesets.ashrae9012019.data_fns.table_9_5_1_fns import table_9_5_1_lookup
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.std_comparisons import std_equal
 
-NONE = schema_enums["LightingBuildingAreaOptions2019ASHRAE901T951TG38"].NONE
+NONE = SchemaEnums.schema_enums["LightingBuildingAreaOptions2019ASHRAE901T951TG38"].NONE
 
 
 # Intended for export and internal use
@@ -14,7 +14,9 @@ class LightingStatusType:
     AS_DESIGNED_OR_AS_EXISTING: str = "AS-DESIGNED OR AS-EXISTING"
 
 
-def get_building_segment_lighting_status_type_dict(building_segment):
+def get_building_segment_lighting_status_type_dict(
+    building_segment: dict,
+) -> dict[str, LightingStatusType]:
     """Returns a dictionary that maps building_segment id to a LightingStatusType
 
     Parameters

@@ -3,37 +3,34 @@
         "Section": 23,
         "Rule": 7,
         "Test": "a",
-        "test_description": "System 6's fan system correctly specified temperature control as constant",
+        "test_description": "The project has one building segment with two zones served by baseline system type 6. The baseline system supply air temperature is constant at the design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "23-7",
             "ruleset_reference": "G3.1.3.14",
-            "rule_description": "For baseline systems 6 and 8,  supply air temperature setpoint shall be constant at the design condition",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "For baseline systems 6 and 8, supply air temperature setpoint shall be constant at the design condition.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -50,8 +47,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -72,11 +67,11 @@
                                                 "id": "System 6",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
+                                                    "type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -98,7 +93,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -108,37 +104,34 @@
         "Section": 23,
         "Rule": 7,
         "Test": "b",
-        "test_description": "System 6's fan system incorrectly specified temperature control as outside air reset",
+        "test_description": "The project has one building segment with two zones served by baseline system type 6. The baseline system supply air temperature has outdoor air reset controls.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "23-7",
             "ruleset_reference": "G3.1.3.14",
-            "rule_description": "For baseline systems 6 and 8,  supply air temperature setpoint shall be constant at the design condition",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "For baseline systems 6 and 8, supply air temperature setpoint shall be constant at the design condition.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -155,8 +148,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -177,11 +168,11 @@
                                                 "id": "System 6",
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
-                                                    "cooling_system_type": "DIRECT_EXPANSION"
+                                                    "type": "DIRECT_EXPANSION"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "heating_system_type": "ELECTRIC_RESISTANCE"
+                                                    "type": "ELECTRIC_RESISTANCE"
                                                 },
                                                 "fan_system": {
                                                     "id": "VAV Fan System 1",
@@ -203,7 +194,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

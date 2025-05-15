@@ -1,18 +1,18 @@
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    find_exactly_one_hvac_system,
-)
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
-FAN_SYSTEM_SUPPLY_FAN_CONTROL = schema_enums["FanSystemSupplyFanControlOptions"]
+FAN_SYSTEM_SUPPLY_FAN_CONTROL = SchemaEnums.schema_enums[
+    "FanSystemSupplyFanControlOptions"
+]
 
 
-def is_hvac_sys_fan_sys_vsd(rmi_b, hvac_b_id):
+def is_hvac_sys_fan_sys_vsd(rmd_b, hvac_b_id):
     """Returns TRUE if the HVAC system fan system is variable speed drive controlled. Returns FALSE if the HVAC system fan system is anything other than variable speed drive controlled.
 
     Parameters
     ----------
-    rmi_b : json
-        RMD at RuleSetModelInstance level
+    rmd_b : json
+        RMD at RuleSetModelDescription level
     hvac_b_id : str
         The HVAC system ID.
 
@@ -24,7 +24,7 @@ def is_hvac_sys_fan_sys_vsd(rmi_b, hvac_b_id):
     """
 
     # Get the hvac system
-    hvac_b = find_exactly_one_hvac_system(rmi_b, hvac_b_id)
+    hvac_b = find_exactly_one_hvac_system(rmd_b, hvac_b_id)
     fan_system = hvac_b.get("fan_system")
     is_hvac_sys_fan_sys_vsd_flag = (
         fan_system is not None

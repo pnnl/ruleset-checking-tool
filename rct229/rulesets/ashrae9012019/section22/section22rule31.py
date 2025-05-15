@@ -1,7 +1,7 @@
 import math
 
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -28,30 +28,38 @@ REQUIRED_BUILDING_PEAK_LOAD_600 = 600 * ureg("ton")
 CHILLER_SIZE_800 = 800 * ureg("ton")
 
 
-class Section22Rule31(RuleDefinitionBase):
+class PRM9012019Rule30m88(RuleDefinitionBase):
     """Rule 31 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule31, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
+        super(PRM9012019Rule30m88, self).__init__(
+            rmds_used=produce_ruleset_model_description(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
             id="22-31",
-            description="The baseline building design’s chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
+            description="The baseline chiller plant shall be modeled with the chiller quantity specified in Table G3.1.3.7, as a function of building peak cooling load.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.1 Type and Number of Chillers (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmd_context="ruleset_model_descriptions/0",
             required_fields={
-                "$": ["output"],
+                "$": ["model_output"],
+            },
+            precision={
+                "building_peak_load_b": {
+                    "precision": 1,
+                    "unit": "ton",
+                },
             },
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
-        # create a list containing all HVAC systems that are modeled in the rmi_b
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
+        # create a list containing all HVAC systems that are modeled in the rmd_b
         available_type_list = [
             hvac_type
-            for hvac_type in baseline_system_types_dict.keys()
+            for hvac_type in baseline_system_types_dict
             if len(baseline_system_types_dict[hvac_type]) > 0
         ]
         return any(
@@ -62,10 +70,10 @@ class Section22Rule31(RuleDefinitionBase):
         )
 
     def get_calc_vals(self, context, data=None):
-        rmi_b = context.baseline
-        chiller_number = len(rmi_b["chillers"])
+        rmd_b = context.BASELINE_0
+        chiller_number = len(rmd_b["chillers"])
 
-        output_b = rmi_b["output"]
+        output_b = rmd_b["model_output"]
         building_peak_load_b = getattr_(
             output_b,
             "building_peak_cooling_load",
@@ -73,7 +81,13 @@ class Section22Rule31(RuleDefinitionBase):
             "building_peak_cooling_load",
         )
 
-        if building_peak_load_b <= REQUIRED_BUILDING_PEAK_LOAD_300:
+        if (
+            building_peak_load_b < REQUIRED_BUILDING_PEAK_LOAD_300
+            or self.precision_comparison["building_peak_load_b"](
+                building_peak_load_b,
+                REQUIRED_BUILDING_PEAK_LOAD_300,
+            )
+        ):
             target_chiller_number = 1
         elif building_peak_load_b < REQUIRED_BUILDING_PEAK_LOAD_600:
             target_chiller_number = 2

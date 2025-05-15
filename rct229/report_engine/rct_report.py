@@ -1,17 +1,22 @@
 import os
 from datetime import datetime
 
+from rct229 import __version__ as version
+
 # rule outcome evaluation logic
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
+from rct229.schema import config
 
 
 class RCTReport:
     def __init__(self):
         self.title = "Ruleset Checking Tool"
+        self.tool = "PNNL Ruleset Checking Tool"
+        self.version = version
         self.purpose = "report"
         self.ruleset = "ruleset"
         self.date_run = str(datetime.utcnow())
-        self.schema_version = "0"
+        self.schema_version = config.schema_version
         self.ruleset_report_file = "report.txt"
         self.ruleset_outcome = {
             RCTOutcomeLabel.PASS: 0,
@@ -39,17 +44,28 @@ class RCTReport:
         -------
 
         """
-        invalid_msg = rct_outcome["invalid_rmrs"]
-        # Sort the outcomes by id
+        invalid_msg = rct_outcome["invalid_rmds"]
+        # Sort the outcomes by id or rule_id
+        if "id" in rct_outcome["outcomes"][0]:
+            id_key = "id"
+        elif "rule_id" in rct_outcome["outcomes"][0]:
+            id_key = "rule_id"
+        else:
+            raise Exception(
+                f"rct_outcome['outcomes'] dictionary has neither a 'rule_id' or 'id' as a key. Cannot be "
+                f"sorted"
+            )
+
         outcomes = sorted(
             # The key used below splits the id on "-" and ensures the outcomes are sorted by the first components of the ids, then the second components, and so on
             rct_outcome["outcomes"],
-            key=lambda x: [int(y) for y in x["id"].split("-")],
+            key=lambda x: [int(y) for y in x[id_key].split("-")],
         )
+
         if invalid_msg:
             print(f"Invalid RMDs: {str(invalid_msg)}\n")
         else:
-            ruleset_report = self.initialize_ruleset_report()
+            ruleset_report = self.initialize_ruleset_report(rct_outcome)
             for outcome in outcomes:
                 # if outcome["primary_rule"]:  #  TODO Do we output ONLY primary rules?
                 rule_outcome_dict = {
@@ -82,10 +98,14 @@ class RCTReport:
         """
         return rule_outcome
 
-    def initialize_ruleset_report(self):
+    def initialize_ruleset_report(self, rule_outcome=None):
         """
         Initialize a data structure for generating a ruleset report
         default is list
+
+        Parameters
+        ----------
+        rule_outcome: json contains a rule's raw report
 
         Returns: data structure, default is list
         -------

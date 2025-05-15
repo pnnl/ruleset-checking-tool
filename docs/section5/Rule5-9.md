@@ -1,38 +1,41 @@
-
-# Envelope - Rule 5-9  
-
+# Envelope - Rule 5-9
+**Schema Version** 0.0.23  
+**Primary Rule:** False  
 **Rule ID:** 5-9  
-**Rule Description:** Below-grade wall C-factor must be the same in the proposed model as in the user model  
-**Appendix G Section:** Section G3.1-5(a) Building Envelope Modeling Requirements for the Proposed building  
+**Rule Description:** Baseline floor assemblies must conform with assemblies detailed in  Appendix A (Floors—Steel-joist (A5.3)).  
+**Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** None  
 
-**Applicability:** All required data elements exist for P_RMR  
-**Applicability Checks:** None  
-
-**Manual Check:** None  
+**Applicability:** All required data elements exist for B_RMD  
+**Applicability Checks:**  
+  1. Surfaces that are a regulated floor
+ 
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 **Function Call:**
 
-  - get_opaque_surface_type()
-  - match_data_element()
+  1. get_surface_conditioning_category()  
+  2. get_opaque_surface_type()  
 
 ## Rule Logic:  
 
-- For each building segment in the Proposed model: `for building_segment_p in P_RMR.building.building_segments:`  
+- Get surface conditioning category dictionary for B_RMD: ```scc_dictionary_b = get_surface_conditioning_category(B_RMD)```  
 
-  - For each thermal_block in building segment: `for thermal_block_p in building_segment_p.thermal_blocks:`  
+- For each building segment in the Baseline model: ```for building_segment_b in B_RMD.building.building_segments:```  
 
-    - For each zone in thermal block: `for zone_p in thermal_block_p.zones:`  
+  - For each zone in building segment: ```for zone_b in building_segment_b.zones:```
 
-      - For each surface in zone: `for surface_p in zone_p.surfaces:`  
+    - For each surface in zone: ```for surface_b in zone_b.surfaces:```
 
-        - Check if surface is below-grade wall: `if get_opaque_surface_type(surface_p) == "BELOW-GRADE WALL":`
+        **Rule Assertion:**  
 
-          - Get matching surface from U-RMR: `surface_u = match_data_element(U_RMR, surfaces, surface_p.id)`  
+        Case 1: Surface is a floor and is regulated: ```if ( ( get_opaque_surface_type(surface_b) == "FLOOR" ) AND ( scc_dictionary_b[surface_b.id] != UNREGULATED ) ):
+        outcome = "UNDETERMINED" and raise_message "<Insert surface_b.id> is a regulated floor surface. Conduct a manual check to confirm that Baseline floor assemblies conform with assemblies detailed in Appendix A."```  
 
-            **Rule Assertion:**  
+        Case 2: Else; outcome is NOT_APPLICABLE: ```else: outcome = NOT_APPLICABLE```  
 
-            - Case 1: Surface construction C-factor in P_RMR matches U_RMR: `if surface_p.construction.c_factor == surface_u.construction.c_factor: PASS`  
+**Notes:**
 
-            - Case 2: Else: `else: FAIL`  
+1. Update Rule ID from 5-12 to 5-9 on 10/26/2023
+
+**[Back](../_toc.md)

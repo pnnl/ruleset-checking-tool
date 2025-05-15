@@ -21,7 +21,7 @@ class OpaqueSurfaceType:
     UNHEATED_SOG: str = "UNHEATED SLAB-ON-GRADE"
 
 
-def get_opaque_surface_type(surface):
+def get_opaque_surface_type(surface: dict) -> str:
     """Determines a surface's opaque surface type
 
     Parameters
@@ -30,7 +30,7 @@ def get_opaque_surface_type(surface):
         A dictionary representing a surface as defined by the ASHRAE229 schema.
         It is assumed to have at least the minimal structure:
         {
-            ajacent_to,
+            adjacent_to,
             construction: {
                 has_radiant_heating
             },

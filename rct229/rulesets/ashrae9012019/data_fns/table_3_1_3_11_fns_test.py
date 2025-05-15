@@ -5,6 +5,7 @@ from rct229.schema.config import ureg
 
 degree_fahrenheit = ureg("degree_Fahrenheit")
 
+
 # Testing table_3_1_3_7------------------------------------------
 def test__table_3_1_3_11_CZ0A():
     assert table_3_1_3_11_lookup("CZ0A") == {

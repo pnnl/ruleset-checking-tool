@@ -34,7 +34,7 @@
 
 **Notes/Questions:**  
 1. I left in the checks on the heating and cooling unmet load hours separately in case coincident unmet load hours is not defined to avoid flags. 
-2. I made the final else statement an undetermined outcome because it would mean that coincident_unmet_load_hours was not populated in the RMI and unmet_load_hours_heating + unmet_load_hours_cooling is between 300 and 600 (or nothing needed was populated in the RMI). 
+2. I made the final else statement an undetermined outcome because it would mean that coincident_unmet_load_hours was not populated in the RMD and unmet_load_hours_heating + unmet_load_hours_cooling is between 300 and 600 (or nothing needed was populated in the RMD). 
 
 
 **[Back](../_toc.md)**

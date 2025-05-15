@@ -1,3 +1,23 @@
+from rct229.utils.pint_utils import _UNIT_LIST
+
+
+def test_evaluation_converter(evaluation: dict):
+    output_evaluation = {}
+    output_evaluation["data_group_id"] = evaluation["id"]
+    output_evaluation["message"] = (
+        evaluation["message"] if evaluation.get("message") else ""
+    )
+    output_evaluation["evaluation_outcome"] = (
+        evaluation["result"] if evaluation.get("result") else "FAILED"
+    )
+    output_evaluation["calculated_values"] = (
+        calc_vals_converter(evaluation["calculated_values"])
+        if evaluation.get("calculated_values")
+        else []
+    )
+    return output_evaluation
+
+
 def calc_vals_converter(calc_vals):
     """
     Utility function that converts a calc_vals raw output
@@ -11,9 +31,24 @@ def calc_vals_converter(calc_vals):
     -------
 
     """
-    calc_vals_dict = dict()
-    for key in calc_vals.keys():
-        calc_vals_dict[key] = str(calc_vals[key])
+    calc_vals_dict = []
+    for key in calc_vals:
+        calc_val = {}
+        calc_val["variable"] = key
+        value = calc_vals[key]
+        if isinstance(value, str):
+            numerical_value = value.split(" ", 1)
+            if len(numerical_value) > 1 and numerical_value[1] in _UNIT_LIST:
+                calc_val["value"] = numerical_value[0]
+                calc_val["unit"] = numerical_value[1]
+            elif len(numerical_value) > 1 and numerical_value[1] == "R":
+                calc_val["value"] = numerical_value[0]
+                calc_val["unit"] = "delta F"
+            else:
+                calc_val["value"] = value
+        else:
+            calc_val["value"] = str(value)
+        calc_vals_dict.append(calc_val)
     return calc_vals_dict
 
 
@@ -39,7 +74,7 @@ def aggregate_outcomes(outcomes):
             elif type(result) is dict and any(
                 [
                     key.startswith("INVALID_") and key.endswith("_CONTEXT")
-                    for key in result.keys()
+                    for key in result
                 ]
             ):
                 summary_dict["number_invalid_context"] += 1

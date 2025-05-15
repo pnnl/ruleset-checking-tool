@@ -2,12 +2,12 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hw_loop_zone_list_w_are
     get_hw_loop_zone_list_w_area,
 )
 from rct229.schema.config import ureg
-from rct229.schema.schema_utils import quantify_rmr
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.schema_utils import quantify_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -113,12 +113,12 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
                                     "id": "System 7",
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "cooling_system": {
                                         "id": "Cooling Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Chiller Loop 1",
                                     },
                                     "fan_system": {
@@ -132,11 +132,11 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
                                     "id": "PTAC 1",
                                     "cooling_system": {
                                         "id": "DX Coil 1",
-                                        "cooling_system_type": "DIRECT_EXPANSION",
+                                        "type": "DIRECT_EXPANSION",
                                     },
                                     "heating_system": {
                                         "id": "HHW Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "fan_system": {
@@ -149,7 +149,7 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
                                     "id": "Electric Resistance System",
                                     "heating_system": {
                                         "id": "Resistance 1",
-                                        "heating_system_type": "ELECTRIC_RESISTANCE",
+                                        "type": "ELECTRIC_RESISTANCE",
                                     },
                                 },
                             ],
@@ -174,22 +174,33 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
                     },
                 },
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
-TEST_RMI = quantify_rmr(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)["ruleset_model_instances"][0]
+TEST_RMD = quantify_rmd(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)["ruleset_model_descriptions"][
+    0
+]
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rpd(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__get_hw_loop_zone_list_w_area__true():
-    assert get_hw_loop_zone_list_w_area(TEST_RMI) == {
+    assert get_hw_loop_zone_list_w_area(TEST_RMD) == {
         "Boiler Loop 1": {
             "zone_list": ["Thermal Zone 1", "Thermal Zone 2", "Thermal Zone 3"],
             "total_area": 60 * ureg.m2,

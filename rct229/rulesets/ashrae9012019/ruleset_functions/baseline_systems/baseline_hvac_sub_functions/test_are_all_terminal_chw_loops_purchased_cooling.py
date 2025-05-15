@@ -28,14 +28,26 @@ TEST_RMD = {
         {"id": "HW_Loop_1", "type": "HEATING"},
         {"id": "CHW_Loop_1", "type": "COOLING"},
     ],
-    "external_fluid_source": [
+    "external_fluid_sources": [
         {"id": "fluid_loop_1", "loop": "HW_Loop_1", "type": "HOT_WATER"},
         {"id": "fluid_loop_2", "loop": "ST_Loop_1", "type": "STEAM"},
         {"id": "fluid_loop_3", "loop": "CHW_Loop_1", "type": "CHILLED_WATER"},
     ],
+    "type": "BASELINE_0",
 }
 
-TEST_RMD_FULL = {"id": "229_01", "ruleset_model_instances": [TEST_RMD]}
+TEST_RPD_FULL = {
+    "id": "229_01",
+    "ruleset_model_descriptions": [TEST_RMD],
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
+}
 
 
 def test__all_terminal_cooling_loops_purchased_cooling_all_are_cooling():

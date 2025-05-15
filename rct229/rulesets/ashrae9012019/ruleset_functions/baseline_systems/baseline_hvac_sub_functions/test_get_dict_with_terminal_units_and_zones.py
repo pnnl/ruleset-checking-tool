@@ -1,11 +1,11 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.get_dict_with_terminal_units_and_zones import (
     get_dict_with_terminal_units_and_zones,
 )
-from rct229.schema.validate import schema_validate_rmr
+from rct229.schema.validate import schema_validate_rpd
 
-rmd_model = {
+rpd_model = {
     "id": "ASHRAE229 1",
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
             "id": "RMD 1",
             "buildings": [
@@ -82,12 +82,12 @@ rmd_model = {
                                     "id": "System 7",
                                     "preheat_system": {
                                         "id": "Preheat Coil 1",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "cooling_system": {
                                         "id": "Cooling Coil 1",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Chiller Loop 1",
                                     },
                                     "fan_system": {
@@ -101,12 +101,12 @@ rmd_model = {
                                     "id": "System 7a",
                                     "preheat_system": {
                                         "id": "Preheat Coil 2",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Boiler Loop 1",
                                     },
                                     "cooling_system": {
                                         "id": "Cooling Coil 2",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Purchased CHW Loop 1",
                                     },
                                     "fan_system": {
@@ -120,12 +120,12 @@ rmd_model = {
                                     "id": "System 7b",
                                     "preheat_system": {
                                         "id": "Preheat Coil 3",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "cooling_system": {
                                         "id": "Cooling Coil 3",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Chiller Loop 1",
                                     },
                                     "fan_system": {
@@ -139,12 +139,12 @@ rmd_model = {
                                     "id": "System 7c",
                                     "preheat_system": {
                                         "id": "Preheat Coil 4",
-                                        "heating_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "hot_water_loop": "Purchased HW Loop 1",
                                     },
                                     "cooling_system": {
                                         "id": "Cooling Coil 4",
-                                        "cooling_system_type": "FLUID_LOOP",
+                                        "type": "FLUID_LOOP",
                                         "chilled_water_loop": "Purchased CHW Loop 1",
                                     },
                                     "fan_system": {
@@ -207,7 +207,7 @@ rmd_model = {
                     "type": "COOLING",
                 },
             ],
-            "external_fluid_source": [
+            "external_fluid_sources": [
                 {
                     "id": "Purchased HW",
                     "loop": "Purchased HW Loop 1",
@@ -219,13 +219,22 @@ rmd_model = {
                     "type": "CHILLED_WATER",
                 },
             ],
+            "type": "BASELINE_0",
         }
     ],
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 
-def test__TEST_RMD__is_valid():
-    schema_validation_result = schema_validate_rmr(rmd_model)
+def test__TEST_RPD__is_valid():
+    schema_validation_result = schema_validate_rpd(rpd_model)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -233,7 +242,7 @@ def test__TEST_RMD__is_valid():
 
 def test_get_dict_with_terminal_units_and_zones():
     assert get_dict_with_terminal_units_and_zones(
-        rmd_model["ruleset_model_instances"][0]
+        rpd_model["ruleset_model_descriptions"][0]
     ) == {
         "VAV Air Terminal 1": ["Thermal Zone 1"],
         "VAV Air Terminal 2": ["Thermal Zone 2"],

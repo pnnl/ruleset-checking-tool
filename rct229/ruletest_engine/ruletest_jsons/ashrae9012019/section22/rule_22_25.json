@@ -3,36 +3,33 @@
         "Section": 22,
         "Rule": 25,
         "Test": "a",
-        "test_description": "Baseline building is system type 7 and is correctly modeled with the 9 w/gpm",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The primary chilled water pump power is 9 W/gpm at design conditions.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "22-25",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 9 W/gpm at design conditions.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -46,8 +43,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -65,12 +60,12 @@
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Cooling Child Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -119,7 +114,7 @@
                             },
                             {
                                 "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "loop_or_piping": "Cooling Child Loop 1",
                                 "speed_control": "VARIABLE_SPEED"
                             }
                         ],
@@ -139,7 +134,8 @@
                                 ],
                                 "pump_power_per_flow_rate": 142.66842800528403
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -149,36 +145,33 @@
         "Section": 22,
         "Rule": 25,
         "Test": "b",
-        "test_description": "Baseline building is system type 7 and is incorrectly modeled with the 11 w/gpm",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a chilled water system. The primary chilled water pump power is 12 W/gpm at design conditions.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "22-25",
             "ruleset_reference": "G3.1.3.10",
-            "rule_description": "For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm.",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 9 W/gpm at design conditions.",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Yes",
-            "schema_version": "0.0.23"
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -192,8 +185,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -211,12 +202,12 @@
                                                 "id": "System 7",
                                                 "cooling_system": {
                                                     "id": "CHW Coil 1",
-                                                    "cooling_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "chilled_water_loop": "Cooling Child Loop 1"
                                                 },
                                                 "preheat_system": {
                                                     "id": "Preheat Coil 1",
-                                                    "heating_system_type": "FLUID_LOOP",
+                                                    "type": "FLUID_LOOP",
                                                     "hot_water_loop": "Boiler Loop 1"
                                                 },
                                                 "fan_system": {
@@ -265,7 +256,7 @@
                             },
                             {
                                 "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "loop_or_piping": "Cooling Child Loop 1",
                                 "speed_control": "VARIABLE_SPEED"
                             }
                         ],
@@ -285,7 +276,389 @@
                                 ],
                                 "pump_power_per_flow_rate": 190.22457067371204
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-25-c": {
+        "Section": 22,
+        "Rule": 25,
+        "Test": "c",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a chilled water system. The primary chilled water pump power is 9 W/gpm at design conditions.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "22-25",
+            "ruleset_reference": "G3.1.3.10",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 9 W/gpm at design conditions.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "CAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 12"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 12",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Cooling Child Loop 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Cooling Child Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Cooling Child Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ],
+                                "pump_power_per_flow_rate": 142.66842800528403
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-25-d": {
+        "Section": 22,
+        "Rule": 25,
+        "Test": "d",
+        "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a chilled water system. The primary chilled water pump power is 12 W/gpm at design conditions.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "22-25",
+            "ruleset_reference": "G3.1.3.10",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 9 W/gpm at design conditions.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "CAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 12"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 12",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Cooling Child Loop 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Cooling Child Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Cooling Child Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ],
+                                "pump_power_per_flow_rate": 190.22457067371204
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-25-e": {
+        "Section": 22,
+        "Rule": 25,
+        "Test": "e",
+        "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a chilled water system. The chilled water system serves a computer room.",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "22-25",
+            "ruleset_reference": "G3.1.3.10",
+            "rule_description": "Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (baseline system type 11) shall have a constant-flow primary pump power of 9 W/gpm at design conditions.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 11",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Cooling Child Loop 1"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Cooling Child Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Cooling Child Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ],
+                                "pump_power_per_flow_rate": 190.22457067371204
+                            }
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

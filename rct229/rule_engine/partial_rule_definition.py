@@ -1,25 +1,28 @@
-from rct229.rule_engine.rule_base import RuleDefinitionBase
+from typing import Mapping
+
+from rct229.rule_engine.rule_base import RCTPrecision, RuleDefinitionBase
 
 
 class PartialRuleDefinition(RuleDefinitionBase):
     def __init__(
         self,
-        rmrs_used,
+        rmds_used,
         id=None,
         description=None,
         ruleset_section_title=None,
         standard_section=None,
         is_primary_rule=False,
-        rmr_context="",
+        rmd_context="",
         required_fields=None,
         manual_check_required_msg="",
         not_applicable_msg="",
+        precision: Mapping[str, RCTPrecision] = None,
     ):
         """Base class for all Partial Rule definitions (secondary)
 
         Parameters
         ----------
-        rmrs_used : UserBaselineProposedVals
+        rmds_used : RuleSetModels
             A trio of boolean values indicating which RMDs are required by the rule
         id : string
             Unique id for the rule
@@ -48,16 +51,17 @@ class PartialRuleDefinition(RuleDefinitionBase):
             default message for NOT_APPLICABLE outcome
         """
         super(PartialRuleDefinition, self).__init__(
-            rmrs_used=rmrs_used,
+            rmds_used=rmds_used,
             id=id,
             description=description,
-            rmr_context=rmr_context,
+            rmd_context=rmd_context,
             required_fields=required_fields,
             manual_check_required_msg=manual_check_required_msg,
             not_applicable_msg=not_applicable_msg,
             ruleset_section_title=ruleset_section_title,
             standard_section=standard_section,
             is_primary_rule=is_primary_rule,
+            precision=precision,
         )
 
     def rule_check(self, context, calc_vals=None, data={}):
@@ -65,8 +69,8 @@ class PartialRuleDefinition(RuleDefinitionBase):
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMDs
+        context : RuleSetModels
+            Object containing the contexts for RMDs
         calc_vals: dictionary
             Dictionary contains calculated values for rule check and reporting.
         data : dict
@@ -89,8 +93,8 @@ class PartialRuleDefinition(RuleDefinitionBase):
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMDs
         calc_vals: dict. It contains the calculated values
         data : An optional data object. It is ignored by this base implementation.
 

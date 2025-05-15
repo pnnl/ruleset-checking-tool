@@ -10,6 +10,7 @@ from rct229.schema.config import ureg
 
 btuh_per_ft2 = ureg("british_thermal_unit / (hour * foot ** 2)")
 
+
 # Testing table_3_2------------------------------------------
 def test__table_3_2_CZ0():
     assert table_3_2_lookup("CZ0B") == {"system_min_heating_output": 5 * btuh_per_ft2}

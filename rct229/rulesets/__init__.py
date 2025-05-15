@@ -13,15 +13,17 @@ from rct229.rule_engine.rulesets import RuleSet
 __all__ = [RuleSet.ASHRAE9012019_RULESET]
 
 # Added to remove the sub-module that are not rules.
-MODULE_EXCEPTION_LIST = ["math"]
+from rct229.schema.schema_store import SchemaStore
+
+MODULE_EXCEPTION_LIST = ["math", "itertools"]
 
 
-def __getrules__(ruleset_doc: str):
+def __getrules__():
     modules = []
     ruleset_list = inspect.getmembers(rulesets, inspect.ismodule)
     for ruleset in ruleset_list:
-        if ruleset[0] == ruleset_doc:
-            __getrules_module__helper(rulesets, modules)
+        if ruleset[0] == SchemaStore.SELECTED_RULESET:
+            __getrules_module__helper(ruleset[1], modules)
     # Adding the module names that should be excluded from the available rules. Such as RuleDefinitionBase
     base_class_names = [f[0] for f in inspect.getmembers(base_classes, inspect.isclass)]
     base_class_names = base_class_names + [
@@ -79,6 +81,14 @@ def _meet_exception_modules(inspection_results):
 
     """
     return any(f[0] in MODULE_EXCEPTION_LIST for f in inspection_results)
+
+
+def __getrulemap__():
+    ruleset_list = inspect.getmembers(rulesets, inspect.ismodule)
+    for ruleset in ruleset_list:
+        if ruleset[0] == SchemaStore.SELECTED_RULESET:
+            rules_dict = getattr(ruleset[1], "rules_dict", None)
+            return rules_dict
 
 
 def __getattr__(name):

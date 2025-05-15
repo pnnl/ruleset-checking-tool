@@ -3,29 +3,29 @@
         "Section": 6,
         "Rule": 4,
         "Test": "a",
-        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing but the lighting space type has not been specified in the baseline RMD. The lighting power density in the baseline RMD cannot be verified.",
+        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing but the lighting space type has not been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description cannot be verified.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "P_RMD lighting status type is as-designed or as-existing. But lighting space type in B_RMD is not specified.",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": "(Previously 6-7, then 6-5) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Standard 90.1-2019 Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -33,18 +33,14 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 339.80215910399994,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
                                                                 "occupancy_control_type": "NONE",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 4.843759687519376
                                                             }
                                                         ],
@@ -57,19 +53,19 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -77,18 +73,14 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 339.80215910399994,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
                                                                 "occupancy_control_type": "NONE",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 7.965293708365196
                                                             }
                                                         ]
@@ -100,7 +92,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -110,29 +103,28 @@
         "Section": 6,
         "Rule": 4,
         "Test": "b",
-        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing and the lighting space type has been specified in the baseline RMD. The lighting power density in the baseline RMD is equal to the value specified in Standard 90.1-2019 Table G3.7 for the specified lighting space type.",
+        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing and the lighting space type has been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is equal to the value specified in Standard 90.1-2019 Table G3.7 for the specified lighting space type.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": "(Previously 6-7, then 6-5) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Standard 90.1-2019 Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -140,18 +132,14 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 339.80215910399994,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
                                                                 "occupancy_control_type": "NONE",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 4.843759687519376
                                                             }
                                                         ],
@@ -164,19 +152,19 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -184,18 +172,14 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 339.80215910399994,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
                                                                 "occupancy_control_type": "NONE",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 11.840301458380697
                                                             }
                                                         ],
@@ -208,7 +192,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -218,29 +203,28 @@
         "Section": 6,
         "Rule": 4,
         "Test": "c",
-        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing and the lighting space type has been specified in the baseline RMD. The lighting power density in the baseline RMD is not equal to the value specified in Standard 90.1-2019 Table G3.7 for the specified lighting space type.",
+        "test_description": "Project has one building segment with one zone and one space. The lighting system is as-designed or as-existing and the lighting space type has been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is not equal to the value specified in Standard 90.1-2019 Table G3.7 for the specified lighting space type.",
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": "(Previously 6-7, then 6-5) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Standard 90.1-2019 Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -248,18 +232,14 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 339.80215910399994,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
                                                                 "occupancy_control_type": "NONE",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 4.843759687519376
                                                             }
                                                         ],
@@ -272,19 +252,19 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -292,18 +272,14 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 339.80215910399994,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
                                                                 "occupancy_control_type": "NONE",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 13.99308354172264
                                                             }
                                                         ],
@@ -316,7 +292,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -326,29 +303,28 @@
         "Section": 6,
         "Rule": 4,
         "Test": "d",
-        "test_description": "Project has one building segment with one zone and one space. The lighting system is not-yet-designed and the lighting space type has not been specified in the baseline RMD. The lighting power density in the baseline RMD is equal to the value specified in Standard 90.1-2019 Table G3.7 for the lighting systems not-yet-designed",
+        "test_description": "Project has one building segment with one zone and one space. The lighting system is not-yet-designed and the lighting space type has not been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is equal to the value specified in Standard 90.1-2019 Table G3.7 for the lighting systems not-yet-designed.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": "(Previously 6-7, then 6-5) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Standard 90.1-2019 Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -356,18 +332,14 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 339.80215910399994,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
                                                                 "occupancy_control_type": "NONE",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 6.888902666694223
                                                             }
                                                         ]
@@ -379,19 +351,19 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -399,18 +371,14 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 339.80215910399994,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
                                                                 "occupancy_control_type": "NONE",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 11.840301458380697
                                                             }
                                                         ]
@@ -422,7 +390,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -432,29 +401,29 @@
         "Section": 6,
         "Rule": 4,
         "Test": "e",
-        "test_description": "Project has one building segment with one zone and one space. The lighting system is not-yet-designed and the lighting space type has not been specified in the baseline RMD. The lighting power density in the baseline RMD is not equal to the value specified in Standard 90.1-2019 Table G3.7 for the lighting systems not-yet-designed",
+        "test_description": "Project has one building segment with one zone and one space. The lighting system is not-yet-designed and the lighting space type has not been specified in the baseline ruleset project description. The lighting power density in the baseline ruleset project description is not equal to the value specified in Standard 90.1-2019 Table G3.7 for the lighting systems not-yet-designed.",
         "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "P_RMD lighting status type is as-designed or as-existing. But lighting space type in B_RMD is not specified.",
         "standard": {
             "rule_id": "6-4",
-            "ruleset_reference": "(Previously 6-7, then 6-5) Table G3.1(6) Baseline Building Performance",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
             "rule_description": "Where a complete lighting system exists and where a lighting system has been designed and submitted with design documents, the baseline LPD is equal to expected value in Standard 90.1-2019 Table G3.7. Where lighting neither exists nor is submitted with design documents, baseline LPD shall be determined in accordance with Table G3-7 for \"Office-Open Plan\" space type.",
-            "applicable_rmr": "Baseline RMR",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "None",
-            "mandatory_rule": "Yes",
-            "schema_version": "0.0.23"
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -462,18 +431,14 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 339.80215910399994,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
                                                                 "occupancy_control_type": "NONE",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 4.843759687519376
                                                             }
                                                         ]
@@ -485,19 +450,19 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "ruleset_model_instances": [
+                "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Building Open Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
@@ -505,18 +470,14 @@
                                             {
                                                 "id": "Thermal Zone 1",
                                                 "volume": 339.80215910399994,
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Setpoint Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Setpoint Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
-                                                        "occupant_multiplier_schedule": "Occupancy Schedule 1",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
                                                                 "occupancy_control_type": "NONE",
-                                                                "lighting_multiplier_schedule": "Space 1 Lighting Schedule 1",
                                                                 "power_per_area": 13.99308354172264
                                                             }
                                                         ]
@@ -528,7 +489,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

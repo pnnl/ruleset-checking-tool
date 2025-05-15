@@ -1,6 +1,9 @@
-from rct229.utils.assertions import assert_, assert_required_fields
-from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO, pint_sum
+from typing import TypedDict
+
+from pint import Quantity
+from rct229.utils.assertions import assert_
+from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields
+from rct229.utils.pint_utils import ZERO
 
 # Intended for export and internal use
 GET_HVAC_ZONE_LIST_W_AREA_DICT__REQUIRED_FIELDS = {
@@ -8,14 +11,42 @@ GET_HVAC_ZONE_LIST_W_AREA_DICT__REQUIRED_FIELDS = {
         "building_segments[*].zones[*].spaces[*]": [
             "floor_area",
         ],
-        "building_segments[*].zones[*].terminals[*]": [
-            "served_by_heating_ventilating_air_conditioning_system"
-        ],
     }
 }
 
 
-def get_hvac_zone_list_w_area_dict(building):
+class HVACZoneListArea(TypedDict):
+    total_area: Quantity
+    zone_list: list[str]
+
+
+def get_hvac_zone_list_w_area_by_rmd_dict(rmd: dict) -> dict[str, HVACZoneListArea]:
+    """
+    RMD version of the get_hvac_zone_list_w_area_dict function
+
+    Parameters
+    ----------
+    rmd dict
+        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
+
+    Returns
+    -------
+    dict
+        A dictionary of the form
+        {
+            <hvac_system id>: {
+                "zone_list": [<zones served by the hvac system>],
+                "total_area": <total area served by the hvac system>
+            }
+        }
+    """
+    hvac_zone_list_w_area_dict = {}
+    for building in find_all("$.buildings[*]", rmd):
+        hvac_zone_list_w_area_dict.update(get_hvac_zone_list_w_area_dict(building))
+    return hvac_zone_list_w_area_dict
+
+
+def get_hvac_zone_list_w_area_dict(building: dict) -> dict[str, HVACZoneListArea]:
     """Gets the list of zones and their total floor area served by each HVAC system
     in a building
 
@@ -35,7 +66,7 @@ def get_hvac_zone_list_w_area_dict(building):
             }
         }
     """
-    assert_required_fields(
+    find_exactly_required_fields(
         GET_HVAC_ZONE_LIST_W_AREA_DICT__REQUIRED_FIELDS["building"], building
     )
 
@@ -45,12 +76,14 @@ def get_hvac_zone_list_w_area_dict(building):
         terminals = zone.get("terminals")
         # Note: None and [] are falsey; zone.terminals is optional
         if terminals:
-            zone_area = pint_sum(find_all("spaces[*].floor_area", zone), ZERO.AREA)
+            zone_area = sum(find_all("spaces[*].floor_area", zone), ZERO.AREA)
             assert_(zone_area > ZERO.AREA, f"zone:{zone['id']} has zero floor area")
             for terminal in terminals:
-                hvac_sys_id = terminal[
+                hvac_sys_id = terminal.get(
                     "served_by_heating_ventilating_air_conditioning_system"
-                ]
+                )
+                if hvac_sys_id is None:
+                    continue
 
                 # Initialize the hvac_sys entry if not already there
                 if hvac_sys_id not in hvac_zone_list_w_area_dict:

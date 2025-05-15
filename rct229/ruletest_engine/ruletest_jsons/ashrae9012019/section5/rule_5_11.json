@@ -3,44 +3,40 @@
         "Section": 5,
         "Rule": 11,
         "Test": "a",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
-        "expected_rule_outcome": "pass",
+        "test_description": "Project has one building segment with one zone and a single surface. The surface is not a slab-on-grade so this rule does not apply.",
+        "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "5-11",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A (unheated slabs from tables (A6))",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "primary_rule": "Applicability",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "DWELLING_UNIT",
                                                         "floor_area": 23.225759999999998
                                                     }
@@ -54,11 +50,10 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
+                                                        "adjacent_to": "GROUND",
                                                         "tilt": 90,
                                                         "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 0.363408904595587
+                                                            "id": "Construction 1"
                                                         }
                                                     }
                                                 ]
@@ -69,7 +64,7 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 17585.0
+                                                    "design_sensible_cool_capacity": 10551.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
@@ -80,7 +75,8 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }
@@ -90,44 +86,40 @@
         "Section": 5,
         "Rule": 11,
         "Test": "b",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on cooling capacity of the HVAC system that servies the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
-        "expected_rule_outcome": "pass",
+        "test_description": "Project has one building segment with one zone and a single surface. The surface is a regulated slab-on-grade for which this rule cannot be fully evaluated.",
+        "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "5-11",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
+            "rule_description": "Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A (unheated slabs from tables (A6))",
+            "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
+            "primary_rule": "Applicability",
+            "schema_version": "0.1.3"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
                     {
-                        "id": "RMR 1",
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "lighting_space_type": "DWELLING_UNIT",
                                                         "floor_area": 23.225759999999998
                                                     }
@@ -141,11 +133,10 @@
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
+                                                        "adjacent_to": "GROUND",
+                                                        "tilt": 180,
                                                         "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 0.363408904595587
+                                                            "id": "Construction 1"
                                                         }
                                                     }
                                                 ]
@@ -156,94 +147,7 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 42204.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 8792.133333333333
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-11-c": {
-        "Section": 5,
-        "Rule": 11,
-        "Test": "c",
-        "test_description": "Building is located in climate zone 4A and includes a space that has residential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
-        "expected_rule_outcome": "fail",
-        "standard": {
-            "rule_id": "5-11",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "DWELLING_UNIT",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 1.2378615812787181
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 17585.0
+                                                    "design_sensible_cool_capacity": 10551.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
@@ -254,357 +158,8 @@
                                     }
                                 ]
                             }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-11-d": {
-        "Section": 5,
-        "Rule": 11,
-        "Test": "d",
-        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline above-grade wall U-factor for the zone is established correctly.",
-        "expected_rule_outcome": "pass",
-        "standard": {
-            "rule_id": "5-11",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 0.7041047526539498
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 17585.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 9378.275555555556
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-11-e": {
-        "Section": 5,
-        "Rule": 11,
-        "Test": "e",
-        "test_description": "Building is located in climate zone 4A and includes a space that has nonresidential occupancy type and is  conditionedbased on heating capacity of the HVAC system that servies the parent zone. The baseline above-grade wall U-factor for the zone is not established correctly.",
-        "expected_rule_outcome": "fail",
-        "standard": {
-            "rule_id": "5-11",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 1.2378615812787181
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 17585.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 9378.275555555556
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-11-f": {
-        "Section": 5,
-        "Rule": 11,
-        "Test": "f",
-        "test_description": "A zone is semiheated based on heating and cooling capacity of the HVAC system that servies the parent zone. Building is located in climate zone 4A. The baseline above-grade wall U-factor for the zone is established correctly.",
-        "expected_rule_outcome": "pass",
-        "standard": {
-            "rule_id": "5-11",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 9.290303999999999,
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 0.7041047526539498
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 0.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 699.8538133333334
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        }
-    },
-    "rule-5-11-g": {
-        "Section": 5,
-        "Rule": 11,
-        "Test": "g",
-        "test_description": "A zone is semiheated based on heating and cooling capacity of the HVAC system that servies the parent zone. Building is located in climate zone 4A. The baseline above-grade wall U-factor for the zone is not established correctly.",
-        "expected_rule_outcome": "fail",
-        "standard": {
-            "rule_id": "5-11",
-            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b) ",
-            "rule_description": "Baseline above-grade wall assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
-            "applicable_rmr": "Baseline RMR",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Y",
-            "schema_version": "0.0.23"
-        },
-        "rmr_transformations": {
-            "baseline": {
-                "id": "ASHRAE229",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "ruleset_model_instances": [
-                    {
-                        "id": "RMR 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
-                                                        "lighting_space_type": "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 9.290303999999999,
-                                                        "construction": {
-                                                            "id": "construction_1",
-                                                            "u_factor": 0.35773064046128095
-                                                        }
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 0.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 699.8538133333334
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
+                        ],
+                        "type": "BASELINE_0"
                     }
                 ]
             }

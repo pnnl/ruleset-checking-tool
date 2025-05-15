@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
-from rct229.rulesets.ashrae9012019.data.schema_enums import schema_enums
+from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
@@ -12,6 +12,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
@@ -24,45 +25,52 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_2,
 ]
 
-FanSystemTemperatureControl = schema_enums["FanSystemTemperatureControlOptions"]
+FanSystemTemperatureControl = SchemaEnums.schema_enums[
+    "FanSystemTemperatureControlOptions"
+]
 REQUIRED_RESET_DIFF_TEMP = 5.0 * ureg("degR")
 
 
-class Section23Rule2(RuleDefinitionListIndexedBase):
+class PRM9012019Rule52x31(RuleDefinitionListIndexedBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule2, self).__init__(
-            rmrs_used=UserBaselineProposedVals(False, True, False),
-            each_rule=Section23Rule2.HVACRule(),
-            index_rmr="baseline",
+        super(PRM9012019Rule52x31, self).__init__(
+            rmds_used=produce_ruleset_model_description(
+                USER=False, BASELINE_0=True, PROPOSED=False
+            ),
+            each_rule=PRM9012019Rule52x31.HVACRule(),
+            index_rmd=BASELINE_0,
             id="23-2",
             description="For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.",
             ruleset_section_title="HVAC - Airside",
             standard_section="Section G3.1.3.12 Supply Air Temperature Reset (Systems 5 through 8 and 11)",
             is_primary_rule=True,
-            rmr_context="ruleset_model_instances/0",
+            rmd_context="ruleset_model_descriptions/0",
             list_path="$..heating_ventilating_air_conditioning_systems[*]",
         )
 
     def is_applicable(self, context, data=None):
-        rmi_b = context.baseline
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
         return any(
             [
-                baseline_system_type_compare(system_type, applicable_sys_type, False)
-                for system_type in baseline_system_types_dict.keys()
+                baseline_system_types_dict[system_type]
+                and baseline_system_type_compare(
+                    system_type, applicable_sys_type, False
+                )
+                for system_type in baseline_system_types_dict
                 for applicable_sys_type in APPLICABLE_SYS_TYPES
             ]
         )
 
     def create_data(self, context, data):
-        rmi_b = context.baseline
-        baseline_system_types_dict = get_baseline_system_types(rmi_b)
+        rmd_b = context.BASELINE_0
+        baseline_system_types_dict = get_baseline_system_types(rmd_b)
         applicable_hvac_sys_ids = [
             hvac_id
-            for sys_type in baseline_system_types_dict.keys()
+            for sys_type in baseline_system_types_dict
             for target_sys_type in APPLICABLE_SYS_TYPES
             if baseline_system_type_compare(sys_type, target_sys_type, False)
             for hvac_id in baseline_system_types_dict[sys_type]
@@ -73,12 +81,14 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
     def list_filter(self, context_item, data):
         applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
 
-        return context_item.baseline["id"] in applicable_hvac_sys_ids
+        return context_item.BASELINE_0["id"] in applicable_hvac_sys_ids
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section23Rule2.HVACRule, self).__init__(
-                rmrs_used=UserBaselineProposedVals(False, True, False),
+            super(PRM9012019Rule52x31.HVACRule, self).__init__(
+                rmds_used=produce_ruleset_model_description(
+                    USER=False, BASELINE_0=True, PROPOSED=False
+                ),
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": [
@@ -86,10 +96,16 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
                         "reset_differential_temperature",
                     ],
                 },
+                precision={
+                    "reset_differential_temperature_b": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
+                },
             )
 
         def get_calc_vals(self, context, data=None):
-            hvac_b = context.baseline
+            hvac_b = context.BASELINE_0
 
             fan_system_b = hvac_b["fan_system"]
             fan_system_id_b = fan_system_b["id"]
@@ -102,11 +118,25 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
                 "fan_system_id": fan_system_id_b,
                 "temperature_control_b": temperature_control_b,
                 "reset_differential_temperature_b": CalcQ(
-                    "temperature", reset_differential_temperature_b
+                    "temperature_difference", reset_differential_temperature_b
                 ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            temperature_control_b = calc_vals["temperature_control_b"]
+            reset_differential_temperature_b = calc_vals[
+                "reset_differential_temperature_b"
+            ]
+
+            return (
+                temperature_control_b == FanSystemTemperatureControl.ZONE_RESET
+                and self.precision_comparison["reset_differential_temperature_b"](
+                    reset_differential_temperature_b,
+                    REQUIRED_RESET_DIFF_TEMP,
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             temperature_control_b = calc_vals["temperature_control_b"]
             reset_differential_temperature_b = calc_vals[
                 "reset_differential_temperature_b"
