@@ -78,8 +78,15 @@ def evaluate(rpds, ruleset, reports, reports_directory):
     if ruleset == RuleSet.ASHRAE9012019_RULESET:
         SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
         SchemaEnums.update_schema_enum()
-        print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
-        print("")
+    elif ruleset == RuleSet.ASHRAE9012022_RULESET:
+        SchemaStore.set_ruleset(RuleSet.ASHRAE9012022_RULESET)
+        SchemaEnums.update_schema_enum()
+    else:
+        raise RCTException(
+            f"Ruleset: {ruleset} is not supported. Available rulesets are: {RuleSet.ASHRAE9012019_RULESET}, {RuleSet.ASHRAE9012022_RULESET}."
+        )
+    print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
+    print("")
 
     available_report_modules = rct_report.__getreports__()
     available_report_dict = {key: value for key, value in available_report_modules}

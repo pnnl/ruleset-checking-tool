@@ -3,7 +3,10 @@ from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import assert_
 
-ruleset_model_dict = {RuleSet.ASHRAE9012019_RULESET: "RulesetModelOptions2019ASHRAE901"}
+ruleset_model_dict = {
+    RuleSet.ASHRAE9012019_RULESET: "RulesetModelOptions2019ASHRAE901",
+    RuleSet.ASHRAE9012022_RULESET: "RulesetModelOptions2019ASHRAE901",
+}
 
 
 def get_ruleset_model_types(self):

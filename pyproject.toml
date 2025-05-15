@@ -24,6 +24,7 @@ jsonpath-ng = "^1.6.1"
 pyinstrument = "^4.6.2"
 pydash = "^7.0.7"
 openpyxl = "^3.1.2"
+astor = "^0.8.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.6.0"
