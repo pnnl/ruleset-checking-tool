@@ -16,15 +16,15 @@ from rct229.utils.utility_functions import find_exactly_one_zone
 HUMIDIFICATION = SchemaEnums.schema_enums["HumidificationOptions"]
 
 
-class Section10Rule1(RuleDefinitionListIndexedBase):
+class prm9012019rule34l34(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 10 (HVAC General)"""
 
     def __init__(self):
-        super(Section10Rule1, self).__init__(
+        super(prm9012019rule34l34, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section10Rule1.ZoneRule(),
+            each_rule=prm9012019rule34l34.ZoneRule(),
             index_rmd=BASELINE_0,
             id="10-1",
             description="When the proposed design includes humidification and complies with Section 6.5.2.4, then the baseline building design shall use nonadiabatic humidification. "
@@ -78,7 +78,7 @@ class Section10Rule1(RuleDefinitionListIndexedBase):
 
     class ZoneRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section10Rule1.ZoneRule, self).__init__(
+            super(prm9012019rule34l34.ZoneRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
