@@ -44,9 +44,6 @@ GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
         "building_segments[*].zones[*].surfaces[*].subsurfaces[*]": [
             "u_factor",
         ],
-        "building_segments[*].zones[*].terminals[*]": [
-            "served_by_heating_ventilating_air_conditioning_system"
-        ],
     }
 }
 
@@ -192,17 +189,18 @@ def get_zone_conditioning_category_dict(
         for terminal in find_all("terminals[*]", zone):
             # Note: there is only one hvac system even though the field name is plural
             # This will change to singular in schema version 0.0.8
-            hvac_sys_id = terminal[
+            hvac_sys_id = terminal.get(
                 "served_by_heating_ventilating_air_conditioning_system"
-            ]
+            )
 
             # Add cooling and heating capacites for the terminal
             zone_capacity["sensible_cooling"] += hvac_cool_capacity_dict.get(
                 hvac_sys_id, ZERO.THERMAL_CAPACITY
             )
+            # Terminal heating_capacity will include baseboard capacity when hvac_sys_id is None
             zone_capacity["heating"] += hvac_heat_capacity_dict.get(
                 hvac_sys_id, ZERO.THERMAL_CAPACITY
-            ) + (terminal.get("heat_capacity", ZERO.POWER) / zone_area)
+            ) + (terminal.get("heating_capacity", ZERO.POWER) / zone_area)
 
     # Determine eligibility for directly conditioned (heated or cooled) and
     # semi-heated zones
@@ -290,12 +288,21 @@ def get_zone_conditioning_category_dict(
                     # Add the surface UA to one of the running totals for the zone
                     # according to whether the surface is adjacent to a directly conditioned
                     # zone or not
-                    if (
-                        getattr_(surface, "surface", "adjacent_to") == "INTERIOR"
-                        and getattr_(surface, "surface", "adjacent_zone")
-                        in directly_conditioned_zone_ids
-                    ):
-                        zone_directly_conditioned_ua += surface_ua  # zone_1_4
+                    if getattr_(surface, "surface", "adjacent_to") == "INTERIOR":
+                        if (
+                            len(find_all("$.spaces[*]", zone)) <= 1
+                            and getattr_(surface, "surface", "adjacent_zone")
+                            in directly_conditioned_zone_ids
+                        ):
+                            # 1. check zone has only one space, if yes, use getattr_, if more than 1, can skip the ua calculation.
+                            zone_directly_conditioned_ua += surface_ua  # zone_1_4
+                        elif (
+                            surface.get("adjacent_zone")
+                            in directly_conditioned_zone_ids
+                        ):
+                            zone_directly_conditioned_ua += surface_ua  # zone_1_4
+                        else:
+                            zone_other_ua += surface_ua
                     else:
                         zone_other_ua += surface_ua  # zone_1_4
 

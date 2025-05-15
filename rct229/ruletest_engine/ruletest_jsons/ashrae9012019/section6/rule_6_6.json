@@ -8,7 +8,7 @@
         "standard": {
             "rule_id": "6-6",
             "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
-            "rule_description": "Baseline building shall not be modeled with daylighting control",
+            "rule_description": "Baseline building shall not be modeled with daylighting control.",
             "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -64,7 +64,7 @@
         "standard": {
             "rule_id": "6-6",
             "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
-            "rule_description": "Baseline building shall not be modeled with daylighting control",
+            "rule_description": "Baseline building shall not be modeled with daylighting control.",
             "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",

@@ -50,18 +50,18 @@ APPLICABLE_SYS_TYPES = [
 SYSTEM_3_4_TYPES = [HVAC_SYS.SYS_3, HVAC_SYS.SYS_4]
 
 
-class Section19Rule10(RuleDefinitionListIndexedBase):
+class PRM9012019Rule76q46(RuleDefinitionListIndexedBase):
     """Rule 10 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule10, self).__init__(
+        super(PRM9012019Rule76q46, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
                 "$": ["ruleset_model_descriptions"],
             },
-            each_rule=Section19Rule10.RulesetModelInstanceRule(),
+            each_rule=PRM9012019Rule76q46.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="19-10",
             description="Air economizers shall be included in baseline HVAC Systems 3 through 8, and 11, 12, and 13 based on climate as specified in Section G3.1.2.6 with exceptions."
@@ -76,11 +76,11 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section19Rule10.RulesetModelInstanceRule, self,).__init__(
+            super(PRM9012019Rule76q46.RulesetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section19Rule10.RulesetModelInstanceRule.HVACRule(),
+                each_rule=PRM9012019Rule76q46.RulesetModelInstanceRule.HVACRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
                 required_fields={
@@ -141,7 +141,9 @@ class Section19Rule10(RuleDefinitionListIndexedBase):
 
         class HVACRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section19Rule10.RulesetModelInstanceRule.HVACRule, self).__init__(
+                super(
+                    PRM9012019Rule76q46.RulesetModelInstanceRule.HVACRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

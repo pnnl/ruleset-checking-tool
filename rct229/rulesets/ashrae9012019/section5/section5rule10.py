@@ -19,11 +19,11 @@ from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
-class Section5Rule10(RuleDefinitionListIndexedBase):
+class PRM9012019Rule29j06(RuleDefinitionListIndexedBase):
     """Rule 10 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule10, self).__init__(
+        super(PRM9012019Rule29j06, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
@@ -31,7 +31,7 @@ class Section5Rule10(RuleDefinitionListIndexedBase):
                 "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule10.BuildingRule(),
+            each_rule=PRM9012019Rule29j06.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-10",
             description="Baseline floor assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-9.",
@@ -48,12 +48,12 @@ class Section5Rule10(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule10.BuildingRule, self).__init__(
+            super(PRM9012019Rule29j06.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={},
-                each_rule=Section5Rule10.BuildingRule.FloorRule(),
+                each_rule=PRM9012019Rule29j06.BuildingRule.FloorRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -76,7 +76,7 @@ class Section5Rule10(RuleDefinitionListIndexedBase):
 
         class FloorRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule10.BuildingRule.FloorRule, self).__init__(
+                super(PRM9012019Rule29j06.BuildingRule.FloorRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
@@ -149,4 +149,4 @@ class Section5Rule10(RuleDefinitionListIndexedBase):
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 floor_u_factor = calc_vals["floor_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
-                return std_equal(floor_u_factor, target_u_factor)
+                return std_equal(target_u_factor, floor_u_factor)

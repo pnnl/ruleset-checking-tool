@@ -16,15 +16,15 @@ from rct229.utils.utility_functions import find_exactly_one_service_water_heatin
 MIN_PUMP_POWER = 0.0 * ureg("Btu/hr")
 
 
-class Section11Rule14(RuleDefinitionListIndexedBase):
+class PRM9012019Rule62z26(RuleDefinitionListIndexedBase):
     """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule14, self).__init__(
+        super(PRM9012019Rule62z26, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section11Rule14.RMDRule(),
+            each_rule=PRM9012019Rule62z26.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-14",
             description=(
@@ -39,11 +39,11 @@ class Section11Rule14(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule14.RMDRule, self).__init__(
+            super(PRM9012019Rule62z26.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section11Rule14.RMDRule.SWHDistributionRule(),
+                each_rule=PRM9012019Rule62z26.RMDRule.SWHDistributionRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.service_water_heating_distribution_systems[*]",
             )
@@ -127,7 +127,7 @@ class Section11Rule14(RuleDefinitionListIndexedBase):
 
         class SWHDistributionRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section11Rule14.RMDRule.SWHDistributionRule, self).__init__(
+                super(PRM9012019Rule62z26.RMDRule.SWHDistributionRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

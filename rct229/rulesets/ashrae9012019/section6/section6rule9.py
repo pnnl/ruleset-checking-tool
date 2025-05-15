@@ -12,19 +12,20 @@ from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.pint_utils import ZERO
+from rct229.utils.std_comparisons import std_equal
 
 FLOOR_AREA_LIMIT = 5000 * ureg("ft2")  # square foot
 
 
-class Section6Rule9(RuleDefinitionListIndexedBase):
+class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
     """Rule 9 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(Section6Rule9, self).__init__(
+        super(PRM9012019Rule22c86, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section6Rule9.RulesetModelInstanceRule(),
+            each_rule=PRM9012019Rule22c86.RulesetModelInstanceRule(),
             index_rmd=PROPOSED,
             id="6-9",
             description="Proposed building is modeled with other programmable lighting controls through a 10% "
@@ -37,11 +38,11 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section6Rule9.RulesetModelInstanceRule, self).__init__(
+            super(PRM9012019Rule22c86.RulesetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section6Rule9.RulesetModelInstanceRule.BuildingRule(),
+                each_rule=PRM9012019Rule22c86.RulesetModelInstanceRule.BuildingRule(),
                 index_rmd=PROPOSED,
                 list_path="buildings[*]",
                 required_fields={
@@ -58,21 +59,24 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
         class BuildingRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(
-                    Section6Rule9.RulesetModelInstanceRule.BuildingRule, self
+                    PRM9012019Rule22c86.RulesetModelInstanceRule.BuildingRule, self
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
-                    each_rule=Section6Rule9.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
+                    each_rule=PRM9012019Rule22c86.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
                     index_rmd=PROPOSED,
                     list_path="$..zones[*]",
                 )
 
             def is_applicable(self, context, data=None):
                 building_p = context.PROPOSED
+                total_floor_area_p = sum(
+                    find_all("$.spaces[*].floor_area", building_p), ZERO.AREA
+                )
                 return (
-                    sum(find_all("$.spaces[*].floor_area", building_p), ZERO.AREA)
-                    <= FLOOR_AREA_LIMIT
+                    self.precision_comparison(total_floor_area_p, FLOOR_AREA_LIMIT)
+                    or total_floor_area_p < FLOOR_AREA_LIMIT
                 )
 
             def create_data(self, context, data=None):
@@ -94,13 +98,13 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
             class ZoneRule(RuleDefinitionListIndexedBase):
                 def __init__(self):
                     super(
-                        Section6Rule9.RulesetModelInstanceRule.BuildingRule.ZoneRule,
+                        PRM9012019Rule22c86.RulesetModelInstanceRule.BuildingRule.ZoneRule,
                         self,
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
-                        each_rule=Section6Rule9.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
+                        each_rule=PRM9012019Rule22c86.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
                         index_rmd=PROPOSED,
                         list_path="spaces[*]",
                     )
@@ -115,12 +119,18 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                 class SpaceRule(RuleDefinitionBase):
                     def __init__(self):
                         super(
-                            Section6Rule9.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule,
+                            PRM9012019Rule22c86.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule,
                             self,
                         ).__init__(
                             rmds_used=produce_ruleset_model_description(
                                 USER=False, BASELINE_0=True, PROPOSED=True
                             ),
+                            precision={
+                                "total_hours_matched": {
+                                    "precision": 1,
+                                    "unit": "",
+                                }
+                            },
                         )
 
                     def get_calc_vals(self, context, data=None):
@@ -187,7 +197,14 @@ class Section6Rule9(RuleDefinitionListIndexedBase):
                     def rule_check(self, context, calc_vals=None, data=None):
                         total_hours_compared = calc_vals["total_hours_compared"]
                         total_hours_matched = calc_vals["total_hours_matched"]
-                        return total_hours_matched == total_hours_compared
+                        return self.precision_comparison["total_hours_matched"](
+                            total_hours_matched, total_hours_compared
+                        )
+
+                    def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                        total_hours_compared = calc_vals["total_hours_compared"]
+                        total_hours_matched = calc_vals["total_hours_matched"]
+                        return std_equal(total_hours_matched, total_hours_compared)
 
                     def get_fail_msg(self, context, calc_vals=None, data=None):
                         eflh_difference = calc_vals["eflh_difference"]

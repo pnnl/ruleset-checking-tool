@@ -27,15 +27,15 @@ DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 FAIL_MSG = "The vertical fenestration is not distributed across baseline opaque surfaces in the same proportion as in the proposed design. Verify if envelope is existing or altered and can be excluded from this check."
 
 
-class Section5Rule16(RuleDefinitionListIndexedBase):
+class PRM9012019Rule80o45(RuleDefinitionListIndexedBase):
     """Rule 16 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule16, self).__init__(
+        super(PRM9012019Rule80o45, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section5Rule16.BuildingRule(),
+            each_rule=PRM9012019Rule80o45.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-16",
             description="The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
@@ -56,12 +56,12 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule16.BuildingRule, self).__init__(
+            super(PRM9012019Rule80o45.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 required_fields={},
-                each_rule=Section5Rule16.BuildingRule.AboveGradeWallRule(),
+                each_rule=PRM9012019Rule80o45.BuildingRule.AboveGradeWallRule(),
                 index_rmd=BASELINE_0,
                 # list_path and list_filter together determine the list of
                 # above grade walls to be passed to AboveGradeWallRule
@@ -105,7 +105,9 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
 
         class AboveGradeWallRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule16.BuildingRule.AboveGradeWallRule, self).__init__(
+                super(
+                    PRM9012019Rule80o45.BuildingRule.AboveGradeWallRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -183,6 +185,32 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
                     self.precision_comparison[
                         "total_fenestration_area_surface_b / total_fenstration_area_b"
                     ](
+                        (
+                            total_fenestration_area_surface_b
+                            / total_fenestration_area_b
+                        ).magnitude,
+                        (
+                            total_fenestration_area_surface_p
+                            / total_fenestration_area_p
+                        ).magnitude,
+                    )
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                total_fenestration_area_surface_b = calc_vals[
+                    "total_fenestration_area_surface_b"
+                ]
+                total_fenestration_area_surface_p = calc_vals[
+                    "total_fenestration_area_surface_p"
+                ]
+                total_fenestration_area_b = calc_vals["total_fenestration_area_b"]
+                total_fenestration_area_p = calc_vals["total_fenestration_area_p"]
+
+                return (
+                    total_fenestration_area_b == ZERO.AREA
+                    and total_fenestration_area_p == ZERO.AREA
+                ) or (
+                    std_equal(
                         (
                             total_fenestration_area_surface_b
                             / total_fenestration_area_b

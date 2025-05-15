@@ -18,15 +18,15 @@ DESIGN_OUTDOOR_TEMP_FOR_RESET_HIGH = 50 * ureg("degF")
 DESIGN_OUTDOOR_TEMP_FOR_RESET_LOW = 20 * ureg("degF")
 
 
-class Section21Rule8(RuleDefinitionListIndexedBase):
+class PRM9012019Rule58s22(RuleDefinitionListIndexedBase):
     """Rule 8 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule8, self).__init__(
+        super(PRM9012019Rule58s22, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section21Rule8.HeatingFluidLoopRule(),
+            each_rule=PRM9012019Rule58s22.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="21-8",
             description="When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150Fat 50F OAT, ramped linearly between 150F and 180F.",
@@ -66,7 +66,7 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule8.HeatingFluidLoopRule, self).__init__(
+            super(PRM9012019Rule58s22.HeatingFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -82,19 +82,19 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "design_outdoor_high_for_loop_supply_reset_temperature_b": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                     "design_outdoor_low_for_loop_supply_reset_temperature_b": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                     "design_supply_temperature_at_outdoor_high_b": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                     "design_supply_temperature_at_outdoor_low_b": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                 },
@@ -204,6 +204,60 @@ class Section21Rule8(RuleDefinitionListIndexedBase):
                 and self.precision_comparison[
                     "design_supply_temperature_at_outdoor_low_b"
                 ](
+                    design_supply_temperature_at_outdoor_low_b.to(ureg.kelvin),
+                    required_supply_temperature_at_outdoor_low_b.to(ureg.kelvin),
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            temperature_reset_type_b = calc_vals["temperature_reset_type_b"]
+            design_outdoor_high_for_loop_supply_reset_temperature_b = calc_vals[
+                "design_outdoor_high_for_loop_supply_reset_temperature_b"
+            ]
+            design_outdoor_low_for_loop_supply_reset_temperature_b = calc_vals[
+                "design_outdoor_low_for_loop_supply_reset_temperature_b"
+            ]
+            design_supply_temperature_at_outdoor_high_b = calc_vals[
+                "design_supply_temperature_at_outdoor_high_b"
+            ]
+            design_supply_temperature_at_outdoor_low_b = calc_vals[
+                "design_supply_temperature_at_outdoor_low_b"
+            ]
+            required_outdoor_high_for_loop_supply_reset_temperature_b = calc_vals[
+                "required_outdoor_high_for_loop_supply_reset_temperature_b"
+            ]
+            required_outdoor_low_for_loop_supply_reset_temperature_b = calc_vals[
+                "required_outdoor_low_for_loop_supply_reset_temperature_b"
+            ]
+            required_supply_temperature_at_outdoor_high_b = calc_vals[
+                "required_supply_temperature_at_outdoor_high_b"
+            ]
+            required_supply_temperature_at_outdoor_low_b = calc_vals[
+                "required_supply_temperature_at_outdoor_low_b"
+            ]
+            return (
+                temperature_reset_type_b == DESIGN_TEMP_RESET_TYPE.OUTSIDE_AIR_RESET
+                and std_equal(
+                    design_outdoor_high_for_loop_supply_reset_temperature_b.to(
+                        ureg.kelvin
+                    ),
+                    required_outdoor_high_for_loop_supply_reset_temperature_b.to(
+                        ureg.kelvin
+                    ),
+                )
+                and std_equal(
+                    design_outdoor_low_for_loop_supply_reset_temperature_b.to(
+                        ureg.kelvin
+                    ),
+                    required_outdoor_low_for_loop_supply_reset_temperature_b.to(
+                        ureg.kelvin
+                    ),
+                )
+                and std_equal(
+                    design_supply_temperature_at_outdoor_high_b.to(ureg.kelvin),
+                    required_supply_temperature_at_outdoor_high_b.to(ureg.kelvin),
+                )
+                and std_equal(
                     design_supply_temperature_at_outdoor_low_b.to(ureg.kelvin),
                     required_supply_temperature_at_outdoor_low_b.to(ureg.kelvin),
                 )

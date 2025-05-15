@@ -11,15 +11,15 @@ COMPLIANCE_PATH_TYPE = SchemaEnums.schema_enums["CompliancePathOptions2019ASHRAE
 MANUAL_CHECK_REQUIRED_MSG = "The proposed building miscellaneous equipment load is less than the baseline, which is only permitted when the model is being used to quantify performance that exceeds the requirements of Standard 90.1."
 
 
-class Section12Rule1(RuleDefinitionListIndexedBase):
+class PRM9012019rule88h78(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 12 (Receptacle)"""
 
     def __init__(self):
-        super(Section12Rule1, self).__init__(
+        super(PRM9012019rule88h78, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section12Rule1.RMDRule(),
+            each_rule=PRM9012019rule88h78.RMDRule(),
             index_rmd=BASELINE_0,
             id="12-1",
             description=(
@@ -34,7 +34,7 @@ class Section12Rule1(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section12Rule1.RMDRule, self).__init__(
+            super(PRM9012019rule88h78.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),

@@ -30,15 +30,15 @@ APPLICABLE_SYS_TYPES = [
 FluidLoopFlowControl = SchemaEnums.schema_enums["FluidLoopFlowControlOptions"]
 
 
-class Section22Rule36(RuleDefinitionListIndexedBase):
+class PRM9012019Rule01b91(RuleDefinitionListIndexedBase):
     """Rule 36 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule36, self).__init__(
+        super(PRM9012019Rule01b91, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule36.PrimaryFluidlLoop(),
+            each_rule=PRM9012019Rule01b91.PrimaryFluidlLoop(),
             index_rmd=BASELINE_0,
             id="22-36",
             description="Baseline chilled water loops that do not use purchased chilled water shall be modeled with a constant flow primary loop and a variable flow secondary loop.",
@@ -85,7 +85,7 @@ class Section22Rule36(RuleDefinitionListIndexedBase):
 
     class PrimaryFluidlLoop(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule36.PrimaryFluidlLoop, self).__init__(
+            super(PRM9012019Rule01b91.PrimaryFluidlLoop, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

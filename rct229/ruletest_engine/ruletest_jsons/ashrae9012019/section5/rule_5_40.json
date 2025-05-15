@@ -8,7 +8,7 @@
         "standard": {
             "rule_id": "5-40",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design",
+            "rule_description": "Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
@@ -131,7 +131,7 @@
         "standard": {
             "rule_id": "5-40",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design",
+            "rule_description": "Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
@@ -254,7 +254,7 @@
         "standard": {
             "rule_id": "5-40",
             "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
-            "rule_description": "Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design",
+            "rule_description": "Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be modeled with the same thermal emittance and solar reflectance in the baseline as in the proposed design.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",

@@ -53,15 +53,15 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section4Rule11(RuleDefinitionListIndexedBase):
+class PRM9012019Rule18y74(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
-        super(Section4Rule11, self).__init__(
+        super(PRM9012019Rule18y74, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section4Rule11.RuleSetModelInstanceRule(),
+            each_rule=PRM9012019Rule18y74.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="4-11",
             description="Fan schedules shall be modeled identically in the baseline and proposed unless Table G3.1 Section 4 baseline exceptions are applicable. Fan Schedules may be allowed to differ when Section 4 Baseline Column Exceptions #1, #2 Or #3 are applicable.",
@@ -73,11 +73,11 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section4Rule11.RuleSetModelInstanceRule, self).__init__(
+            super(PRM9012019Rule18y74.RuleSetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section4Rule11.RuleSetModelInstanceRule.ZoneRule(),
+                each_rule=PRM9012019Rule18y74.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
                 required_fields={
@@ -162,7 +162,9 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section4Rule11.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
+                super(
+                    PRM9012019Rule18y74.RuleSetModelInstanceRule.ZoneRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

@@ -1,13 +1,11 @@
 {
-    "rule-21-1-a": {
-        "Section": 21,
-        "Rule": 1,
+    "rule-34f57-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones. The zones are served by a baseline system type 7 with purchased hot water in both the proposed and baseline model.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Manual Check Required - Proposed is modeled with purchased hot water or steam.  Make sure the heating source in the baseline building is also purchased hot water or steam.",
         "standard": {
-            "rule_id": "21-1",
+            "rule_id": "34f57",
             "ruleset_reference": "G3.1.1.3",
             "rule_description": "For systems using purchased hot water or steam, the heating source shall be modeled as purchased hot water or steam in both the proposed design and baseline building design. If any system in the proposed design uses purchased hot water or steam, all baseline systems with hot water coils shall use the same type of purchased hot water or steam.",
             "applicable_rmr": "Baseline Model",
@@ -263,15 +261,13 @@
             }
         }
     },
-    "rule-21-1-b": {
-        "Section": 21,
-        "Rule": 1,
+    "rule-34f57-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones. The zones are served by a baseline system type 7 with a conventional boiler (not purchased hot water) in both the proposed and baseline model.",
         "expected_rule_outcome": "not_applicable",
         "expected_raised_message_includes": "Rule 21-1 Not Applicable - the proposed is not modeled with Purchased Hot Water or Steam",
         "standard": {
-            "rule_id": "21-1",
+            "rule_id": "34f57",
             "ruleset_reference": "G3.1.1.3",
             "rule_description": "For systems using purchased hot water or steam, the heating source shall be modeled as purchased hot water or steam in both the proposed design and baseline building design. If any system in the proposed design uses purchased hot water or steam, all baseline systems with hot water coils shall use the same type of purchased hot water or steam.",
             "applicable_rmr": "Baseline Model",
@@ -527,15 +523,13 @@
             }
         }
     },
-    "rule-21-2-a": {
-        "Section": 21,
-        "Rule": 2,
+    "rule-83m55-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones. The zones are served by a baseline system type 7 with purchased hot water in both the proposed and baseline model.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Manual Check Required - Proposed is modeled with purchased hot water or steam.  Make sure the baseline model uses the same number of pumps for the heating loop.",
         "standard": {
-            "rule_id": "21-2",
+            "rule_id": "83m55",
             "ruleset_reference": "G3.1.1.3.4",
             "rule_description": "For purchased HW/steam in the proposed model, the baseline shall have the same number of pumps as proposed",
             "applicable_rmr": "Baseline Model",
@@ -791,15 +785,13 @@
             }
         }
     },
-    "rule-21-2-b": {
-        "Section": 21,
-        "Rule": 2,
+    "rule-83m55-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones. The zones are served by a baseline system type 7 with a conventional boiler (not purchased hot water) in both the proposed and baseline model.",
         "expected_rule_outcome": "not_applicable",
         "expected_raised_message_includes": "Rule 21-2 Not Applicable - the proposed is not modeled with Purchased Hot Water or Steam",
         "standard": {
-            "rule_id": "21-2",
+            "rule_id": "83m55",
             "ruleset_reference": "G3.1.1.3.4",
             "rule_description": "For purchased HW/steam in the proposed model, the baseline shall have the same number of pumps as proposed",
             "applicable_rmr": "Baseline Model",
@@ -1055,14 +1047,12 @@
             }
         }
     },
-    "rule-21-3-a": {
-        "Section": 21,
-        "Rule": 3,
+    "rule-86n98-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a boiler. The baseline building's hot water system sizing is based on coincident loads.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-3",
+            "rule_id": "86n98",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
             "applicable_rmr": "Baseline Model",
@@ -1200,14 +1190,12 @@
             }
         }
     },
-    "rule-21-3-b": {
-        "Section": 21,
-        "Rule": 3,
+    "rule-86n98-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a boiler. The baseline building's hot water system sizing is not based on coincident loads.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-3",
+            "rule_id": "86n98",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
             "applicable_rmr": "Baseline Model",
@@ -1345,14 +1333,12 @@
             }
         }
     },
-    "rule-21-3-c": {
-        "Section": 21,
-        "Rule": 3,
+    "rule-86n98-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a boiler. The baseline building's hot water system sizing is based on coincident loads.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-3",
+            "rule_id": "86n98",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
             "applicable_rmr": "Baseline Model",
@@ -1463,14 +1449,12 @@
             }
         }
     },
-    "rule-21-3-d": {
-        "Section": 21,
-        "Rule": 3,
+    "rule-86n98-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a boiler. The baseline building's hot water system sizing is not based on coincident loads.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-3",
+            "rule_id": "86n98",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
             "applicable_rmr": "Baseline Model",
@@ -1581,14 +1565,12 @@
             }
         }
     },
-    "rule-21-3-e": {
-        "Section": 21,
-        "Rule": 3,
+    "rule-86n98-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 2. There are no plant systems.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-3",
+            "rule_id": "86n98",
             "ruleset_reference": "G3.1.2.2",
             "rule_description": "When the baseline building is modeled with a hot water or chilled water plant the plant shall be sized based on coincident loads.",
             "applicable_rmr": "Baseline Model",
@@ -1654,16 +1636,14 @@
             }
         }
     },
-    "rule-21-4-a": {
-        "Section": 21,
-        "Rule": 4,
+    "rule-63n48-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a natural draft boiler.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-4",
+            "rule_id": "63n48",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.",
+            "rule_description": "When baseline building does not use purchased heat, baseline systems 1, 5, 7, 11, 12 shall be modeled with natural draft boilers.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -1796,16 +1776,14 @@
             }
         }
     },
-    "rule-21-4-b": {
-        "Section": 21,
-        "Rule": 4,
+    "rule-63n48-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a forced boiler.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-4",
+            "rule_id": "63n48",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.",
+            "rule_description": "When baseline building does not use purchased heat, baseline systems 1, 5, 7, 11, 12 shall be modeled with natural draft boilers.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -1938,16 +1916,14 @@
             }
         }
     },
-    "rule-21-4-c": {
-        "Section": 21,
-        "Rule": 4,
+    "rule-63n48-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a natural draft boiler.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-4",
+            "rule_id": "63n48",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.",
+            "rule_description": "When baseline building does not use purchased heat, baseline systems 1, 5, 7, 11, 12 shall be modeled with natural draft boilers.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -2065,16 +2041,14 @@
             }
         }
     },
-    "rule-21-4-d": {
-        "Section": 21,
-        "Rule": 4,
+    "rule-63n48-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with a forced draft boiler.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-4",
+            "rule_id": "63n48",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.",
+            "rule_description": "When baseline building does not use purchased heat, baseline systems 1, 5, 7, 11, 12 shall be modeled with natural draft boilers.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -2192,16 +2166,14 @@
             }
         }
     },
-    "rule-21-4-e": {
-        "Section": 21,
-        "Rule": 4,
+    "rule-63n48-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 3. There are no boilers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-4",
+            "rule_id": "63n48",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.",
+            "rule_description": "When baseline building does not use purchased heat, baseline systems 1, 5, 7, 11, 12 shall be modeled with natural draft boilers.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -2270,16 +2242,14 @@
             }
         }
     },
-    "rule-21-5-a": {
-        "Section": 21,
-        "Rule": 5,
+    "rule-34r52-a": {
         "Test": "a",
         "test_description": "The project has one 12,000 ft2 building segment with two zones and two spaces. The zones are served by a baseline system type 7 with a single boiler.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-5",
+            "rule_id": "34r52",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), for building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler shall be modeled.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), for building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler shall be modeled.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -2429,16 +2399,14 @@
             }
         }
     },
-    "rule-21-5-b": {
-        "Section": 21,
-        "Rule": 5,
+    "rule-34r52-b": {
         "Test": "b",
         "test_description": "The project has one 12,000 ft2 building segment with two zones and two spaces. The zones are served by a baseline system type 7 with two boilers.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-5",
+            "rule_id": "34r52",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), for building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler shall be modeled.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), for building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler shall be modeled.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -2593,16 +2561,14 @@
             }
         }
     },
-    "rule-21-5-c": {
-        "Section": 21,
-        "Rule": 5,
+    "rule-34r52-c": {
         "Test": "c",
         "test_description": "The project has one 24,000 ft2 building segment with one zone and one space. The zone is served by a baseline system type 12 with two equally sized boilers.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-5",
+            "rule_id": "34r52",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), for building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler shall be modeled.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), for building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler shall be modeled.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -2736,16 +2702,14 @@
             }
         }
     },
-    "rule-21-5-d": {
-        "Section": 21,
-        "Rule": 5,
+    "rule-34r52-d": {
         "Test": "d",
         "test_description": "The project has one 24,000 ft2 building segment with one zone and one space. The zone is served by a baseline system type 12 with two unequally sized boilers.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-5",
+            "rule_id": "34r52",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), for building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler shall be modeled.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), for building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler shall be modeled.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -2879,16 +2843,14 @@
             }
         }
     },
-    "rule-21-5-e": {
-        "Section": 21,
-        "Rule": 5,
+    "rule-34r52-e": {
         "Test": "e",
         "test_description": "The project has one 24,000 ft2 building segment with one zone and one space. The zone is served by a baseline system type 12 with one boiler.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-5",
+            "rule_id": "34r52",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), for building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler shall be modeled.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), for building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler shall be modeled.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -3017,16 +2979,14 @@
             }
         }
     },
-    "rule-21-5-f": {
-        "Section": 21,
-        "Rule": 5,
+    "rule-34r52-f": {
         "Test": "f",
         "test_description": "The project has one 24,000 ft2 building segment with one zone and one space. The zone is served by a baseline system type 4. There are no boilers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-5",
+            "rule_id": "34r52",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), for building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler shall be modeled.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), for building area>15,000ft2, two equally sized boilers should be modeled. Else a single boiler shall be modeled.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -3104,16 +3064,14 @@
             }
         }
     },
-    "rule-21-6-a": {
-        "Section": 21,
-        "Rule": 6,
+    "rule-47b05-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with two boilers which are staged based on load. Boiler 1 is staged before Boiler 2.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-6",
+            "rule_id": "47b05",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -3267,16 +3225,14 @@
             }
         }
     },
-    "rule-21-6-b": {
-        "Section": 21,
-        "Rule": 6,
+    "rule-47b05-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with two boilers which are staged based on load. Boiler 2 is staged before Boiler 1.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-6",
+            "rule_id": "47b05",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -3430,16 +3386,14 @@
             }
         }
     },
-    "rule-21-6-c": {
-        "Section": 21,
-        "Rule": 6,
+    "rule-47b05-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with two boilers which are not staged based on load.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-6",
+            "rule_id": "47b05",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -3581,16 +3535,14 @@
             }
         }
     },
-    "rule-21-6-d": {
-        "Section": 21,
-        "Rule": 6,
+    "rule-47b05-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 1 with two boilers which are staged based on load. Boiler 1 is staged before Boiler 2.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-6",
+            "rule_id": "47b05",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -3693,16 +3645,14 @@
             }
         }
     },
-    "rule-21-6-e": {
-        "Section": 21,
-        "Rule": 6,
+    "rule-47b05-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 1 with two boilers which are staged based on load. Boiler 2 is staged before Boiler 1.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-6",
+            "rule_id": "47b05",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -3805,16 +3755,14 @@
             }
         }
     },
-    "rule-21-6-f": {
-        "Section": 21,
-        "Rule": 6,
+    "rule-47b05-f": {
         "Test": "f",
         "test_description": "The project has one building segment with one zone served by a baseline system type 1 with two boilers which are not staged based on load.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-6",
+            "rule_id": "47b05",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -3902,16 +3850,14 @@
             }
         }
     },
-    "rule-21-6-g": {
-        "Section": 21,
-        "Rule": 6,
+    "rule-47b05-g": {
         "Test": "g",
         "test_description": "The project has one building segment with two zones served by a baseline system type 6. There are no boilers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-6",
+            "rule_id": "47b05",
             "ruleset_reference": "G3.1.3.2",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), and is modeled with two boilers, each boiler shall be staged based on load.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -4001,16 +3947,14 @@
             }
         }
     },
-    "rule-21-7-a": {
-        "Section": 21,
-        "Rule": 7,
+    "rule-92f56-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water supply temperature is 180 F and the hot water return temperature is 130 F.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-7",
+            "rule_id": "92f56",
             "ruleset_reference": "G3.1.3.3",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), the hot water supply temperature (HWST) shall be 180F, and the hot water return temperature (HSRT) shall be 130F",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), the hot water supply temperature (HWST) shall be 180F, and the hot water return temperature (HSRT) shall be 130F",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -4147,16 +4091,14 @@
             }
         }
     },
-    "rule-21-7-b": {
-        "Section": 21,
-        "Rule": 7,
+    "rule-92f56-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water supply temperature is 200 F and the hot water return temperature is 130 F.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-7",
+            "rule_id": "92f56",
             "ruleset_reference": "G3.1.3.3",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), the hot water supply temperature (HWST) shall be 180F, and the hot water return temperature (HSRT) shall be 130F",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), the hot water supply temperature (HWST) shall be 180F, and the hot water return temperature (HSRT) shall be 130F",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -4293,16 +4235,14 @@
             }
         }
     },
-    "rule-21-7-c": {
-        "Section": 21,
-        "Rule": 7,
+    "rule-92f56-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water supply temperature is 180 F and the hot water return temperature is 150 F.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-7",
+            "rule_id": "92f56",
             "ruleset_reference": "G3.1.3.3",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), the hot water supply temperature (HWST) shall be 180F, and the hot water return temperature (HSRT) shall be 130F",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), the hot water supply temperature (HWST) shall be 180F, and the hot water return temperature (HSRT) shall be 130F",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -4439,16 +4379,14 @@
             }
         }
     },
-    "rule-21-7-d": {
-        "Section": 21,
-        "Rule": 7,
+    "rule-92f56-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a hot water loop. The hot water supply temperature is 180 F and the hot water return temperature is 130 F.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-7",
+            "rule_id": "92f56",
             "ruleset_reference": "G3.1.3.3",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), the hot water supply temperature (HWST) shall be 180F, and the hot water return temperature (HSRT) shall be 130F",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), the hot water supply temperature (HWST) shall be 180F, and the hot water return temperature (HSRT) shall be 130F",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -4558,16 +4496,14 @@
             }
         }
     },
-    "rule-21-7-e": {
-        "Section": 21,
-        "Rule": 7,
+    "rule-92f56-e": {
         "Test": "e",
         "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a hot water loop. The hot water supply temperature is 200 F and the hot water return temperature is 130 F.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-7",
+            "rule_id": "92f56",
             "ruleset_reference": "G3.1.3.3",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), the hot water supply temperature (HWST) shall be 180F, and the hot water return temperature (HSRT) shall be 130F",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), the hot water supply temperature (HWST) shall be 180F, and the hot water return temperature (HSRT) shall be 130F",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -4677,16 +4613,14 @@
             }
         }
     },
-    "rule-21-7-f": {
-        "Section": 21,
-        "Rule": 7,
+    "rule-92f56-f": {
         "Test": "f",
         "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a hot water loop. The hot water supply temperature is 180 F and the hot water return temperature is 150 F.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-7",
+            "rule_id": "92f56",
             "ruleset_reference": "G3.1.3.3",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), the hot water supply temperature (HWST) shall be 180F, and the hot water return temperature (HSRT) shall be 130F",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), the hot water supply temperature (HWST) shall be 180F, and the hot water return temperature (HSRT) shall be 130F",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -4796,16 +4730,14 @@
             }
         }
     },
-    "rule-21-7-g": {
-        "Section": 21,
-        "Rule": 7,
+    "rule-92f56-g": {
         "Test": "g",
         "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a purchased hot water loop. The prescibed hot water supply and return temperatures are not applicable.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-7",
+            "rule_id": "92f56",
             "ruleset_reference": "G3.1.3.3",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12), the hot water supply temperature (HWST) shall be 180F, and the hot water return temperature (HSRT) shall be 130F",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), the hot water supply temperature (HWST) shall be 180F, and the hot water return temperature (HSRT) shall be 130F",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -4910,16 +4842,14 @@
             }
         }
     },
-    "rule-21-8-a": {
-        "Section": 21,
-        "Rule": 8,
+    "rule-58s22-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop supply temperature is reset based on the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-8",
+            "rule_id": "58s22",
             "ruleset_reference": "G3.1.3.4",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12),,  HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150Fat 50F OAT, ramped linerarly between 150F and 180F.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150F at 50F OAT, ramped linerarly between 150F and 180F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -5059,16 +4989,14 @@
             }
         }
     },
-    "rule-21-8-b": {
-        "Section": 21,
-        "Rule": 8,
+    "rule-58s22-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a hot water loop. The hot water loop supply temperature is reset based on the prescribed outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-8",
+            "rule_id": "58s22",
             "ruleset_reference": "G3.1.3.4",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12),,  HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150Fat 50F OAT, ramped linerarly between 150F and 180F.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150F at 50F OAT, ramped linerarly between 150F and 180F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -5181,16 +5109,14 @@
             }
         }
     },
-    "rule-21-8-c": {
-        "Section": 21,
-        "Rule": 8,
+    "rule-58s22-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop supply temperature is reset based on the incorrect outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-8",
+            "rule_id": "58s22",
             "ruleset_reference": "G3.1.3.4",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12),,  HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150Fat 50F OAT, ramped linerarly between 150F and 180F.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150F at 50F OAT, ramped linerarly between 150F and 180F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -5330,16 +5256,14 @@
             }
         }
     },
-    "rule-21-8-d": {
-        "Section": 21,
-        "Rule": 8,
+    "rule-58s22-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 5 with a hot water loop. The hot water loop supply temperature is reset based on the incorrect outdoor air dry-bulb temperature reset schedule.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-8",
+            "rule_id": "58s22",
             "ruleset_reference": "G3.1.3.4",
-            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1,5,7,11 and 12),,  HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150Fat 50F OAT, ramped linerarly between 150F and 180F.",
+            "rule_description": "When the baseline building requires boilers, (for baseline system type = 1, 5, 7, 11 and 12), HWST for the baseline building shall be reset using an outdoor air dry-bulb reset schedule. 180F at 20F OAT, 150F at 50F OAT, ramped linerarly between 150F and 180F.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -5452,16 +5376,14 @@
             }
         }
     },
-    "rule-21-9-a": {
-        "Section": 21,
-        "Rule": 9,
+    "rule-39a29-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop pump power is 19 W/gpm.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-9",
+            "rule_id": "39a29",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building is modeled with a hot water plant, served by boiler(s), (for baseline system type = 1,5,7,11 and 12), the hot water pump power shall be 19W/gpm",
+            "rule_description": "When the baseline building is modeled with a hot water plant, served by boiler(s), (for baseline system type = 1, 5, 7, 11 and 12), the hot water pump power shall be 19W/gpm",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -5594,16 +5516,14 @@
             }
         }
     },
-    "rule-21-9-b": {
-        "Section": 21,
-        "Rule": 9,
+    "rule-39a29-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop pump power is 21 W/gpm.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-9",
+            "rule_id": "39a29",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building is modeled with a hot water plant, served by boiler(s), (for baseline system type = 1,5,7,11 and 12), the hot water pump power shall be 19W/gpm",
+            "rule_description": "When the baseline building is modeled with a hot water plant, served by boiler(s), (for baseline system type = 1, 5, 7, 11 and 12), the hot water pump power shall be 19W/gpm",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -5736,16 +5656,14 @@
             }
         }
     },
-    "rule-21-9-c": {
-        "Section": 21,
-        "Rule": 9,
+    "rule-39a29-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The hot water loop pump power is 19 W/gpm.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-9",
+            "rule_id": "39a29",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building is modeled with a hot water plant, served by boiler(s), (for baseline system type = 1,5,7,11 and 12), the hot water pump power shall be 19W/gpm",
+            "rule_description": "When the baseline building is modeled with a hot water plant, served by boiler(s), (for baseline system type = 1, 5, 7, 11 and 12), the hot water pump power shall be 19W/gpm",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -5828,16 +5746,14 @@
             }
         }
     },
-    "rule-21-9-d": {
-        "Section": 21,
-        "Rule": 9,
+    "rule-39a29-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The hot water loop pump power is 21 W/gpm.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-9",
+            "rule_id": "39a29",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building is modeled with a hot water plant, served by boiler(s), (for baseline system type = 1,5,7,11 and 12), the hot water pump power shall be 19W/gpm",
+            "rule_description": "When the baseline building is modeled with a hot water plant, served by boiler(s), (for baseline system type = 1, 5, 7, 11 and 12), the hot water pump power shall be 19W/gpm",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -5920,16 +5836,14 @@
             }
         }
     },
-    "rule-21-9-e": {
-        "Section": 21,
-        "Rule": 9,
+    "rule-39a29-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a purchased hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-9",
+            "rule_id": "39a29",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building is modeled with a hot water plant, served by boiler(s), (for baseline system type = 1,5,7,11 and 12), the hot water pump power shall be 19W/gpm",
+            "rule_description": "When the baseline building is modeled with a hot water plant, served by boiler(s), (for baseline system type = 1, 5, 7, 11 and 12), the hot water pump power shall be 19W/gpm",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -6007,16 +5921,14 @@
             }
         }
     },
-    "rule-21-10-a": {
-        "Section": 21,
-        "Rule": 10,
+    "rule-06a67-a": {
         "Test": "a",
         "test_description": "The project has one 100,000 ft2 building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water pump speed control is fixed-speed (riding the pump curve).",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-10",
+            "rule_id": "06a67",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building uses boiler)s) or purchased hot water, the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.",
+            "rule_description": "When the baseline building uses boiler)s) or purchased hot water, the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft2 otherwise it shall be modeled with a VFD.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -6160,16 +6072,14 @@
             }
         }
     },
-    "rule-21-10-b": {
-        "Section": 21,
-        "Rule": 10,
+    "rule-06a67-b": {
         "Test": "b",
         "test_description": "The project has one 100,000 ft2 building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water pump speed control is variable-speed.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-10",
+            "rule_id": "06a67",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building uses boiler)s) or purchased hot water, the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.",
+            "rule_description": "When the baseline building uses boiler)s) or purchased hot water, the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft2 otherwise it shall be modeled with a VFD.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -6313,16 +6223,14 @@
             }
         }
     },
-    "rule-21-10-c": {
-        "Section": 21,
-        "Rule": 10,
+    "rule-06a67-c": {
         "Test": "c",
         "test_description": "The project has one 140,000 ft2 building segment with one zone served by a baseline system type 11 with a hot water loop. The hot water pump speed control is variable-speed.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-10",
+            "rule_id": "06a67",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building uses boiler)s) or purchased hot water, the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.",
+            "rule_description": "When the baseline building uses boiler)s) or purchased hot water, the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft2 otherwise it shall be modeled with a VFD.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -6435,16 +6343,14 @@
             }
         }
     },
-    "rule-21-10-d": {
-        "Section": 21,
-        "Rule": 10,
+    "rule-06a67-d": {
         "Test": "d",
         "test_description": "The project has one 140,000 ft2 building segment with one zone served by a baseline system type 11 with a hot water loop. The hot water pump speed control is fixed-speed.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-10",
+            "rule_id": "06a67",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building uses boiler)s) or purchased hot water, the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.",
+            "rule_description": "When the baseline building uses boiler)s) or purchased hot water, the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft2 otherwise it shall be modeled with a VFD.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -6557,16 +6463,14 @@
             }
         }
     },
-    "rule-21-10-e": {
-        "Section": 21,
-        "Rule": 10,
+    "rule-06a67-e": {
         "Test": "e",
         "test_description": "The project has one 140,000 ft2 building segment with two zones served by a baseline system type 8. There is no hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-10",
+            "rule_id": "06a67",
             "ruleset_reference": "G3.1.3.5",
-            "rule_description": "When the baseline building uses boiler)s) or purchased hot water, the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft^2 otherwise it shall be modeled with a VFD.",
+            "rule_description": "When the baseline building uses boiler)s) or purchased hot water, the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft2 otherwise it shall be modeled with a VFD.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
@@ -6693,14 +6597,12 @@
             }
         }
     },
-    "rule-21-11-a": {
-        "Section": 21,
-        "Rule": 11,
+    "rule-59p62-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop configuration is primary-only.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-11",
+            "rule_id": "59p62",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
             "applicable_rmr": "Baseline Model",
@@ -6834,14 +6736,12 @@
             }
         }
     },
-    "rule-21-11-b": {
-        "Section": 21,
-        "Rule": 11,
+    "rule-59p62-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop configuration is primary-secondary.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-11",
+            "rule_id": "59p62",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
             "applicable_rmr": "Baseline Model",
@@ -6981,14 +6881,12 @@
             }
         }
     },
-    "rule-21-11-c": {
-        "Section": 21,
-        "Rule": 11,
+    "rule-59p62-c": {
         "Test": "c",
         "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a hot water loop. The hot water loop configuration is primary-only.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-11",
+            "rule_id": "59p62",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
             "applicable_rmr": "Baseline Model",
@@ -7097,14 +6995,12 @@
             }
         }
     },
-    "rule-21-11-d": {
-        "Section": 21,
-        "Rule": 11,
+    "rule-59p62-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a hot water loop. The hot water loop configuration is primary-secondary.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-11",
+            "rule_id": "59p62",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
             "applicable_rmr": "Baseline Model",
@@ -7219,14 +7115,12 @@
             }
         }
     },
-    "rule-21-11-e": {
-        "Section": 21,
-        "Rule": 11,
+    "rule-59p62-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 10. There is no hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-11",
+            "rule_id": "59p62",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW loop shall be modeled as primary only",
             "applicable_rmr": "Baseline Model",
@@ -7294,14 +7188,12 @@
             }
         }
     },
-    "rule-21-12-a": {
-        "Section": 21,
-        "Rule": 12,
+    "rule-22a24-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The loop has continuous operation with variable flow control.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-12",
+            "rule_id": "22a24",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW Loop is modeled with continuous variable flow",
             "applicable_rmr": "Baseline Model",
@@ -7440,14 +7332,12 @@
             }
         }
     },
-    "rule-21-12-b": {
-        "Section": 21,
-        "Rule": 12,
+    "rule-22a24-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The loop has intermittent operation with variable flow control.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-12",
+            "rule_id": "22a24",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW Loop is modeled with continuous variable flow",
             "applicable_rmr": "Baseline Model",
@@ -7586,14 +7476,12 @@
             }
         }
     },
-    "rule-21-12-c": {
-        "Section": 21,
-        "Rule": 12,
+    "rule-22a24-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The loop has continuous operation with fixed flow control.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-12",
+            "rule_id": "22a24",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW Loop is modeled with continuous variable flow",
             "applicable_rmr": "Baseline Model",
@@ -7732,14 +7620,12 @@
             }
         }
     },
-    "rule-21-12-d": {
-        "Section": 21,
-        "Rule": 12,
+    "rule-22a24-d": {
         "Test": "d",
         "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The loop has continuous operation with variable flow control.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-12",
+            "rule_id": "22a24",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW Loop is modeled with continuous variable flow",
             "applicable_rmr": "Baseline Model",
@@ -7824,14 +7710,12 @@
             }
         }
     },
-    "rule-21-12-e": {
-        "Section": 21,
-        "Rule": 12,
+    "rule-22a24-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The loop has intermittent operation with variable flow control.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-12",
+            "rule_id": "22a24",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW Loop is modeled with continuous variable flow",
             "applicable_rmr": "Baseline Model",
@@ -7916,14 +7800,12 @@
             }
         }
     },
-    "rule-21-12-f": {
-        "Section": 21,
-        "Rule": 12,
+    "rule-22a24-f": {
         "Test": "f",
         "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The loop has continuous operation with fixed flow control.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-12",
+            "rule_id": "22a24",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW Loop is modeled with continuous variable flow",
             "applicable_rmr": "Baseline Model",
@@ -8008,14 +7890,12 @@
             }
         }
     },
-    "rule-21-12-g": {
-        "Section": 21,
-        "Rule": 12,
+    "rule-22a24-g": {
         "Test": "g",
         "test_description": "The project has one building segment with one zone served by a baseline system type 9. There is no hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-12",
+            "rule_id": "22a24",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the HW Loop is modeled with continuous variable flow",
             "applicable_rmr": "Baseline Model",
@@ -8083,14 +7963,12 @@
             }
         }
     },
-    "rule-21-13-a": {
-        "Section": 21,
-        "Rule": 13,
+    "rule-43l11-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop minimum turndown ratio is 0.25.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-13",
+            "rule_id": "43l11",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
             "applicable_rmr": "Baseline Model",
@@ -8228,14 +8106,12 @@
             }
         }
     },
-    "rule-21-13-b": {
-        "Section": 21,
-        "Rule": 13,
+    "rule-43l11-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water loop minimum turndown ratio is 0.30.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-13",
+            "rule_id": "43l11",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
             "applicable_rmr": "Baseline Model",
@@ -8373,14 +8249,12 @@
             }
         }
     },
-    "rule-21-13-c": {
-        "Section": 21,
-        "Rule": 13,
+    "rule-43l11-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 3 with a purchased hot water loop. The purchased hot water loop minimum turndown ratio is 0.25.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-13",
+            "rule_id": "43l11",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
             "applicable_rmr": "Baseline Model",
@@ -8469,14 +8343,12 @@
             }
         }
     },
-    "rule-21-13-d": {
-        "Section": 21,
-        "Rule": 13,
+    "rule-43l11-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 3 with a purchased hot water loop. The purchased hot water loop minimum turndown ratio is 0.30.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-13",
+            "rule_id": "43l11",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
             "applicable_rmr": "Baseline Model",
@@ -8565,14 +8437,12 @@
             }
         }
     },
-    "rule-21-13-e": {
-        "Section": 21,
-        "Rule": 13,
+    "rule-43l11-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with electric reisistance heating. There is no hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-13",
+            "rule_id": "43l11",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building uses boiler(s) or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
             "applicable_rmr": "Baseline Model",
@@ -8664,14 +8534,12 @@
             }
         }
     },
-    "rule-21-14-a": {
-        "Section": 21,
-        "Rule": 14,
+    "rule-29g28-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 that uses purchased hot water.",
         "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "21-14",
+            "rule_id": "29g28",
             "ruleset_reference": "G3.1.3.4",
             "rule_description": "When the baseline building is modeled with a hot water plant, served by purchased HW system, hot water supply temperature reset is not modeled. ",
             "applicable_rmr": "Baseline Model",
@@ -8788,14 +8656,12 @@
             }
         }
     },
-    "rule-21-14-b": {
-        "Section": 21,
-        "Rule": 14,
+    "rule-29g28-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 that does not use purchased hot water.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-14",
+            "rule_id": "29g28",
             "ruleset_reference": "G3.1.3.4",
             "rule_description": "When the baseline building is modeled with a hot water plant, served by purchased HW system, hot water supply temperature reset is not modeled. ",
             "applicable_rmr": "Baseline Model",
@@ -8929,14 +8795,12 @@
             }
         }
     },
-    "rule-21-15-a": {
-        "Section": 21,
-        "Rule": 15,
+    "rule-62u16-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 that uses purchased hot water.",
         "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "21-15",
+            "rule_id": "62u16",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building is modeled with a hot water plant, served by purchased HW system, the hot water pump power shall be 14 W/gpm",
             "applicable_rmr": "Baseline Model",
@@ -9053,14 +8917,12 @@
             }
         }
     },
-    "rule-21-15-b": {
-        "Section": 21,
-        "Rule": 15,
+    "rule-62u16-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 that does not use purchased hot water.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-15",
+            "rule_id": "62u16",
             "ruleset_reference": "G3.1.3.5",
             "rule_description": "When the baseline building is modeled with a hot water plant, served by purchased HW system, the hot water pump power shall be 14 W/gpm",
             "applicable_rmr": "Baseline Model",
@@ -9194,14 +9056,12 @@
             }
         }
     },
-    "rule-21-16-a": {
-        "Section": 21,
-        "Rule": 16,
+    "rule-31d63-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The project has a single heating hot water plant.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-16",
+            "rule_id": "31d63",
             "ruleset_reference": "G3.1.3.2",
             "rule_description": "Baseline shall have only one heating hot water plant.",
             "applicable_rmr": "Baseline Model",
@@ -9335,14 +9195,12 @@
             }
         }
     },
-    "rule-21-16-b": {
-        "Section": 21,
-        "Rule": 16,
+    "rule-31d63-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7. The project has more than one heating hot water plant.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-16",
+            "rule_id": "31d63",
             "ruleset_reference": "G3.1.3.2",
             "rule_description": "Baseline shall have only one heating hot water plant.",
             "applicable_rmr": "Baseline Model",
@@ -9480,14 +9338,12 @@
             }
         }
     },
-    "rule-21-16-c": {
-        "Section": 21,
-        "Rule": 16,
+    "rule-31d63-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 5 with purchased hot water. The project has a single heating hot water loop.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-16",
+            "rule_id": "31d63",
             "ruleset_reference": "G3.1.3.2",
             "rule_description": "Baseline shall have only one heating hot water plant.",
             "applicable_rmr": "Baseline Model",
@@ -9594,14 +9450,12 @@
             }
         }
     },
-    "rule-21-16-d": {
-        "Section": 21,
-        "Rule": 16,
+    "rule-31d63-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 5 with purchased hot water. The project has more than one heating hot water loop.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-16",
+            "rule_id": "31d63",
             "ruleset_reference": "G3.1.3.2",
             "rule_description": "Baseline shall have only one heating hot water plant.",
             "applicable_rmr": "Baseline Model",
@@ -9712,14 +9566,12 @@
             }
         }
     },
-    "rule-21-16-e": {
-        "Section": 21,
-        "Rule": 16,
+    "rule-31d63-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 11 with electric resistance heating. There is no hot water loop.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-16",
+            "rule_id": "31d63",
             "ruleset_reference": "G3.1.3.2",
             "rule_description": "Baseline shall have only one heating hot water plant.",
             "applicable_rmr": "Baseline Model",
@@ -9821,14 +9673,12 @@
             }
         }
     },
-    "rule-21-17-a": {
-        "Section": 21,
-        "Rule": 17,
+    "rule-35d81-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The baseline boiler efficiency matches the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-17",
+            "rule_id": "35d81",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
             "applicable_rmr": "Baseline Model",
@@ -9969,14 +9819,12 @@
             }
         }
     },
-    "rule-21-17-b": {
-        "Section": 21,
-        "Rule": 17,
+    "rule-35d81-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The baseline boiler efficiency metric does not match the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-17",
+            "rule_id": "35d81",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
             "applicable_rmr": "Baseline Model",
@@ -10117,14 +9965,12 @@
             }
         }
     },
-    "rule-21-17-c": {
-        "Section": 21,
-        "Rule": 17,
+    "rule-35d81-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The baseline boiler efficiency does not match the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-17",
+            "rule_id": "35d81",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
             "applicable_rmr": "Baseline Model",
@@ -10265,14 +10111,12 @@
             }
         }
     },
-    "rule-21-17-d": {
-        "Section": 21,
-        "Rule": 17,
+    "rule-35d81-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The baseline boiler efficiency matches the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-17",
+            "rule_id": "35d81",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
             "applicable_rmr": "Baseline Model",
@@ -10413,14 +10257,12 @@
             }
         }
     },
-    "rule-21-17-e": {
-        "Section": 21,
-        "Rule": 17,
+    "rule-35d81-e": {
         "Test": "e",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The baseline boiler efficiency metric does not match the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-17",
+            "rule_id": "35d81",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
             "applicable_rmr": "Baseline Model",
@@ -10561,14 +10403,12 @@
             }
         }
     },
-    "rule-21-17-f": {
-        "Section": 21,
-        "Rule": 17,
+    "rule-35d81-f": {
         "Test": "f",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The baseline boiler efficiency does not match the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-17",
+            "rule_id": "35d81",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
             "applicable_rmr": "Baseline Model",
@@ -10709,14 +10549,12 @@
             }
         }
     },
-    "rule-21-17-g": {
-        "Section": 21,
-        "Rule": 17,
+    "rule-35d81-g": {
         "Test": "g",
         "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a hot water loop. The baseline boiler efficiency matches the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-17",
+            "rule_id": "35d81",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
             "applicable_rmr": "Baseline Model",
@@ -10832,14 +10670,12 @@
             }
         }
     },
-    "rule-21-17-h": {
-        "Section": 21,
-        "Rule": 17,
+    "rule-35d81-h": {
         "Test": "h",
         "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a hot water loop. The baseline boiler efficiency metric does not match the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-17",
+            "rule_id": "35d81",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
             "applicable_rmr": "Baseline Model",
@@ -10955,14 +10791,12 @@
             }
         }
     },
-    "rule-21-17-i": {
-        "Section": 21,
-        "Rule": 17,
+    "rule-35d81-i": {
         "Test": "i",
         "test_description": "The project has one building segment with two zones served by a baseline system type 12 with a hot water loop. The baseline boiler efficiency does not match the prescibed efficiency based on the capacity range in table G3.5.6.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-17",
+            "rule_id": "35d81",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
             "applicable_rmr": "Baseline Model",
@@ -11078,14 +10912,12 @@
             }
         }
     },
-    "rule-21-17-j": {
-        "Section": 21,
-        "Rule": 17,
+    "rule-35d81-j": {
         "Test": "j",
         "test_description": "The project has one building segment with one zone served by a baseline system type 12 with a purchased hot water loop. There are no boilers",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-17",
+            "rule_id": "35d81",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
             "applicable_rmr": "Baseline Model",
@@ -11204,14 +11036,12 @@
             }
         }
     },
-    "rule-21-18-a": {
-        "Section": 21,
-        "Rule": 18,
+    "rule-82a90-a": {
         "Test": "a",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water boiler uses natural gas as the fuel source.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-18",
+            "rule_id": "82a90",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source. Exception: For fossil fuel systems where natural gas is not available for the proposed building site as determined by the rating authority, the baseline HVAC systems shall be modeled using propane as their fuel. ",
             "applicable_rmr": "Baseline Model",
@@ -11345,14 +11175,12 @@
             }
         }
     },
-    "rule-21-18-b": {
-        "Section": 21,
-        "Rule": 18,
+    "rule-82a90-b": {
         "Test": "b",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water boiler uses electricity as the fuel source.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-18",
+            "rule_id": "82a90",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source. Exception: For fossil fuel systems where natural gas is not available for the proposed building site as determined by the rating authority, the baseline HVAC systems shall be modeled using propane as their fuel. ",
             "applicable_rmr": "Baseline Model",
@@ -11486,14 +11314,12 @@
             }
         }
     },
-    "rule-21-18-c": {
-        "Section": 21,
-        "Rule": 18,
+    "rule-82a90-c": {
         "Test": "c",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a purchased hot water loop. There are no boilers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-18",
+            "rule_id": "82a90",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source. Exception: For fossil fuel systems where natural gas is not available for the proposed building site as determined by the rating authority, the baseline HVAC systems shall be modeled using propane as their fuel. ",
             "applicable_rmr": "Baseline Model",
@@ -11627,15 +11453,13 @@
             }
         }
     },
-    "rule-21-18-d": {
-        "Section": 21,
-        "Rule": 18,
+    "rule-82a90-d": {
         "Test": "d",
         "test_description": "The project has one building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water boiler uses propane as the fuel source.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Baseline boiler fuel source is modeled as propane. Verify if natural gas is not available for the proposed building site as determined by the rating authority.",
         "standard": {
-            "rule_id": "21-18",
+            "rule_id": "82a90",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source. Exception: For fossil fuel systems where natural gas is not available for the proposed building site as determined by the rating authority, the baseline HVAC systems shall be modeled using propane as their fuel. ",
             "applicable_rmr": "Baseline Model",
@@ -11769,14 +11593,12 @@
             }
         }
     },
-    "rule-21-18-e": {
-        "Section": 21,
-        "Rule": 18,
+    "rule-82a90-e": {
         "Test": "e",
         "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The hot water boiler uses natural gas as the fuel source.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "21-18",
+            "rule_id": "82a90",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source. Exception: For fossil fuel systems where natural gas is not available for the proposed building site as determined by the rating authority, the baseline HVAC systems shall be modeled using propane as their fuel. ",
             "applicable_rmr": "Baseline Model",
@@ -11856,14 +11678,12 @@
             }
         }
     },
-    "rule-21-18-f": {
-        "Section": 21,
-        "Rule": 18,
+    "rule-82a90-f": {
         "Test": "f",
         "test_description": "The project has one building segment with one zone served by a baseline system type 1 with a hot water loop. The hot water boiler uses electricity as the fuel source.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "21-18",
+            "rule_id": "82a90",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source. Exception: For fossil fuel systems where natural gas is not available for the proposed building site as determined by the rating authority, the baseline HVAC systems shall be modeled using propane as their fuel. ",
             "applicable_rmr": "Baseline Model",
@@ -11943,14 +11763,12 @@
             }
         }
     },
-    "rule-21-18-g": {
-        "Section": 21,
-        "Rule": 18,
+    "rule-82a90-g": {
         "Test": "g",
         "test_description": "The project has one building segment with one zone served by a baseline system type 2. There are no boilers.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "21-18",
+            "rule_id": "82a90",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "For baseline building, fossil fuel systems shall be modeled using natural gas as their fuel source. Exception: For fossil fuel systems where natural gas is not available for the proposed building site as determined by the rating authority, the baseline HVAC systems shall be modeled using propane as their fuel. ",
             "applicable_rmr": "Baseline Model",
