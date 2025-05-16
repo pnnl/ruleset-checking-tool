@@ -16,6 +16,8 @@
 
 - Check if each zone has window or skylight in the building segment in the Proposed model: `For zone_p in P_RMR...zones:`
 
+  - Check if all spaces in the zone are in the list of not_applicable space types, if so, skip the zone: `if all(space.lighting_space_type in not_applicable_space_types for space in zone_p.spaces): continue`
+
   - For each surfaces in zone: `surface_p in zone_p.surfaces`
 
     - Check if surface is exterior: `if surface_p.adjacent_to == "EXTERIOR":`
@@ -23,8 +25,6 @@
       - Check if surface has any subsurface that is not door, set daylight flag as TRUE: `if ( subsurface.classification != "DOOR" for subsurface in surface_p.subsurfaces ): daylight_flag_p == TRUE`
 
   - For each space in zone: `space_p in zone_p.spaces:`
-  
-    - Check if the lighting space type is in the list of not applicable space types: `if space_p.lighting_space_type in not_applicable_space_types: continue`
 
     - Get interior_lighting in space: `interior_lighting_p = space_p.interior_lighting`
 
