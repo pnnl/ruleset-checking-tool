@@ -473,7 +473,7 @@
         "Section": 19,
         "Rule": 10,
         "Test": "c",
-        "test_description": "The project located in climate zone 5A has one building segment with one zone which is served by a baseline system type 3. The system is primarily serving computer room(s) and does not include an air economizer in the baseline nor the proposed.",
+        "test_description": "The project located in climate zone 5A has one building segment with one zone which is served by a baseline system type 3. The system is primarily serving computer room(s). The proposed HVAC system has an economizer but the baseline HVAC system does not.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-10",
@@ -539,7 +539,11 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "air_economizer": {
+                                                        "id": "Air Economizer 1",
+                                                        "type": "ENTHALPY"
+                                                    }
                                                 }
                                             }
                                         ]
