@@ -11,7 +11,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.utility_functions import find_exactly_one_zone
+from rct229.utils.utility_functions import (
+    find_exactly_one_hvac_system,
+)
 
 HUMIDIFICATION = SchemaEnums.schema_enums["HumidificationOptions"]
 
@@ -53,27 +55,27 @@ class prm9012019rule34l34(RuleDefinitionListIndexedBase):
 
         zones_have_humidification_list_p = list(set(zones_have_humidification_list_p))
 
-        has_humidification_b = {}
-        has_humidification_p = {}
+        zone_has_humidification_dict_b = {}
+        zone_has_humidification_dict_p = {}
         for zone_b in find_all("$.buildings[*].building_segments[*].zones[*]", rmd_b):
             zone_id_b = zone_b["id"]
             hvac_list_b = get_list_hvac_systems_associated_with_zone(rmd_b, zone_id_b)
 
             assert_(
                 len(hvac_list_b) == 1,
-                "There must be one system serving each zone in the baseline RMD.",
+                "There must be only one HVAC system serving each zone in the baseline RMD.",
             )
 
-            has_humidification_b[zone_id_b] = find_exactly_one_zone(
-                rmd_b, zone_id_b
-            ) not in (None, HUMIDIFICATION.NONE)
-            has_humidification_p[zone_id_b] = (
+            zone_has_humidification_dict_b[zone_id_b] = find_exactly_one_hvac_system(
+                rmd_b, hvac_list_b[0]
+            ).get("humidification_type") not in (None, HUMIDIFICATION.NONE)
+            zone_has_humidification_dict_p[zone_id_b] = (
                 zone_b["id"] in zones_have_humidification_list_p
             )
 
         return {
-            "has_humidification_b": has_humidification_b,
-            "has_humidification_p": has_humidification_p,
+            "zone_has_humidification_dict_b": zone_has_humidification_dict_b,
+            "zone_has_humidification_dict_p": zone_has_humidification_dict_p,
         }
 
     class ZoneRule(PartialRuleDefinition):
@@ -88,26 +90,30 @@ class prm9012019rule34l34(RuleDefinitionListIndexedBase):
             zone_b = context.BASELINE_0
             zone_id_b = zone_b["id"]
 
-            has_humidification_b = data["has_humidification_b"][zone_id_b]
-            has_humidification_p = data["has_humidification_p"][zone_id_b]
+            zone_has_humidification_bool_b = data["zone_has_humidification_dict_b"][
+                zone_id_b
+            ]
+            zone_has_humidification_bool_p = data["zone_has_humidification_dict_p"][
+                zone_id_b
+            ]
 
             return {
-                "has_humidification_b": has_humidification_b,
-                "has_humidification_p": has_humidification_p,
+                "zone_has_humidification_bool_b": zone_has_humidification_bool_b,
+                "zone_has_humidification_bool_p": zone_has_humidification_bool_p,
             }
 
         def applicability_check(self, context, calc_vals, data):
-            has_humidification_b = calc_vals["has_humidification_b"]
-            has_humidification_p = calc_vals["has_humidification_p"]
+            zone_has_humidification_bool_b = calc_vals["zone_has_humidification_bool_b"]
+            zone_has_humidification_bool_p = calc_vals["zone_has_humidification_bool_p"]
 
-            return has_humidification_b and has_humidification_p
+            return zone_has_humidification_bool_b and zone_has_humidification_bool_p
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            has_humidification_b = calc_vals["has_humidification_b"]
-            has_humidification_p = calc_vals["has_humidification_p"]
+            zone_has_humidification_bool_b = calc_vals["zone_has_humidification_bool_b"]
+            zone_has_humidification_bool_p = calc_vals["zone_has_humidification_bool_p"]
 
             UNDETERMINED_MSG = ""
-            if has_humidification_b and has_humidification_p:
+            if zone_has_humidification_bool_b and zone_has_humidification_bool_p:
                 UNDETERMINED_MSG = (
                     "This zone is modeled with humidification in the baseline and proposed. Check that the baseline system serving this zone is modeled with adiabatic humidification "
                     "if the specified humidification system complies with 90.1 - 2019 Section 6.5.2.4, and that the baseline system serving this zone is modeled with non-adiabatic humidification "
