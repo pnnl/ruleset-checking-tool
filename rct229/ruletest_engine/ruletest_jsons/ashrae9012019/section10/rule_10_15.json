@@ -1,0 +1,642 @@
+{
+    "rule-10-15-a": {
+        "Section": 10,
+        "Rule": 15,
+        "Test": "a",
+        "test_description": "A one zone building is modeled with  system 4. Both the proposed and baseline building's Thermal Zone 1 utilize humidification via their HVAC system.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "10-15",
+            "ruleset_reference": "Section G3.1-10 HVAC Systems for the baseline building",
+            "rule_description": "The proposed design includes humidification and the baseline building design has been modeled with humidification.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Return Fan"
+                                                        }
+                                                    ]
+                                                },
+                                                "humidification_type": "ADIABATIC"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Return Fan"
+                                                        }
+                                                    ]
+                                                },
+                                                "humidification_type": "ADIABATIC"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-10-15-b": {
+        "Section": 10,
+        "Rule": 15,
+        "Test": "b",
+        "test_description": "A one zone building is modeled with  system 4. Only the baseline Thermal Zone 1 utilize humidification via their HVAC system. The proposed building has no humidification in it at all.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "The baseline was modeled with humidification when humidification was not modeled in the proposed design model",
+        "standard": {
+            "rule_id": "10-15",
+            "ruleset_reference": "Section G3.1-10 HVAC Systems for the baseline building",
+            "rule_description": "The proposed design includes humidification and the baseline building design has been modeled with humidification.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Return Fan"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Return Fan"
+                                                        }
+                                                    ]
+                                                },
+                                                "humidification_type": "ADIABATIC"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-10-15-c": {
+        "Section": 10,
+        "Rule": 15,
+        "Test": "c",
+        "test_description": "A one zone building is modeled with  system 4. Only the proposed Thermal Zone 1 utilize humidification via their HVAC system. The baseline building has no humidification in it at all.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "The baseline was NOT modeled with humidification when humidification was modeled in the proposed design model",
+        "standard": {
+            "rule_id": "10-15",
+            "ruleset_reference": "Section G3.1-10 HVAC Systems for the baseline building",
+            "rule_description": "The proposed design includes humidification and the baseline building design has been modeled with humidification.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Return Fan"
+                                                        }
+                                                    ]
+                                                },
+                                                "humidification_type": "ADIABATIC"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Return Fan"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-10-15-d": {
+        "Section": 10,
+        "Rule": 15,
+        "Test": "d",
+        "test_description": "A one zone building is modeled with  system 4. Neither the proposed or baseline building has humidification present.",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "10-15",
+            "ruleset_reference": "Section G3.1-10 HVAC Systems for the baseline building",
+            "rule_description": "The proposed design includes humidification and the baseline building design has been modeled with humidification.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Return Fan"
+                                                        }
+                                                    ]
+                                                },
+                                                "humidification_type": "NONE"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 929.0303999999999
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "System_4_PSZ_HP - Terminal for Thermal Zone 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System_4_PSZ_HP"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System_4_PSZ_HP",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Supply Fan"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "System_4_PSZ_HP Return Fan"
+                                                        }
+                                                    ]
+                                                },
+                                                "humidification_type": "NONE"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}
