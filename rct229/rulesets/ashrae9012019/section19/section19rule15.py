@@ -24,7 +24,7 @@ from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.compare_standard_val import std_lt
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 from rct229.utils.utility_functions import find_exactly_one_terminal_unit
 
@@ -36,15 +36,15 @@ APPLICABLE_SYS_TYPES = [
 REQ_DESIGN_SUPPLY_AIR_TEMP_SETPOINT = 105.0 * ureg("degF")
 
 
-class Section19Rule15(RuleDefinitionListIndexedBase):
+class PRM9012019Rule03j97(RuleDefinitionListIndexedBase):
     """Rule 15 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule15, self).__init__(
+        super(PRM9012019Rule03j97, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule15.HVACRule(),
+            each_rule=PRM9012019Rule03j97.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-15",
             description="For baseline system types 9 & 10, the system design supply airflow rates shall be based on the temperature difference between a supply air temperature set point of 105°F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
@@ -129,7 +129,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule15.HVACRule, self).__init__(
+            super(PRM9012019Rule03j97.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
@@ -156,7 +156,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
 
             return any(
                 hvac_id_b in baseline_system_types_dict[system_type]
-                for system_type in baseline_system_types_dict
+                for system_type in APPLICABLE_SYS_TYPES
             )
 
         def get_calc_vals(self, context, data=None):
@@ -179,14 +179,17 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
             return {
                 "hvac_id_b": hvac_id_b,
                 "supply_fan_qty_b": supply_fan_qty_b,
-                "supply_fan_airflow_b": supply_fan_airflow_b,
-                "minimum_outdoor_airflow_b": minimum_outdoor_airflow_b,
+                "supply_fan_airflow_b": CalcQ("air_flow_rate", supply_fan_airflow_b),
+                "minimum_outdoor_airflow_b": CalcQ(
+                    "air_flow_rate", minimum_outdoor_airflow_b
+                ),
                 "all_design_setpoints_105": data["hvac_info_dict_b"][hvac_id_b][
                     "all_design_setpoints_105"
                 ],
-                "proposed_supply_flow": data["hvac_info_dict_b"][hvac_id_b][
-                    "proposed_supply_flow"
-                ],
+                "proposed_supply_flow": CalcQ(
+                    "air_flow_rate",
+                    data["hvac_info_dict_b"][hvac_id_b]["proposed_supply_flow"],
+                ),
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
@@ -202,18 +205,14 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                     proposed_supply_flow,
                     supply_fan_airflow_b,
                 )
-            ) and (supply_fan_qty_b != 1)
+            ) or (supply_fan_qty_b != 1)
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
             hvac_id_b = calc_vals["hvac_id_b"]
             supply_fan_qty_b = calc_vals["supply_fan_qty_b"]
             supply_fan_airflow_b = calc_vals["supply_fan_airflow_b"]
-            all_design_setpoints_105 = calc_vals["hvac_info_dict_b"][hvac_id_b][
-                "all_design_setpoints_105"
-            ]
-            proposed_supply_flow = calc_vals["hvac_info_dict_b"][hvac_id_b][
-                "proposed_supply_flow"
-            ]
+            all_design_setpoints_105 = calc_vals["all_design_setpoints_105"]
+            proposed_supply_flow = calc_vals["proposed_supply_flow"]
 
             if (
                 supply_fan_qty_b == 1
@@ -247,7 +246,9 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                 )
                 or (
                     not all_design_setpoints_105
-                    and minimum_outdoor_airflow_b == supply_fan_airflow_b
+                    and self.precision_comparison["supply_fan_airflow_b"](
+                        minimum_outdoor_airflow_b, supply_fan_airflow_b
+                    )
                 )
             )
 

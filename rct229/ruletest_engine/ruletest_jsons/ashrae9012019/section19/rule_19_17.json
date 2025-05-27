@@ -13,27 +13,23 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "PTAC Terminal 1",
@@ -119,10 +115,10 @@
             }
         }
     },
-    "rule-19-17-a2": {
+    "rule-19-17-b": {
         "Section": 19,
         "Rule": 17,
-        "Test": "a2",
+        "Test": "b",
         "test_description": "The project has one building segment with one zone served by a baseline system type 1. The fan electrical power for the supply, return, exhaust, relief, and zone exhaust fans is calculated with the brake horsepower and motor efficiency. The total fan power is about 280 W with 1,000 cfm design supply airflow.",
         "expected_rule_outcome": "pass",
         "standard": {
@@ -133,27 +129,23 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "PTAC Terminal 1",
@@ -239,10 +231,10 @@
             }
         }
     },
-    "rule-19-17-b": {
+    "rule-19-17-c": {
         "Section": 19,
         "Rule": 17,
-        "Test": "b",
+        "Test": "c",
         "test_description": "The project has one building segment with one zone served by a baseline system type 1. The fan electrical power for the supply, return, exhaust, relief, and zone exhaust fans is calculated with the brake horsepower and motor efficiency. The total fan power is about 500 W with 1,000 cfm design supply airflow.",
         "expected_rule_outcome": "fail",
         "standard": {
@@ -253,27 +245,23 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.3"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "PTAC Terminal 1",

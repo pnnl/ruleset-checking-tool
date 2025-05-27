@@ -54,14 +54,14 @@ def get_aggregated_zone_hvac_fan_operating_schedule(
             schedules.append([1] * num_hours)
 
     assert_(
-        schedules,
+        len(schedules) > 0,
         "Please make sure the provided ZONE 'zone_id' is connected with at least one HVAC system",
     )
 
     # determine if all the schedules operate. If so, assign 1, else 0.
     schedules_df = pd.DataFrame(schedules)
     aggregated_zone_hvac_fan_operating_schedule = (
-        (schedules_df.sum(axis=0) == len(schedules_df)).astype(int).tolist()
+        (schedules_df.gt(0).all(axis=0)).astype(int).tolist()
     )
 
     return aggregated_zone_hvac_fan_operating_schedule

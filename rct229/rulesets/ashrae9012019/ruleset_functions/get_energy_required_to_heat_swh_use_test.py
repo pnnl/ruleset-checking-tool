@@ -11,6 +11,7 @@ from rct229.utils.std_comparisons import std_equal
 
 TEST_RMD = {
     "id": "test_rmd",
+    "calendar": {"is_leap_year": False},
     "buildings": [
         {
             "id": "Building 1",
@@ -127,27 +128,22 @@ TEST_RMD = {
                     "id": "Tank 2",
                 },
             ],
-            "service_water_piping": [
-                {
-                    "id": "SWH Piping 1",
-                    "child": [
-                        {
-                            "id": "SWH Piping Child 1",
-                            "child": [
-                                {
-                                    "id": "SWH Piping 1-a",
-                                },
-                                {
-                                    "id": "SWH Piping 1-b",
-                                },
-                            ],
-                        }
-                    ],
-                },
-                {
-                    "id": "SWH Piping 2",
-                },
-            ],
+            "service_water_piping": {
+                "id": "SWH Piping 1",
+                "child": [
+                    {
+                        "id": "SWH Piping Child 1",
+                        "child": [
+                            {
+                                "id": "SWH Piping 1-a",
+                            },
+                            {
+                                "id": "SWH Piping 1-b",
+                            },
+                        ],
+                    }
+                ],
+            },
         }
     ],
     "type": "BASELINE_0",
@@ -156,8 +152,6 @@ TEST_RMD = {
 TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
-    "calendar": {"is_leap_year": False},
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]

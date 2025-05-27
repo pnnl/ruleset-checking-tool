@@ -22,20 +22,15 @@ FAIL_MSG_B = "Fail because a humidity schedule is defined in the baseline but no
 FAIL_MSG_P = "Fail because a humidity schedule is defined in the proposed but not in the baseline."
 
 
-class Section4Rule2(RuleDefinitionListIndexedBase):
+class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
-        super(Section4Rule2, self).__init__(
+        super(PRM9012019Rule85i93, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={
-                "$": ["weather", "calendar"],
-                "weather": ["climate_zone"],
-                "calendar": ["is_leap_year"],
-            },
-            each_rule=Section4Rule2.RuleSetModelInstanceRule(),
+            each_rule=PRM9012019Rule85i93.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="4-2",
             description="Humidity Control Setpoints shall be the same for proposed design and baseline building design.",
@@ -43,31 +38,36 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-4 Schedule Modeling Requirements for the Proposed design and Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={
-                "climate_zone": (BASELINE_0, "weather/climate_zone"),
-                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-            },
         )
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section4Rule2.RuleSetModelInstanceRule, self).__init__(
+            super(PRM9012019Rule85i93.RuleSetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section4Rule2.RuleSetModelInstanceRule.ZoneRule(),
+                each_rule=PRM9012019Rule85i93.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
+                required_fields={
+                    "$": ["weather", "calendar"],
+                    "weather": ["climate_zone"],
+                    "calendar": ["is_leap_year"],
+                },
             )
 
         def create_data(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
+            climate_zone = rmd_b["weather"]["climate_zone"]
+            is_leap_year = rmd_b["calendar"]["is_leap_year"]
             return {
+                "climate_zone": climate_zone,
+                "is_leap_year": is_leap_year,
                 "schedules_b": rmd_b.get("schedules"),
                 "schedules_p": rmd_p.get("schedules"),
                 "zcc_dict_b": get_zone_conditioning_category_rmd_dict(
-                    data["climate_zone"], rmd_b
+                    climate_zone, rmd_b
                 ),
             }
 
@@ -78,7 +78,9 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section4Rule2.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
+                super(
+                    PRM9012019Rule85i93.RuleSetModelInstanceRule.ZoneRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

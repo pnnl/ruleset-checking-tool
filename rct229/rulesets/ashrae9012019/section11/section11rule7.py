@@ -22,15 +22,15 @@ SERVICE_WATER_HEATING_SPACE = SchemaEnums.schema_enums[
 ]
 
 
-class Section11Rule7(RuleDefinitionListIndexedBase):
+class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
     """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule7, self).__init__(
+        super(PRM9012019Rule49y39, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section11Rule7.RMDRule(),
+            each_rule=PRM9012019Rule49y39.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-7",
             description="Except in buildings that will have no service water heating loads, the service water heating system type in the baseline building design shall be as specified in Table G3.1.1-2 for each building area type in the proposed design.",
@@ -38,25 +38,25 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1 #11, baseline column, a & b",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule7.RMDRule, self).__init__(
+            super(PRM9012019Rule49y39.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False,
                     BASELINE_0=True,
                     PROPOSED=True,
                 ),
                 index_rmd=BASELINE_0,
-                each_rule=Section11Rule7.RMDRule.SWHBATRule(),
+                each_rule=PRM9012019Rule49y39.RMDRule.SWHBATRule(),
+                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
             rmd_b = context.BASELINE_0
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             service_water_heating_uses_p = {
                 swh_use["id"]: swh_use.get("use", 0.0)
@@ -77,12 +77,13 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
             return {
                 "service_water_heating_uses_p": service_water_heating_uses_p,
                 "swh_equip_type_b": swh_equip_type_b,
+                "is_leap_year_b": is_leap_year_b,
             }
 
         def create_context_list(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            is_leap_year_b = data["is_leap_year"]
+            is_leap_year_b = data["is_leap_year_b"]
 
             swh_bats_and_equip_association_b = (
                 get_swh_components_associated_with_each_swh_bat(rmd_b, is_leap_year_b)
@@ -118,7 +119,7 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
 
         class SWHBATRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section11Rule7.RMDRule.SWHBATRule, self).__init__(
+                super(PRM9012019Rule49y39.RMDRule.SWHBATRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -149,9 +150,20 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
                     expected_swh_equip_type_list.append(
                         table_g3_1_2_lookup(swh_bat_b)["baseline_heating_method"]
                     )
-                    swh_equip_type_list_b.append(
+
+                    if (
                         swh_equip_type_b[swh_heating_equipment_id]
-                    )
+                        == "PROPANE_INSTANTANEOUS"
+                    ):
+                        swh_equip_type_list_b.append("GAS_INSTANTANEOUS_WATER_HEATER")
+                    elif (
+                        swh_equip_type_b[swh_heating_equipment_id] == "PROPANE_STORAGE"
+                    ):
+                        swh_equip_type_list_b.append("GAS_STORAGE_WATER_HEATER")
+                    else:
+                        swh_equip_type_list_b.append(
+                            swh_equip_type_b[swh_heating_equipment_id]
+                        )
 
                 return {
                     "expected_swh_equip_type_list": expected_swh_equip_type_list,

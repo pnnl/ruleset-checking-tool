@@ -25,25 +25,15 @@
 
     - For each surface in zone: `for surface_b in zone_b.surfaces:`
 
-      - Get matching surface in P_RMD: `surface_p = match_data_element(P_RMD, Surfaces, surface_b.id)`
+      - For each subsurface in surface in B_RMD: `for subsurface_b in surface_b.subsurfaces:`
+    
+        - Get matching subsurface in P_RMD: subsurface_p = match_data_element(P_RMD, Subsurfaces, subsurface_b.id)
+              
+        - **Rule Assertion:**
 
-        - For each subsurface in surface in P_RMD: `for subsurface_p in surface_p.subsurfaces:`
+           - Case 1: If subsurface is modeled with the same manual shade status as in P_RMD: `if subsurface_b.has_manual_interior_shades == subsurface_p.has_manual_interior_shades: PASS`
 
-          - Calculate the total number of subsurfaces that have manual shades modeled: `if subsurface_p.has_manual_interior_shades: num_shades += 1`
-
-        - Check if subsurfaces in P_RMD have different manual shade status, flag for manual check: `if ( num_shades != LEN(surface_p.subsurfaces) ) AND ( num_shades != 0 ): manual_check_flag = TRUE`
-
-        - Else, for each subsurface in surface in B_RMD: `else: for subsurface_b in surface_b.subsurfaces:`
-
-          - Check if subsurface is modeled with the same manual shade status as in P_RMD: `if subsurface_b.has_manual_interior_shades == surface_p.subsurfaces[0].has_manual_interior_shades: shade_match_flag = TRUE`
-
-        **Rule Assertion:**
-
-        - Case 1: For each surface, if manual check flag is True: `if manual_check_flag: CAUTION and raise_warning "SURFACE IN P-RMD HAS SUBSURFACES MODELED WITH DIFFERENT MANUAL SHADE STATUS. VERIFY IF SUBSURFACES MANUAL SHADE STATUS IN B-RMD ARE MODELED THE SAME AS IN P-RMD".`
-
-        - Case 2: Else if shade_match_flag is True: `if shade_match_flag: PASS`
-
-        - Case 3: Else: `else: FAIL`
+           - Case 2: Else: `else: FAIL`
 
 **Notes:**
 

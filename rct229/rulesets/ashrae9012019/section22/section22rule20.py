@@ -30,15 +30,15 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section22Rule20(RuleDefinitionListIndexedBase):
+class PRM9012019Rule71o81(RuleDefinitionListIndexedBase):
     """Rule 20 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule20, self).__init__(
+        super(PRM9012019Rule71o81, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule20.HeatRejectionRule(),
+            each_rule=PRM9012019Rule71o81.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-20",
             description="The baseline heat rejection device leaving water temperature shall be modeled as specified in Table G3.1.3.11.",
@@ -47,9 +47,8 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].heat_rejections[*]",
             required_fields={
-                "$": ["ruleset_model_descriptions", "weather"],
+                "$": ["ruleset_model_descriptions"],
             },
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
 
     def is_applicable(self, context, data=None):
@@ -73,9 +72,14 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
             ]
         )
 
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
+
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule20.HeatRejectionRule, self).__init__(
+            super(PRM9012019Rule71o81.HeatRejectionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -84,7 +88,7 @@ class Section22Rule20(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "tower_leaving_temperature_b": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                 },

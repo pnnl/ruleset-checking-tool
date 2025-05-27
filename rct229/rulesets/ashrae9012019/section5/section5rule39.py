@@ -27,15 +27,15 @@ OTHER = SUBSURFACE_SUBCLASSIFICATION_OPTIONS.OTHER
 UNEXPECTED_DOOR = [SPANDREL_GLASS, GLASS_BLOCK, OTHER]
 
 
-class Section5Rule39(RuleDefinitionListIndexedBase):
+class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
     """Rule 39 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule39, self).__init__(
+        super(PRM9012019Rule50m61, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section5Rule39.BuildingRule(),
+            each_rule=PRM9012019Rule50m61.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-39",
             description="U-factor of the baseline door is based on Tables G3.4-1 through G3.4-8 for the applicable door "
@@ -44,16 +44,20 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline model",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule39.BuildingRule, self).__init__(
+            super(PRM9012019Rule50m61.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section5Rule39.BuildingRule.SurfaceRule(),
+                each_rule=PRM9012019Rule50m61.BuildingRule.SurfaceRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -68,16 +72,19 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data=None):
             surface_b = context_item.BASELINE_0
-            return data["scc_dict_b"][surface_b["id"]] != SCC.UNREGULATED
+            return (
+                data["scc_dict_b"][surface_b["id"]] != SCC.UNREGULATED
+                and len(surface_b.get("subsurfaces", [])) > 0
+            )
 
         class SurfaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section5Rule39.BuildingRule.SurfaceRule, self).__init__(
+                super(PRM9012019Rule50m61.BuildingRule.SurfaceRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     list_path="$.subsurfaces[*]",
-                    each_rule=Section5Rule39.BuildingRule.SurfaceRule.SubSurfaceRule(),
+                    each_rule=PRM9012019Rule50m61.BuildingRule.SurfaceRule.SubSurfaceRule(),
                     index_rmd=BASELINE_0,
                     required_fields={
                         "$.subsurfaces[*]": [
@@ -102,7 +109,8 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
             class SubSurfaceRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section5Rule39.BuildingRule.SurfaceRule.SubSurfaceRule, self
+                        PRM9012019Rule50m61.BuildingRule.SurfaceRule.SubSurfaceRule,
+                        self,
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False
@@ -221,8 +229,12 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
                         f"the baseline door u-factor (${u_factor_b}) is modeled correctly."
                         if manual_check_required_flag
                         and (
-                            std_equal(u_factor_b, target_u_factor_nonres_b)
-                            or std_equal(u_factor_b, target_u_factor_res_b)
+                            self.precision_comparison["subsurface_u_factor_b"](
+                                u_factor_b, target_u_factor_nonres_b
+                            )
+                            or self.precision_comparison["subsurface_u_factor_b"](
+                                u_factor_b, target_u_factor_res_b
+                            )
                         )
                         else ""
                     )
@@ -243,7 +255,12 @@ class Section5Rule39(RuleDefinitionListIndexedBase):
                     target_u_factor_b = calc_vals["target_u_factor_b"]
                     fail_msg = (
                         "Rule evaluation fails with a conservative outcome."
-                        if std_le(std_val=target_u_factor_b, val=u_factor_b)
+                        if (
+                            self.precision_comparison["subsurface_u_factor_b"](
+                                u_factor_b, target_u_factor_b
+                            )
+                            or u_factor_b < target_u_factor_b
+                        )
                         else ""
                     )
                     return fail_msg

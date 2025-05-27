@@ -16,19 +16,19 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 )
 
 
-class Section5Rule11(RuleDefinitionListIndexedBase):
+class PRM9012019Rule46p73(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule11, self).__init__(
+        super(PRM9012019Rule46p73, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule11.BuildingRule(),
+            each_rule=PRM9012019Rule46p73.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-11",
             description=" Baseline slab-on-grade assemblies must conform with assemblies detailed in Appendix A (Unheated Slabs A6).",
@@ -36,16 +36,20 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule11.BuildingRule, self).__init__(
+            super(PRM9012019Rule46p73.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section5Rule11.BuildingRule.SurfaceRule(),
+                each_rule=PRM9012019Rule46p73.BuildingRule.SurfaceRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -67,7 +71,7 @@ class Section5Rule11(RuleDefinitionListIndexedBase):
 
         class SurfaceRule(PartialRuleDefinition):
             def __init__(self):
-                super(Section5Rule11.BuildingRule.SurfaceRule, self).__init__(
+                super(PRM9012019Rule46p73.BuildingRule.SurfaceRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),

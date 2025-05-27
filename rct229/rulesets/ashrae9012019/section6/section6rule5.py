@@ -20,54 +20,53 @@ from rct229.utils.pint_utils import ZERO
 BUILDING_AREA_CUTTOFF = ureg("5000 ft2")
 
 
-class Section6Rule5(RuleDefinitionListIndexedBase):
+class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
     """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(Section6Rule5, self).__init__(
+        super(PRM9012019Rule08a45, self).__init__(
             id="6-5",
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section6Rule5.RulesetModelInstanceRule(),
+            each_rule=PRM9012019Rule08a45.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
             description="Baseline building is modeled with automatic shutoff controls in buildings >5000 sq.ft.",
-            required_fields={
-                "$": ["calendar"],
-                "calendar": ["is_leap_year"],
-            },
             ruleset_section_title="Lighting",
             standard_section="Section G3.1-6 Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section6Rule5.RulesetModelInstanceRule, self).__init__(
+            super(PRM9012019Rule08a45.RulesetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule(),
+                each_rule=PRM9012019Rule08a45.RulesetModelInstanceRule.BuildingRule(),
                 index_rmd=BASELINE_0,
                 list_path="buildings[*]",
-                required_fields={"$": ["schedules"]},
+                required_fields={
+                    "$": ["schedules", "calendar"],
+                    "calendar": ["is_leap_year"],
+                },
                 data_items={
                     "schedules_b": (BASELINE_0, "schedules"),
                     "schedules_p": (PROPOSED, "schedules"),
+                    "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
                 },
             )
 
         class BuildingRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(
-                    Section6Rule5.RulesetModelInstanceRule.BuildingRule, self
+                    PRM9012019Rule08a45.RulesetModelInstanceRule.BuildingRule, self
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
-                    each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
+                    each_rule=PRM9012019Rule08a45.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
                     index_rmd=BASELINE_0,
                     list_path="$.building_segments[*].zones[*]",
                     required_fields={"$": ["building_open_schedule"]},
@@ -94,13 +93,13 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
             class ZoneRule(RuleDefinitionListIndexedBase):
                 def __init__(self):
                     super(
-                        Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule,
+                        PRM9012019Rule08a45.RulesetModelInstanceRule.BuildingRule.ZoneRule,
                         self,
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
-                        each_rule=Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
+                        each_rule=PRM9012019Rule08a45.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
                         index_rmd=BASELINE_0,
                         list_path="spaces[*]",
                     )
@@ -116,7 +115,7 @@ class Section6Rule5(RuleDefinitionListIndexedBase):
                 class SpaceRule(RuleDefinitionBase):
                     def __init__(self):
                         super(
-                            Section6Rule5.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule,
+                            PRM9012019Rule08a45.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule,
                             self,
                         ).__init__(
                             rmds_used=produce_ruleset_model_description(

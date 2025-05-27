@@ -26,15 +26,15 @@ MANUAL_CHECK_MSG = "MANUAL REVIEW IS REQUESTED TO VERIFY SKYLIGHT MEETS SHGC REQ
 SURFACE_CLASSIFICATION = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"]
 
 
-class Section5Rule28(RuleDefinitionListIndexedBase):
+class PRM9012019Rule42c42(RuleDefinitionListIndexedBase):
     """Rule 28 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule28, self).__init__(
+        super(PRM9012019Rule42c42, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section5Rule28.BuildingRule(),
+            each_rule=PRM9012019Rule42c42.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-28",
             description="Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
@@ -42,21 +42,25 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
         )
 
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
+
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule28.BuildingRule, self).__init__(
+            super(PRM9012019Rule42c42.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
-                each_rule=Section5Rule28.BuildingRule.RoofRule(),
+                each_rule=PRM9012019Rule42c42.BuildingRule.RoofRule(),
                 index_rmd=BASELINE_0,
                 manual_check_required_msg=MANUAL_CHECK_MSG,
             )
@@ -164,11 +168,11 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
 
         class RoofRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section5Rule28.BuildingRule.RoofRule, self).__init__(
+                super(PRM9012019Rule42c42.BuildingRule.RoofRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
-                    each_rule=Section5Rule28.BuildingRule.RoofRule.SubsurfaceRule(),
+                    each_rule=PRM9012019Rule42c42.BuildingRule.RoofRule.SubsurfaceRule(),
                     index_rmd=BASELINE_0,
                     list_path="subsurfaces[*]",
                     manual_check_required_msg=MANUAL_CHECK_MSG,
@@ -188,7 +192,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
             class SubsurfaceRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section5Rule28.BuildingRule.RoofRule.SubsurfaceRule, self
+                        PRM9012019Rule42c42.BuildingRule.RoofRule.SubsurfaceRule, self
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False
@@ -202,6 +206,7 @@ class Section5Rule28(RuleDefinitionListIndexedBase):
                                 "unit": "",
                             }
                         },
+                        manual_check_required_msg=MANUAL_CHECK_MSG,
                     )
 
                 def is_applicable(self, context, data=None):

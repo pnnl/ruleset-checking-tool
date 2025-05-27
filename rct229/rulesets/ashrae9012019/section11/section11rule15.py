@@ -17,15 +17,15 @@ MANUAL_CHECK_REQUIRED_MSG = (
 getEither = curry(lambda o, k: o.get(k) if isinstance(o, dict) else None)
 
 
-class Section11Rule15(RuleDefinitionListIndexedBase):
+class PRM9012019Rule06k20(RuleDefinitionListIndexedBase):
     """Rule 15 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule15, self).__init__(
+        super(PRM9012019Rule06k20, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section11Rule15.RMDRule(),
+            each_rule=PRM9012019Rule06k20.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-15",
             description=(
@@ -41,11 +41,11 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule15.RMDRule, self).__init__(
+            super(PRM9012019Rule06k20.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section11Rule15.RMDRule.SWHUseRule(),
+                each_rule=PRM9012019Rule06k20.RMDRule.SWHUseRule(),
                 index_rmd=BASELINE_0,
                 # TODO, change the path if the service_water_heating_uses moved to building_segment level
                 list_path="$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
@@ -107,7 +107,7 @@ class Section11Rule15(RuleDefinitionListIndexedBase):
 
         class SWHUseRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section11Rule15.RMDRule.SWHUseRule, self).__init__(
+                super(PRM9012019Rule06k20.RMDRule.SWHUseRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

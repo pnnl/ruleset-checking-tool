@@ -9,21 +9,22 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
     get_zone_conditioning_category_dict,
 )
 from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 
-class Section5Rule36(RuleDefinitionListIndexedBase):
+class PRM9012019Rule23m90(RuleDefinitionListIndexedBase):
     """Rule 36 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule36, self).__init__(
+        super(PRM9012019Rule23m90, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule36.BuildingRule(),
+            each_rule=PRM9012019Rule23m90.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-36",
             description="The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.",
@@ -34,16 +35,17 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data=None):
-        rmd_baseline = context.BASELINE_0
-        return {"climate_zone": rmd_baseline["weather"]["climate_zone"]}
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule36.BuildingRule, self).__init__(
+            super(PRM9012019Rule23m90.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section5Rule36.BuildingRule.ZoneRule(),
+                each_rule=PRM9012019Rule23m90.BuildingRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*]",
             )
@@ -63,7 +65,7 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule36.BuildingRule.ZoneRule, self).__init__(
+                super(PRM9012019Rule23m90.BuildingRule.ZoneRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -97,6 +99,12 @@ class Section5Rule36(RuleDefinitionListIndexedBase):
 
             def rule_check(self, context, calc_vals=None, data=None):
                 return self.precision_comparison["total_infiltration_rate_b"](
+                    calc_vals["baseline_infiltration"],
+                    calc_vals["proposed_infiltration"],
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                return std_equal(
                     calc_vals["baseline_infiltration"],
                     calc_vals["proposed_infiltration"],
                 )

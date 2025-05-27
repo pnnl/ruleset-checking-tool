@@ -159,6 +159,28 @@ Before committing changes you should run the following commands from the `rulese
 - Note: Aborting the run with Ctrl C will cause the profiler to output the profile up to the abort.
 - For detailed info on pyinstrument: https://pyinstrument.readthedocs.io/en/latest/home.html
 
+#### Rule numbering procedure:
+- For adding a new rule:
+  1. Generate a unique rule ID for the new rule using the `generate_unique_rule_id()` function in the `rct229/utils/generate_unique_rule_id.py` file.
+  2. Add a new item to the `rules_dict` in the rulset's `rct229/rulesets/<RULESET>/__init__.py` file with the unique rule ID and desired rule section and number.
+  3. Create the new rule module in the ruleset directory following the typical procedure, but using the unique rule ID as the rule's class name.
+  ```python
+        class PRM9012019Rule86h31(RuleDefinitionBase):
+  ```
+  
+- For renumbering a rule to remain in the same section:
+  1. Adjust the `rules_dict` in the rulset's `rct229/rulesets/<RULESET>/__init__.py` file.
+  2. Run the `renumber_rules()` function in the `rct229/rulesets/ruleset_functions.py` file.
+  3. Update the rule number in the RDS file.
+
+- For renumbering a rule to move to a different section:
+  1. Adjust the `rules_dict` in the rulset's `rct229/rulesets/<RULESET>/__init__.py` file.
+  2. Transfer the Rule and TCD info between the affected TCD Excel Spreadsheets
+  3. Regenerate the affected Master Test JSON files
+  4. Run the `renumber_rules()` function in the `rct229/rulesets/ruleset_functions.py` file.
+  5. Update the rule number in the RDS file.
+  >  Replace `<RULESET>` with the appropriate ruleset name (e.g., `ashrae9012019`).
+
 ## Disclaimer Notice      
 This material was prepared as an account of work sponsored by an agency of the United States Government.  Neither the United States Government nor the United States Department of Energy, nor Battelle, nor any of their employees, nor any jurisdiction or organization that has cooperated in the development of these materials, makes any warranty, express or implied, or assumes any legal liability or responsibility for the accuracy, completeness, or usefulness or any information, apparatus, product, software, or process disclosed, or represents that its use would not infringe privately owned rights.
 Reference herein to any specific commercial product, process, or service by trade name, trademark, manufacturer, or otherwise does not necessarily constitute or imply its endorsement, recommendation, or favoring by the United States Government or any agency thereof, or Battelle Memorial Institute. The views and opinions of authors expressed herein do not necessarily state or reflect those of the United States Government or any agency thereof.

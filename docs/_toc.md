@@ -185,6 +185,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   *[1-3](section1/Rule1-3.md): The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to [baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)]/ BBP
   *[1-4](section1/Rule1-4.md): The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1.
   *[1-5](section1/Rule1-5.md): When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt.
+  *[1-6](section1/Rule1-6.md): On-site renewable energy shall not be included in the baseline building performance.
 
 ## Section 3 - Space Use Classification
   
@@ -277,6 +278,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [11-7](section11/Rule11-7.md): Except in buildings that will have no service water heating loads, the service water heating system type in the baseline building design shall be as specified in Table G3.1.1-2 for each building area type in the proposed design.
   * [11-8](section11/Rule11-8.md): One system per building area type shall be modeled in the baseline.
   * [11-9](section11/Rule11-9.md): The baseline system must be sized according to Standard 90.1 2019, Section 7.4.1.
+  * [11-10](section11/Rule11-10.md): The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.
   * [11-11](section11/Rule11-11.md): For buildings that will have no service water-heating loads, no service water-heating shall be modeled in baseline building model.
   * [11-12](section11/Rule11-12.md): For large, 24-hour-per-day facilities that meet the prescriptive criteria for use of condenser heat recovery systems described in Section 6.5.6.2, a system meeting the requirements of that section shall be included in the baseline building design regardless of the exceptions to Section 6.5.6.2.
   * [11-13](section11/Rule11-13.md): Service water-heating energy consumption shall be calculated explicitly based upon the volume of service water heating required and the entering makeup water and the leaving service water-heating temperatures. Entering water temperatures shall be estimated based upon the location. Leaving temperatures shall be based upon the end-use requirements.
@@ -352,6 +354,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [19-34](section19/Rule19-34.md): Where no heating and/or cooling system is to be installed, and a heating or cooling system is being simulated only to meet the requirements described in this table, heating and/or cooling system fans shall not be simulated as running continuously during occupied hours but shall be cycled ON and OFF to meet heating and cooling loads during all hours in the baseline design.
   * [19-35](section19/Rule19-35.md): For baseline systems serving only laboratory spaces that are prohibited from recirculating return air by code or accreditation standards, the baseline system shall be modeled as 100% outdoor air. Rule only applies when baseline outdoor air CFM is modeled as greater than proposed design outdoor air CFM.
   * [19-36](section19/Rule19-36.md): Baseline systems required to model energy recovery per G3.1.2.10 shall be modeled with a 50% enthalpy recovery ratio.
+  * [19-37](section19/Rule19-37.md): Weather conditions used in sizing runs for the 99.6% heating design temperature and 1% dry-bulb and 1% wet-bulb cooling design temperatures are consistent with the site location.
 
 ## Section 21 - Central Heating Hot Water Systems
   * [21-1](section21/Rule21-1.md): For systems using purchased hot water or steam, the heating source shall be modeled as purchased hot water or steam in both the proposed design and baseline building design. If any system in the proposed design uses purchased hot water or steam, all baseline systems with hot water coils shall use the same type of purchased hot water or steam.
@@ -417,7 +420,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [22-41](section22/Rule22-41.md): Purchased CHW systems must be modeled with only one external fluid loop in the baseline design.
 
 ## Section 23 - Chilled Water Systems and Condenser Water Systems
-  * [23-2](section23/Rule23-1.md): System 2 and 4 - Electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40°F. The air-source heat pump shall be modeled to continue to operate while auxiliary heat is energized.
+  * [23-1](section23/Rule23-1.md): System 2 and 4 - Electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40°F.  
   * [23-2](section23/Rule23-2.md): For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.
   * [23-3](section23/Rule23-3.md): System 5, 6, 7 and 8 minimum volume setpoint shall be 30% of zone peak airflow, minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.
   * [23-4](section23/Rule23-4.md): Baseline systems 5 & 7 serving lab spaces per G3.1.1c shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.
@@ -433,3 +436,4 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [23-14](section23/Rule23-14.md): If the baseline system does not comply with exceptions in Section 6.5.2.3 then only 25% of the system reheat energy shall be included in the baseline building performance.
   * [23-15](section23/Rule23-15.md): Dehumidification reheat shall be the same as the system heating type.
   * [23-16](section23/Rule23-16.md): Systems 5 - 8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20F less than the design room heating temperature setpoint.
+  * [23-17](section23/Rule23-17.md): System 2 and 4 - Electric air-source heat pumps shall be modeled to continue to operate while auxiliary heat is energized.

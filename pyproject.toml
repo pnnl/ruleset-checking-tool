@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ruleset-checking-tool"
-version = "0.3.0"
+version = "0.3.1"
 description = "PNNL ruleset checking tool"
 authors = ["Weili Xu <weili.xu@pnnl.gov>", "Charlie Holly <charlie.holly@pnnl.gov>", "Juan Gonzalez <juan.gonzalez@pnnl.gov>", "Yun Joon Jung <yunjoon.jung@pnnl.gov>", "Jiarong Xie <jiarong.xie@pnnl.gov>", "Jackson Jarbose <jackson@karpmanconsulting.net>", "Karen Walkerman <kwalkerman@gard.com>"]
 license = "MIT"
@@ -34,6 +34,7 @@ icecream = "^2.1.3"
 pytest-cov = "^4.1.0"
 pytest-watch = "^4.2.0"
 pre-commit = "^4.0.1"
+astor = "^0.8.1"
 
 [tool.poetry.scripts]
 rct229 = 'rct229.cli:cli'

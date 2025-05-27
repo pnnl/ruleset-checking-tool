@@ -15,6 +15,7 @@ from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
@@ -32,15 +33,15 @@ REQUIRED_MIN_FLOW_FRACTION = 0.25
 MIN_CHW_PRIMARY_LOOP_COOLING_CAPACITY = 300.0 * ureg("ton")
 
 
-class Section22Rule9(RuleDefinitionListIndexedBase):
+class PRM9012019Rule78g49(RuleDefinitionListIndexedBase):
     """Rule 9 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule9, self).__init__(
+        super(PRM9012019Rule78g49, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule9.ChillerFluidLoopRule(),
+            each_rule=PRM9012019Rule78g49.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-9",
             description="Baseline chilled water systems with a cooling capacity of 300 tons or more shall have the secondary loop modeled with a minimum flow of 25% of the design flow rate.",
@@ -105,11 +106,11 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
 
     class ChillerFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section22Rule9.ChillerFluidLoopRule, self).__init__(
+            super(PRM9012019Rule78g49.ChillerFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section22Rule9.ChillerFluidLoopRule.SecondaryChildLoopRule(),
+                each_rule=PRM9012019Rule78g49.ChillerFluidLoopRule.SecondaryChildLoopRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.child_loops[*]",
             )
@@ -117,7 +118,8 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
         class SecondaryChildLoopRule(RuleDefinitionBase):
             def __init__(self):
                 super(
-                    Section22Rule9.ChillerFluidLoopRule.SecondaryChildLoopRule, self
+                    PRM9012019Rule78g49.ChillerFluidLoopRule.SecondaryChildLoopRule,
+                    self,
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
@@ -146,9 +148,12 @@ class Section22Rule9(RuleDefinitionListIndexedBase):
             def rule_check(self, context, calc_vals=None, data=None):
                 min_flow_fraction = calc_vals["min_flow_fraction"]
 
-                # return min_flow_fraction == REQUIRED_MIN_FLOW_FRACTION
-
                 return self.precision_comparison["min_flow_fraction"](
                     min_flow_fraction,
                     REQUIRED_MIN_FLOW_FRACTION,
                 )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                min_flow_fraction = calc_vals["min_flow_fraction"]
+
+                return std_equal(REQUIRED_MIN_FLOW_FRACTION, min_flow_fraction)

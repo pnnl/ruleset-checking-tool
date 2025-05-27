@@ -13,7 +13,7 @@ TEST_RMD = {
             "building_segments": [
                 {
                     "id": "Building Segment 1",
-                    "service_water_heating_building_area_type": "LIBRARY",
+                    "service_water_heating_area_type": "LIBRARY",
                 },
                 {
                     "id": "Building Segment 2",
@@ -66,6 +66,7 @@ TEST_RMD = {
                                             "id": "service water heating uses 3_1",
                                             "use": 5,
                                             "use_units": "OTHER",
+                                            "served_by_distribution_system": "SWH Distribution 1",
                                         },
                                     ],
                                 },
@@ -81,7 +82,7 @@ TEST_RMD = {
                             "spaces": [
                                 {
                                     "id": "Space 4_1",
-                                    "service_water_heating_building_area_type": "MUSEUM",
+                                    "service_water_heating_area_type": "MUSEUM",
                                     "service_water_heating_uses": [
                                         {
                                             "id": "service water heating uses 4_1",
@@ -118,7 +119,7 @@ TEST_RMD = {
                             "spaces": [
                                 {
                                     "id": "Space 5_1",
-                                    "service_water_heating_building_area_type": "HOTEL",
+                                    "service_water_heating_area_type": "HOTEL",
                                     "service_water_heating_uses": [
                                         {
                                             "id": "service water heating uses 5_1",
@@ -132,7 +133,7 @@ TEST_RMD = {
                                 },
                                 {
                                     "id": "Space 5_2",
-                                    "service_water_heating_building_area_type": "CONVENIENCE_STORE",
+                                    "service_water_heating_area_type": "CONVENIENCE_STORE",
                                     "service_water_heating_uses": [
                                         {
                                             "id": "service water heating uses 5_2",
@@ -175,27 +176,22 @@ TEST_RMD = {
                     "id": "Tank 2",
                 },
             ],
-            "service_water_piping": [
-                {
-                    "id": "SWH Piping 1",
-                    "child": [
-                        {
-                            "id": "SWH Piping Child 1",
-                            "child": [
-                                {
-                                    "id": "SWH Piping 1-a",
-                                },
-                                {
-                                    "id": "SWH Piping 1-b",
-                                },
-                            ],
-                        }
-                    ],
-                },
-                {
-                    "id": "SWH Piping 2",
-                },
-            ],
+            "service_water_piping": {
+                "id": "SWH Piping 1",
+                "child": [
+                    {
+                        "id": "SWH Piping Child 1",
+                        "child": [
+                            {
+                                "id": "SWH Piping 1-a",
+                            },
+                            {
+                                "id": "SWH Piping 1-b",
+                            },
+                        ],
+                    }
+                ],
+            },
         }
     ],
     "type": "BASELINE_0",
@@ -204,7 +200,14 @@ TEST_RMD = {
 TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]

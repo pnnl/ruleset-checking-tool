@@ -7,15 +7,15 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.utils.jsonpath_utils import find_all
 
 
-class Section11Rule6(RuleDefinitionListIndexedBase):
+class PRM9012019Rule29n09(RuleDefinitionListIndexedBase):
     """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule6, self).__init__(
+        super(PRM9012019Rule29n09, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section11Rule6.RMDRule(),
+            each_rule=PRM9012019Rule29n09.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-6",
             description="Piping losses shall not be modeled.",
@@ -27,11 +27,11 @@ class Section11Rule6(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule6.RMDRule, self).__init__(
+            super(PRM9012019Rule29n09.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section11Rule6.RMDRule.SWHDistRule(),
+                each_rule=PRM9012019Rule29n09.RMDRule.SWHDistRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.service_water_heating_distribution_systems[*]",
             )
@@ -47,7 +47,7 @@ class Section11Rule6(RuleDefinitionListIndexedBase):
 
         class SWHDistRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section11Rule6.RMDRule.SWHDistRule, self).__init__(
+                super(PRM9012019Rule29n09.RMDRule.SWHDistRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False,
                         BASELINE_0=True,
@@ -62,8 +62,9 @@ class Section11Rule6(RuleDefinitionListIndexedBase):
                 swh_dist_sys_b = context.BASELINE_0
 
                 piping_losses_modeled_b = []
-                for service_water_piping in swh_dist_sys_b["service_water_piping"]:
-                    queue = deque([service_water_piping])
+                piping = swh_dist_sys_b.get("service_water_piping")
+                if piping:
+                    queue = deque([piping])
                     while queue:
                         current_piping = queue.popleft()
                         children_piping = current_piping.get("child", [])

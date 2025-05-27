@@ -17,15 +17,15 @@ SERVICE_WATER_HEATING_SPACE = SchemaEnums.schema_enums[
 ]
 
 
-class Section11Rule17(RuleDefinitionListIndexedBase):
+class PRM9012019rule63z32(RuleDefinitionListIndexedBase):
     """Rule 17 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule17, self).__init__(
+        super(PRM9012019rule63z32, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section11Rule17.RMDRule(),
+            each_rule=PRM9012019rule63z32.RMDRule(),
             index_rmd=PROPOSED,
             id="11-17",
             description="All buildings that will have service water heating loads must include those loads in the simulation.",
@@ -33,24 +33,22 @@ class Section11Rule17(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1 #1, proposed column, (a)",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (PROPOSED, "calendar/is_leap_year")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule17.RMDRule, self).__init__(
+            super(PRM9012019rule63z32.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
-                each_rule=Section11Rule17.RMDRule.BuildingSegmentRule(),
+                each_rule=PRM9012019rule63z32.RMDRule.BuildingSegmentRule(),
                 index_rmd=PROPOSED,
                 list_path="$.buildings[*].building_segments[*]",
             )
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
-            is_leap_year_p = data["is_leap_year"]
+            is_leap_year_p = rmd_p["calendar"]["is_leap_year"]
 
             swh_bat = {
                 bldg_seg_id: get_building_segment_swh_bat(
@@ -72,7 +70,7 @@ class Section11Rule17(RuleDefinitionListIndexedBase):
 
         class BuildingSegmentRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section11Rule17.RMDRule.BuildingSegmentRule, self).__init__(
+                super(PRM9012019rule63z32.RMDRule.BuildingSegmentRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=False, PROPOSED=True
                     )

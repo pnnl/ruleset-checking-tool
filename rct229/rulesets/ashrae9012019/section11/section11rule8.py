@@ -32,15 +32,15 @@ CASE4_MSG = (
 )
 
 
-class Section11Rule8(RuleDefinitionListIndexedBase):
+class PRM9012019Rule40i48(RuleDefinitionListIndexedBase):
     """Rule 8 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule8, self).__init__(
+        super(PRM9012019Rule40i48, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section11Rule8.RMDRule(),
+            each_rule=PRM9012019Rule40i48.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-8",
             description="One system per building area type shall be modeled in the baseline.",
@@ -48,26 +48,25 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1 #11, baseline column, a + b",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule8.RMDRule, self).__init__(
+            super(PRM9012019Rule40i48.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False,
                     BASELINE_0=True,
                     PROPOSED=True,
                 ),
                 index_rmd=BASELINE_0,
-                each_rule=Section11Rule8.RMDRule.SWHBATRule(),
+                each_rule=PRM9012019Rule40i48.RMDRule.SWHBATRule(),
+                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
             rmd_b = context.BASELINE_0
-            is_leap_year_b = data["is_leap_year"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             num_of_bldg_segment_b = len(
                 find_all("$.buildings[*].building_segments[*]", rmd_b)
@@ -159,7 +158,7 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
 
         class SWHBATRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section11Rule8.RMDRule.SWHBATRule, self).__init__(
+                super(PRM9012019Rule40i48.RMDRule.SWHBATRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -220,14 +219,14 @@ class Section11Rule8(RuleDefinitionListIndexedBase):
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
                 swh_bat_b = calc_vals["swh_bat_b"]
-                multiple_segments_with_bat_other_b = calc_vals[
-                    "multiple_segments_with_bat_other_b"
-                ]
+                multiple_segments_with_bat_other_b = (
+                    calc_vals["num_other_swh_bat_segment_b"] > 1
+                )
 
                 UNDETERMINED_MSG = ""
                 if swh_bat_b == "UNDETERMINED":
                     UNDETERMINED_MSG = CASE3_MSG
-                elif not multiple_segments_with_bat_other_b:
+                elif multiple_segments_with_bat_other_b:
                     UNDETERMINED_MSG = CASE4_MSG
 
                 return UNDETERMINED_MSG

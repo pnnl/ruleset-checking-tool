@@ -17,15 +17,15 @@ from rct229.utils.jsonpath_utils import find_all
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 
 
-class Section19Rule35(RuleDefinitionListIndexedBase):
+class PRM9012019Rule40n43(RuleDefinitionListIndexedBase):
     """Rule 35 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule35, self).__init__(
+        super(PRM9012019Rule40n43, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule35.RMDRule(),
+            each_rule=PRM9012019Rule40n43.RMDRule(),
             index_rmd=BASELINE_0,
             id="19-35",
             description="For baseline systems serving only laboratory spaces that are prohibited from recirculating return air by code or accreditation standards, "
@@ -34,38 +34,35 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-10 HVAC Systems proposed column c and d",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={
-                "$": ["calendar", "ruleset_model_descriptions"],
-                "calendar": ["is_leap_year"],
-            },
-            data_items={
-                "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
-                "is_leap_year_p": (PROPOSED, "calendar/is_leap_year"),
-            },
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section19Rule35.RMDRule, self).__init__(
+            super(PRM9012019Rule40n43.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section19Rule35.RMDRule.HVACRule(),
+                each_rule=PRM9012019Rule40n43.RMDRule.HVACRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+                required_fields={
+                    "$": ["calendar"],
+                    "calendar": ["is_leap_year"],
+                },
             )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            leap_year_b = data["is_leap_year_b"]
-            leap_year_p = data["is_leap_year_p"]
+            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
+            is_leap_year_p = rmd_p["calendar"]["is_leap_year"]
 
             dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
             )
 
             hvac_system_serves_only_labs = True
+            hvac_system_serves_no_space_types = True
             are_any_lighting_space_types_defined = False
             all_lighting_space_types_defined = True
             zone_OA_flow_list_of_schedules_b = []
@@ -81,13 +78,34 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                         f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id_b}")].spaces[*].lighting_space_type',
                         rmd_b,
                     )
+
+                    # Count this zone's spaces and the number of light space types
+                    space_count = len(
+                        find_all(
+                            f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id_b}")].spaces[*]',
+                            rmd_b,
+                        )
+                    )
+                    lighting_space_type_count = len(lighting_space_types_b)
+
+                    # Evaluate is all of this zone's lighting space types are defined (i.e., does each space have
+                    # an associated lighting space type)
+                    all_zone_types_defined = space_count == lighting_space_type_count
+
+                    # If no space types are served, this is valuable for undetermined checks
+                    hvac_system_serves_no_space_types = (
+                        len(lighting_space_types_b) == 0
+                        and hvac_system_serves_no_space_types
+                    )
+
                     all_lighting_space_types_defined = (
-                        all(lighting_space_types_b) and all_lighting_space_types_defined
+                        all(lighting_space_types_b)
+                        and all_zone_types_defined
+                        and all_lighting_space_types_defined
                     )
                     are_any_lighting_space_types_defined = (
-                        any(lighting_space_types_b)
-                        or are_any_lighting_space_types_defined
-                    )
+                        any(lighting_space_types_b) or lighting_space_type_count > 0
+                    ) or are_any_lighting_space_types_defined
                     hvac_system_serves_only_labs = (
                         all(
                             map(
@@ -96,14 +114,14 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                                 lighting_space_types_b,
                             )
                         )
-                        and hvac_system_serves_only_labs
-                    )
+                        and not hvac_system_serves_no_space_types
+                    ) and hvac_system_serves_only_labs
 
                     zone_OA_flow_list_of_schedules_b.append(
-                        get_min_oa_cfm_sch_zone(rmd_b, zone_id_b, leap_year_b)
+                        get_min_oa_cfm_sch_zone(rmd_b, zone_id_b, is_leap_year_b)
                     )
                     zone_OA_flow_list_of_schedules_p.append(
-                        get_min_oa_cfm_sch_zone(rmd_p, zone_id_b, leap_year_p)
+                        get_min_oa_cfm_sch_zone(rmd_p, zone_id_b, is_leap_year_p)
                     )
 
             aggregated_min_OA_schedule_across_zones_b = (
@@ -123,6 +141,7 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
             return {
                 "dict_of_zones_and_terminal_units_served_by_hvac_sys_b": dict_of_zones_and_terminal_units_served_by_hvac_sys_b,
                 "hvac_system_serves_only_labs": hvac_system_serves_only_labs,
+                "hvac_system_serves_no_space_types": hvac_system_serves_no_space_types,
                 "are_any_lighting_space_types_defined": are_any_lighting_space_types_defined,
                 "all_lighting_space_types_defined": all_lighting_space_types_defined,
                 "modeled_baseline_total_zone_min_OA_flow": modeled_baseline_total_zone_min_OA_flow,
@@ -131,7 +150,7 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
 
         class HVACRule(PartialRuleDefinition):
             def __init__(self):
-                super(Section19Rule35.RMDRule.HVACRule, self).__init__(
+                super(PRM9012019Rule40n43.RMDRule.HVACRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -139,6 +158,9 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
 
             def is_applicable(self, context, data=None):
                 hvac_system_serves_only_labs = data["hvac_system_serves_only_labs"]
+                hvac_system_serves_no_space_types = data[
+                    "hvac_system_serves_no_space_types"
+                ]
                 modeled_baseline_total_zone_min_OA_flow = data[
                     "modeled_baseline_total_zone_min_OA_flow"
                 ]
@@ -147,7 +169,7 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                 ]
 
                 return (
-                    hvac_system_serves_only_labs
+                    (hvac_system_serves_only_labs or hvac_system_serves_no_space_types)
                     and modeled_baseline_total_zone_min_OA_flow
                     > modeled_proposed_total_zone_min_OA_flow
                 )
@@ -166,6 +188,9 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                 are_any_lighting_space_types_defined = data[
                     "are_any_lighting_space_types_defined"
                 ]
+                hvac_system_serves_no_space_types = data[
+                    "hvac_system_serves_no_space_types"
+                ]
 
                 return (
                     modeled_baseline_total_zone_min_OA_flow
@@ -178,7 +203,7 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                             or are_any_lighting_space_types_defined
                         )
                     )
-                    or not are_any_lighting_space_types_defined
+                    or hvac_system_serves_no_space_types
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):

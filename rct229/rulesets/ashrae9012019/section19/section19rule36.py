@@ -14,15 +14,15 @@ REQ_SENSIBLE_EFFECTIVENESS = 0.5
 REQ_LATENT_EFFECTIVENESS = 0.5
 
 
-class Section19Rule36(RuleDefinitionListIndexedBase):
+class PRM9012019Rule45j93(RuleDefinitionListIndexedBase):
     """Rule 36 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule36, self).__init__(
+        super(PRM9012019Rule45j93, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule36.HVACRule(),
+            each_rule=PRM9012019Rule45j93.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-36",
             description="Baseline systems required to model energy recovery per G3.1.2.10 shall be modeled with a 50% enthalpy recovery ratio.",
@@ -34,7 +34,7 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
 
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section19Rule36.HVACRule, self).__init__(
+            super(PRM9012019Rule45j93.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -64,10 +64,10 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
                 energy_recovery_b, "air_energy_recovery", "design_latent_effectiveness"
             )
             ERV_OA_airflow_b = getattr_(
-                energy_recovery_b, "air_energy_recovery", "outside_air_flow"
+                energy_recovery_b, "air_energy_recovery", "outdoor_airflow"
             )
             ERV_EA_airflow_b = getattr_(
-                energy_recovery_b, "air_energy_recovery", "exhaust_air_flow"
+                energy_recovery_b, "air_energy_recovery", "exhaust_airflow"
             )
             hvac_min_oa_flow_b = getattr_(
                 hvac_b, "HVAC", "fan_system", "minimum_outdoor_airflow"
@@ -89,10 +89,10 @@ class Section19Rule36(RuleDefinitionListIndexedBase):
             hvac_min_oa_flow_b = calc_vals["hvac_min_oa_flow_b"]
 
             return (
-                REQ_SENSIBLE_EFFECTIVENESS == sensible_eff_b
-                and REQ_LATENT_EFFECTIVENESS == latent_eff_b
-                and std_equal(ERV_OA_airflow_b, hvac_min_oa_flow_b)
-                and std_equal(ERV_OA_airflow_b, ERV_EA_airflow_b)
+                self.precision_comparison(sensible_eff_b, REQ_SENSIBLE_EFFECTIVENESS)
+                and self.precision_comparison(latent_eff_b, REQ_LATENT_EFFECTIVENESS)
+                and self.precision_comparison(ERV_OA_airflow_b, hvac_min_oa_flow_b)
+                and self.precision_comparison(ERV_OA_airflow_b, ERV_EA_airflow_b)
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):

@@ -1,14 +1,15 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.utils.assertions import assert_
+from rct229.utils.compare_standard_val import std_le
 from rct229.utils.jsonpath_utils import find_one
 
 
-class Section1Rule4(RuleDefinitionBase):
+class PRM9012019Rule60m79(RuleDefinitionBase):
     """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculations)"""
 
     def __init__(self):
-        super(Section1Rule4, self).__init__(
+        super(PRM9012019Rule60m79, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True,
                 BASELINE_0=True,
@@ -43,11 +44,11 @@ class Section1Rule4(RuleDefinitionBase):
         for rmd in (rmd_u, rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p):
             if rmd is not None:
                 pci_target_set.append(
-                    find_one("$.output.performance_cost_index_target", rmd)
+                    find_one("$.model_output.performance_cost_index_target", rmd)
                 )
                 pci_set.append(
                     find_one(
-                        "$.output.performance_cost_index",
+                        "$.model_output.performance_cost_index",
                         rmd,
                     )
                 )
@@ -69,7 +70,18 @@ class Section1Rule4(RuleDefinitionBase):
         pci_target_set = calc_vals["pci_target_set"]
         pci_set = calc_vals["pci_set"]
 
-        return len(pci_target_set) == len(pci_set) == 1 and pci_set <= pci_target_set
+        return len(pci_target_set) == len(pci_set) == 1 and (
+            pci_set[0] < pci_target_set[0]
+            or self.precision_comparison(pci_set[0], pci_target_set[0])
+        )
+
+    def is_tolerance_fail(self, context, calc_vals=None, data=None):
+        pci_target_set = calc_vals["pci_target_set"]
+        pci_set = calc_vals["pci_set"]
+
+        return len(pci_target_set) == len(pci_set) == 1 and std_le(
+            pci_set[0], pci_target_set[0]
+        )
 
     def get_fail_msg(self, context, calc_vals=None, data=None):
         pci_target_set = calc_vals["pci_target_set"]

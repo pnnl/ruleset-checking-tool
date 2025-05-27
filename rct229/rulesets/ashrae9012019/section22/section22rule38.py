@@ -7,15 +7,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_sta
 )
 
 
-class Section22Rule38(RuleDefinitionListIndexedBase):
+class PRM9012019Rule84g72(RuleDefinitionListIndexedBase):
     """Rule 38 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule38, self).__init__(
+        super(PRM9012019Rule84g72, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule38.RulesetModelInstanceRule(),
+            each_rule=PRM9012019Rule84g72.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="22-38",
             description="Baseline chilled water loops that use purchased chilled water shall have a minimum flow setpoint of 25%.",
@@ -23,18 +23,18 @@ class Section22Rule38(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
-            manual_check_required_msg="Manual Check Required - Baseline is modeled with purchased chilled water. Make sure "
-            "baseline systems served by purchased chilled water are modeled with the purchased chilled water loop having "
-            "a minimum flow setpoint of 25%.",
-            not_applicable_msg="Rule 22-38 Not Applicable - the baseline is not modeled with Purchased Chilled Water",
         )
 
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section22Rule38.RulesetModelInstanceRule, self,).__init__(
+            super(PRM9012019Rule84g72.RulesetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
+                manual_check_required_msg="Manual Check Required - Baseline is modeled with purchased chilled water. Make sure "
+                "baseline systems served by purchased chilled water are modeled with the purchased chilled water loop having "
+                "a minimum flow setpoint of 25%.",
+                not_applicable_msg="Rule 22-38 Not Applicable - the baseline is not modeled with Purchased Chilled Water",
             )
 
         def applicability_check(self, context, calc_vals, data):

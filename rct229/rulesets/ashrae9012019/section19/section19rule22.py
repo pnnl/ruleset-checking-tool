@@ -8,15 +8,15 @@ from rct229.utils.assertions import getattr_
 ENERGY_RECOVERY_OPERATION = SchemaEnums.schema_enums["EnergyRecoveryOperationOptions"]
 
 
-class Section19Rule22(RuleDefinitionListIndexedBase):
+class PRM9012019Rule44t17(RuleDefinitionListIndexedBase):
     """Rule 22 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule22, self).__init__(
+        super(PRM9012019Rule44t17, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule22.HVACRule(),
+            each_rule=PRM9012019Rule44t17.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-22",
             description="Baseline systems modeled with exhaust air energy recovery shall allow bypass or control heat recovery system to permit air economizer operation.",
@@ -28,7 +28,7 @@ class Section19Rule22(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule22.HVACRule, self).__init__(
+            super(PRM9012019Rule44t17.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

@@ -25,11 +25,11 @@ RULESET_MODEL = SchemaEnums.schema_enums["RulesetModelOptions2019ASHRAE901"]
 ACCEPTABLE_FEN_PERCENTAGE_DIFFERENCE = 0.05
 
 
-class Section5Rule1(RuleDefinitionListIndexedBase):
+class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule1, self).__init__(
+        super(PRM9012019Rule77j30, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True,
                 BASELINE_0=True,
@@ -41,7 +41,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
             rmds_used_optional=produce_ruleset_model_description(
                 BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
             ),
-            each_rule=Section5Rule1.RMDRule(),
+            each_rule=PRM9012019Rule77j30.RMDRule(),
             index_rmd=BASELINE_0,
             id="5-1",
             description="There are four baseline rotations (i.e., four baseline models differing in azimuth by 90 degrees and four sets of baseline model results) if vertical fenestration area per each orientation differ by more than 5%.",
@@ -53,7 +53,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule1.RMDRule, self).__init__(
+            super(PRM9012019Rule77j30.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=True,
                     BASELINE_0=True,
@@ -65,7 +65,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
                 rmds_used_optional=produce_ruleset_model_description(
                     BASELINE_90=True, BASELINE_180=True, BASELINE_270=True
                 ),
-                each_rule=Section5Rule1.RMDRule.BuildingRule(),
+                each_rule=PRM9012019Rule77j30.RMDRule.BuildingRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*]",
             )
@@ -86,22 +86,22 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
             has_user = rmd_u is not None
 
             has_baseline_0_output = has_baseline_0 and bool(
-                find_one("$.output.output_instance", rmd_b0)
+                find_one("$.model_output.output_instance", rmd_b0)
             )
             has_baseline_90_output = has_baseline_90 and bool(
-                find_one("$.output.output_instance", rmd_b90)
+                find_one("$.model_output.output_instance", rmd_b90)
             )
             has_baseline_180_output = has_baseline_180 and bool(
-                find_one("$.output.output_instance", rmd_b180)
+                find_one("$.model_output.output_instance", rmd_b180)
             )
             has_baseline_270_output = has_baseline_270 and bool(
-                find_one("$.output.output_instance", rmd_b270)
+                find_one("$.model_output.output_instance", rmd_b270)
             )
             has_proposed_output = has_proposed and bool(
-                find_one("$.output.output_instance", rmd_p)
+                find_one("$.model_output.output_instance", rmd_p)
             )
             has_user_output = has_user and bool(
-                find_one("$.output.output_instance", rmd_u)
+                find_one("$.model_output.output_instance", rmd_u)
             )
 
             rmd_list = [rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p, rmd_u]
@@ -114,7 +114,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
             no_of_output_instance = len(
                 compact(
                     [
-                        find_one("$.output.output_instance", rmd)
+                        find_one("$.model_output.output_instance", rmd)
                         for rmd in rmd_list_no_user
                     ]
                 )
@@ -139,7 +139,7 @@ class Section5Rule1(RuleDefinitionListIndexedBase):
 
         class BuildingRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule1.RMDRule.BuildingRule, self).__init__(
+                super(PRM9012019Rule77j30.RMDRule.BuildingRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         BASELINE_0=True,
                     ),

@@ -19,19 +19,19 @@ from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
-class Section5Rule4(RuleDefinitionListIndexedBase):
+class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
     """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule4, self).__init__(
+        super(PRM9012019Rule43n21, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule4.BuildingRule(),
+            each_rule=PRM9012019Rule43n21.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-4",
             description="Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8.",
@@ -39,17 +39,21 @@ class Section5Rule4(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule4.BuildingRule, self).__init__(
+            super(PRM9012019Rule43n21.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={},
-                each_rule=Section5Rule4.BuildingRule.RoofRule(),
+                each_rule=PRM9012019Rule43n21.BuildingRule.RoofRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -73,7 +77,7 @@ class Section5Rule4(RuleDefinitionListIndexedBase):
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule4.BuildingRule.RoofRule, self).__init__(
+                super(PRM9012019Rule43n21.BuildingRule.RoofRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
@@ -139,11 +143,13 @@ class Section5Rule4(RuleDefinitionListIndexedBase):
                 )
 
             def rule_check(self, context=None, calc_vals=None, data=None):
+                roof_u_factor = calc_vals["roof_u_factor"]
+                target_u_factor = calc_vals["target_u_factor"]
                 return self.precision_comparison["roof_u_factor_b"](
-                    calc_vals["roof_u_factor"], calc_vals["target_u_factor"]
+                    roof_u_factor, target_u_factor
                 )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 roof_u_factor = calc_vals["roof_u_factor"]
                 target_u_factor = calc_vals["target_u_factor"]
-                return std_equal(roof_u_factor, target_u_factor)
+                return std_equal(target_u_factor, roof_u_factor)

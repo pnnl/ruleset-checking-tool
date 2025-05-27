@@ -13,7 +13,6 @@ from rct229.utils.utility_functions import find_exactly_one_schedule
 
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 
-
 EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES = [
     LIGHTING_SPACE.OFFICE_ENCLOSED,
     LIGHTING_SPACE.CONFERENCE_MEETING_MULTIPURPOSE_ROOM,
@@ -27,15 +26,15 @@ EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES = [
 ]
 
 
-class Section12Rule3(RuleDefinitionListIndexedBase):
+class PRM9012019rule79w60(RuleDefinitionListIndexedBase):
     """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 12 (Receptacle)"""
 
     def __init__(self):
-        super(Section12Rule3, self).__init__(
+        super(PRM9012019rule79w60, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section12Rule3.RuleSetModelDescriptionRule(),
+            each_rule=PRM9012019rule79w60.RuleSetModelDescriptionRule(),
             index_rmd=PROPOSED,
             id="12-3",
             description="When receptacle controls are specified in the proposed building design for spaces where not required by Standard 90.1 2019 Section 8.4.2, "
@@ -44,19 +43,18 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1-12 Proposed Building Performance column",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (PROPOSED, "calendar/is_leap_year")},
         )
 
     class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section12Rule3.RuleSetModelDescriptionRule, self).__init__(
+            super(PRM9012019rule79w60.RuleSetModelDescriptionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section12Rule3.RuleSetModelDescriptionRule.SpaceRule(),
+                each_rule=PRM9012019rule79w60.RuleSetModelDescriptionRule.SpaceRule(),
                 index_rmd=PROPOSED,
                 list_path="$.buildings[*].building_segments[*].zones[*].spaces[*]",
+                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
         def is_applicable(self, context, data=None):
@@ -74,7 +72,14 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                     for misc_equip_p in find_all(
                         "$.miscellaneous_equipment[*]", space_p
                     ):
-                        if misc_equip_p.get("has_automatic_control"):
+                        automatic_controlled_percentage_p = misc_equip_p.get(
+                            "automatic_controlled_percentage"
+                        )
+                        auto_receptacle_control_p = (
+                            automatic_controlled_percentage_p
+                            and automatic_controlled_percentage_p > 0.0
+                        )
+                        if auto_receptacle_control_p:
                             spaces_with_receptacle_controls_beyond_req.append(
                                 misc_equip_p["id"]
                             )
@@ -104,7 +109,11 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                 )
             }
 
-            return {"schedule_b": schedule_b, "schedule_p": schedule_p}
+            return {
+                "schedule_b": schedule_b,
+                "schedule_p": schedule_p,
+                "is_leap_year": rmd_b["calendar"]["is_leap_year"],
+            }
 
         def list_filter(self, context_item, data):
             space_p = context_item.PROPOSED
@@ -114,12 +123,12 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
         class SpaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(
-                    Section12Rule3.RuleSetModelDescriptionRule.SpaceRule, self
+                    PRM9012019rule79w60.RuleSetModelDescriptionRule.SpaceRule, self
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
-                    each_rule=Section12Rule3.RuleSetModelDescriptionRule.SpaceRule.MiscEquipRule(),
+                    each_rule=PRM9012019rule79w60.RuleSetModelDescriptionRule.SpaceRule.MiscEquipRule(),
                     index_rmd=PROPOSED,
                     list_path="$.miscellaneous_equipment[*]",
                 )
@@ -132,7 +141,7 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
             class MiscEquipRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section12Rule3.RuleSetModelDescriptionRule.SpaceRule.MiscEquipRule,
+                        PRM9012019rule79w60.RuleSetModelDescriptionRule.SpaceRule.MiscEquipRule,
                         self,
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
@@ -140,7 +149,6 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
                         ),
                         required_fields={
                             "$": [
-                                "has_automatic_control",
                                 "multiplier_schedule",
                             ]
                         },
@@ -149,7 +157,14 @@ class Section12Rule3(RuleDefinitionListIndexedBase):
 
                 def is_applicable(self, context, data=None):
                     misc_equip_p = context.PROPOSED
-                    return misc_equip_p.get("has_automatic_control")
+                    automatic_controlled_percentage_p = misc_equip_p.get(
+                        "automatic_controlled_percentage"
+                    )
+                    auto_receptacle_control_p = (
+                        automatic_controlled_percentage_p
+                        and automatic_controlled_percentage_p > 0.0
+                    )
+                    return auto_receptacle_control_p
 
                 def get_not_applicable_msg(self, context, data=None):
                     misc_equip_p = context.PROPOSED
