@@ -51,8 +51,8 @@ class prm9012019rule10p01(RuleDefinitionListIndexedBase):
                 zones_have_humidification_list_p.extend(zone_list_p)
         zones_have_humidification_list_p = list(set(zones_have_humidification_list_p))
 
-        has_humidification_b = {}
-        has_humidification_p = {}
+        zone_has_humidification_dict_b = {}
+        zone_has_humidification_dict_p = {}
         for zone_b in find_all("$.buildings[*].building_segments[*].zones[*]", rmd_b):
             zone_id_b = zone_b["id"]
             hvac_list_b = get_list_hvac_systems_associated_with_zone(rmd_b, zone_id_b)
@@ -62,16 +62,16 @@ class prm9012019rule10p01(RuleDefinitionListIndexedBase):
                 "There must be one system serving each zone in the baseline RMD.",
             )
 
-            has_humidification_b[zone_id_b] = find_exactly_one_hvac_system(
+            zone_has_humidification_dict_b[zone_id_b] = find_exactly_one_hvac_system(
                 rmd_b, hvac_list_b[0]
             ).get("humidification_type") not in (None, HUMIDIFICATION.NONE)
-            has_humidification_p[zone_id_b] = (
+            zone_has_humidification_dict_p[zone_id_b] = (
                 zone_b["id"] in zones_have_humidification_list_p
             )
 
         return {
-            "has_humidification_b": has_humidification_b,
-            "has_humidification_p": has_humidification_p,
+            "zone_has_humidification_dict_b": zone_has_humidification_dict_b,
+            "zone_has_humidification_dict_p": zone_has_humidification_dict_p,
         }
 
     class ZoneRule(RuleDefinitionBase):
@@ -86,38 +86,46 @@ class prm9012019rule10p01(RuleDefinitionListIndexedBase):
             zone_b = context.BASELINE_0
             zone_id_b = zone_b["id"]
 
-            has_humidification_b = data["has_humidification_b"][zone_id_b]
-            has_humidification_p = data["has_humidification_p"][zone_id_b]
+            zone_has_humidification_bool_b = data["zone_has_humidification_dict_b"][
+                zone_id_b
+            ]
+            zone_has_humidification_bool_p = data["zone_has_humidification_dict_p"][
+                zone_id_b
+            ]
 
             # if one or two of the variables are True, the rule is applicable
-            return has_humidification_b or has_humidification_p
+            return zone_has_humidification_bool_b or zone_has_humidification_bool_p
 
         def get_calc_vals(self, context, data=None):
             zone_b = context.BASELINE_0
             zone_id_b = zone_b["id"]
 
-            has_humidification_b = data["has_humidification_b"][zone_id_b]
-            has_humidification_p = data["has_humidification_p"][zone_id_b]
+            zone_has_humidification_bool_b = data["zone_has_humidification_dict_b"][
+                zone_id_b
+            ]
+            zone_has_humidification_bool_p = data["zone_has_humidification_dict_p"][
+                zone_id_b
+            ]
 
             return {
-                "has_humidification_b": has_humidification_b,
-                "has_humidification_p": has_humidification_p,
+                "zone_has_humidification_bool_b": zone_has_humidification_bool_b,
+                "zone_has_humidification_bool_p": zone_has_humidification_bool_p,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            has_humidification_b = calc_vals["has_humidification_b"]
-            has_humidification_p = calc_vals["has_humidification_p"]
+            zone_has_humidification_bool_b = calc_vals["zone_has_humidification_bool_b"]
+            zone_has_humidification_bool_p = calc_vals["zone_has_humidification_bool_p"]
 
-            return has_humidification_b and has_humidification_p
+            return zone_has_humidification_bool_b and zone_has_humidification_bool_p
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
-            has_humidification_b = calc_vals["has_humidification_b"]
-            has_humidification_p = calc_vals["has_humidification_p"]
+            zone_has_humidification_bool_b = calc_vals["zone_has_humidification_bool_b"]
+            zone_has_humidification_bool_p = calc_vals["zone_has_humidification_bool_p"]
 
             FAIL_MSG = ""
-            if has_humidification_b and not has_humidification_p:
+            if zone_has_humidification_bool_b and not zone_has_humidification_bool_p:
                 FAIL_MSG = "The baseline was modeled with humidification when humidification was not modeled in the proposed design model."
-            elif not has_humidification_b and has_humidification_p:
+            elif not zone_has_humidification_bool_b and zone_has_humidification_bool_p:
                 FAIL_MSG = "The baseline was NOT modeled with humidification when humidification was modeled in the proposed design model."
 
             return FAIL_MSG
