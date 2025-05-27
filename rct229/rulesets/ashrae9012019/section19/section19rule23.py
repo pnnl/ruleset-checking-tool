@@ -1,4 +1,4 @@
-from pydash import curry, every, has
+from pydash import curry, every
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
@@ -14,11 +14,9 @@ LIGHTING_BUILDING_AREA = SchemaEnums.schema_enums[
 ]
 
 find_schedule = curry(
-    lambda schedules, schedule_id, schedule_type: getattr_(
-        find_exactly_one(f'$[*][?(@.id="{schedule_id}")]', schedules),
-        "schedule",
-        schedule_type,
-    )
+    lambda schedules, schedule_id, schedule_type: (
+        find_exactly_one(f'$[*][?(@.id="{schedule_id}")]', schedules)
+    ).get(schedule_type)
 )
 
 
@@ -132,8 +130,9 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                             "hourly_values"
                         )
 
-                        if curry(has)(multiplier_sch_inf_b)(
-                            "hourly_heating_design_year"
+                        if (
+                            multiplier_sch_inf_b("hourly_heating_design_year")
+                            is not None
                         ):
                             design_heating_multiplier_sch_b = multiplier_sch_inf_b(
                                 "hourly_heating_design_year"
@@ -143,8 +142,9 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                 "hourly_heating_design_day"
                             )
 
-                        if curry(has)(multiplier_sch_inf_b)(
-                            "hourly_cooling_design_year"
+                        if (
+                            multiplier_sch_inf_b("hourly_cooling_design_year")
+                            is not None
                         ):
                             design_cooling_multiplier_sch_b = multiplier_sch_inf_b(
                                 "hourly_cooling_design_year"
@@ -213,8 +213,9 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                 "hourly_values"
                             )
 
-                            if curry(has)(multiplier_sch_occ_b)(
-                                "hourly_heating_design_year"
+                            if (
+                                multiplier_sch_occ_b("hourly_heating_design_year")
+                                is not None
                             ):
                                 multiplier_sch_design_heating_occ_b = (
                                     multiplier_sch_occ_b("hourly_heating_design_year")
@@ -224,8 +225,9 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                     multiplier_sch_occ_b("hourly_heating_design_day")
                                 )
 
-                            if curry(has)(multiplier_sch_occ_b)(
-                                "hourly_cooling_design_year"
+                            if (
+                                multiplier_sch_occ_b("hourly_cooling_design_year")
+                                is not None
                             ):
                                 multiplier_sch_design_cooling_occ_b = (
                                     multiplier_sch_occ_b("hourly_cooling_design_year")
@@ -268,8 +270,9 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                     multiplier_sch_light_b("hourly_values")
                                 )
 
-                                if curry(has)(multiplier_sch_light_b)(
-                                    "hourly_heating_design_year"
+                                if (
+                                    multiplier_sch_light_b("hourly_heating_design_year")
+                                    is not None
                                 ):
                                     multiplier_sch_design_heating_light_b = (
                                         multiplier_sch_light_b(
@@ -283,8 +286,9 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                         )
                                     )
 
-                                if curry(has)(multiplier_sch_light_b)(
-                                    "hourly_cooling_design_year"
+                                if (
+                                    multiplier_sch_light_b("hourly_cooling_design_year")
+                                    is not None
                                 ):
                                     multiplier_sch_design_cooling_light_b = (
                                         multiplier_sch_light_b(
@@ -342,8 +346,9 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                     multiplier_sch_misc_b("hourly_values")
                                 )
 
-                                if curry(has)(multiplier_sch_light_b)(
-                                    "hourly_heating_design_year"
+                                if (
+                                    multiplier_sch_light_b("hourly_heating_design_year")
+                                    is not None
                                 ):
                                     multiplier_sch_design_heating_misc_b = (
                                         multiplier_sch_misc_b(
@@ -357,8 +362,9 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                         )
                                     )
 
-                                if curry(has)(multiplier_sch_light_b)(
-                                    "hourly_cooling_design_year"
+                                if (
+                                    multiplier_sch_light_b("hourly_cooling_design_year")
+                                    is not None
                                 ):
                                     multiplier_sch_design_cooling_misc_b = (
                                         multiplier_sch_misc_b(
