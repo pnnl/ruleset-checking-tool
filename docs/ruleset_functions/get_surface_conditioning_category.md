@@ -1,11 +1,18 @@
 
 ## get_surface_conditioning_category
-**Schema Version:** 0.0.23
-Description: This function would cycle through each surface in  a zone and categorize it as exterior res, exterior non res, exterior mixed, semi-exterior or unregulated.  
+**Schema Version:** 0.1.3  
+Description: This function relies on get_surface_conditioning_category_for_single_RMD to return a dictionary that provides the more stringent conditioning category between two RMDs.  This funciton is updated for ASHRAE 90.1-2022 to ensure that the surface conditioning categories comply with the following:  
+  "Space conditioning categories used to determine applicability of the envelope requirements in Tables G3.4-1 through G3.4-8 shall be the same as in the proposed design.  
+  
+  Exception: Envelope components of the HVAC zones that are semiheated in the proposed design must meet conditioned envelope requirements in Tables G3.4-1 through G3.4-8 if, based on the sizing runs, these zones are served by a baseline system with sensible cooling output capacity >= 5 Btu/h·ft2 of floor area, or with heating output capacity greater than or equal to the criteria in Table G3.4-9, or that are indirectly conditioned spaces."  
 
 Inputs:
 
-  - **RMR**: The RMR that needs to determine surface conditioning category.  
+  - **RMD1**: The RMD - usually the Baseline RMD - primarily used to determine surface conditioning category.
+  - **RMD2**: The other RMD - usually the P_RMD - used to determine the surface conditioning category.  If RMD2 is not provided, the program should supply P_RMD by default.  If RMD1 and RMD2 is equal, this function will return exactly the same result as get_surface_conditioning_category_for_single_RMD.
+
+Functions:  
+  - **get_surface_conditioning_category_for_single_RMD**
 
 Returns:
 
@@ -13,82 +20,25 @@ Returns:
 
 Logic:  
 
-- Get zone conditioning category dictionary for the RMR: `zone_conditioning_category_dict = get_zone_conditioning_category(RMR)`  
+- Get the surface conditioning category dictionary for RMD1 (usually the baseline, so we'll name the dictionary b_...): `b_surface_conditioning_category = get_surface_conditioning_category_for_single_RMD(RMD1)`
 
-- For each building segment in the RMR: `for building_segment in RMR.building.building_segments:`  
+- Get the surface conditioning category dictionary for RMD2 (usually the proposed, so we'll name the dictionary p_...): `p_surface_conditioning_category = get_surface_conditioning_category_for_single_RMD(RMD2)`
+  
+- Create a new surface conditioning category dictionary that will be a combination of the two: `surface_conditioning_category = {}`
 
-  - For each zone in building segement: `for zone in building_segment.zones:`  
+- Look at each surface id in RMD1: `for surface_id in b_surface_conditioning_category:`
 
-    - If zone is residential and conditioned: `if zone_conditioning_category_dict[zone.id] == "CONDITIONED RESIDENTIAL":`  
-
-      - For each surface in zone: `for surface in zone.surfaces:`  
-
-        - If surface adjacency is exterior, ground or if surface adjacency is interior and the adjacent zone is unenclosed, surface is classified as exterior residential type: `if ( surface.adjacent_to == EXTERIOR ) OR ( surface.adjacent_to == GROUND ) OR ( ( surface.adjacent_to == INTERIOR ) AND ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNENCLOSED" ) ): surface_conditioning_category_dict[surface.id] = "EXTERIOR RESIDENTIAL"`  
-
-        - Else if surface adjacency is interior and the adjacent zone is semi-heated or unconditioned, surface is classified as semi-exterior: `else if ( surface.adjacent_to == INTERIOR ) AND ( ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "SEMI-HEATED" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNCONDITIONED" ) ): surface_conditioning_category_dict[surface.id] = "SEMI-EXTERIOR"`  
-
-        - Else, surface is unregulated: `else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"`  
-
-    - Else if zone is non-residential and conditioned: `else if zone_conditioning_category_dict[zone.id] == "CONDITIONED NONRESIDENTIAL":`  
-
-      - For each surface in zone: `for surface in zone.surfaces:`  
-
-        - If surface adjacency is exterior, ground or if surface adjacency is interior and the adjacent zone is unenclosed, surface is classified as exterior non-residential type: `if ( surface.adjacent_to == EXTERIOR ) OR ( surface.adjacent_to == GROUND ) OR ( ( surface.adjacent_to == INTERIOR ) AND ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNENCLOSED" ) ): surface_conditioning_category_dict[surface.id] = "EXTERIOR NON-RESIDENTIAL"`  
-
-        - Else if surface adjacency is interior and the adjacent zone is semi-heated or unconditioned, surface is classified as semi-exterior: `else if ( surface.adjacent_to == INTERIOR ) AND ( ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "SEMI-HEATED" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNCONDITIONED" ) ): surface_conditioning_category_dict[surface.id] = "SEMI-EXTERIOR"`  
-
-        - Else, surface is unregulated: `else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"`  
-
-    - Else if zone is mixed and conditioned: `else if zone_conditioning_category_dict[zone.id] == "CONDITIONED MIXED":`  
-
-      - For each surface in zone: `for surface in zone.surfaces:`  
-
-        - If surface adjacency is exterior, ground or if surface adjacency is interior and the adjacent zone is unenclosed, surface is classified as exterior mixed type: `if ( surface.adjacent_to == EXTERIOR ) OR ( surface.adjacent_to == GROUND ) OR ( ( surface.adjacent_to == INTERIOR ) AND ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNENCLOSED" ) ): surface_conditioning_category_dict[surface.id] = "EXTERIOR MIXED"`  
-
-        - Else if surface adjacency is interior and the adjacent zone is semi-heated or unconditioned, surface is classified as semi-exterior: `else if ( surface.adjacent_to == INTERIOR ) AND ( ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "SEMI-HEATED" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNCONDITIONED" ) ): surface_conditioning_category_dict[surface.id] = "SEMI-EXTERIOR"`  
-
-        - Else, surface is unregulated: `else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"`  
-
-    - Else if zone is semi-heated: `else if zone_conditioning_category_dict[zone.id] == "SEMI-HEATED":`  
-
-      - For each surface in zone: `for surface in zone.surfaces:`  
-
-        - If surface adjacency is exterior, ground, or if surface adjacency is interior and the adjacent zone is conditioned, unenclosed or unconditioned, surface is classified as semi-exterior: `if ( surface.adjacent_to == EXTERIOR ) OR ( surface.adjacent_to == GROUND ) OR ( ( surface.adjacent_to == INTERIOR ) AND ( ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED RESIDENTIAL" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED NON-RESIDENTIAL" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED MIXED" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNENCLOSED" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "UNCONDITIONED" ) ): surface_conditioning_category_dict[surface.id] = "SEMI-EXTERIOR"`  
-
-        - Else, surface is classified as unregulated: `else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"`  
-
-    - Else if zone is unenclosed: `else if zone_conditioning_category_dict[zone.id] == "UNENCLOSED":`  
-
-      - For each surface in zone: `for surface in zone.surfaces:`  
-
-        - If surface adjacency is interior and the adjacent zone is residential and conditioned, surface is classified as exterior residential: `else if ( surface.adjacent_to == INTERIOR ) AND ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED RESIDENTIAL" ): surface_conditioning_category_dict[surface.id] = "EXTERIOR RESIDENTIAL"`  
-
-        - Else if surface adjacency is interior and the adjacent zone is non-residential and conditioned, surface is classified as exterior non-residential: `else if ( surface.adjacent_to == INTERIOR ) AND ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED NON-RESIDENTIAL" ): surface_conditioning_category_dict[surface.id] = "EXTERIOR NON-RESIDENTIAL"`  
-
-        - Else if surface adjacency is interior and the adjacent zone is mixed and conditioned, surface is classified as exterior mixed: `else if ( surface.adjacent_to == INTERIOR ) AND ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED MIXED" ): surface_conditioning_category_dict[surface.id] = "EXTERIOR MIXED"`  
-
-        - Else if surface adjacency is interior and the adjacent zone is semi-heated, surface is classified as semi-exterior: `else if ( surface.adjacent_to == INTERIOR ) AND ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "SEMI-HEATED" ): surface_conditioning_category_dict[surface.id] = "SEMI-EXTERIOR"`  
-
-        - Else, surface is classified as unregulated: `else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"`  
-
-    - Else, zone is unconditioned: `else:`  
-
-      - For each surface in zone:  `for surface in zone.surfaces:`  
-
-        - If surface adjacency is interior and the adjacent zone is conditioned or semi-heated, surface is classified as semi-exterior: `if ( surface.adjacent_to == INTERIOR ) AND ( ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED RESIDENTIAL" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED NON-RESIDENTIAL" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "CONDITIONED MIXED" ) OR ( zone_conditioning_category_dict[surface.adjacent_zone_id] == "SEMI-HEATED" ) ): surface_conditioning_category_dict[surface.id] = "SEMI-EXTERIOR"`  
-
-        - Else, surface is classified as unregulated: `else: surface_conditioning_category_dict[surface.id] = "UNREGULATED"`  
+  - Check to see if the two conditioning cateogries match: `if b_surface_conditioning_category[surface_id] == p_surface_conditioning_category[surface_id]:`
+ 
+    - then this category is the category to be used.  Add this category to surface_conditioning_category: `surface_conditioning_category[surface_id] = b_surface_conditioning_category[surface_id]`
+   
+    - Otherwise, if the proposed is semi-exterior, and the baseline is one of [exterior residential, exterior non-residential, exterior mixed], then the conditioning category needs to be the more stringent: `if b_surface_conditioning_category[surface_id] in ["exterior residential", "exterior non-residential", "exterior mixed"] and p_surface_conditioning_category[surface_id] == "semi-exterior": surface_conditioning_category[surface_id] = b_surface_conditioning_category[surface_id]`
+   
+    - All other cases, set the conditioning category equal to that in the proposed: `surface_conditioning_category[surface_id] = p_surface_conditioning_category[surface_id]`
 
 **Returns** `return surface_conditioning_category_dict`  
 
-**Rule Assertion Table for Reference:**  
-| Adjacent to  /Zone    |Conditioned Res |Conditioned Non-Res |Conditioned Mix  |Semi-heated |Unenclosed |Unconditioned |Exterior |Ground   |
-| :-                    |:-:             |:-:                 |:-:              |:-:         |:-:        |:-: |:-:      |:-:      |
-| Conditioned Res       |UR              |UR                  |UR               |SEMI        |E-R        |SEMI          |E-R      |E-R      |
-| Conditioned Non-Res   |UR              |UR                  |UR               |SEMI        |E-NR       |SEMI          |E-NR     |E-NR     |
-| Conditioned Mix       |UR              |UR                  |UR               |SEMI        |E-M        |SEMI          |E-M      |E-M      |
-| Semi-heated           |SEMI            |SEMI                |SEMI             |UR          |SEMI       |SEMI          |SEMI     |SEMI     |
-| Unenclosed            |E-R             |E-NR                |E-M              |SEMI        |UR         |UR            |UR       |UR       |
-| Unconditioned         |SEMI            |SEMI                |SEMI             |SEMI        |UR         |UR            |UR       |UR       |
+**Notes**
+1.  What if the proposed is "unregulated" and the baseline is a different category?
 
 **[Back](../_toc.md)**
