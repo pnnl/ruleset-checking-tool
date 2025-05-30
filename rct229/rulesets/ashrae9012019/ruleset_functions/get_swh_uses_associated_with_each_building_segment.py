@@ -15,14 +15,14 @@ def get_swh_uses_associated_with_each_building_segment(
     Returns
     -------
     swh_uses_dict: dict
-        A dictionary where the keys are all the building segment ids and the value is `service_water_heating_uses` object under the `service_water_heating_uses`.
+        A dictionary where the keys are all the building segment ids and the value is a list of `service_water_heating_uses` objects.
     """
 
-    swh_uses_dict = {
-        bldg_seg["id"]: find_all(
-            "$.zones[*].spaces[*].service_water_heating_uses[*]",
-            bldg_seg,
-        )
-        for bldg_seg in find_all("$.buildings[*].building_segments[*]", rmd)
-    }
+    swh_uses_dict = {}
+    for bldg_seg in find_all("$.buildings[*].building_segments[*]", rmd):
+        swh_uses_dict[bldg_seg["id"]] = [
+            swh_use["id"]
+            for swh_use in find_all("$.zones[*].spaces[*].service_water_heating_uses[*]", bldg_seg)
+        ]
+
     return swh_uses_dict

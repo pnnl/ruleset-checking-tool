@@ -98,27 +98,11 @@ def test__TEST_RPD__is_valid():
 def test__get_swh_uses_associated_with_each_building_segment__bldg_segment_ids_exist():
     assert get_swh_uses_associated_with_each_building_segment(TEST_RMD) == {
         "Building Segment 1": [
-            {
-                "id": "service water heating uses 1_1",
-                "use": 100,
-                "served_by_distribution_system": "SWH Distribution 1",
-            },
-            {
-                "id": "service water heating uses 1_2",
-                "use": 50,
-                "served_by_distribution_system": "SWH Distribution 1",
-            },
+            "service water heating uses 1_1",
+            "service water heating uses 1_2",
         ],
         "Building Segment 2": [
-            {
-                "id": "service water heating uses 2_1",
-                "use": 30,
-                "served_by_distribution_system": "SWH Distribution 1",
-            },
-            {
-                "id": "service water heating uses 2_2",
-                "use": 15,
-                "served_by_distribution_system": "SWH Distribution 1",
-            },
+            "service water heating uses 2_1",
+            "service water heating uses 2_2",
         ],
     }
