@@ -13,16 +13,13 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -8835,9 +8832,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -17663,16 +17657,13 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -26485,9 +26476,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -35313,16 +35301,13 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -44135,9 +44120,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {

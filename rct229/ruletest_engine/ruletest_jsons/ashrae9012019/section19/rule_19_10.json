@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
@@ -239,7 +239,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
@@ -473,7 +473,7 @@
         "Section": 19,
         "Rule": 10,
         "Test": "c",
-        "test_description": "The project located in climate zone 5A has one building segment with one zone which is served by a baseline system type 3. The system is primarily serving computer room(s) and does not include an air economizer in the baseline nor the proposed.",
+        "test_description": "The project located in climate zone 5A has one building segment with one zone which is served by a baseline system type 3. The system is primarily serving computer room(s). The proposed HVAC system has an economizer but the baseline HVAC system does not.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-10",
@@ -483,7 +483,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
@@ -539,7 +539,11 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "air_economizer": {
+                                                        "id": "Air Economizer 1",
+                                                        "type": "ENTHALPY"
+                                                    }
                                                 }
                                             }
                                         ]
@@ -640,7 +644,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
@@ -791,7 +795,7 @@
         "Rule": 10,
         "Test": "e",
         "test_description": "The project located in climate zone 5A has one building segment with one zone served by a baseline system type 3. The system does not include an air economizer in the baseline nor the proposed.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "are served in the proposed design by systems with a gas-phase air cleaning where such air cleaning is requirements of Standard 62.1, Section 6.1.2 (G3.1.2.6 exception #1) or where the use of outdoor air for cooling will affect supermarket open refrigerated case-work systems (G3.1.2.6 exception #2).",
         "standard": {
             "rule_id": "19-10",
@@ -801,7 +805,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
@@ -957,7 +961,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
@@ -1191,7 +1195,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
@@ -1342,7 +1346,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
@@ -1589,7 +1593,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {

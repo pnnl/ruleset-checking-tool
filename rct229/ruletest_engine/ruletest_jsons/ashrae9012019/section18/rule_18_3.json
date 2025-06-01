@@ -12,16 +12,13 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -218,9 +215,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -246,10 +240,12 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone Exhaust Fan 1",
-                                                    "design_airflow": 7551.159091199997
-                                                },
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone Exhaust Fan 1",
+                                                        "design_airflow": 7551.159091199997
+                                                    }
+                                                ],
                                                 "floor_name": "flr 1"
                                             },
                                             {
@@ -443,16 +439,13 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -649,9 +642,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -677,10 +667,12 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone Exhaust Fan 1",
-                                                    "design_airflow": 471.94744319999984
-                                                },
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone Exhaust Fan 1",
+                                                        "design_airflow": 471.94744319999984
+                                                    }
+                                                ],
                                                 "floor_name": "flr 1"
                                             },
                                             {
@@ -874,16 +866,13 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -1080,9 +1069,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -1107,10 +1093,12 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone Exhaust Fan 1",
-                                                    "design_airflow": 7551.159091199997
-                                                },
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone Exhaust Fan 1",
+                                                        "design_airflow": 7551.159091199997
+                                                    }
+                                                ],
                                                 "floor_name": "flr 1"
                                             },
                                             {
