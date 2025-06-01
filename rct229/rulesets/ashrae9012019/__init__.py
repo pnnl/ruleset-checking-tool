@@ -236,19 +236,23 @@ rules_dict = {
     "prm9012019rule40y63": "section23rule17",
 }
 
+
 if SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901"):
     RMD = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")
+    COMMON_RMD = SchemaEnums.schema_enums.get("CommonRulesetModelOptions")
+
 else:
     SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
     SchemaEnums.update_schema_enum()
     RMD = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")
+    COMMON_RMD = SchemaEnums.schema_enums.get("CommonRulesetModelOptions")
 
 BASELINE_0 = RMD.BASELINE_0
 BASELINE_90 = RMD.BASELINE_90
 BASELINE_180 = RMD.BASELINE_180
 BASELINE_270 = RMD.BASELINE_270
-USER = RMD.USER
-PROPOSED = RMD.PROPOSED
+USER = COMMON_RMD.USER
+PROPOSED = COMMON_RMD.PROPOSED
 
 
 def __getattr__(name):
