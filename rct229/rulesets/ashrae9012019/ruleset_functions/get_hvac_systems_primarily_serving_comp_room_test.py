@@ -78,6 +78,12 @@ TEST_RMD = {
             ],
         }
     ],
+    "schedules": [
+        {
+            "id": "om_sched_1",
+            "hourly_values": [0.8] * 8760,
+        },
+    ],
     "type": "BASELINE_0",
 }
 TEST_RPD = {
