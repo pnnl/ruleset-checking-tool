@@ -59,9 +59,10 @@ def get_hvac_systems_primarily_serving_comp_room(rmd: dict) -> list[str]:
         total_wattage_across_hvac_sys_for_computer_room = ZERO.POWER
         for zone_id in hvac_zone_list_w_area_dict[hvac_id]["zone_list"]:
             total_zone_wattage_of_computer_rooms_only = ZERO.POWER
+            total_wattage_zone = ZERO.POWER
+
             if zone_id in zone_with_computer_room_list:
                 hvac_system_serves_computer_room_space = True
-                total_wattage_zone = ZERO.POWER
 
                 for space in find_all(
                     f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id}")].spaces[*]',
