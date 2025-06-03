@@ -37,7 +37,7 @@ def get_hvac_systems_primarily_serving_comp_room(rmd: dict) -> list[str]:
     hvac_zone_list_w_area_dict = get_hvac_zone_list_w_area_by_rmd_dict(rmd)
     zone_with_computer_room_list = list(
         {
-            space["id"]
+            zone["id"]
             for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmd)
             for space in find_all("$.spaces[*]", zone)
             if space.get("lighting_space_type") == LIGHTING_SPACE_OPTION.COMPUTER_ROOM
@@ -45,115 +45,102 @@ def get_hvac_systems_primarily_serving_comp_room(rmd: dict) -> list[str]:
     )
 
     hvac_systems_primarily_serving_comp_rooms_list = []
-    for hvac in find_all(
-        "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+    for hvac_id in find_all(
+        "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
         rmd,
     ):
         assert_(
-            hvac_zone_list_w_area_dict.get(hvac["id"]),
-            f"HVAC system {hvac['id']} is missing in the zone.terminals data group.",
+            hvac_zone_list_w_area_dict.get(hvac_id),
+            f"HVAC system {hvac_id} is missing in the zone.terminals data group.",
         )
 
         hvac_system_serves_computer_room_space = False
-        total_Wattage_across_hvac_sys = ZERO.POWER
-        total_Wattage_across_hvac_sys_for_computer_room = ZERO.POWER
-        for zone in hvac_zone_list_w_area_dict[hvac["id"]]["zone_list"]:
-            if zone["id"] in zone_with_computer_room_list:
+        total_wattage_across_hvac_sys = ZERO.POWER
+        total_wattage_across_hvac_sys_for_computer_room = ZERO.POWER
+        for zone_id in hvac_zone_list_w_area_dict[hvac_id]["zone_list"]:
+            if zone_id in zone_with_computer_room_list:
                 hvac_system_serves_computer_room_space = True
-                total_Wattage_zone = ZERO.POWER
-                total_zone_Wattage_of_computer_rooms_only = ZERO.POWER
+                total_wattage_zone = ZERO.POWER
+                total_zone_wattage_of_computer_rooms_only = ZERO.POWER
 
-                for space in zone:
-                    total_Wattage_space = ZERO.POWER
-
-                    space_is_a_computer_room = (
-                        True if is_space_a_computer_room(rmd, space["id"]) else False
-                    )
-
+                for space in find_all(
+                    f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id}")].spaces[*]',
+                    rmd,
+                ):
+                    total_wattage_space = ZERO.POWER
                     # occupancy max wattage calculation
-                    max_design_cooling_multiplier_sch = max(
-                        find_exactly_one_schedule(
-                            rmd,
-                            getattr_(space, "spaces", "occupant_multiplier_schedule"),
-                        ).get("cooling_design_day_sequence", 0.0)
-                    )
-
                     peak_occ_heat_gain = (
-                        max_design_cooling_multiplier_sch
+                        max(
+                            find_exactly_one_schedule(
+                                rmd,
+                                getattr_(
+                                    space, "spaces", "occupant_multiplier_schedule"
+                                ),
+                            ).get("hourly_cooling_design_day", 0.0)
+                        )
                         * space.get("number_of_occupants", 0)
                         * space.get("occupant_sensible_heat_gain", ZERO.POWER)
                     )
 
-                    total_Wattage_space += peak_occ_heat_gain
-
                     # lighting max wattage calculation
-                    temp_total_power = ZERO.POWER
-                    for int_lgt in space.get("interior_lighting", []):
-                        max_design_cooling_multiplier_sch = max(
-                            find_exactly_one_schedule(
-                                rmd,
-                                getattr_(
-                                    int_lgt,
-                                    "interior_lighting",
-                                    "lighting_multiplier_schedule",
-                                ),
-                            ).get("cooling_design_day_sequence", 0.0)
-                        )
-                        lgt_W = (
-                            max_design_cooling_multiplier_sch
+                    lgt_wattage = sum(
+                        [
+                            max(
+                                find_exactly_one_schedule(
+                                    rmd,
+                                    getattr_(
+                                        int_lgt,
+                                        "interior_lighting",
+                                        "lighting_multiplier_schedule",
+                                    ),
+                                ).get("hourly_cooling_design_day", 0.0)
+                            )
                             * int_lgt.get("power_per_area", ZERO.POWER_PER_AREA)
                             * space.get("floor_area", ZERO.AREA)
-                        )
-
-                        temp_total_power += lgt_W
-
-                    total_Wattage_space += temp_total_power
+                            for int_lgt in space.get("interior_lighting", [])
+                        ]
+                    )
 
                     # miscellaneous max wattage calculation
-                    temp_total_power = ZERO.POWER
-                    for misc_obj in space.get("miscellaneous_equipment", []):
-                        max_design_cooling_multiplier_sch = max(
-                            find_exactly_one_schedule(
-                                rmd,
-                                getattr_(
-                                    misc_obj,
-                                    "miscellaneous_equipment",
-                                    "multiplier_schedule",
-                                ),
-                            ).get("cooling_design_day_sequence", 0.0)
-                        )
-
-                        misc_power = misc_obj.get("power", ZERO.POWER)
-
-                        misc_W = (
-                            max_design_cooling_multiplier_sch
-                            * misc_power
+                    misc_wattage = sum(
+                        [
+                            max(
+                                find_exactly_one_schedule(
+                                    rmd,
+                                    getattr_(
+                                        misc_obj,
+                                        "miscellaneous_equipment",
+                                        "multiplier_schedule",
+                                    ),
+                                ).get("hourly_cooling_design_day", 0.0)
+                            )
+                            * misc_obj.get("power", ZERO.POWER)
                             * misc_obj.get("sensible_fraction", 0.0)
-                        )
+                            for misc_obj in space.get("miscellaneous_equipment", [])
+                        ]
+                    )
 
-                        temp_total_power += misc_W
+                    total_wattage_space += (
+                        peak_occ_heat_gain + lgt_wattage + misc_wattage
+                    )
 
-                    total_Wattage_space += temp_total_power
+                    total_wattage_zone += total_wattage_space
 
-                total_Wattage_zone += total_Wattage_space
+                    # check if space is computer room type
+                    if is_space_a_computer_room(rmd, space["id"]):
+                        total_zone_wattage_of_computer_rooms_only += total_wattage_space
 
-                if space_is_a_computer_room:
-                    total_zone_Wattage_of_computer_rooms_only += total_Wattage_space
-
-            total_Wattage_across_hvac_sys_for_computer_room += (
-                total_zone_Wattage_of_computer_rooms_only
+            total_wattage_across_hvac_sys_for_computer_room += (
+                total_zone_wattage_of_computer_rooms_only
             )
-            hvac_system_serves_computer_room_space = (
-                total_Wattage_across_hvac_sys + total_Wattage_zone
-            )
+            total_wattage_across_hvac_sys += total_wattage_zone
 
         if (
             hvac_system_serves_computer_room_space
-            and hvac_system_serves_computer_room_space
-            and total_Wattage_across_hvac_sys_for_computer_room
-            / hvac_system_serves_computer_room_space
+            and total_wattage_across_hvac_sys_for_computer_room
+            / total_wattage_across_hvac_sys
             > COMPUTER_ROOM_REQ
         ):
-            hvac_systems_primarily_serving_comp_rooms_list.append(hvac["id"])
+            hvac_systems_primarily_serving_comp_rooms_list.append(hvac_id)
 
     return hvac_systems_primarily_serving_comp_rooms_list
