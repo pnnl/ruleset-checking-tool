@@ -260,7 +260,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [6-9](section6/Rule6-9.md): Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction in buildings less than 5,000sq.ft.  
 
 ## Section 10 - Airside systems
-  * [10-1](section10/10-1.md): The proposed design includes humidification and the baseline building design has been modeled with adiabatic humidification if proposed design does not comply with 90.1-2019 Section 6.5.2.4 and non-adiabatic humidification otherwise.
+  * [10-1](section10/10-1.md): When the proposed design includes humidification and complies with Section 6.5.2.4, then the baseline building design shall use nonadiabatic humidification. When the proposed design includes humidification and does not comply with Section 6.5.2.4 then the baseline building design shall use adiabatic humidification.
   * [10-3](section10/10-3.md): For systems serving computer rooms, the baseline building design shall not have reheat for the purpose of dehumidification.
   * [10-4](section10/10-4.md): Baseline HVAC systems using fossil fuel shall be modeled using natural gas. Except where natural gas is not available for the proposed building site, propane shall be used as the heating fuel.
   * [10-6](section10/10-6.md): For HVAC systems designed, mechanical cooling equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
@@ -271,6 +271,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [10-13A](section10/10-13A.md): For HVAC systems designed, mechanical heating equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
   * [10-13B](section10/10-13B.md): For proposed HVAC systems designed, mechanical preheating equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
   * [10-14](section10/10-14.md): Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces.
+  * [10-15](section10/10-15.md): The proposed design includes humidification and the baseline building design has been modeled with humidification.
 
 ## Section 11 - Service Hot Water System
   * [11-1](section11/Rule11-1.md): Where a complete service water-heating system exists, the proposed design shall reflect the actual system type. Where a service water-heating system has been designed the service waterheating type shall be consistent with design documents.  Where no service water-heating system exists or has been designed and submitted with design documents but the building will have service water-heating loads, a service water-heating system shall be modeled that matches the system type in the baseline building design.
