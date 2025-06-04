@@ -26,7 +26,7 @@ Logic:
 	- create a list of all of the swh uses stored in spaces - note to DEV team - just take the actual objects, not the object references at this stage: `swh_uses_from_spaces = find_all(f'$.buildings[*].building_segments[*][?(@.id == "{building_segment.id}")].zones[*].spaces[*].service_water_heating_uses[*]', rmd)`
 	- create a list of all the swh uses stored at the building segment level: `swh_uses_direct = find_all(f'$.buildings[*].building_segments[*][?(@.id == "{building_segment.id}")].service_water_heating_uses[*]', rmd)`
 
-    - look at each service water heating use in the building: `for swh_use in swh_use_dict + swh_uses_direct:`
+    - look at each service water heating use in the building: `for swh_use in swh_uses_from_spaces + swh_uses_direct:`
         - if any swh_use has use_units equal to "OTHER" or swh_use is not an empty dict, the total energy required to heat the use cannot be determined, and building_segment_swh_bat is "UNDETERMINED": `if swh_use and swh_use.use_units == "OTHER": building_segment_swh_bat = "UNDETERMINED"`
         - calculate the total energy required to heat the swh_use using the function get_energy_required_to_heat_swh_use: `swh_use_energy_by_space = get_energy_required_to_heat_swh_use(swh_use, RMD, building_segment, is_leap_year)`
         - check to see if the swh_use has service_water_heating_area_type: `if swh_use.area_type:`
