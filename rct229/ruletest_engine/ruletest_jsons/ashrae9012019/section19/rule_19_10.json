@@ -41,6 +41,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -115,6 +118,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
                 ]
@@ -144,6 +178,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
@@ -219,6 +256,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
                 ]
@@ -269,6 +337,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -288,6 +359,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
+                                                        "number_of_occupants": 5,
+                                                        "occupant_sensible_heat_gain": 146.53555555555556,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 500
                                                     }
                                                 ]
@@ -352,6 +426,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
                 ]
@@ -383,6 +488,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
@@ -403,6 +511,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
+                                                        "number_of_occupants": 5,
+                                                        "occupant_sensible_heat_gain": 146.53555555555556,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 500
                                                     }
                                                 ]
@@ -463,6 +574,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
                 ]
@@ -511,6 +653,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -554,6 +699,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
                 ]
@@ -583,6 +759,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "COMPUTER_ROOM"
                                                     }
@@ -623,6 +802,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
                 ]
@@ -672,6 +882,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -711,6 +924,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
                 ]
@@ -740,6 +984,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "COMPUTER_ROOM"
                                                     }
@@ -784,6 +1031,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
                 ]
@@ -833,6 +1111,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -872,6 +1153,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
                 ]
@@ -901,6 +1213,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
@@ -941,6 +1256,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
                 ]
@@ -991,6 +1337,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -1010,6 +1359,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
+                                                        "number_of_occupants": 5,
+                                                        "occupant_sensible_heat_gain": 146.53555555555556,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 500
                                                     }
                                                 ]
@@ -1070,6 +1422,37 @@
                         "weather": {
                             "climate_zone": "CZ3A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
                 ]
@@ -1101,6 +1484,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
@@ -1175,6 +1561,37 @@
                         "weather": {
                             "climate_zone": "CZ3A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
                 ]
@@ -1223,6 +1640,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -1259,6 +1679,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
                 ]
@@ -1288,6 +1739,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
@@ -1325,6 +1779,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
                 ]
@@ -1376,6 +1861,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -1395,6 +1883,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
+                                                        "number_of_occupants": 5,
+                                                        "occupant_sensible_heat_gain": 146.53555555555556,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 500
                                                     }
                                                 ]
@@ -1455,6 +1946,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
                 ]
@@ -1486,6 +2008,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 46.451519999999995
                                                     }
                                                 ]
@@ -1505,6 +2030,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
+                                                        "number_of_occupants": 5,
+                                                        "occupant_sensible_heat_gain": 146.53555555555556,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 1000
                                                     }
                                                 ]
@@ -1572,6 +2100,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
                 ]
@@ -1623,6 +2182,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -1642,6 +2204,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
+                                                        "number_of_occupants": 5,
+                                                        "occupant_sensible_heat_gain": 146.53555555555556,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 500
                                                     }
                                                 ]
@@ -1702,6 +2267,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
                 ]
@@ -1733,6 +2329,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 46.451519999999995
                                                     }
                                                 ]
@@ -1752,6 +2351,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
+                                                        "number_of_occupants": 5,
+                                                        "occupant_sensible_heat_gain": 146.53555555555556,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 1000
                                                     }
                                                 ]
@@ -1823,6 +2425,37 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
                 ]
