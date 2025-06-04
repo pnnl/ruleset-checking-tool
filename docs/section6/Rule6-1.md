@@ -4,6 +4,7 @@
 **Rule ID:** 6-1  
 **Rule Description:** The total building interior lighting power shall not exceed the interior lighting power allowance determined using either Table G3.7 or G3.8.  
 **Appendix G Section:** Section G1.2.1(b) Mandatory Provisions related to interior lighting power
+**Schema Version:** 0.1.3
 
 **Appendix G Section Reference:**  
 
@@ -22,13 +23,15 @@
 
   - If building segment specifies lighting building area type, get the allowable lighting power density from Table G3-8: `if building_segment_p.lighting_building_area_type in table_G3_8: allowable_LPD_BAM = data_lookup(table_G3_8, building_segment_p.lighting_building_area_type)`  
 
-  - For each thermal block in building segment: `thermal_block_p in building_segment_p.thermal_blocks:`  
+    - Look at each zone in the building segment: `zone_p in building_segment_p.zones:`  
 
-    - For each zone in thermal block: `zone_p in thermal_block_p.zones:`  
-
-      - For each space in zone: `space_p in zone_p.spaces:`  
-
-        - For each interior lighting in space, add lighting power to building segment total: `building_segment_design_lighting_wattage += sum(interior_lighting.power_per_area for interior_lighting in space_p.interior_lighting) * space_p.floor_area`  
+      - For each space in zone: `space_p in zone_p.spaces:`
+        - Get total lighting power density in space, EXCLUDING retail display lighting located in Sales Area space types: `total_space_LPD_p = 0`
+          - Look at each lighting object in the space: `for interior_lighting in space_p.interior_lighting:`
+            - create a boolean is_part_of_total and set it to true: `is_part_of_total = TRUE`
+            - check whether the space type is one of the retail space types: `if space_p.lighting_space_type == "SALES AREA":`
+              - check whether this specific interior_lighting object is Retail display.  If it is, set is_part_of_total to FALSE: `if interior_lighting.purpose_type == "RETAIL_DISPLAY": is_part_of_total = FALSE`
+            - Add the LPD of this interior_lighting if it is not retail display lighting located in a retail space: `if is_part_of_total: building_segment_design_lighting_wattage += interior_lighting.power_per_area * space_p.floor_area` 
 
         - If building segment specifies lighting building area type , add space floor area to the total building segment floor area: `if allowable_LPD_BAM: total_building_segment_area_p += space_p.floor_area`  
 

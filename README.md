@@ -72,38 +72,7 @@ rct229 evaluate -rs ashrae9012019 -f examples\chicago_demo\baseline_model.json -
 ```
 
 ## About ASHRAE 229P
-
-ASHRAE Standard 229P is a proposed standard entitled, "Protocols for Evaluating Ruleset Implementation in Building Performance Modeling Software". To learn more about the title/scope/purpose and status of the proposed standard development visit the standards project committee site at [ASHRAE SPC 229](https://tpc.ashrae.org/?cmtKey=9ffa4db6-eebe-4418-a8c4-d0c220603735).
-
-## Introduction
-The Ruleset Checking Tool (RCT) is a Python package providing a command line tool for evaluating whether the Building Energy Models (BEM) meet the requirements of a ruleset. Current available ruleset includes ANSI/ASHRAE/IES Standard 90.1-2019 Appendix G (`ashrae9012019`).  The tool accepts Ruleset Project Description (RPD) files as inputs, and generates output reports describing the RPD evaluation.
-
-
-## ASHRAE Standard 229P Workflows
-The RCT can be used for two different workflows within ASHRAE Standard 229P.  The first workflow is the *Project Testing Workflow*.  This workflow is used to evaluate RMD triplets for a design project to determine whether a ruleset is applied correctly in a building energy model.  The second workflow is the *Software Testing Workflow*.  This workflow consists of validation and verification software tests that ensure the ruleset is correctly evaluated by a RCT.
-
-### Project Testing Workflow
-A project RPD is evaluated by running the *evaluate* command in the RCT.  RPD file paths are provided as the input arguments to the *evaluate* command.  The output of this command is a JSON report defining the outcome of the rule evaluation.
-
-`rct229 evaluate -f user_rmr.json -f baseline_rmr.json -f proposed_rmr.json -rs ashrae9012019`
-
-#### RPD Schema
-The RCT data model used by the RCT is based on the [RPD schema](https://github.com/open229/ruleset-model-report-schema).  All RPDS must comply with the version of the Ruleset evaluation schema (RES) corresponding to the RCT.  The RES files used by the RCT are located within the [rct229/schema](rct229/schema) directory.  
-
-#### Rule Definition Strategy
-
-The definition of each of the individual rules contained with the RCT are documented in [Rule Definition Strategy](docs/_toc.md) (RDS) documents.  The purpose of the RDS is to act as a bridge between the narrative form of the ruleset document and the logical form of a programming language, allowing non-programmers to evaluate how the rules are implemented in the Python programming language.  The RDS documents provide a description of the specific interpretation of a rule coded into the RCT.  In addition to the description of each rule, the RDS describes how data from ruleset tables are handled and defines frequently used functions.  
-
-#### Rule Definition
-
-The core functionality of the RCT is the evaluation of logic defining each rule within a ruleset.  The rules are defined within the RCT by a Rule Definition.  The Rule Definition is a Python class that contains the logic necessary to evaluate the rule within the context of the RES.  The Rule Definition files are located in the [rct229/rules](rct229/rules) directory.
-
-### Software Testing Workflow
-
-The RCT validation and verification software test suite is run using the `test` command.  This command composes a set of RPDs for each of the Rule Tests and then evaluates each RPD set for the corresponding Rule Definition using the same rule engine as the Project Testing Workflow.  A report is provided that details any Rule Tests that provided unexpected results.
-
-#### Rule Tests
-The test cases for the Software Testing Workflow are defined in the Rule Test JSON files.  These files are located in the [rct229/ruletest_engine/ruletest_jsons](rct229/ruletest_engine/ruletest_jsons) directory.  The Rule Tests are contained within JSON files that define the related Rule Definition, the RPD transformation to apply, and the expected outcome of the test evaluation.  The JSON files can be generated using an Excel spreadsheet and Python scripts.  This process is described in the [Rule Test JSON Generation Guide](rct229/ruletest_engine/Ruletest_JSON_Generation_Guide.md).
+See details in the [wiki](https://github.com/pnnl/ruleset-checking-tool/wiki/Standard_229).
 
 ## Developing the RCT
 
