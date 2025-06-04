@@ -69,6 +69,7 @@ def get_hvac_systems_primarily_serving_comp_room(rmd: dict) -> list[str]:
                     rmd,
                 ):
                     total_wattage_space = ZERO.POWER
+
                     # occupancy max wattage calculation
                     peak_occ_heat_gain = (
                         max(
@@ -120,12 +121,9 @@ def get_hvac_systems_primarily_serving_comp_room(rmd: dict) -> list[str]:
                             for misc_obj in space.get("miscellaneous_equipment", [])
                         ]
                     )
-
-                    total_wattage_space += (
-                        peak_occ_heat_gain + lgt_wattage + misc_wattage
-                    )
-
-                    total_wattage_zone += total_wattage_space
+                    tempo_wattage = peak_occ_heat_gain + lgt_wattage + misc_wattage
+                    total_wattage_space += tempo_wattage
+                    total_wattage_zone += tempo_wattage
 
                     # check if space is computer room type
                     if is_space_a_computer_room(rmd, space["id"]):
