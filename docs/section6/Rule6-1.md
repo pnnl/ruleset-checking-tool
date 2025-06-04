@@ -23,7 +23,7 @@
 
   - If building segment specifies lighting building area type, get the allowable lighting power density from Table G3-8: `if building_segment_p.lighting_building_area_type in table_G3_8: allowable_LPD_BAM = data_lookup(table_G3_8, building_segment_p.lighting_building_area_type)`  
 
-    - For each zone in thermal block: `zone_p in building_segment_p.zones:`  
+    - Look at each zone in the building segment: `zone_p in building_segment_p.zones:`  
 
       - For each space in zone: `space_p in zone_p.spaces:`
         - Get total lighting power density in space, EXCLUDING retail display lighting located in Sales Area space types: `total_space_LPD_p = 0`
