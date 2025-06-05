@@ -1,7 +1,5 @@
 from jsonpointer import resolve_pointer
-
 from rct229.rule_engine.rule_base import RuleDefinitionBase
-from rct229.rule_engine.user_baseline_proposed_vals import UserBaselineProposedVals
 from rct229.utils.json_utils import slash_prefix_guarantee
 
 
@@ -12,28 +10,38 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
     def __init__(
         self,
-        rmrs_used,
+        rmds_used,
         each_rule,
+        rmds_used_optional=None,
         id=None,
         description=None,
-        rmr_context="",
+        ruleset_section_title=None,
+        standard_section=None,
+        is_primary_rule=None,
+        rmd_context="",
         required_fields=None,
         manual_check_required_msg="Manual Check Required",
         not_applicable_msg="Not Applicable",
         # An example data object:
         #    {"cliimate_zone": ("baseline", weather/climate_zone")}
         data_items=None,
+        precision=None,
     ):
         self.each_rule = each_rule
         self.data_items = data_items
         super(RuleDefinitionListBase, self).__init__(
-            rmrs_used=rmrs_used,
+            rmds_used=rmds_used,
+            rmds_used_optional=rmds_used_optional,
             id=id,
             description=description,
-            rmr_context=rmr_context,
+            rmd_context=rmd_context,
             required_fields=required_fields,
             manual_check_required_msg=manual_check_required_msg,
             not_applicable_msg=not_applicable_msg,
+            ruleset_section_title=ruleset_section_title,
+            standard_section=standard_section,
+            is_primary_rule=is_primary_rule,
+            precision=precision,
         )
 
     def create_context_list(self, context, data):
@@ -41,20 +49,20 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         For a list-type rule, we need to create a list of contexts to pass on
         to the sub-rule. Often, we need to match up the entries in the
-        RMR lists by name or id and then apply the sub-rule to each trio of entries.
+        RMD lists by name or id and then apply the sub-rule to each trio of entries.
         This method is responsible for creating the list of trios.
 
         This method must be overridden.
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for RMDs required by model type schema
         data : An optional data object.
 
         Returns
         -------
-        list of UserBaselineProposedVals
+        list of RuleSetModels
             A list of context trios
         """
         raise NotImplementedError
@@ -80,7 +88,7 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
+        context : RuleSetModels
             Object containing the user, baseline, and proposed contexts
         data : any
             The data object that was passed into the rule.
@@ -124,10 +132,9 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         Returns
         -------
-        list of UserBaselineProposedVals
-            A filtered list of context trios
+        bool True iff context_item should passed through the filter.
         """
-        return context_item
+        return True
 
     def rule_check(self, context, calc_vals=None, data={}):
         """Overrides the base implementation to apply a rule to each entry in
@@ -137,8 +144,8 @@ class RuleDefinitionListBase(RuleDefinitionBase):
 
         Parameters
         ----------
-        context : UserBaselineProposedVals
-            Object containing the contexts for the user, baseline, and proposed RMRs
+        context : RuleSetModels
+            Object containing the contexts for the user, baseline, and proposed RMDs
         data : dict
             An optional dictionary. New data, based on data_pointers, data_paths, or
             create_data() will be merged into this data dictionary and passed to each
@@ -162,19 +169,15 @@ class RuleDefinitionListBase(RuleDefinitionBase):
             if self.list_filter(context_item, data)
         ]
 
-        # Evalutate the subrule for each item in the context list
+        # Evaluate the subrule for each item in the context list
         outcomes = []
         for ubp in filtered_context_list:
             item_outcome = self.each_rule.evaluate(ubp, data)
 
-            # Set the id for item_outcome
-            if ubp.user and ubp.user["id"]:
-                item_outcome["id"] = ubp.user["id"]
-            elif ubp.baseline and ubp.baseline["id"]:
-                item_outcome["id"] = ubp.baseline["id"]
-            elif ubp.proposed and ubp.proposed["id"]:
-                item_outcome["id"] = ubp.proposed["id"]
-
+            # All ids are supposedly match so any no-none value should have the correct id.
+            for ruleset_model in ubp.get_ruleset_model_types():
+                if ubp[ruleset_model] and ubp[ruleset_model]["id"]:
+                    item_outcome["id"] = ubp[ruleset_model]["id"]
             outcomes.append(item_outcome)
 
         return outcomes

@@ -2,39 +2,48 @@
 # Envelope - Rule 5-25  
 
 **Rule ID:** 5-25  
-**Rule Description:** Fenestration (window and skylight) U-factors in the proposed model must match the user model.  
-**Rule Assertion:** P-RMR subsurface:U_factor = U-RMR subsurface:U_factor  
-**Appendix G Section:** Section G3.1-1(a) Building Modeling Requirements for the proposed building  
-**Appendix G Section Reference:**  None
+**Rule Description:**  If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased in all roof components in which skylights are located to reach 3%.  
+**Rule Assertion:** B-RMD total (subsurface.glazed_area+subsurface.opaque_area) = expected value for each zone  
+**Appendix G Section:** Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building  
+**Appendix G Section Reference:** None  
 
-**Applicability:** All required data elements exist for P_RMR  
-**Applicability Checks:** None  
+**Applicability:** All required data elements exist for B_RMD  
+**Applicability Checks:**
+1. the skylight area in the proposed design is 3% or greater.  
 
-**Manual Checks:** None  
-**Evaluation Context:**  Each Data Element  
+**Manual Check:** None  
+**Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 **Function Call:**  
 
-  1. match_data_element()
+  1. get_building_segment_skylight_roof_areas()  
+  2. match_data_element()
 
 ## Rule Logic:
 
-- For each building segment in the Proposed model: `for building_segment_p in P_RMR.building.building_segments:`
+- Get skylight roof areas dictionary for B_RMD: `skylight_roof_areas_dictionary_b = get_building_segment_skylight_roof_areas(B_RMD)`
 
-  - For each thermal block in building segment: `for thermal_block_p in building_segment_p.thermal_blocks:`
+- Get skylight roof areas dictionary for P_RMD: `skylight_roof_areas_dictionary_p = get_building_segment_skylight_roof_areas(P_RMD)`
 
-    - For each zone in thermal block: `for zone_p in thermal_block_p.zones:`  
+- For each building segment in B_RMD: `for building_segment_b in B_RMD.building.building_segments:`
 
-      - For each surface in zone: `for surface_p in zone_p.surfaces:`  
+  - Calculate skylight roof ratio for building segment: `skylight_roof_ratio_b = skylight_roof_areas_dictionary_b[building_segment_b.id]["total_skylight_area"] / skylight_roof_areas_dictionary_b[building_segment_b.id]["total_envelope_roof_area"]`
 
-        - For each subsurface in surface: `for subsurface_p in surface_p.subsurfaces:`
+  - Get matching building segment in P_RMD: `building_segment_p = match_data_element(P_RMD, BuildingSegments, building_segment_b.id)`
 
-          - Get matching subsurface in U_RMR: `subsurface_u = match_data_element(U_RMR, Subsurfaces, subsurface_p.id)`
+    - Calculate skylight roof ratio for building segment in P_RMD: `skylight_roof_ratio_p = skylight_roof_areas_dictionary_p[building_segment_p.id][0] / skylight_roof_areas_dictionary_p[building_segment_p.id][1]`
 
-            **Rule Assertion:**
+      - Check if skylight roof ratio in P_RMD is greater than 3%: `if skylight_roof_ratio_p > 0.03:`
 
-            - Case 1: For each subsurface, subsurface U-factor in P_RMR is equal to that in U_RMR: `if subsurface_p.u_factor == subsurface_u.u_factor: PASS`
+        **Rule Assertion:**
 
-            - Case 2: Else: `else: FAIL`
+        - Case 1: For each building segment in B_RMD, the skylight to roof ratio is equal to 3%: `if skylight_roof_ratio_b == 0.03: PASS`  
+
+        - Case 2: Else: `Else: FAIL`
+
+**Notes:**
+
+1. Update Rule ID from 5-35 to 5-25 on 10/26/2023
+
 
 **[Back](../_toc.md)**

@@ -1,0 +1,379 @@
+{
+    "rule-5-22-a": {
+        "Section": 5,
+        "Rule": 22,
+        "Test": "a",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled as flush with the exterior wall with no shading projections.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-22",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance(d)",
+            "rule_description": "Baseline vertical fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "has_shading_overhang": false,
+                                                                "has_shading_sidefins": false
+                                                            }
+                                                        ],
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 10551.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 9378.275555555556
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-22-b": {
+        "Section": 5,
+        "Rule": 22,
+        "Test": "b",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. The baseline model contains overhangs casting shade.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Baseline fenestration was modeled with shading projections and/or overhangs, which is incorrect.",
+        "standard": {
+            "rule_id": "5-22",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance(d)",
+            "rule_description": "Baseline vertical fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "has_shading_overhang": true,
+                                                                "has_shading_sidefins": false
+                                                            }
+                                                        ],
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 10551.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 9378.275555555556
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-22-c": {
+        "Section": 5,
+        "Rule": 22,
+        "Test": "c",
+        "test_description": "Project has one building segment and includes a space with an above-grade wall surface. The space is conditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled as flush with the exterior wall and overhangs are specified, but the depth of overhang is 0.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-22",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance(d)",
+            "rule_description": "Baseline vertical fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 5.5741824,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "has_shading_overhang": false,
+                                                                "has_shading_sidefins": false
+                                                            }
+                                                        ],
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 10551.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 9378.275555555556
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-22-d": {
+        "Section": 5,
+        "Rule": 22,
+        "Test": "d",
+        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface but no windows or other subsurfaces. ",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "5-22",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance(d)",
+            "rule_description": "Baseline vertical fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 3.2366105565544463
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 0.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 0.0
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

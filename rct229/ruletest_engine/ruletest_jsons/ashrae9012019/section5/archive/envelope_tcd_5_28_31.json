@@ -1,0 +1,920 @@
+{
+    "rule-5-28-a": {
+        "Section": 5,
+        "Rule": 28,
+        "Test": "a",
+        "test_description": "Rule 100-1-a's test description would go here. Be as descriptive as you like within this cell.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-28",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "User RMR",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "glazed_area": 500,
+                                                        "opaque_area": 100,
+                                                        "u_factor": 6.75,
+                                                        "solar_heat_gain_coefficient": 0.5
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "glazed_area": 500,
+                                                        "opaque_area": 100,
+                                                        "u_factor": 6.75,
+                                                        "solar_heat_gain_coefficient": 0.5
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-28-b": {
+        "Section": 5,
+        "Rule": 28,
+        "Test": "b",
+        "test_description": "Rule 100-1-a's test description would go here. Be as descriptive as you like within this cell.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-28",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "User RMR",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "glazed_area": 500,
+                                                        "u_factor": 6.75,
+                                                        "solar_heat_gain_coefficient": 0.5
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "glazed_area": 500,
+                                                        "u_factor": 6.75,
+                                                        "solar_heat_gain_coefficient": 0.5
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-28-c": {
+        "Section": 5,
+        "Rule": 28,
+        "Test": "c",
+        "test_description": "Rule 100-1-a's test description would go here. Be as descriptive as you like within this cell.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-28",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "User RMR",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "glazed_area": 500,
+                                                        "opaque_area": 120,
+                                                        "solar_heat_gain_coefficient": 0.5
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "glazed_area": 500,
+                                                        "opaque_area": 120,
+                                                        "solar_heat_gain_coefficient": 0.5
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-28-d": {
+        "Section": 5,
+        "Rule": 28,
+        "Test": "d",
+        "test_description": "Rule 100-1-a's test description would go here. Be as descriptive as you like within this cell.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-28",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "User RMR",
+            "rule_dependency": "1. Baseline heating and cooling capacities are established correctly (air-side HVAC rule TBD). This affects baseline space conditioning categories",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "glazed_area": 500,
+                                                        "opaque_area": 120,
+                                                        "u_factor": 6.75,
+                                                        "solar_heat_gain_coefficient": 0.5
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "glazed_area": 500,
+                                                        "opaque_area": 120,
+                                                        "u_factor": 6.75,
+                                                        "solar_heat_gain_coefficient": 0.5
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-29-a": {
+        "Section": 5,
+        "Rule": 29,
+        "Test": "a",
+        "test_description": "Rule 100-1-a's test description would go here. Be as descriptive as you like within this cell.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-29",
+            "ruleset_reference": "Table G3.1 #5 baselne column (d) All vertical fenestration shall be assumed to be flush with\nthe exterior wall, and no shading projections shall be modeled.",
+            "rule_description": "Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline RMR",
+            "rule_dependency": "None",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "has_shading_overhang": false,
+                                                        "has_shading_sidefins": false
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-29-b": {
+        "Section": 5,
+        "Rule": 29,
+        "Test": "b",
+        "test_description": "Rule 100-1-a's test description would go here. Be as descriptive as you like within this cell.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-29",
+            "ruleset_reference": "Table G3.1 #5 baselne column (d) All vertical fenestration shall be assumed to be flush with\nthe exterior wall, and no shading projections shall be modeled.",
+            "rule_description": "Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline RMR",
+            "rule_dependency": "None",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "has_shading_overhang": true,
+                                                        "has_shading_sidefins": false
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-29-c": {
+        "Section": 5,
+        "Rule": 29,
+        "Test": "c",
+        "test_description": "Rule 100-1-a's test description would go here. Be as descriptive as you like within this cell.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-29",
+            "ruleset_reference": "Table G3.1 #5 baselne column (d) All vertical fenestration shall be assumed to be flush with\nthe exterior wall, and no shading projections shall be modeled.",
+            "rule_description": "Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading projections shall be modeled.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline RMR",
+            "rule_dependency": "None",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "has_shading_overhang": false,
+                                                        "has_shading_sidefins": true
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-30-a": {
+        "Section": 5,
+        "Rule": 30,
+        "Test": "a",
+        "test_description": "Rule 100-1-a's test description would go here. Be as descriptive as you like within this cell.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-30",
+            "ruleset_reference": "G3.1 #1 (a) The simulation model of the proposed design shall be consistent\nwith the design documents\u2026",
+            "rule_description": "Proposed fenestration has the same shading projections as the user model.",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "User RMR",
+            "rule_dependency": "None",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "has_shading_overhang": true,
+                                                        "has_shading_sidefins": false
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "has_shading_overhang": true,
+                                                        "has_shading_sidefins": false
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-30-b": {
+        "Section": 5,
+        "Rule": 30,
+        "Test": "b",
+        "test_description": "Rule 100-1-a's test description would go here. Be as descriptive as you like within this cell.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-30",
+            "ruleset_reference": "G3.1 #1 (a) The simulation model of the proposed design shall be consistent\nwith the design documents\u2026",
+            "rule_description": "Proposed fenestration has the same shading projections as the user model.",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "User RMR",
+            "rule_dependency": "None",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "user": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "has_shading_overhang": true,
+                                                        "has_shading_sidefins": false
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "has_shading_overhang": true,
+                                                        "has_shading_sidefins": true
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-31-a": {
+        "Section": 5,
+        "Rule": 31,
+        "Test": "a",
+        "test_description": "Rule 100-1-a's test description would go here. Be as descriptive as you like within this cell.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-31",
+            "ruleset_reference": "Table G3.1 #5 Proposed column a.4: Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design. \nTable G3.1#5 baseline column (d) Manual window shading devices such as blinds or shades are not required to be modeled.",
+            "rule_description": "Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "has_manual_interior_shades": true
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "has_manual_interior_shades": true
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-31-b": {
+        "Section": 5,
+        "Rule": 31,
+        "Test": "b",
+        "test_description": "Rule 100-1-a's test description would go here. Be as descriptive as you like within this cell.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-31",
+            "ruleset_reference": "Table G3.1 #5 Proposed column a.4: Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design. \nTable G3.1#5 baseline column (d) Manual window shading devices such as blinds or shades are not required to be modeled.",
+            "rule_description": "Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "has_manual_interior_shades": true
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "has_manual_interior_shades": false
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

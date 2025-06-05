@@ -4,6 +4,7 @@ from rct229.schema.config_functions import *
 
 # Constants
 schema_dict = get_schema_definitions_dictionary()
+schema_version = get_schema_version()
 unit_convention_dict = get_unit_conventions_dictionary()
 ureg = get_pint_unit_registry()
 

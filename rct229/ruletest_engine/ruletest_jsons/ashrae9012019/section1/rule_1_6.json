@@ -1,0 +1,162 @@
+{
+    "rule-1-6-a": {
+        "Section": 1,
+        "Rule": 6,
+        "Test": "a",
+        "test_description": "A one building segment, single zone building has proposed on site renewable energy production. An end use result has an energy source with \"ON_SITE_RENEWABLES\" and has annual set energy use greater than 0",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "1-6",
+            "ruleset_reference": "G3.11 18 Baseline",
+            "rule_description": "On-site renewable energy shall not be included in the baseline building performance.",
+            "applicable_rmd": "Baseline RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "model_output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 105510.0,
+                                "annual_end_use_results": [
+                                    {
+                                        "id": "End Result 1",
+                                        "type": "MISC_EQUIPMENT",
+                                        "energy_source": "ON_SITE_RENEWABLES",
+                                        "annual_site_energy_use": 100000,
+                                        "annual_site_coincident_demand": 0,
+                                        "annual_site_non_coincident_demand": 0
+                                    }
+                                ]
+                            }
+                        },
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-1-6-b": {
+        "Section": 1,
+        "Rule": 6,
+        "Test": "b",
+        "test_description": "A one building segment, single zone building has proposed on site renewable energy production. An end use result has an energy source with \"ON_SITE_RENEWABLES\" and but has annual site energy set to 0.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "1-6",
+            "ruleset_reference": "G3.11 18 Baseline",
+            "rule_description": "On-site renewable energy shall not be included in the baseline building performance.",
+            "applicable_rmd": "Baseline RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "calendar": {
+                            "is_leap_year": false
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "model_output": {
+                            "id": "Output 1",
+                            "output_instance": {
+                                "id": "Output Instance 1",
+                                "unmet_load_hours": 0,
+                                "unmet_load_hours_heating": 0,
+                                "unmet_occupied_load_hours_heating": 0,
+                                "unmet_load_hours_cooling": 0,
+                                "unmet_occupied_load_hours_cooling": 0,
+                                "building_peak_cooling_load": 105510.0,
+                                "annual_end_use_results": [
+                                    {
+                                        "id": "End Result 1",
+                                        "type": "MISC_EQUIPMENT",
+                                        "energy_source": "ON_SITE_RENEWABLES",
+                                        "annual_site_energy_use": 0,
+                                        "annual_site_coincident_demand": 0,
+                                        "annual_site_non_coincident_demand": 0
+                                    }
+                                ]
+                            }
+                        },
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

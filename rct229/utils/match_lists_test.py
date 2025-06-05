@@ -1,5 +1,5 @@
 import pytest
-from match_lists import match_lists
+from rct229.utils.match_lists import match_lists
 
 
 # Testing match_lists()

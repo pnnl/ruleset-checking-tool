@@ -1,0 +1,1826 @@
+{
+    "rule-5-17-a": {
+        "Section": 5,
+        "Rule": 17,
+        "Test": "a",
+        "test_description": "A surface separates unconditioned zone from exterior. The baseline exterior envelope U-factor for the surface was established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-17",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "u_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "u_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-17-b": {
+        "Section": 5,
+        "Rule": 17,
+        "Test": "b",
+        "test_description": "A surface separates unconditioned zone from exterior. The baseline exterior envelope U-factor for the surface was not established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-17",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "u_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "u_factor": 1.35
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-17-c": {
+        "Section": 5,
+        "Rule": 17,
+        "Test": "c",
+        "test_description": "A surface separates semiheated zone from exterior. The baseline exterior envelope U-factor for the surface was established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-17",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "u_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "u_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-17-d": {
+        "Section": 5,
+        "Rule": 17,
+        "Test": "d",
+        "test_description": "A surface separates semiheated zone from exterior. The baseline exterior envelope U-factor for the surface was not established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-17",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "u_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "u_factor": 1.35
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-17-e": {
+        "Section": 5,
+        "Rule": 17,
+        "Test": "e",
+        "test_description": "An unconditioned zone has wall adjacent to ground. Baseline below-grade wall C-factor was established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-17",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 90,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "c_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 90,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "c_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-17-f": {
+        "Section": 5,
+        "Rule": 17,
+        "Test": "f",
+        "test_description": "An unconditioned zone has wall adjacent to ground. Baseline below-grade wall C-factor was not established correctly",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-17",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 90,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "c_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 90,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "c_factor": 1.35
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-17-g": {
+        "Section": 5,
+        "Rule": 17,
+        "Test": "g",
+        "test_description": "A semiheated zone has wall adjacent to ground. Baseline below-grade wall C-factor was established correctly",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-17",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 90,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "c_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 90,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "c_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-17-h": {
+        "Section": 5,
+        "Rule": 17,
+        "Test": "h",
+        "test_description": "A semiheated zone has wall adjacent to ground. Baseline below-grade wall C-factor was not established correctly",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-17",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 90,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "c_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 90,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "c_factor": 1.35
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-17-i": {
+        "Section": 5,
+        "Rule": 17,
+        "Test": "i",
+        "test_description": "An unconditioned zone has slab-on-grade. Baseline slab-on-grade F-factor was established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-17",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 180,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "f_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 180,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "f_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-17-j": {
+        "Section": 5,
+        "Rule": 17,
+        "Test": "j",
+        "test_description": "An unconditioned zone has slab-on-grade. Baseline slab-on-grade F-factor was not established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-17",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 180,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "f_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 180,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "f_factor": 1.35
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-17-k": {
+        "Section": 5,
+        "Rule": 17,
+        "Test": "k",
+        "test_description": "A semiheated zone has slab-on-grade. Baseline slab-on-grade F-factor was established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-17",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 180,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "f_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 180,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "f_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-17-l": {
+        "Section": 5,
+        "Rule": 17,
+        "Test": "l",
+        "test_description": "A semiheated zone has slab-on-grade. Baseline slab-on-grade F-factor was not established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-17",
+            "ruleset_reference": "Table G3.1 #1, Baseline column: The baseline building design shall be developed by modifying the proposed design as described in Section G3. Except as specifically instructed, all building systems and equipment shall be modeled identically in the proposed design and baseline building design.",
+            "rule_description": "Opaque surfaces that are not regulated (not part of opaque building envelope) must be modeled the same U/C/F-factor in the baseline as in the proposed design",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMR",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "proposed": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 180,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "f_factor": 1.25
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            },
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "GROUND",
+                                                "tilt": 180,
+                                                "construction": {
+                                                    "id": "construction_1",
+                                                    "f_factor": 1.35
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "weather": {
+                    "climate_zone": "CZ4A"
+                }
+            }
+        }
+    },
+    "rule-5-18-a": {
+        "Section": 5,
+        "Rule": 18,
+        "Test": "a",
+        "test_description": "Building area type = \"school (primary)\"; building includes a conditioned zone that has two exterior walls with windows. Baseline fenestration area is  established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-18",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1\nbased on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior.",
+            "rule_description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "area": 1000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "classification": "WINDOW",
+                                                        "glazed_area": 220,
+                                                        "opaque_area": 0
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "surface_2",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "area": 2000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_2",
+                                                        "classification": "DOOR",
+                                                        "glazed_area": 400,
+                                                        "opaque_area": 40
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-18-b": {
+        "Section": 5,
+        "Rule": 18,
+        "Test": "b",
+        "test_description": "Building area type = \"school (primary)\"; building includes a conditioned zone that has two exterior walls with windows. Baseline fenestration area is  established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-18",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1\nbased on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior.",
+            "rule_description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "area_type_vertical_fenestration": "SCHOOL_PRIMARY",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 82.5,
+                                                "area": 1000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "classification": "WINDOW",
+                                                        "glazed_area": 220,
+                                                        "opaque_area": 0
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "surface_2",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "area": 2000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_2",
+                                                        "classification": "DOOR",
+                                                        "glazed_area": 400,
+                                                        "opaque_area": 60
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-18-c": {
+        "Section": 5,
+        "Rule": 18,
+        "Test": "c",
+        "test_description": "Building area type = \"warehouse (nonrefrigerated)\"; building includes a semiheated zone that has two exterior walls with windows. Baseline fenestration area is  established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-18",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1\nbased on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior.",
+            "rule_description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "area_type_vertical_fenestration": "WAREHOUSE_NONREFRIGERATED",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 82.5,
+                                                "area": 1000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "classification": "WINDOW",
+                                                        "glazed_area": 60,
+                                                        "opaque_area": 0
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "surface_2",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "area": 2000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_2",
+                                                        "classification": "WINDOW",
+                                                        "glazed_area": 100,
+                                                        "opaque_area": 20
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-18-d": {
+        "Section": 5,
+        "Rule": 18,
+        "Test": "d",
+        "test_description": "Building area type = \"warehouse (nonrefrigerated)\"; building includes a semiheated zone that has two exterior walls with windows. Baseline fenestration area is not established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-18",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1\nbased on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior.",
+            "rule_description": "For building area types included in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in Table G3.1.1-1 based on the area of gross above-grade walls that separate conditioned spaces and semiheated spaces from the exterior. \n",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "area_type_vertical_fenestration": "WAREHOUSE_NONREFRIGERATED",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 82.5,
+                                                "area": 1000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "classification": "WINDOW",
+                                                        "glazed_area": 60,
+                                                        "opaque_area": 20
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "surface_2",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "area": 2000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_2",
+                                                        "classification": "WINDOW",
+                                                        "glazed_area": 100,
+                                                        "opaque_area": 20
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-19-a": {
+        "Section": 5,
+        "Rule": 19,
+        "Test": "a",
+        "test_description": "Building area type = \"school (primary)\"; building includes a conditioned zone that has two exterior walls with windows. Baseline fenestration area is  established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-19",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: For building\nareas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area,\nwhichever is smaller",
+            "rule_description": "For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "area_type_vertical_fenestration": "OTHER",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 82.5,
+                                                "area": 1000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "classification": "WINDOW",
+                                                        "opaque_area": 0,
+                                                        "glazed_area": 400
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "surface_2",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "area": 2000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_2",
+                                                        "classification": "WINDOW",
+                                                        "glazed_area": 700,
+                                                        "opaque_area": 100
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "proposed": {
+                "buildings": [
+                    {
+                        "building_segments": [
+                            {
+                                "zones": [
+                                    {
+                                        "surfaces": [
+                                            {
+                                                "subsurfaces": [
+                                                    {
+                                                        "glazed_area": 600
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-19-b": {
+        "Section": 5,
+        "Rule": 19,
+        "Test": "b",
+        "test_description": "Building area type = \"multifamily\"; building includes a conditioned zone that has two exterior walls with windows. Vertical fenestration area in the user model exceeds 40% of wall area of conditioned zone.  ",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-19",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: For building\nareas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area,\nwhichever is smaller",
+            "rule_description": "For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "area_type_vertical_fenestration": "OTHER",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 82.5,
+                                                "area": 1000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "opaque_area": 0
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "surface_2",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "area": 2000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_2",
+                                                        "classification": "WINDOW",
+                                                        "glazed_area": 700,
+                                                        "opaque_area": 100
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-19-c": {
+        "Section": 5,
+        "Rule": 19,
+        "Test": "c",
+        "test_description": "Building area type = \"multifamily\"; building includes a conditioned zone that has two exterior walls with windows. Vertical fenestration area in the user model is below 40% of wall area of conditioned zone.  ",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-19",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: For building\nareas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area,\nwhichever is smaller",
+            "rule_description": "For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "area_type_vertical_fenestration": "OTHER",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 82.5,
+                                                "area": 1000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "opaque_area": 0
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "surface_2",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "area": 2000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_2",
+                                                        "classification": "WINDOW",
+                                                        "glazed_area": 200,
+                                                        "opaque_area": 100
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-19-d": {
+        "Section": 5,
+        "Rule": 19,
+        "Test": "d",
+        "test_description": "Building area type = \"multifamily\"; building includes a conditioned zone that has two exterior walls with windows. Vertical fenestration area in the user model is below 40% of wall area of conditioned zone.  ",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-19",
+            "ruleset_reference": "Table G3.1 #5 baseline column #c: For building\nareas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area,\nwhichever is smaller",
+            "rule_description": "For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller, ",
+            "applicable_rmr": "Baseline RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "None",
+            "mandatory_rule": 0,
+            "schema_version": "0.0.5"
+        },
+        "rmr_transformations": {
+            "baseline": {
+                "id": "ashrae_229",
+                "buildings": [
+                    {
+                        "id": "building_1",
+                        "building_open_schedule": "schedule_1",
+                        "building_segments": [
+                            {
+                                "id": "segment_1",
+                                "area_type_vertical_fenestration": "OTHER",
+                                "zones": [
+                                    {
+                                        "id": "zone_1",
+                                        "thermostat_cooling_setpoint_schedule": "schedule_1",
+                                        "thermostat_heating_setpoint_schedule": "schedule_1",
+                                        "surfaces": [
+                                            {
+                                                "id": "surface_1",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 82.5,
+                                                "area": 1000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_1",
+                                                        "opaque_area": 0
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "surface_2",
+                                                "adjacent_to": "EXTERIOR",
+                                                "tilt": 90,
+                                                "area": 2000,
+                                                "subsurfaces": [
+                                                    {
+                                                        "id": "subsurface_2",
+                                                        "classification": "WINDOW",
+                                                        "opaque_area": 100
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "heating_ventilating_air_conditioning_systems": [
+                                    {
+                                        "id": "heating_ventilating_air_conditioning_systems_1"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

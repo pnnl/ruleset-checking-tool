@@ -1,0 +1,760 @@
+{
+    "rule-5-4-a": {
+        "Section": 5,
+        "Rule": 4,
+        "Test": "a",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has residential occupancy type, and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-4",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 0,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 0.35773064046128095
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 9378.275555555556
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-4-b": {
+        "Section": 5,
+        "Rule": 4,
+        "Test": "b",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface.The project includes a space that has residential occupancy type, and is conditioned based on  cooling capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-4",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 0,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 0.35773064046128095
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 42204.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 8792.133333333333
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-4-c": {
+        "Section": 5,
+        "Rule": 4,
+        "Test": "c",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has residential occupancy type, and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-4",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 0,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 1.2378615812787181
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 9378.275555555556
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-4-d": {
+        "Section": 5,
+        "Rule": 4,
+        "Test": "d",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-4",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 0,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 0.35773064046128095
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 9378.275555555556
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-4-e": {
+        "Section": 5,
+        "Rule": 4,
+        "Test": "e",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-4",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 0,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 1.2378615812787181
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 9378.275555555556
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-4-f": {
+        "Section": 5,
+        "Rule": 4,
+        "Test": "f",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-4",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 0,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 1.2378615812787181
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 0.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 699.8538133333334
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-4-g": {
+        "Section": 5,
+        "Rule": 4,
+        "Test": "g",
+        "test_description": "Project located in climate zone 4A has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is semiheated based on heating and cooling capacity of the HVAC system that serves the the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-4",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 0,
+                                                        "area": 9.290303999999999,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 0.35773064046128095
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 0.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 699.8538133333334
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-4-h": {
+        "Section": 5,
+        "Rule": 4,
+        "Test": "h",
+        "test_description": "Project located in climate zone 8 has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is established correctly.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-4",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ8",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 0,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 0.27255667844669024
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 9378.275555555556
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-4-i": {
+        "Section": 5,
+        "Rule": 4,
+        "Test": "i",
+        "test_description": "Project located in climate zone 8 has one building segment with an exterior roof surface. The project includes a space that has non-residential occupancy type and is conditioned based on heating capacity of the HVAC system that serves the parent zone. The baseline roof U-factor for the space is not established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-4",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (b)",
+            "rule_description": "Baseline roof assemblies must match the appropriate assembly maximum U-factors in Tables G3.4-1 through G3.4-8",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ8",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "CORRIDOR_ALL_OTHERS",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 0,
+                                                        "construction": {
+                                                            "id": "Construction 1",
+                                                            "u_factor": 0.35773064046128095
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 17585.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 9378.275555555556
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

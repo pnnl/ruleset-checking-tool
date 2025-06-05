@@ -1,0 +1,204 @@
+{
+    "rule-23-7-a": {
+        "Section": 23,
+        "Rule": 7,
+        "Test": "a",
+        "test_description": "The project has one building segment with two zones served by baseline system type 6. The baseline system supply air temperature is constant at the design conditions.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "23-7",
+            "ruleset_reference": "G3.1.3.14",
+            "rule_description": "For baseline systems 6 and 8, supply air temperature setpoint shall be constant at the design condition.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 6",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Fan 1"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 6",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Fan 2"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 6",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "temperature_control": "CONSTANT"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-23-7-b": {
+        "Section": 23,
+        "Rule": 7,
+        "Test": "b",
+        "test_description": "The project has one building segment with two zones served by baseline system type 6. The baseline system supply air temperature has outdoor air reset controls.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "23-7",
+            "ruleset_reference": "G3.1.3.14",
+            "rule_description": "For baseline systems 6 and 8, supply air temperature setpoint shall be constant at the design condition.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "System 6, 8 (Rule18-a, to be confirmed)",
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 6",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Fan 1"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 6",
+                                                        "heating_source": "ELECTRIC",
+                                                        "fan": {
+                                                            "id": "Fan 2"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 6",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ],
+                                                    "temperature_control": "OUTDOOR_AIR_RESET"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

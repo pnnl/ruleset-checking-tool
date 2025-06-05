@@ -1,47 +1,47 @@
 
-# Airside System - Rule 23-5  
+# Airside System - Rule 23-5 
 
-**Schema Version:** 0.0.10  
+**Schema Version:** 0.0.34  
 **Mandatory Rule:** True  
 **Rule ID:** 23-5  
-**Rule Description:** For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.  
+**Rule Description:** For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall run as the first stage of heating before the reheat coil is energized.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 23 Air-side  
-**90.1 Section Reference:** Section G3.1.3.14 Fan Power and Control (Systems 6 and 8)  
+**90.1 Section Reference:** G3.1.3.14 Fan Power and Control (Systems 6 and 8)  
 **Data Lookup:** None  
-**Evaluation Context:** Building  
+**Evaluation Context:** Terminal  
 
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-6, 8, 8a, 6b, 8b.  
+1. B-RMR is modeled with at least one air-side system that is Type-6 or 8.  
 
 **Function Calls:**  
 
 1. get_baseline_system_types()
-2. is_baseline_system_type()
+2. baseline_system_type_compare()
 
 **Applicability Checks:**  
-
+- create a list of the target system types: `APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_6, HVAC_SYS.SYS_8]`
 - Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
 
-  - Check if B-RMR is modeled with at least one air-side system that is Type-6, 8, 8a, 6b, 8b, continue to rule logic: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-6", "SYS-8", "SYS-8A", "SYS-6B", "SYS-8B"]): CHECK_RULE_LOGIC`
+- make a list of hvac system type ids for systems that are one of 6 or 8: `hvac_sys_6_or_8_list = []`
+- loop through the applicable system types: `for target_sys_type in APPLICABLE_SYS_TYPES:`
+    - and loop through the baseline_system_types_dict to check the system types of the baseline systems: `for system_type in baseline_system_types_dict:`
+        - do baseline_system_type_compare to determine whether the baseline_system_type is the applicable_system_type: `if((baseline_system_type_compare(system_type, target_sys_type, false)):`
+            - the systems in the list: baseline_system_types_dict[system_type] are either sys-6 or 8, add them to hvac_sys_6_or_8_list: `hvac_sys_6_or_8_list.extend(baseline_system_types_dict[system_type])`
 
-  - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
+- go through all the zones in the buildings: `for zone in B-RMR....zones:`
+    - look at the zone terminal, and then the zone terminal hvac system to determine if the zone terminal is connected to a system type 6 or 8: `for terminal in zone.terminals:`
+        - check if the terminal is connected to a hvac system 6 or 8: `if zone.served_by_heating_ventilating_air_conditioning_system in hvac_sys_6_or_8_list:`
+            - `CONTINUE TO RULE LOGIC`
+        - otherwise not applicable: `else: NOT_APPLICABLE`
+**Rule Logic:**
+- if the terminal runs the fan as a first stage of heating before the reheat coil is turned on, then this terminal is compliant with the rule, return PASS: `if terminal.is_first_stage_heat_fan_powered_box: PASS`
+- otherwise, the terminal is not compliant, return fail: `else: FAIL`
 
-## Rule Logic:  
 
-- For each zone in B_RMR: `for zone_b in B_RMR...zones:`
+**Notes:**
 
-  - For each terminal in zone: `for terminal_b in zone_b.terminals:`
-
-    - Get HVAC system serving terminal: `hvac_b = terminal_b.served_by_heating_ventilation_air_conditioning_systems`
-  
-      - Check if HVAC system is type 6, 8, 8a, 6b, 8b: `if any(is_baseline_system_type(hvac_b, sys_type) == TRUE for sys_type in ["SYS-6", "SYS-8", "SYS-8A", "SYS-6B", "SYS-8B"]):`
-
-        **Rule Assertion:**
-
-        - Case 1: For each terminal that is served by HVAC system that is Type-6, 8, 8a, 6b, 8b, if fan in parallel VAV-powered box is sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate (CFM) and is modeled with 0.35W/cfm fan power: `if ( terminal_b.fan.design_airflow == terminal_b.primary_airflow * 0.5 ) AND ( terminal_b.fan.design_electric_power == 0.35 * terminal_b.fan.design_airflow ): PASS`
-
-        - Case 2: Else: `else: FAIL`
+1.  This rule relies on the data element terminal.is_first_stage_heat_fan_powered_box, which does not yet exist in the schema.  Furthermore, this rule logic assumes that it will be implemented as a boolean
 
 **[Back](../_toc.md)**

@@ -1,13 +1,13 @@
 # is_hvac_sys_cooling_type_DX  
 
-**Description:** Returns TRUE if the HVAC system has DX cooling. Returns FALSE if the HVAC system has anything other than DX cooling or if it has more than 1 or no cooling system.   
+**Description:** Returns TRUE if the HVAC system has DX cooling. Returns FALSE if the HVAC system has anything other than DX cooling.   
 
 **Inputs:**  
 - **B-RMR**: To evaluate if the hvac system is modeled with DX cooling.   
 - **hvac_b.id**: The id of the hvac system to evaluate.  
 
 **Returns:**  
-- **is_hvac_sys_cooling_type_DX**: Returns TRUE if the HVAC system has DX cooling AND only one cooling system . Returns FALSE if the HVAC system has a cooling system type other than DX or if it has more than one cooling system.   
+- **is_hvac_sys_cooling_type_DX**: Returns TRUE if the HVAC system has DX cooling. Returns FALSE if the HVAC system has a cooling system type other than DX.   
  
 **Function Call:** 
 1. is_there_only_one_cooling_system()  

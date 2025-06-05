@@ -2,47 +2,45 @@
 # Envelope - Rule 5-31  
 
 **Rule ID:** 5-31  
-**Rule Description:** Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.  
-**Rule Assertion:** B-RMR subsurface.has_manual_interior_shades=P-RMR subsurface.has_manual_interior_shades  
-**Appendix G Section:** Section G3.1-5(a)(4) Building Modeling Requirements for the Proposed design and G3.1-5(d) Building Modeling Requirements for Baseline building  
-**Appendix G Section Reference:**  None
+**Rule Description:** The baseline roof surfaces shall be modeled using a solar reflectance of 0.30.  
+**Rule Assertion:** B-RMR SurfaceOpticalProperties:absorptance_solar_exterior = 0.7  
+**Appendix G Section:** Section G3.1-5(g) Building Envelope Modeling Requirements for the Baseline building  
+**Appendix G Section Reference:** None  
 
 **Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:** None  
+**Applicability Checks:**  None  
 
-**Manual Checks:** None  
-**Evaluation Context:**  Each Data Element  
+**Manual Check:** None  
+**Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 **Function Call:**  
 
-  1. match_data_element()
+  1. get_opaque_surface_type()
+  2. get_surface_conditioning_category()
 
-## Rule Logic:
+## Rule Logic:  
 
-- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`
+- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`
 
-  - For each zone in thermal block: `for zone_b in building_segment_b.zones:`
+- For each building segment in the Baseline model: `for building_segment_b in B_RMR.building.building_segments:`  
 
-    - For each surface in zone: `for surface_b in zone_b.surfaces:`
+  - For each thermal_block in building segment: `for thermal_block_b in building_segment_b.thermal_blocks:`  
 
-      - Get matching surface in P_RMR: `surface_p = match_data_element(P_RMR, Surfaces, surface_b.id)`
+    - For each zone in thermal block: `for zone_b in thermal_block_b.zones:`  
 
-        - For each subsurface in surface in P_RMR: `for subsurface_p in surface_p.subsurfaces:`
+      - For each surface in zone: `for surface_b in zone_b.surfaces;`
 
-          - Calculate the total number of subsurfaces that have manual shades modeled: `if subsurface_p.has_manual_interior_shades: num_shades += 1`
+        - Check if surface is roof and is regulated, get surface optical properties: `if ( get_opaque_surface_type(surface_b.id) == "ROOF" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ): surface_optical_property_b = surface_b.optical_properties`  
 
-        - Check if subsurfaces in P_RMR have different manual shade status, flag for manual check: `if ( num_shades != LEN(surface_p.subsurfaces) ) AND ( num_shades != 0 ): manual_check_flag = TRUE`
+          **Rule Assertion:**  
 
-        - Else, for each subsurface in surface in B_RMR: `else: for subsurface_b in surface_b.subsurfaces:`
+          - Case 1: If roof surface solar reflectance is equal to 0.3: `if surface_optical_property_b.absorptance_solar_exterior == 0.7: PASS`  
 
-          - Check if subsurface is modeled with the same manual shade status as in P_RMR: `if subsurface_b.has_manual_interior_shades == surface_p.subsurfaces[0].has_manual_interior_shades: shade_match_flag = TRUE`
+          - Case 2: Else: `Else: FAIL`
 
-        **Rule Assertion:**
+**Notes:**
 
-        - Case 1: For each surface, if manual check flag is True: `if manual_check_flag: CAUTION and raise_warning "SURFACE IN P-RMR HAS SUBSURFACES MODELED WITH DIFFERENT MANUAL SHADE STATUS. VERIFY IF SUBSURFACES MANUAL SHADE STATUS IN B-RMR ARE MODELED THE SAME AS IN P-RMR".`
-
-        - Case 2: Else if shade_match_flag is True: `if shade_match_flag: PASS`
-
-        - Case 3: Else: `else: FAIL`
+1. Update Rule ID from 5-42 to 5-32 on 10/26/2023
+2. Update Rule ID from 5-32 to 5-31 on 12/22/2023
 
 **[Back](../_toc.md)**

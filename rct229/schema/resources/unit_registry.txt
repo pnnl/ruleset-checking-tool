@@ -128,6 +128,8 @@ square_degree = (π / 180) ** 2 * sr = sq_deg = sqdeg
 # Length
 
 # Mass
+lb = 0.4536 * kilogram
+
 
 # Time
 minute = 60 * second = min
@@ -153,8 +155,9 @@ cubic_centimeter = centimeter ** 3 = cc
 m3 = meter ** 3
 gallon = 3.785 * L
 
-# Volumetric Flow Rtae
+# Volumetric Flow Rate
 cfm = ft ** 3 / min
+gpm = gallon / min
 
 # Frequency
 [frequency] = 1 / [time]
@@ -281,6 +284,13 @@ octave = 1 ; logbase: 2; logfactor: 1 = oct
 
 neper = 1 ; logbase: 2.71828182845904523536028747135266249775724709369995; logfactor: 0.5 = Np
 # neper = 1 ; logbase: eulers_number; logfactor: 0.5 = Np
+
+## Reciprocal square foot
+reciprocal_square_foot = people / foot**2 = 1 people/ft2
+# Define the unit 'people'
+people = [dimensionless]
+# Define people per 1000 square feet unit
+people_per_1000_square_feet = 1 people/kft2
 
 #### UNIT GROUPS ####
 # Mostly for length, area, volume, mass, force

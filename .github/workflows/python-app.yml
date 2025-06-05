@@ -19,8 +19,8 @@ jobs:
       - uses: psf/black@stable
         with:
           version: "22.6.0"
-  run-pytests:
-    name: Run pytests
+  run-unit-tests:
+    name: Run unit tests
     runs-on: 'ubuntu-latest'
     steps:
       - name: Checkout code
@@ -28,12 +28,14 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.7'
-          cache: 'pipenv'
-      - name: Install pipenv
-        run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
-      - name: Install dependencies
-        run: pipenv install --dev
-      - name: Run tests
+          python-version: '3.10'
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 - --version 1.8.4
+      - name: Install venv
+        run: poetry install
+      - name: Run pytests
         # This will halt the action if any of the tests fail
-        run: pipenv run pytest -v
+        run: poetry run pytest -v
+      - name: Run rule tests
+        run: poetry run rct229 test -rs ashrae9012019

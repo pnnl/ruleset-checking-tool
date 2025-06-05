@@ -1,46 +1,48 @@
 
-# CHW&CW - Rule 23-1  
+# Airside System - Rule 23-1 
 
-**Schema Version:** 0.0.12  
-**Mandatory Rule:** True  
+**Schema Version:** 0.0.34  
+**Mandatory Rule:** TRUE   
 **Rule ID:** 23-1  
-**Rule Description:** For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.  
+**Rule Description:** System 2 and 4 - Electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40°F.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 23 Air-side  
-**90.1 Section Reference:** Section G3.1.3.12 Supply Air Temperature Reset (Systems 5 through 8 and 11)  
+**90.1 Section Reference:** G3.1.3.1 Heat Pumps (Systems 2 and 4)  
 **Data Lookup:** None  
-**Evaluation Context:** Building  
+**Evaluation Context:** HVAC System  
+
 **Applicability Checks:**  
 
-1. B-RMR is modeled with at least one air-side system that is Type-5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c.
+1. B-RMR is modeled with at least one air-side system that is Type-2, or 4  
 
 **Function Calls:**  
 
 1. get_baseline_system_types()
-2. is_baseline_system_type()
+2. baseline_system_type_compare()
+3. get_component_by_id()
 
 **Applicability Checks:**  
+- create a list of the target system types: `APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_2,HVAC_SYS.SYS_4]`
+- Get B-RMR system types: `baseline_system_types_dict = get_baseline_system_types(B-RMR)`
 
-- Get B-RMR system types: `baseline_hvac_system_dict = get_baseline_system_types(B-RMR)`
+- loop through the applicable system types: `for target_sys_type in APPLICABLE_SYS_TYPES:`
+    - and loop through the baseline_system_types_dict to check the system types of the baseline systems: `for system_type in baseline_system_types_dict:`
+        - do baseline_system_type_compare to determine whether the baseline_system_type is the applicable_system_type: `if((baseline_system_type_compare(system_type, target_sys_type, false)):`
+            - the systems in the list: baseline_system_types_dict[system_type] are sys-2 or 4 - loop through the list of systems: `for hvac_system_id in baseline_system_types_dict[system_type]:`
+            - `CONTINUE TO RULE LOGIC`
+            - otherwise, rule not applicable: `else: RULE_NOT_APPLICABLE`
+         
+**Rule Logic:**  
+- get the hvac system from the hvac_system_id: `hvac_system = get_component_by_id(hvac_system_id)`
+- get the heating system: `heating_system = hvac_system.heating_system`
+- get the auxiliary heat high temperature shutoff = `aux_heat_high_temp_shutoff = heating_system.heatpump_auxilliary_heat_high_shutoff_temperature`
+- get the auxiliary heat energy source: `aux_heat_energy_source = heating_system.heatpump_auxilliary_heat_type`
 
-  - Check if B-RMR is modeled with at least one air-side system that is Type-5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c, continue to rule logic: `if any(sys_type in baseline_hvac_system_dict.keys() for sys_type in ["SYS-5", "SYS-6", "SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-7A", "SYS-8A", "SYS-11.1A", "SYS-11.2A", "SYS-5B", "SYS-6B", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-7C", "SYS-11C"]): CHECK_RULE_LOGIC`
+**Rule Assertion:**
+- Case 1: The auxiliary heat high temperature shutoff is greater than 40F, or the auxiliary heat energy source is anything other than electricity - FAIL: `if (aux_heat_high_temp_shutoff > 40) or (aux_heat_energy_source != "ELECTRIC_RESISTANCE"): FAIL`
+- Case 2: All other cases: PASS: `else: PASS`
 
-  - Else, rule is not applicable to B-RMR: `else: RULE_NOT_APPLICABLE`
-
-## Rule Logic:  
-
-- For each building segment in B_RMR: `for building_segment_b in B_RMR...building_segments:`
-
-  - For each HVAC system in building segment: `for hvac_b in building_segment_b.heating_ventilation_air_conditioning_systems:`
-
-    - Check if HVAC system is type 5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c: `if any(is_baseline_system_type(hvac_b, sys_type) == TRUE for sys_type in ["SYS-5", "SYS-6", "SYS-7", "SYS-8", "SYS-11.1", "SYS-11.2", "SYS-7A", "SYS-8A", "SYS-11.1A", "SYS-11.2A", "SYS-5B", "SYS-6B", "SYS-7B", "SYS-8B", "SYS-11B", "SYS-7C", "SYS-11C"]):`
-
-      - For each fan system in HVAC system: `for fan_system_b in hvac_b.fan_systems:`
-
-        **Rule Assertion:**
-
-        - Case 1: For each HVAC system that is Type-5, 6, 7, 8, 11.1, 11.2, 7a, 8a, 11.1a, 11.2a, 5b, 6b, 7b, 8b, 11b, 7c, 11c, if supply air temperature is reset higher by 5F under minimum cooling load condition: `if ( fan_system_b.temperature_control == "ZONE_RESET" ) AND ( fan_system_b.reset_differential_temperature == 5 ): PASS`
-
-        - Case 2: Else: `else: FAIL`
+- 
+**Notes:**
 
 **[Back](../_toc.md)**

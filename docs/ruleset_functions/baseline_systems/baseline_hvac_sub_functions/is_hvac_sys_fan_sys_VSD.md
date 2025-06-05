@@ -13,7 +13,7 @@
 
 ## Logic:   
 - Set is_hvac_sys_fan_sys_VSD = FALSE: `is_hvac_sys_fan_sys_VSD = FALSE`  
-- Create an object associate with the fan_system associated with hvac_b: `fan_system_b = hvac_b.fan_system[0]`
+- Create an object associate with the fan_system associated with hvac_b: `fan_system_b = hvac_b.fan_system`
 - Check if the system control is variable speed drive control, if yes then is_hvac_sys_fan_sys_VSD equals TRUE  : `if fan_system_b.fan_control == "VARIABLE_SPEED_DRIVE":is_hvac_sys_fan_sys_VSD = TRUE` 
 
 **Returns** `return is_hvac_sys_fan_sys_VSD`  

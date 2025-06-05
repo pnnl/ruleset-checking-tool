@@ -1,0 +1,688 @@
+{
+    "rule-21-10-a": {
+        "Section": 21,
+        "Rule": 10,
+        "Test": "a",
+        "test_description": "The project has one 100,000 ft2 building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water pump speed control is fixed-speed (riding the pump curve).",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-10",
+            "ruleset_reference": "G3.1.3.5",
+            "rule_description": "When the baseline building uses boiler)s) or purchased hot water, the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft2 otherwise it shall be modeled with a VFD.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 5574.1824
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 3716.1215999999995
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                },
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-10-b": {
+        "Section": 21,
+        "Rule": 10,
+        "Test": "b",
+        "test_description": "The project has one 100,000 ft2 building segment with two zones served by a baseline system type 7 with a hot water loop. The hot water pump speed control is variable-speed.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-10",
+            "ruleset_reference": "G3.1.3.5",
+            "rule_description": "When the baseline building uses boiler)s) or purchased hot water, the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft2 otherwise it shall be modeled with a VFD.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 5574.1824
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "HOT_WATER",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 2",
+                                                        "floor_area": 3716.1215999999995
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                },
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-10-c": {
+        "Section": 21,
+        "Rule": 10,
+        "Test": "c",
+        "test_description": "The project has one 140,000 ft2 building segment with one zone served by a baseline system type 11 with a hot water loop. The hot water pump speed control is variable-speed.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "21-10",
+            "ruleset_reference": "G3.1.3.5",
+            "rule_description": "When the baseline building uses boiler)s) or purchased hot water, the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft2 otherwise it shall be modeled with a VFD.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 13006.425599999999
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 11",
+                                                "heating_system": {
+                                                    "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                },
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chilled Water Loop 1"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            },
+                            {
+                                "id": "CHW Pump 1",
+                                "loop_or_piping": "Chilled Water Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chilled Water Loop 1",
+                                "type": "COOLING"
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-10-d": {
+        "Section": 21,
+        "Rule": 10,
+        "Test": "d",
+        "test_description": "The project has one 140,000 ft2 building segment with one zone served by a baseline system type 11 with a hot water loop. The hot water pump speed control is fixed-speed.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "21-10",
+            "ruleset_reference": "G3.1.3.5",
+            "rule_description": "When the baseline building uses boiler)s) or purchased hot water, the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft2 otherwise it shall be modeled with a VFD.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 11"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 13006.425599999999
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 11",
+                                                "heating_system": {
+                                                    "id": "Boiler Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                },
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chilled Water Loop 1"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "CHW Pump 1",
+                                "loop_or_piping": "Chilled Water Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chilled Water Loop 1",
+                                "type": "COOLING"
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-21-10-e": {
+        "Section": 21,
+        "Rule": 10,
+        "Test": "e",
+        "test_description": "The project has one 140,000 ft2 building segment with two zones served by a baseline system type 8. There is no hot water loop.",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "21-10",
+            "ruleset_reference": "G3.1.3.5",
+            "rule_description": "When the baseline building uses boiler)s) or purchased hot water, the hot water pump shall be modeled as riding the pump curve if the hot water system serves less than 120,000 ft2 otherwise it shall be modeled with a VFD.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "ELECTRIC",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                                        "fan": {
+                                                            "id": "Fan 1"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 13006.425599999999
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "heating_source": "ELECTRIC",
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 8",
+                                                        "fan": {
+                                                            "id": "Fan 2"
+                                                        },
+                                                        "fan_configuration": "PARALLEL"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 8",
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "ELECTRIC_RESISTANCE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                },
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

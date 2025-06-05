@@ -1,0 +1,9 @@
+{
+    "performance_rating_method_hydraulic_elevator_motor_efficiency": [
+        {"shaft_input_power": 10, "full_load_motor_efficiency_for_modeling": 0.72},
+        {"shaft_input_power": 20, "full_load_motor_efficiency_for_modeling": 0.75},
+        {"shaft_input_power": 30, "full_load_motor_efficiency_for_modeling": 0.78},
+        {"shaft_input_power": 40, "full_load_motor_efficiency_for_modeling": 0.78},
+        {"shaft_input_power": 100, "full_load_motor_efficiency_for_modeling": 0.80}
+    ]
+}

@@ -1,0 +1,348 @@
+{
+    "rule-5-25-a": {
+        "Section": 5,
+        "Rule": 25,
+        "Test": "a",
+        "test_description": " Project has one building segment and includes a conditioned zone that has two roof surfaces one of which has skylights. Skylight area in the proposed design is greater than 3% of the total roof area. Baseline skylight area ratio reduced to 3%.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-25",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
+            "rule_description": "If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "glazed_area": 8.361273599999999,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.5
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 50,
+                                                        "area": 185.80607999999998
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 42204.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 10257.488888888889
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "glazed_area": 6.503212799999999,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.5
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 50,
+                                                        "area": 185.80607999999998
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 42204.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 10257.488888888889
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-25-b": {
+        "Section": 5,
+        "Rule": 25,
+        "Test": "b",
+        "test_description": " Project has one building segment and includes a conditioned zone that has two roof surfaces one of which has skylights. Skylight area in the proposed design is greater than 3% of the total roof area. Baseline skylight area ratio is higher than 3%.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-25",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
+            "rule_description": "If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased by an identical percentage in all roof components in which skylights are located to reach 3%.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "glazed_area": 8.361273599999999,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.5
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 50,
+                                                        "area": 185.80607999999998
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 42204.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 10257.488888888889
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 30,
+                                                        "area": 92.90303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "glazed_area": 8.361273599999999,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "u_factor": 3.2366105565544463,
+                                                                "solar_heat_gain_coefficient": 0.5
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": "Surface 2",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 50,
+                                                        "area": 185.80607999999998
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 42204.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 10257.488888888889
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

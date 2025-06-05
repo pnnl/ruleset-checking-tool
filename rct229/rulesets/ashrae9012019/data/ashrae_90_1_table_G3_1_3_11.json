@@ -1,0 +1,20 @@
+{
+    "heat_rejection_leaving_water_temp":[
+        {
+            "climate_zone": "0A, 1A, 2A",
+            "leaving_water_temp_f": 80
+        },
+        {
+            "climate_zone": "0B, 1B, 2B, 3B, 3C, 4B, 4C, 5A, 6A, 7",
+            "leaving_water_temp_f": 70
+        },
+        {
+            "climate_zone": "3A,4A",
+            "leaving_water_temp_f": 75
+        },
+        {
+            "climate_zone": "5B, 5C, 6B, 8",
+            "leaving_water_temp_f": 65
+        }
+    ]
+}

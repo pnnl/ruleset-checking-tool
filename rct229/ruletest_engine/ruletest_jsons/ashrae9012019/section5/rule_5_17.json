@@ -1,0 +1,220 @@
+{
+    "rule-5-17-a": {
+        "Section": 5,
+        "Rule": 17,
+        "Test": "a",
+        "test_description": "Project has one building segment and includes an existing space. Existing fenestration area cannot be determined.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Part or all of spaces listed below is existing or altered. The baseline vertical fenestration area for a existing zone must equal to the fenestration area prior to the proposed scope of work. The baseline fenestration area in zone must be checked manually.",
+        "standard": {
+            "rule_id": "5-17",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c)",
+            "rule_description": "The baseline fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Applicability",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "status_type": "EXISTING"
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 42204.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 10257.488888888889
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-17-b": {
+        "Section": 5,
+        "Rule": 17,
+        "Test": "b",
+        "test_description": "Project has one building segment and includes an altered space. Existing fenestration area prior to proposed work cannot be determined.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Part or all of spaces listed below is existing or altered. The baseline vertical fenestration area for a existing zone must equal to the fenestration area prior to the proposed scope of work. The baseline fenestration area in zone must be checked manually.",
+        "standard": {
+            "rule_id": "5-17",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c)",
+            "rule_description": "The baseline fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Applicability",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "status_type": "ALTERED"
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 42204.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 10257.488888888889
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-17-c": {
+        "Section": 5,
+        "Rule": 17,
+        "Test": "c",
+        "test_description": "Project has one building segment and includes a space that is new construction. There is no existing fenestration.",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "5-17",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (c)",
+            "rule_description": "The baseline fenestration area for an existing building shall equal the existing fenestration area prior to the proposed work ",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Applicability",
+            "schema_version": "0.1.3"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "status_type": "NEW"
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 42204.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 10257.488888888889
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

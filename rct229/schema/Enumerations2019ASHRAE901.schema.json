@@ -33,7 +33,22 @@
                 "Beyond Code"
             ]
         },
-        "LightingSpaceOptions2019ASHRAE901T951TG38": {
+        "EnvelopeSpaceOptions2019ASHRAE901": {
+            "type": "string",
+            "enum": [
+                "NONRESIDENTIAL_CONDITIONED",
+                "RESIDENTIAL_CONDITIONED",
+                "SEMIHEATED",
+                "UNCONDITIONED"
+            ],
+            "descriptions": [
+                "Nonresidential conditioned",
+                "Residential conditioned",
+                "Semiheated",
+                "Unconditioned"
+            ]
+        },
+        "LightingBuildingAreaOptions2019ASHRAE901T951TG38": {
             "type": "string",
             "enum": [
                 "AUTOMOTIVE_FACILITY",
@@ -995,14 +1010,16 @@
             "type": "string",
             "enum": [
                 "NEW",
-                "EXISTING"
+                "EXISTING",
+                "ALTERED"
             ],
             "descriptions": [
                 "New",
-                "Existing"
+                "Existing",
+                "Altered"
             ]
         },
-        "AdditionalSurfaceAdjacentToOptions2019ASHRAE901": {
+        "AdditionalSurfaceAdjacencyOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
                 "UNENCLOSED",
@@ -1015,6 +1032,33 @@
                 "The space on the other side of the surface is assumed to be unconditioned. The space on the other side of the surface is not explicity modeled.",
                 "Surface adjacent to a environment that is not heated but enclosed. The space on the other side of the surface is not explicity modeled.",
                 "Surface adjacent to a environment that is semi-heated. The space on the other side of the surface is not explicity modeled."
+            ]
+        },
+        "ConstructionClassificationOptions2019ASHRAE901": {
+            "type": "string",
+            "enum": [
+                "METAL_BUILDING",
+                "WOOD_FRAMED",
+                "STEEL_FRAMED",
+                "MASS",
+                "INSULATION_ENTIRELY_ABOVE_DECK",
+                "ATTIC",
+                "BELOW_GRADE_WALL",
+                "STEEL_JOIST",
+                "SLAB_ON_GRADE",
+                "OTHER"
+            ],
+            "descriptions": [
+                "Metal building",
+                "Wood-framed",
+                "Steel-framed",
+                "Mass",
+                "Insulation entirely above deck",
+                "Attic",
+                "Below-grade wall",
+                "Steel joist",
+                "Slab-on-grade",
+                "Other"
             ]
         },
         "SubsurfaceSubclassificationOptions2019ASHRAE901": {
@@ -1038,13 +1082,14 @@
                 "other subclassifications"
             ]
         },
-        "HeatingVentilationAirConditioningBuildingAreaOptions2019ASHRAE901": {
+        "HeatingVentilatingAirConditioningBuildingAreaOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
                 "RESIDENTIAL",
                 "PUBLIC_ASSEMBLY",
                 "RETAIL",
                 "HOSPITAL",
+                "HEATED_ONLY_STORAGE",
                 "OTHER_NON_RESIDENTIAL"
             ],
             "descriptions": [
@@ -1052,6 +1097,7 @@
                 "Public assembly",
                 "Retail",
                 "Hospital",
+                "Heated only storage",
                 "Other non-residential"
             ]
         },

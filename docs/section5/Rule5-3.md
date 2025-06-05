@@ -1,33 +1,41 @@
-
-# Envelope - Rule 5-3  
-
+# Envelope - Rule 5-3
+**Schema Version** 0.0.23  
+**Primary Rule:** False  
 **Rule ID:** 5-3  
-**Rule Description:** The building shall be modeled so that it does not shade itself.  
-**Rule Assertion:** Baseline RMR Building: surface.does_cast_shade = expected value  
+**Rule Description:** Baseline roof assemblies must conform with assemblies detailed in Appendix A.  
 **Appendix G Section:** Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:** Table G3.1 Section 5a  
+**Appendix G Section Reference:** None  
 
 **Applicability:** All required data elements exist for B_RMR  
-**Applicability Checks:**  None  
+**Applicability Checks:**
+  1. Surfaces that are a regulated roof
 
-**Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
+**Function Call:**
+  1. get_surface_conditioning_category()  
+  2. get_opaque_surface_type()  
 
 ## Rule Logic:  
 
+- Get surface conditioning category dictionary for B_RMR: ```scc_dictionary_b = get_surface_conditioning_category(B_RMR)```  
+
 - For each building segment in the Baseline model: ```for building_segment_b in B_RMR.building.building_segments:```  
 
-  - For each thermal_block in building segment: ```thermal_block_b in building_segment_b.thermal_blocks:```  
-  
-    - For each zone in thermal block: ```zone_b in thermal_block_b.zones:```  
+  - For each zone in building segment: ```for zone_b in building_segment_b.zones:```  
 
-        - For each surface in zone: ```for surface_b in zone_b.surfaces:```  
+    - For each surface in zone: ```for surface_b in zone_b.surfaces:```  
 
-          - Check that surface is exterior: ```if ( surface_b.adjacent_to == "EXTERIOR" ): exterior_vertical_surface_b = surface_b```  
+        **Rule Assertion:**  
 
-          **Rule Assertion:** Baseline exterior surface does not cast shade:  
+        Case 1: Surface is a roof or ceiling and is regulated; outcome is UNDETERMINED: ```if ( ( get_opaque_surface_type(surface_b) == "ROOF" ) AND ( scc_dictionary_b[surface_b.id] != UNREGULATED ) ): 
+        outcome = "UNDETERMINED" and raise_message "<Insert surface_b.id> is a regulated roof surface. Conduct a manual check to confirm that Baseline roof assemblies conform with assemblies detailed in Appendix A."```  
 
-          - Case 1: ```exterior_vertical_surface_b.does_cast_shade == FALSE: PASS```  
+        Case 2: Else; outcome is NOT_APPLICABLE: ```else: outcome = NOT_APPLICABLE```  
 
-          - Case 2: ```exterior_vertical_surface_b.does_cast_shade == TRUE: FAIL```  
+
+**Notes:**
+
+1. Update Rule ID from 5-4 to 5-3 on 10/26/2023
+
+**[Back](../_toc.md)**
