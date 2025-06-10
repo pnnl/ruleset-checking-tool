@@ -83,7 +83,7 @@ class PRM9012019Rule44u85(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(PRM9012019Rule44u85.TerminalRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=False, BASELINE_0=True, PROPOSED=False
+                    USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 required_fields={
                     "$": [
@@ -98,6 +98,8 @@ class PRM9012019Rule44u85(RuleDefinitionListIndexedBase):
                         "unit": "cfm",
                     },
                 },
+                manual_check_required_msg="The minimum volume flowrate is equal to the maximum of 30% of the terminal primary airflow rate and the terminal minimum outdoor airflow, but it is less than the minimum airflow in the proposed design. "
+                "Check that the baseline minimum airlfow is sufficient to comply with accredidation standards.",
             )
 
         def get_calc_vals(self, context, data=None):
@@ -113,6 +115,15 @@ class PRM9012019Rule44u85(RuleDefinitionListIndexedBase):
                     "volumetric_flow_rate", minimum_outdoor_airflow_b
                 ),
             }
+
+        def manual_check_required(self, context, calc_vals=None, data=None):
+            minimum_airflow_b = calc_vals["minimum_airflow_b"]
+            primary_airflow_b = calc_vals["primary_airflow_b"]
+            minimum_outdoor_airflow_b = calc_vals["minimum_outdoor_airflow_b"]
+
+            return minimum_airflow_b == max(
+                primary_airflow_b * 0.3, minimum_outdoor_airflow_b
+            )
 
         def rule_check(self, context, calc_vals=None, data=None):
             minimum_airflow_b = calc_vals["minimum_airflow_b"]
