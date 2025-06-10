@@ -86,6 +86,7 @@ rules_dict = {
     "prm9012019rule22c86": "section6rule9",
     "prm9012019rule34l34": "section10rule1",
     "prm9012019rule34l50": "section10rule7",
+    "prm9012019rule73m45": "section10rule10",
     "prm9012019rule10p28": "section10rule14",
     "prm9012019rule10p01": "section10rule15",
     "prm9012019rule72v93": "section11rule1",
@@ -234,6 +235,41 @@ rules_dict = {
     "prm9012019rule71f87": "section23rule15",
     "prm9012019rule79i34": "section23rule16",
     "prm9012019rule40y63": "section23rule17",
+}
+
+section_list = [
+    "All",
+    "Performance Calculations",
+    "Schedules Setpoints",
+    "Envelope",
+    "Lighting",
+    "HVAC General",
+    "Service Hot Water",
+    "Receptacles",
+    "Transformers",
+    "Elevator",
+    "HVAC-Baseline",
+    "HVAC-General",
+    "HVAC-HotWaterSide",
+    "HVAC-ChilledWaterSide",
+    "HVAC-AirSide",
+]
+
+section_dict = {
+    "1": "Performance Calculations",
+    "4": "Schedules Setpoints",
+    "5": "Envelope",
+    "6": "Lighting",
+    "10": "HVAC General",
+    "11": "Service Hot Water",
+    "12": "Receptacles",
+    "15": "Transformers",
+    "16": "Elevator",
+    "18": "HVAC-Baseline",
+    "19": "HVAC-General",
+    "21": "HVAC-HotWaterSide",
+    "22": "HVAC-ChilledWaterSide",
+    "23": "HVAC-AirSide",
 }
 
 if SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901"):

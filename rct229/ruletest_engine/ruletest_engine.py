@@ -14,6 +14,8 @@ from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
 from rct229.rulesets import rulesets
+from rct229.rulesets.ashrae9012019 import rules_dict as rules_hash_dict
+from rct229.rulesets.ashrae9012019 import section_dict
 from rct229.ruletest_engine.ruletest_rmd_factory import get_ruletest_rmd_models
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
@@ -438,18 +440,6 @@ def generate_rct_outcomes_list_from_section_list(section_list):
     rct_outcomes_list = []
     invalid_rmd_messages = []
 
-    # Maps section lists to their titles
-    section_dict = {
-        "5": "Envelope",
-        "6": "Lighting",
-        "12": "Receptacles",
-        "15": "Transformers",
-        "19": "HVAC-Airside",
-        "21": "HVAC-WaterSide",
-        "22": "HVAC-Chiller",
-        "23": "HVAC-SystemSpecificRequirements",
-    }
-
     # Maps excel enumerations for pass/fail etc. to RCTOutcomeLabel. Unfortunately there's a disconnect.
     ruletest_outcome_dict = {
         "pass": RCTOutcomeLabel.PASS,
@@ -479,6 +469,10 @@ def generate_rct_outcomes_list_from_section_list(section_list):
         )
         json_list = glob.glob(master_json_path)
 
+        print(
+            f"Running rule tests for {section.capitalize()}:{section_dict[section.replace('section','')]}..."
+        )
+
         for rule_test_json_path in json_list:
             # Open the rule test JSON and perform rule evaluation for each test in JSON
             with open(rule_test_json_path) as f:
@@ -497,8 +491,18 @@ def generate_rct_outcomes_list_from_section_list(section_list):
                     section = test_dict["Section"]
                     rule = test_dict["Rule"]
 
-                    # Construction function name for Section and rule
-                    function_name = f"Section{section}Rule{rule}"
+                    # Construct look-up name for Section and Rule to map back to its corresponding python function
+                    section_name = f"section{section}rule{rule}"
+
+                    # Inverted dictionary: from 'sectionNruleN' -> 'prm9012019rule<hash>'
+                    section_rule_to_rule_hash_dict = {
+                        v: k for k, v in rules_hash_dict.items()
+                    }
+                    function_name = (
+                        section_rule_to_rule_hash_dict[section_name]
+                        .replace("prm", "PRM")
+                        .replace("rule", "Rule")
+                    )
 
                     # Pull in rule, if written. If not found, relay RULE_NOT_FOUND message to console and continue testing
                     try:
@@ -535,9 +539,17 @@ def generate_rct_outcomes_list_from_section_list(section_list):
                         rule_test_outcome_dict["test_description"] = test_dict[
                             "test_description"
                         ]
-                        rule_test_outcome_dict["ruleset_section"] = standard_dict[
-                            "ruleset_reference"
-                        ]
+                        # Add ruleset reference, if it exists (not all rule tests have ruleset reference objects)
+                        if (
+                            "ruleset_reference" in standard_dict
+                            and standard_dict["ruleset_reference"] != "0"
+                        ):
+                            rule_test_outcome_dict["ruleset_section"] = standard_dict[
+                                "ruleset_reference"
+                            ]
+                        else:
+                            rule_test_outcome_dict["ruleset_section"] = None
+
                         rule_test_outcome_dict["ruleset_section_title"] = section_dict[
                             str(test_dict["Section"])
                         ]
