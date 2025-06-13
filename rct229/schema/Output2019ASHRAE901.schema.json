@@ -196,7 +196,7 @@
                 },
                 "energy_source": {
                     "description": "End source",
-                    "$ref": "Output2019ASHRAE901.schema.json#/definitions/EnergySourceOptions"
+                    "$ref": "ASHRAE229.schema.json#/definitions/EnergySourceOptions"
                 },
                 "annual_site_energy_use": {
                     "description": "Annual site energy use",
@@ -311,6 +311,6 @@
             ]
         }
     },
-    "version": "0.1.6",
+    "version": "0.1.7",
     "$ref": "ASHRAE229_extra.schema.json#/definitions/RulesetProjectDescription"
 }
