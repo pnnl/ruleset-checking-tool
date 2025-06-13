@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "baseline": {
@@ -126,7 +126,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "baseline": {
@@ -238,7 +238,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "baseline": {

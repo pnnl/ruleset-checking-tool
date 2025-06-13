@@ -15,7 +15,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
@@ -85,7 +85,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
@@ -164,7 +164,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
@@ -242,7 +242,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {
@@ -315,7 +315,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "proposed": {

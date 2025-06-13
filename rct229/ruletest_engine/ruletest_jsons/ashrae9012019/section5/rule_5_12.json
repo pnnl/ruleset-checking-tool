@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "baseline": {
@@ -98,7 +98,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "baseline": {
@@ -184,7 +184,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "baseline": {
@@ -269,7 +269,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "baseline": {
@@ -355,7 +355,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "baseline": {
@@ -440,7 +440,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "baseline": {
@@ -526,7 +526,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "baseline": {
@@ -616,7 +616,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "baseline": {
@@ -702,7 +702,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.6"
         },
         "rmd_transformations": {
             "baseline": {
