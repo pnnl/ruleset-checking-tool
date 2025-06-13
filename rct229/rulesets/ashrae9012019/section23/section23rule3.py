@@ -74,7 +74,8 @@ class PRM9012019Rule44u85(RuleDefinitionListIndexedBase):
 
         operation_schedule_hourly_values_dict_p = {}
         for hvac in find_all(
-            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]"
+            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+            rmd_p,
         ):
             operation_sch_id = getattr_(
                 hvac,
