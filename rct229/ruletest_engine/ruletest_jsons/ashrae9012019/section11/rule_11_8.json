@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -37,26 +37,14 @@
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1",
+                                                            "SHW 2"
                                                         ]
                                                     },
                                                     {
                                                         "id": "Space 2",
                                                         "floor_area": 92.90303999999999,
-                                                        "service_water_heating_area_type": "OFFICE",
-                                                        "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 2",
-                                                                "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
-                                                        ]
+                                                        "service_water_heating_area_type": "OFFICE"
                                                     }
                                                 ]
                                             }
@@ -73,12 +61,7 @@
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_area_type": "LIBRARY",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 3",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 3"
                                                         ]
                                                     },
                                                     {
@@ -86,12 +69,7 @@
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_area_type": "LIBRARY",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 4",
-                                                                "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 4"
                                                         ]
                                                     }
                                                 ]
@@ -99,6 +77,32 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 2",
+                                "served_by_distribution_system": "SHW Distribution 2",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 3",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 4",
+                                "served_by_distribution_system": "SHW Distribution 2",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -134,18 +138,8 @@
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            },
-                                                            {
-                                                                "id": "SHW 2",
-                                                                "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1",
+                                                            "SHW 2"
                                                         ]
                                                     }
                                                 ]
@@ -163,18 +157,8 @@
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_area_type": "LIBRARY",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 3",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            },
-                                                            {
-                                                                "id": "SHW 4",
-                                                                "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 3",
+                                                            "SHW 4"
                                                         ]
                                                     }
                                                 ]
@@ -182,6 +166,32 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 2",
+                                "served_by_distribution_system": "SHW Distribution 2",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 3",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 4",
+                                "served_by_distribution_system": "SHW Distribution 2",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -222,7 +232,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -246,12 +256,7 @@
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -259,6 +264,14 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -291,12 +304,7 @@
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -304,6 +312,14 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -337,7 +353,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -360,12 +376,7 @@
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -381,12 +392,7 @@
                                                     {
                                                         "id": "Space 2",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 2",
-                                                                "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 2"
                                                         ]
                                                     }
                                                 ]
@@ -394,6 +400,20 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 2",
+                                "served_by_distribution_system": "SHW Distribution 2",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -438,12 +458,7 @@
                                                         "id": "Space 1",
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -459,12 +474,7 @@
                                                     {
                                                         "id": "Space 2",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 2",
-                                                                "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 2"
                                                         ]
                                                     }
                                                 ]
@@ -472,6 +482,20 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 2",
+                                "served_by_distribution_system": "SHW Distribution 2",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -513,7 +537,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -537,12 +561,7 @@
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_area_type": "ALL_OTHERS",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -559,12 +578,7 @@
                                                         "id": "Space 2",
                                                         "service_water_heating_area_type": "ALL_OTHERS",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 2",
-                                                                "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 2"
                                                         ]
                                                     }
                                                 ]
@@ -572,6 +586,20 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 2",
+                                "served_by_distribution_system": "SHW Distribution 2",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -617,12 +645,7 @@
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_area_type": "ALL_OTHERS",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -639,12 +662,7 @@
                                                         "id": "Space 2",
                                                         "service_water_heating_area_type": "ALL_OTHERS",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 2",
-                                                                "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 2"
                                                         ]
                                                     }
                                                 ]
@@ -652,6 +670,20 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 2",
+                                "served_by_distribution_system": "SHW Distribution 2",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -692,7 +724,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -716,12 +748,7 @@
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -738,12 +765,7 @@
                                                         "id": "Space 2",
                                                         "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 2",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 2"
                                                         ]
                                                     }
                                                 ]
@@ -751,6 +773,20 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 2",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -783,12 +819,7 @@
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -805,12 +836,7 @@
                                                         "id": "Space 2",
                                                         "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 2",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 2"
                                                         ]
                                                     }
                                                 ]
@@ -818,6 +844,20 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 2",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -850,7 +890,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -874,18 +914,7 @@
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_area_type": "RETAIL",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            },
-                                                            {
-                                                                "id": "SHW 2",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -902,18 +931,8 @@
                                                         "id": "Space 2",
                                                         "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 3",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            },
-                                                            {
-                                                                "id": "SHW 4",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 3",
+                                                            "SHW 4"
                                                         ]
                                                     }
                                                 ]
@@ -921,6 +940,32 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 2",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 3",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 4",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -953,18 +998,7 @@
                                                         "floor_area": 92.90303999999999,
                                                         "service_water_heating_area_type": "RETAIL",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            },
-                                                            {
-                                                                "id": "SHW 2",
-                                                                "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -981,18 +1015,8 @@
                                                         "id": "Space 2",
                                                         "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 3",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            },
-                                                            {
-                                                                "id": "SHW 4",
-                                                                "served_by_distribution_system": "SHW Distribution 2",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 3",
+                                                            "SHW 4"
                                                         ]
                                                     }
                                                 ]
@@ -1000,6 +1024,32 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 2",
+                                "served_by_distribution_system": "SHW Distribution 2",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 3",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
+                            },
+                            {
+                                "id": "SHW 4",
+                                "served_by_distribution_system": "SHW Distribution 2",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [

@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -35,10 +35,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -46,6 +43,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -76,10 +79,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -87,6 +87,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -114,7 +120,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -136,10 +142,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -147,6 +150,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -177,12 +186,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100,
-                                                                "use_units": "POWER"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -190,6 +194,14 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
