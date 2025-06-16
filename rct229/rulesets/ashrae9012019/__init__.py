@@ -20,7 +20,7 @@ __all__ = [
     "section22",
     "section23",
     "section_list",
-    "section_dict"
+    "section_dict",
 ]
 
 rules_dict = {
