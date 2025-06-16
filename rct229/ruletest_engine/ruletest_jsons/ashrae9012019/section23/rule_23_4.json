@@ -14,7 +14,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5, 7 (Rule18-a, to be confirmed), lab space",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -239,7 +239,7 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5, 7 (Rule18-a, to be confirmed), lab space",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
