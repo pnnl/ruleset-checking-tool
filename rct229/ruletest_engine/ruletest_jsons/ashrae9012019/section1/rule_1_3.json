@@ -14,7 +14,7 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "user": {
@@ -163,7 +163,7 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "user": {
@@ -313,7 +313,7 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "user": {
@@ -463,7 +463,7 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "user": {
@@ -610,7 +610,7 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "user": {
@@ -757,7 +757,7 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "user": {
@@ -904,7 +904,7 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "user": {
@@ -1051,7 +1051,7 @@
             "comparison_value": "Baseline RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "user": {

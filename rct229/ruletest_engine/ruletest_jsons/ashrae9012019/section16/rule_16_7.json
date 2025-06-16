@@ -14,7 +14,7 @@
             "comparison_value": "Proposed Model",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -176,7 +176,7 @@
             "comparison_value": "Proposed Model",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -338,7 +338,7 @@
             "comparison_value": "Proposed Model",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -492,7 +492,7 @@
             "comparison_value": "Proposed Model",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {

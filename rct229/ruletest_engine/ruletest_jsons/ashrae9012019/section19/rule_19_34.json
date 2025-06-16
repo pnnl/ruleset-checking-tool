@@ -14,7 +14,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "user": {
@@ -256,7 +256,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "user": {

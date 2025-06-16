@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -41,9 +41,6 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "number_of_occupants": 10,
-                                                        "occupant_sensible_heat_gain": 586.1422222222222,
-                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "COMPUTER_ROOM"
                                                     }
@@ -78,37 +75,6 @@
                                 ]
                             }
                         ],
-                        "schedules": [
-                            {
-                                "id": "Occupant Schedule",
-                                "hourly_cooling_design_day": [
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0
-                                ]
-                            }
-                        ],
                         "type": "PROPOSED"
                     }
                 ]
@@ -129,7 +95,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -157,9 +123,6 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "number_of_occupants": 10,
-                                                        "occupant_sensible_heat_gain": 586.1422222222222,
-                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "COMPUTER_ROOM"
                                                     }
@@ -191,37 +154,6 @@
                                             }
                                         ]
                                     }
-                                ]
-                            }
-                        ],
-                        "schedules": [
-                            {
-                                "id": "Occupant Schedule",
-                                "hourly_cooling_design_day": [
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0,
-                                    1.0
                                 ]
                             }
                         ],
