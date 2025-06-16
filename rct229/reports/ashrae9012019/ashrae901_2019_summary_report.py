@@ -2,8 +2,8 @@ import re
 
 from pydash import find
 from rct229.report_engine.rct_report import RCTReport
-from rct229.reports.ashrae9012019 import section_dict, section_list
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
+from rct229.rulesets.ashrae9012019 import section_dict, section_list
 
 
 class ASHRAE9012019SummaryReport(RCTReport):
@@ -94,7 +94,7 @@ Replace-Undetermined
 
         # determine whether overall outcome is pass/fail/undetermined/not_applicable
         overall_result = self.calculate_rule_outcome(rule_outcome_result_dict)
-        self.ruleset_outcome[self.section_dict[rule_outcome["id"].split("-")[0]]][
+        self.ruleset_outcome[section_dict[rule_outcome["id"].split("-")[0]]][
             overall_result
         ] += 1
         self.ruleset_outcome["All"][overall_result] += 1
@@ -165,9 +165,9 @@ Replace-Undetermined
 
     def _section_name_helper(self, rule_outcome):
         section_no = rule_outcome.split("-")[0]
-        if f"Section: {self.section_dict[section_no]}" not in self.summary_report:
+        if f"Section: {section_dict[section_no]}" not in self.summary_report:
             return f"""
-### Section: {self.section_dict[section_no]}
+### Section: {section_dict[section_no]}
             """
         else:
             return None
