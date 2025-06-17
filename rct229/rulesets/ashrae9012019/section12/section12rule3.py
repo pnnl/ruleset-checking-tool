@@ -26,15 +26,15 @@ EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES = [
 ]
 
 
-class PRM9012019rule79w60(RuleDefinitionListIndexedBase):
+class PRM9012019Rule79w60(RuleDefinitionListIndexedBase):
     """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 12 (Receptacle)"""
 
     def __init__(self):
-        super(PRM9012019rule79w60, self).__init__(
+        super(PRM9012019Rule79w60, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=PRM9012019rule79w60.RuleSetModelDescriptionRule(),
+            each_rule=PRM9012019Rule79w60.RuleSetModelDescriptionRule(),
             index_rmd=PROPOSED,
             id="12-3",
             description="When receptacle controls are specified in the proposed building design for spaces where not required by Standard 90.1 2019 Section 8.4.2, "
@@ -47,11 +47,11 @@ class PRM9012019rule79w60(RuleDefinitionListIndexedBase):
 
     class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(PRM9012019rule79w60.RuleSetModelDescriptionRule, self).__init__(
+            super(PRM9012019Rule79w60.RuleSetModelDescriptionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=PRM9012019rule79w60.RuleSetModelDescriptionRule.SpaceRule(),
+                each_rule=PRM9012019Rule79w60.RuleSetModelDescriptionRule.SpaceRule(),
                 index_rmd=PROPOSED,
                 list_path="$.buildings[*].building_segments[*].zones[*].spaces[*]",
                 required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
@@ -123,12 +123,12 @@ class PRM9012019rule79w60(RuleDefinitionListIndexedBase):
         class SpaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(
-                    PRM9012019rule79w60.RuleSetModelDescriptionRule.SpaceRule, self
+                    PRM9012019Rule79w60.RuleSetModelDescriptionRule.SpaceRule, self
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
-                    each_rule=PRM9012019rule79w60.RuleSetModelDescriptionRule.SpaceRule.MiscEquipRule(),
+                    each_rule=PRM9012019Rule79w60.RuleSetModelDescriptionRule.SpaceRule.MiscEquipRule(),
                     index_rmd=PROPOSED,
                     list_path="$.miscellaneous_equipment[*]",
                 )
@@ -141,7 +141,7 @@ class PRM9012019rule79w60(RuleDefinitionListIndexedBase):
             class MiscEquipRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        PRM9012019rule79w60.RuleSetModelDescriptionRule.SpaceRule.MiscEquipRule,
+                        PRM9012019Rule79w60.RuleSetModelDescriptionRule.SpaceRule.MiscEquipRule,
                         self,
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
