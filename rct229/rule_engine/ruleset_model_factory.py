@@ -51,10 +51,15 @@ def get_rmd_instance():
 
     """
     rmd = RuleSetModels()
-    ruleset_model_types_enum = SchemaEnums.schema_enums[
+    common_model_enum = SchemaEnums.schema_enums["CommonRulesetModelOptions"]
+    ruleset_specific_enum = SchemaEnums.schema_enums[
         ruleset_model_dict[SchemaStore.SELECTED_RULESET]
     ]
-    for ruleset_model in ruleset_model_types_enum.get_list():
+    ruleset_model_types_enum_list = list(
+        set(common_model_enum.get_list() + ruleset_specific_enum.get_list())
+    )
+
+    for ruleset_model in ruleset_model_types_enum_list:
         rmd.__setattr__(ruleset_model, None)
     return rmd
 
