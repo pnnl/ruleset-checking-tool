@@ -560,16 +560,17 @@ def schema_validate_rpd(rpd, full_errors: bool = False):
                 # Construct the error message
                 parent_id = parent_id[0] if parent_id else parent_id
                 if not full_errors:
-                    truncated_message = (error.message[:20] + '..........' + error.message[-130:]) if len(
-                        error.message) > 160 else error.message
-                    error_message = (
-                            f"{truncated_message}. Path: {error_path}." +
-                            (f" Parent ID: {parent_id}" if parent_id else "")
+                    truncated_message = (
+                        (error.message[:20] + ".........." + error.message[-130:])
+                        if len(error.message) > 160
+                        else error.message
+                    )
+                    error_message = f"{truncated_message}. Path: {error_path}." + (
+                        f" Parent ID: {parent_id}" if parent_id else ""
                     )
                 else:
-                    error_message = (
-                            f"{error.message}. Path: {error_path}." +
-                            (f" Parent ID: {parent_id}" if parent_id else "")
+                    error_message = f"{error.message}. Path: {error_path}." + (
+                        f" Parent ID: {parent_id}" if parent_id else ""
                     )
                 error_details.append(error_message)
 
