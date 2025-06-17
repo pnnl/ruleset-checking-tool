@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -107,7 +107,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -201,7 +201,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -293,7 +293,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -385,7 +385,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -432,20 +432,14 @@
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "Construction 1"
                                                     },
                                                     {
                                                         "id": "Surface 2",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "Construction 2"
                                                     }
                                                 ]
                                             }
@@ -465,6 +459,16 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "u_factor": 3.2366105565544463
+                            },
+                            {
+                                "id": "Construction 2",
+                                "u_factor": 3.2366105565544463
                             }
                         ],
                         "type": "BASELINE_0"
@@ -487,7 +491,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -534,20 +538,14 @@
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "Construction 1"
                                                     },
                                                     {
                                                         "id": "Surface 2",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "Construction 2"
                                                     }
                                                 ]
                                             }
@@ -567,6 +565,16 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "u_factor": 3.2366105565544463
+                            },
+                            {
+                                "id": "Construction 2",
+                                "u_factor": 3.2366105565544463
                             }
                         ],
                         "type": "BASELINE_0"
@@ -589,7 +597,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -633,20 +641,14 @@
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "Construction 1"
                                                     },
                                                     {
                                                         "id": "Surface 2",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "Construction 2"
                                                     }
                                                 ]
                                             }
@@ -666,6 +668,16 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "u_factor": 3.2366105565544463
+                            },
+                            {
+                                "id": "Construction 2",
+                                "u_factor": 3.2366105565544463
                             }
                         ],
                         "type": "BASELINE_0"
@@ -688,7 +700,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -732,20 +744,14 @@
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "Construction 1"
                                                     },
                                                     {
                                                         "id": "Surface 2",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
                                                         "area": 464.51519999999994,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "Construction 2"
                                                     }
                                                 ]
                                             }
@@ -765,6 +771,16 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "u_factor": 3.2366105565544463
+                            },
+                            {
+                                "id": "Construction 2",
+                                "u_factor": 3.2366105565544463
                             }
                         ],
                         "type": "BASELINE_0"

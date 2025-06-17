@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -52,10 +52,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "c_factor": 6.473221113108893
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
@@ -75,6 +72,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "c_factor": 6.473221113108893
                             }
                         ],
                         "type": "BASELINE_0"
@@ -97,7 +100,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -136,10 +139,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "c_factor": 6.473221113108893
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
@@ -159,6 +159,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "c_factor": 6.473221113108893
                             }
                         ],
                         "type": "BASELINE_0"
@@ -181,7 +187,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -220,10 +226,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "c_factor": 0.363408904595587
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
@@ -243,6 +246,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "c_factor": 0.363408904595587
                             }
                         ],
                         "type": "BASELINE_0"
@@ -265,7 +274,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -304,10 +313,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "c_factor": 6.473221113108893
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
@@ -327,6 +333,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "c_factor": 6.473221113108893
                             }
                         ],
                         "type": "BASELINE_0"
@@ -349,7 +361,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -388,10 +400,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "c_factor": 0.6757134319824195
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
@@ -411,6 +420,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "c_factor": 0.6757134319824195
                             }
                         ],
                         "type": "BASELINE_0"
@@ -433,7 +448,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -473,10 +488,7 @@
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
                                                         "area": 9.290303999999999,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "c_factor": 6.473221113108893
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
@@ -496,6 +508,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "c_factor": 6.473221113108893
                             }
                         ],
                         "type": "BASELINE_0"
@@ -518,7 +536,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -558,10 +576,7 @@
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
                                                         "area": 9.290303999999999,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "c_factor": 0.363408904595587
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
@@ -581,6 +596,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "c_factor": 0.363408904595587
                             }
                         ],
                         "type": "BASELINE_0"
@@ -603,7 +624,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -642,10 +663,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "c_factor": 0.6757134319824195
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
@@ -665,6 +683,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "c_factor": 0.6757134319824195
                             }
                         ],
                         "type": "BASELINE_0"
@@ -687,7 +711,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -726,10 +750,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "GROUND",
                                                         "tilt": 90,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "c_factor": 6.473221113108893
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
@@ -749,6 +770,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "c_factor": 6.473221113108893
                             }
                         ],
                         "type": "BASELINE_0"

@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -104,7 +104,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -195,7 +195,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -286,7 +286,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -377,7 +377,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -426,10 +426,7 @@
                                                                 "u_factor": 7.722439222656224
                                                             }
                                                         ],
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 0.7041047526539498
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
@@ -449,6 +446,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "u_factor": 0.7041047526539498
                             }
                         ],
                         "type": "BASELINE_0"
@@ -471,7 +474,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -520,10 +523,7 @@
                                                                 "u_factor": 3.293393197897507
                                                             }
                                                         ],
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
@@ -543,6 +543,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "u_factor": 3.2366105565544463
                             }
                         ],
                         "type": "BASELINE_0"
@@ -565,7 +571,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -656,7 +662,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {

@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -53,15 +53,18 @@
                                                             "absorptance_thermal_exterior": 0.3,
                                                             "absorptance_solar_exterior": 0.1
                                                         },
-                                                        "construction": {
-                                                            "id": "Construction 1"
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1"
                             }
                         ],
                         "type": "PROPOSED"
@@ -105,15 +108,18 @@
                                                             "absorptance_thermal_exterior": 0.3,
                                                             "absorptance_solar_exterior": 0.1
                                                         },
-                                                        "construction": {
-                                                            "id": "Construction 1"
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -136,7 +142,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -176,15 +182,18 @@
                                                             "absorptance_thermal_exterior": 0.3,
                                                             "absorptance_solar_exterior": 0.1
                                                         },
-                                                        "construction": {
-                                                            "id": "Construction 1"
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1"
                             }
                         ],
                         "type": "PROPOSED"
@@ -228,15 +237,18 @@
                                                             "absorptance_thermal_exterior": 0.5,
                                                             "absorptance_solar_exterior": 0.5
                                                         },
-                                                        "construction": {
-                                                            "id": "Construction 1"
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -259,7 +271,7 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -298,15 +310,18 @@
                                                             "id": "Surface Optical Properties 1",
                                                             "absorptance_solar_exterior": 0.1
                                                         },
-                                                        "construction": {
-                                                            "id": "Construction 1"
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1"
                             }
                         ],
                         "type": "PROPOSED"
@@ -350,15 +365,18 @@
                                                             "absorptance_thermal_exterior": 0.3,
                                                             "absorptance_solar_exterior": 0.1
                                                         },
-                                                        "construction": {
-                                                            "id": "Construction 1"
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1"
                             }
                         ],
                         "type": "BASELINE_0"

@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -57,10 +57,7 @@
                                                             "id": "Surface Optical Properties 1",
                                                             "absorptance_solar_exterior": 0.7
                                                         },
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
@@ -80,6 +77,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "u_factor": 3.2366105565544463
                             }
                         ],
                         "type": "BASELINE_0"
@@ -102,7 +105,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.6"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -146,10 +149,7 @@
                                                             "id": "Surface Optical Properties 1",
                                                             "absorptance_solar_exterior": 0.5
                                                         },
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
@@ -169,6 +169,12 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "u_factor": 3.2366105565544463
                             }
                         ],
                         "type": "BASELINE_0"
