@@ -40,10 +40,6 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
                 BASELINE_180=True,
                 BASELINE_270=True,
             ),
-            required_fields={
-                "$": ["ruleset_model_descriptions", "output"],
-                "output": ["total_area_weighted_building_performance_factor"],
-            },
             index_rmd=BASELINE_0,
             each_rule=PRM9012019Rule73j65.RMDRule(),
             id="1-1",
@@ -54,8 +50,14 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
             standard_section="Section G4.2.1.1",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"output": (BASELINE_0, "output")},
         )
+
+    def create_data(self, context, data=None):
+        return {
+            key: getattr(context, key).get("output", {}).get("total_area_weighted_building_performance_factor")
+            for key in context.__dict__
+            if getattr(context, key) is not None
+        }
 
     class RMDRule(RuleDefinitionBase):
         def __init__(self):
@@ -83,10 +85,14 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             rmd_b0 = context.BASELINE_0
-            output_bpf = data["output"][
-                "total_area_weighted_building_performance_factor"
-            ]
 
+            output_bpf_list = list(
+                set(filter(lambda x: x is not None, data.values()))
+            )
+            assert_(
+                len(output_bpf_list) >= 1,
+                "At least one `output_bpf_set` value must exist.",
+            )
             bpf_building_area_type_dict = get_BPF_building_area_types_and_zones(rmd_b0)
             has_undetermined = "UNDETERMINED" in bpf_building_area_type_dict
             bpf_bat_sum_prod = ZERO.AREA
@@ -114,7 +120,7 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
                 )
 
             return {
-                "output_bpf": output_bpf,
+                "output_bpf_list": output_bpf_list,
                 "bpf_bat_sum_prod": bpf_bat_sum_prod,
                 "total_area": total_area,
                 "has_undetermined": has_undetermined,
@@ -125,14 +131,18 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
             return has_undetermined
 
         def rule_check(self, context, calc_vals=None, data=None):
-            output_bpf = calc_vals["output_bpf"]
+            output_bpf_list = calc_vals["output_bpf_list"]
             bpf_bat_sum_prod = calc_vals["bpf_bat_sum_prod"]
             total_area = calc_vals["total_area"]
 
-            return self.precision_comparison(bpf_bat_sum_prod / total_area, output_bpf)
+            return len(output_bpf_list) == 1 and self.precision_comparison(
+                bpf_bat_sum_prod / total_area, output_bpf_list[0]
+            )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
-            output_bpf = calc_vals["output_bpf"]
+            output_bpf_list = calc_vals["output_bpf_list"]
             bpf_bat_sum_prod = calc_vals["bpf_bat_sum_prod"]
             total_area = calc_vals["total_area"]
-            return std_equal(output_bpf, bpf_bat_sum_prod / total_area)
+            return len(output_bpf_list) == 1 and std_equal(
+                output_bpf_list[0], bpf_bat_sum_prod / total_area
+            )
