@@ -52,9 +52,7 @@ class PRM9012019Rule63e94(RuleDefinitionBase):
                     )
                 )
                 bbp_set.append(
-                    find_one(
-                        "$.output.baseline_building_performance_energy_cost", rmd
-                    )
+                    find_one("$.output.baseline_building_performance_energy_cost", rmd)
                 )
 
         pci_set = list(set(filter(lambda x: x is not None, pci_set)))

@@ -56,9 +56,7 @@ class PRM9012019Rule10d53(RuleDefinitionListIndexedBase):
                 required_fields={
                     "$": ["model_output"],
                     "$.model_output": ["annual_end_use_results"],
-                    "$.model_output.annual_end_use_results[*]": [
-                        "energy_source"
-                    ],
+                    "$.model_output.annual_end_use_results[*]": ["energy_source"],
                 },
             )
 

@@ -56,19 +56,13 @@ class PRM9012019Rule88z11(RuleDefinitionBase):
                     )
                 )
                 bbp_set.append(
-                    find_one(
-                        "$.output.baseline_building_performance_energy_cost", rmd
-                    )
+                    find_one("$.output.baseline_building_performance_energy_cost", rmd)
                 )
                 bbrec_set.append(
-                    find_one(
-                        "$.output.baseline_building_regulated_energy_cost", rmd
-                    )
+                    find_one("$.output.baseline_building_regulated_energy_cost", rmd)
                 )
                 bbuec_set.append(
-                    find_one(
-                        "$.output.baseline_building_unregulated_energy_cost", rmd
-                    )
+                    find_one("$.output.baseline_building_unregulated_energy_cost", rmd)
                 )
 
         pci_target_set = list(set(filter(lambda x: x is not None, pci_target_set)))

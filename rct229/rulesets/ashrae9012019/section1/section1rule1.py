@@ -53,7 +53,9 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         return {
-            key: getattr(context, key).get("output", {}).get("total_area_weighted_building_performance_factor")
+            key: getattr(context, key)
+            .get("output", {})
+            .get("total_area_weighted_building_performance_factor")
             for key in context.__dict__
             if getattr(context, key) is not None
         }
@@ -85,9 +87,7 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             rmd_b0 = context.BASELINE_0
 
-            output_bpf_list = list(
-                set(filter(lambda x: x is not None, data.values()))
-            )
+            output_bpf_list = list(set(filter(lambda x: x is not None, data.values())))
             assert_(
                 len(output_bpf_list) >= 1,
                 "At least one `output_bpf_set` value must exist.",
