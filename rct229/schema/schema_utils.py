@@ -1,6 +1,7 @@
 import json
 import os
 import re
+from collections.abc import Sequence
 from copy import deepcopy
 
 from jsonpath_ng.ext import parse as parse_jsonpath
@@ -177,13 +178,16 @@ def quantify_rmd(rmd):
         if schema_unit_str is not None:
             # Make the units string pint-compatible
             pint_unit_str = clean_schema_units(schema_unit_str)
-
-            # Create the pint quantity to replace the number
-            pint_qty = number_rmd_item_match.value * config.ureg(pint_unit_str)
-
-            # Replace the number with the appropriate pint quantity
-            set_(rmd, full_path, pint_qty)
-
+            val = number_rmd_item_match.value
+            if isinstance(val, Sequence) and not isinstance(val, str):
+                # Replace each number in the list with a pint quantity
+                pint_qty_list = [v * config.ureg(pint_unit_str) for v in val]
+                set_(rmd, full_path, pint_qty_list)
+            else:
+                # Create the pint quantity to replace the number
+                pint_qty = number_rmd_item_match.value * config.ureg(pint_unit_str)
+                # Replace the number with the appropriate pint quantity
+                set_(rmd, full_path, pint_qty)
     return rmd
 
 
