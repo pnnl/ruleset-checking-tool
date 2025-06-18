@@ -32,7 +32,6 @@ class PRM9012019Rule10d53(RuleDefinitionListIndexedBase):
             ruleset_section_title="Performance Calculation",
             standard_section="G3.11 18 Baseline",
             is_primary_rule=True,
-            rmd_context="ruleset_model_descriptions/0",
             index_rmd=BASELINE_0,
             each_rule=PRM9012019Rule10d53.RMDRule(),
             list_path="ruleset_model_descriptions[0]",
@@ -56,9 +55,8 @@ class PRM9012019Rule10d53(RuleDefinitionListIndexedBase):
                 ),
                 required_fields={
                     "$": ["model_output"],
-                    "$.model_output": ["output_instance"],
-                    "$.model_output.output_instance": ["annual_end_use_results"],
-                    "$.model_output.output_instance.annual_end_use_results[*]": [
+                    "$.model_output": ["annual_end_use_results"],
+                    "$.model_output.annual_end_use_results[*]": [
                         "energy_source"
                     ],
                 },
@@ -72,7 +70,7 @@ class PRM9012019Rule10d53(RuleDefinitionListIndexedBase):
         renewable_annual_site_energy_use_list = [
             sum(
                 find_all(
-                    f'$.model_output.output_instance.annual_end_use_results[*][?(@.energy_source="{ENERGY_SOURCE_OPTIONS.ON_SITE_RENEWABLES}")].annual_site_energy_use',
+                    f'$.ruleset_model_descriptions[0].model_output.annual_end_use_results[*][?(@.energy_source="{ENERGY_SOURCE_OPTIONS.ON_SITE_RENEWABLES}")].annual_site_energy_use',
                     rmd,
                 )
             )

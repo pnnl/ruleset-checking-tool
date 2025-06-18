@@ -29,7 +29,6 @@ class PRM9012019Rule88z11(RuleDefinitionBase):
             ruleset_section_title="Performance Calculations",
             standard_section="Section 4.2.1.1",
             is_primary_rule=True,
-            rmd_context="ruleset_model_descriptions/0",
         )
 
     def get_calc_vals(self, context, data=None):
@@ -48,27 +47,27 @@ class PRM9012019Rule88z11(RuleDefinitionBase):
         for rmd in (rmd_u, rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p):
             if rmd is not None:
                 pci_target_set.append(
-                    find_one("$.model_output.performance_cost_index_target", rmd)
+                    find_one("$.output.performance_cost_index_target", rmd)
                 )
                 bpf_set.append(
                     find_one(
-                        "$.model_output.total_area_weighted_building_performance_factor",
+                        "$.output.total_area_weighted_building_performance_factor",
                         rmd,
                     )
                 )
                 bbp_set.append(
                     find_one(
-                        "$.model_output.baseline_building_performance_energy_cost", rmd
+                        "$.output.baseline_building_performance_energy_cost", rmd
                     )
                 )
                 bbrec_set.append(
                     find_one(
-                        "$.model_output.baseline_building_regulated_energy_cost", rmd
+                        "$.output.baseline_building_regulated_energy_cost", rmd
                     )
                 )
                 bbuec_set.append(
                     find_one(
-                        "$.model_output.baseline_building_unregulated_energy_cost", rmd
+                        "$.output.baseline_building_unregulated_energy_cost", rmd
                     )
                 )
 

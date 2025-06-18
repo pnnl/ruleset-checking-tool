@@ -9,7 +9,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_BPF_building_area_types
     get_BPF_building_area_types_and_zones,
 )
 from rct229.utils.assertions import assert_
-from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
