@@ -4,7 +4,7 @@ from functools import partial
 from pint import Quantity
 from rct229.rulesets.ashrae9012019.data import data
 
-EXTRA_SCHEMA = data["ASHRAE229.9012019.extra.schema"]
+EXTRA_SCHEMA = data["ASHRAE229.9012019.extra.schema_0_1_7"]
 
 exception_list = [
     "Enumerations2019ASHRAE901",
