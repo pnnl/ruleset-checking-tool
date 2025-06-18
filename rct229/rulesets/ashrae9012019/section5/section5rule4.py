@@ -17,6 +17,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 )
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
+from rct229.utils.assertions import getattr_, assert_
 
 
 class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
@@ -28,7 +29,7 @@ class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$.ruleset_model_descriptions[*]": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather", "constructions"],
                 "weather": ["climate_zone"],
             },
             each_rule=PRM9012019Rule43n21.BuildingRule(),
@@ -44,7 +45,11 @@ class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        return {"climate_zone": climate_zone}
+        constructions = rpd_b["ruleset_model_descriptions"][0]["constructions"]
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -81,10 +86,6 @@ class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
-                    required_fields={
-                        "$": ["construction"],
-                        "construction": ["u_factor"],
-                    },
                     precision={
                         "roof_u_factor_b": {
                             "precision": 0.001,
@@ -95,10 +96,19 @@ class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 climate_zone: str = data["climate_zone"]
+                constructions = data["constructions"]
                 roof = context.BASELINE_0
                 scc: str = data["surface_conditioning_category_dict"][roof["id"]]
-                roof_u_factor = roof["construction"]["u_factor"]
-
+                roof_construction = getattr_(roof, "Surface", "construction")
+                roof_u_factor = next(
+                    (
+                        construction.get("u_factor")
+                        for construction in constructions
+                        if construction["id"] == roof_construction
+                    ),
+                    None,
+                )
+                assert_(roof_u_factor is not None, f"U-factor for roof construction '{roof_construction}' is missing")
                 target_u_factor = None
                 target_u_factor_res = None
                 target_u_factor_nonres = None
