@@ -27,12 +27,14 @@ TEST_RMD = {
                                     "served_by_heating_ventilating_air_conditioning_system": "PTAC 1",
                                 }
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Zone exhaust fan 1",
-                                "specification_method": "SIMPLE",
-                                "design_electric_power": 200,
-                                "design_airflow": 1500,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Zone exhaust fan 1",
+                                    "specification_method": "SIMPLE",
+                                    "design_electric_power": 200,
+                                    "design_airflow": 1500,
+                                }
+                            ],
                         },
                         {
                             "id": "Thermal Zone 2",
@@ -59,12 +61,14 @@ TEST_RMD = {
                                     "served_by_heating_ventilating_air_conditioning_system": "PTAC 3",
                                 }
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Zone exhaust fan 3-1",
-                                "specification_method": "SIMPLE",
-                                "design_electric_power": 200,
-                                "design_airflow": 1500,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Zone exhaust fan 3-1",
+                                    "specification_method": "SIMPLE",
+                                    "design_electric_power": 200,
+                                    "design_airflow": 1500,
+                                }
+                            ],
                         },
                     ],
                     "heating_ventilating_air_conditioning_systems": [

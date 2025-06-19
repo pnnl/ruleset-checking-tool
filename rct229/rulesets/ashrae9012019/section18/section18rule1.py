@@ -55,9 +55,8 @@ class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
                 required_fields={
-                    "$": ["weather", "calendar"],
+                    "$": ["weather"],
                     "weather": ["climate_zone"],
-                    "calendar": ["is_leap_year"],
                 },
             )
 
@@ -65,10 +64,9 @@ class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
             climate_zone_b = rmd_b["weather"]["climate_zone"]
-            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             zone_target_baseline_system_dict_b = get_zone_target_baseline_system(
-                rmd_b, rmd_p, climate_zone_b, is_leap_year_b
+                rmd_b, rmd_p, climate_zone_b
             )
 
             return bool(zone_target_baseline_system_dict_b)
@@ -77,10 +75,9 @@ class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
             climate_zone_b = rmd_b["weather"]["climate_zone"]
-            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             zone_target_baseline_system_dict_b = get_zone_target_baseline_system(
-                rmd_b, rmd_p, climate_zone_b, is_leap_year_b
+                rmd_b, rmd_p, climate_zone_b
             )
             baseline_hvac_system_dict_b = get_baseline_system_types(rmd_b)
             get_building_lab_zones_list_b = get_building_lab_zones_list(rmd_p)
