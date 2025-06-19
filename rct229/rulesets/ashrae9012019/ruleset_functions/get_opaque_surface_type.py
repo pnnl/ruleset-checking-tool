@@ -21,7 +21,7 @@ class OpaqueSurfaceType:
     UNHEATED_SOG: str = "UNHEATED SLAB-ON-GRADE"
 
 
-def get_opaque_surface_type(surface: dict) -> str:
+def get_opaque_surface_type(surface: dict, has_radiant_heat: bool = False) -> str:
     """Determines a surface's opaque surface type
 
     Parameters
@@ -31,11 +31,11 @@ def get_opaque_surface_type(surface: dict) -> str:
         It is assumed to have at least the minimal structure:
         {
             adjacent_to,
-            construction: {
-                has_radiant_heating
-            },
+            construction,
             tilt
         }
+    has_radiant_heat : bool
+        A boolean indicating whether the surface has radiant heating, as defined by the corresponding Construction data group
 
     Returns
     -------
@@ -51,12 +51,7 @@ def get_opaque_surface_type(surface: dict) -> str:
 
     # Check for a floor type
     elif MIN_FLOOR_TILT <= surface_tilt <= MAX_FLOOR_TILT:
-        if (
-            getattr_(surface, "surface", "construction").get(
-                "has_radiant_heating"
-            )  # surface should have a construction
-            and surface.get("adjacent_to") == OpaqueSurfaceType.GROUND
-        ):
+        if has_radiant_heat and surface.get("adjacent_to") == OpaqueSurfaceType.GROUND:
             surface_type = OpaqueSurfaceType.HEATED_SOG
         elif surface.get("adjacent_to") == OpaqueSurfaceType.GROUND:
             surface_type = OpaqueSurfaceType.UNHEATED_SOG

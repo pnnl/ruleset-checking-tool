@@ -95,9 +95,7 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
             has_proposed_output = has_proposed and bool(
                 find_one("$.model_output", rmd_p)
             )
-            has_user_output = has_user and bool(
-                find_one("$.model_output", rmd_u)
-            )
+            has_user_output = has_user and bool(find_one("$.model_output", rmd_u))
 
             rmd_list = [rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p, rmd_u]
             rmd_list_no_user = [rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p]
@@ -107,12 +105,7 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
 
             # filter out rmds that aren't None then count the length
             no_of_output_instance = len(
-                compact(
-                    [
-                        find_one("$.model_output", rmd)
-                        for rmd in rmd_list_no_user
-                    ]
-                )
+                compact([find_one("$.model_output", rmd) for rmd in rmd_list_no_user])
             )
 
             return {

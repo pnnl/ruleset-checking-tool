@@ -68,16 +68,17 @@ def get_zone_conditioning_category_rmd_dict(
         SEMI_HEATED, UNCONDITIONED, UNENCOLOSED
     """
     zone_conditioning_category_rmd_dict = {}
+    constructions = rmd.get("constructions", [])
     for building in find_all("$.buildings[*]", rmd):
         zone_conditioning_category_dict = get_zone_conditioning_category_dict(
-            climate_zone, building
+            climate_zone, constructions, building
         )
         zone_conditioning_category_rmd_dict.update(zone_conditioning_category_dict)
     return zone_conditioning_category_rmd_dict
 
 
 def get_zone_conditioning_category_dict(
-    climate_zone: str, building: dict
+    climate_zone: str, building: dict, constructions: list
 ) -> dict[str, ZoneConditioningCategory]:
     """Determines the zone conditioning category for every zone in a building
 
@@ -87,6 +88,8 @@ def get_zone_conditioning_category_dict(
         One of the ClimateZoneOptions2019ASHRAE901 enumerated values
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
+    constructions : list
+        A list of construction dictionaries as defined by the ASHRAE229 schema
     Returns
     -------
     dict
@@ -94,6 +97,9 @@ def get_zone_conditioning_category_dict(
         CONDITIONED_MIXED, CONDITIONED_NON_RESIDENTIAL, CONDITIONED_RESIDENTIAL,
         SEMI_HEATED, UNCONDITIONED, UNENCOLOSED
     """
+    if constructions is None:
+        constructions = []
+
     find_exactly_required_fields(
         GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS["building"], building
     )
@@ -269,9 +275,18 @@ def get_zone_conditioning_category_dict(
                         getattr_(surface, "surface", "area") - subsurfaces_area
                     )
                     # Calculate the UA for the surface
-                    surface_construction = getattr_(surface, "surface", "construction")
-                    # TODO Temp code for test
-                    surface_ua = ZERO.UA
+                    surface_construction_id = getattr_(
+                        surface, "Surface", "construction"
+                    )
+                    surface_construction = next(
+                        (
+                            construction
+                            for construction in constructions
+                            if construction["id"] == surface_construction_id
+                        ),
+                        {},  # empty dict if not found, to allow constructions to be optional
+                    )
+
                     try:
                         surface_ua = (
                             get_first_attr_(

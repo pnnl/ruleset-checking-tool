@@ -68,7 +68,7 @@ class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
 
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building
+                    data["climate_zone"], building, data["constructions"]
                 ),
             }
 
@@ -86,9 +86,7 @@ class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
-                    required_fields={
-                        "$": ["construction"]
-                    },
+                    required_fields={"$": ["construction"]},
                     precision={
                         "roof_u_factor_b": {
                             "precision": 0.001,
@@ -107,10 +105,12 @@ class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
                         construction.get("u_factor")
                         for construction in constructions
                         if construction["id"] == roof["construction"]
-                    ),
-                    None,
+                    )
                 )
-                assert_(roof_u_factor is not None, f"U-factor for roof construction '{roof['construction']}' is missing")
+                assert_(
+                    roof_u_factor is not None,
+                    f"U-factor for roof construction '{roof['construction']}' is missing",
+                )
                 target_u_factor = None
                 target_u_factor_res = None
                 target_u_factor_nonres = None
