@@ -42,10 +42,7 @@ def compare_schedules(
     """
 
     assert_(
-        (
-            len(schedule_1) == len(schedule_2)
-            and len(schedule_1) == len(mask_schedule)
-        ),
+        (len(schedule_1) == len(schedule_2) and len(schedule_1) == len(mask_schedule)),
         f"Failed when comparing hourly schedules with target number of hours. number of hours of schedule_1 : {len(schedule_1)}; number of hours of schedule_2: {len(schedule_2)}; number of hours of mask_schedule: {len(mask_schedule)}",
     )
 

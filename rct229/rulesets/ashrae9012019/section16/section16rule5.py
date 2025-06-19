@@ -125,6 +125,4 @@ class PRM9012019Rule55z67(RuleDefinitionListIndexedBase):
                 vent_sched_compare_data = calc_vals["vent_sched_compare_data"]
                 light_sched_compare_data = calc_vals["light_sched_compare_data"]
 
-                return (
-                    vent_sched_compare_data == light_sched_compare_data
-                )
+                return vent_sched_compare_data == light_sched_compare_data

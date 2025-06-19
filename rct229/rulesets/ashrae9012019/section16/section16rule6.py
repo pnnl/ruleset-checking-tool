@@ -51,7 +51,10 @@ class PRM9012019Rule34h06(RuleDefinitionListIndexedBase):
                 ),
                 required_fields={
                     "$": ["cab_ventilation_fan"],
-                    "$.cab_ventilation_fan": ["design_airflow", "design_electric_power"]
+                    "$.cab_ventilation_fan": [
+                        "design_airflow",
+                        "design_electric_power",
+                    ],
                 },
                 precision={
                     "elevator_cab_ventilation_fan_power_b/elevator_cab_ventilation_fan_flow_b": {
@@ -63,13 +66,17 @@ class PRM9012019Rule34h06(RuleDefinitionListIndexedBase):
 
         def get_calc_vals(self, context, data=None):
             elevator_b = context.BASELINE_0
-            elevator_cab_ventilation_fan_power_b = elevator_b["cab_ventilation_fan"]["design_electric_power"]
+            elevator_cab_ventilation_fan_power_b = elevator_b["cab_ventilation_fan"][
+                "design_electric_power"
+            ]
             assert_(
                 elevator_cab_ventilation_fan_power_b > ZERO.POWER,
                 "Elevator cab ventilation fan power should be " "greater than 0 W.",
             )
 
-            elevator_cab_ventilation_fan_flow_b = elevator_b["cab_ventilation_fan"]["design_airflow"]
+            elevator_cab_ventilation_fan_flow_b = elevator_b["cab_ventilation_fan"][
+                "design_airflow"
+            ]
             assert_(
                 elevator_cab_ventilation_fan_flow_b > ZERO.FLOW,
                 "Elevator cab ventilation fan flow rate should "
