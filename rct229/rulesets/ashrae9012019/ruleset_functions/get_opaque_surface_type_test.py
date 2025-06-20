@@ -56,4 +56,6 @@ def test__get_opaque_surface_type():
             (c for c in CONSTRUCTIONS if c["id"] == TEST_SURFACES[key]["construction"]),
         )
         has_radiant_heating = construction.get("has_radiant_heating", False)
-        assert get_opaque_surface_type(TEST_SURFACES[key], has_radiant_heating) == key, f"Failed {key} test"
+        assert (
+            get_opaque_surface_type(TEST_SURFACES[key], has_radiant_heating) == key
+        ), f"Failed {key} test"

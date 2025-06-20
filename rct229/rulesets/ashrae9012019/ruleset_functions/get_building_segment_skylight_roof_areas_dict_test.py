@@ -136,7 +136,7 @@ TEST_RMD = {
                                     "adjacent_zone": "zone_1_1",
                                     "area": 10,  # m2
                                     "tilt": 90,  # wall
-                                    "construction": "construction_1"
+                                    "construction": "construction_1",
                                 }
                             ],
                         },
@@ -164,7 +164,9 @@ TEST_RMD_12 = {
 TEST_BUILDING = quantify_rmd(TEST_RMD_12)["ruleset_model_descriptions"][0]["buildings"][
     0
 ]
-TEST_CONSTRUCTIONS = TEST_RMD_12["ruleset_model_descriptions"][0].get("constructions")
+TEST_CONSTRUCTIONS = quantify_rmd(TEST_RMD_12)["ruleset_model_descriptions"][0].get(
+    "constructions"
+)
 
 
 def test__TEST_RPD__is_valid():

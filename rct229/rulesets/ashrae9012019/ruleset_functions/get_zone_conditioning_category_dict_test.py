@@ -299,7 +299,7 @@ TEST_RMD = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "construction": "const_1_4_3"
+                                    "construction": "const_1_4_3",
                                 },
                             ],
                             "terminals": [
@@ -738,7 +738,9 @@ TEST_RPD_12 = {
 TEST_BUILDING = quantify_rmd(TEST_RPD_12)["ruleset_model_descriptions"][0]["buildings"][
     0
 ]
-TEST_CONSTRUCTIONS = quantify_rmd(TEST_RPD_12)["ruleset_model_descriptions"][0]["constructions"]
+TEST_CONSTRUCTIONS = quantify_rmd(TEST_RPD_12)["ruleset_model_descriptions"][0][
+    "constructions"
+]
 
 
 def test__TEST_RPD__is_valid():
@@ -749,7 +751,9 @@ def test__TEST_RPD__is_valid():
 
 
 def test__get_zone_conditioning_category_dict():
-    assert get_zone_conditioning_category_dict(CLIMATE_ZONE, TEST_BUILDING, TEST_CONSTRUCTIONS) == {
+    assert get_zone_conditioning_category_dict(
+        CLIMATE_ZONE, TEST_BUILDING, TEST_CONSTRUCTIONS
+    ) == {
         "zone_1_1": "CONDITIONED MIXED",
         "zone_1_2": "CONDITIONED NON-RESIDENTIAL",
         "zone_1_3": "CONDITIONED NON-RESIDENTIAL",

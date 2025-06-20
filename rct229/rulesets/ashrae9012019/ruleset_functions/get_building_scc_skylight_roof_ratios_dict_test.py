@@ -48,7 +48,7 @@ TEST_rmd = {
         {
             "id": "const_3_6_1",
             "u_factor": 0.1,  # W/(m2 * K)
-        }
+        },
     ],
     "buildings": [
         {
@@ -537,7 +537,9 @@ TEST_RMD_12 = {
 TEST_BUILDING = quantify_rmd(TEST_RMD_12)["ruleset_model_descriptions"][0]["buildings"][
     0
 ]
-TEST_CONSTRUCTIONS = TEST_RMD_12["ruleset_model_descriptions"][0]["constructions"]
+TEST_CONSTRUCTIONS = quantify_rmd(TEST_RMD_12)["ruleset_model_descriptions"][0][
+    "constructions"
+]
 
 # The purpose of below is to test out when all the summed areas equal 0.
 TEST_RMD_BRANCH_COVERAGE = {
@@ -720,7 +722,9 @@ def test__TEST_RPD__is_valid():
 
 
 def test__get_building_scc_skylight_roof_ratios_dict():
-    assert get_building_scc_skylight_roof_ratios_dict(CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING) == {
+    assert get_building_scc_skylight_roof_ratios_dict(
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING
+    ) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.2,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.2,
         SCC.SEMI_EXTERIOR: 0.2,
