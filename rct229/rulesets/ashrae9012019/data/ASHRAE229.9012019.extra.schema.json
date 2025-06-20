@@ -3,7 +3,7 @@
     "Object Type": "Meta",
     "Title": "ASHRAE 229",
     "Description": "Base schema for ASHRAE 229 representations",
-    "Version": "0.1.3",
+    "Version": "0.1.7",
     "References": [
       "Enumerations2019ASHRAE901",
       "EnumerationsRESNET",
@@ -56,6 +56,15 @@
     "JSON Schema Pattern": "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}Z",
     "Examples": [
       "2016-06-29T14:35Z"
+    ]
+  },
+  "Version": {
+    "Object Type": "String Type",
+    "Description": "Version identifier in the form major.minor.patch as defined by SemVer[@SemVer]",
+    "JSON Schema Pattern": "(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?",
+    "Examples": [
+      "1.1.3",
+      "1.2.0-beta-92"
     ]
   },
   "ID": {
@@ -176,66 +185,126 @@
     "Data Elements": {
       "id": {
         "Description": "Unique data set identifier",
-        "Data Type": "UUID",
-        "Notes": "Assigned by *data publisher* to identify this data. `id` shall remain unchanged for revisions of the same data."
+        "Data Type": "ID",
+        "Notes": "Assigned by *data publisher* to identify this data. `id` shall remain unchanged for revisions of the same data.",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown"
       },
       "schema_author": {
         "Description": "Name of the organization that published the schema",
         "Data Type": "String",
         "Required": true,
-        "Notes": "Identifies the organization that defined the schema. Is should be set to: ASHRAE SPC 229 Schema Working Group"
+        "Notes": "Identifies the organization that defined the schema. Is should be set to: ASHRAE SPC 229 Schema Working Group",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown"
       },
       "schema_name": {
         "Description": "Schema name or identifier",
         "Data Type": "String",
         "Required": true,
-        "Notes": "Identifies the schema used to define the data content. It should be set to Ruleset Evaluation Schema"
+        "Notes": "Identifies the schema used to define the data content. It should be set to Ruleset Evaluation Schema",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown"
       },
       "schema_version": {
         "Description": "The version of the schema the data complies with",
         "Data Type": "Version",
         "Required": true,
-        "Notes": "Common versions may include 0.0.36 from the first public review period. This is the value of the version field in the top of the ASRAE229.schema.json file or the version in the ASHRAE229.schema.yaml Schema data group."
+        "Notes": "Common versions may include 0.0.36 from the first public review period. This is the value of the version field in the top of the ASRAE229.schema.json file or the version in the ASHRAE229.schema.yaml Schema data group.",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown"
       },
       "schema_url": {
         "Description": "The Uniform Resource Locator (url) for the schema definition and/or documentation",
         "Data Type": "String",
-        "Notes": "Should be set to: https://github.com/open229/ruleset-model-description-schema"
+        "Notes": "Should be set to: https://github.com/open229/ruleset-model-description-schema",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown"
       },
       "author": {
         "Description": "Name of the entity creating the serialization",
         "Data Type": "String",
         "Required": true,
-        "Notes": "Identifies the organization that created the file"
+        "Notes": "Identifies the organization that created the file",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown"
       },
       "description": {
         "Description": "Description of data content (suitable for display)",
         "Data Type": "String",
-        "Required": true
+        "Required": true,
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown"
       },
       "time_of_creation": {
         "Description": "Timestamp indicating when the serialization was created",
         "Data Type": "Timestamp",
         "Required": true,
-        "Notes": "Updated anytime any data content is modified."
+        "Notes": "Updated anytime any data content is modified.",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown"
       },
       "version": {
         "Description": "Integer version identifier for the data",
         "Data Type": "Version",
-        "Notes": "Used by data publisher to track revisions of the data. Shall be incremented for each data revision"
+        "Notes": "Used by data publisher to track revisions of the data. Shall be incremented for each data revision",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown"
       },
       "source": {
         "Description": "Source(s) of the data",
         "Data Type": "String",
-        "Notes": "Used by data publisher to document methods (e.g., software and version) used to generate data. **Informative note:** `source` may be different from other data source(s) included elsewhere within the data"
+        "Notes": "Used by data publisher to document methods (e.g., software and version) used to generate data. **Informative note:** `source` may be different from other data source(s) included elsewhere within the data",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown"
       },
       "disclaimer": {
         "Description": "Characterization of accuracy, limitations, and applicability of this data",
-        "Data Type": "String"
+        "Data Type": "String",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown"
       },
       "notes": {
         "Description": "Additional Information",
-        "Data Type": "String"
+        "Data Type": "String",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown"
       }
     }
   },
@@ -312,6 +381,26 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": true
       },
+      "materials": {
+        "Description": "Materials used at the site in Construction layers",
+        "Data Type": "[{Material}]",
+        "Notes": "Contains a list of Materials used in Construction layers.",
+        "RMD Test": false,
+        "AppG Used By TCDs": false,
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": false
+      },
+      "constructions": {
+        "Description": "Constructions used at the site",
+        "Data Type": "[{Construction}]",
+        "Notes": "Contains a list of Constructions used in Surfaces.",
+        "RMD Test": "Secondary",
+        "AppG Used By TCDs": true,
+        "AppG P_RMD Equals U_RMD": true,
+        "AppG B_RMD Equals P_RMD": false,
+        "AppG B_RMDs Same": true
+      },
       "measured_infiltration_pressure_difference": {
         "Description": "Differential pressure difference used during measurement for infiltration values.",
         "Data Type": "Numeric",
@@ -374,6 +463,16 @@
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true
+      },
+      "service_water_heating_uses": {
+        "Description": "Service water heating uses on the site",
+        "Data Type": "[{ServiceWaterHeatingUse}]",
+        "Notes": "Contains a list of service water heating uses at the site. Used in BuildingSegment and Space data groups, see notes in those locations.",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown"
       },
       "pumps": {
         "Description": "Pumps used on the site",
@@ -545,7 +644,7 @@
         "AppG B_RMDs Same": true
       },
       "building_open_schedule": {
-        "Description": "Reference to the schedule indicating when the building is open",
+        "Description": "ID of the Schedule indicating when the building is open",
         "Data Type": "Reference",
         "Notes": "One represent when the building is open and zero when closed. If the schedule is not present, 24 hour operation is assumed. Constraint to use when implemented :Schedule:",
         "RMD Test": false,
@@ -705,7 +804,7 @@
       },
       "service_water_heating_area_type": {
         "Description": "Service water heating area type classification",
-        "Data Type": "<ServiceWaterHeatingSpaceOptions2019ASHRAE901>",
+        "Data Type": "<ServiceWaterHeatingAreaOptions2019ASHRAE901>",
         "Notes": "The enumeration is based on the standard used.",
         "RMD Test": false,
         "AppG Used By TCDs": "unknown",
@@ -716,9 +815,9 @@
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "service_water_heating_uses": {
-        "Description": "List of service water heating uses",
-        "Data Type": "[({ServiceWaterHeatingUse}, Reference)]",
-        "Notes": "This data element also appears in Space. A list of ServiceWaterHeatingUse data groups can either appear here or a list of references to IDs of a ServiceWaterHeatingUse already defined somewhere else or a mixture of both. When a reference is used, the constraint to use when implemented is to :ServiceWaterHeatingUse:",
+        "Description": "List of IDs of service water heating uses",
+        "Data Type": "[Reference]",
+        "Notes": "This data element also appears in Space. A list of references to ServiceWaterHeatingUse data groups. A ServiceWaterHeatingUse that has one of the following unit types: [POWER_PER_PERSON, POWER_PER_AREA, VOLUME_PER_PERSON, VOLUME PER AREA] AND has not been explicitly referenced by any spaces is assumed to apply to each space in the building segment. A ServiceWaterHeatingUse that is referenced by one or more spaces will be applied only to those spaces. A ServiceWaterHeatingUse with units POWER, VOLUME, or OTHER will be applied only once to the entire building segment. The constraint to use when implemented is to :ServiceWaterHeatingUse:",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -834,7 +933,7 @@
         "AppG B_RMDs Same": true
       },
       "thermostat_cooling_setpoint_schedule": {
-        "Description": "Reference to the schedule containing the cooling setpoint temperatures",
+        "Description": "ID of the Schedule containing the cooling setpoint temperatures",
         "Data Type": "Reference",
         "Notes": "If the schedule is not present, the design thermostat cooling setpoint is assumed to be constant. Constraint to use when implemented :Schedule:",
         "RMD Test": "unknown",
@@ -855,7 +954,7 @@
         "AppG B_RMDs Same": true
       },
       "thermostat_heating_setpoint_schedule": {
-        "Description": "Reference to the schedule containing the heating setpoint temperatures",
+        "Description": "ID of the Schedule containing the heating setpoint temperatures",
         "Data Type": "Reference",
         "Notes": "If the schedule is not present, the design thermostat heating setpoint is assumed to be constant. Constraint to use when implemented :Schedule:",
         "RMD Test": "unknown",
@@ -865,7 +964,7 @@
         "AppG B_RMDs Same": true
       },
       "minimum_humidity_setpoint_schedule": {
-        "Description": "Reference to the schedule containing the minimum relative humidity setpoint",
+        "Description": "ID of the Schedule containing the minimum relative humidity setpoint",
         "Data Type": "Reference",
         "Range": ">=0, <=1",
         "Notes": "For schedule values use relative humidity expressed on a 0 to 1 scale. Constraint to use when implemented :Schedule:",
@@ -876,7 +975,7 @@
         "AppG B_RMDs Same": true
       },
       "maximum_humidity_setpoint_schedule": {
-        "Description": "Reference to the schedule containing the maximum relative humidity setpoint",
+        "Description": "ID of the Schedule containing the maximum relative humidity setpoint",
         "Data Type": "Reference",
         "Range": ">=0, <=1",
         "Notes": "For schedule values use relative humidity expressed on a 0 to 1 scale. Constraint to use when implemented :Schedule:",
@@ -897,7 +996,7 @@
         "AppG B_RMDs Same": true
       },
       "served_by_service_water_heating_system": {
-        "Description": "A service water heating system distribution serving the zone",
+        "Description": "ID of the ServiceWaterHeatingDistributionSystem serving the zone",
         "Data Type": "Reference",
         "Notes": "Contains the ID of the service water heating distribution system serving the zone. The ID is a unique identification for a specific ServiceWaterHeatingSystem data group. Constraint to use when implemented :ServiceWaterHeatingDistributionSystem:",
         "RMD Test": "unknown",
@@ -918,7 +1017,7 @@
         "AppG B_RMDs Same": false
       },
       "transfer_airflow_source_zone": {
-        "Description": "ID of the source zone for transfer air.",
+        "Description": "ID of the Zone for the source of transfer air.",
         "Data Type": "Reference",
         "Notes": "Constraint to use when implemented :Zone:",
         "RMD Test": "unknown",
@@ -927,20 +1026,40 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true
       },
-      "zonal_exhaust_fan": {
-        "Description": "Zonal exhaust fan",
-        "Data Type": "{Fan}",
-        "Notes": "References a fan that is used to exhaust air from the zone. The fan should be configured to not be connected from any other HVAC data group.",
+      "zonal_supply_fans": {
+        "Description": "A list of zonal supply fans",
+        "Data Type": "[{Fan}]",
+        "Notes": "A list of references to one or more fans that is used to supply air to the zone. The fan should be configured to not be connected from any other HVAC data group. This may include fans used in a non-mechancial applications typically for warehouses with high air change rates.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true
       },
-      "exhaust_airflow_rate_multiplier_schedule": {
-        "Description": "Reference to the schedule containing the multiplier for the exhaust airflow rate",
-        "Data Type": "Reference",
-        "Notes": "If the schedule is not present, the multiplier is always one. Constraint to use when implemented :Schedule:",
+      "supply_airflow_rate_multiplier_schedules": {
+        "Description": "A list of IDs for Schedules containing the multipliers for the zonal supply airflow rates",
+        "Data Type": "[Reference]",
+        "Notes": "Each schedule corresponds to the list in zonal_supply_fans. If a schedule is not present, the multiplier is always one. Constraint to use when implemented :Schedule:",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": true
+      },
+      "zonal_exhaust_fans": {
+        "Description": "A list of zonal exhaust fans",
+        "Data Type": "[{Fan}]",
+        "Notes": "A list of references to one or more fans that is used to exhaust air from the zone. The fan should be configured to not be connected from any other HVAC data group. This may include fans used in a non-mechancial applications typically for warehouses with high air change rates.",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": true
+      },
+      "exhaust_airflow_rate_multiplier_schedules": {
+        "Description": "A list of IDs for Schedules containing the multipliers for the zonal exhaust airflow rates",
+        "Data Type": "[Reference]",
+        "Notes": "Each schedule corresponds to the list in zonal_exhaust_fans. If a schedule is not present, the multiplier is always one. Constraint to use when implemented :Schedule:",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -952,30 +1071,6 @@
         "Data Type": "Numeric",
         "Range": ">=0",
         "Units": "L/s",
-        "RMD Test": "unknown",
-        "AppG Used By TCDs": "unknown",
-        "AppG P_RMD Equals U_RMD": "unknown",
-        "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false
-      },
-      "non_mechanical_cooling_fan_power": {
-        "Description": "Non-mechanical cooling fan power",
-        "Data Type": "Numeric",
-        "Range": ">=0",
-        "Units": "W",
-        "Notes": "The power consumed by a fan used in a non-mechancial cooling device such as supply or exhaust fans typically for warehouse applications with high air change rates.",
-        "RMD Test": "unknown",
-        "AppG Used By TCDs": "unknown",
-        "AppG P_RMD Equals U_RMD": "unknown",
-        "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false
-      },
-      "non_mechanical_cooling_fan_airflow": {
-        "Description": "Non-mechanical cooling fan airflow",
-        "Data Type": "Numeric",
-        "Range": ">=0",
-        "Units": "L/s",
-        "Notes": "The airflow of a fan used in a non-mechancial cooling device such as a supply or exhaust fans typically for warehouse applications with high air change rates.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -1081,7 +1176,7 @@
         "AppG B_RMDs Same": true
       },
       "occupant_multiplier_schedule": {
-        "Description": "Reference to the schedule containing the multiplier for the number of occupants",
+        "Description": "ID of the Schedule containing the multiplier for the number of occupants",
         "Data Type": "Reference",
         "Notes": "If the schedule is not present, the multiplier is always one. Constraint to use when implemented :Schedule:",
         "RMD Test": false,
@@ -1172,9 +1267,9 @@
         "AppG B_RMDs Same": true
       },
       "service_water_heating_uses": {
-        "Description": "List of service water heating uses",
-        "Data Type": "[({ServiceWaterHeatingUse}, Reference)]",
-        "Notes": "This data element also appears in BuildingSegment. A list of ServiceWaterHeatingUse data groups can either appear here or a list of references to IDs of a ServiceWaterHeatingUse already defined somewhere else or a mixture of both. When a reference is used, the constraint to use when implemented is to :ServiceWaterHeatingUse:",
+        "Description": "List of IDs of service water heating uses",
+        "Data Type": "[Reference]",
+        "Notes": "This data element also appears in BuildingSegment. A list of references to ServiceWaterHeatingUse data groups. A ServiceWaterHeatingUse that has one of the following unit types: [POWER_PER_PERSON, POWER_PER_AREA, VOLUME_PER_PERSON, VOLUME PER AREA] AND has not been explicitly referenced by any spaces is assumed to apply to each space in the building segment. A ServiceWaterHeatingUse that is referenced by one or more spaces will be applied only to those spaces. A ServiceWaterHeatingUse with units POWER, VOLUME, or OTHER will be applied only once to the entire building segment. The constraint to use when implemented is to :ServiceWaterHeatingUse:",
         "RMD Test": false,
         "AppG Used By TCDs": false,
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -1327,7 +1422,7 @@
         "AppG B_RMDs Same": true
       },
       "multiplier_schedule": {
-        "Description": "Referenced to the schedule containing the multiplier for the infiltration",
+        "Description": "ID of the Schedule containing the multiplier for the infiltration",
         "Data Type": "Reference",
         "Notes": "If the schedule is not present, the multiplier is always one. If a zone includes multiple spaces and infiltration is specified at the space level the rates and schedules should be aggregated to the zone. Constraint to use when implemented :Schedule:",
         "RMD Test": "Secondary",
@@ -1447,8 +1542,8 @@
       },
       "adjacent_to": {
         "Description": "Used to classify the conditions on the surface.",
-        "Data Type": "(<SurfaceAdjacencyOptions>,<AdditionalSurfaceAdjacencyOptionsRESNET>,<AdditionalSurfaceAdjacencyOptions2019ASHRAE901>)",
-        "Notes": "Determines whether the other side of the surface is modeled and if not what assumptions should be used. Commonly, plenums do not need to be explicitly described for many rulesets and instead when a plenum is present in the simulation model, this field should be set to the what is adjacent to the other side of the plenum. For example, on the top floor with a plenum, EXTERIOR would be entered.",
+        "Data Type": "(<SurfaceAdjacencyOptions>,<AdditionalSurfaceAdjacencyOptionsRESNET>)",
+        "Notes": "Determines whether the other side of the surface is modeled and if not what assumptions should be used.",
         "RMD Test": "Secondary",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
@@ -1456,7 +1551,7 @@
         "AppG B_RMDs Same": true
       },
       "adjacent_zone": {
-        "Description": "ID of the adjacent zone for interior surface. Only required when adjacent zone is explicity modeled when adjacent_to is set to INTERIOR.",
+        "Description": "ID of the adjacent Zone for interior surface. Only required when adjacent zone is explicity modeled when adjacent_to is set to INTERIOR.",
         "Data Type": "Reference",
         "Notes": "Each interior surface between two zones should be described only once as a surface. No duplication of an interior surface facing each zone is necessary. Constraint to use when implemented :Zone:",
         "RMD Test": false,
@@ -1475,9 +1570,9 @@
         "AppG B_RMDs Same": true
       },
       "construction": {
-        "Description": "Construction description of surface or an ID of another Construction.",
-        "Data Type": "({Construction}, Reference)",
-        "Notes": "The construction data group can either appear here or a reference to an ID of a Construction used in a previous Surface. When the reference is used, the constraint to use when implemented is to :Construction:",
+        "Description": "ID of the Construction description of surface or an ID of another Construction.",
+        "Data Type": "Reference",
+        "Notes": "The construction data group can either appear here or a reference to an ID of a Construction used in a previous Surface. The constraint to use when implemented is to :Construction:",
         "RMD Test": "Secondary",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
@@ -1557,9 +1652,9 @@
         "AppG B_RMDs Same": true
       },
       "primary_layers": {
-        "Description": "List of names, or IDs, of layer descriptions starting from the outside surface for primary heat path",
-        "Data Type": "[({Material}, Reference)]",
-        "Notes": "For constructions with framing and cavity heat transfer paths, use this for the cavity. For constructions with homogeneous layer, use this element only. Air films should not be included in the list of layers. When Construction.primary_layers are specified, the Construction.r_values should not be used. The list of primary_layers should include at least one Material that has mass with Material.density and Material.specific_heat specified. A list of material data groups can either appear here or a list of references to IDs of a Materials already defined somewhere else or a mixture of both. When a reference is used, the constraint to use when implemented is to :Material:",
+        "Description": "List of IDs for materials as layer descriptions starting from the outside surface for the primary heat path",
+        "Data Type": "[Reference]",
+        "Notes": "For constructions with framing and cavity heat transfer paths, use this for the cavity. For constructions with homogeneous layer, use this element only. Air films should not be included in the list of layers. When Construction.primary_layers are specified, the Construction.r_values should not be used. The list of primary_layers should include at least one Material that has mass with Material.density and Material.specific_heat specified. The constraint to use when implemented is to :Material:",
         "RMD Test": "Primary",
         "AppG Used By TCDs": false,
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -1567,9 +1662,9 @@
         "AppG B_RMDs Same": false
       },
       "framing_layers": {
-        "Description": "List of names, or IDs, of layer descriptions starting from the outside surface for the framing heat path",
-        "Data Type": "[({Material}, Reference)]",
-        "Notes": "For constructions with framing and cavity heat transfer paths, use this for the framing otherwise leave blank. Air films should not be included in the list of layers. Only used when primary_layers is also populated. A list of material data groups can either appear here or a list of references to IDs of a Materials already defined somewhere else or a mixture of both. When a reference is used, the constraint to use when implemented is to :Material:",
+        "Description": "List of IDs for materials as layer descriptions starting from the outside surface for the  framing heat path",
+        "Data Type": "[Reference]",
+        "Notes": "For constructions with framing and cavity heat transfer paths, use this for the framing otherwise leave blank. Air films should not be included in the list of layers. Only used when primary_layers is also populated. The constraint to use when implemented is to :Material:",
         "RMD Test": false,
         "AppG Used By TCDs": false,
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -1579,6 +1674,7 @@
       "insulation_locations": {
         "Description": "List of locations for the insulation related to the surface that correspoond to the values in the r_values list. Only used when r_values are specified.",
         "Data Type": "[<InsulationLocationOptions>]",
+        "Notes": "The items in the list of r-values should directly correspond to the items in the list of insulation_locations.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -1626,7 +1722,7 @@
         "Data Type": "[Numeric]",
         "Range": ">=0",
         "Units": "K-m2/W",
-        "Notes": "When Construction.r_values are specified, the Construction.primary_layers should not be used.",
+        "Notes": "When Construction.r_values are specified, the Construction.primary_layers should not be used. The items in the list of r-values should directly correspond to the items in the list of insulation_locations.",
         "RMD Test": false,
         "AppG Used By TCDs": false,
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -2271,7 +2367,7 @@
         "AppG B_RMDs Same": true
       },
       "lighting_multiplier_schedule": {
-        "Description": "Reference to the schedule containing the multiplier for lighting",
+        "Description": "ID of the Schedule containing the multiplier for lighting",
         "Data Type": "Reference",
         "Notes": "If the schedule is not present, the multiplier is always one. Constraint to use when implemented :Schedule:",
         "RMD Test": false,
@@ -2394,7 +2490,7 @@
         "Description": "Source of energy for the miscellaneous equipment in the space",
         "Data Type": "<EnergySourceOptions>",
         "RMD Test": false,
-        "Notes": "To indicate that the energy is not accounted for by any utility supplied source, choose NONE. To indicate equipment with a energy source from a Loop choose OTHER",
+        "Notes": "To indicate that the energy is not accounted for by any utility supplied source, choose NONE. To indicate equipment with a energy source from a Loop choose STEAM, HOT_WATER, or OTHER",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
         "AppG B_RMD Equals P_RMD": true,
@@ -2412,7 +2508,7 @@
         "AppG B_RMDs Same": true
       },
       "multiplier_schedule": {
-        "Description": "Reference to the schedule containing the multiplier for miscellaneous equipment power in the space.",
+        "Description": "ID of the Schedule containing the multiplier for miscellaneous equipment power in the space.",
         "Data Type": "Reference",
         "Notes": "If the schedule is not present, the multiplier is always one. Constraint to use when implemented :Schedule:",
         "RMD Test": "Secondary",
@@ -2444,7 +2540,7 @@
         "AppG B_RMDs Same": true
       },
       "remaining_fraction_to_loop": {
-        "Description": "Referenced to the water fluid loop for the remaining fraction",
+        "Description": "ID of the FluidLoop for the remaining fraction",
         "Data Type": "Reference",
         "Notes": "If sensible_fraction and latent_fraction add up to less than 1.0 and this field is specified then the chilled water or condenser water loop specified gets the remaining fraction of the miscellenous load. Constraint to use when implemented :FluidLoop:",
         "RMD Test": "unknown",
@@ -2454,7 +2550,7 @@
         "AppG B_RMDs Same": true
       },
       "energy_from_loop": {
-        "Description": "Referenced to the loop serving as the source of energy",
+        "Description": "ID of the FluidLoop serving as the source of energy",
         "Data Type": "Reference",
         "Notes": "References the loop that is the source of energy for the miscellenous equipment. Example would be hot water that is used for laundry in the zone. When this is used the energy_type should be set to OTHER. Constraint to use when implemented :FluidLoop:",
         "RMD Test": "unknown",
@@ -2644,16 +2740,6 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": false
       },
-      "purpose": {
-        "Description": "The purpose of schedule",
-        "Data Type": "String",
-        "Notes": "Describe the purpose of the schedule and how it can be used. Not an enumerations. The purpose assigned by BEM tool should match across RMDs. Examples include thermostat, multiplier for lighting, availability for equipment.",
-        "RMD Test": false,
-        "AppG Used By TCDs": false,
-        "AppG P_RMD Equals U_RMD": false,
-        "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": true
-      },
       "sequence_type": {
         "Description": "Schedule sequence type",
         "Data Type": "<ScheduleSequenceOptions>",
@@ -2666,7 +2752,7 @@
       "hourly_values": {
         "Description": "Hourly Values of Schedule",
         "Data Type": "[Numeric][0..8784]",
-        "Notes": "Used when schedule_sequence_type is HOURLY. Can also use functions like EFLH(), MAX(), MIN() to determine overall characteristics for the list of schedule values.",
+        "Notes": "Used when schedule_sequence_type is HOURLY. Can also use functions like EFLH(), MAX(), MIN() to determine overall characteristics for the list of schedule values. A year that does not have a leap day should be a list of 8760 values and a leap year should be a list of 8784 values. All schedules for a project should be consistently either a list of 8760 values or a list of 8784 values but not mixed within a project. The list of values is in standard time with no adjustment for daylight savings time.",
         "RMD Test": true,
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
@@ -2676,7 +2762,7 @@
       "hourly_heating_design_day": {
         "Description": "Hourly values for heating design day",
         "Data Type": "[Numeric][0..24]",
-        "Notes": "Used when schedule_sequence_type is HOURLY.",
+        "Notes": "Used when schedule_sequence_type is HOURLY. Populate only one of the data elements: hourly_heating_design_day and hourly_heating_design_year, not both.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -2685,8 +2771,8 @@
       },
       "hourly_heating_design_year": {
         "Description": "Hourly values for heating design year",
-        "Data Type": "[Numeric][0..8784]",
-        "Notes": "Used when schedule_sequence_type is HOURLY. Use when more than a 24 hour period was used for sizing. Values with the value -999 will be ignored.",
+        "Data Type": "[Numeric/Null][0..8784]",
+        "Notes": "Used when schedule_sequence_type is HOURLY. Use when more than a 24 hour period was used for sizing. Values with the value Null will be ignored. Populate only one of the data elements: hourly_heating_design_day and hourly_heating_design_year, not both. A year that does not have a leap day should be a list of 8760 values and a leap year should be a list of 8784 values. All schedules for a project should be consistently either a list of 8760 values or a list of 8784 values but not mixed within a project. The list of values is in standard time with no adjustment for daylight savings time.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -2696,7 +2782,7 @@
       "hourly_cooling_design_day": {
         "Description": "Hourly values for cooling design day",
         "Data Type": "[Numeric][0..24]",
-        "Notes": "Used when schedule_sequence_type is HOURLY.",
+        "Notes": "Used when schedule_sequence_type is HOURLY. Populate only one of the data elements: hourly_cooling_design_day and hourly_cooling_design_year, not both.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -2705,8 +2791,8 @@
       },
       "hourly_cooling_design_year": {
         "Description": "Hourly values for cooling design year",
-        "Data Type": "[Numeric][0..8784]",
-        "Notes": "Used when schedule_sequence_type is HOURLY.  Use when more than a 24 hour period was used for sizing.  Values with the value -999 will be ignored.",
+        "Data Type": "[Numeric/Null][0..8784]",
+        "Notes": "Used when schedule_sequence_type is HOURLY.  Use when more than a 24 hour period was used for sizing.  Values with the value Null will be ignored. Populate only one of the data elements: hourly_cooling_design_day and hourly_cooling_design_year, not both. A year that does not have a leap day should be a list of 8760 values and a leap year should be a list of 8784 values. All schedules for a project should be consistently either a list of 8760 values or a list of 8784 values but not mixed within a project. The list of values is in standard time with no adjustment for daylight savings time.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -2857,26 +2943,6 @@
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true
-      },
-      "is_leap_year": {
-        "Description": "The schedules assume it is a leap year",
-        "Data Type": "Boolean",
-        "Notes": "This value is true if the calendar and schedules include February 29.",
-        "RMD Test": "unknown",
-        "AppG Used By TCDs": "unknown",
-        "AppG P_RMD Equals U_RMD": "unknown",
-        "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": true
-      },
-      "has_daylight_saving_time": {
-        "Description": "The schedules adjust for Daylight Saving Time",
-        "Data Type": "Boolean",
-        "Notes": "This value should be true if the modeled calendar includes daylight saving time.",
-        "RMD Test": "unknown",
-        "AppG Used By TCDs": "unknown",
-        "AppG P_RMD Equals U_RMD": "unknown",
-        "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": true
       }
     }
   },
@@ -2920,7 +2986,7 @@
         "AppG B_RMDs Same": false
       },
       "ground_temperature_schedule": {
-        "Description": "Ground temperature schedule name",
+        "Description": "ID of the Schedule containing ground temperatures",
         "Data Type": "Reference",
         "Notes": "Constraint to use when implemented :Schedule:",
         "RMD Test": "unknown",
@@ -2958,8 +3024,8 @@
         "AppG B_RMD Equals P_RMD": true,
         "AppG B_RMDs Same": true
       },
-      "cooling_design_day_type": {
-        "Description": "The frequency of occurance type for cooling design day",
+      "cooling_dry_bulb_design_day_type": {
+        "Description": "The frequency of occurance type for cooling design day based on dry-bulb temperature",
         "Data Type": "<CoolingDesignDayOptions>",
         "RMD Test": false,
         "AppG Used By TCDs": true,
@@ -2967,8 +3033,18 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": true
       },
-      "heating_design_day_type": {
-        "Description": "The frequency of occurance type for heating design day",
+      "evaporation_wet_bulb_design_day_type": {
+        "Description": "The frequency of occurance type for evaporation wet-bulb design day",
+        "Data Type": "<CoolingDesignDayOptions>",
+        "Notes": "This may also be known as cooling design wet-bulb temperature day type.",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": true
+      },
+      "heating_dry_bulb_design_day_type": {
+        "Description": "The frequency of occurance type for heating design day based on dry-bulb temperature",
         "Data Type": "<HeatingDesignDayOptions>",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
@@ -3072,7 +3148,7 @@
         "AppG B_RMDs Same": true
       },
       "motor_location_zone": {
-        "Description": "Zone where the heat from the motor goes",
+        "Description": "ID of the Zone where the heat from the motor goes",
         "Data Type": "Reference",
         "Notes": "When specified, it is the zone the heat from the elevator motor get added to. Constraint to use when implemented :Zone:",
         "RMD Test": "unknown",
@@ -3092,7 +3168,7 @@
         "AppG B_RMDs Same": true
       },
       "cab_location_zone": {
-        "Description": "Zone where the heat from the cab goes",
+        "Description": "ID of the Zone where the heat from the cab goes",
         "Data Type": "Reference",
         "Notes": "When specified, it is the zone the heat from the cab get added to to the zone including lighting heat, fan heat, and accessory heat. Constraint to use when implemented :Zone:",
         "RMD Test": "unknown",
@@ -3183,7 +3259,7 @@
         "AppG B_RMDs Same": true
       },
       "cab_lighting_power": {
-        "Description": "Lighitng power of cab",
+        "Description": "Lighting power of cab",
         "Data Type": "Numeric",
         "Units": "W",
         "RMD Test": false,
@@ -3192,28 +3268,27 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": true
       },
-      "cab_ventilation_fan_power": {
-        "Description": "Ventilation fan power of cab",
-        "Data Type": "Numeric",
-        "Units": "W",
+      "cab_ventilation_fan": {
+        "Description": "Ventilation fan for the cab",
+        "Data Type": "{Fan}",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": true
+      },
+      "cab_ventilation_fan_multiplier_schedule": {
+        "Description": "ID of the Schedule containg the multipler for elevator ventilation fan operation",
+        "Data Type": "Reference",
+        "Notes": "If the schedule is not present, the multiplier is always one. Constraint to use when implemented :Schedule:",
         "RMD Test": false,
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": true
-      },
-      "cab_ventilation_fan_flow": {
-        "Description": "Airflow of cab ventfan",
-        "Data Type": "Numeric",
-        "Units": "L/s",
-        "RMD Test": false,
-        "AppG Used By TCDs": true,
-        "AppG P_RMD Equals U_RMD": true,
-        "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": false
       },
       "cab_motor_multiplier_schedule": {
-        "Description": "Elevator motor operation multiplier schedule name",
+        "Description": "ID of the Schedule containing the multiplier for the elevator motor operation",
         "Data Type": "Reference",
         "Notes": "If the schedule is not present, the multiplier is always one. Constraint to use when implemented :Schedule:",
         "RMD Test": false,
@@ -3222,18 +3297,8 @@
         "AppG B_RMD Equals P_RMD": true,
         "AppG B_RMDs Same": true
       },
-      "cab_ventilation_fan_multiplier_schedule": {
-        "Description": "Elevator ventilation fan operation mulitplier schedule name",
-        "Data Type": "Reference",
-        "Notes": "If the schedule is not present, the multiplier is always one. Constraint to use when implemented :Schedule:",
-        "RMD Test": false,
-        "AppG Used By TCDs": true,
-        "AppG P_RMD Equals U_RMD": true,
-        "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": true
-      },
       "cab_lighting_multiplier_schedule": {
-        "Description": "Elevator lighting multiplier schedule name",
+        "Description": "ID of the Schedule containing the multiplier for the elevator lighting",
         "Data Type": "Reference",
         "Notes": "If the schedule is not present, the multiplier is always one. Constraint to use when implemented :Schedule:",
         "RMD Test": false,
@@ -3402,7 +3467,7 @@
         "AppG B_RMDs Same": true
       },
       "hot_water_loop": {
-        "Description": "Referenced to the hot water fluid loop",
+        "Description": "ID of the FluidLoop providing the hot water",
         "Data Type": "Reference",
         "Notes": "Constraint to use when implemented :FluidLoop:",
         "RMD Test": "Primary",
@@ -3412,7 +3477,7 @@
         "AppG B_RMDs Same": true
       },
       "water_source_heat_pump_loop": {
-        "Description": "Referenced to the water fluid loop to support water source heat pumps",
+        "Description": "ID of the FluidLoop containing water source heat pumps",
         "Data Type": "Reference",
         "Notes": "Constraint to use when implemented :FluidLoop:",
         "RMD Test": "unknown",
@@ -3519,9 +3584,9 @@
       },
       "heatpump_low_shutoff_temperature": {
         "Description": "Heatpump low temperature shutoff",
-        "Data Type": "Numeric",
+        "Data Type": "Numeric/Null",
         "Units": "C",
-        "Notes": "The heat pump is available at above this outdoor temperature to satsify the load. The heat pump is always energized first to meet any heating load prior to the use of auxiliary heat. For heat pumps with no lower temperature limit, this value should not be provided or else set to -999.",
+        "Notes": "The heat pump is available at above this outdoor temperature to satsify the load. The heat pump is always energized first to meet any heating load prior to the use of auxiliary heat. For heat pumps with no lower temperature limit, this value should not be provided or else set to Null.",
         "RMD Test": "Primary",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
@@ -3594,11 +3659,11 @@
         "Description": "Efficiency at -8.3C/17F dry bulb and -9.4C/15F wet bulb"
       },
       "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_HIGH_TEMPERATURE_NO_FAN": {
-        "Description": "Efficiency at 8.3C/47F dry bulb and 6.1C/43F wet bulb not including fan",
+        "Description": "Efficiency not including fan at 8.3C/47F dry bulb and 6.1C/43F wet bulb",
         "Notes": "Used for heat pump and descibes the efficiency not including the indoor supply fan. The outdoor evaporator fan power is generally included."
       },
       "HEAT_PUMP_COEFFICIENT_OF_PERFORMANCE_LOW_TEMPERATURE_NO_FAN": {
-        "Description": "Efficiency at -8.3C/17F dry bulb and -9.4C/15F wet bulb not including fan",
+        "Description": "Efficiency  not including fanat -8.3C/17F dry bulb and -9.4C/15F wet bulb",
         "Notes": "Used for heat pump and descibes the efficiency not including the indoor supply fan. The outdoor evaporator fan power is generally included."
       },
       "THERMAL_EFFICIENCY": {
@@ -3619,11 +3684,23 @@
       "COEFFICIENT_OF_PERFORMANCE_WATER_TO_AIR_WATER_LOOP": {
         "Description": "Coefficient of performance at entering temperature of 20C/68F rated conditions for water loops per ISO 13256-1"
       },
+      "COEFFICIENT_OF_PERFORMANCE_WATER_TO_AIR_WATER_LOOP_NO_FAN": {
+        "Description": "Coefficient of performance at entering temperature of 20C/68F rated conditions for water loops per ISO 13256-1",
+        "Notes": "Used for heat pump and descibes the efficiency not including the indoor supply fan."
+      },
       "COEFFICIENT_OF_PERFORMANCE_WATER_TO_AIR_GROUND_WATER": {
         "Description": "Coefficient of performance at entering temperature of 10C/50F rated conditions for ground water per ISO 13256-1"
       },
+      "COEFFICIENT_OF_PERFORMANCE_WATER_TO_AIR_GROUND_WATER_NO_FAN": {
+        "Description": "Coefficient of performance not including fan at entering temperature of 10C/50F rated conditions for ground water per ISO 13256-1",
+        "Notes": "Used for heat pump and descibes the efficiency not including the indoor supply fan."
+      },
       "COEFFICIENT_OF_PERFORMANCE_BRINE_TO_AIR_GROUND_LOOP": {
         "Description": "Coefficient of performance at entering temperature of 0C/32F rated conditions for ground water per ISO 13256-1"
+      },
+      "COEFFICIENT_OF_PERFORMANCE_BRINE_TO_AIR_GROUND_LOOP_NO_FAN": {
+        "Description": "Coefficient of performance not including fan at entering temperature of 0C/32F rated conditions for ground water per ISO 13256-1",
+        "Notes": "Used for heat pump and descibes the efficiency not including the indoor supply fan."
       },
       "COEFFICIENT_OF_PERFORMANCE_WATER_TO_WATER_WATER_LOOP": {
         "Description": "Coefficient of performance at entering temperature of 20C/68F rated conditions for water loops per ISO 13256-2"
@@ -3752,7 +3829,7 @@
         "AppG B_RMDs Same": true
       },
       "chilled_water_loop": {
-        "Description": "Referenced to the Chilled water fluid loop",
+        "Description": "ID of the FluidLoop providing chilled water",
         "Data Type": "Reference",
         "Notes": "Constraint to use when implemented :FluidLoop:",
         "RMD Test": "Primary",
@@ -3762,7 +3839,7 @@
         "AppG B_RMDs Same": true
       },
       "condenser_water_loop": {
-        "Description": "Referenced to the Condenser water fluid loop",
+        "Description": "ID of the FluidLoop providing condenser water",
         "Data Type": "Reference",
         "Notes": "Constraint to use when implemented :FluidLoop:",
         "RMD Test": "Primary",
@@ -3860,7 +3937,7 @@
         "Description": "Full load efficiency expressed as a coefficient of performance at 35C/95F rated conditions"
       },
       "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN": {
-        "Description": "Full load efficiency expressed as a coefficient of performance at 35C/95F rated conditions not including indoor fan power",
+        "Description": "Full load efficiency expressed as a coefficient of performance not including indoor fan power at 35C/95F rated conditions",
         "Notes": "Descibes the efficiency not including the indoor supply fan. The outdoor evaporator fan power is generally included."
       },
       "ENERGY_EFFICIENCY_RATIO": {
@@ -3884,11 +3961,23 @@
       "COEFFICIENT_OF_PERFORMANCE_WATER_TO_AIR_WATER_LOOP": {
         "Description": "Coefficient of performance at entering temperature of 30C/86F rated conditions for water loops per ISO 13256-1"
       },
+      "COEFFICIENT_OF_PERFORMANCE_WATER_TO_AIR_WATER_LOOP_NO_FAN": {
+        "Description": "Coefficient of performance not including fan at entering temperature of 30C/86F rated conditions for water loops per ISO 13256-1",
+        "Notes": "Used for heat pump and descibes the efficiency not including the indoor supply fan."
+      },
       "COEFFICIENT_OF_PERFORMANCE_WATER_TO_AIR_GROUND_WATER": {
         "Description": "Coefficient of performance at entering temperature of 15C/59F rated conditions for ground water per ISO 13256-1"
       },
+      "COEFFICIENT_OF_PERFORMANCE_WATER_TO_AIR_GROUND_WATER_NO_FAN": {
+        "Description": "Coefficient of performance not including fan at entering temperature of 15C/59F rated conditions for ground water per ISO 13256-1",
+        "Notes": "Used for heat pump and descibes the efficiency not including the indoor supply fan."
+      },
       "COEFFICIENT_OF_PERFORMANCE_BRINE_TO_AIR_GROUND_LOOP": {
         "Description": "Coefficient of performance at entering temperature of 25C/77F rated conditions for ground water per ISO 13256-1"
+      },
+      "COEFFICIENT_OF_PERFORMANCE_BRINE_TO_AIR_GROUND_LOOP_NO_FAN": {
+        "Description": "Coefficient of performance not including fan at entering temperature of 25C/77F rated conditions for ground water per ISO 13256-1",
+        "Notes": "Used for heat pump and descibes the efficiency not including the indoor supply fan."
       },
       "COEFFICIENT_OF_PERFORMANCE_WATER_TO_WATER_WATER_LOOP": {
         "Description": "Coefficient of performance at entering temperature of 30C/86F rated conditions for water loops per ISO 13256-2"
@@ -3998,9 +4087,10 @@
         "AppG B_RMDs Same": false
       },
       "temperature_control": {
-        "Description": "Supply air temperature control type",
+        "Description": "Cooling supply air temperature control type",
         "Data Type": "<FanSystemTemperatureControlOptions>",
         "RMD Test": "Primary",
+        "Notes": "The options describe the controls during cooling operation.",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
         "AppG B_RMD Equals P_RMD": false,
@@ -4055,7 +4145,7 @@
         "AppG B_RMDs Same": true
       },
       "supply_air_temperature_reset_load_fraction": {
-        "Description": "Supply air temperature reset load fraction",
+        "Description": "Supply air temperature reset load fraction during cooling operation",
         "Data Type": "Numeric",
         "Notes": "When temperature_control is LOAD_RESET_TO_SPACE_TEMPERATURE, this is the threshold fraction below which supply air temperature reset begins.  Between the stated load fraction and 0% load the supply air temperature is ramped linearally until the supply air temperature reaches the zone. The supply air temperature is specified in Terminal.",
         "RMD Test": "Primary",
@@ -4065,7 +4155,7 @@
         "AppG B_RMDs Same": true
       },
       "supply_air_temperature_reset_schedule": {
-        "Description": "Supply air temperature reset schedule",
+        "Description": "ID of the Schedule for the supply air temperature reset during cooling operation",
         "Data Type": "Reference",
         "Notes": "The supply air temperature is specified in Terminal. Constraint to use when implemented :Schedule:",
         "RMD Test": "Primary",
@@ -4094,7 +4184,7 @@
         "AppG B_RMDs Same": true
       },
       "operating_schedule": {
-        "Description": "Operating schedule name",
+        "Description": "ID of the Schedule indicating operation",
         "Data Type": "Reference",
         "Notes": "If the schedule is not present, the fansystem  is always operating. Schedule values of zero when fan is scheduled to be off and one when the fan is scheduled to be on. While a zero indicates the fan is off, it may still be activated during that hour by other controls such as providing fan cycling at night to maintain the unoccupied set point. No values beside 0 and 1 are allowed. Constraint to use when implemented :Schedule:",
         "RMD Test": "Primary",
@@ -4676,7 +4766,7 @@
         "AppG B_RMDs Same": true
       },
       "motor_location_zone": {
-        "Description": "Zone where the heat from the motor goes",
+        "Description": "ID of the Zone where the heat from the motor goes",
         "Data Type": "Reference",
         "Notes": "When specified, it is the zone the heat from the fan motor get added to. Constraint to use when implemented :Zone:",
         "RMD Test": "unknown",
@@ -4694,10 +4784,10 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": true
       },
-      "output_validation_points": {
-        "Description": "Energy validation points",
-        "Data Type": "[{FanOutputValidationPoint}]",
-        "Notes": "Airflow is input to each validation point and energy output is the result. A minimum number of four points is recommended. Certain rulesets may have a different minimum number of points. For example, 90.1 Appendix G expects 11 data points.",
+      "operating_points": {
+        "Description": "Operating points",
+        "Data Type": "[{FanOperatingPoint}]",
+        "Notes": "Used to confirm the proper operation at various conditions which is based on the nominal value and performance curves, performance maps, or other adjustment mechanism. The airflow and power should be directly related. A minimum number of four points is recommended. Certain rulesets may have a different minimum number of points. For example, 90.1 Appendix G expects 11 data points. The ruleset checking specification would normally provide a list operating points that should match what is provided by the simulation.",
         "RMD Test": "Primary",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
@@ -4706,11 +4796,11 @@
       }
     }
   },
-  "FanOutputValidationPoint": {
+  "FanOperatingPoint": {
     "Object Type": "Data Group",
     "Data Elements": {
       "airflow": {
-        "Description": "Load",
+        "Description": "Airflow",
         "Data Type": "Numeric",
         "Units": "L/s",
         "Notes": "No name and id is needed since typically used as one of a series.",
@@ -4720,8 +4810,8 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": false
       },
-      "result": {
-        "Description": "Result",
+      "power": {
+        "Description": "power",
         "Data Type": "Numeric",
         "Units": "W",
         "Notes": "The rate of energy used by the fan at the given airflow.",
@@ -4789,7 +4879,7 @@
         "AppG B_RMDs Same": true
       },
       "served_by_heating_ventilating_air_conditioning_system": {
-        "Description": "HVAC system serving the terminal",
+        "Description": "ID of the HeatingVentilatingAirConditioningSystem serving the terminal",
         "Data Type": "Reference",
         "Notes": "Contains ID of the HVAC system serving the terminal - from Unique Identification Number in HeatingVentilatingAirConditioningSystem. Constraint to use when implemented :HeatingVentilatingAirConditioningSystem:",
         "RMD Test": "Primary",
@@ -4809,7 +4899,7 @@
         "AppG B_RMDs Same": true
       },
       "heating_from_loop": {
-        "Description": "References the fluid loop used to provide heating",
+        "Description": "ID of the FluidLoop providing heating",
         "Data Type": "Reference",
         "Notes": "Only used when heating_source is hot water. Used for terminal heating including reheat. Constraint to use when implemented :FluidLoop:",
         "RMD Test": "Primary",
@@ -4829,7 +4919,7 @@
         "AppG B_RMDs Same": true
       },
       "cooling_from_loop": {
-        "Description": "Referenced the fluid loop used to provide cooling",
+        "Description": "ID of the FluidLoop providing cooling",
         "Data Type": "Reference",
         "Notes": "Only used when cooling_source is chilled water. Used for terminal cooling including radiant and fan coils. Constraint to use when implemented :FluidLoop:",
         "RMD Test": "unknown",
@@ -4940,7 +5030,7 @@
         "AppG B_RMDs Same": true
       },
       "minimum_outdoor_airflow_multiplier_schedule": {
-        "Description": "Zone terminal minimum outdoor air volume airflow multiplier schedule name",
+        "Description": "ID of the Schedule containing the multiplier for zone terminal minimum outdoor air volume airflow",
         "Data Type": "Reference",
         "Notes": "If the schedule is not present, the multiplier is always one. Often used to indicate the reduced flow needed when the space has reduced occupancy when a demand controlled ventilation control is used. Constraint to use when implemented :Schedule:",
         "RMD Test": "unknown",
@@ -5253,7 +5343,7 @@
         "AppG B_RMDs Same": true
       },
       "operation_schedule": {
-        "Description": "Operation schedule",
+        "Description": "ID of the Schedule describing operation",
         "Data Type": "Reference",
         "Notes": "One represents when the fluid loop is availble to be operating and zero when not available to be operating. Only used when operation equals SCHEDULED. Constraint to use when implemented :Schedule:",
         "RMD Test": "Primary",
@@ -5430,9 +5520,7 @@
         "AppG Used By TCDs": false,
         "AppG P_RMD Equals U_RMD": false,
         "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": false,
-        "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG B_RMDs Same": false
       },
       "notes": {
         "Description": "Supplementary information to provide context to the model reviewer",
@@ -5442,12 +5530,10 @@
         "AppG Used By TCDs": false,
         "AppG P_RMD Equals U_RMD": false,
         "AppG B_RMD Equals P_RMD": false,
-        "AppG B_RMDs Same": false,
-        "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG B_RMDs Same": false
       },
       "loop_or_piping": {
-        "Description": "Referenced to the fluid loop or service water heating piping",
+        "Description": "ID of the FluidLoop or ServiceWaterPiping connected to the Pump",
         "Data Type": "Reference",
         "Required": true,
         "Notes": "Data elements linking data groups by reference that don't make sense without the reference are shown as required. Few other data elements than this type and id data elements are shown as required. Other data elements may be required by specific rulesets. Constraint to use when implemented :FluidLoop: or :ServiceWaterPiping:",
@@ -5557,7 +5643,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "is_flow_calculated": {
         "Description": "True if the design_flow is sized by software",
@@ -5571,10 +5657,10 @@
         "AppG 11-1 P_RMD Equals U_RMD": true,
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
-      "output_validation_points": {
-        "Description": "Energy validation points",
-        "Data Type": "[{PumpOutputValidationPoint}]",
-        "Notes": "Pump flow is input to each validation point and energy output is the result. A minimum number of four points is recommended.",
+      "operating_points": {
+        "Description": "Operating points",
+        "Data Type": "[{PumpOperatingPoint}]",
+        "Notes": "Used to confirm the proper operation at various conditions which is based on the nominal value and performance curves, performance maps, or other adjustment mechanism. The flow rate and power should be directly related. A minimum number of four points is recommended. The ruleset checking specification would normally provide a list operating points that should match what is provided by the simulation.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -5615,7 +5701,7 @@
       }
     }
   },
-  "PumpOutputValidationPoint": {
+  "PumpOperatingPoint": {
     "Object Type": "Data Group",
     "Data Elements": {
       "flow": {
@@ -5631,11 +5717,11 @@
         "AppG 11-1 P_RMD Equals U_RMD": true,
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
-      "result": {
-        "Description": "Result",
+      "power": {
+        "Description": "Power",
         "Data Type": "Numeric",
         "Units": "W",
-        "Notes": "The rate of energy used by the pump at the given flow rate.",
+        "Notes": "The rate of energy used per unit time by the pump at the given flow rate.",
         "RMD Test": "Primary",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
@@ -5679,7 +5765,7 @@
         "AppG B_RMDs Same": false
       },
       "loop": {
-        "Description": "Referenced to the fluid loop",
+        "Description": "ID of the FluidLoop connected to the Boiler",
         "Data Type": "Reference",
         "Required": true,
         "Notes": "Data elements linking data groups by reference that don't make sense without the reference are shown as required. Few other data elements than this type and id data elements are shown as required. Other data elements may be required by specific rulesets. Constraint to use when implemented :FluidLoop:",
@@ -5756,10 +5842,10 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": false
       },
-      "output_validation_points": {
-        "Description": "Energy validation points",
-        "Data Type": "[{BoilerOutputValidationPoint}]",
-        "Notes": "Load is input to each validation point and energy output is the result. A minimum number of four points is recommended.",
+      "operating_points": {
+        "Description": "Operating points",
+        "Data Type": "[{BoilerOperatingPoint}]",
+        "Notes": "Used to confirm the proper operation at various conditions which is based on the nominal value and performance curves, performance maps, or other adjustment mechanism. The energy consumption per unit time should be directly related to the load on the boiler and entering water temperature. A minimum number of sixteen points is recommended. The ruleset checking specification would normally provide a list of operating points that should match what is provided by the simulation.",
         "RMD Test": "Primary",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
@@ -5826,7 +5912,7 @@
       }
     }
   },
-  "BoilerOutputValidationPoint": {
+  "BoilerOperatingPoint": {
     "Object Type": "Data Group",
     "Data Elements": {
       "load": {
@@ -5851,10 +5937,11 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false
       },
-      "result": {
-        "Description": "Result",
+      "power": {
+        "Description": "Power",
         "Data Type": "Numeric",
         "Units": "W",
+        "Notes": "Energy consumption per unit time.",
         "RMD Test": "Primary",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
@@ -5896,7 +5983,7 @@
         "AppG B_RMDs Same": false
       },
       "cooling_loop": {
-        "Description": "Referenced to the cooling fluid loop",
+        "Description": "ID of the FluidLoop connected to the Chiller for supplying chilled water",
         "Data Type": "Reference",
         "Required": true,
         "Notes": "Data elements linking data groups by reference that don't make sense without the reference are shown as required. Few other data elements than this type and id data elements are shown as required. Other data elements may be required by specific rulesets. Constraint to use when implemented :FluidLoop:",
@@ -5907,7 +5994,7 @@
         "AppG B_RMDs Same": true
       },
       "condensing_loop": {
-        "Description": "Referenced to the condensing fluid loop",
+        "Description": "ID of the FluidLoop connected to the Chiller that provides condensing water",
         "Data Type": "Reference",
         "Notes": "No condensing loop name implies air-cooled chiller. Constraint to use when implemented :FluidLoop:",
         "RMD Test": "Primary",
@@ -5928,6 +6015,7 @@
       "chiller_function": {
         "Description": "Function such as chilled and/or hot water",
         "Data Type": "<ChillerFunctionOptions>",
+        "Notes": "This is used to help classify chillers but other data elements in this data group are describing the operation during cooling mode for chillers that operate in multiple modes.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -5937,6 +6025,7 @@
       "energy_source_type": {
         "Description": "Source of energy for the chiller",
         "Data Type": "<EnergySourceOptions>",
+        "Notes": "Select the primary source of energy for the chiller (often electricity). For chillers such as engine-driven or absorption that have both non-electric and electric inputs, provide the input that drives the refrigeration process, usually the non-electric input.",
         "RMD Test": "Primary",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
@@ -5946,7 +6035,7 @@
       "design_capacity": {
         "Description": "Chiller Design Cooling Capacity",
         "Data Type": "Numeric",
-        "Notes": "The capacity of the chiller at design conditions. This should correspond with the design_entering_condenser_temperature and design_leaving_evaporator_temperature.",
+        "Notes": "The capacity of the chiller at design conditions. This should correspond with the design_entering_condenser_temperature and design_leaving_evaporator_temperature. The element should describe the value during cooling mode operation for chillers even for chillers that operate in multiple modes.",
         "Units": "W",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
@@ -5958,7 +6047,7 @@
         "Description": "Chiller Rated Cooling Capacity",
         "Data Type": "Numeric",
         "Units": "W",
-        "Notes": "The capacity of the chiller at rating conditions. This should correspond with the rated_entering_condenser_temperature and rated_leaving_evaporator_temperature.",
+        "Notes": "The capacity of the chiller at rating conditions. This should correspond with the rated_entering_condenser_temperature and rated_leaving_evaporator_temperature. The element should describe the value during cooling mode operation for chillers even for chillers that operate in multiple modes.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -5969,7 +6058,7 @@
         "Description": "Rated entering condenser temperature",
         "Data Type": "Numeric",
         "Units": "C",
-        "Notes": "The rated outside air dry-bulb temperature for air cooled chillers or design entering condenser water temperature for water cooled chillers. For AHRI conditions for inch-pound ratings for air cooled chillers are 35C/95F and water cooled are 29.4C/85F. The AHRI conditions for SI ratings are 35C for air cooled chillers and 30C for water cooled. This should correpond with the rated capacity and the FULL_LOAD_EFFICIENCY_RATED and INTEGRATED_PART_LOAD_VALUE. ",
+        "Notes": "The rated outside air dry-bulb temperature for air cooled chillers or design entering condenser water temperature for water cooled chillers. For AHRI conditions for inch-pound ratings for air cooled chillers are 35C/95F and water cooled are 29.4C/85F. The AHRI conditions for SI ratings are 35C for air cooled chillers and 30C for water cooled. This should correpond with the rated capacity and the FULL_LOAD_EFFICIENCY_RATED and INTEGRATED_PART_LOAD_VALUE. The element should describe the value during cooling mode operation for chillers even for chillers that operate in multiple modes.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -5980,7 +6069,7 @@
         "Description": "Rated leaving evaporator temperature",
         "Data Type": "Numeric",
         "Units": "C",
-        "Notes": "For AHRI conditions for inch-pound ratings are 6.7C/44F. For AHRI conditions for SI ratings are 7C. This should correpond with the rated capacity and the FULL_LOAD_EFFICIENCY_RATED and INTEGRATED_PART_LOAD_VALUE. ",
+        "Notes": "For AHRI conditions for inch-pound ratings are 6.7C/44F. For AHRI conditions for SI ratings are 7C. This should correpond with the rated capacity and the FULL_LOAD_EFFICIENCY_RATED and INTEGRATED_PART_LOAD_VALUE. The element should describe the value during cooling mode operation for chillers even for chillers that operate in multiple modes.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -6031,7 +6120,7 @@
         "Description": "Design entering condenser temperature",
         "Data Type": "Numeric",
         "Units": "C",
-        "Notes": "The temperature entering the condenser portion of the chiller at design conditions. The design outside air dry-bulb temperature for air cooled chillers or design entering condenser water temperature for water cooled chillers. This should correpond with the design_capacity and the FULL_LOAD_EFFICIENCY_DESIGN and NONSTANDARD_PART_LOAD_VALUE.",
+        "Notes": "The temperature entering the condenser portion of the chiller at design conditions. The design outside air dry-bulb temperature for air cooled chillers or design entering condenser water temperature for water cooled chillers. This should correpond with the design_capacity and the FULL_LOAD_EFFICIENCY_DESIGN and NONSTANDARD_PART_LOAD_VALUE. The element should describe the value during cooling mode operation for chillers even for chillers that operate in multiple modes.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -6042,7 +6131,7 @@
         "Description": "Design leaving evaporator temperature",
         "Data Type": "Numeric",
         "Units": "C",
-        "Notes": "The temperature leaving the evaporator portion of the chiller at design conditions. This should correpond with the design_capacity and the FULL_LOAD_EFFICIENCY_DESIGN and NONSTANDARD_PART_LOAD_VALUE.",
+        "Notes": "The temperature leaving the evaporator portion of the chiller at design conditions. This should correpond with the design_capacity and the FULL_LOAD_EFFICIENCY_DESIGN and NONSTANDARD_PART_LOAD_VALUE. The element should describe the value during cooling mode operation for chillers even for chillers that operate in multiple modes.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -6054,7 +6143,7 @@
         "Data Type": "[Numeric]",
         "Units": "W/W",
         "Range": ">=0",
-        "Notes": "The useful cooling energy supplied by the chiller divided by the electric energy into the chiller both in the same units when the chiller is supplying a predefined load.",
+        "Notes": "The useful cooling energy supplied by the chiller divided by the energy into the chiller (usually electricity) both in the same units when the chiller is supplying a predefined load. The element should describe the value during cooling mode operation for chillers even for chillers that operate in multiple modes.",
         "RMD Test": "Primary",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
@@ -6070,18 +6159,20 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": true
       },
-      "capacity_validation_points": {
-        "Description": "Capacity validation points",
-        "Data Type": "[{ChillerCapacityValidationPoint}]",
+      "capacity_operating_points": {
+        "Description": "Capacity points",
+        "Data Type": "[{ChillerCapacityOperatingPoint}]",
+        "Notes": "Used to confirm the proper operation at various conditions which is based on the nominal value and performance curves, performance maps, or other adjustment mechanism. The capacity should be directly related to the chilled water supply temperature and condenser temperature. A minimum number of sixteen points is recommended. The ruleset checking specification would normally provide a list of operating points that should match what is provided by the simulation.",
         "RMD Test": false,
         "AppG Used By TCDs": false,
         "AppG P_RMD Equals U_RMD": false,
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": false
       },
-      "power_validation_points": {
+      "power_operating_points": {
         "Description": "Energy validation points",
-        "Data Type": "[{ChillerPowerValidationPoint}]",
+        "Data Type": "[{ChillerPowerOperatingPoint}]",
+        "Notes": "Used to confirm the proper operation at various conditions which is based on the nominal value and performance curves, performance maps, or other adjustment mechanism. The power should be directly related to the chilled water supply temperature, condenser temperature, and load on the chiller. An indicator that the chiller is at full capacity is also important to differentiate between fully loaded and partially loaded operation. A minimum number of 64 points is recommended but fewer may be adequate to confirm proper operation especially if the temperatures and load are not repeated. The ruleset checking specification would normally provide a list of operating points that should match what is provided by the simulation.",
         "RMD Test": "Primary",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
@@ -6109,7 +6200,7 @@
         "AppG B_RMDs Same": true
       },
       "heat_recovery_loop": {
-        "Description": "Recovered heat to fluid loop",
+        "Description": "ID of the FluidLoop connected to the chiller for supplying recovered heat",
         "Data Type": "Reference",
         "Notes": "Constraint to use when implemented :FluidLoop:",
         "RMD Test": "unknown",
@@ -6143,19 +6234,19 @@
         "Notes": "This should correspond with the design_entering_condenser_temperature and design_leaving_evaporator_temperature."
       },
       "INTEGRATED_PART_LOAD_VALUE": {
-        "Description": "Integrated part load value efficiency expressed as a coefficient of performance (COP) at rated conditions",
-        "Notes": "This should correspond with the rated_entering_condenser_temperature and rated_leaving_evaporator_temperature and should corresond with the AHRI rated conditions for the equipment."
+        "Description": "Integrated part load value efficiency expressed as a coefficient of performance (COP)",
+        "Notes": "This should corresond with the AHRI rated conditions for the equipment, see AHRI 550/590"
       },
       "NONSTANDARD_PART_LOAD_VALUE": {
-        "Description": "Nonstandard part load value efficiency expressed as a coefficient of performance (COP) at design conditions",
-        "Notes": "This should correspond with the design_entering_condenser_temperature and design_leaving_evaporator_temperature."
+        "Description": "Nonstandard part load value efficiency expressed as a coefficient of performance (COP)",
+        "Notes": "This should correspond with the applications conditions defined by the user other than AHRI rated conditions, see AHRI 550/590"
       },
       "OTHER": {
         "Description": "Other part load efficiency metric"
       }
     }
   },
-  "ChillerCapacityValidationPoint": {
+  "ChillerCapacityOperatingPoint": {
     "Object Type": "Data Group",
     "Data Elements": {
       "chilled_water_supply_temperature": {
@@ -6170,7 +6261,7 @@
         "AppG B_RMDs Same": false
       },
       "condenser_temperature": {
-        "Description": "Second temperature",
+        "Description": "Condenser temperature",
         "Data Type": "Numeric",
         "Units": "C",
         "Notes": "Outside air dry-bulb temperature for air cooled chillers and condenser water temperature for water cooled chillers. For water cooled chillers, this is the temperature as the water enters the chiller. For air cooled chilers this the temperature of the ambient air.",
@@ -6180,10 +6271,11 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": false
       },
-      "result": {
-        "Description": "Result",
+      "capacity": {
+        "Description": "Capacity",
         "Data Type": "Numeric",
         "Units": "W",
+        "Notes": "The capacity available by the chiller at the given operating point.",
         "RMD Test": false,
         "AppG Used By TCDs": false,
         "AppG P_RMD Equals U_RMD": false,
@@ -6192,7 +6284,7 @@
       }
     }
   },
-  "ChillerPowerValidationPoint": {
+  "ChillerPowerOperatingPoint": {
     "Object Type": "Data Group",
     "Data Elements": {
       "chilled_water_supply_temperature": {
@@ -6207,7 +6299,7 @@
         "AppG B_RMDs Same": false
       },
       "condenser_temperature": {
-        "Description": "Second temperature",
+        "Description": "Condenser temperature",
         "Data Type": "Numeric",
         "Units": "C",
         "Notes": "Outside air dry-bulb temperature for air cooled chillers and condenser water temperature for water cooled chillers. For water cooled chillers, this is the temperature as the water enters the chiller. For air cooled chilers this the temperature of the ambient air.",
@@ -6238,10 +6330,11 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false
       },
-      "result": {
-        "Description": "Result",
+      "power": {
+        "Description": "Power",
         "Data Type": "Numeric",
         "Units": "W",
+        "Notes": "The rate of energy used by the chiller at the given operating point.",
         "RMD Test": "Primary",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
@@ -6266,10 +6359,8 @@
         "Description": "Scroll"
       },
       "POSITIVE_DISPLACEMENT": {
-        "Description": "Positive displacement"
-      },
-      "HEAT_PUMP": {
-        "Description": "Heat pump"
+        "Description": "Positive displacement",
+        "Notes": "Only use the POSITIVE_DISPLACEMENT enumerator when the chiller is positive displacement but it is not known whether it is RECIPROCATING, SCREW, or SCROLL."
       },
       "SINGLE_EFFECT_INDIRECT_FIRED_ABSORPTION": {
         "Description": "Single-effect indirect-fired absorption"
@@ -6299,9 +6390,9 @@
         "Description": "Hot water only",
         "Notes": "Chiller is being used exclusively as a heat pump instead of a boiler."
       },
-      "CHILLED_AND_HOT_WATER": {
-        "Description": "Chilled and hot water",
-        "Notes": "Chiller can produce either chilled or hot water."
+      "CHILLED_OR_HOT_WATER": {
+        "Description": "Chilled or hot water",
+        "Notes": "Chiller is reversible and can produce either chilled or hot water."
       },
       "OTHER": {
         "Description": "Other"
@@ -6341,7 +6432,7 @@
         "AppG B_RMDs Same": false
       },
       "loop": {
-        "Description": "Referenced to the fluid loop",
+        "Description": "ID of the FluidLoop connected to the HeatRejection",
         "Data Type": "Reference",
         "Required": true,
         "Notes": "Data elements linking data groups by reference that don't make sense without the reference are shown as required. Few other data elements than this type and id data elements are shown as required. Other data elements may be required by specific rulesets. Constraint to use when implemented :FluidLoop:",
@@ -6368,6 +6459,15 @@
         "AppG P_RMD Equals U_RMD": true,
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": true
+      },
+      "fan": {
+        "Description": "Heat Rejection Fan",
+        "Data Type": "{Fan}",
+        "RMD Test": "unknown",
+        "AppG Used By TCDs": "unknown",
+        "AppG P_RMD Equals U_RMD": "unknown",
+        "AppG B_RMD Equals P_RMD": "unknown",
+        "AppG B_RMDs Same": "unknown"
       },
       "fluid": {
         "Description": "Fluid Cooled by Heat Rejection",
@@ -6407,50 +6507,6 @@
         "AppG P_RMD Equals U_RMD": true,
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": true
-      },
-      "fan_design_electric_power": {
-        "Description": "Fan design electric power",
-        "Data Type": "Numeric",
-        "Units": "W",
-        "Notes": "Only used when fan_shaft_power and fan_motor_efficiency and fan_motor_nameplate_power cannot be provided.",
-        "RMD Test": "unknown",
-        "AppG Used By TCDs": "unknown",
-        "AppG P_RMD Equals U_RMD": "unknown",
-        "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": "unknown"
-      },
-      "fan_shaft_power": {
-        "Description": "Fan Shaft Power",
-        "Data Type": "Numeric",
-        "Units": "W",
-        "Notes": "Power delivered to the fan’s shaft and does not include the mechanical drive losses. Equivalent to fan brake horsepower for inch-pound units.",
-        "RMD Test": "unknown",
-        "AppG Used By TCDs": "unknown",
-        "AppG P_RMD Equals U_RMD": "unknown",
-        "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false
-      },
-      "fan_motor_efficiency": {
-        "Description": "Efficiency of the fan motor at rating conditions",
-        "Data Type": "Numeric",
-        "Units": "W",
-        "Notes": "From CBECC-Com.",
-        "RMD Test": "unknown",
-        "AppG Used By TCDs": "unknown",
-        "AppG P_RMD Equals U_RMD": "unknown",
-        "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false
-      },
-      "fan_motor_nameplate_power": {
-        "Description": "Fan Motor Nameplate Power",
-        "Data Type": "Numeric",
-        "Units": "W",
-        "Notes": "The nameplate power at rating conditions. In inch-pound units is the fan motor horsepower.From CBECC-Com.",
-        "RMD Test": "unknown",
-        "AppG Used By TCDs": "unknown",
-        "AppG P_RMD Equals U_RMD": "unknown",
-        "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false
       },
       "fan_speed_control": {
         "Description": "Fan Speed Control Type",
@@ -6610,7 +6666,7 @@
         "AppG B_RMDs Same": false
       },
       "loop": {
-        "Description": "Referenced to the fluid loop",
+        "Description": "ID of the FluidLoop connected to the ExternalFluidSource",
         "Data Type": "Reference",
         "Required": true,
         "Notes": "Data elements linking data groups by reference that don't make sense without the reference are shown as required. Few other data elements than this type and id data elements are shown as required. Other data elements may be required by specific rulesets. Constraint to use when implemented :FluidLoop:",
@@ -6676,9 +6732,7 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false,
-        "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG B_RMDs Same": false
       },
       "notes": {
         "Description": "Supplementary information to provide context to the model reviewer",
@@ -6688,9 +6742,7 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false,
-        "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG B_RMDs Same": false
       },
       "design_supply_temperature": {
         "Description": "Design supply temperature setpoint of service water heating loop",
@@ -6825,10 +6877,10 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "flow_multiplier_schedule": {
-        "Description": "service water heating Loop flow muliplier schedule name",
+        "Description": "ID of the Schedule containing a multiplier for the service water heating loop flow",
         "Data Type": "Reference",
         "Notes": "If the schedule is not present, the multiplier is always one. Constraint to use when implemented :Schedule:",
         "RMD Test": "unknown",
@@ -6840,7 +6892,7 @@
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "entering_water_mains_temperature_schedule": {
-        "Description": "Temperature schedule for unheated entering water to the building site often referenced as mains temperature.",
+        "Description": "ID of the Schedule containing the temperature for unheated entering water to the building site often referenced as mains temperature",
         "Data Type": "Reference",
         "Notes": "Constraint to use when implemented :Schedule:",
         "RMD Test": "unknown",
@@ -6950,9 +7002,7 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false,
-        "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG B_RMDs Same": false
       },
       "notes": {
         "Description": "Supplementary information to provide context to the model reviewer",
@@ -6962,9 +7012,7 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false,
-        "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG B_RMDs Same": false
       },
       "is_recirculation_loop": {
         "Description": "Indicates if service water heating piping is a loop and recirculates",
@@ -6985,8 +7033,8 @@
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
-        "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "insulation_thickness": {
         "Description": "Pipe insulation thickness",
@@ -6999,8 +7047,8 @@
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
-        "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals U_RMD": false,
+        "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "loop_pipe_location": {
         "Description": "Loop pipe location",
@@ -7015,7 +7063,7 @@
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "location_zone": {
-        "Description": "Zone reference of where the component is located when IN_ZONE is selected from ComponentLocationOptions",
+        "Description": "ID of the Zone where the piping is located when IN_ZONE is selected from ComponentLocationOptions",
         "Data Type": "Reference",
         "Notes": "When present, it indicates that heat transfer into or out of the component turns into a cooling or heating load in the simulation. From CBECC-Com. Constraint to use when implemented :Zone:",
         "RMD Test": "unknown",
@@ -7073,9 +7121,7 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": true,
-        "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG B_RMDs Same": true
       }
     }
   },
@@ -7101,9 +7147,7 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false,
-        "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG B_RMDs Same": false
       },
       "notes": {
         "Description": "Supplementary information to provide context to the model reviewer",
@@ -7113,9 +7157,7 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false,
-        "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG B_RMDs Same": false
       },
       "angle_from_true_north": {
         "Description": "Solar heater angle from true north, clockwise",
@@ -7213,9 +7255,7 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false,
-        "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG B_RMDs Same": false
       },
       "notes": {
         "Description": "Supplementary information to provide context to the model reviewer",
@@ -7225,9 +7265,7 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false,
-        "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG B_RMDs Same": false
       },
       "heater_fuel_type": {
         "Description": "Service water heating heater fuel type",
@@ -7241,7 +7279,7 @@
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "distribution_system": {
-        "Description": "Referenced to the service water heating distribution system",
+        "Description": "ID of the ServiceWaterHeatingDistributionSystem connected to the ServiceWaterHeatingEquipment",
         "Data Type": "Reference",
         "Required": true,
         "Notes": "Data elements linking data groups by reference that don't make sense without the reference are shown as required. Few other data elements than this type and id data elements are shown as required. Other data elements may be required by specific rulesets. Constraint to use when implemented :ServiceWaterHeatingDistributionSystem:",
@@ -7301,9 +7339,10 @@
         "AppG 11-1 P_RMD Equals U_RMD": true,
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
-      "output_validation_points": {
-        "Description": "Capacity validation points",
-        "Data Type": "[{ServiceWaterHeaterValidationPoint}]",
+      "operating_points": {
+        "Description": "Operating points",
+        "Data Type": "[{ServiceWaterHeaterOperatingPoint}]",
+        "Notes": "Used to confirm the proper operation at various conditions which is based on the nominal value and performance curves, performance maps, or other adjustment mechanism. The power should be directly related to the load. A minimum number of four points is recommended. The ruleset checking specification would normally provide a list operating points that should match what is provided by the simulation.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -7390,7 +7429,7 @@
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "compressor_zone": {
-        "Description": "Zone reference of where the heat pump for the water heater is located",
+        "Description": "ID of the Zone where the heat pump for the water heater is located",
         "Data Type": "Reference",
         "Notes": "From CBECC-Com. Constraint to use when implemented :Zone:",
         "RMD Test": "unknown",
@@ -7414,7 +7453,7 @@
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "compressor_heat_rejection_zone": {
-        "Description": "Heat pump heat rejection zone",
+        "Description": "ID of the Zone for rejecting heat pump heat",
         "Data Type": "Reference",
         "Notes": "When present, it indicates that heat transfer into or out of the component turns into a cooling or heating load in the simulation. From CBECC-Res. Constraint to use when implemented :Zone:",
         "RMD Test": "unknown",
@@ -7425,9 +7464,10 @@
         "AppG 11-1 P_RMD Equals U_RMD": true,
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
-      "compressor_capacity_validation_points": {
-        "Description": "Capacity validation points",
-        "Data Type": "[{HeatPumpWaterHeaterCapacityValidationPoint}]",
+      "compressor_capacity_operating_points": {
+        "Description": "Compressor capacity operating points",
+        "Data Type": "[{HeatPumpWaterHeaterCapacityOperatingPoint}]",
+        "Notes": "Used to confirm the proper operation at various conditions which is based on the nominal value and performance curves, performance maps, or other adjustment mechanism. The capacity should be directly related to the evaporator_air_temperature, condenser_water_temperature, evaporator_air_flow, and condenser_water_flow. A minimum number of 64 points is recommended but fewer may be adequate to confirm proper operation especially if the temperatures and flows are not repeated. The ruleset checking specification would normally provide a list of operating points that should match what is provided by the simulation.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -7436,9 +7476,10 @@
         "AppG 11-1 P_RMD Equals U_RMD": true,
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
-      "compressor_power_validation_points": {
-        "Description": "Coefficient of performance validation points",
-        "Data Type": "[{HeatPumpWaterHeaterPowerValidationPoint}]",
+      "compressor_power_operating_points": {
+        "Description": "Compressor power operating points",
+        "Data Type": "[{HeatPumpWaterHeaterPowerOperatingPoint}]",
+        "Notes": "Used to confirm the proper operation at various conditions which is based on the nominal value and performance curves, performance maps, or other adjustment mechanism. The power should be directly related to the chilled water evaporator_air_temperature, condenser_water_temperature, evaporator_air_flow, condenser_water_flow, and load on the heat pump water heater. A minimum number of 64 points is recommended but fewer may be adequate to confirm proper operation especially if the temperatures and flows are not repeated. The ruleset checking specification would normally provide a list of operating points that should match what is provided by the simulation.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -7447,11 +7488,9 @@
         "AppG 11-1 P_RMD Equals U_RMD": true,
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
-      "draft_fan_power": {
-        "Description": "Power for the draft fan ",
-        "Data Type": "Numeric",
-        "Units": "W",
-        "Range": ">=0",
+      "draft_fan": {
+        "Description": "Draft fan ",
+        "Data Type": "{Fan}",
         "Notes": "From CBECC-Com.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
@@ -7509,7 +7548,7 @@
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "hot_water_loop": {
-        "Description": "Referenced to the hot water fluid loop",
+        "Description": "ID of the FluidLoop for hot water",
         "Data Type": "Reference",
         "Notes": "Can be used when heat is supplied to service water heater from a hot water loop or when combination service water and space heating is used. Constraint to use when implemented :FluidLoop:",
         "RMD Test": "unknown",
@@ -7608,7 +7647,7 @@
       }
     }
   },
-  "ServiceWaterHeaterValidationPoint": {
+  "ServiceWaterHeaterOperatingPoint": {
     "Object Type": "Data Group",
     "Data Elements": {
       "load": {
@@ -7624,10 +7663,11 @@
         "AppG 11-1 P_RMD Equals U_RMD": true,
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
-      "result": {
-        "Description": "Result",
+      "power": {
+        "Description": "power",
         "Data Type": "Numeric",
         "Units": "W",
+        "Notes": "The rate of energy used per unit time by the service water heating at the given load.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -7638,7 +7678,7 @@
       }
     }
   },
-  "HeatPumpWaterHeaterCapacityValidationPoint": {
+  "HeatPumpWaterHeaterCapacityOperatingPoint": {
     "Object Type": "Data Group",
     "Data Elements": {
       "evaporator_air_temperature": {
@@ -7690,10 +7730,11 @@
         "AppG 11-1 P_RMD Equals U_RMD": true,
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
-      "result": {
+      "capacity": {
         "Description": "Result",
         "Data Type": "Numeric",
         "Units": "W",
+        "Notes": "The capacity available by the heat pump water heater at the given operating point.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -7704,7 +7745,7 @@
       }
     }
   },
-  "HeatPumpWaterHeaterPowerValidationPoint": {
+  "HeatPumpWaterHeaterPowerOperatingPoint": {
     "Object Type": "Data Group",
     "Data Elements": {
       "evaporator_air_temperature": {
@@ -7768,10 +7809,11 @@
         "AppG 11-1 P_RMD Equals U_RMD": true,
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
-      "result": {
+      "power": {
         "Description": "Result",
         "Data Type": "Numeric",
         "Units": "W",
+        "Notes": "The rate of energy used by the heat pump water heater at the given operating point.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
@@ -7804,9 +7846,7 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false,
-        "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG B_RMDs Same": false
       },
       "notes": {
         "Description": "Supplementary information to provide context to the model reviewer",
@@ -7816,9 +7856,7 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false,
-        "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG B_RMDs Same": false
       },
       "storage_capacity": {
         "Description": "Storage capacity of tank in distribution system",
@@ -7830,7 +7868,9 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": true
+        "AppG B_RMDs Same": true,
+        "AppG 11-1 P_RMD Equals U_RMD": true,
+        "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "type": {
         "Description": "Service water heater tank type",
@@ -7898,7 +7938,7 @@
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "location_zone": {
-        "Description": "Tank zone location",
+        "Description": "ID of the Zone containing the Tank",
         "Data Type": "Reference",
         "Notes": "When present, it indicates that heat transfer into or out of the component turns into a cooling or heating load in the simulation. Constraint to use when implemented :Zone:",
         "RMD Test": "unknown",
@@ -7970,9 +8010,7 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false,
-        "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG B_RMDs Same": false
       },
       "notes": {
         "Description": "Supplementary information to provide context to the model reviewer",
@@ -7982,13 +8020,11 @@
         "AppG Used By TCDs": "unknown",
         "AppG P_RMD Equals U_RMD": "unknown",
         "AppG B_RMD Equals P_RMD": "unknown",
-        "AppG B_RMDs Same": false,
-        "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG B_RMDs Same": false
       },
       "area_type": {
         "Description": "Service Water Heating Loop Area Type",
-        "Data Type": "<ServiceWaterHeatingSpaceOptions2019ASHRAE901>",
+        "Data Type": "<ServiceWaterHeatingAreaOptions2019ASHRAE901>",
         "Notes": "The enumeration is based on the standard used.",
         "RMD Test": "unknown",
         "AppG Used By TCDs": "unknown",
@@ -8010,7 +8046,7 @@
         "AppG 11-3 P_RMD Equals B_RMD": true
       },
       "served_by_distribution_system": {
-        "Description": "ID fo the ServiceWaterHeatingDistributionSystem that serves this end use",
+        "Description": "ID of the ServiceWaterHeatingDistributionSystem that serves this end use",
         "Data Type": "Reference",
         "Required": true,
         "Notes": "From CBECC-Res. Constraint to use when implemented :ServiceWaterHeatingDistributionSystem:",
@@ -8046,7 +8082,7 @@
         "AppG 11-3 P_RMD Equals B_RMD": false
       },
       "use_multiplier_schedule": {
-        "Description": "Reference to the schedule containing the multiplier for the use of service hot water",
+        "Description": "ID of the Schedule containing the multiplier for the use of service hot water",
         "Data Type": "Reference",
         "Notes": "If the schedule is not present, the multiplier is always one. Constraint to use when implemented :Schedule:",
         "RMD Test": "unknown",
@@ -8172,6 +8208,14 @@
       "FUEL_OIL": {
         "Description": "Fuel oil"
       },
+      "STEAM": {
+        "Description": "Steam",
+        "Notes": "Applicable for absorption chillers"
+      },
+      "HOT_WATER": {
+        "Description": "Hot water",
+        "Notes": "Applicable for absorption chillers"
+      },
       "NONE": {
         "Description": "None",
         "Notes": "No energy consumption by a utility supplied source occurs"
@@ -8278,7 +8322,7 @@
         "AppG B_RMDs Same": true
       },
       "multiplier_schedule": {
-        "Description": "Reference to the schedule containing the multiplier for exterior lighting",
+        "Description": "ID of the Schedule containing the multiplier for exterior lighting",
         "Data Type": "Reference",
         "Notes": "If the schedule is not present, the multiplier is always one. Constraint to use when implemented :Schedule:",
         "RMD Test": "unknown",
@@ -8371,7 +8415,7 @@
         "AppG B_RMDs Same": true
       },
       "power_multiplier_schedule": {
-        "Description": "Refrigerated case power multiplier schedule name",
+        "Description": "ID of the Schedule containing the multiplier for refrigerated case power",
         "Data Type": "Reference",
         "Notes": "If the schedule is not present, the multiplier is always one. Constraint to use when implemented :Schedule:",
         "RMD Test": "unknown",
@@ -8401,7 +8445,7 @@
         "AppG B_RMDs Same": true
       },
       "volume": {
-        "Description": "volume of a refrigerated case in cubic meters",
+        "Description": "Volume of a refrigerated case in cubic meters",
         "Data Type": "Numeric",
         "Units": "m3",
         "RMD Test": "unknown",
@@ -8411,7 +8455,7 @@
         "AppG B_RMDs Same": true
       },
       "total_display_area": {
-        "Description": "display area of a refrigerated case in square meters",
+        "Description": "Display area of a refrigerated case in square meters",
         "Data Type": "Numeric",
         "Units": "m2",
         "RMD Test": "unknown",
@@ -8421,7 +8465,7 @@
         "AppG B_RMDs Same": true
       },
       "zone": {
-        "Description": "Zone where case is located",
+        "Description": "ID of the Zone where the RefrigeratedCase is located",
         "Data Type": "Reference",
         "Notes": "Constraint to use when implemented :Zone:",
         "RMD Test": "unknown",
