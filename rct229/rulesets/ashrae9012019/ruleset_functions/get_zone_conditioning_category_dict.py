@@ -71,7 +71,7 @@ def get_zone_conditioning_category_rmd_dict(
     constructions = rmd.get("constructions", [])
     for building in find_all("$.buildings[*]", rmd):
         zone_conditioning_category_dict = get_zone_conditioning_category_dict(
-            climate_zone, constructions, building
+            climate_zone, building, constructions
         )
         zone_conditioning_category_rmd_dict.update(zone_conditioning_category_dict)
     return zone_conditioning_category_rmd_dict
