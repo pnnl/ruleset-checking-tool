@@ -73,7 +73,6 @@ class PRM9012019Rule60e48(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019Rule60e48.RuleSetModelDescriptionRule.MiscEquipRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]",
-                required_fields={"$": ["calendar"], "calendar": ["is_leap_year"]},
             )
 
         def is_applicable(self, context, data=None):
@@ -90,7 +89,6 @@ class PRM9012019Rule60e48(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
-            is_leap_year = rmd_b["calendar"]["is_leap_year"]
 
             schedule_b = {
                 mult_sch_b: find_exactly_one_schedule(rmd_b, mult_sch_b)[
@@ -101,16 +99,11 @@ class PRM9012019Rule60e48(RuleDefinitionListIndexedBase):
                     rmd_b,
                 )
             }
-            hours_in_a_year = (
-                LeapYear.LEAP_YEAR_HOURS
-                if is_leap_year
-                else LeapYear.REGULAR_YEAR_HOURS
-            )
 
+            hours_in_a_year = len(schedule_b["Plug Load Schedule"])
             return {
                 "schedule_b": schedule_b,
                 "hours_in_a_year": hours_in_a_year,
-                "is_leap_year": is_leap_year,
             }
 
         class MiscEquipRule(RuleDefinitionBase):
@@ -133,9 +126,8 @@ class PRM9012019Rule60e48(RuleDefinitionListIndexedBase):
 
                 schedule_b = data["schedule_b"]
                 hours_in_a_year = data["hours_in_a_year"]
-                is_leap_year = data["is_leap_year"]
 
-                if is_leap_year:
+                if hours_in_a_year == LeapYear.LEAP_YEAR_HOURS:
                     DAYS_IN_MONTH[2] = 29
 
                 hourly_multiplier_schedule_b = misc_equip_b["multiplier_schedule"]
@@ -147,17 +139,11 @@ class PRM9012019Rule60e48(RuleDefinitionListIndexedBase):
                         [MONTH_FRACTIONS[month]] * DAYS_IN_MONTH[month] * 24
                     )
 
-                mask_schedule = (
-                    [1] * LeapYear.LEAP_YEAR_HOURS
-                    if is_leap_year
-                    else [1] * LeapYear.REGULAR_YEAR_HOURS
-                )
-
+                mask_schedule = [1] * hours_in_a_year
                 total_hours_matched = compare_schedules(
                     multiplier_schedule_b,
                     expected_hourly_values,
                     mask_schedule,
-                    is_leap_year,
                 )["total_hours_matched"]
 
                 return {

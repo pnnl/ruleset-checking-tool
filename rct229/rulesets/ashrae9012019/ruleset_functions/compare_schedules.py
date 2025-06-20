@@ -14,7 +14,6 @@ def compare_schedules(
     schedule_1: list[float],
     schedule_2: list[float],
     mask_schedule: list[float],
-    is_leap_year: bool,
 ) -> CompareSchedulesEFLHDifference:
     """Compare two schedules and determine if they match with or without a comparison factor when applicable
     NOTE: The function only works with hourly schedule for now.
@@ -41,17 +40,10 @@ def compare_schedules(
         "eflh_difference: EFLH_difference
         }
     """
-    num_hours = (
-        LeapYear.LEAP_YEAR_HOURS if is_leap_year else LeapYear.REGULAR_YEAR_HOURS
-    )
 
     assert_(
-        (
-            len(schedule_1) == len(schedule_2)
-            and len(schedule_1) == len(mask_schedule)
-            and len(schedule_1) == num_hours
-        ),
-        f"Failed when comparing hourly schedules with target number of hours. target number of hour: {num_hours}, number of hours of schedule_1 : {len(schedule_1)}; number of hours of schedule_2: {len(schedule_2)}; number of hours of mask_schedule: {len(mask_schedule)}",
+        (len(schedule_1) == len(schedule_2) and len(schedule_1) == len(mask_schedule)),
+        f"Failed when comparing hourly schedules with target number of hours. number of hours of schedule_1 : {len(schedule_1)}; number of hours of schedule_2: {len(schedule_2)}; number of hours of mask_schedule: {len(mask_schedule)}",
     )
 
     total_hours_compared = 0
