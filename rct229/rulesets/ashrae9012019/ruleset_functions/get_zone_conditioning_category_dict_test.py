@@ -738,7 +738,7 @@ TEST_RPD_12 = {
 TEST_BUILDING = quantify_rmd(TEST_RPD_12)["ruleset_model_descriptions"][0]["buildings"][
     0
 ]
-TEST_CONSTRUCTIONS = TEST_RPD_12["ruleset_model_descriptions"][0]["constructions"]
+TEST_CONSTRUCTIONS = quantify_rmd(TEST_RPD_12)["ruleset_model_descriptions"][0]["constructions"]
 
 
 def test__TEST_RPD__is_valid():
