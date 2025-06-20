@@ -341,7 +341,7 @@ def check_annual_schedule_lengths(rpd: dict) -> list[str]:
     schedules = find_all(
         "$.ruleset_model_descriptions[*].schedules[?(@.hourly_values)]", rpd
     )
-    lengths = [len(schedule["hourly_values"]) for schedule in schedules]
+    lengths = [len(schedule) for schedule in schedules]
 
     if not lengths:
         return []  # No schedules with hourly_values — no errors
