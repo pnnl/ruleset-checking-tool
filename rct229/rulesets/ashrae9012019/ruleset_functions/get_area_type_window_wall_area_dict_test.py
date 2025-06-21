@@ -375,10 +375,7 @@ TEST_rmd = {
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
                                     "tilt": 90,  # above grade wall
-                                    "construction": {
-                                        "id": "const_1_5_1",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_1_5_1",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_2_2_1_1",
@@ -440,10 +437,7 @@ TEST_rmd = {
                                     "adjacent_zone": "zone_1_2",  # semi-heated
                                     "area": 10,  # m2
                                     "tilt": 90,  # above grade wall
-                                    "construction": {
-                                        "id": "interior_wall_3_1_1",
-                                        "u_factor": 0.222,  # W/(m2 * K)
-                                    },
+                                    "construction": "interior_wall_3_1_1",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_3_1_1_1",
@@ -486,10 +480,7 @@ TEST_rmd = {
                                     "adjacent_zone": "zone_3_1",  # directly conditioned
                                     "area": 10,  # m2
                                     "tilt": 90,  # above grade wall
-                                    "construction": {
-                                        "id": "interior_wall_3_2_1",
-                                        "u_factor": 0.222,  # W/(m2 * K)
-                                    },
+                                    "construction": "interior_wall_3_2_1",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_3_2_1_1",
@@ -506,6 +497,20 @@ TEST_rmd = {
                 },
             ],
         }
+    ],
+    "constructions": [
+        {
+            "id": "const_1_5_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "interior_wall_3_1_1",
+            "u_factor": 0.222,  # W/(m2 * K)
+        },
+        {
+            "id": "interior_wall_3_2_1",
+            "u_factor": 0.222,  # W/(m2 * K)
+        },
     ],
     "type": "BASELINE_0",
 }
