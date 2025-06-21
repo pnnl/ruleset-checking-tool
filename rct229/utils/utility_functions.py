@@ -205,7 +205,7 @@ def find_exactly_one_service_water_heating_use(rmd: dict, swh_use_id: str) -> di
     """
     return find_exactly_one_with_field_value(
         # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
-        "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+        "$.service_water_heating_uses[*]",
         "id",
         swh_use_id,
         rmd,
