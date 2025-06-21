@@ -1,5 +1,6 @@
 import json
 import os
+from collections import Counter
 from referencing import Registry
 from jsonschema import Draft7Validator
 from referencing.jsonschema import DRAFT7
@@ -320,6 +321,50 @@ def check_hvac_association(rpd: dict) -> list:
     return mismatch_list
 
 
+def check_annual_schedule_lengths(rpd: dict) -> list[str]:
+    """
+    Verify that all schedules in the rpd file have the same length for hourly_values: either 8760 or 8784 entries.
+
+    Parameters
+    ----------
+    rpd : dict
+        The ruleset model description object.
+
+    Returns
+    -------
+    list[str]
+        A list of error messages for schedules that do not have 8760 or 8784 entries.
+    """
+    error_messages = []
+
+    schedules = find_all(
+        "$.ruleset_model_descriptions[*].schedules[?(@.hourly_values)]", rpd
+    )
+    lengths = [len(schedule) for schedule in schedules]
+
+    if not lengths:
+        return []  # No schedules with hourly_values — no errors
+
+    # Compute the mode of the lengths
+    length_counts = Counter(lengths)
+    common_length, _ = length_counts.most_common(1)[0]
+
+    # Check if common length is valid
+    if common_length not in (8760, 8784):
+        error_messages.append(
+            f"The most common schedule length is {common_length}, which is not 8760 or 8784."
+        )
+
+    for schedule, length in zip(schedules, lengths):
+        schedule_id = schedule.get["id"]
+        if length != common_length:
+            error_messages.append(
+                f"Schedule '{schedule_id}' has {length} hourly values; expected {common_length}."
+            )
+
+    return error_messages
+
+
 def check_unique_ids_in_ruleset_model_descriptions(rpd):
     """Checks that the ids within each group inside a
     RuleSetModelInstance are unique
@@ -499,6 +544,11 @@ def non_schema_validate_rpd(rmd_obj):
     passed = passed and not mismatch_associated_data_elements_errors
     if mismatch_associated_data_elements_errors:
         error.extend(mismatch_associated_data_elements_errors)
+
+    mismatch_annual_schedule_length_errors = check_annual_schedule_lengths(rmd_obj)
+    passed = passed and not mismatch_annual_schedule_length_errors
+    if mismatch_annual_schedule_length_errors:
+        error.extend(mismatch_annual_schedule_length_errors)
 
     return {"passed": passed, "error": error if error else None}
 
