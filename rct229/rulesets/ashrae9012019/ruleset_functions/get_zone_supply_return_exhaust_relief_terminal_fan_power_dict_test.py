@@ -59,7 +59,7 @@ TEST_RMD = {
                                     "id": "PTAC Terminal 3-1",
                                     "is_supply_ducted": False,
                                     "type": "CONSTANT_AIR_VOLUME",
-                                    "served_by_heating_ventilating_air_conditioning_system": "PTAC 1",
+                                    "served_by_heating_ventilating_air_conditioning_system": "PTAC 2",
                                     "primary_airflow": 800,
                                 }
                             ],
@@ -293,35 +293,35 @@ def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_two_zone
     )
     # check supply fans
     assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 1"][
+        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 2"][
             "supply_fans_power"
         ]
         - 2 * ureg("W")
         < 0.001 * ureg("W")
     )
     assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 1"][
+        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 2"][
             "return_fans_power"
         ]
         - 2 * ureg("W")
         < 0.001 * ureg("W")
     )
     assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 1"][
+        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 2"][
             "exhaust_fans_power"
         ]
         - 2 * ureg("W")
         < 0.001 * ureg("W")
     )
     assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 1"][
+        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 2"][
             "relief_fans_power"
         ]
         - 2 * ureg("W")
         < 0.001 * ureg("W")
     )
     assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 1"][
+        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 2"][
             "terminal_fans_power"
         ]
         == 0.0 * ureg("W")
