@@ -1,151 +1,150 @@
 {
     "id": "ashrae_229_1",
-    "ruleset_model_descriptions": [{
-        "id": "987",
-        "weather": {
-            "climate_zone": "CZ4A",
-            "data_source_type": "HISTORIC_AGGREGATION"
-    },
-        "buildings": [
-            {
-                "id": "0",
-                "building_open_schedule": "bo_sched_1",
-                "building_segments": [
-                    {
-                        "id": "0",
-                        "is_all_new": true,
-                        "area_type_vertical_fenestration": "HOTEL_MOTEL_SMALL",
-                        "lighting_building_area_type": "HOTEL_MOTEL",
-                        "zones": [
-                            {
-                                "id": "0",
-                                "spaces": [
-                                    {
-                                        "id": "1",
-                                        "lighting_space_type": "GUEST_ROOM",
-                                        "floor_area": 100,
-                                        "interior_lighting": [
-                                            {
-                                                "id": "1",
-                                                "power_per_area": 0.41,
-                                                "daylighting_control_type": "NONE",
-                                                "lighting_multiplier_schedule": "lm_sched_1"
-                                            }
-                                        ],
-                                        "occupant_multiplier_schedule": "om_sched_1"
-                                    },
-                                    {
-                                        "id": "2",
-                                        "lighting_space_type": "LOBBY_HOTEL",
-                                        "floor_area": 1000,
-                                        "interior_lighting": [
-                                            {
-                                                "id": "2",
-                                                "power_per_area": 1.1,
-                                                "daylighting_control_type": "NONE",
-                                                "lighting_multiplier_schedule": "lm_sched_1"
-                                            }
-                                        ],
-                                        "occupant_multiplier_schedule": "om_sched_1"
-                                    }
-                                ],
-                                "terminals": [
-                                    {
-                                        "id": "Terminal 1",
-                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                    }
-                                ],
-                                "infiltration": {
-                                    "id": "Infiltration 1",
-                                    "flow_rate": 4.009193529983999,
-                                    "modeling_method": "WEATHER_DRIVEN",
-                                    "algorithm_name": "AIR-CHANGE"
-                                },
-                                "surfaces": [
-                                    {
-                                        "id": "1",
-                                        "adjacent_to": "EXTERIOR",
-                                        "azimuth": 90,
-                                        "area": 100,
-                                        "tilt": 90,
-                                        "does_cast_shade": true,
-                                        "construction": {
-                                            "id": "construction_1",
-                                            "u_factor": 0.363408904595587
-                                        }
-                                    },
-                                    {
-                                        "id": "2",
-                                        "adjacent_to": "EXTERIOR",
-                                        "azimuth": 180,
-                                        "area": 100,
-                                        "tilt": 90,
-                                        "does_cast_shade": false,
-                                        "construction": {
-                                            "id": "construction_1",
-                                            "u_factor": 0.363408904595587
-                                        }
-                                    },
-                                    {
-                                        "id": "3",
-                                        "adjacent_to": "EXTERIOR",
-                                        "azimuth": 180,
-                                        "area": 100,
-                                        "tilt": 90,
-                                        "does_cast_shade": true,
-                                        "construction": {
-                                            "id": "construction_1",
-                                            "u_factor": 0.363408904595587
-                                        }
-                                    }
-                                ],
-                                "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
-                                "thermostat_heating_setpoint_schedule": "ths_sched_1",
-                                "volume": 11000
-                            }
-                        ],
-                        "heating_ventilating_air_conditioning_systems": [
-                            {
-                                "id": "HVAC 1",
-                                "cooling_system": {
-                                    "id": "Cooling System 1",
-                                    "design_sensible_cool_capacity": 17585.0
-                                },
-                                "heating_system": {
-                                    "id": "Heating System 1",
-                                    "design_capacity": 9378.275555555556
-                                }
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        "schedules": [
-            {"id":  "tcs_sched_1"},
-            {"id":  "ths_sched_1"},
-            {"id":  "om_sched_1"},
-            {"id":  "lm_sched_1"},
-            {"id":  "bo_sched_1"}
-        ],
-        "transformers": [
-            {
-                "id": "1",
-                "type": "DRY_TYPE",
-                "phase": "SINGLE_PHASE",
-                "efficiency": 0.9860,
-                "capacity": 100000.0,
-                "peak_load": 500.0
+    "ruleset_model_descriptions": [
+        {
+            "id": "987",
+            "weather": {
+                "climate_zone": "CZ4A",
+                "data_source_type": "HISTORIC_AGGREGATION"
             },
-            {
-                "id": "2",
-                "type": "DRY_TYPE",
-                "phase": "THREE_PHASE",
-                "efficiency": 0.988,
-                "capacity": 150000.0,
-                "peak_load": 500.0
-            }
-        ],
-        "type": "USER"
-    }]
+            "constructions": [
+                {
+                    "id": "construction_1",
+                    "u_factor": 0.363408904595587
+                }
+            ],
+            "buildings": [
+                {
+                    "id": "0",
+                    "building_open_schedule": "bo_sched_1",
+                    "building_segments": [
+                        {
+                            "id": "0",
+                            "is_all_new": true,
+                            "area_type_vertical_fenestration": "HOTEL_MOTEL_SMALL",
+                            "lighting_building_area_type": "HOTEL_MOTEL",
+                            "zones": [
+                                {
+                                    "id": "0",
+                                    "spaces": [
+                                        {
+                                            "id": "1",
+                                            "lighting_space_type": "GUEST_ROOM",
+                                            "floor_area": 100,
+                                            "interior_lighting": [
+                                                {
+                                                    "id": "1",
+                                                    "power_per_area": 0.41,
+                                                    "daylighting_control_type": "NONE",
+                                                    "lighting_multiplier_schedule": "lm_sched_1"
+                                                }
+                                            ],
+                                            "occupant_multiplier_schedule": "om_sched_1"
+                                        },
+                                        {
+                                            "id": "2",
+                                            "lighting_space_type": "LOBBY_HOTEL",
+                                            "floor_area": 1000,
+                                            "interior_lighting": [
+                                                {
+                                                    "id": "2",
+                                                    "power_per_area": 1.1,
+                                                    "daylighting_control_type": "NONE",
+                                                    "lighting_multiplier_schedule": "lm_sched_1"
+                                                }
+                                            ],
+                                            "occupant_multiplier_schedule": "om_sched_1"
+                                        }
+                                    ],
+                                    "terminals": [
+                                        {
+                                            "id": "Terminal 1",
+                                            "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                        }
+                                    ],
+                                    "infiltration": {
+                                        "id": "Infiltration 1",
+                                        "flow_rate": 4.009193529983999,
+                                        "modeling_method": "WEATHER_DRIVEN",
+                                        "algorithm_name": "AIR-CHANGE"
+                                    },
+                                    "surfaces": [
+                                        {
+                                            "id": "1",
+                                            "adjacent_to": "EXTERIOR",
+                                            "azimuth": 90,
+                                            "area": 100,
+                                            "tilt": 90,
+                                            "does_cast_shade": true,
+                                            "construction": "construction_1"
+                                        },
+                                        {
+                                            "id": "2",
+                                            "adjacent_to": "EXTERIOR",
+                                            "azimuth": 180,
+                                            "area": 100,
+                                            "tilt": 90,
+                                            "does_cast_shade": false,
+                                            "construction": "construction_1"
+                                        },
+                                        {
+                                            "id": "3",
+                                            "adjacent_to": "EXTERIOR",
+                                            "azimuth": 180,
+                                            "area": 100,
+                                            "tilt": 90,
+                                            "does_cast_shade": true,
+                                            "construction": "construction_1"
+                                        }
+                                    ],
+                                    "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
+                                    "thermostat_heating_setpoint_schedule": "ths_sched_1",
+                                    "volume": 11000
+                                }
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "HVAC 1",
+                                    "cooling_system": {
+                                        "id": "Cooling System 1",
+                                        "design_sensible_cool_capacity": 17585.0
+                                    },
+                                    "heating_system": {
+                                        "id": "Heating System 1",
+                                        "design_capacity": 9378.275555555556
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "schedules": [
+                {"id":  "tcs_sched_1"},
+                {"id":  "ths_sched_1"},
+                {"id":  "om_sched_1"},
+                {"id":  "lm_sched_1"},
+                {"id":  "bo_sched_1"}
+            ],
+            "transformers": [
+                {
+                    "id": "1",
+                    "type": "DRY_TYPE",
+                    "phase": "SINGLE_PHASE",
+                    "efficiency": 0.9860,
+                    "capacity": 100000.0,
+                    "peak_load": 500.0
+                },
+                {
+                    "id": "2",
+                    "type": "DRY_TYPE",
+                    "phase": "THREE_PHASE",
+                    "efficiency": 0.988,
+                    "capacity": 150000.0,
+                    "peak_load": 500.0
+                }
+            ],
+            "type": "USER"
+        }
+    ]
 }
