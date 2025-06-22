@@ -1,3 +1,5 @@
+from typing import List, Dict
+
 from rct229.rulesets.ashrae9012019.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
     get_hvac_zone_list_w_area_dict,
@@ -68,16 +70,17 @@ def get_zone_conditioning_category_rmd_dict(
         SEMI_HEATED, UNCONDITIONED, UNENCOLOSED
     """
     zone_conditioning_category_rmd_dict = {}
+    constructions = find_all("$.constructions[*]", rmd)
     for building in find_all("$.buildings[*]", rmd):
         zone_conditioning_category_dict = get_zone_conditioning_category_dict(
-            climate_zone, building
+            climate_zone, building, constructions
         )
         zone_conditioning_category_rmd_dict.update(zone_conditioning_category_dict)
     return zone_conditioning_category_rmd_dict
 
 
 def get_zone_conditioning_category_dict(
-    climate_zone: str, building: dict
+    climate_zone: str, building: dict, constructions: List[Dict] | None = None
 ) -> dict[str, ZoneConditioningCategory]:
     """Determines the zone conditioning category for every zone in a building
 
@@ -87,6 +90,8 @@ def get_zone_conditioning_category_dict(
         One of the ClimateZoneOptions2019ASHRAE901 enumerated values
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
+    constructions: List[Dict] | None
+        A list of dictionary, each dict representing a construction
     Returns
     -------
     dict
@@ -407,13 +412,17 @@ def get_zone_conditioning_category_dict(
                     zone_floor_area > ZERO.AREA,
                     f"zone:{zone_id} has no floor area",
                 )
-                if zone_volume / zone_floor_area < CRAWLSPACE_HEIGHT_THRESHOLD and any(
-                    [
-                        get_opaque_surface_type(surface)
-                        in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"]
-                        and surface["adjacent_to"] == "GROUND"
-                        for surface in zone["surfaces"]
-                    ]
+                if (
+                    zone_volume / zone_floor_area < CRAWLSPACE_HEIGHT_THRESHOLD
+                    and constructions
+                    and any(
+                        [
+                            get_opaque_surface_type(surface, constructions)
+                            in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"]
+                            and surface["adjacent_to"] == "GROUND"
+                            for surface in zone["surfaces"]
+                        ]
+                    )
                 ):
                     zone_conditioning_category_dict[
                         zone_id

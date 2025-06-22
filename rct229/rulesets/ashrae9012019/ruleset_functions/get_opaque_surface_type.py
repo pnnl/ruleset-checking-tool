@@ -1,3 +1,5 @@
+from typing import List, Dict
+
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
 
@@ -21,7 +23,9 @@ class OpaqueSurfaceType:
     UNHEATED_SOG: str = "UNHEATED SLAB-ON-GRADE"
 
 
-def get_opaque_surface_type(surface: dict) -> str:
+def get_opaque_surface_type(
+    surface: dict, constructions: List[Dict] | None = None
+) -> str:
     """Determines a surface's opaque surface type
 
     Parameters
@@ -51,11 +55,18 @@ def get_opaque_surface_type(surface: dict) -> str:
 
     # Check for a floor type
     elif MIN_FLOOR_TILT <= surface_tilt <= MAX_FLOOR_TILT:
+        construction_id = getattr_(surface, "surface", "construction")
         if (
-            getattr_(surface, "surface", "construction").get(
-                "has_radiant_heating"
-            )  # surface should have a construction
-            and surface.get("adjacent_to") == OpaqueSurfaceType.GROUND
+            next(
+                (
+                    c.get("has_radiant_heating")
+                    for c in constructions or []
+                    if c.get("id") == construction_id
+                ),
+                False,
+            )
+            if surface.get("adjacent_to") == OpaqueSurfaceType.GROUND
+            else False
         ):
             surface_type = OpaqueSurfaceType.HEATED_SOG
         elif surface.get("adjacent_to") == OpaqueSurfaceType.GROUND:
