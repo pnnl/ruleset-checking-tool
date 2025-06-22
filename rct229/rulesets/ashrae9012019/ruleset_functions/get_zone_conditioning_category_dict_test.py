@@ -29,55 +29,6 @@ CRAWLSPACE_HEIGHT_THRESHOLD = CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY.to("m").magni
 # This single RMD is intended to exercise all the get_zone_conditioning_category_dict() code
 TEST_RMD = {
     "id": "test_rmd",
-    "constructions": [
-        {
-            "id": "const_1_4_1",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_1_4_2",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_1_4_3",
-        },
-        {
-            "id": "const_1_5_1",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_1_5_2",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_1_6_1",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_1_6_2",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_1_7_1",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_1_7_2",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_1_8_1",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_1_8_2",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_1_9_1",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-    ],
     "buildings": [
         {
             "id": "bldg_1",
