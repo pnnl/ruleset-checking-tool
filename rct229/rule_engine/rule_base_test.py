@@ -174,7 +174,7 @@ def test__rule_definition_base__get_context__with_missing_rmds():
                 USER=RMD_EMPTY, BASELINE_0=RMD_EMPTY, PROPOSED=RMD_2
             )
         )
-        == "MISSING_USER_BASELINE_0"
+        == "MISSING_BASELINE_0_USER"
     )
 
 
