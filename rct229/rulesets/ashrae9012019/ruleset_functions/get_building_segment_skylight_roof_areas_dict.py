@@ -33,7 +33,7 @@ class BuildingSegmentRoofAreas(TypedDict):
 
 
 def get_building_segment_skylight_roof_areas_dict(
-    climate_zone: str, building: dict
+    climate_zone: str, constructions: list, building: dict
 ) -> dict[str, BuildingSegmentRoofAreas]:
     """Gets a dictionary mapping building segment id to a dictionary of (total area of
     skylights) and (total area of envelope roofs) for the building_segment
@@ -42,6 +42,8 @@ def get_building_segment_skylight_roof_areas_dict(
     ----------
     climate_zone : str
         One of the ClimateZoneOptions2019ASHRAE901 enumerated values
+    constructions : list
+        A list of construction dictionaries as defined by the ASHRAE229 schema
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
 
@@ -56,8 +58,12 @@ def get_building_segment_skylight_roof_areas_dict(
             }
         }
     """
-    zcc_dict = get_zone_conditioning_category_dict(climate_zone, building)
-    scc_dict = get_surface_conditioning_category_dict(climate_zone, building)
+    zcc_dict = get_zone_conditioning_category_dict(
+        climate_zone, building, constructions
+    )
+    scc_dict = get_surface_conditioning_category_dict(
+        climate_zone, building, constructions
+    )
     building_segment_roof_areas_dict = {}
 
     for building_segment in find_all("$.building_segments[*]", building):

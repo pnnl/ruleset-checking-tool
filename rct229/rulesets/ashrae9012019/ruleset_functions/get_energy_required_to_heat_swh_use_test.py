@@ -11,7 +11,6 @@ from rct229.utils.std_comparisons import std_equal
 
 TEST_RMD = {
     "id": "test_rmd",
-    "calendar": {"is_leap_year": False},
     "buildings": [
         {
             "id": "Building 1",
@@ -25,35 +24,10 @@ TEST_RMD = {
                                 {
                                     "id": "Space 1",
                                     "service_water_heating_uses": [
-                                        {
-                                            "id": "SWH Use 1",
-                                            "use": 100,
-                                            "use_units": "POWER_PER_PERSON",
-                                            "is_heat_recovered_by_drain": True,
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
-                                        {
-                                            "id": "SWH Use 2",
-                                            "use": 10,
-                                            "use_units": "POWER_PER_AREA",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
-                                        {
-                                            "id": "SWH Use 3",
-                                            "use": 1000,
-                                            "use_units": "POWER",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
-                                        {
-                                            "id": "SWH Use 4",
-                                            "use": 100,
-                                            "use_units": "VOLUME_PER_PERSON",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
+                                        "SWH Use 1",
+                                        "SWH Use 2",
+                                        "SWH Use 3",
+                                        "SWH Use 4",
                                     ],
                                     "number_of_occupants": 5,
                                     "floor_area": 100,
@@ -61,27 +35,9 @@ TEST_RMD = {
                                 {
                                     "id": "Space 2",
                                     "service_water_heating_uses": [
-                                        {
-                                            "id": "SWH Use 5",
-                                            "use": 10,
-                                            "use_units": "VOLUME_PER_AREA",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
-                                        {
-                                            "id": "SWH Use 6",
-                                            "use": 1000,
-                                            "use_units": "VOLUME",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
-                                        {
-                                            "id": "SWH Use 7",
-                                            "use": 10,
-                                            "use_units": "OTHER",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
+                                        "SWH Use 5",
+                                        "SWH Use 6",
+                                        "SWH Use 7",
                                     ],
                                     "number_of_occupants": 5,
                                     "floor_area": 100,
@@ -112,6 +68,58 @@ TEST_RMD = {
         {
             "id": "SWH Entering Water Temp Schedule 1",
             "hourly_values": [50] * 8760,
+        },
+    ],
+    "service_water_heating_uses": [
+        {
+            "id": "SWH Use 1",
+            "use": 100,
+            "use_units": "POWER_PER_PERSON",
+            "is_heat_recovered_by_drain": True,
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "SWH Use 2",
+            "use": 10,
+            "use_units": "POWER_PER_AREA",
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "SWH Use 3",
+            "use": 1000,
+            "use_units": "POWER",
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "SWH Use 4",
+            "use": 100,
+            "use_units": "VOLUME_PER_PERSON",
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "SWH Use 5",
+            "use": 10,
+            "use_units": "VOLUME_PER_AREA",
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "SWH Use 6",
+            "use": 1000,
+            "use_units": "VOLUME",
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "SWH Use 7",
+            "use": 10,
+            "use_units": "OTHER",
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
         },
     ],
     "service_water_heating_distribution_systems": [

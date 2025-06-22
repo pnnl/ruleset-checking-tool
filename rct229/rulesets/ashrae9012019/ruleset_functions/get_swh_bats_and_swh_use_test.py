@@ -21,18 +21,8 @@ TEST_RMD = {
                                     "id": "Space 1",
                                     "service_water_heating_area_type": "HOTEL",
                                     "service_water_heating_uses": [
-                                        {
-                                            "id": "service water heating uses 1_1",
-                                            "use": 400,
-                                            "use_units": "POWER",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                        },
-                                        {
-                                            "id": "service water heating uses 1_2",
-                                            "use": 500,
-                                            "use_units": "POWER",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                        },
+                                        "service water heating uses 1_1",
+                                        "service water heating uses 1_2",
                                     ],
                                 }
                             ],
@@ -49,18 +39,8 @@ TEST_RMD = {
                                     "id": "Space 2",
                                     "service_water_heating_area_type": "OFFICE",
                                     "service_water_heating_uses": [
-                                        {
-                                            "id": "service water heating uses 2_1",
-                                            "use": 400,
-                                            "use_units": "POWER",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                        },
-                                        {
-                                            "id": "service water heating uses 2_2",
-                                            "use": 500,
-                                            "use_units": "POWER",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                        },
+                                        "service water heating uses 2_1",
+                                        "service water heating uses 2_2",
                                     ],
                                 }
                             ],
@@ -69,6 +49,32 @@ TEST_RMD = {
                 },
             ],
         }
+    ],
+    "service_water_heating_uses": [
+        {
+            "id": "service water heating uses 1_1",
+            "use": 400,
+            "use_units": "POWER",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
+        {
+            "id": "service water heating uses 1_2",
+            "use": 500,
+            "use_units": "POWER",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
+        {
+            "id": "service water heating uses 2_1",
+            "use": 400,
+            "use_units": "POWER",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
+        {
+            "id": "service water heating uses 2_2",
+            "use": 500,
+            "use_units": "POWER",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
     ],
     "service_water_heating_distribution_systems": [
         {

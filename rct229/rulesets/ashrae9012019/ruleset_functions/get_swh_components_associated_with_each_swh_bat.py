@@ -12,6 +12,7 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
     find_exactly_one_service_water_heating_distribution_system,
+    find_exactly_one_service_water_heating_use,
 )
 from rct229.utils.assertions import getattr_
 
@@ -55,11 +56,12 @@ def get_swh_components_associated_with_each_swh_bat(
             energy_required=ZERO.ENERGY
         )
         # TODO Need to update json path if schema changes
-        for swh_use in find_all(
+        for swh_use_id in find_all(
             f'$.buildings[*].building_segments[*][?(@.id="{building_segment["id"]}")].zones[*].spaces['
             f"*].service_water_heating_uses[*]",
             rmd,
         ):
+            swh_use = find_exactly_one_service_water_heating_use(rmd, swh_use_id)
             swh_use_energy_by_space_dict = get_energy_required_to_heat_swh_use(
                 swh_use["id"], rmd, building_segment["id"], is_leap_year
             )

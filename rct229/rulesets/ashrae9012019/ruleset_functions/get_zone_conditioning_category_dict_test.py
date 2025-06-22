@@ -11,6 +11,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rpd
+from rct229.utils.jsonpath_utils import find_all
 
 CLIMATE_ZONE = "CZ0A"
 POWER_DELTA = 1
@@ -218,10 +219,7 @@ TEST_RMD = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_3",  # semi-heated
                                     "area": 10,  # m2
-                                    "construction": {
-                                        "id": "const_1_4_1",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_1_4_1",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_4_1_1",
@@ -237,10 +235,7 @@ TEST_RMD = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "construction": {
-                                        "id": "const_1_4_2",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_1_4_2",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_4_2_1",
@@ -256,9 +251,7 @@ TEST_RMD = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "construction": {
-                                        "id": "const_1_4_3",
-                                    },
+                                    "construction": "const_1_4_3",
                                 },
                             ],
                             "terminals": [
@@ -293,10 +286,7 @@ TEST_RMD = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "construction": {
-                                        "id": "const_1_5_1",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_1_5_1",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_5_1_1",
@@ -312,10 +302,7 @@ TEST_RMD = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_4",  # semi-heated
                                     "area": 10,  # m2
-                                    "construction": {
-                                        "id": "const_1_5_2",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_1_5_2",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_5_2_1",
@@ -359,10 +346,7 @@ TEST_RMD = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_4",  # semi-heated
                                     "area": 10,  # m2
-                                    "construction": {
-                                        "id": "const_1_6_1",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_1_6_1",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_6_1_1",
@@ -378,10 +362,7 @@ TEST_RMD = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "construction": {
-                                        "id": "const_1_6_2",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_1_6_2",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_6_2_1",
@@ -424,10 +405,7 @@ TEST_RMD = {
                                     "adjacent_to": "GROUND",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "construction": {
-                                        "id": "const_1_7_1",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_1_7_1",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_7_1_1",
@@ -444,10 +422,7 @@ TEST_RMD = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_4",  # semi-heated
                                     "area": 10,  # m2
-                                    "construction": {
-                                        "id": "const_1_7_2",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_1_7_2",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_7_2_1",
@@ -485,10 +460,7 @@ TEST_RMD = {
                                     "adjacent_to": "EXTERIOR",
                                     "adjacent_zone": "zone_1_4",  # semi-heated
                                     "area": 10,  # m2
-                                    "construction": {
-                                        "id": "const_1_8_1",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_1_8_1",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_8_1_1",
@@ -505,10 +477,7 @@ TEST_RMD = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "construction": {
-                                        "id": "const_1_8_2",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_1_8_2",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_8_2_1",
@@ -546,10 +515,7 @@ TEST_RMD = {
                                     "adjacent_to": "EXTERIOR",
                                     "adjacent_zone": "zone_1_4",  # semi-heated
                                     "area": 10,  # m2
-                                    "construction": {
-                                        "id": "const_1_9_1",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_1_9_1",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_9_1_1",
@@ -566,10 +532,7 @@ TEST_RMD = {
                                     "adjacent_to": "INTERIOR",
                                     "adjacent_zone": "zone_1_1",  # directly conditioned
                                     "area": 10,  # m2
-                                    "construction": {
-                                        "id": "const_1_9_2",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_1_9_2",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_9_2_1",
@@ -709,6 +672,59 @@ TEST_RMD = {
             ],
         }
     ],
+    "constructions": [
+        {
+            "id": "const_1_4_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_1_4_2",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_1_4_3",
+        },
+        {
+            "id": "const_1_5_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_1_5_2",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_1_6_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_1_6_2",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_1_7_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_1_7_2",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_1_8_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_1_8_2",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_1_9_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_1_9_2",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+    ],
     "type": "BASELINE_0",
 }
 
@@ -724,9 +740,8 @@ TEST_RPD_12 = {
         "time_of_creation": "2024-02-12T09:00Z",
     },
 }
-TEST_BUILDING = quantify_rmd(TEST_RPD_12)["ruleset_model_descriptions"][0]["buildings"][
-    0
-]
+TEST_RMD = quantify_rmd(TEST_RPD_12)["ruleset_model_descriptions"][0]
+TEST_BUILDING = TEST_RMD["buildings"][0]
 
 
 def test__TEST_RPD__is_valid():
@@ -737,7 +752,11 @@ def test__TEST_RPD__is_valid():
 
 
 def test__get_zone_conditioning_category_dict():
-    assert get_zone_conditioning_category_dict(CLIMATE_ZONE, TEST_BUILDING) == {
+    assert get_zone_conditioning_category_dict(
+        CLIMATE_ZONE,
+        TEST_BUILDING,
+        constructions=find_all("$.constructions[*]", TEST_RMD),
+    ) == {
         "zone_1_1": "CONDITIONED MIXED",
         "zone_1_2": "CONDITIONED NON-RESIDENTIAL",
         "zone_1_3": "CONDITIONED NON-RESIDENTIAL",
