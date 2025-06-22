@@ -187,13 +187,13 @@ def test_get_hvac_sys_and_assoc_zones_largest_exhaust_source_hvac_and_zone_succe
     assert (
         hvac_sys_and_assoc_zones_largest_exhaust_source_dict["hvac_fan_sys_exhaust_sum"]
         - 1500 * ureg("liter / second")
-        < 0.001 * ureg("liter / second"),
+        < 0.001 * ureg("liter / second")
     )
 
     assert (
         hvac_sys_and_assoc_zones_largest_exhaust_source_dict["maximum_zone_exhaust"]
         - 1500 * ureg("liter / second")
-        < 0.001 * ureg("liter / second"),
+        < 0.001 * ureg("liter / second")
     )
 
     assert (
@@ -204,7 +204,7 @@ def test_get_hvac_sys_and_assoc_zones_largest_exhaust_source_hvac_and_zone_succe
     assert (
         hvac_sys_and_assoc_zones_largest_exhaust_source_dict["maximum_hvac_exhaust"]
         - 1000 * ureg("liter / second")
-        < 0.001 * ureg("liter / second"),
+        < 0.001 * ureg("liter / second")
     )
 
 
@@ -215,7 +215,7 @@ def test_get_hvac_sys_and_assoc_zones_largest_exhaust_source_hvac_only_success()
     assert (
         hvac_sys_and_assoc_zones_largest_exhaust_source_dict["hvac_fan_sys_exhaust_sum"]
         - 1500 * ureg("liter / second")
-        < 0.001 * ureg("liter / second"),
+        < 0.001 * ureg("liter / second")
     )
 
     assert hvac_sys_and_assoc_zones_largest_exhaust_source_dict[
@@ -230,7 +230,7 @@ def test_get_hvac_sys_and_assoc_zones_largest_exhaust_source_hvac_only_success()
     assert (
         hvac_sys_and_assoc_zones_largest_exhaust_source_dict["maximum_hvac_exhaust"]
         - 1000 * ureg("liter / second")
-        < 0.001 * ureg("liter / second"),
+        < 0.001 * ureg("liter / second")
     )
 
 
@@ -245,7 +245,7 @@ def test_get_hvac_sys_and_assoc_zones_largest_exhaust_source_zone_only_success()
     assert (
         hvac_sys_and_assoc_zones_largest_exhaust_source_dict["maximum_zone_exhaust"]
         - 1500 * ureg("liter / second")
-        < 0.001 * ureg("liter / second"),
+        < 0.001 * ureg("liter / second")
     )
 
     assert (
