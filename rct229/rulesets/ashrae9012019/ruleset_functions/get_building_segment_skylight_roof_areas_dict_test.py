@@ -145,6 +145,12 @@ TEST_RMD = {
             ],
         }
     ],
+    "constructions": [
+        {
+            "id": "construction_1",
+            "u_factor": 3.2366105565544463,
+        }
+    ],
     "type": "BASELINE_0",
 }
 

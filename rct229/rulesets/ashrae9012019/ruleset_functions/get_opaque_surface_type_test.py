@@ -6,56 +6,47 @@ from rct229.schema.config import ureg
 # Constants
 DEGREES = ureg("degrees")
 
-CONSTRUCTIONS = [
-    {
-        "id": "Heated",
-        "has_radiant_heating": True,
-    },
-    {
-        "id": "Unheated",
-        "has_radiant_heating": False,
-    },
-]
 TEST_SURFACES = {
     "ABOVE-GRADE WALL": {
         "adjacent_to": "INTERIOR",
-        "construction": "Unheated",
+        "construction": "sample_construction",
         "tilt": 80 * DEGREES,
     },
     "BELOW-GRADE WALL": {
         "adjacent_to": "GROUND",
-        "construction": "Heated",
+        "construction": "sample_construction",
         "tilt": 100 * DEGREES,
     },
     "FLOOR": {
         "adjacent_to": "EXTERIOR",
-        "construction": "Unheated",
+        "construction": "sample_construction",
         "tilt": 160 * DEGREES,
     },
     "HEATED SLAB-ON-GRADE": {
         "adjacent_to": "GROUND",
-        "construction": "Heated",
+        "construction": "sample_construction",
         "tilt": 120 * DEGREES,
     },
     "ROOF": {
         "adjacent_to": "EXTERIOR",
-        "construction": "Unheated",
+        "construction": "sample_construction",
         "tilt": 30 * DEGREES,
     },
     "UNHEATED SLAB-ON-GRADE": {
         "adjacent_to": "GROUND",
-        "construction": "Unheated",
+        "construction": "unheated_sample_construction",
         "tilt": 180 * DEGREES,
     },
 }
 
+constructions = [
+    {"id": "sample_construction", "has_radiant_heating": True},
+    {"id": "unheated_sample_construction", "has_radiant_heating": False},
+]
+
 
 def test__get_opaque_surface_type():
     for key in TEST_SURFACES:
-        construction = next(
-            (c for c in CONSTRUCTIONS if c["id"] == TEST_SURFACES[key]["construction"]),
-        )
-        has_radiant_heating = construction.get("has_radiant_heating", False)
         assert (
-            get_opaque_surface_type(TEST_SURFACES[key], has_radiant_heating) == key
+            get_opaque_surface_type(TEST_SURFACES[key], constructions) == key
         ), f"Failed {key} test"

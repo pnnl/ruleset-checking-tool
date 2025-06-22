@@ -526,6 +526,24 @@ TEST_rmd = {
             ],
         }
     ],
+    "constructions": [
+        {
+            "id": "const_1_5_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_3_6_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_3_5_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_1_6_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+    ],
     "type": "BASELINE_0",
 }
 
@@ -691,6 +709,12 @@ TEST_RMD_BRANCH_COVERAGE2 = {
                     ],
                 },
             ],
+        }
+    ],
+    "constructions": [
+        {
+            "id": "Construction 1",
+            "u_factor": 0.35773064046128095,
         }
     ],
 }

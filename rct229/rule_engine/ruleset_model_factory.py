@@ -3,7 +3,12 @@ from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import assert_
 
-ruleset_model_dict = {RuleSet.ASHRAE9012019_RULESET: "RulesetModelOptions2019ASHRAE901"}
+ruleset_model_dict = {
+    RuleSet.ASHRAE9012019_RULESET: [
+        "RulesetModelOptions2019ASHRAE901",
+        "CommonRulesetModelOptions",
+    ]
+}
 
 
 def get_ruleset_model_types(self):
@@ -51,13 +56,16 @@ def get_rmd_instance():
 
     """
     rmd = RuleSetModels()
-    common_model_enum = SchemaEnums.schema_enums["CommonRulesetModelOptions"]
-    ruleset_specific_enum = SchemaEnums.schema_enums[
-        ruleset_model_dict[SchemaStore.SELECTED_RULESET]
+    ruleset_model_types_enums = [
+        SchemaEnums.schema_enums[rmt]
+        for rmt in ruleset_model_dict[SchemaStore.SELECTED_RULESET]
     ]
-    ruleset_model_types_enum_list = list(
-        set(common_model_enum.get_list() + ruleset_specific_enum.get_list())
-    )
+
+    ruleset_model_types_enum_list = [
+        model_type_enum
+        for ruleset_model_types_enum in ruleset_model_types_enums
+        for model_type_enum in ruleset_model_types_enum.get_list()
+    ]
 
     for ruleset_model in ruleset_model_types_enum_list:
         rmd.__setattr__(ruleset_model, None)

@@ -28,11 +28,13 @@ TEST_RMD = {
                                     "primary_airflow": 1888,
                                 }
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Zone exhaust fan 1",
-                                "specification_method": "SIMPLE",
-                                "design_electric_power": 20,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Zone exhaust fan 1",
+                                    "specification_method": "SIMPLE",
+                                    "design_electric_power": 20,
+                                }
+                            ],
                         },
                         {
                             "id": "Thermal Zone 2",
@@ -61,11 +63,13 @@ TEST_RMD = {
                                     "primary_airflow": 800,
                                 }
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Zone exhaust fan 1",
-                                "specification_method": "SIMPLE",
-                                "design_electric_power": 20,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Zone exhaust fan 1",
+                                    "specification_method": "SIMPLE",
+                                    "design_electric_power": 20,
+                                }
+                            ],
                         },
                         {
                             "id": "Thermal Zone 4",

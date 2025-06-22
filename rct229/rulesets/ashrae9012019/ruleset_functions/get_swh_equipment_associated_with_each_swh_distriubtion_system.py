@@ -73,7 +73,7 @@ def get_swh_equipment_associated_with_each_swh_distribution_system(
 
     # TODO revise the json path if the service_water_heating_uses is relocated in the schema
     for swh_use in find_all(
-        "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+        "$.service_water_heating_uses[*]",
         rmd,
     ):
         distribution_id = swh_use.get("served_by_distribution_system")

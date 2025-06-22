@@ -512,6 +512,20 @@ TEST_rmd = {
             ],
         }
     ],
+    "constructions": [
+        {
+            "id": "const_1_5_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "interior_wall_3_1_1",
+            "u_factor": 0.222,  # W/(m2 * K)
+        },
+        {
+            "id": "interior_wall_3_2_1",
+            "u_factor": 0.222,  # W/(m2 * K)
+        },
+    ],
     "type": "BASELINE_0",
 }
 
