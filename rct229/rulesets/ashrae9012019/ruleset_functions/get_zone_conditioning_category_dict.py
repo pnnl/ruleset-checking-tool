@@ -276,7 +276,9 @@ def get_zone_conditioning_category_dict(
                     non_subsurfaces_area = (
                         getattr_(surface, "surface", "area") - subsurfaces_area
                     )
-                    surface_construction = _find_construction(surface, constructions)
+                    surface_construction = find_construction_by_surface(
+                        surface, constructions
+                    )
                     # Calculate the UA for the surface
                     try:
                         surface_ua = (
@@ -417,7 +419,7 @@ def get_zone_conditioning_category_dict(
                     [
                         get_opaque_surface_type(
                             surface,
-                            _find_construction(surface, constructions).get(
+                            find_construction_by_surface(surface, constructions).get(
                                 "has_radiant_heat"
                             ),
                         )
@@ -449,7 +451,7 @@ def get_zone_conditioning_category_dict(
     return zone_conditioning_category_dict
 
 
-def _find_construction(surface: dict, constructions: List[Dict]) -> dict:
+def find_construction_by_surface(surface: dict, constructions: List[Dict]) -> dict:
     surface_construction_id = getattr_(surface, "Surface", "construction")
     surface_construction = next(
         (
