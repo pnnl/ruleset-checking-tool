@@ -9,37 +9,44 @@ DEGREES = ureg("degrees")
 TEST_SURFACES = {
     "ABOVE-GRADE WALL": {
         "adjacent_to": "INTERIOR",
-        "construction": {"has_radiant_heating": False},
+        "construction": "sample_construction",
         "tilt": 80 * DEGREES,
     },
     "BELOW-GRADE WALL": {
         "adjacent_to": "GROUND",
-        "construction": {"has_radiant_heating": True},
+        "construction": "sample_construction",
         "tilt": 100 * DEGREES,
     },
     "FLOOR": {
         "adjacent_to": "EXTERIOR",
-        "construction": {"has_radiant_heating": False},
+        "construction": "sample_construction",
         "tilt": 160 * DEGREES,
     },
     "HEATED SLAB-ON-GRADE": {
         "adjacent_to": "GROUND",
-        "construction": {"has_radiant_heating": True},
+        "construction": "sample_construction",
         "tilt": 120 * DEGREES,
     },
     "ROOF": {
         "adjacent_to": "EXTERIOR",
-        "construction": {"has_radiant_heating": False},
+        "construction": "sample_construction",
         "tilt": 30 * DEGREES,
     },
     "UNHEATED SLAB-ON-GRADE": {
         "adjacent_to": "GROUND",
-        "construction": {"has_radiant_heating": False},
+        "construction": "unheated_sample_construction",
         "tilt": 180 * DEGREES,
     },
 }
 
+constructions = [
+    {"id": "sample_construction", "has_radiant_heating": True},
+    {"id": "unheated_sample_construction", "has_radiant_heating": False},
+]
+
 
 def test__get_opaque_surface_type():
     for key in TEST_SURFACES:
-        assert get_opaque_surface_type(TEST_SURFACES[key]) == key, f"Failed {key} test"
+        assert (
+            get_opaque_surface_type(TEST_SURFACES[key], constructions) == key
+        ), f"Failed {key} test"

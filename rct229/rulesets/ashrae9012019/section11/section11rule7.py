@@ -18,7 +18,7 @@ from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 
 SERVICE_WATER_HEATING_SPACE = SchemaEnums.schema_enums[
-    "ServiceWaterHeatingSpaceOptions2019ASHRAE901"
+    "ServiceWaterHeatingAreaOptions2019ASHRAE901"
 ]
 
 
