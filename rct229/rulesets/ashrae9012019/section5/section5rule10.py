@@ -11,6 +11,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     get_surface_conditioning_category_dict,
     SurfaceConditioningCategory as SCC,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
+    find_construction_by_surface,
+)
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 from rct229.utils.assertions import assert_
@@ -70,8 +73,11 @@ class PRM9012019Rule29j06(RuleDefinitionListIndexedBase):
         def list_filter(self, context_item, data=None):
             surface_b = context_item.BASELINE_0
             scc = data["surface_conditioning_category_dict"][surface_b["id"]]
+            constructions = data["constructions"]
+            construction = find_construction_by_surface(surface_b, constructions)
             return (
-                get_opaque_surface_type(surface_b) == OST.FLOOR
+                get_opaque_surface_type(surface_b, construction.get("has_radiant_heat"))
+                == OST.FLOOR
                 and scc is not SCC.UNREGULATED
             )
 
