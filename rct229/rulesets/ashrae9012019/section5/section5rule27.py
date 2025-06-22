@@ -54,7 +54,11 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        return {"climate_zone": climate_zone}
+        constructions = rpd_b["ruleset_model_descriptions"][0].get("constructions")
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -74,8 +78,11 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
             # then set the manual check required and stop execution.
             building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
+            constructions = data["constructions"]
             building_scc_skylight_roof_ratios_dict_b = (
-                get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
+                get_building_scc_skylight_roof_ratios_dict(
+                    climate_zone, constructions, building_b
+                )
             )
             target_exterior_2per_residential = table_G34_lookup(
                 climate_zone,
@@ -115,8 +122,11 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
         def create_data(self, context, data=None):
             building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
+            constructions = data["constructions"]
             building_scc_skylight_roof_ratios_dict_b = (
-                get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
+                get_building_scc_skylight_roof_ratios_dict(
+                    climate_zone, constructions, building_b
+                )
             )
 
             # Process target_u_factor_res
@@ -177,7 +187,7 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
 
             return {
                 "surface_conditioning_category_dict_b": get_surface_conditioning_category_dict(
-                    climate_zone, building_b
+                    climate_zone, building_b, constructions
                 ),
                 # at this point, target_u_factor_mixed should be same regardless of
                 # residential <2% or >2%, skylight.
