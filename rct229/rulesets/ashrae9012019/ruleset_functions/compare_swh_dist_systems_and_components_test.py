@@ -24,12 +24,7 @@ TEST_RMD = {
                                 },
                                 {
                                     "id": "Space 2",
-                                    "service_water_heating_uses": [
-                                        {
-                                            "id": "SWH Use 2",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                        }
-                                    ],
+                                    "service_water_heating_uses": ["SWH Use 2"],
                                 },
                             ],
                         }
@@ -42,7 +37,11 @@ TEST_RMD = {
         {
             "id": "SWH Use 1",
             "served_by_distribution_system": "SWH Distribution 1",
-        }
+        },
+        {
+            "id": "SWH Use 2",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
     ],
     "service_water_heating_distribution_systems": [
         {
