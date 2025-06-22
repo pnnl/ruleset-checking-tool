@@ -153,9 +153,7 @@ TEST_MISMATCHED_LISTS_RMD = {
                                     "spaces": [
                                         {
                                             "id": "Space 1",
-                                            "service_water_heating_uses": [
-                                                {"id": "SWH Use 1"},
-                                            ],
+                                            "service_water_heating_uses": ["SWH Use 1"],
                                         }
                                     ],
                                 }
@@ -168,15 +166,17 @@ TEST_MISMATCHED_LISTS_RMD = {
                                     "cooling_system": {"id": "Cooling 1"},
                                 }
                             ],
-                            "service_water_heating_uses": [
-                                {"id": "Typical SWH Use"},
-                            ],
+                            "service_water_heating_uses": ["Typical SWH Use"],
                         },
                     ],
                 }
             ],
             "boilers": [{"id": "Boiler 1"}],
             "chillers": [{"id": "Chiller 1"}],
+            "service_water_heating_uses": [
+                {"id": "Typical SWH Use"},
+                {"id": "SWH Use 1"},
+            ],
             "service_water_heating_equipment": [{"id": "SWH Equipment 1"}],
         }
     ]
@@ -185,9 +185,9 @@ TEST_MISMATCHED_LISTS_RMD = {
 
 def test__non_schema_validate_rpd__missing_associated_swh_use_lists_1():
     test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
-        "service_water_heating_uses"
-    ][0]["use"] = [3]
+    test_rmd["ruleset_model_descriptions"][0]["service_water_heating_uses"][0][
+        "use"
+    ] = [3]
     assert non_schema_validate_rpd(test_rmd) == {
         "passed": False,
         "error": ["'Typical SWH Use' has populated 'use' but is missing 'use_units'."],
@@ -196,12 +196,12 @@ def test__non_schema_validate_rpd__missing_associated_swh_use_lists_1():
 
 def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_1():
     test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
-        "service_water_heating_uses"
-    ][0]["use"] = [3, 4, 5]
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
-        "service_water_heating_uses"
-    ][0]["use_units"] = [
+    test_rmd["ruleset_model_descriptions"][0]["service_water_heating_uses"][0][
+        "use"
+    ] = [3, 4, 5]
+    test_rmd["ruleset_model_descriptions"][0]["service_water_heating_uses"][0][
+        "use_units"
+    ] = [
         ServiceWaterHeatingUseUnitOptions.POWER,
         ServiceWaterHeatingUseUnitOptions.VOLUME,
     ]
@@ -216,12 +216,12 @@ def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_1():
 
 def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_2():
     test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
-        "zones"
-    ][0]["spaces"][0]["service_water_heating_uses"][0]["use"] = [3, 4, 5]
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
-        "zones"
-    ][0]["spaces"][0]["service_water_heating_uses"][0]["use_units"] = [
+    test_rmd["ruleset_model_descriptions"][0]["service_water_heating_uses"][1][
+        "use"
+    ] = [3, 4, 5]
+    test_rmd["ruleset_model_descriptions"][0]["service_water_heating_uses"][1][
+        "use_units"
+    ] = [
         ServiceWaterHeatingUseUnitOptions.POWER,
         ServiceWaterHeatingUseUnitOptions.VOLUME,
     ]
