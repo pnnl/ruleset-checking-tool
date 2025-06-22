@@ -69,10 +69,7 @@
                                         "area": 100,
                                         "tilt": 90,
                                         "does_cast_shade": true,
-                                        "construction": {
-                                            "id": "construction_1",
-                                            "u_factor": 0.363408904595587
-                                        }
+                                        "construction": "construction_1"
                                     },
                                     {
                                         "id": "2",
@@ -81,10 +78,7 @@
                                         "area": 100,
                                         "tilt": 90,
                                         "does_cast_shade": false,
-                                        "construction": {
-                                            "id": "construction_1",
-                                            "u_factor": 0.363408904595587
-                                        }
+                                        "construction": "construction_1"
                                     },
                                     {
                                         "id": "3",
@@ -93,10 +87,7 @@
                                         "area": 100,
                                         "tilt": 90,
                                         "does_cast_shade": true,
-                                        "construction": {
-                                            "id": "construction_1",
-                                            "u_factor": 0.363408904595587
-                                        }
+                                        "construction": "construction_1"
                                     }
                                 ],
                                 "thermostat_cooling_setpoint_schedule": "tcs_sched_1",
@@ -144,6 +135,12 @@
                 "efficiency": 0.988,
                 "capacity": 150000.0,
                 "peak_load": 500.0
+            }
+        ],
+        "constructions": [
+            {
+                "id": "construction_1",
+                "u_factor": 0.363408904595587
             }
         ],
         "type": "USER"
