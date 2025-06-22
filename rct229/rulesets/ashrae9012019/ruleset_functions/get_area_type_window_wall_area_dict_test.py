@@ -29,6 +29,20 @@ CRAWLSPACE_HEIGHT_THRESHOLD = CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY.to("m").magni
 # This single rmd is intended to exercise all the get_zone_conditioning_category_dict() code
 TEST_rmd = {
     "id": "test_rmd",
+    "constructions": [
+        {
+            "id": "const_1_5_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "interior_wall_3_1_1",
+            "u_factor": 0.222,  # W/(m2 * K)
+        },
+        {
+            "id": "interior_wall_3_2_1",
+            "u_factor": 0.222,  # W/(m2 * K)
+        },
+    ],
     "buildings": [
         {
             "id": "bldg_1",
@@ -531,6 +545,9 @@ TEST_rmd_12 = {
 TEST_BUILDING = quantify_rmd(TEST_rmd_12)["ruleset_model_descriptions"][0]["buildings"][
     0
 ]
+TEST_CONSTRUCTIONS = quantify_rmd(TEST_rmd_12)["ruleset_model_descriptions"][0][
+    "constructions"
+]
 
 
 def test__TEST_RPD__is_valid():
@@ -541,7 +558,9 @@ def test__TEST_RPD__is_valid():
 
 
 def test__get_area_type_window_wall_area():
-    assert get_area_type_window_wall_area_dict(CLIMATE_ZONE, TEST_BUILDING) == {
+    assert get_area_type_window_wall_area_dict(
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING
+    ) == {
         "HOTEL_MOTEL_SMALL": {
             "total_wall_area": 40 * ureg("m2"),
             "total_window_area": 20 * ureg("m2"),

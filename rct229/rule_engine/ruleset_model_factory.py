@@ -61,11 +61,15 @@ def get_rmd_instance():
         for rmt in ruleset_model_dict[SchemaStore.SELECTED_RULESET]
     ]
 
-    ruleset_model_types_enum_list = [
-        model_type_enum
-        for ruleset_model_types_enum in ruleset_model_types_enums
-        for model_type_enum in ruleset_model_types_enum.get_list()
-    ]
+    ruleset_model_types_enum_list = list(
+        set(
+            [
+                model_type_enum
+                for ruleset_model_types_enum in ruleset_model_types_enums
+                for model_type_enum in ruleset_model_types_enum.get_list()
+            ]
+        )
+    )
 
     for ruleset_model in ruleset_model_types_enum_list:
         rmd.__setattr__(ruleset_model, None)

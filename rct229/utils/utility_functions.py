@@ -190,6 +190,29 @@ def find_exactly_one_service_water_heating_distribution_system(
     )
 
 
+def find_exactly_one_construction(rmd: dict, construction_id: str) -> dict:
+    """
+    Search for the construction data group in a ruleset model description by matching construction_id:
+    Raise exception if no matching construction
+
+    Parameters
+    ----------
+    rmd
+    construction_id
+
+    Returns
+    -------
+
+    """
+    return find_exactly_one_with_field_value(
+        # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
+        "$.constructions[*]",
+        "id",
+        construction_id,
+        rmd,
+    )
+
+
 def find_exactly_one_service_water_heating_use(rmd: dict, swh_use_id: str) -> dict:
     """
     Search for the service water heating use data group in a ruleset model description by matching swh_id:

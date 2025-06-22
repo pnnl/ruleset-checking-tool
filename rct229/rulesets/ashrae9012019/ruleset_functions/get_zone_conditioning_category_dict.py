@@ -8,7 +8,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
     get_opaque_surface_type,
 )
 from rct229.schema.config import ureg
-from rct229.utils.assertions import assert_, get_first_attr_, getattr_
+from rct229.utils.assertions import assert_, get_first_attr_, getattr_, RCTException
 from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields, find_one
 from rct229.utils.pint_utils import ZERO
 
@@ -70,7 +70,7 @@ def get_zone_conditioning_category_rmd_dict(
         SEMI_HEATED, UNCONDITIONED, UNENCOLOSED
     """
     zone_conditioning_category_rmd_dict = {}
-    constructions = find_all("$.constructions[*]", rmd)
+    constructions = rmd.get("constructions", [])
     for building in find_all("$.buildings[*]", rmd):
         zone_conditioning_category_dict = get_zone_conditioning_category_dict(
             climate_zone, building, constructions
@@ -80,7 +80,7 @@ def get_zone_conditioning_category_rmd_dict(
 
 
 def get_zone_conditioning_category_dict(
-    climate_zone: str, building: dict, constructions: List[Dict] | None = None
+    climate_zone: str, building: dict, constructions: list
 ) -> dict[str, ZoneConditioningCategory]:
     """Determines the zone conditioning category for every zone in a building
 
@@ -90,8 +90,8 @@ def get_zone_conditioning_category_dict(
         One of the ClimateZoneOptions2019ASHRAE901 enumerated values
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
-    constructions: List[Dict] | None
-        A list of dictionary, each dict representing a construction
+    constructions : list
+        A list of construction dictionaries as defined by the ASHRAE229 schema
     Returns
     -------
     dict
@@ -99,6 +99,9 @@ def get_zone_conditioning_category_dict(
         CONDITIONED_MIXED, CONDITIONED_NON_RESIDENTIAL, CONDITIONED_RESIDENTIAL,
         SEMI_HEATED, UNCONDITIONED, UNENCOLOSED
     """
+    if constructions is None:
+        constructions = []
+
     find_exactly_required_fields(
         GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS["building"], building
     )
@@ -273,10 +276,8 @@ def get_zone_conditioning_category_dict(
                     non_subsurfaces_area = (
                         getattr_(surface, "surface", "area") - subsurfaces_area
                     )
+                    surface_construction = _find_construction(surface, constructions)
                     # Calculate the UA for the surface
-                    surface_construction = getattr_(surface, "surface", "construction")
-                    # TODO Temp code for test
-                    surface_ua = ZERO.UA
                     try:
                         surface_ua = (
                             get_first_attr_(
@@ -412,17 +413,18 @@ def get_zone_conditioning_category_dict(
                     zone_floor_area > ZERO.AREA,
                     f"zone:{zone_id} has no floor area",
                 )
-                if (
-                    zone_volume / zone_floor_area < CRAWLSPACE_HEIGHT_THRESHOLD
-                    and constructions
-                    and any(
-                        [
-                            get_opaque_surface_type(surface, constructions)
-                            in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"]
-                            and surface["adjacent_to"] == "GROUND"
-                            for surface in zone["surfaces"]
-                        ]
-                    )
+                if zone_volume / zone_floor_area < CRAWLSPACE_HEIGHT_THRESHOLD and any(
+                    [
+                        get_opaque_surface_type(
+                            surface,
+                            _find_construction(surface, constructions).get(
+                                "has_radiant_heat"
+                            ),
+                        )
+                        in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"]
+                        and surface["adjacent_to"] == "GROUND"
+                        for surface in zone["surfaces"]
+                    ]
                 ):
                     zone_conditioning_category_dict[
                         zone_id
@@ -445,3 +447,16 @@ def get_zone_conditioning_category_dict(
                     ] = ZoneConditioningCategory.UNCONDITIONED  # zone_1_9
 
     return zone_conditioning_category_dict
+
+
+def _find_construction(surface: dict, constructions: List[Dict]) -> dict:
+    surface_construction_id = getattr_(surface, "Surface", "construction")
+    surface_construction = next(
+        (
+            construction
+            for construction in constructions
+            if construction["id"] == surface_construction_id
+        ),
+        {},  # empty dict if not found, to allow constructions to be optional
+    )
+    return surface_construction
