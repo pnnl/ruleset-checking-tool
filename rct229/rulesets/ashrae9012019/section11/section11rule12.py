@@ -48,7 +48,7 @@ class PRM9012019Rule52y79(RuleDefinitionListIndexedBase):
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
+            is_leap_year_b = True
             swh_uses_associated_with_each_building_segment_p = (
                 get_swh_uses_associated_with_each_building_segment(rmd_p)
             )

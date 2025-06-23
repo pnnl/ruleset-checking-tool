@@ -219,7 +219,7 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                             "Btu/h"
                         ) and (
                             (
-                                swh_setpoint_temperature_b
+                                swh_setpoint_temperature_b is not None
                                 and swh_setpoint_temperature_b > 180 * ureg("degF")
                             )
                             or swh_tank_storage_volume_b > 120 * ureg("gallon")
