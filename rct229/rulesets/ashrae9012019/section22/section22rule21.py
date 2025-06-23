@@ -73,7 +73,6 @@ class PRM9012019Rule96z66(RuleDefinitionListIndexedBase):
         building_cooling_peak_load = getattr_(
             output_b,
             "building_peak_cooling_load",
-            "output_instance",
             "building_peak_cooling_load",
         )
 
