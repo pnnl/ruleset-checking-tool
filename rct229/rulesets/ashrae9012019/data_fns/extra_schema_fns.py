@@ -97,7 +97,11 @@ def compare_context_pair(
 
     """
     matched = True
-    if isinstance(index_context, dict) and isinstance(compare_context, dict):
+    if (
+        isinstance(index_context, dict)
+        and isinstance(compare_context, dict)
+        and not isinstance(extra_schema, str)
+    ):
         # context shall be aligned and have the same data type.
         if compare_context.get("id") and index_context["id"] != compare_context["id"]:
             error_msg_list.append(
@@ -175,7 +179,7 @@ def compare_context_pair(
             index_context, Quantity
         ):
             index_value = index_context.magnitude
-            compare_value = compare_value.magnitude
+            compare_value = compare_context.magnitude
 
         if required_equal and index_value != compare_value:
             # the != takes care of None data type. if both None, this will still pass.
