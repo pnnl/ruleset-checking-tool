@@ -11,9 +11,9 @@ class CompareSchedulesEFLHDifference(TypedDict):
 
 
 def compare_schedules(
-    schedule_1: List[float],
-    schedule_2: List[float],
-    mask_schedule: List[float],
+    schedule_1: list[float],
+    schedule_2: list[float],
+    mask_schedule: list[float],
 ) -> CompareSchedulesEFLHDifference:
     """Compare two schedules and determine if they match with or without a comparison factor when applicable
     NOTE: The function only works with hourly schedule for now.
