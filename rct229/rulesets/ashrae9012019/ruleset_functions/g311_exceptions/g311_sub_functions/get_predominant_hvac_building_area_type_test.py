@@ -15,6 +15,12 @@ POWER_THRESHOLD_100 = (CAPACITY_THRESHOLD_QUANTITY * 100 * ureg("m2")).to("W").m
 
 TEST_RMD = {
     "id": "test_rmd",
+    "constructions": [
+        {
+            "id": "construction_1",
+            "u_factor": 1.2,
+        }
+    ],
     "buildings": [
         {
             "id": "Building 1",
