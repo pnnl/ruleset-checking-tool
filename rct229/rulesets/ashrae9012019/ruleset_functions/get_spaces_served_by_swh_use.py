@@ -25,8 +25,8 @@ def get_spaces_served_by_swh_use(rmd: dict, swh_use_id: str) -> list[str]:
         for space in find_all(
             "$.buildings[*].building_segments[*].zones[*].spaces[*]", rmd
         )
-        for swh_use in find_all("$.service_water_heating_uses[*]", space)
-        if swh_use_id == swh_use["id"]
+        for space_swh_use_id in find_all("$.service_water_heating_uses[*]", space)
+        if swh_use_id == space_swh_use_id
     ]
 
     # if `spaces_served` is an empty list, apply to all spaces

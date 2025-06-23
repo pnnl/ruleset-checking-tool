@@ -1,4 +1,4 @@
-from typing import TypedDict
+from typing import TypedDict, List
 
 from rct229.rule_engine.rulesets import LeapYear
 from rct229.utils.assertions import assert_
@@ -11,9 +11,9 @@ class CompareSchedulesEFLHDifference(TypedDict):
 
 
 def compare_schedules(
-    schedule_1: list[float],
-    schedule_2: list[float],
-    mask_schedule: list[float],
+    schedule_1: List[float],
+    schedule_2: List[float],
+    mask_schedule: List[float],
 ) -> CompareSchedulesEFLHDifference:
     """Compare two schedules and determine if they match with or without a comparison factor when applicable
     NOTE: The function only works with hourly schedule for now.
@@ -26,8 +26,7 @@ def compare_schedules(
         if hourly value is 1, schedule_1 is evaluated to be equal to schedule_2;
         if hourly value is 2, schedule_1 is evaluated to be equal to schedule_2 times the comparison factor;
         if hourly value is 0, comparison was skipped for that particular hour
-        (example when evaluating shut off controls, only he building closed hrs are evaluated) example: [1,1,1,1,1...]
-    is_leap_year: bool, indicate whether the comparison is in a leap year or not. True / False
+        (example when evaluating shut off controls, only the building closed hrs are evaluated) example: [1,1,1,1,1...]
 
     Returns
     -------
@@ -43,7 +42,7 @@ def compare_schedules(
 
     assert_(
         (len(schedule_1) == len(schedule_2) and len(schedule_1) == len(mask_schedule)),
-        f"Failed when comparing hourly schedules with target number of hours. number of hours of schedule_1 : {len(schedule_1)}; number of hours of schedule_2: {len(schedule_2)}; number of hours of mask_schedule: {len(mask_schedule)}",
+        f"Failed when comparing hourly schedules. number of hours of schedule_1 : {len(schedule_1)}; number of hours of schedule_2: {len(schedule_2)}; number of hours of mask_schedule: {len(mask_schedule)}",
     )
 
     total_hours_compared = 0

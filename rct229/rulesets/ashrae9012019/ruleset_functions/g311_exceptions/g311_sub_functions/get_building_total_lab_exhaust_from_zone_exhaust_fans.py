@@ -25,7 +25,8 @@ def get_building_total_lab_exhaust_from_zone_exhaust_fans(rmd: dict) -> Quantity
     laboratory_zone_list = get_building_lab_zones_list(rmd)
     for zone_id in laboratory_zone_list:
         design_airflow = find_one(
-            "$.zonal_exhaust_fan.design_airflow", find_exactly_one_zone(rmd, zone_id)
+            "$.zonal_exhaust_fans[*].design_airflow",
+            find_exactly_one_zone(rmd, zone_id),
         )
         if design_airflow:
             total_exhaust += design_airflow

@@ -33,7 +33,7 @@ def get_swh_bats_and_swh_use(rmd: dict) -> dict:
         # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs
         swh_and_swh_use_dict[swh_bat].extend(
             find_all(
-                f'$.buildings[*].building_segments[*][?(@.id="{bldg_seg_id}")].zones[*].spaces[*].service_water_heating_uses[*].id',
+                f'$.buildings[*].building_segments[*][?(@.id="{bldg_seg_id}")].zones[*].spaces[*].service_water_heating_uses[*]',
                 rmd,
             )
         )
