@@ -1,4 +1,4 @@
-from typing import TypedDict
+from typing import TypedDict, List
 
 from rct229.rule_engine.rulesets import LeapYear
 from rct229.utils.assertions import assert_
@@ -11,9 +11,9 @@ class CompareSchedulesEFLHDifference(TypedDict):
 
 
 def compare_schedules(
-    schedule_1: list[float],
-    schedule_2: list[float],
-    mask_schedule: list[float],
+    schedule_1: List[float],
+    schedule_2: List[float],
+    mask_schedule: List[float],
 ) -> CompareSchedulesEFLHDifference:
     """Compare two schedules and determine if they match with or without a comparison factor when applicable
     NOTE: The function only works with hourly schedule for now.
