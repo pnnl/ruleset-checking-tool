@@ -30,7 +30,7 @@ class SWHEquipmentAssociations:
 
 
 def get_swh_components_associated_with_each_swh_bat(
-    rmd: dict, is_leap_year: bool
+    rmd: dict,
 ) -> dict[str, SWHEquipmentAssociations]:
     """
     This function gets all the SWH equipment connected to a particular SWH use type.  The information is stored in a dictionary where the keys are the ServiceWaterHeatingSpaceOptions2019ASHRAE901 and values are a dictionary giving the ServiceWaterHeatingDistributionSystem, ServiceWaterHeatingEquipment, and Pumps connected to the particular use type.  There is also an entry for the total energy required to heat all SWH uses for a year: "EnergyRequired" .
@@ -38,8 +38,7 @@ def get_swh_components_associated_with_each_swh_bat(
     Parameters
     ----------
     rmd: dict, RMD at RuleSetModelDescription level
-    is_leap_year: bool, default: False
-        Whether the year is a leap year or not.
+
     Returns
     -------
     swh_and_equip_dict: A dictionary containing where the keys are the ServiceWaterHeatingSpaceOptions2019ASHRAE901 in the RMD and values are dictionaries where keys are the type of SWH equipment and values are the ids of the connected equipment.
@@ -63,7 +62,7 @@ def get_swh_components_associated_with_each_swh_bat(
         ):
             swh_use = find_exactly_one_service_water_heating_use(rmd, swh_use_id)
             swh_use_energy_by_space_dict = get_energy_required_to_heat_swh_use(
-                swh_use["id"], rmd, building_segment["id"], is_leap_year
+                swh_use["id"], rmd, building_segment["id"]
             )
 
             swh_and_equip_dict[swh_bat].energy_required += sum(

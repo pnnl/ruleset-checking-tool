@@ -59,7 +59,7 @@ def get_building_segment_swh_bat(
                 building_segment_swh_bat = "UNDETERMINED"
             else:
                 swh_use_energy_by_space = get_energy_required_to_heat_swh_use(
-                    swh_use["id"], rmd, building_segment["id"], is_leap_year
+                    swh_use["id"], rmd, building_segment["id"]
                 )
 
                 if swh_use.get("area_type"):
