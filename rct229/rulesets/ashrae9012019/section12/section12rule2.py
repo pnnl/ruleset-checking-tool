@@ -60,7 +60,6 @@ class PRM9012019Rule66e91(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019Rule66e91.RMDRule.SpaceRule(),
                 index_rmd=BASELINE_0,
                 list_path="buildings[*].building_segments[*].zones[*].spaces[*]",
-                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
         def create_data(self, context, data):
@@ -84,7 +83,6 @@ class PRM9012019Rule66e91(RuleDefinitionListIndexedBase):
             return {
                 "mis_equip_schedule_b_dict": mis_equip_schedule_b_dict,
                 "mis_equip_schedule_p_dict": mis_equip_schedule_p_dict,
-                "is_leap_year": rmd_b["calendar"]["is_leap_year"],
             }
 
         class SpaceRule(RuleDefinitionListIndexedBase):
@@ -117,7 +115,6 @@ class PRM9012019Rule66e91(RuleDefinitionListIndexedBase):
                     )
 
                 def get_calc_vals(self, context, data=None):
-                    is_leap_year = data["is_leap_year"]
                     misc_equip_b = context.BASELINE_0
                     misc_equip_p = context.PROPOSED
 
@@ -149,16 +146,11 @@ class PRM9012019Rule66e91(RuleDefinitionListIndexedBase):
                         and automatic_controlled_percentage_p > 0.0
                     )
 
-                    mask_schedule = (
-                        [1] * LeapYear.LEAP_YEAR_HOURS
-                        if is_leap_year
-                        else [1] * LeapYear.REGULAR_YEAR_HOURS
-                    )
+                    mask_schedule = [1] * len(misc_equip_schedule_b)
                     schedules_comparison_output = compare_schedules(
                         misc_equip_schedule_b,
                         misc_equip_schedule_p,
                         mask_schedule,
-                        is_leap_year,
                     )
                     return {
                         # No need to report full schedule values.
