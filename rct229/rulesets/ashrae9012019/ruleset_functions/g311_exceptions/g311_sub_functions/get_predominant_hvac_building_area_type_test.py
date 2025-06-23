@@ -120,6 +120,12 @@ TEST_RMD = {
             ],
         },
     ],
+    "constructions": [
+        {
+            "id": "construction_1",
+            "u_factor": 1.2,
+        }
+    ],
     "type": "BASELINE_0",
 }
 

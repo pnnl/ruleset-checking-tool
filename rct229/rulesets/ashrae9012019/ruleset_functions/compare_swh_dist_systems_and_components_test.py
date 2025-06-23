@@ -8,6 +8,16 @@ from rct229.schema.validate import schema_validate_rpd
 
 TEST_RMD = {
     "id": "test_rmd",
+    "service_water_heating_uses": [
+        {
+            "id": "SWH Use 1",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
+        {
+            "id": "SWH Use 2",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
+    ],
     "buildings": [
         {
             "id": "Building 1",
@@ -20,21 +30,11 @@ TEST_RMD = {
                             "spaces": [
                                 {
                                     "id": "Space 1",
-                                    "service_water_heating_uses": [
-                                        {
-                                            "id": "SWH Use 1",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                        }
-                                    ],
+                                    "service_water_heating_uses": ["SWH Use 1"],
                                 },
                                 {
                                     "id": "Space 2",
-                                    "service_water_heating_uses": [
-                                        {
-                                            "id": "SWH Use 2",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                        }
-                                    ],
+                                    "service_water_heating_uses": ["SWH Use 2"],
                                 },
                             ],
                         }
@@ -42,6 +42,16 @@ TEST_RMD = {
                 }
             ],
         }
+    ],
+    "service_water_heating_uses": [
+        {
+            "id": "SWH Use 1",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
+        {
+            "id": "SWH Use 2",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
     ],
     "service_water_heating_distribution_systems": [
         {

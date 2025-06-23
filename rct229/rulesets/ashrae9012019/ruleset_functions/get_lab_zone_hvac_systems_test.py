@@ -132,6 +132,12 @@ TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM = {
             ],
         },
     ],
+    "constructions": [
+        {
+            "id": "Construction 3",
+            "u_factor": 0.35773064046128095,
+        }
+    ],
     "type": "BASELINE_0",
 }
 
@@ -278,6 +284,12 @@ TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM2_TWO_SYSTEMS = {
             ],
         },
     ],
+    "constructions": [
+        {
+            "id": "Construction 3",
+            "u_factor": 0.35773064046128095,
+        }
+    ],
     "type": "BASELINE_0",
 }
 
@@ -407,6 +419,12 @@ TEST_RMD_B_G311D_G311F = {
                 },
             ],
         },
+    ],
+    "constructions": [
+        {
+            "id": "Construction 3",
+            "u_factor": 0.35773064046128095,
+        }
     ],
     "type": "BASELINE_0",
 }
