@@ -4,19 +4,16 @@ from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_descr
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
-    OpaqueSurfaceType as OST,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
-    SurfaceConditioningCategory as SCC,
+    OpaqueSurfaceType as OST,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
+    SurfaceConditioningCategory as SCC,
 )
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
+from rct229.utils.assertions import getattr_, assert_
 
 MANUAL_CHECK_REQUIRED_MSG = (
     "Zone has both residential and non-residential spaces and the construction requirements "
@@ -37,7 +34,7 @@ class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$.ruleset_model_descriptions[*]": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather", "constructions"],
                 "weather": ["climate_zone"],
             },
             each_rule=PRM9012019Rule40d86.BuildingRule(),
@@ -53,7 +50,11 @@ class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        return {"climate_zone": climate_zone}
+        constructions = rpd_b["ruleset_model_descriptions"][0]["constructions"]
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -71,15 +72,23 @@ class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
             building = context.BASELINE_0
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building
+                    data["climate_zone"], building, data["constructions"]
                 ),
             }
 
         def list_filter(self, context_item, data=None):
             surface_b = context_item.BASELINE_0
+            construction_id = getattr_(surface_b, "Surface", "construction")
+            has_radiant_heat = next(
+                (
+                    construction.get("has_radiant_heat", False)
+                    for construction in data["constructions"]
+                    if construction["id"] == construction_id
+                )
+            )
             scc = data["surface_conditioning_category_dict"][surface_b["id"]]
             return (
-                get_opaque_surface_type(surface_b) == OST.UNHEATED_SOG
+                get_opaque_surface_type(surface_b, has_radiant_heat) == OST.UNHEATED_SOG
                 and scc is not SCC.UNREGULATED
             )
 
@@ -91,10 +100,7 @@ class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
-                    required_fields={
-                        "$": ["construction"],
-                        "construction": ["f_factor"],
-                    },
+                    required_fields={"$": ["construction"]},
                     manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
                     fail_msg=FAIL_MSG,
                     precision={
@@ -107,13 +113,21 @@ class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 climate_zone: str = data["climate_zone"]
-                slab_on_grade_floor = context.BASELINE_0
+                slab_on_grade = context.BASELINE_0
                 scc: str = data["surface_conditioning_category_dict"][
-                    slab_on_grade_floor["id"]
+                    slab_on_grade["id"]
                 ]
-                slab_on_grade_floor_f_factor = slab_on_grade_floor["construction"][
-                    "f_factor"
-                ]
+                slab_on_grade_f_factor = next(
+                    (
+                        construction.get("f_factor")
+                        for construction in data["constructions"]
+                        if construction["id"] == slab_on_grade["construction"]
+                    )
+                )
+                assert_(
+                    slab_on_grade_f_factor is not None,
+                    f"F-factor for slab on grade construction '{slab_on_grade['construction']}' is missing",
+                )
 
                 target_f_factor = None
                 target_f_factor_res = None
@@ -139,7 +153,7 @@ class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
 
                 return {
                     "slab_on_grade_floor_f_factor": CalcQ(
-                        "linear_thermal_transmittance", slab_on_grade_floor_f_factor
+                        "linear_thermal_transmittance", slab_on_grade_f_factor
                     ),
                     "target_f_factor": CalcQ(
                         "linear_thermal_transmittance", target_f_factor

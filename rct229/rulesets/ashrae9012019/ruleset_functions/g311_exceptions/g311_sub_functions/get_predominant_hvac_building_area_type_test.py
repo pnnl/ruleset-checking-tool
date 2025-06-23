@@ -105,10 +105,7 @@ TEST_RMD = {
                                     "adjacent_zone": "zone_1_2",  # semi-heated
                                     "area": 10,  # m2
                                     "tilt": 90,  # wall
-                                    "construction": {
-                                        "id": "construction_1",
-                                        "u_factor": 1.2,
-                                    },
+                                    "construction": "construction_1",
                                 }
                             ],
                         },
@@ -116,6 +113,12 @@ TEST_RMD = {
                 },
             ],
         },
+    ],
+    "constructions": [
+        {
+            "id": "construction_1",
+            "u_factor": 1.2,
+        }
     ],
     "type": "BASELINE_0",
 }

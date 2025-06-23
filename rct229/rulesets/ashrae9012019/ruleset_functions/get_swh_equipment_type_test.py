@@ -74,7 +74,7 @@ TEST_RMD = {
             "id": "swh equipment 9",
             "distribution_system": "distribution system 9",
             "tank": {"id": "Tank 9", "type": "OTHER"},
-            "compressor_power_validation_points": [{"evaporator_air_temperature": 23}],
+            "compressor_power_operating_points": [{"evaporator_air_temperature": 23}],
             "heater_fuel_type": "OTHER",
         },
     ],
