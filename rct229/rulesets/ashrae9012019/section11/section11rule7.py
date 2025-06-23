@@ -55,7 +55,6 @@ class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
             rmd_b = context.BASELINE_0
-            is_leap_year_b = True
 
             service_water_heating_uses_p = {
                 swh_use["id"]: swh_use.get("use", 0.0)
@@ -75,16 +74,14 @@ class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
             return {
                 "service_water_heating_uses_p": service_water_heating_uses_p,
                 "swh_equip_type_b": swh_equip_type_b,
-                "is_leap_year_b": is_leap_year_b,
             }
 
         def create_context_list(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            is_leap_year_b = data["is_leap_year_b"]
 
             swh_bats_and_equip_association_b = (
-                get_swh_components_associated_with_each_swh_bat(rmd_b, is_leap_year_b)
+                get_swh_components_associated_with_each_swh_bat(rmd_b)
             )
             swh_bats_and_uses_p = get_swh_bats_and_swh_use(rmd_p)
 

@@ -65,7 +65,6 @@ class PRM9012019Rule40i48(RuleDefinitionListIndexedBase):
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
             rmd_b = context.BASELINE_0
-            is_leap_year_b = True
 
             num_of_bldg_segment_b = len(
                 find_all("$.buildings[*].building_segments[*]", rmd_b)
@@ -97,9 +96,7 @@ class PRM9012019Rule40i48(RuleDefinitionListIndexedBase):
                 )
             }
 
-            swh_bats_and_uses_b = get_swh_components_associated_with_each_swh_bat(
-                rmd_b, is_leap_year_b
-            )
+            swh_bats_and_uses_b = get_swh_components_associated_with_each_swh_bat(rmd_b)
 
             num_swh_systems_b = {
                 swh_bat: len(swh_use.swh_distribution)
