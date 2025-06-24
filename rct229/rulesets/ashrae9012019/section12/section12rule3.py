@@ -54,7 +54,6 @@ class PRM9012019Rule79w60(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019Rule79w60.RuleSetModelDescriptionRule.SpaceRule(),
                 index_rmd=PROPOSED,
                 list_path="$.buildings[*].building_segments[*].zones[*].spaces[*]",
-                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
         def is_applicable(self, context, data=None):
@@ -112,7 +111,6 @@ class PRM9012019Rule79w60(RuleDefinitionListIndexedBase):
             return {
                 "schedule_b": schedule_b,
                 "schedule_p": schedule_p,
-                "is_leap_year": rmd_b["calendar"]["is_leap_year"],
             }
 
         def list_filter(self, context_item, data):
@@ -175,7 +173,6 @@ class PRM9012019Rule79w60(RuleDefinitionListIndexedBase):
                     misc_equip_b = context.BASELINE_0
                     misc_equip_p = context.PROPOSED
 
-                    is_leap_year = data["is_leap_year"]
                     space_type_p = data["space_type_p"]
                     schedule_b = data["schedule_b"]
                     schedule_p = data["schedule_p"]
@@ -194,24 +191,17 @@ class PRM9012019Rule79w60(RuleDefinitionListIndexedBase):
                         for hour_value in schedule_b[hourly_multiplier_schedule_b]
                     ]
 
-                    mask_schedule = (
-                        [1] * LeapYear.LEAP_YEAR_HOURS
-                        if is_leap_year
-                        else [1] * LeapYear.REGULAR_YEAR_HOURS
-                    )
-
+                    mask_schedule = [1] * len(schedule_b["Plug Load Schedule"])
                     credit_comparison_data = compare_schedules(
                         expected_hourly_values,
                         schedule_p[hourly_multiplier_schedule_p],
                         mask_schedule,
-                        is_leap_year,
                     )["total_hours_matched"]
 
                     no_credit_comparison_data = compare_schedules(
                         schedule_b[hourly_multiplier_schedule_b],
                         schedule_p[hourly_multiplier_schedule_p],
                         mask_schedule,
-                        is_leap_year,
                     )["total_hours_matched"]
 
                     return {

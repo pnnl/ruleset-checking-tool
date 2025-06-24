@@ -22,16 +22,13 @@
                     {
                         "id": "RMD 1",
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -91,16 +88,13 @@
                     {
                         "id": "RMD 1",
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -160,16 +154,13 @@
                     {
                         "id": "RMD 1",
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -224,16 +215,13 @@
                     {
                         "id": "RMD 1",
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -288,16 +276,13 @@
                     {
                         "id": "RMD 1",
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -352,16 +337,13 @@
                     {
                         "id": "RMD 1",
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -440,16 +422,13 @@
                     {
                         "id": "RMD 1",
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -509,16 +488,13 @@
                     {
                         "id": "RMD 1",
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -578,16 +554,13 @@
                     {
                         "id": "RMD 1",
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -666,16 +639,13 @@
                     {
                         "id": "RMD 1",
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -735,16 +705,13 @@
                     {
                         "id": "RMD 1",
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -804,16 +771,13 @@
                     {
                         "id": "RMD 1",
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {

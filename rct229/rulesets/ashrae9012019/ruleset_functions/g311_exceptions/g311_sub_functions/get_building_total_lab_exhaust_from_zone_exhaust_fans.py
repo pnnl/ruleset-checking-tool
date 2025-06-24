@@ -2,7 +2,7 @@ from pint import Quantity
 from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_building_lab_zones_list import (
     get_building_lab_zones_list,
 )
-from rct229.utils.jsonpath_utils import find_one
+from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import find_exactly_one_zone
 
@@ -24,8 +24,11 @@ def get_building_total_lab_exhaust_from_zone_exhaust_fans(rmd: dict) -> Quantity
     total_exhaust = ZERO.FLOW
     laboratory_zone_list = get_building_lab_zones_list(rmd)
     for zone_id in laboratory_zone_list:
-        design_airflow = find_one(
-            "$.zonal_exhaust_fan.design_airflow", find_exactly_one_zone(rmd, zone_id)
+        design_airflow = sum(
+            find_all(
+                "$.zonal_exhaust_fans[*].design_airflow",
+                find_exactly_one_zone(rmd, zone_id),
+            )
         )
         if design_airflow:
             total_exhaust += design_airflow

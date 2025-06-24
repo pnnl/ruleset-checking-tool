@@ -74,40 +74,42 @@ class PRM9012019Rule04g06(RuleDefinitionListIndexedBase):
             heat_rejection_b = context.BASELINE_0
 
             fully_calculated = False
+            heat_rejection_fan_b = heat_rejection_b.get("fan")
             heat_rejection_efficiency_b = None
             fan_shaft_power_defined_b = False
-            if heat_rejection_b.get("fan_motor_nameplate_power"):
-                rated_water_flowrate_b = heat_rejection_b.get(
-                    "rated_water_flowrate", ZERO.FLOW
-                ).to("gpm")
+            if heat_rejection_fan_b is not None:
+                if heat_rejection_fan_b.get("motor_nameplate_power"):
+                    rated_water_flowrate_b = heat_rejection_b.get(
+                        "rated_water_flowrate", ZERO.FLOW
+                    ).to("gpm")
 
-                fan_motor_nameplate_power_b = heat_rejection_b[
-                    "fan_motor_nameplate_power"
-                ].to("hp")
+                    fan_motor_nameplate_power_b = heat_rejection_fan_b[
+                        "motor_nameplate_power"
+                    ].to("hp")
 
-                heat_rejection_efficiency_b = (
-                    0.0
-                    if fan_motor_nameplate_power_b == ZERO.POWER
-                    else rated_water_flowrate_b / fan_motor_nameplate_power_b
-                )
-                fully_calculated = True
-
-            elif heat_rejection_b.get("fan_shaft_power"):
-                fan_shaft_power_defined_b = True
-
-                motor_nameplate_hp_b = (
-                    heat_rejection_b["fan_shaft_power"].to("hp")
-                    / FAN_SHAFT_POWER_FACTOR
-                )
-
-                heat_rejection_efficiency_b = (
-                    0.0
-                    if motor_nameplate_hp_b == ZERO.POWER
-                    else heat_rejection_b.get("rated_water_flowrate", ZERO.FLOW).to(
-                        "gpm"
+                    heat_rejection_efficiency_b = (
+                        0.0
+                        if fan_motor_nameplate_power_b == ZERO.POWER
+                        else rated_water_flowrate_b / fan_motor_nameplate_power_b
                     )
-                    / motor_nameplate_hp_b
-                )
+                    fully_calculated = True
+
+                elif heat_rejection_fan_b.get("shaft_power"):
+                    fan_shaft_power_defined_b = True
+
+                    motor_nameplate_hp_b = (
+                        heat_rejection_fan_b["shaft_power"].to("hp")
+                        / FAN_SHAFT_POWER_FACTOR
+                    )
+
+                    heat_rejection_efficiency_b = (
+                        0.0
+                        if motor_nameplate_hp_b == ZERO.POWER
+                        else heat_rejection_b.get("rated_water_flowrate", ZERO.FLOW).to(
+                            "gpm"
+                        )
+                        / motor_nameplate_hp_b
+                    )
 
             return {
                 "heat_rejection_efficiency_b": CalcQ(

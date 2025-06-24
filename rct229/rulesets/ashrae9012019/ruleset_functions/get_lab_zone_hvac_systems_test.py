@@ -6,6 +6,12 @@ from rct229.schema.validate import schema_validate_rpd
 
 TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM = {
     "id": "test_rmd",
+    "constructions": [
+        {
+            "id": "Construction 3",
+            "u_factor": 0.35773064046128095,
+        }
+    ],
     "buildings": [
         {
             "id": "Building 1",
@@ -60,10 +66,7 @@ TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM = {
                                     "area": 100,
                                     "tilt": 0,
                                     "adjacent_zone": "Thermal Zone 1",
-                                    "construction": {
-                                        "id": "Construction 3",
-                                        "u_factor": 0.35773064046128095,
-                                    },
+                                    "construction": "Construction 3",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_1_1",
@@ -74,10 +77,12 @@ TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM = {
                                     ],
                                 }
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Exhaust Fan 1",
-                                "design_airflow": 1000,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Exhaust Fan 1",
+                                    "design_airflow": 1000,
+                                }
+                            ],
                         },
                         {
                             "id": "Thermal Zone 2",
@@ -104,10 +109,7 @@ TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM = {
                                     "area": 100,
                                     "tilt": 0,
                                     "adjacent_zone": "Thermal Zone 2",
-                                    "construction": {
-                                        "id": "Construction 3",
-                                        "u_factor": 0.35773064046128095,
-                                    },
+                                    "construction": "Construction 3",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_2_1_1",
@@ -118,15 +120,23 @@ TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM = {
                                     ],
                                 }
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Exhaust Fan 1",
-                                "design_airflow": 1000,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Exhaust Fan 1",
+                                    "design_airflow": 1000,
+                                }
+                            ],
                         },
                     ],
                 },
             ],
         },
+    ],
+    "constructions": [
+        {
+            "id": "Construction 3",
+            "u_factor": 0.35773064046128095,
+        }
     ],
     "type": "BASELINE_0",
 }
@@ -208,10 +218,7 @@ TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM2_TWO_SYSTEMS = {
                                     "area": 100,
                                     "tilt": 0,
                                     "adjacent_zone": "Thermal Zone 1",
-                                    "construction": {
-                                        "id": "Construction 3",
-                                        "u_factor": 0.35773064046128095,
-                                    },
+                                    "construction": "Construction 3",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_1_1",
@@ -222,10 +229,12 @@ TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM2_TWO_SYSTEMS = {
                                     ],
                                 }
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Exhaust Fan 1",
-                                "design_airflow": 1000,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Exhaust Fan 1",
+                                    "design_airflow": 1000,
+                                }
+                            ],
                         },
                         {
                             "id": "Thermal Zone 2",
@@ -252,10 +261,7 @@ TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM2_TWO_SYSTEMS = {
                                     "area": 100,
                                     "tilt": 0,
                                     "adjacent_zone": "Thermal Zone 2",
-                                    "construction": {
-                                        "id": "Construction 3",
-                                        "u_factor": 0.35773064046128095,
-                                    },
+                                    "construction": "Construction 3",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_2_1_1",
@@ -266,15 +272,23 @@ TEST_RMD_B_ALL_ZONES_G311D_ONE_SYSTEM2_TWO_SYSTEMS = {
                                     ],
                                 }
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Exhaust Fan 1",
-                                "design_airflow": 1000,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Exhaust Fan 1",
+                                    "design_airflow": 1000,
+                                }
+                            ],
                         },
                     ],
                 },
             ],
         },
+    ],
+    "constructions": [
+        {
+            "id": "Construction 3",
+            "u_factor": 0.35773064046128095,
+        }
     ],
     "type": "BASELINE_0",
 }
@@ -349,10 +363,7 @@ TEST_RMD_B_G311D_G311F = {
                                     "area": 100,
                                     "tilt": 0,
                                     "adjacent_zone": "Thermal Zone 1",
-                                    "construction": {
-                                        "id": "Construction 3",
-                                        "u_factor": 0.35773064046128095,
-                                    },
+                                    "construction": "Construction 3",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_1_1",
@@ -363,10 +374,12 @@ TEST_RMD_B_G311D_G311F = {
                                     ],
                                 }
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Exhaust Fan 1",
-                                "design_airflow": 1000,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Exhaust Fan 1",
+                                    "design_airflow": 1000,
+                                }
+                            ],
                         },
                         {
                             "id": "Thermal Zone 2",
@@ -406,6 +419,12 @@ TEST_RMD_B_G311D_G311F = {
                 },
             ],
         },
+    ],
+    "constructions": [
+        {
+            "id": "Construction 3",
+            "u_factor": 0.35773064046128095,
+        }
     ],
     "type": "BASELINE_0",
 }
@@ -565,7 +584,7 @@ def test__TEST_RMD_P_is_valid():
 
 def test__get_lab_zone_hvac_systems_all_zones_g311d_one_system__true():
     assert get_lab_zone_hvac_systems(
-        TEST_RMD_B_UNIT_G311D_ONE_SYS, TEST_RMD_UNIT_P, "CZ4A", False
+        TEST_RMD_B_UNIT_G311D_ONE_SYS, TEST_RMD_UNIT_P, "CZ4A"
     ) == {
         "lab_zones_only": ["hvac 1"],
         "lab_and_other": [],
@@ -574,7 +593,7 @@ def test__get_lab_zone_hvac_systems_all_zones_g311d_one_system__true():
 
 def test__get_lab_zone_hvac_systems_all_zones_g311d_two_systems__true():
     assert get_lab_zone_hvac_systems(
-        TEST_RMD_B_UNIT_G311D_TWO_SYS, TEST_RMD_UNIT_P, "CZ4A", False
+        TEST_RMD_B_UNIT_G311D_TWO_SYS, TEST_RMD_UNIT_P, "CZ4A"
     ) == {
         "lab_zones_only": ["hvac 1", "hvac 2"],
         "lab_and_other": [],
@@ -583,7 +602,7 @@ def test__get_lab_zone_hvac_systems_all_zones_g311d_two_systems__true():
 
 def test__get_lab_zone_hvac_systems__zones_g311d_g311f_two_systems__true():
     assert get_lab_zone_hvac_systems(
-        TEST_RMD_B_UNIT_G311D_G311F, TEST_RMD_UNIT_P, "CZ4A", False
+        TEST_RMD_B_UNIT_G311D_G311F, TEST_RMD_UNIT_P, "CZ4A"
     ) == {
         "lab_zones_only": ["hvac 1"],
         "lab_and_other": [],
