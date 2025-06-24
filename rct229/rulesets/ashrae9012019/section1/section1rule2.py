@@ -29,7 +29,6 @@ class PRM9012019Rule63e94(RuleDefinitionBase):
             ruleset_section_title="Performance Calculations",
             standard_section="Section G1.2.2",
             is_primary_rule=True,
-            rmd_context="ruleset_model_descriptions/0",
         )
 
     def get_calc_vals(self, context, data=None):
@@ -45,17 +44,15 @@ class PRM9012019Rule63e94(RuleDefinitionBase):
         bbp_set = []
         for rmd in (rmd_u, rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p):
             if rmd is not None:
-                pci_set.append(find_one("$.model_output.performance_cost_index", rmd))
+                pci_set.append(find_one("$.output.performance_cost_index", rmd))
                 pbp_set.append(
                     find_one(
-                        "$.model_output.total_proposed_building_energy_cost_including_renewable_energy",
+                        "$.output.total_proposed_building_energy_cost_including_renewable_energy",
                         rmd,
                     )
                 )
                 bbp_set.append(
-                    find_one(
-                        "$.model_output.baseline_building_performance_energy_cost", rmd
-                    )
+                    find_one("$.output.baseline_building_performance_energy_cost", rmd)
                 )
 
         pci_set = list(set(filter(lambda x: x is not None, pci_set)))
