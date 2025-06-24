@@ -17,7 +17,7 @@ class HVACServeLabZoneDict(TypedDict):
 
 
 def get_lab_zone_hvac_systems(
-    rmd_b: dict, rmd_p: dict, climate_zone: str, is_leap_year: bool
+    rmd_b: dict, rmd_p: dict, climate_zone: str
 ) -> HVACServeLabZoneDict:
     """
     returns a list of HVAC systems serving only lab zones
@@ -30,8 +30,6 @@ def get_lab_zone_hvac_systems(
         RMD at RuleSetModelDescription level
     climate_zone: str
         baseline climate zone
-    is_leap_year: bool
-        Whether leap year or not
 
     Returns
     -------
@@ -41,7 +39,7 @@ def get_lab_zone_hvac_systems(
     """
 
     target_baseline_systems = get_zone_target_baseline_system(
-        rmd_b, rmd_p, climate_zone, is_leap_year
+        rmd_b, rmd_p, climate_zone
     )
 
     # find zone ids whose `system_origin` is `SYSTEMORIGIN.G311D`
