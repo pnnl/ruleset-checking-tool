@@ -416,7 +416,9 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                     def manual_check_required(self, context, calc_vals=None, data=None):
                         is_dwelling_unit_b = calc_vals["is_dwelling_unit_b"]
                         is_space_type_defined_b = calc_vals["is_space_type_defined_b"]
-
+                        is_lighting_bldg_area_defined_b = calc_vals[
+                            "is_lighting_bldg_area_defined_b"
+                        ]
                         is_heating_schedule_pass = all(
                             [
                                 calc_vals["inf_pass_heating_b"],
@@ -425,6 +427,24 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                 calc_vals["misc_pass_heating_b"],
                             ]
                         )
+                        is_cooling_schedule_pass = all(
+                            [
+                                calc_vals["inf_pass_cooling_b"],
+                                calc_vals["occ_pass_cooling_b"],
+                                calc_vals["int_lgt_pass_cooling_b"],
+                                calc_vals["misc_pass_cooling_b"],
+                            ]
+                        )
+
+                        # Case 8 exclusion: prevent false undetermined when cooling fails
+                        if (
+                            not is_dwelling_unit_b
+                            and not is_space_type_defined_b
+                            and not is_lighting_bldg_area_defined_b
+                            and is_heating_schedule_pass
+                            and not is_cooling_schedule_pass
+                        ):
+                            return False
 
                         return (
                             not is_dwelling_unit_b
@@ -523,8 +543,8 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                         space_id_b = space_b["id"]
                         is_dwelling_unit_b = calc_vals["is_dwelling_unit_b"]
                         is_space_type_defined_b = calc_vals["is_space_type_defined_b"]
-                        is_building_area_MF_dormitory_or_hotel_b = calc_vals[
-                            "is_building_area_MF_dormitory_or_hotel_b"
+                        is_lighting_bldg_area_defined_b = calc_vals[
+                            "is_lighting_bldg_area_defined_b"
                         ]
                         is_heating_schedule_pass = all(
                             [
@@ -548,12 +568,22 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                         dwelling_heat_failed = f"{space_id_b} appears to be a dwelling unit and does not appear to have followed this rule per Section G3.1.2.2.1 for one more more of the following heating design schedules (cooling design schedules fall under the exception to Section G3.1.2.2.1 and were not assessed for dwelling units in this check): infiltration, occupants, lighting, gas and electricity using equipment."
 
                         failed_msg = ""
-                        if is_dwelling_unit_b:
-                            if is_heating_schedule_pass:
-                                failed_msg = dwelling_heat_failed
+                        if is_dwelling_unit_b and not is_heating_schedule_pass:
+                            failed_msg = dwelling_heat_failed
+
                         elif not (is_heating_schedule_pass or is_cooling_schedule_pass):
                             if is_space_type_defined_b:
                                 failed_msg = confirmed_non_dwelling_heat_cool_failed
-                            elif not is_building_area_MF_dormitory_or_hotel_b:
+                            elif not is_lighting_bldg_area_defined_b:
                                 failed_msg = deduced_non_dwelling_heat_cool_failed
+
+                        elif (
+                            not is_dwelling_unit_b
+                            and not is_space_type_defined_b
+                            and not is_lighting_bldg_area_defined_b
+                            and is_heating_schedule_pass
+                            and not is_cooling_schedule_pass
+                        ):
+                            failed_msg = deduced_non_dwelling_heat_cool_failed
+
                         return failed_msg
