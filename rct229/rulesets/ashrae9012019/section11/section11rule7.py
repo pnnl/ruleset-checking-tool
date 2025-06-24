@@ -18,7 +18,7 @@ from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 
 SERVICE_WATER_HEATING_SPACE = SchemaEnums.schema_enums[
-    "ServiceWaterHeatingSpaceOptions2019ASHRAE901"
+    "ServiceWaterHeatingAreaOptions2019ASHRAE901"
 ]
 
 
@@ -50,19 +50,16 @@ class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
                 ),
                 index_rmd=BASELINE_0,
                 each_rule=PRM9012019Rule49y39.RMDRule.SWHBATRule(),
-                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
             rmd_b = context.BASELINE_0
-            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             service_water_heating_uses_p = {
                 swh_use["id"]: swh_use.get("use", 0.0)
                 for swh_use in find_all(
-                    # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
-                    "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+                    "$.service_water_heating_uses[*]",
                     rmd_p,
                 )
             }
@@ -77,16 +74,14 @@ class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
             return {
                 "service_water_heating_uses_p": service_water_heating_uses_p,
                 "swh_equip_type_b": swh_equip_type_b,
-                "is_leap_year_b": is_leap_year_b,
             }
 
         def create_context_list(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            is_leap_year_b = data["is_leap_year_b"]
 
             swh_bats_and_equip_association_b = (
-                get_swh_components_associated_with_each_swh_bat(rmd_b, is_leap_year_b)
+                get_swh_components_associated_with_each_swh_bat(rmd_b)
             )
             swh_bats_and_uses_p = get_swh_bats_and_swh_use(rmd_p)
 

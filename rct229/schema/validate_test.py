@@ -16,7 +16,7 @@ from rct229.schema.schema_store import SchemaStore, RuleSet
 
 SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
 SchemaEnums.update_schema_enum()
-EXAMPLES_PATH = "examples"
+EXAMPLES_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "examples")
 
 ServiceWaterHeatingUseUnitOptions = SchemaEnums.schema_enums[
     "ServiceWaterHeatingUseUnitOptions"
@@ -154,7 +154,7 @@ TEST_MISMATCHED_LISTS_RMD = {
                                         {
                                             "id": "Space 1",
                                             "service_water_heating_uses": [
-                                                {"id": "SWH Use 1"},
+                                                "SWH Use 1",
                                             ],
                                         }
                                     ],
@@ -169,7 +169,7 @@ TEST_MISMATCHED_LISTS_RMD = {
                                 }
                             ],
                             "service_water_heating_uses": [
-                                {"id": "Typical SWH Use"},
+                                "Typical SWH Use",
                             ],
                         },
                     ],
@@ -177,7 +177,15 @@ TEST_MISMATCHED_LISTS_RMD = {
             ],
             "boilers": [{"id": "Boiler 1"}],
             "chillers": [{"id": "Chiller 1"}],
+            "service_water_heating_uses": [
+                {"id": "Typical SWH Use"},
+                {"id": "SWH Use 1"},
+            ],
             "service_water_heating_equipment": [{"id": "SWH Equipment 1"}],
+            "service_water_heating_uses": [
+                {"id": "SWH Use 1"},
+                {"id": "Typical SWH Use"},
+            ],
         }
     ]
 }
@@ -185,9 +193,9 @@ TEST_MISMATCHED_LISTS_RMD = {
 
 def test__non_schema_validate_rpd__missing_associated_swh_use_lists_1():
     test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
-        "service_water_heating_uses"
-    ][0]["use"] = [3]
+    test_rmd["ruleset_model_descriptions"][0]["service_water_heating_uses"][1][
+        "use"
+    ] = [3]
     assert non_schema_validate_rpd(test_rmd) == {
         "passed": False,
         "error": ["'Typical SWH Use' has populated 'use' but is missing 'use_units'."],
@@ -196,12 +204,12 @@ def test__non_schema_validate_rpd__missing_associated_swh_use_lists_1():
 
 def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_1():
     test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
-        "service_water_heating_uses"
-    ][0]["use"] = [3, 4, 5]
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
-        "service_water_heating_uses"
-    ][0]["use_units"] = [
+    test_rmd["ruleset_model_descriptions"][0]["service_water_heating_uses"][1][
+        "use"
+    ] = [3, 4, 5]
+    test_rmd["ruleset_model_descriptions"][0]["service_water_heating_uses"][1][
+        "use_units"
+    ] = [
         ServiceWaterHeatingUseUnitOptions.POWER,
         ServiceWaterHeatingUseUnitOptions.VOLUME,
     ]
@@ -216,12 +224,12 @@ def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_1():
 
 def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_2():
     test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
-        "zones"
-    ][0]["spaces"][0]["service_water_heating_uses"][0]["use"] = [3, 4, 5]
-    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
-        "zones"
-    ][0]["spaces"][0]["service_water_heating_uses"][0]["use_units"] = [
+    test_rmd["ruleset_model_descriptions"][0]["service_water_heating_uses"][0][
+        "use"
+    ] = [3, 4, 5]
+    test_rmd["ruleset_model_descriptions"][0]["service_water_heating_uses"][0][
+        "use_units"
+    ] = [
         ServiceWaterHeatingUseUnitOptions.POWER,
         ServiceWaterHeatingUseUnitOptions.VOLUME,
     ]

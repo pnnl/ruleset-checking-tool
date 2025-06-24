@@ -15,16 +15,13 @@
             "comparison_value": "Baseline Model",
             "rule_dependency": 0,
             "mandatory_rule": "No",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -92,9 +89,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -175,16 +169,13 @@
             "comparison_value": "Baseline Model",
             "rule_dependency": 0,
             "mandatory_rule": "No",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -252,9 +243,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {

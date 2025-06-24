@@ -101,7 +101,7 @@ class PRM9012019Rule45r08(RuleDefinitionListIndexedBase):
                         "$": [
                             "design_airflow",
                             "design_electric_power",
-                            "output_validation_points",
+                            "operating_points",
                         ],
                     },
                     precision={
@@ -109,7 +109,7 @@ class PRM9012019Rule45r08(RuleDefinitionListIndexedBase):
                             "precision": 1,
                             "unit": "cfm",
                         },
-                        "result": {
+                        "power": {
                             "precision": 10,
                             "unit": "W",
                         },
@@ -121,11 +121,11 @@ class PRM9012019Rule45r08(RuleDefinitionListIndexedBase):
 
                 design_airflow_b = supply_fan_b["design_airflow"]
                 design_electric_power_b = supply_fan_b["design_electric_power"]
-                output_validation_points_b = supply_fan_b["output_validation_points"]
+                operating_points_b = supply_fan_b["operating_points"]
 
-                output_validation_points = [
-                    [output["airflow"], output["result"]]
-                    for output in output_validation_points_b
+                operating_points = [
+                    [output["airflow"], output["power"]]
+                    for output in operating_points_b
                 ]
 
                 target_validation_points = [
@@ -141,43 +141,35 @@ class PRM9012019Rule45r08(RuleDefinitionListIndexedBase):
                     "design_electric_power_b": CalcQ(
                         "electric_power", design_electric_power_b
                     ),
-                    "output_validation_points": output_validation_points,
+                    "operating_points": operating_points,
                     "target_validation_points": target_validation_points,
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
-                output_validation_points = calc_vals["output_validation_points"]
+                operating_points = calc_vals["operating_points"]
                 target_validation_points = calc_vals["target_validation_points"]
 
-                return len(
-                    output_validation_points
-                ) == VALIDATION_POINTS_LENGTH and all(
+                return len(operating_points) == VALIDATION_POINTS_LENGTH and all(
                     [
                         self.precision_comparison["airflow"](
                             ovp[0],
                             tvp[0],
                         )
-                        and self.precision_comparison["result"](
+                        and self.precision_comparison["power"](
                             ovp[1],
                             tvp[1],
                         )
-                        for ovp, tvp in zip(
-                            output_validation_points, target_validation_points
-                        )
+                        for ovp, tvp in zip(operating_points, target_validation_points)
                     ]
                 )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                output_validation_points = calc_vals["output_validation_points"]
+                operating_points = calc_vals["operating_points"]
                 target_validation_points = calc_vals["target_validation_points"]
 
-                return len(
-                    output_validation_points
-                ) == VALIDATION_POINTS_LENGTH and all(
+                return len(operating_points) == VALIDATION_POINTS_LENGTH and all(
                     [
                         std_equal(ovp[0], tvp[0]) and std_equal(ovp[1], tvp[1])
-                        for ovp, tvp in zip(
-                            output_validation_points, target_validation_points
-                        )
+                        for ovp, tvp in zip(operating_points, target_validation_points)
                     ]
                 )

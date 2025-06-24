@@ -81,16 +81,14 @@ class PRM9012019Rule18y74(RuleDefinitionListIndexedBase):
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
                 required_fields={
-                    "$": ["weather", "calendar"],
+                    "$": ["weather"],
                     "weather": ["climate_zone"],
-                    "calendar": ["is_leap_year"],
                 },
             )
 
         def create_data(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            is_leap_year = rmd_b["calendar"]["is_leap_year"]
             climate_zone = rmd_b["weather"]["climate_zone"]
 
             zone_p_hvac_list_dict = {
@@ -101,9 +99,7 @@ class PRM9012019Rule18y74(RuleDefinitionListIndexedBase):
             }
 
             zone_p_fan_schedule_dict = {
-                zone_id: get_aggregated_zone_hvac_fan_operating_schedule(
-                    rmd_p, zone_id, is_leap_year
-                )
+                zone_id: get_aggregated_zone_hvac_fan_operating_schedule(rmd_p, zone_id)
                 for zone_id in find_all(
                     "$.buildings[*].building_segments[*].zones[*].id", rmd_p
                 )
@@ -121,9 +117,7 @@ class PRM9012019Rule18y74(RuleDefinitionListIndexedBase):
             }
 
             zone_b_fan_schedule_dict = {
-                zone_id: get_aggregated_zone_hvac_fan_operating_schedule(
-                    rmd_b, zone_id, is_leap_year
-                )
+                zone_id: get_aggregated_zone_hvac_fan_operating_schedule(rmd_b, zone_id)
                 for zone_id in find_all(
                     "$.buildings[*].building_segments[*].zones[*].id", rmd_b
                 )
@@ -140,7 +134,6 @@ class PRM9012019Rule18y74(RuleDefinitionListIndexedBase):
 
             return {
                 "climate_zone": climate_zone,
-                "is_leap_year": is_leap_year,
                 "baseline_hvac_sys_type_ids_dict_b": get_baseline_system_types(rmd_b),
                 "zone_p_hvac_list_dict": zone_p_hvac_list_dict,
                 "zone_b_hvac_zone_list_dict": zone_b_hvac_zone_list_dict,

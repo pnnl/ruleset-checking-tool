@@ -41,6 +41,13 @@ class SchemaEnums:
         with open(_enum_schema_path) as json_file:
             _enum_schema_obj = json.load(json_file)
 
+        # Load the output schema file
+        _output_schema_path = join(
+            dirname(__file__), "..", "schema", "Output2019ASHRAE901.schema.json"
+        )
+        with open(_output_schema_path) as json_file:
+            _output_schema_obj = json.load(json_file)
+
         # Load the schema file
         _schema_path = join(dirname(__file__), "..", "schema", "ASHRAE229.schema.json")
         with open(_schema_path) as json_file:
@@ -54,10 +61,14 @@ class SchemaEnums:
         _schema_enum_jsonpath_value_dict = create_jsonpath_value_dict(
             "$..*[?(@.enum)]", _schema_obj
         )
+        _output_schema_enum_jsonpath_value_dict = create_jsonpath_value_dict(
+            "$..*[?(@.enum)]", _output_schema_obj
+        )
         # Merge the two dictionaries
         enum_jsonpath_value_dict = {
             **_enum_schema_enum_jsonpath_value_dict,
             **_schema_enum_jsonpath_value_dict,
+            **_output_schema_enum_jsonpath_value_dict,
         }
 
         # Create a dictionary of all the enumerations as dictionaries

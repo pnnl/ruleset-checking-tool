@@ -48,15 +48,22 @@ class PRM9012019Rule52y79(RuleDefinitionListIndexedBase):
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
             swh_uses_associated_with_each_building_segment_p = (
                 get_swh_uses_associated_with_each_building_segment(rmd_p)
             )
+            # Infer number of hours in the year (from any valid schedule)
+            hours_this_year = None
+            for sched in find_all("$.schedules[*].hourly_values", rmd_b):
+                if isinstance(sched, list) and len(sched) > 0:
+                    hours_this_year = len(sched)
+                    break
+            if hours_this_year is None:
+                hours_this_year = 8760  # fallback default
 
             return {
-                "is_leap_year_b": is_leap_year_b,
                 "schedules_b": find_all("$.schedules[*]", rmd_b),
                 "schedules_p": find_all("$.schedules[*]", rmd_p),
+                "hours_this_year": hours_this_year,
                 "swh_uses_associated_with_each_building_segment_p": swh_uses_associated_with_each_building_segment_p,
             }
 
@@ -73,7 +80,7 @@ class PRM9012019Rule52y79(RuleDefinitionListIndexedBase):
                 building_b = context.BASELINE_0
                 building_p = context.PROPOSED
                 schedules_b = data["schedules_b"]
-                is_leap_year_b = data["is_leap_year_b"]
+                hours_this_year = data["hours_this_year"]
 
                 # TODO revise the json path if the service_water_heating_uses is relocated in the schema
                 service_water_heating_uses_p = find_all(
@@ -96,12 +103,6 @@ class PRM9012019Rule52y79(RuleDefinitionListIndexedBase):
                         if schedule_b["id"] == bldg_open_sch_id_b
                     ),
                     [],
-                )
-
-                hours_this_year = (
-                    LeapYear.LEAP_YEAR_HOURS
-                    if is_leap_year_b
-                    else LeapYear.REGULAR_YEAR_HOURS
                 )
 
                 return (

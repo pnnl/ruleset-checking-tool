@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -120,7 +120,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -227,7 +227,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -278,10 +278,7 @@
                                                                 "u_factor": 3.2366105565544463
                                                             }
                                                         ],
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "Construction 1"
                                                     },
                                                     {
                                                         "id": "Surface 2",
@@ -297,10 +294,7 @@
                                                                 "u_factor": 3.2366105565544463
                                                             }
                                                         ],
-                                                        "construction": {
-                                                            "id": "construction_2",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "construction_2"
                                                     }
                                                 ]
                                             }
@@ -320,6 +314,16 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "u_factor": 3.2366105565544463
+                            },
+                            {
+                                "id": "construction_2",
+                                "u_factor": 3.2366105565544463
                             }
                         ],
                         "type": "BASELINE_0"
@@ -342,7 +346,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -393,10 +397,7 @@
                                                                 "u_factor": 3.2366105565544463
                                                             }
                                                         ],
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "Construction 1"
                                                     },
                                                     {
                                                         "id": "Surface 2",
@@ -412,10 +413,7 @@
                                                                 "u_factor": 3.2366105565544463
                                                             }
                                                         ],
-                                                        "construction": {
-                                                            "id": "construction_2",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "construction_2"
                                                     }
                                                 ]
                                             }
@@ -435,6 +433,16 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "u_factor": 3.2366105565544463
+                            },
+                            {
+                                "id": "construction_2",
+                                "u_factor": 3.2366105565544463
                             }
                         ],
                         "type": "BASELINE_0"

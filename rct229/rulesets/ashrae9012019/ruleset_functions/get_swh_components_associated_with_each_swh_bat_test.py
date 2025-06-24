@@ -22,30 +22,12 @@ TEST_RMD = {
                                 {
                                     "id": "Space 1",
                                     "service_water_heating_area_type": "LIBRARY",
-                                    "service_water_heating_uses": [
-                                        {
-                                            "id": "SWH Use 1",
-                                            "use": 400,
-                                            "use_units": "POWER",
-                                            "is_heat_recovered_by_drain": False,
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        }
-                                    ],
+                                    "service_water_heating_uses": ["SWH Use 1"],
                                 },
                                 {
                                     "id": "Space 2",
                                     "service_water_heating_area_type": "CONVENIENCE_STORE",
-                                    "service_water_heating_uses": [
-                                        {
-                                            "id": "SWH Use 2",
-                                            "use": 100,
-                                            "use_units": "POWER",
-                                            "is_heat_recovered_by_drain": False,
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        }
-                                    ],
+                                    "service_water_heating_uses": ["SWH Use 2"],
                                 },
                                 {
                                     "id": "Space 3",
@@ -65,6 +47,24 @@ TEST_RMD = {
         {
             "id": "SWH Entering Water Temp Schedule 1",
             "hourly_values": [50] * 8760,
+        },
+    ],
+    "service_water_heating_uses": [
+        {
+            "id": "SWH Use 1",
+            "use": 400,
+            "use_units": "POWER",
+            "is_heat_recovered_by_drain": False,
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "SWH Use 2",
+            "use": 100,
+            "use_units": "POWER",
+            "is_heat_recovered_by_drain": False,
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
         },
     ],
     "service_water_heating_distribution_systems": [
@@ -159,7 +159,7 @@ def test__TEST_RPD__is_valid():
 
 
 def test__get_swh_components_associated_with_each_swh_bat():
-    actual_result = get_swh_components_associated_with_each_swh_bat(TEST_RMD, False)
+    actual_result = get_swh_components_associated_with_each_swh_bat(TEST_RMD)
     assert (
         len(actual_result) == 1
         and std_equal(

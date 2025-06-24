@@ -14,16 +14,13 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "No",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -39,11 +36,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -52,6 +45,14 @@
                                     }
                                 ],
                                 "building_open_schedule": "Building Open Schedule 1"
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -8834,9 +8835,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -8852,11 +8850,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -8865,6 +8859,14 @@
                                     }
                                 ],
                                 "building_open_schedule": "Building Open Schedule 1"
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -17659,16 +17661,13 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "No",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -17684,13 +17683,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 5000,
-                                                                "use_units": "POWER",
-                                                                "use_multiplier_schedule": "Water Use Schedule"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -17698,6 +17691,15 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 5000,
+                                "use_units": "POWER",
+                                "use_multiplier_schedule": "Water Use Schedule"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -35247,9 +35249,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -35265,11 +35264,7 @@
                                                     {
                                                         "id": "Space 1",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 100
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -35278,6 +35273,14 @@
                                     }
                                 ],
                                 "building_open_schedule": "Building Open Schedule 1"
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 100,
+                                "use_units": "POWER"
                             }
                         ],
                         "service_water_heating_distribution_systems": [

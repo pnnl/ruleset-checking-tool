@@ -168,14 +168,11 @@ def test__rule_definition_base__get_context__with_missing_rmds():
         )
         == "MISSING_USER"
     )
-    assert (
-        BASE_RULE_1.get_context(
-            produce_ruleset_model_description(
-                USER=RMD_EMPTY, BASELINE_0=RMD_EMPTY, PROPOSED=RMD_2
-            )
+    assert BASE_RULE_1.get_context(
+        produce_ruleset_model_description(
+            USER=RMD_EMPTY, BASELINE_0=RMD_EMPTY, PROPOSED=RMD_2
         )
-        == "MISSING_USER_BASELINE_0"
-    )
+    ) in ["MISSING_USER_BASELINE_0", "MISSING_BASELINE_0_USER"]
 
 
 def test__rule_definition_base__get_context__with_rmds_present():

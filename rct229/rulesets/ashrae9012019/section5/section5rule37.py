@@ -51,7 +51,11 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rpd_p = context.PROPOSED
         climate_zone = rpd_p["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        return {"climate_zone": climate_zone}
+        constructions = rpd_p["ruleset_model_descriptions"][0].get("constructions", {})
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
@@ -73,10 +77,10 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
             building_p = context.PROPOSED
 
             scc_dict_p = get_surface_conditioning_category_dict(
-                data["climate_zone"], building_p
+                data["climate_zone"], building_p, data["constructions"]
             )
             zcc_dict_p = get_zone_conditioning_category_dict(
-                data["climate_zone"], building_p
+                data["climate_zone"], building_p, data["constructions"]
             )
 
             building_total_air_leakage_rate = ZERO.FLOW

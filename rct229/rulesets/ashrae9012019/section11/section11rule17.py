@@ -13,7 +13,7 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 
 SERVICE_WATER_HEATING_SPACE = SchemaEnums.schema_enums[
-    "ServiceWaterHeatingSpaceOptions2019ASHRAE901"
+    "ServiceWaterHeatingAreaOptions2019ASHRAE901"
 ]
 
 
@@ -48,7 +48,7 @@ class PRM9012019Rule63z32(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
-            is_leap_year_p = rmd_p["calendar"]["is_leap_year"]
+            is_leap_year_p = True
 
             swh_bat = {
                 bldg_seg_id: get_building_segment_swh_bat(

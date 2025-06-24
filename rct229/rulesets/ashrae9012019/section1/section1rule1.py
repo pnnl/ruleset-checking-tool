@@ -9,7 +9,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_BPF_building_area_types
     get_BPF_building_area_types_and_zones,
 )
 from rct229.utils.assertions import assert_
-from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
 
@@ -40,9 +39,6 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
                 BASELINE_180=True,
                 BASELINE_270=True,
             ),
-            required_fields={
-                "$": ["ruleset_model_descriptions"],
-            },
             index_rmd=BASELINE_0,
             each_rule=PRM9012019Rule73j65.RMDRule(),
             id="1-1",
@@ -54,6 +50,15 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
         )
+
+    def create_data(self, context, data=None):
+        return {
+            key: getattr(context, key)
+            .get("output", {})
+            .get("total_area_weighted_building_performance_factor")
+            for key in context.__dict__
+            if getattr(context, key) is not None
+        }
 
     class RMDRule(RuleDefinitionBase):
         def __init__(self):
@@ -72,8 +77,7 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
                     BASELINE_270=True,
                 ),
                 required_fields={
-                    "$": ["model_output", "weather"],
-                    "model_output": ["total_area_weighted_building_performance_factor"],
+                    "$": ["weather"],
                     "weather": ["climate_zone"],
                 },
                 manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
@@ -81,26 +85,12 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
             )
 
         def get_calc_vals(self, context, data=None):
-            rmd_u = context.USER
             rmd_b0 = context.BASELINE_0
-            rmd_b90 = context.BASELINE_90
-            rmd_b180 = context.BASELINE_180
-            rmd_b270 = context.BASELINE_270
-            rmd_p = context.PROPOSED
-            model_output_bpf_list = [
-                find_one(
-                    "$.model_output.total_area_weighted_building_performance_factor",
-                    rmd,
-                )
-                for rmd in (rmd_u, rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p)
-            ]
 
-            model_output_bpf_list = list(
-                set(filter(lambda x: x is not None, model_output_bpf_list))
-            )
+            output_bpf_list = list(set(filter(lambda x: x is not None, data.values())))
             assert_(
-                len(model_output_bpf_list) >= 1,
-                "At least one `model_output_bpf_set` value must exist.",
+                len(output_bpf_list) >= 1,
+                "At least one `output_bpf_set` value must exist.",
             )
             bpf_building_area_type_dict = get_BPF_building_area_types_and_zones(rmd_b0)
             has_undetermined = "UNDETERMINED" in bpf_building_area_type_dict
@@ -129,7 +119,7 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
                 )
 
             return {
-                "model_output_bpf_list": model_output_bpf_list,
+                "output_bpf_list": output_bpf_list,
                 "bpf_bat_sum_prod": bpf_bat_sum_prod,
                 "total_area": total_area,
                 "has_undetermined": has_undetermined,
@@ -140,18 +130,18 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
             return has_undetermined
 
         def rule_check(self, context, calc_vals=None, data=None):
-            model_output_bpf_list = calc_vals["model_output_bpf_list"]
+            output_bpf_list = calc_vals["output_bpf_list"]
             bpf_bat_sum_prod = calc_vals["bpf_bat_sum_prod"]
             total_area = calc_vals["total_area"]
 
-            return len(model_output_bpf_list) == 1 and self.precision_comparison(
-                bpf_bat_sum_prod / total_area, model_output_bpf_list[0]
+            return len(output_bpf_list) == 1 and self.precision_comparison(
+                bpf_bat_sum_prod / total_area, output_bpf_list[0]
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
-            model_output_bpf_list = calc_vals["model_output_bpf_list"]
+            output_bpf_list = calc_vals["output_bpf_list"]
             bpf_bat_sum_prod = calc_vals["bpf_bat_sum_prod"]
             total_area = calc_vals["total_area"]
-            return len(model_output_bpf_list) == 1 and std_equal(
-                model_output_bpf_list[0], bpf_bat_sum_prod / total_area
+            return len(output_bpf_list) == 1 and std_equal(
+                output_bpf_list[0], bpf_bat_sum_prod / total_area
             )

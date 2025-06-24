@@ -45,15 +45,10 @@ class PRM9012019Rule51s51(RuleDefinitionListIndexedBase):
                 index_rmd=BASELINE_0,
                 each_rule=PRM9012019Rule51s51.RMDRule.BuildingRule(),
                 list_path="$.buildings[*]",
-                required_fields={
-                    "$": ["calendar"],
-                    "calendar": ["is_leap_year"],
-                },
             )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
-            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
             energy_required_to_heat_swh_use_dict = {}
             service_water_heating_use_dict = {}
 
@@ -74,7 +69,7 @@ class PRM9012019Rule51s51(RuleDefinitionListIndexedBase):
                         continue
                     energy_required_to_heat_swh_use = (
                         get_energy_required_to_heat_swh_use(
-                            swh_use["id"], rmd_b, building_segment["id"], is_leap_year_b
+                            swh_use["id"], rmd_b, building_segment["id"]
                         )
                     )
                     if swh_use["id"] not in energy_required_to_heat_swh_use_dict:

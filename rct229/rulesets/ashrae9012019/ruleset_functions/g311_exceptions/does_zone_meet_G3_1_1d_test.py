@@ -42,10 +42,12 @@ TEST_RMD = {
                                     "primary_airflow": 6500,
                                 }
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Exhaust Fan 1",
-                                "design_airflow": 1000,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Exhaust Fan 1",
+                                    "design_airflow": 1000,
+                                }
+                            ],
                         },
                         {
                             "id": "Thermal Zone 2",

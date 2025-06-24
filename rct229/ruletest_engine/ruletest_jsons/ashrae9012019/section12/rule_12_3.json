@@ -14,7 +14,7 @@
             "comparison_value": "Proposed RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -23,9 +23,6 @@
                     {
                         "weather": {
                             "climate_zone": "CZ4A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "id": "RMD 1",
                         "buildings": [
@@ -8836,9 +8833,6 @@
                     {
                         "weather": {
                             "climate_zone": "CZ4A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "id": "RMD 1",
                         "buildings": [
@@ -17661,7 +17655,7 @@
             "comparison_value": "Proposed RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -17670,9 +17664,6 @@
                     {
                         "weather": {
                             "climate_zone": "CZ4A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "id": "RMD 1",
                         "buildings": [
@@ -26483,9 +26474,6 @@
                     {
                         "weather": {
                             "climate_zone": "CZ4A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "id": "RMD 1",
                         "buildings": [
@@ -35307,7 +35295,7 @@
             "comparison_value": "Proposed RMD",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -35316,9 +35304,6 @@
                     {
                         "weather": {
                             "climate_zone": "CZ4A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "id": "RMD 1",
                         "buildings": [
@@ -44129,9 +44114,6 @@
                     {
                         "weather": {
                             "climate_zone": "CZ4A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "id": "RMD 1",
                         "buildings": [

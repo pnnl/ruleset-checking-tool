@@ -220,7 +220,11 @@ def return_json_schema_reference(object_dict, key):
     # $ref elements are either at the top level or buried inside "items"
     if "items" in properties_dict:
         # Return the reference string (the last element separated by the '/'s)
-        return properties_dict["items"]["$ref"].split("/")[-1]
+        if "$ref" in properties_dict["items"]:
+            return properties_dict["items"]["$ref"].split("/")[-1]
+        else:
+            # Some elements have an oddball "oneOf" that allows for a reference or "string".
+            return properties_dict["items"]["oneOf"][0]["$ref"].split("/")[-1]
 
     elif "$ref" in properties_dict:
         # Return the reference string (the last element separated by the '/'s)
