@@ -1098,7 +1098,7 @@
         "Test": "p",
         "test_description": "A one story, one zone building has one gas storage water heater with input rating between 75k-105kBtu/h, 100 gallons storage capacity, setpoint temperature greater than 180F, thermal efficiency of 0.8, and low draw pattern. The water heater efficiency is correctly modeled as 0.8 thermal efficiency. The estimated stand by loss of 577.5 Btu/hr is less than the max standby loss of 1225 Btu/hr.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "This calculated loss is less than or equal to the expected loss.  Rule passes if assessor determines that this equation is appropriate for this project.",
+        "expected_raised_message_includes": "This calculated loss is less than or equal to the expected loss. Rule passes if assessor determines that this equation is appropriate for this project.",
         "standard": {
             "rule_id": "11-10",
             "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
@@ -1176,7 +1176,7 @@
         "Test": "q",
         "test_description": "A one story, one zone building has one gas storage water heater with input rating between 75k-105kBtu/h, 100 gallons storage capacity, setpoint temperature greater than 180F, thermal efficiency of 0.8, and low draw pattern. The water heater efficiency is correctly modeled as 0.8 thermal efficiency. The estimated stand by loss of 1733 Btu/hr is more than the max standby loss of 1225 Btu/hr.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "This calculated loss greater than the expected loss. Rule fails unless the assesor determines that the loss is appropriate for this project.",
+        "expected_raised_message_includes": "This calculated loss is greater than the expected loss. Rule fails unless the assessor determines that the standby loss is appropriate for this project.",
         "standard": {
             "rule_id": "11-10",
             "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
@@ -1254,7 +1254,7 @@
         "Test": "r",
         "test_description": "A one story, one zone building has one gas storage water heater with input rating between 75k-105kBtu/h, 100 gallons storage capacity, setpoint temperature greater than 180F, thermal efficiency of 0.8, and low draw pattern. The water heater efficiency is correctly modeled as 0.8 thermal efficiency. No estimated stand by loss was given.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "This calculated loss greater than the expected loss. Rule fails unless the assesor determines that the loss is appropriate for this project.",
+        "expected_raised_message_includes": "Based on the provided details, STANDBY_LOSS_ENERGY is an expected efficiency metric for this water heater, however it was not provided. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2.",
         "standard": {
             "rule_id": "11-10",
             "ruleset_reference": "Table G3.1 #11, baseline column, a & b",

@@ -159,7 +159,7 @@ def test__TEST_RPD__is_valid():
 
 
 def test__get_swh_components_associated_with_each_swh_bat():
-    actual_result = get_swh_components_associated_with_each_swh_bat(TEST_RMD, False)
+    actual_result = get_swh_components_associated_with_each_swh_bat(TEST_RMD)
     assert (
         len(actual_result) == 1
         and std_equal(

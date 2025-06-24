@@ -36,7 +36,7 @@ WATER_SPECIFIC_HEAT = 1.001 * ureg("Btu/lb/delta_degF")
 
 
 def get_energy_required_to_heat_swh_use(
-    swh_use_id: str, rmd: dict, building_segment_id: str, is_leap_year: bool
+    swh_use_id: str, rmd: dict, building_segment_id: str
 ) -> dict[str, Quantity | None]:
     """
     This function calculates the total energy required to heat the SWH use over the course of a year.  Note - this function does not work for service water heating uses with use_units == "OTHER".  In this case, it will return 0 Btu.
@@ -46,8 +46,7 @@ def get_energy_required_to_heat_swh_use(
     swh_use_id: str, id of service_water_heating_uses
     rmd: dict, RMD at RuleSetModelDescription level
     building_segment_id: str, id of building_segment
-    is_leap_year: bool, default: False
-        Whether the year is a leap year or not.
+
 
     Returns
     ----------
@@ -122,9 +121,15 @@ def get_energy_required_to_heat_swh_use(
     if not spaces and use_units not in REQUIRED_USE_UNIT:
         spaces = find_all("$.zones[*].spaces[*]", building_segment)
 
-    num_hours = (
-        LeapYear.LEAP_YEAR_HOURS if is_leap_year else LeapYear.REGULAR_YEAR_HOURS
-    )
+    # Infer number of hours in the year (from any valid schedule)
+    num_hours = None
+    for sched in find_all("$.schedules[*].hourly_values", rmd):
+        if isinstance(sched, list) and len(sched) > 0:
+            num_hours = len(sched)
+            break
+    if num_hours is None:
+        num_hours = 8760  # fallback default
+
     hourly_multiplier_values = (
         getattr_(hourly_multiplier_schedule, "hourly_schedule", "hourly_values")
         if hourly_multiplier_schedule is not None

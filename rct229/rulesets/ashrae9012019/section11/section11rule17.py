@@ -48,7 +48,7 @@ class PRM9012019Rule63z32(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
-            is_leap_year_p = rmd_p["calendar"]["is_leap_year"]
+            is_leap_year_p = True
 
             swh_bat = {
                 bldg_seg_id: get_building_segment_swh_bat(
