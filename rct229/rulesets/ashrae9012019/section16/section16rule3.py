@@ -40,7 +40,6 @@ class PRM9012019Rule92n36(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019Rule92n36.RuleSetModelDescriptionRule.ElevatorRule(),
                 index_rmd=PROPOSED,
                 list_path="buildings[*].elevators[*]",
-                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
         def is_applicable(self, context, data=None):
@@ -50,7 +49,6 @@ class PRM9012019Rule92n36(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
-            is_leap_year_p = rmd_p["calendar"]["is_leap_year"]
 
             cab_ventilation_schedule_p = {
                 sch_id: find_exactly_one_schedule(rmd_p, sch_id)["hourly_values"]
@@ -70,7 +68,6 @@ class PRM9012019Rule92n36(RuleDefinitionListIndexedBase):
             return {
                 "cab_ventilation_schedule_p": cab_ventilation_schedule_p,
                 "motor_use_schedule_p": motor_use_schedule_p,
-                "is_leap_year_p": is_leap_year_p,
             }
 
         class ElevatorRule(RuleDefinitionBase):
@@ -87,7 +84,6 @@ class PRM9012019Rule92n36(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 elevator_p = context.PROPOSED
-                is_leap_year_p = data["is_leap_year_p"]
 
                 cab_ventilation_fan_multiplier_schedule_p = getattr_(
                     elevator_p, "elevators", "cab_ventilation_fan_multiplier_schedule"
@@ -103,17 +99,12 @@ class PRM9012019Rule92n36(RuleDefinitionListIndexedBase):
                     cab_motor_multiplier_schedule_p
                 ]
 
-                mask_schedule = (
-                    [1] * LeapYear.LEAP_YEAR_HOURS
-                    if is_leap_year_p
-                    else [1] * LeapYear.REGULAR_YEAR_HOURS
-                )
+                mask_schedule = [1] * len(cab_ventilation_schedule_p)
 
                 sch_total_hours_matched = compare_schedules(
                     cab_ventilation_schedule_p,
                     motor_use_schedule_p,
                     mask_schedule,
-                    is_leap_year_p,
                 )["total_hours_matched"]
 
                 return {
