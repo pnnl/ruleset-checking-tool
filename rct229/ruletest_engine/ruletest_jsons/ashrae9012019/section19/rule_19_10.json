@@ -684,7 +684,7 @@
                                                     ],
                                                     "air_economizer": {
                                                         "id": "Air Economizer 1",
-                                                        "type": "FIXED_FRACTION"
+                                                        "type": "ENTHALPY"
                                                     }
                                                 }
                                             }
