@@ -27,19 +27,15 @@ DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 FAIL_MSG = "The vertical fenestration is not distributed across baseline opaque surfaces in the same proportion as in the proposed design. Verify if envelope is existing or altered and can be excluded from this check."
 
 
-class Section5Rule16(RuleDefinitionListIndexedBase):
+class PRM9012019Rule80o45(RuleDefinitionListIndexedBase):
     """Rule 16 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule16, self).__init__(
+        super(PRM9012019Rule80o45, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            required_fields={
-                "$": ["weather"],
-                "weather": ["climate_zone"],
-            },
-            each_rule=Section5Rule16.BuildingRule(),
+            each_rule=PRM9012019Rule80o45.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-16",
             description="The vertical fenestration shall be distributed on each face of the building in the same proportion as in the proposed design.",
@@ -47,17 +43,29 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "weather": ["climate_zone"],
+            },
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        constructions = rpd_b["ruleset_model_descriptions"][0].get("constructions")
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule16.BuildingRule, self).__init__(
+            super(PRM9012019Rule80o45.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 required_fields={},
-                each_rule=Section5Rule16.BuildingRule.AboveGradeWallRule(),
+                each_rule=PRM9012019Rule80o45.BuildingRule.AboveGradeWallRule(),
                 index_rmd=BASELINE_0,
                 # list_path and list_filter together determine the list of
                 # above grade walls to be passed to AboveGradeWallRule
@@ -68,12 +76,13 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
             building_b = context.BASELINE_0
             building_p = context.PROPOSED
             climate_zone = data["climate_zone"]
+            constructions = data["constructions"]
 
             window_wall_areas_dictionary_b = get_area_type_window_wall_area_dict(
-                climate_zone, building_b
+                climate_zone, constructions, building_b
             )
             window_wall_areas_dictionary_p = get_area_type_window_wall_area_dict(
-                climate_zone, building_p
+                climate_zone, constructions, building_p
             )
 
             return {
@@ -86,7 +95,7 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
                     ZERO.AREA,
                 ),
                 "surface_conditioning_category_dict_b": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building_b
+                    data["climate_zone"], building_b, data["constructions"]
                 ),
             }
 
@@ -101,13 +110,14 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
 
         class AboveGradeWallRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule16.BuildingRule.AboveGradeWallRule, self).__init__(
+                super(
+                    PRM9012019Rule80o45.BuildingRule.AboveGradeWallRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
                     required_fields={
                         "$": ["construction"],
-                        "construction": ["u_factor"],
                     },
                     precision={
                         "total_fenestration_area_surface_b / total_fenstration_area_b": {
@@ -179,6 +189,32 @@ class Section5Rule16(RuleDefinitionListIndexedBase):
                     self.precision_comparison[
                         "total_fenestration_area_surface_b / total_fenstration_area_b"
                     ](
+                        (
+                            total_fenestration_area_surface_b
+                            / total_fenestration_area_b
+                        ).magnitude,
+                        (
+                            total_fenestration_area_surface_p
+                            / total_fenestration_area_p
+                        ).magnitude,
+                    )
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                total_fenestration_area_surface_b = calc_vals[
+                    "total_fenestration_area_surface_b"
+                ]
+                total_fenestration_area_surface_p = calc_vals[
+                    "total_fenestration_area_surface_p"
+                ]
+                total_fenestration_area_b = calc_vals["total_fenestration_area_b"]
+                total_fenestration_area_p = calc_vals["total_fenestration_area_p"]
+
+                return (
+                    total_fenestration_area_b == ZERO.AREA
+                    and total_fenestration_area_p == ZERO.AREA
+                ) or (
+                    std_equal(
                         (
                             total_fenestration_area_surface_b
                             / total_fenestration_area_b

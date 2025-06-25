@@ -59,6 +59,25 @@ TEST_RMD = {
                                 },
                             ],
                         },
+                        {
+                            "id": "Thermal Zone 5",
+                            "spaces": [
+                                {
+                                    "id": "Space 8",
+                                    "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
+                                },
+                            ],
+                        },
+                        {
+                            "id": "Thermal Zone 6",
+                            "spaces": [
+                                {
+                                    "id": "Space 9",
+                                    "function": "LABORATORY",
+                                    "lighting_space_type": "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
+                                },
+                            ],
+                        },
                     ],
                 },
             ],
@@ -71,7 +90,6 @@ TEST_RMD = {
 TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMD_UNIT = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
@@ -89,4 +107,6 @@ def test__get_building_lab_zone_list__success():
         "Thermal Zone 1",
         "Thermal Zone 2",
         "Thermal Zone 3",
+        "Thermal Zone 5",
+        "Thermal Zone 6",
     ]

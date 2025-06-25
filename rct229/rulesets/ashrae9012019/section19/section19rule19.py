@@ -44,15 +44,15 @@ COOLING_SYSTEM = SchemaEnums.schema_enums["CoolingSystemOptions"]
 REQ_FAN_POWER_FLOW_RATIO = 0.3 * ureg("W/cfm")
 
 
-class Section19Rule19(RuleDefinitionListIndexedBase):
+class PRM9012019Rule51d17(RuleDefinitionListIndexedBase):
     """Rule 19 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule19, self).__init__(
+        super(PRM9012019Rule51d17, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule19.HVACRule(),
+            each_rule=PRM9012019Rule51d17.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-19",
             description="For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be CFMs × 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. "
@@ -128,17 +128,23 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
                 zone_b = find_exactly_one_zone(rmd_b, zone_id_b)
                 zone_p = find_exactly_one_zone(rmd_p, zone_id_b)
 
-                hvac_map[hvac_id_b][
-                    "zonal_exhaust_fan_elec_power_b"
-                ] += get_fan_object_electric_power(zone_b.get("zonal_exhaust_fan"))
+                zone_b_exhaust_fans = zone_b.get("zonal_exhaust_fans", [])
+                zone_p_exhaust_fans = zone_p.get("zonal_exhaust_fans", [])
+                zone_p_supply_fans = zone_p.get("supply_fans", [])
+
+                for zone_b_exhaust_fan in zone_b_exhaust_fans:
+                    hvac_map[hvac_id_b][
+                        "zonal_exhaust_fan_elec_power_b"
+                    ] += get_fan_object_electric_power(zone_b_exhaust_fan)
+
+                zone_p_has_non_mech_cooling = any(
+                    fan.get("design_airflow", 0) > ZERO.FLOW
+                    for fan in zone_p_exhaust_fans + zone_p_supply_fans
+                )
 
                 hvac_map[hvac_id_b].update(
                     {
-                        "zones_served_by_hvac_has_non_mech_cooling_bool_p": zone_p.get(
-                            "non_mechanical_cooling_fan_airflow"
-                        )
-                        is not None
-                        and zone_p["non_mechanical_cooling_fan_airflow"] > ZERO.FLOW
+                        "zones_served_by_hvac_has_non_mech_cooling_bool_p": zone_p_has_non_mech_cooling
                     }
                 )
 
@@ -156,7 +162,7 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule19.HVACRule, self).__init__(
+            super(PRM9012019Rule51d17.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),

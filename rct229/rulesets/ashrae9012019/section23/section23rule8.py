@@ -27,15 +27,15 @@ SUPPLY_AIRFLOW_COEFFS = [0.1 * i for i in range(VALIDATION_POINTS_LENGTH)]
 DESIGN_POWER_COEFFS = [0.0, 0.03, 0.07, 0.13, 0.21, 0.30, 0.41, 0.54, 0.68, 0.83, 1.0]
 
 
-class Section23Rule8(RuleDefinitionListIndexedBase):
+class PRM9012019Rule45r08(RuleDefinitionListIndexedBase):
     """Rule 8 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule8, self).__init__(
+        super(PRM9012019Rule45r08, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section23Rule8.HVACRule(),
+            each_rule=PRM9012019Rule45r08.HVACRule(),
             index_rmd=BASELINE_0,
             id="23-8",
             description="System 5-8 and 11 - part load VAV fan power shall be modeled using either method 1 or 2 in Table G3.1.3.15. This rule will only validate data points from Method-1 Part-load Fan Power Data. However, both methods are equivalent. When modeling inputs are based on Method 2, values should be converted to Method 1 when writing to RMD.",
@@ -82,18 +82,18 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section23Rule8.HVACRule, self).__init__(
+            super(PRM9012019Rule45r08.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section23Rule8.HVACRule.SupplyFanRule(),
+                each_rule=PRM9012019Rule45r08.HVACRule.SupplyFanRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.fan_system.supply_fans[*]",
             )
 
         class SupplyFanRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section23Rule8.HVACRule.SupplyFanRule, self).__init__(
+                super(PRM9012019Rule45r08.HVACRule.SupplyFanRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
@@ -101,7 +101,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
                         "$": [
                             "design_airflow",
                             "design_electric_power",
-                            "output_validation_points",
+                            "operating_points",
                         ],
                     },
                     precision={
@@ -109,7 +109,7 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
                             "precision": 1,
                             "unit": "cfm",
                         },
-                        "result": {
+                        "power": {
                             "precision": 10,
                             "unit": "W",
                         },
@@ -121,11 +121,11 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
 
                 design_airflow_b = supply_fan_b["design_airflow"]
                 design_electric_power_b = supply_fan_b["design_electric_power"]
-                output_validation_points_b = supply_fan_b["output_validation_points"]
+                operating_points_b = supply_fan_b["operating_points"]
 
-                output_validation_points = [
-                    [output["airflow"], output["result"]]
-                    for output in output_validation_points_b
+                operating_points = [
+                    [output["airflow"], output["power"]]
+                    for output in operating_points_b
                 ]
 
                 target_validation_points = [
@@ -141,43 +141,35 @@ class Section23Rule8(RuleDefinitionListIndexedBase):
                     "design_electric_power_b": CalcQ(
                         "electric_power", design_electric_power_b
                     ),
-                    "output_validation_points": output_validation_points,
+                    "operating_points": operating_points,
                     "target_validation_points": target_validation_points,
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
-                output_validation_points = calc_vals["output_validation_points"]
+                operating_points = calc_vals["operating_points"]
                 target_validation_points = calc_vals["target_validation_points"]
 
-                return len(
-                    output_validation_points
-                ) == VALIDATION_POINTS_LENGTH and all(
+                return len(operating_points) == VALIDATION_POINTS_LENGTH and all(
                     [
                         self.precision_comparison["airflow"](
                             ovp[0],
                             tvp[0],
                         )
-                        and self.precision_comparison["result"](
+                        and self.precision_comparison["power"](
                             ovp[1],
                             tvp[1],
                         )
-                        for ovp, tvp in zip(
-                            output_validation_points, target_validation_points
-                        )
+                        for ovp, tvp in zip(operating_points, target_validation_points)
                     ]
                 )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                output_validation_points = calc_vals["output_validation_points"]
+                operating_points = calc_vals["operating_points"]
                 target_validation_points = calc_vals["target_validation_points"]
 
-                return len(
-                    output_validation_points
-                ) == VALIDATION_POINTS_LENGTH and all(
+                return len(operating_points) == VALIDATION_POINTS_LENGTH and all(
                     [
                         std_equal(ovp[0], tvp[0]) and std_equal(ovp[1], tvp[1])
-                        for ovp, tvp in zip(
-                            output_validation_points, target_validation_points
-                        )
+                        for ovp, tvp in zip(operating_points, target_validation_points)
                     ]
                 )

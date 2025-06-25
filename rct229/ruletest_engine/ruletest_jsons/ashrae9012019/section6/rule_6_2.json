@@ -8,18 +8,17 @@
         "standard": {
             "rule_id": "6-2",
             "ruleset_reference": "Table G3.1 (6)(e)",
-            "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2",
+            "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2.",
             "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
             "comparison_value": "User Design",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -68,7 +67,6 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -126,18 +124,17 @@
         "standard": {
             "rule_id": "6-2",
             "ruleset_reference": "Table G3.1 (6)(e)",
-            "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2",
+            "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2.",
             "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
             "comparison_value": "User Design",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -186,7 +183,6 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -244,18 +240,17 @@
         "standard": {
             "rule_id": "6-2",
             "ruleset_reference": "Table G3.1 (6)(e)",
-            "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2",
+            "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2.",
             "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
             "comparison_value": "User Design",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -304,7 +299,6 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -362,18 +356,17 @@
         "standard": {
             "rule_id": "6-2",
             "ruleset_reference": "Table G3.1 (6)(e)",
-            "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2",
+            "rule_description": "Interior lighting power for spaces in proposed building with hardwired lighting, including hotel/motel guest rooms and dormitory living quarters shall be >= the value prescribed by Standard 90.1-2019 in Table 9.6.1.\nInterior lighting power for dwelling units shall be >=0.60 W/ft2.",
             "applicable_rmr": "Proposed Design",
             "rule_assertion": "<=",
             "comparison_value": "User Design",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -422,7 +415,6 @@
             },
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

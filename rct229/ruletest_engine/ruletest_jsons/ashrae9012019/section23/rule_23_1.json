@@ -14,12 +14,11 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.37"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -52,8 +51,8 @@
                                                 "heating_system": {
                                                     "id": "HP Heating Coil 1",
                                                     "type": "HEAT_PUMP",
-                                                    "heatpump_auxilliary_heat_type": "ELECTRIC_RESISTANCE",
-                                                    "heatpump_auxilliary_heat_high_shutoff_temperature": 7.222222222222285
+                                                    "heatpump_auxiliary_heat_type": "ELECTRIC_RESISTANCE",
+                                                    "heatpump_auxiliary_heat_high_shutoff_temperature": 7.222222222222285
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -91,12 +90,11 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.37"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -129,8 +127,8 @@
                                                 "heating_system": {
                                                     "id": "HP Heating Coil 1",
                                                     "type": "HEAT_PUMP",
-                                                    "heatpump_auxilliary_heat_type": "OTHER",
-                                                    "heatpump_auxilliary_heat_high_shutoff_temperature": 4.444444444444457
+                                                    "heatpump_auxiliary_heat_type": "OTHER",
+                                                    "heatpump_auxiliary_heat_high_shutoff_temperature": 4.444444444444457
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",
@@ -168,12 +166,11 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "none",
             "mandatory_rule": "Applicability",
-            "schema_version": "0.0.37"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -206,8 +203,8 @@
                                                 "heating_system": {
                                                     "id": "HP Heating Coil 1",
                                                     "type": "HEAT_PUMP",
-                                                    "heatpump_auxilliary_heat_type": "ELECTRIC_RESISTANCE",
-                                                    "heatpump_auxilliary_heat_high_shutoff_temperature": 4.444444444444457
+                                                    "heatpump_auxiliary_heat_type": "ELECTRIC_RESISTANCE",
+                                                    "heatpump_auxiliary_heat_high_shutoff_temperature": 4.444444444444457
                                                 },
                                                 "fan_system": {
                                                     "id": "CAV Fan System 1",

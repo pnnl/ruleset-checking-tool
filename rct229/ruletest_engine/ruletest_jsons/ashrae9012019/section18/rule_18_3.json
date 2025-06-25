@@ -7,21 +7,16 @@
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "18-3",
-            "ruleset_reference": 0,
             "rule_description": "The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -209,19 +204,15 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ1A"
+                        },
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ1A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -249,10 +240,12 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone Exhaust Fan 1",
-                                                    "design_airflow": 7551.159091199997
-                                                },
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone Exhaust Fan 1",
+                                                        "design_airflow": 7551.159091199997
+                                                    }
+                                                ],
                                                 "floor_name": "flr 1"
                                             },
                                             {
@@ -424,12 +417,12 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ1A"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ1A"
-                }
+                ]
             }
         }
     },
@@ -441,21 +434,16 @@
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "18-3",
-            "ruleset_reference": 0,
             "rule_description": "The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -643,19 +631,15 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ1A"
+                        },
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ1A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -683,10 +667,12 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone Exhaust Fan 1",
-                                                    "design_airflow": 471.94744319999984
-                                                },
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone Exhaust Fan 1",
+                                                        "design_airflow": 471.94744319999984
+                                                    }
+                                                ],
                                                 "floor_name": "flr 1"
                                             },
                                             {
@@ -858,12 +844,12 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ1A"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ1A"
-                }
+                ]
             }
         }
     },
@@ -875,21 +861,16 @@
         "expected_rule_outcome": "not_applicable",
         "standard": {
             "rule_id": "18-3",
-            "ruleset_reference": 0,
             "rule_description": "The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1077,19 +1058,15 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ1A"
+                        },
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ1A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1116,10 +1093,12 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System_1_PTAC"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone Exhaust Fan 1",
-                                                    "design_airflow": 7551.159091199997
-                                                },
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone Exhaust Fan 1",
+                                                        "design_airflow": 7551.159091199997
+                                                    }
+                                                ],
                                                 "floor_name": "flr 1"
                                             },
                                             {
@@ -1290,12 +1269,12 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ1A"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ1A"
-                }
+                ]
             }
         }
     }

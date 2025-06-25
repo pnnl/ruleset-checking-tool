@@ -3,7 +3,7 @@
         "Section": 11,
         "Rule": 7,
         "Test": "a",
-        "test_description": "A one story office, single zone building has no service hot water systems. Returns undetermined.",
+        "test_description": "A one story office, single zone building has a proposed buildign with service hot water system use. The baseline building does have service hot water use. Returns undetermined.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "11-7",
@@ -13,15 +13,11 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -38,14 +34,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 0,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -53,6 +44,14 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 0,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -65,7 +64,6 @@
                                 "id": "SHW Equipment 1",
                                 "distribution_system": "SHW Distribution 1",
                                 "heater_fuel_type": "ELECTRICITY",
-                                "heater_type": "CONVENTIONAL",
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_STORAGE"
@@ -78,10 +76,6 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -98,14 +92,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -113,6 +102,14 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -130,7 +127,6 @@
                                 "id": "SHW Equipment 1",
                                 "distribution_system": "SHW Distribution 1",
                                 "heater_fuel_type": "ELECTRICITY",
-                                "heater_type": "CONVENTIONAL",
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_STORAGE"
@@ -162,15 +158,11 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -187,14 +179,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -202,6 +189,14 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -214,7 +209,6 @@
                                 "id": "SHW Equipment 1",
                                 "distribution_system": "SHW Distribution 1",
                                 "heater_fuel_type": "ELECTRICITY",
-                                "heater_type": "CONVENTIONAL",
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_STORAGE"
@@ -227,10 +221,6 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -247,14 +237,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "OFFICE",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -262,6 +247,14 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -279,7 +272,6 @@
                                 "id": "SHW Equipment 1",
                                 "distribution_system": "SHW Distribution 1",
                                 "heater_fuel_type": "ELECTRICITY",
-                                "heater_type": "CONVENTIONAL",
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_STORAGE"
@@ -301,8 +293,8 @@
         "Section": 11,
         "Rule": 7,
         "Test": "c",
-        "test_description": "A one story office, single zone building has a service hot water system and neither the proposed nor the baseline building service water heating systems align with Table G3.1.1-2.",
-        "expected_rule_outcome": "fail",
+        "test_description": "A one story fire station, single zone building has a natural gas service hot water system and both the proposed and baseline building service water systems match and align with Table G3.1.1-2.",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "11-7",
             "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
@@ -311,15 +303,11 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -336,14 +324,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "FIRE_STATION",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -351,6 +334,14 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -363,7 +354,6 @@
                                 "id": "SHW Equipment 1",
                                 "distribution_system": "SHW Distribution 1",
                                 "heater_fuel_type": "NATURAL_GAS",
-                                "heater_type": "CONVENTIONAL",
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_STORAGE"
@@ -376,10 +366,6 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -396,14 +382,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "service_water_heating_building_area_type": "OFFICE",
+                                                        "service_water_heating_area_type": "FIRE_STATION",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -411,6 +392,14 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -428,7 +417,6 @@
                                 "id": "SHW Equipment 1",
                                 "distribution_system": "SHW Distribution 1",
                                 "heater_fuel_type": "NATURAL_GAS",
-                                "heater_type": "CONVENTIONAL",
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_STORAGE"
@@ -450,8 +438,8 @@
         "Section": 11,
         "Rule": 7,
         "Test": "d",
-        "test_description": "A one story parking garage, single zone building has a service hot water system. Neither the proposed nor the baseline building are applicable to this rule due to being parking garages.",
-        "expected_rule_outcome": "not_applicable",
+        "test_description": "A one story fire station, single zone building has a propane service hot water system and both the proposed and baseline building service water systems match and align with Table G3.1.1-2.",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "11-7",
             "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
@@ -460,15 +448,11 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -485,14 +469,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "service_water_heating_building_area_type": "PARKING_GARAGE",
+                                                        "service_water_heating_area_type": "FIRE_STATION",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 0,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -500,6 +479,14 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -511,8 +498,7 @@
                             {
                                 "id": "SHW Equipment 1",
                                 "distribution_system": "SHW Distribution 1",
-                                "heater_fuel_type": "NATURAL_GAS",
-                                "heater_type": "CONVENTIONAL",
+                                "heater_fuel_type": "PROPANE",
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_STORAGE"
@@ -525,10 +511,6 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -545,14 +527,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "service_water_heating_building_area_type": "PARKING_GARAGE",
+                                                        "service_water_heating_area_type": "FIRE_STATION",
                                                         "service_water_heating_uses": [
-                                                            {
-                                                                "id": "SHW 1",
-                                                                "served_by_distribution_system": "SHW Distribution 1",
-                                                                "use": 10,
-                                                                "use_units": "POWER_PER_AREA"
-                                                            }
+                                                            "SHW 1"
                                                         ]
                                                     }
                                                 ]
@@ -560,6 +537,159 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "PROPANE",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                },
+                                "solar_thermal_systems": [
+                                    {
+                                        "id": "SHW Equipment Solar Thermal Sys 1"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-7-e": {
+        "Section": 11,
+        "Rule": 7,
+        "Test": "e",
+        "test_description": "A one story office, single zone building has a service hot water system and neither the proposed nor the baseline building service water heating systems align with Table G3.1.1-2.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "11-7",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "\u00a0Except in buildings that will have no service water heating loads, the service water heating system type in the baseline building design shall be as specified in Table G3.1.1-2 for each building area type in the proposed design.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "service_water_heating_area_type": "OFFICE",
+                                                        "service_water_heating_uses": [
+                                                            "SHW 1"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                }
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "service_water_heating_area_type": "OFFICE",
+                                                        "service_water_heating_uses": [
+                                                            "SHW 1"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
                             }
                         ],
                         "service_water_heating_distribution_systems": [
@@ -577,7 +707,151 @@
                                 "id": "SHW Equipment 1",
                                 "distribution_system": "SHW Distribution 1",
                                 "heater_fuel_type": "NATURAL_GAS",
-                                "heater_type": "CONVENTIONAL",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                },
+                                "solar_thermal_systems": [
+                                    {
+                                        "id": "SHW Equipment Solar Thermal Sys 1"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-7-f": {
+        "Section": 11,
+        "Rule": 7,
+        "Test": "f",
+        "test_description": "A one story parking garage, single zone building has a service hot water system. Neither the proposed nor the baseline building are applicable to this rule due to being parking garages.",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "11-7",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "\u00a0Except in buildings that will have no service water heating loads, the service water heating system type in the baseline building design shall be as specified in Table G3.1.1-2 for each building area type in the proposed design.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "service_water_heating_area_type": "PARKING_GARAGE",
+                                                        "service_water_heating_uses": [
+                                                            "SHW 1"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 0,
+                                "use_units": "POWER_PER_AREA"
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                }
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "service_water_heating_area_type": "PARKING_GARAGE",
+                                                        "service_water_heating_uses": [
+                                                            "SHW 1"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "use": 10,
+                                "use_units": "POWER_PER_AREA"
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1",
+                                "tanks": [
+                                    {
+                                        "id": "SHW Dist Tank 1"
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
                                 "tank": {
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_STORAGE"

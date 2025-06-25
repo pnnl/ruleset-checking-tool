@@ -18,15 +18,15 @@ TEST_RMD = {
                             "spaces": [
                                 {
                                     "id": "Space 1",
-                                    "service_water_heating_uses": [{"id": "SWH use 1"}],
+                                    "service_water_heating_uses": ["SWH use 1"],
                                 },
                                 {
                                     "id": "Space 2",
-                                    "service_water_heating_uses": [{"id": "SWH use 1"}],
+                                    "service_water_heating_uses": ["SWH use 1"],
                                 },
                                 {
                                     "id": "Space 3",
-                                    "service_water_heating_uses": [{"id": "SWH use 2"}],
+                                    "service_water_heating_uses": ["SWH use 2"],
                                 },
                                 {
                                     "id": "Space 4",
@@ -39,12 +39,34 @@ TEST_RMD = {
         }
     ],
     "type": "BASELINE_0",
+    "service_water_heating_uses": [
+        {
+            "id": "SWH use 2",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
+        {
+            "id": "SWH use 1",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
+    ],
+    "service_water_heating_distribution_systems": [
+        {
+            "id": "SWH Distribution 1",
+        }
+    ],
 }
 
 TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]

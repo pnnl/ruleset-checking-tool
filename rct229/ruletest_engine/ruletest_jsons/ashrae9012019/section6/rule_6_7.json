@@ -9,18 +9,17 @@
         "standard": {
             "rule_id": "6-7",
             "ruleset_reference": "Table G3.1(6) Proposed Building Performance (h)",
-            "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas",
+            "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas.",
             "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -80,18 +79,17 @@
         "standard": {
             "rule_id": "6-7",
             "ruleset_reference": "Table G3.1(6) Proposed Building Performance (h)",
-            "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas",
+            "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas.",
             "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -160,18 +158,17 @@
         "standard": {
             "rule_id": "6-7",
             "ruleset_reference": "Table G3.1(6) Proposed Building Performance (h)",
-            "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas",
+            "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas.",
             "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -239,18 +236,17 @@
         "standard": {
             "rule_id": "6-7",
             "ruleset_reference": "Table G3.1(6) Proposed Building Performance (h)",
-            "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas",
+            "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas.",
             "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -313,18 +309,17 @@
         "standard": {
             "rule_id": "6-7",
             "ruleset_reference": "Table G3.1(6) Proposed Building Performance (h)",
-            "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas",
+            "rule_description": "Automatic daylighting responsive controls shall be modeled directly in the proposed design or through schedule adjustments determined by a separate daylighting analysis. Modeling and schedule  adjustments shall separately account for primary sidelighted areas, secondary sidelighted areas, and toplighted areas.",
             "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

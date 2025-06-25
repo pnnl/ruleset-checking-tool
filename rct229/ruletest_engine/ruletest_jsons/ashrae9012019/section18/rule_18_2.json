@@ -7,21 +7,16 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-2",
-            "ruleset_reference": 0,
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -209,19 +204,15 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -418,12 +409,12 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                }
+                ]
             }
         }
     },
@@ -435,21 +426,16 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-2",
-            "ruleset_reference": 0,
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -640,19 +626,15 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ1A"
+                        },
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ1A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -852,12 +834,12 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ1A"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ1A"
-                }
+                ]
             }
         }
     },
@@ -869,21 +851,16 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-2",
-            "ruleset_reference": 0,
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1058,19 +1035,15 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ1A"
+                        },
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ1A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1254,12 +1227,12 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ1A"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ1A"
-                }
+                ]
             }
         }
     },
@@ -1271,21 +1244,16 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-2",
-            "ruleset_reference": 0,
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1460,19 +1428,15 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1656,12 +1620,12 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                }
+                ]
             }
         }
     },
@@ -1673,21 +1637,16 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-2",
-            "ruleset_reference": 0,
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1830,19 +1789,15 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1994,12 +1949,12 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                }
+                ]
             }
         }
     },
@@ -2011,21 +1966,16 @@
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-2",
-            "ruleset_reference": 0,
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2232,19 +2182,15 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2274,10 +2220,12 @@
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone Exhaust Fan 1",
-                                                    "design_airflow": 7551.159091199997
-                                                },
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone Exhaust Fan 1",
+                                                        "design_airflow": 7551.159091199997
+                                                    }
+                                                ],
                                                 "floor_name": "flr 1"
                                             },
                                             {
@@ -2466,12 +2414,12 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                }
+                ]
             }
         }
     },
@@ -2483,21 +2431,16 @@
         "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "18-2",
-            "ruleset_reference": 0,
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2766,19 +2709,15 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ1A"
+                        },
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ1A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -2808,10 +2747,12 @@
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone Exhaust Fan 1",
-                                                    "design_airflow": 7551.159091199997
-                                                },
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone Exhaust Fan 1",
+                                                        "design_airflow": 7551.159091199997
+                                                    }
+                                                ],
                                                 "floor_name": "flr 1"
                                             },
                                             {
@@ -3062,38 +3003,33 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ1A"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ1A"
-                }
+                ]
             }
         }
     },
-    "rule-18-2-i": {
+    "rule-18-2-h": {
         "Section": 18,
         "Rule": 2,
-        "Test": "i",
+        "Test": "h",
         "test_description": "The project located in climate zone 4A has one 50,000 ft2 building segment with two zones on each of two floors. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate less than 15,000 cfm but 4,000 cfm of central system exhaust. It cannot be determined if the building has a total laboratory exhaust rate greater than 15,000 cfm.",
         "expected_rule_outcome": "undetermined",
         "standard": {
             "rule_id": "18-2",
-            "ruleset_reference": 0,
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3300,19 +3236,15 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3342,10 +3274,12 @@
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone Exhaust Fan 1",
-                                                    "design_airflow": 4719.474431999998
-                                                },
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone Exhaust Fan 1",
+                                                        "design_airflow": 4719.474431999998
+                                                    }
+                                                ],
                                                 "floor_name": "flr 1"
                                             },
                                             {
@@ -3540,38 +3474,33 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                }
+                ]
             }
         }
     },
-    "rule-18-2-j": {
+    "rule-18-2-i": {
         "Section": 18,
         "Rule": 2,
-        "Test": "j",
+        "Test": "i",
         "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with two zones on each of two floors. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate less than 15,000 cfm. The two laboratory zones are served by a single baseline system type 7 and the other zones are each served by a baseline system type 7 (one per floor).",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "18-2",
-            "ruleset_reference": 0,
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3807,19 +3736,15 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ1A"
+                        },
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ1A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
-                "calendar": {
-                    "is_leap_year": false
-                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -3849,10 +3774,12 @@
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone Exhaust Fan 1",
-                                                    "design_airflow": 7551.159091199997
-                                                },
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone Exhaust Fan 1",
+                                                        "design_airflow": 7551.159091199997
+                                                    }
+                                                ],
                                                 "floor_name": "flr 1"
                                             },
                                             {
@@ -4070,12 +3997,12 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ1A"
+                        },
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ1A"
-                }
+                ]
             }
         }
     }

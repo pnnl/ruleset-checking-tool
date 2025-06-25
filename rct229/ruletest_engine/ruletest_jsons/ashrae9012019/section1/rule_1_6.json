@@ -14,20 +14,16 @@
             "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.37"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -52,31 +48,31 @@
                                 ]
                             }
                         ],
-                        "output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 105510.0,
-                                "annual_end_use_results": [
-                                    {
-                                        "id": "End Result 1",
-                                        "type": "MISC_EQUIPMENT",
-                                        "energy_source": "ON_SITE_RENEWABLE",
-                                        "annual_site_energy_use": 100000,
-                                        "annual_site_coincident_demand": 0,
-                                        "annual_site_non_coincident_demand": 0
-                                    }
-                                ]
-                            }
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 105510.0,
+                            "annual_end_use_results": [
+                                {
+                                    "id": "End Result 1",
+                                    "type": "MISC_EQUIPMENT",
+                                    "energy_source": "ON_SITE_RENEWABLES",
+                                    "annual_site_energy_use": 100000,
+                                    "annual_site_coincident_demand": 0,
+                                    "annual_site_non_coincident_demand": 0
+                                }
+                            ]
                         },
                         "type": "BASELINE_0"
                     }
-                ]
+                ],
+                "output": {
+                    "id": "Output 1"
+                }
             }
         }
     },
@@ -95,20 +91,16 @@
             "comparison_value": "Expected Value",
             "rule_dependency": 0,
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.37"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -133,31 +125,31 @@
                                 ]
                             }
                         ],
-                        "output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 105510.0,
-                                "annual_end_use_results": [
-                                    {
-                                        "id": "End Result 1",
-                                        "type": "MISC_EQUIPMENT",
-                                        "energy_source": "ON_SITE_RENEWABLE",
-                                        "annual_site_energy_use": 0,
-                                        "annual_site_coincident_demand": 0,
-                                        "annual_site_non_coincident_demand": 0
-                                    }
-                                ]
-                            }
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 105510.0,
+                            "annual_end_use_results": [
+                                {
+                                    "id": "End Result 1",
+                                    "type": "MISC_EQUIPMENT",
+                                    "energy_source": "ON_SITE_RENEWABLES",
+                                    "annual_site_energy_use": 0,
+                                    "annual_site_coincident_demand": 0,
+                                    "annual_site_non_coincident_demand": 0
+                                }
+                            ]
                         },
                         "type": "BASELINE_0"
                     }
-                ]
+                ],
+                "output": {
+                    "id": "Output 1"
+                }
             }
         }
     }

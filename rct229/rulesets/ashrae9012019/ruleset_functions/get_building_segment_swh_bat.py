@@ -7,6 +7,7 @@ from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
     find_exactly_one_building_segment,
     find_exactly_one_space,
+    find_exactly_one_service_water_heating_use,
 )
 
 SERVICE_WATER_HEATING_USE_UNIT = SchemaEnums.schema_enums[
@@ -19,9 +20,9 @@ def get_building_segment_swh_bat(
 ) -> str:
     """
     This function determines the SWH BAT for the given building segment.
-    Returns None if there is no service water heating uses and no service_water_heating_building_area_type under building segment,
-    UNDETERMINED if there are service water heating uses but no service_water_heating_building_area_type under building segment,
-    A bat type if there is service_water_heating_building_area_type under building segment
+    Returns None if there is no service water heating uses and no service_water_heating_area_type under building segment,
+    UNDETERMINED if there are service water heating uses but no service_water_heating_area_type under building segment,
+    A bat type if there is service_water_heating_area_type under building segment
 
     Parameters
     ----------
@@ -41,17 +42,16 @@ def get_building_segment_swh_bat(
 
     building_segment = find_exactly_one_building_segment(rmd, building_segment_id)
 
-    building_segment_swh_bat = building_segment.get(
-        "service_water_heating_building_area_type"
-    )
+    building_segment_swh_bat = building_segment.get("service_water_heating_area_type")
 
     if building_segment_swh_bat is None:
         swh_use_dict = {}
         # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
-        for swh_use in find_all(
+        for swh_use_id in find_all(
             f'$.buildings[*].building_segments[*][?(@.id="{building_segment["id"]}")].zones[*].spaces[*].service_water_heating_uses[*]',
             rmd,
         ):
+            swh_use = find_exactly_one_service_water_heating_use(rmd, swh_use_id)
             if (
                 swh_use.get("use_units", SERVICE_WATER_HEATING_USE_UNIT.OTHER)
                 == SERVICE_WATER_HEATING_USE_UNIT.OTHER
@@ -59,7 +59,7 @@ def get_building_segment_swh_bat(
                 building_segment_swh_bat = "UNDETERMINED"
             else:
                 swh_use_energy_by_space = get_energy_required_to_heat_swh_use(
-                    swh_use["id"], rmd, building_segment["id"], is_leap_year
+                    swh_use["id"], rmd, building_segment["id"]
                 )
 
                 if swh_use.get("area_type"):
@@ -72,9 +72,9 @@ def get_building_segment_swh_bat(
                     for space_id in swh_use_energy_by_space:
                         if space_id != "no_spaces_assigned":
                             space = find_exactly_one_space(rmd, space_id)
-                            if space.get("service_water_heating_building_area_type"):
+                            if space.get("service_water_heating_area_type"):
                                 service_water_heating_bat = space[
-                                    "service_water_heating_building_area_type"
+                                    "service_water_heating_area_type"
                                 ]
                                 swh_use_dict.setdefault(
                                     service_water_heating_bat, ZERO.ENERGY
@@ -96,8 +96,6 @@ def get_building_segment_swh_bat(
                 )
 
     else:
-        building_segment_swh_bat = building_segment[
-            "service_water_heating_building_area_type"
-        ]
+        building_segment_swh_bat = building_segment["service_water_heating_area_type"]
 
     return building_segment_swh_bat

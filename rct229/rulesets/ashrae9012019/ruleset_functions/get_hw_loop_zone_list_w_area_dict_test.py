@@ -177,7 +177,14 @@ GET_HW_LOOP_ZONE_LIST_W_AREA_RMD = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RMD = quantify_rmd(GET_HW_LOOP_ZONE_LIST_W_AREA_RMD)["ruleset_model_descriptions"][

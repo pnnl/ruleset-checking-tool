@@ -27,15 +27,15 @@ from rct229.utils.jsonpath_utils import find_all
 EXHAUST_AIRFLOW_15000 = 15000 * ureg("cfm")
 
 
-class Section18Rule1(RuleDefinitionListIndexedBase):
+class PRM9012019Rule77j55(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 18 (HVAC - System Zone Assignment)"""
 
     def __init__(self):
-        super(Section18Rule1, self).__init__(
+        super(PRM9012019Rule77j55, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section18Rule1.RMDRule(),
+            each_rule=PRM9012019Rule77j55.RMDRule(),
             index_rmd=BASELINE_0,
             id="18-1",
             description="HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h).",
@@ -43,36 +43,30 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1.1",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={
-                "$": ["weather", "calendar", "ruleset_model_descriptions"],
-                "weather": ["climate_zone"],
-                "calendar": ["is_leap_year"],
-            },
-            data_items={
-                "climate_zone": (BASELINE_0, "weather/climate_zone"),
-                "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
-            },
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section18Rule1.RMDRule, self).__init__(
+            super(PRM9012019Rule77j55.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section18Rule1.RMDRule.ZoneRule(),
+                each_rule=PRM9012019Rule77j55.RMDRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
+                required_fields={
+                    "$": ["weather"],
+                    "weather": ["climate_zone"],
+                },
             )
 
         def is_applicable(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            climate_zone_b = data["climate_zone"]
-            is_leap_year_b = data["is_leap_year"]
+            climate_zone_b = rmd_b["weather"]["climate_zone"]
 
             zone_target_baseline_system_dict_b = get_zone_target_baseline_system(
-                rmd_b, rmd_p, climate_zone_b, is_leap_year_b
+                rmd_b, rmd_p, climate_zone_b
             )
 
             return bool(zone_target_baseline_system_dict_b)
@@ -80,11 +74,10 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            climate_zone_b = data["climate_zone"]
-            is_leap_year_b = data["is_leap_year"]
+            climate_zone_b = rmd_b["weather"]["climate_zone"]
 
             zone_target_baseline_system_dict_b = get_zone_target_baseline_system(
-                rmd_b, rmd_p, climate_zone_b, is_leap_year_b
+                rmd_b, rmd_p, climate_zone_b
             )
             baseline_hvac_system_dict_b = get_baseline_system_types(rmd_b)
             get_building_lab_zones_list_b = get_building_lab_zones_list(rmd_p)
@@ -124,7 +117,7 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section18Rule1.RMDRule.ZoneRule, self).__init__(
+                super(PRM9012019Rule77j55.RMDRule.ZoneRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -146,20 +139,27 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                 hvac_systems_serving_zone_b = data["hvac_systems_serving_zone_b"][
                     zone_id_b
                 ]
-                systems_of_expected_type_list_b = data["baseline_hvac_system_dict_b"][
-                    expected_system_type_b
+                hvac_system_types_b = {
+                    system_type: system_list
+                    for system_type, system_list in data[
+                        "baseline_hvac_system_dict_b"
+                    ].items()
+                    if system_list
+                }
+                hvac_system_types_serving_zone_b = [
+                    system_type_str
+                    for system_type_str, system_list in data[
+                        "baseline_hvac_system_dict_b"
+                    ].items()
+                    if any(
+                        sys_b in system_list for sys_b in hvac_systems_serving_zone_b
+                    )
                 ]
 
-                # any HVAC system serving this zone is in the `systems_of_expected_type_list_b`
-                is_system_part_of_expected_sys_type_b = any(
-                    [
-                        sys_b in systems_of_expected_type_list_b
-                        for sys_b in hvac_systems_serving_zone_b
-                    ]
-                )
-
                 return {
-                    "is_system_part_of_expected_sys_type_b": is_system_part_of_expected_sys_type_b
+                    "hvac_system_types_b": hvac_system_types_b,
+                    "hvac_system_types_serving_zone_b": hvac_system_types_serving_zone_b,
+                    "expected_system_type_b": expected_system_type_b,
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
@@ -217,11 +217,12 @@ class Section18Rule1(RuleDefinitionListIndexedBase):
                 return advisory_note
 
             def rule_check(self, context, calc_vals=None, data=None):
-                is_system_part_of_expected_sys_type_b = calc_vals[
-                    "is_system_part_of_expected_sys_type_b"
+                hvac_system_types_serving_zone_b = calc_vals[
+                    "hvac_system_types_serving_zone_b"
                 ]
+                expected_system_type_b = calc_vals["expected_system_type_b"]
 
-                return is_system_part_of_expected_sys_type_b
+                return expected_system_type_b in hvac_system_types_serving_zone_b
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
                 zone_b = context.BASELINE_0

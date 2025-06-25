@@ -13,15 +13,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -56,7 +52,7 @@
         "Section": 11,
         "Rule": 10,
         "Test": "b",
-        "test_description": "A one story, one zone building has one gas storage water heater with input rating between 75k-105kBtu/h, 100 gallons storage capacity, and low draw pattern. The water heater efficiency is correctly modeled as 0.4162 UEF.",
+        "test_description": "A one story, one zone building has one gas storage water heater with input rating between 75k-105kBtu/h, 100 gallons storage capacity, 120 F setpoint temperature, and low draw pattern. The water heater efficiency is correctly modeled as 0.4162 UEF.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "11-10",
@@ -66,15 +62,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "mandatory_rule": "Yes",
-            "schema_version": "0.0.34"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -99,12 +91,18 @@
                                 ]
                             }
                         ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
                         "service_water_heating_equipment": [
                             {
                                 "id": "SHW Equipment 1",
                                 "distribution_system": "SHW Distribution 1",
                                 "heater_fuel_type": "NATURAL_GAS",
                                 "input_power": 29307.111111111113,
+                                "setpoint_temperature": 48.888888888888914,
                                 "first_hour_rating": 189.25000000000003,
                                 "efficiency_metric_types": [
                                     "UNIFORM_ENERGY_FACTOR"
@@ -138,15 +136,12 @@
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "mandatory_rule": "Yes"
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -171,6 +166,11 @@
                                 ]
                             }
                         ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
                         "service_water_heating_equipment": [
                             {
                                 "id": "SHW Equipment 1",
@@ -183,7 +183,7 @@
                                 ],
                                 "efficiency_metric_values": [
                                     0.8,
-                                    272
+                                    271.9432973223548
                                 ],
                                 "tank": {
                                     "id": "SHW Tank",
@@ -211,15 +211,12 @@
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "mandatory_rule": "Yes"
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -242,6 +239,11 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
                             }
                         ],
                         "service_water_heating_equipment": [
@@ -282,15 +284,12 @@
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "mandatory_rule": "Yes"
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -313,6 +312,11 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
                             }
                         ],
                         "service_water_heating_equipment": [
@@ -354,15 +358,12 @@
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "mandatory_rule": "Yes"
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -385,6 +386,11 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
                             }
                         ],
                         "service_water_heating_equipment": [
@@ -427,15 +433,12 @@
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "mandatory_rule": "Yes"
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -458,6 +461,11 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
                             }
                         ],
                         "service_water_heating_equipment": [
@@ -500,15 +508,12 @@
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "mandatory_rule": "Yes"
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -531,6 +536,11 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
                             }
                         ],
                         "service_water_heating_equipment": [
@@ -573,15 +583,12 @@
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "mandatory_rule": "Yes"
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -604,6 +611,11 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
                             }
                         ],
                         "service_water_heating_equipment": [
@@ -647,15 +659,12 @@
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "mandatory_rule": "Yes"
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -678,6 +687,11 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
                             }
                         ],
                         "service_water_heating_equipment": [
@@ -719,15 +733,12 @@
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "mandatory_rule": "Yes"
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -750,6 +761,11 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
                             }
                         ],
                         "service_water_heating_equipment": [
@@ -791,15 +807,12 @@
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "mandatory_rule": "Yes"
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -822,6 +835,11 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
                             }
                         ],
                         "service_water_heating_equipment": [
@@ -864,15 +882,12 @@
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "mandatory_rule": "Yes"
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -895,6 +910,11 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
                             }
                         ],
                         "service_water_heating_equipment": [
@@ -937,15 +957,12 @@
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "mandatory_rule": "Yes"
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -968,6 +985,11 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
                             }
                         ],
                         "service_water_heating_equipment": [
@@ -1010,15 +1032,12 @@
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "mandatory_rule": "Yes"
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "calendar": {
-                    "is_leap_year": false
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1043,6 +1062,11 @@
                                 ]
                             }
                         ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
                         "service_water_heating_equipment": [
                             {
                                 "id": "SHW Equipment 1",
@@ -1059,6 +1083,238 @@
                                     "id": "SHW Tank",
                                     "type": "COMMERCIAL_INSTANTANEOUS",
                                     "storage_capacity": 189.25000000000003
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-p": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "p",
+        "test_description": "A one story, one zone building has one gas storage water heater with input rating between 75k-105kBtu/h, 100 gallons storage capacity, setpoint temperature greater than 180F, thermal efficiency of 0.8, and low draw pattern. The water heater efficiency is correctly modeled as 0.8 thermal efficiency. The estimated stand by loss of 577.5 Btu/hr is less than the max standby loss of 1225 Btu/hr.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "This calculated loss is less than or equal to the expected loss. Rule passes if assessor determines that this equation is appropriate for this project.",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
+                                "input_power": 29307.111111111113,
+                                "setpoint_temperature": 87.77777777777783,
+                                "first_hour_rating": 189.25000000000003,
+                                "efficiency_metric_types": [
+                                    "THERMAL_EFFICIENCY",
+                                    "STANDBY_LOSS_FRACTION"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.8,
+                                    0.01
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 378.50000000000006
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-q": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "q",
+        "test_description": "A one story, one zone building has one gas storage water heater with input rating between 75k-105kBtu/h, 100 gallons storage capacity, setpoint temperature greater than 180F, thermal efficiency of 0.8, and low draw pattern. The water heater efficiency is correctly modeled as 0.8 thermal efficiency. The estimated stand by loss of 1733 Btu/hr is more than the max standby loss of 1225 Btu/hr.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "This calculated loss is greater than the expected loss. Rule fails unless the assessor determines that the standby loss is appropriate for this project.",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
+                                "input_power": 29307.111111111113,
+                                "setpoint_temperature": 87.77777777777783,
+                                "first_hour_rating": 189.25000000000003,
+                                "efficiency_metric_types": [
+                                    "THERMAL_EFFICIENCY",
+                                    "STANDBY_LOSS_FRACTION"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.8,
+                                    0.03
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 378.50000000000006
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-10-r": {
+        "Section": 11,
+        "Rule": 10,
+        "Test": "r",
+        "test_description": "A one story, one zone building has one gas storage water heater with input rating between 75k-105kBtu/h, 100 gallons storage capacity, setpoint temperature greater than 180F, thermal efficiency of 0.8, and low draw pattern. The water heater efficiency is correctly modeled as 0.8 thermal efficiency. No estimated stand by loss was given.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Based on the provided details, STANDBY_LOSS_ENERGY is an expected efficiency metric for this water heater, however it was not provided. Note that the specific requirements of 10 CFR 430 can be found in ASHRAE 90.1 Appendix F Table F-2.",
+        "standard": {
+            "rule_id": "11-10",
+            "ruleset_reference": "Table G3.1 #11, baseline column, a & b",
+            "rule_description": "The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
+                                "input_power": 29307.111111111113,
+                                "setpoint_temperature": 87.77777777777783,
+                                "first_hour_rating": 189.25000000000003,
+                                "efficiency_metric_types": [
+                                    "THERMAL_EFFICIENCY"
+                                ],
+                                "efficiency_metric_values": [
+                                    0.8
+                                ],
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE",
+                                    "storage_capacity": 378.50000000000006
                                 }
                             }
                         ],

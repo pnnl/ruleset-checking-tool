@@ -16,15 +16,15 @@ LIGHTING_BUILDING_AREA = SchemaEnums.schema_enums[
 ]
 
 
-class Section19Rule4(RuleDefinitionListIndexedBase):
+class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
     """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule4, self).__init__(
+        super(PRM9012019Rule74p61, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule4.RuleSetModelInstanceRule(),
+            each_rule=PRM9012019Rule74p61.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="19-4",
             description="For baseline cooling sizing runs in residential dwelling units, the infiltration, occupants, lighting, gas and electricity using equipment hourly schedule shall be the same as the most used hourly weekday schedule from the annual simulation.",
@@ -32,43 +32,48 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.2.2.1 Exception",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={
-                "$": ["calendar"],
-                "calendar": ["day_of_week_for_january_1"],
-            },
-            data_items={
-                "day_of_week_for_january_1": (
-                    BASELINE_0,
-                    "calendar/day_of_week_for_january_1",
-                ),
-            },
         )
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section19Rule4.RuleSetModelInstanceRule, self).__init__(
+            super(PRM9012019Rule74p61.RuleSetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule(),
+                each_rule=PRM9012019Rule74p61.RuleSetModelInstanceRule.BuildingSegmentRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*]",
+                required_fields={
+                    "$": ["calendar"],
+                    "calendar": ["day_of_week_for_january_1"],
+                },
+                data_items={
+                    "day_of_week_for_january_1": (
+                        BASELINE_0,
+                        "calendar/day_of_week_for_january_1",
+                    ),
+                },
             )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
+            day_of_week_for_january_1 = rmd_b["calendar"]["day_of_week_for_january_1"]
 
-            return {"schedule_b": getattr_(rmd_b, "RMI", "schedules")}
+            return {
+                "schedule_b": getattr_(rmd_b, "RMI", "schedules"),
+                "day_of_week_for_january_1": day_of_week_for_january_1,
+            }
 
         class BuildingSegmentRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(
-                    Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule, self
+                    PRM9012019Rule74p61.RuleSetModelInstanceRule.BuildingSegmentRule,
+                    self,
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
-                    each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule(),
+                    each_rule=PRM9012019Rule74p61.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule(),
                     index_rmd=BASELINE_0,
                     list_path="$.zones[*]",
                 )
@@ -98,13 +103,13 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
             class ZoneRule(RuleDefinitionListIndexedBase):
                 def __init__(self):
                     super(
-                        Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule,
+                        PRM9012019Rule74p61.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule,
                         self,
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
-                        each_rule=Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule.SpaceRule(),
+                        each_rule=PRM9012019Rule74p61.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule.SpaceRule(),
                         index_rmd=BASELINE_0,
                         list_path="$.spaces[*]",
                     )
@@ -158,7 +163,7 @@ class Section19Rule4(RuleDefinitionListIndexedBase):
                 class SpaceRule(RuleDefinitionBase):
                     def __init__(self):
                         super(
-                            Section19Rule4.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule.SpaceRule,
+                            PRM9012019Rule74p61.RuleSetModelInstanceRule.BuildingSegmentRule.ZoneRule.SpaceRule,
                             self,
                         ).__init__(
                             rmds_used=produce_ruleset_model_description(

@@ -13,12 +13,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -42,6 +41,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -113,16 +115,46 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -146,6 +178,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
@@ -218,12 +253,43 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             }
         }
     },
@@ -241,12 +307,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -272,6 +337,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -352,16 +420,46 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -387,6 +485,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
@@ -407,6 +508,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
+                                                        "number_of_occupants": 5,
+                                                        "occupant_sensible_heat_gain": 500,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 500
                                                     }
                                                 ]
@@ -464,12 +568,43 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             }
         }
     },
@@ -477,7 +612,7 @@
         "Section": 19,
         "Rule": 10,
         "Test": "c",
-        "test_description": "The project located in climate zone 5A has one building segment with one zone which is served by a baseline system type 3. The system is primarily serving computer room(s) and does not include an air economizer in the baseline nor the proposed.",
+        "test_description": "The project located in climate zone 5A has one building segment with one zone which is served by a baseline system type 3. The system is primarily serving computer room(s). The proposed HVAC system has an economizer but the baseline HVAC system does not.",
         "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "19-10",
@@ -487,12 +622,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -516,6 +650,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -544,7 +681,11 @@
                                                         {
                                                             "id": "Return Fan 1"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "air_economizer": {
+                                                        "id": "Air Economizer 1",
+                                                        "type": "ENTHALPY"
+                                                    }
                                                 }
                                             }
                                         ]
@@ -552,16 +693,46 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -585,6 +756,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "COMPUTER_ROOM"
                                                     }
@@ -622,12 +796,43 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             }
         }
     },
@@ -646,12 +851,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -675,6 +879,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -711,16 +918,46 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -744,6 +981,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "COMPUTER_ROOM"
                                                     }
@@ -785,12 +1025,43 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             }
         }
     },
@@ -799,7 +1070,7 @@
         "Rule": 10,
         "Test": "e",
         "test_description": "The project located in climate zone 5A has one building segment with one zone served by a baseline system type 3. The system does not include an air economizer in the baseline nor the proposed.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "are served in the proposed design by systems with a gas-phase air cleaning where such air cleaning is requirements of Standard 62.1, Section 6.1.2 (G3.1.2.6 exception #1) or where the use of outdoor air for cooling will affect supermarket open refrigerated case-work systems (G3.1.2.6 exception #2).",
         "standard": {
             "rule_id": "19-10",
@@ -809,12 +1080,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -838,6 +1108,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -874,16 +1147,46 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -907,6 +1210,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
@@ -944,12 +1250,43 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             }
         }
     },
@@ -967,12 +1304,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -998,6 +1334,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -1017,6 +1356,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 500
                                                     }
                                                 ]
@@ -1074,16 +1414,46 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ3A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ3A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1109,6 +1479,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
@@ -1180,12 +1553,43 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ3A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ3A"
-                }
+                ]
             }
         }
     },
@@ -1203,12 +1607,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1232,6 +1635,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -1265,16 +1671,46 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1298,6 +1734,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999,
                                                         "lighting_space_type": "OFFICE_ENCLOSED"
                                                     }
@@ -1332,12 +1771,43 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             }
         }
     },
@@ -1356,12 +1826,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1387,6 +1856,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -1406,6 +1878,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 500
                                                     }
                                                 ]
@@ -1463,16 +1936,46 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1498,6 +2001,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 46.451519999999995
                                                     }
                                                 ]
@@ -1517,6 +2023,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
+                                                        "number_of_occupants": 5,
+                                                        "occupant_sensible_heat_gain": 500,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 1000
                                                     }
                                                 ]
@@ -1581,12 +2090,43 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             }
         }
     },
@@ -1605,12 +2145,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1636,6 +2175,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 293.0711111111111,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 92.90303999999999
                                                     }
                                                 ]
@@ -1655,6 +2197,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 500
                                                     }
                                                 ]
@@ -1712,16 +2255,46 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1747,6 +2320,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 29.307111111111112,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 46.451519999999995
                                                     }
                                                 ]
@@ -1766,6 +2342,9 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
+                                                        "number_of_occupants": 5,
+                                                        "occupant_sensible_heat_gain": 500,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
                                                         "floor_area": 1000
                                                     }
                                                 ]
@@ -1834,12 +2413,43 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                }
+                ]
             }
         }
     }

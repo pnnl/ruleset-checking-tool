@@ -24,35 +24,10 @@ TEST_RMD = {
                                 {
                                     "id": "Space 1",
                                     "service_water_heating_uses": [
-                                        {
-                                            "id": "SWH Use 1",
-                                            "use": 100,
-                                            "use_units": "POWER_PER_PERSON",
-                                            "is_heat_recovered_by_drain": True,
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
-                                        {
-                                            "id": "SWH Use 2",
-                                            "use": 10,
-                                            "use_units": "POWER_PER_AREA",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
-                                        {
-                                            "id": "SWH Use 3",
-                                            "use": 1000,
-                                            "use_units": "POWER",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
-                                        {
-                                            "id": "SWH Use 4",
-                                            "use": 100,
-                                            "use_units": "VOLUME_PER_PERSON",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
+                                        "SWH Use 1",
+                                        "SWH Use 2",
+                                        "SWH Use 3",
+                                        "SWH Use 4",
                                     ],
                                     "number_of_occupants": 5,
                                     "floor_area": 100,
@@ -60,27 +35,9 @@ TEST_RMD = {
                                 {
                                     "id": "Space 2",
                                     "service_water_heating_uses": [
-                                        {
-                                            "id": "SWH Use 5",
-                                            "use": 10,
-                                            "use_units": "VOLUME_PER_AREA",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
-                                        {
-                                            "id": "SWH Use 6",
-                                            "use": 1000,
-                                            "use_units": "VOLUME",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
-                                        {
-                                            "id": "SWH Use 7",
-                                            "use": 10,
-                                            "use_units": "OTHER",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
+                                        "SWH Use 5",
+                                        "SWH Use 6",
+                                        "SWH Use 7",
                                     ],
                                     "number_of_occupants": 5,
                                     "floor_area": 100,
@@ -113,6 +70,58 @@ TEST_RMD = {
             "hourly_values": [50] * 8760,
         },
     ],
+    "service_water_heating_uses": [
+        {
+            "id": "SWH Use 1",
+            "use": 100,
+            "use_units": "POWER_PER_PERSON",
+            "is_heat_recovered_by_drain": True,
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "SWH Use 2",
+            "use": 10,
+            "use_units": "POWER_PER_AREA",
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "SWH Use 3",
+            "use": 1000,
+            "use_units": "POWER",
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "SWH Use 4",
+            "use": 100,
+            "use_units": "VOLUME_PER_PERSON",
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "SWH Use 5",
+            "use": 10,
+            "use_units": "VOLUME_PER_AREA",
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "SWH Use 6",
+            "use": 1000,
+            "use_units": "VOLUME",
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "SWH Use 7",
+            "use": 10,
+            "use_units": "OTHER",
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+    ],
     "service_water_heating_distribution_systems": [
         {
             "id": "SWH Distribution 1",
@@ -127,27 +136,22 @@ TEST_RMD = {
                     "id": "Tank 2",
                 },
             ],
-            "service_water_piping": [
-                {
-                    "id": "SWH Piping 1",
-                    "child": [
-                        {
-                            "id": "SWH Piping Child 1",
-                            "child": [
-                                {
-                                    "id": "SWH Piping 1-a",
-                                },
-                                {
-                                    "id": "SWH Piping 1-b",
-                                },
-                            ],
-                        }
-                    ],
-                },
-                {
-                    "id": "SWH Piping 2",
-                },
-            ],
+            "service_water_piping": {
+                "id": "SWH Piping 1",
+                "child": [
+                    {
+                        "id": "SWH Piping Child 1",
+                        "child": [
+                            {
+                                "id": "SWH Piping 1-a",
+                            },
+                            {
+                                "id": "SWH Piping 1-b",
+                            },
+                        ],
+                    }
+                ],
+            },
         }
     ],
     "type": "BASELINE_0",
@@ -156,8 +160,6 @@ TEST_RMD = {
 TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
-    "calendar": {"is_leap_year": False},
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
@@ -186,7 +188,7 @@ def test__TEST_RPD__is_valid():
 
 def test__get_energy_required_to_heat_swh_use_power_per_person():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        "SWH Use 1", TEST_RMD, "Building Segment 1", False
+        "SWH Use 1", TEST_RMD, "Building Segment 1"
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 1"], 8362628.17 * ureg("Btu")
@@ -195,7 +197,7 @@ def test__get_energy_required_to_heat_swh_use_power_per_person():
 
 def test__get_energy_required_to_heat_swh_use_power_per_area():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        "SWH Use 2", TEST_RMD, "Building Segment 1", False
+        "SWH Use 2", TEST_RMD, "Building Segment 1"
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 1"], 23912285.2 * ureg("Btu")
@@ -204,7 +206,7 @@ def test__get_energy_required_to_heat_swh_use_power_per_area():
 
 def test__get_energy_required_to_heat_swh_use_power():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        "SWH Use 3", TEST_RMD, "Building Segment 1", False
+        "SWH Use 3", TEST_RMD, "Building Segment 1"
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 1"], 23912285.2 * ureg("Btu")
@@ -213,7 +215,7 @@ def test__get_energy_required_to_heat_swh_use_power():
 
 def test__get_energy_required_to_heat_swh_use_volume_per_person():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        "SWH Use 4", TEST_RMD, "Building Segment 1", False
+        "SWH Use 4", TEST_RMD, "Building Segment 1"
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 1"], 139200741 * ureg("Btu")
@@ -222,7 +224,7 @@ def test__get_energy_required_to_heat_swh_use_volume_per_person():
 
 def test__get_energy_required_to_heat_swh_use_volume_per_area():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        "SWH Use 5", TEST_RMD, "Building Segment 1", False
+        "SWH Use 5", TEST_RMD, "Building Segment 1"
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 2"], 278401481.1 * ureg("Btu")
@@ -231,7 +233,7 @@ def test__get_energy_required_to_heat_swh_use_volume_per_area():
 
 def test__get_energy_required_to_heat_swh_use_volume():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        "SWH Use 6", TEST_RMD, "Building Segment 1", False
+        "SWH Use 6", TEST_RMD, "Building Segment 1"
     )
     assert len(energy_required_by_space) == 1 and std_equal(
         energy_required_by_space["Space 2"], 278401481 * ureg("Btu")
@@ -240,7 +242,7 @@ def test__get_energy_required_to_heat_swh_use_volume():
 
 def test__get_energy_required_to_heat_swh_use_other():
     energy_required_by_space = get_energy_required_to_heat_swh_use(
-        "SWH Use 7", TEST_RMD, "Building Segment 1", False
+        "SWH Use 7", TEST_RMD, "Building Segment 1"
     )
     assert (
         len(energy_required_by_space) == 1

@@ -16,15 +16,15 @@ APPLICABILITY_MSG = (
 )
 
 
-class Section11Rule12(RuleDefinitionListIndexedBase):
+class PRM9012019Rule52y79(RuleDefinitionListIndexedBase):
     """Rule 12 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule12, self).__init__(
+        super(PRM9012019Rule52y79, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section11Rule12.RMDRule(),
+            each_rule=PRM9012019Rule52y79.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-12",
             description="For large, 24-hour-per-day facilities that meet the prescriptive criteria for use of condenser heat recovery systems described in Section 6.5.6.2, a system meeting the requirements of that section shall be included in the baseline building design regardless of the exceptions to Section 6.5.6.2.",
@@ -32,16 +32,15 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1 #11, baseline column, d + exception",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
-            data_items={"is_leap_year_b": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule12.RMDRule, self).__init__(
+            super(PRM9012019Rule52y79.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section11Rule12.RMDRule.BuildingRule(),
+                each_rule=PRM9012019Rule52y79.RMDRule.BuildingRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*]",
             )
@@ -49,21 +48,28 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-
             swh_uses_associated_with_each_building_segment_p = (
                 get_swh_uses_associated_with_each_building_segment(rmd_p)
             )
+            # Infer number of hours in the year (from any valid schedule)
+            hours_this_year = None
+            for sched in find_all("$.schedules[*].hourly_values", rmd_b):
+                if isinstance(sched, list) and len(sched) > 0:
+                    hours_this_year = len(sched)
+                    break
+            if hours_this_year is None:
+                hours_this_year = 8760  # fallback default
 
             return {
-                "is_leap_year_b": data["is_leap_year_b"],
                 "schedules_b": find_all("$.schedules[*]", rmd_b),
                 "schedules_p": find_all("$.schedules[*]", rmd_p),
+                "hours_this_year": hours_this_year,
                 "swh_uses_associated_with_each_building_segment_p": swh_uses_associated_with_each_building_segment_p,
             }
 
         class BuildingRule(PartialRuleDefinition):
             def __init__(self):
-                super(Section11Rule12.RMDRule.BuildingRule, self).__init__(
+                super(PRM9012019Rule52y79.RMDRule.BuildingRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -74,7 +80,7 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
                 building_b = context.BASELINE_0
                 building_p = context.PROPOSED
                 schedules_b = data["schedules_b"]
-                is_leap_year_b = data["is_leap_year_b"]
+                hours_this_year = data["hours_this_year"]
 
                 # TODO revise the json path if the service_water_heating_uses is relocated in the schema
                 service_water_heating_uses_p = find_all(
@@ -97,12 +103,6 @@ class Section11Rule12(RuleDefinitionListIndexedBase):
                         if schedule_b["id"] == bldg_open_sch_id_b
                     ),
                     [],
-                )
-
-                hours_this_year = (
-                    LeapYear.LEAP_YEAR_HOURS
-                    if is_leap_year_b
-                    else LeapYear.REGULAR_YEAR_HOURS
                 )
 
                 return (

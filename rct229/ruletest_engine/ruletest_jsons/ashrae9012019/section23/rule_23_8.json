@@ -14,27 +14,23 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5,8,11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.37"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -48,8 +44,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -83,50 +77,50 @@
                                                             "id": "Supply Fan 1",
                                                             "design_airflow": 47.194744319999984,
                                                             "design_electric_power": 100,
-                                                            "output_validation_points": [
+                                                            "operating_points": [
                                                                 {
                                                                     "airflow": 0.0,
-                                                                    "result": 0
+                                                                    "power": 0
                                                                 },
                                                                 {
                                                                     "airflow": 4.719474431999998,
-                                                                    "result": 3
+                                                                    "power": 3
                                                                 },
                                                                 {
                                                                     "airflow": 9.438948863999997,
-                                                                    "result": 7
+                                                                    "power": 7
                                                                 },
                                                                 {
                                                                     "airflow": 14.158423295999995,
-                                                                    "result": 13
+                                                                    "power": 13
                                                                 },
                                                                 {
                                                                     "airflow": 18.877897727999994,
-                                                                    "result": 21
+                                                                    "power": 21
                                                                 },
                                                                 {
                                                                     "airflow": 23.597372159999992,
-                                                                    "result": 30
+                                                                    "power": 30
                                                                 },
                                                                 {
                                                                     "airflow": 28.31684659199999,
-                                                                    "result": 41
+                                                                    "power": 41
                                                                 },
                                                                 {
                                                                     "airflow": 33.03632102399999,
-                                                                    "result": 54
+                                                                    "power": 54
                                                                 },
                                                                 {
                                                                     "airflow": 37.75579545599999,
-                                                                    "result": 68
+                                                                    "power": 68
                                                                 },
                                                                 {
                                                                     "airflow": 42.475269887999985,
-                                                                    "result": 83
+                                                                    "power": 83
                                                                 },
                                                                 {
                                                                     "airflow": 47.194744319999984,
-                                                                    "result": 100
+                                                                    "power": 100
                                                                 }
                                                             ]
                                                         }
@@ -198,27 +192,23 @@
             "comparison_value": "Expected Value",
             "rule_dependency": "System 5,8,11 (Rule18-a, to be confirmed)",
             "mandatory_rule": "Full",
-            "schema_version": "0.0.37"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Building Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Thermal Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 1",
@@ -232,8 +222,6 @@
                                             },
                                             {
                                                 "id": "Thermal Zone 2",
-                                                "thermostat_cooling_setpoint_schedule": "Required Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Required Heating Schedule 1",
                                                 "terminals": [
                                                     {
                                                         "id": "VAV Air Terminal 2",
@@ -267,50 +255,50 @@
                                                             "id": "Supply Fan 1",
                                                             "design_airflow": 47.194744319999984,
                                                             "design_electric_power": 100,
-                                                            "output_validation_points": [
+                                                            "operating_points": [
                                                                 {
                                                                     "airflow": 0.0,
-                                                                    "result": 0
+                                                                    "power": 0
                                                                 },
                                                                 {
                                                                     "airflow": 4.719474431999998,
-                                                                    "result": 10
+                                                                    "power": 10
                                                                 },
                                                                 {
                                                                     "airflow": 9.438948863999997,
-                                                                    "result": 20
+                                                                    "power": 20
                                                                 },
                                                                 {
                                                                     "airflow": 14.158423295999995,
-                                                                    "result": 30
+                                                                    "power": 30
                                                                 },
                                                                 {
                                                                     "airflow": 18.877897727999994,
-                                                                    "result": 40
+                                                                    "power": 40
                                                                 },
                                                                 {
                                                                     "airflow": 23.597372159999992,
-                                                                    "result": 50
+                                                                    "power": 50
                                                                 },
                                                                 {
                                                                     "airflow": 28.31684659199999,
-                                                                    "result": 60
+                                                                    "power": 60
                                                                 },
                                                                 {
                                                                     "airflow": 33.03632102399999,
-                                                                    "result": 70
+                                                                    "power": 70
                                                                 },
                                                                 {
                                                                     "airflow": 37.75579545599999,
-                                                                    "result": 80
+                                                                    "power": 80
                                                                 },
                                                                 {
                                                                     "airflow": 42.475269887999985,
-                                                                    "result": 90
+                                                                    "power": 90
                                                                 },
                                                                 {
                                                                     "airflow": 47.194744319999984,
-                                                                    "result": 100
+                                                                    "power": 100
                                                                 }
                                                             ]
                                                         }

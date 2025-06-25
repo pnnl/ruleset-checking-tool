@@ -12,17 +12,17 @@ from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 
-class Section16Rule1(RuleDefinitionListIndexedBase):
+class PRM9012019Rule98t42(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 16 (Elevators)"""
 
     def __init__(self):
-        super(Section16Rule1, self).__init__(
+        super(PRM9012019Rule98t42, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False,
                 BASELINE_0=True,
                 PROPOSED=True,
             ),
-            each_rule=Section16Rule1.ElevatorRule(),
+            each_rule=PRM9012019Rule98t42.ElevatorRule(),
             index_rmd=BASELINE_0,
             id="16-1",
             description="The elevator peak motor power shall be calculated according to the equation in Table G3.1-16.",
@@ -44,12 +44,18 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
 
     class ElevatorRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section16Rule1.ElevatorRule, self).__init__(
+            super(PRM9012019Rule98t42.ElevatorRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False,
                     BASELINE_0=True,
                     PROPOSED=False,
                 ),
+                precision={
+                    "elevator_motor_power_b": {
+                        "precision": 0.1,
+                        "unit": "W",
+                    }
+                },
             )
 
         def get_calc_vals(self, context, data=None):
@@ -102,7 +108,8 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
                     - elevator_cab_counterweight_b.to("lb")
                 )
                 * elevator_speed_b.to("ft/min")
-                / (33000 * elevator_mechanical_efficiency_b)
+                / ureg("hp").to("ft*lbf/min")
+                / elevator_mechanical_efficiency_b
             ).m * ureg("hp")
 
             elevator_motor_efficiency_b = (
@@ -128,6 +135,14 @@ class Section16Rule1(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            expected_peak_motor_power_b = calc_vals["expected_peak_motor_power_b"]
+            elevator_motor_power_b = calc_vals["elevator_motor_power_b"]
+
+            return self.precision_comparison["elevator_motor_power_b"](
+                elevator_motor_power_b, expected_peak_motor_power_b
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             expected_peak_motor_power_b = calc_vals["expected_peak_motor_power_b"]
             elevator_motor_power_b = calc_vals["elevator_motor_power_b"]
 

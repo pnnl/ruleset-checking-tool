@@ -28,15 +28,15 @@ CHILLER_COMPRESSOR = SchemaEnums.schema_enums["ChillerCompressorOptions"]
 REQUIRED_BUILDING_PEAK_LOAD_600 = 600 * ureg("ton")
 
 
-class Section22Rule21(RuleDefinitionListIndexedBase):
+class PRM9012019Rule96z66(RuleDefinitionListIndexedBase):
     """Rule 21 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule21, self).__init__(
+        super(PRM9012019Rule96z66, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule21.ChillerRule(),
+            each_rule=PRM9012019Rule96z66.ChillerRule(),
             index_rmd=BASELINE_0,
             id="22-21",
             description="The baseline chiller plant shall be modeled with chiller(s) having the type as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
@@ -46,7 +46,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
             rmd_context="ruleset_model_descriptions/0",
             list_path="$.chillers[*]",
             required_fields={
-                "$": ["output"],
+                "$": ["model_output"],
             },
         )
 
@@ -69,11 +69,10 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
 
-        output_b = rmd_b["output"]
+        output_b = rmd_b["model_output"]
         building_cooling_peak_load = getattr_(
             output_b,
             "building_peak_cooling_load",
-            "output_instance",
             "building_peak_cooling_load",
         )
 
@@ -81,7 +80,7 @@ class Section22Rule21(RuleDefinitionListIndexedBase):
 
     class ChillerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule21.ChillerRule, self).__init__(
+            super(PRM9012019Rule96z66.ChillerRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

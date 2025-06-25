@@ -14,12 +14,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -153,6 +152,9 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
                         "schedules": [
                             {
                                 "id": "Min OA CFM Schedule",
@@ -8925,17 +8927,10 @@
                         ],
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -9067,6 +9062,9 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
                         "schedules": [
                             {
                                 "id": "Min OA CFM Schedule",
@@ -17837,13 +17835,7 @@
                         ],
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                }
+                ]
             }
         }
     },
@@ -17862,12 +17854,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -17995,6 +17986,9 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "schedules": [
                             {
                                 "id": "Min OA CFM Schedule",
@@ -26767,17 +26761,10 @@
                         ],
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -26908,6 +26895,9 @@
                                 ]
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "schedules": [
                             {
                                 "id": "Min OA CFM Schedule",
@@ -35678,13 +35668,7 @@
                         ],
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                }
+                ]
             }
         }
     },
@@ -35703,12 +35687,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -35808,6 +35791,9 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
                         "schedules": [
                             {
                                 "id": "Min OA CFM Schedule",
@@ -44580,17 +44566,10 @@
                         ],
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -44693,6 +44672,9 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ5A"
+                        },
                         "schedules": [
                             {
                                 "id": "Min OA CFM Schedule",
@@ -53463,13 +53445,7 @@
                         ],
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ5A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                }
+                ]
             }
         }
     },
@@ -53487,12 +53463,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -53597,6 +53572,9 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "schedules": [
                             {
                                 "id": "Min OA CFM Schedule",
@@ -62369,17 +62347,10 @@
                         ],
                         "type": "PROPOSED"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                }
+                ]
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -62484,6 +62455,9 @@
                                 "type": "HEATING"
                             }
                         ],
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
                         "schedules": [
                             {
                                 "id": "Min OA CFM Schedule",
@@ -71254,13 +71228,7 @@
                         ],
                         "type": "BASELINE_0"
                     }
-                ],
-                "weather": {
-                    "climate_zone": "CZ4A"
-                },
-                "calendar": {
-                    "is_leap_year": false
-                }
+                ]
             }
         }
     }

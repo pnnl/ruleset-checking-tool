@@ -21,21 +21,11 @@ TEST_RMD = {
                             "spaces": [
                                 {
                                     "id": "Space 1",
-                                    "service_water_heating_uses": [
-                                        {
-                                            "id": "SWH Use 1",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                        }
-                                    ],
+                                    "service_water_heating_uses": ["SWH Use 1"],
                                 },
                                 {
                                     "id": "Space 2",
-                                    "service_water_heating_uses": [
-                                        {
-                                            "id": "SWH Use 2",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                        }
-                                    ],
+                                    "service_water_heating_uses": ["SWH Use 2"],
                                 },
                                 {
                                     "id": "Space 3",
@@ -46,6 +36,16 @@ TEST_RMD = {
                 }
             ],
         }
+    ],
+    "service_water_heating_uses": [
+        {
+            "id": "SWH Use 1",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
+        {
+            "id": "SWH Use 2",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
     ],
     "service_water_heating_distribution_systems": [
         {
@@ -58,37 +58,28 @@ TEST_RMD = {
                     "id": "Tank 2",
                 },
             ],
-            "service_water_piping": [
-                {
-                    "id": "SWH Piping 1",
-                    "child": [
-                        {
-                            "id": "SWH Piping Child 1",
-                            "child": [
-                                {
-                                    "id": "SWH Piping 1-a",
-                                },
-                                {
-                                    "id": "SWH Piping 1-b",
-                                },
-                            ],
-                        }
-                    ],
-                },
-                {
-                    "id": "SWH Piping 2",
-                },
-            ],
+            "service_water_piping": {
+                "id": "SWH Piping 1",
+                "child": [
+                    {
+                        "id": "SWH Piping Child 1",
+                        "child": [
+                            {
+                                "id": "SWH Piping 1-a",
+                            },
+                            {
+                                "id": "SWH Piping 1-b",
+                            },
+                        ],
+                    }
+                ],
+            },
         }
     ],
     "pumps": [
         {
             "id": "Pump 1",
             "loop_or_piping": "SWH Piping 1",
-        },
-        {
-            "id": "Pump 2",
-            "loop_or_piping": "SWH Piping 2",
         },
         {
             "id": "Pump 3",
@@ -127,7 +118,14 @@ TEST_RMD = {
 TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
@@ -159,14 +157,13 @@ def test_get_swh_equipment_associated_with_each_swh_distribution_system():
     assert swh_and_equip_dict["SWH Distribution 1"].swh_heating_eq == [
         "SWH Equipment 1"
     ]
-    assert swh_and_equip_dict["SWH Distribution 1"].pumps == ["Pump 1", "Pump 2"]
+    assert swh_and_equip_dict["SWH Distribution 1"].pumps == ["Pump 1"]
     assert swh_and_equip_dict["SWH Distribution 1"].tanks == ["Tank 1", "Tank 2"]
     assert swh_and_equip_dict["SWH Distribution 1"].piping == [
         "SWH Piping 1",
         "SWH Piping Child 1",
         "SWH Piping 1-a",
         "SWH Piping 1-b",
-        "SWH Piping 2",
     ]
     assert swh_and_equip_dict["SWH Distribution 1"].solar_thermal == [
         "Solar Thermal System 1",

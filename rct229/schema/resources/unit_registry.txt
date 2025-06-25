@@ -168,6 +168,7 @@ gpm = gallon / min
 # Force
 [force] = [mass] * [acceleration]
 newton = kilogram * meter / second ** 2 = N
+force_pound = 4.4482216152605 * newton = lbf = pound_force
 
 # Energy
 [energy] = [force] * [length]
@@ -284,6 +285,13 @@ octave = 1 ; logbase: 2; logfactor: 1 = oct
 
 neper = 1 ; logbase: 2.71828182845904523536028747135266249775724709369995; logfactor: 0.5 = Np
 # neper = 1 ; logbase: eulers_number; logfactor: 0.5 = Np
+
+## Reciprocal square foot
+reciprocal_square_foot = people / foot**2 = 1 people/ft2
+# Define the unit 'people'
+people = [dimensionless]
+# Define people per 1000 square feet unit
+people_per_1000_square_feet = 1 people/kft2
 
 #### UNIT GROUPS ####
 # Mostly for length, area, volume, mass, force

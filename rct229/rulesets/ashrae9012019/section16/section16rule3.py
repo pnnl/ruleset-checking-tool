@@ -11,17 +11,17 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.utility_functions import find_exactly_one_schedule
 
 
-class Section16Rule3(RuleDefinitionListIndexedBase):
+class PRM9012019Rule92n36(RuleDefinitionListIndexedBase):
     """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 16 (Elevators)"""
 
     def __init__(self):
-        super(Section16Rule3, self).__init__(
+        super(PRM9012019Rule92n36, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False,
                 BASELINE_0=False,
                 PROPOSED=True,
             ),
-            each_rule=Section16Rule3.RuleSetModelDescriptionRule(),
+            each_rule=PRM9012019Rule92n36.RuleSetModelDescriptionRule(),
             index_rmd=PROPOSED,
             id="16-3",
             description="The elevator cab ventilation fan shall be modeled with the same schedule as the elevator motor.",
@@ -29,17 +29,15 @@ class Section16Rule3(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year_p": (PROPOSED, "calendar/is_leap_year")},
         )
 
     class RuleSetModelDescriptionRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section16Rule3.RuleSetModelDescriptionRule, self).__init__(
+            super(PRM9012019Rule92n36.RuleSetModelDescriptionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
-                each_rule=Section16Rule3.RuleSetModelDescriptionRule.ElevatorRule(),
+                each_rule=PRM9012019Rule92n36.RuleSetModelDescriptionRule.ElevatorRule(),
                 index_rmd=PROPOSED,
                 list_path="buildings[*].elevators[*]",
             )
@@ -75,7 +73,7 @@ class Section16Rule3(RuleDefinitionListIndexedBase):
         class ElevatorRule(RuleDefinitionBase):
             def __init__(self):
                 super(
-                    Section16Rule3.RuleSetModelDescriptionRule.ElevatorRule, self
+                    PRM9012019Rule92n36.RuleSetModelDescriptionRule.ElevatorRule, self
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False,
@@ -86,7 +84,6 @@ class Section16Rule3(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 elevator_p = context.PROPOSED
-                is_leap_year_p = data["is_leap_year_p"]
 
                 cab_ventilation_fan_multiplier_schedule_p = getattr_(
                     elevator_p, "elevators", "cab_ventilation_fan_multiplier_schedule"
@@ -102,17 +99,12 @@ class Section16Rule3(RuleDefinitionListIndexedBase):
                     cab_motor_multiplier_schedule_p
                 ]
 
-                mask_schedule = (
-                    [1] * LeapYear.LEAP_YEAR_HOURS
-                    if is_leap_year_p
-                    else [1] * LeapYear.REGULAR_YEAR_HOURS
-                )
+                mask_schedule = [1] * len(cab_ventilation_schedule_p)
 
                 sch_total_hours_matched = compare_schedules(
                     cab_ventilation_schedule_p,
                     motor_use_schedule_p,
                     mask_schedule,
-                    is_leap_year_p,
                 )["total_hours_matched"]
 
                 return {

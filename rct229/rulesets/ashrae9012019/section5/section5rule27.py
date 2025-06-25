@@ -29,19 +29,19 @@ MANUAL_CHECK_APPLICABLE = (
 DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 
 
-class Section5Rule27(RuleDefinitionListIndexedBase):
+class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
     """Rule 27 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule27, self).__init__(
+        super(PRM9012019Rule69v04, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule27.BuildingRule(),
+            each_rule=PRM9012019Rule69v04.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-27",
             description="Skylight U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
@@ -49,16 +49,24 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        constructions = rpd_b["ruleset_model_descriptions"][0].get("constructions")
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule27.BuildingRule, self).__init__(
+            super(PRM9012019Rule69v04.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section5Rule27.BuildingRule.RoofRule(),
+                each_rule=PRM9012019Rule69v04.BuildingRule.RoofRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
                 manual_check_required_msg=MANUAL_CHECK_MSG,
@@ -70,8 +78,11 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
             # then set the manual check required and stop execution.
             building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
+            constructions = data["constructions"]
             building_scc_skylight_roof_ratios_dict_b = (
-                get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
+                get_building_scc_skylight_roof_ratios_dict(
+                    climate_zone, constructions, building_b
+                )
             )
             target_exterior_2per_residential = table_G34_lookup(
                 climate_zone,
@@ -111,8 +122,11 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
         def create_data(self, context, data=None):
             building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
+            constructions = data["constructions"]
             building_scc_skylight_roof_ratios_dict_b = (
-                get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
+                get_building_scc_skylight_roof_ratios_dict(
+                    climate_zone, constructions, building_b
+                )
             )
 
             # Process target_u_factor_res
@@ -173,7 +187,7 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
 
             return {
                 "surface_conditioning_category_dict_b": get_surface_conditioning_category_dict(
-                    climate_zone, building_b
+                    climate_zone, building_b, constructions
                 ),
                 # at this point, target_u_factor_mixed should be same regardless of
                 # residential <2% or >2%, skylight.
@@ -195,11 +209,11 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
 
         class RoofRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section5Rule27.BuildingRule.RoofRule, self).__init__(
+                super(PRM9012019Rule69v04.BuildingRule.RoofRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
-                    each_rule=Section5Rule27.BuildingRule.RoofRule.SubsurfaceRule(),
+                    each_rule=PRM9012019Rule69v04.BuildingRule.RoofRule.SubsurfaceRule(),
                     index_rmd=BASELINE_0,
                     list_path="subsurfaces[*]",
                 )
@@ -212,8 +226,7 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
             class SubsurfaceRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section5Rule27.BuildingRule.RoofRule.SubsurfaceRule,
-                        self,
+                        PRM9012019Rule69v04.BuildingRule.RoofRule.SubsurfaceRule, self
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False
@@ -250,7 +263,6 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
                     target_u_factor_res_b = data["target_u_factor_res_b"]
                     target_u_factor_nonres_b = data["target_u_factor_nonres_b"]
                     target_u_factor_semiheated_b = data["target_u_factor_semiheated_b"]
-                    target_u_factor = ZERO.U_FACTOR
                     if (
                         scc_type == SCC.EXTERIOR_MIXED
                         or scc_type == SCC.EXTERIOR_RESIDENTIAL

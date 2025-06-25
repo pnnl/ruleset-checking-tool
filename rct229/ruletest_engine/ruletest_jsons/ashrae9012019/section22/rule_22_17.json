@@ -13,12 +13,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -144,8 +143,11 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Condenser Loop 1",
-                                "fan_motor_nameplate_power": 7457.0,
-                                "fan_shaft_power": 6711.3,
+                                "fan": {
+                                    "id": "Heat Rejection Fan 1",
+                                    "motor_nameplate_power": 7457.0,
+                                    "shaft_power": 6711.3
+                                },
                                 "rated_water_flowrate": 24.09783333333334
                             }
                         ],
@@ -169,12 +171,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -300,8 +301,11 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Condenser Loop 1",
-                                "fan_motor_nameplate_power": 7457.0,
-                                "fan_shaft_power": 6711.3,
+                                "fan": {
+                                    "id": "Heat Rejection Fan 1",
+                                    "motor_nameplate_power": 7457.0,
+                                    "shaft_power": 6711.3
+                                },
                                 "rated_water_flowrate": 18.925000000000004
                             }
                         ],
@@ -326,12 +330,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -457,7 +460,10 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Condenser Loop 1",
-                                "fan_shaft_power": 6711.3,
+                                "fan": {
+                                    "id": "Heat Rejection Fan 1",
+                                    "shaft_power": 6711.3
+                                },
                                 "rated_water_flowrate": 24.09783333333334
                             }
                         ],
@@ -482,12 +488,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -613,7 +618,10 @@
                             {
                                 "id": "Heat Rejection 1",
                                 "loop": "Condenser Loop 1",
-                                "fan_shaft_power": 6711.3,
+                                "fan": {
+                                    "id": "Heat Rejection Fan 1",
+                                    "shaft_power": 6711.3
+                                },
                                 "rated_water_flowrate": 18.925000000000004
                             }
                         ],
@@ -638,12 +646,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

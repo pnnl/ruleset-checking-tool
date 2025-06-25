@@ -171,9 +171,17 @@ class RuleDefinitionListIndexedBase(RuleDefinitionListBase):
         context_list_len = len(index_rmd_list)
         for ruleset_model in list_context.get_ruleset_model_types():
             if self.rmds_used[ruleset_model] and ruleset_model != self.index_rmd:
-                rmd_list = match_lists(
-                    index_rmd_list, list_context[ruleset_model], match_by
-                )
+                # No nested list - so [0] is safe for this instance.
+                if (
+                    len(list_context[ruleset_model]) == 1
+                    and list_context[ruleset_model][0].get("type") == ruleset_model
+                ):
+                    # RMD level - do not need to perform match
+                    rmd_list = list_context[ruleset_model]
+                else:
+                    rmd_list = match_lists(
+                        index_rmd_list, list_context[ruleset_model], match_by
+                    )
                 list_context.__setitem__(ruleset_model, rmd_list)
 
         # Generate the context list

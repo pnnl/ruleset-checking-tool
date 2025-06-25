@@ -13,12 +13,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -47,13 +46,13 @@
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "is_sized_based_on_design_day": true,
+                                                    "is_calculated_size": true,
                                                     "oversizing_factor": 0.15
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
                                                     "type": "FURNACE",
-                                                    "is_sized_based_on_design_day": true,
+                                                    "is_calculated_size": true,
                                                     "oversizing_factor": 0.25
                                                 },
                                                 "fan_system": {
@@ -96,12 +95,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -127,13 +125,10 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "Airside System 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1"
-                                                },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
                                                     "type": "FURNACE",
-                                                    "is_sized_based_on_design_day": true,
+                                                    "is_calculated_size": true,
                                                     "oversizing_factor": 0.25
                                                 },
                                                 "fan_system": {
@@ -175,12 +170,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -209,11 +203,8 @@
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "is_sized_based_on_design_day": true,
+                                                    "is_calculated_size": true,
                                                     "oversizing_factor": 0.15
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1"
                                                 },
                                                 "fan_system": {
                                                     "id": "Fan System 1",
@@ -254,12 +245,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -288,13 +278,13 @@
                                                 "cooling_system": {
                                                     "id": "DX Coil 1",
                                                     "type": "DIRECT_EXPANSION",
-                                                    "is_sized_based_on_design_day": true,
+                                                    "is_calculated_size": true,
                                                     "oversizing_factor": 0
                                                 },
                                                 "heating_system": {
                                                     "id": "Furnace Coil 1",
                                                     "type": "FURNACE",
-                                                    "is_sized_based_on_design_day": true,
+                                                    "is_calculated_size": true,
                                                     "oversizing_factor": 0
                                                 },
                                                 "fan_system": {
@@ -337,12 +327,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -368,13 +357,6 @@
                                         "heating_ventilating_air_conditioning_systems": [
                                             {
                                                 "id": "Airside System 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1"
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "type": "OTHER"
-                                                },
                                                 "fan_system": {
                                                     "id": "Fan System 1",
                                                     "supply_fans": [

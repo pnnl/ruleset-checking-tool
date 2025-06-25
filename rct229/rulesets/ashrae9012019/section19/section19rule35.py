@@ -17,15 +17,15 @@ from rct229.utils.jsonpath_utils import find_all
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 
 
-class Section19Rule35(RuleDefinitionListIndexedBase):
+class PRM9012019Rule40n43(RuleDefinitionListIndexedBase):
     """Rule 35 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule35, self).__init__(
+        super(PRM9012019Rule40n43, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule35.RMDRule(),
+            each_rule=PRM9012019Rule40n43.RMDRule(),
             index_rmd=BASELINE_0,
             id="19-35",
             description="For baseline systems serving only laboratory spaces that are prohibited from recirculating return air by code or accreditation standards, "
@@ -34,32 +34,23 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-10 HVAC Systems proposed column c and d",
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={
-                "$": ["calendar", "ruleset_model_descriptions"],
-                "calendar": ["is_leap_year"],
-            },
-            data_items={
-                "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
-                "is_leap_year_p": (PROPOSED, "calendar/is_leap_year"),
-            },
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section19Rule35.RMDRule, self).__init__(
+            super(PRM9012019Rule40n43.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section19Rule35.RMDRule.HVACRule(),
+                each_rule=PRM9012019Rule40n43.RMDRule.HVACRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+                required_fields={},
             )
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            leap_year_b = data["is_leap_year_b"]
-            leap_year_p = data["is_leap_year_p"]
 
             dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
@@ -122,10 +113,10 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
                     ) and hvac_system_serves_only_labs
 
                     zone_OA_flow_list_of_schedules_b.append(
-                        get_min_oa_cfm_sch_zone(rmd_b, zone_id_b, leap_year_b)
+                        get_min_oa_cfm_sch_zone(rmd_b, zone_id_b)
                     )
                     zone_OA_flow_list_of_schedules_p.append(
-                        get_min_oa_cfm_sch_zone(rmd_p, zone_id_b, leap_year_p)
+                        get_min_oa_cfm_sch_zone(rmd_p, zone_id_b)
                     )
 
             aggregated_min_OA_schedule_across_zones_b = (
@@ -154,7 +145,7 @@ class Section19Rule35(RuleDefinitionListIndexedBase):
 
         class HVACRule(PartialRuleDefinition):
             def __init__(self):
-                super(Section19Rule35.RMDRule.HVACRule, self).__init__(
+                super(PRM9012019Rule40n43.RMDRule.HVACRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

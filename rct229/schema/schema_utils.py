@@ -1,6 +1,7 @@
 import json
 import os
 import re
+from collections.abc import Sequence
 from copy import deepcopy
 
 from jsonpath_ng.ext import parse as parse_jsonpath
@@ -79,12 +80,14 @@ def find_schema_unit_for_json_path(key_list):
         reference_string = return_json_schema_reference(dict_ref, key)
 
         # If reference string references a secondary json reference, update root JSON dictionary to new secondary schema
-        if reference_string in secondary_schema_files:
-            schema_dict = get_secondary_schema_root_dictionary(reference_string)
+        if reference_string.split("#")[0] in secondary_schema_files:
+            schema_dict = get_secondary_schema_root_dictionary(
+                reference_string.split("#")[0]
+            )
 
             # Split out root dictionary object key. It's found in the schema object's file name
             # (e.g., 'Output2019ASHRAE901' in 'Output2019ASHRAE901.schema.json')
-            root_key = reference_string.split(".")[0]
+            root_key = reference_string.split("/")[-1].split(".")[0]
             dict_ref = schema_dict[root_key]
         else:
             dict_ref = schema_dict[reference_string]
@@ -175,13 +178,16 @@ def quantify_rmd(rmd):
         if schema_unit_str is not None:
             # Make the units string pint-compatible
             pint_unit_str = clean_schema_units(schema_unit_str)
-
-            # Create the pint quantity to replace the number
-            pint_qty = number_rmd_item_match.value * config.ureg(pint_unit_str)
-
-            # Replace the number with the appropriate pint quantity
-            set_(rmd, full_path, pint_qty)
-
+            val = number_rmd_item_match.value
+            if isinstance(val, Sequence) and not isinstance(val, str):
+                # Replace each number in the list with a pint quantity
+                pint_qty_list = [v * config.ureg(pint_unit_str) for v in val]
+                set_(rmd, full_path, pint_qty_list)
+            else:
+                # Create the pint quantity to replace the number
+                pint_qty = number_rmd_item_match.value * config.ureg(pint_unit_str)
+                # Replace the number with the appropriate pint quantity
+                set_(rmd, full_path, pint_qty)
     return rmd
 
 
@@ -214,7 +220,11 @@ def return_json_schema_reference(object_dict, key):
     # $ref elements are either at the top level or buried inside "items"
     if "items" in properties_dict:
         # Return the reference string (the last element separated by the '/'s)
-        return properties_dict["items"]["$ref"].split("/")[-1]
+        if "$ref" in properties_dict["items"]:
+            return properties_dict["items"]["$ref"].split("/")[-1]
+        else:
+            # Some elements have an oddball "oneOf" that allows for a reference or "string".
+            return properties_dict["items"]["oneOf"][0]["$ref"].split("/")[-1]
 
     elif "$ref" in properties_dict:
         # Return the reference string (the last element separated by the '/'s)
@@ -225,8 +235,14 @@ def return_json_schema_reference(object_dict, key):
         if "$ref" in properties_dict["oneOf"][0]:
             secondary_json = properties_dict["oneOf"][0]["$ref"].split("#")[0]
 
+            # If it's a secondary schema file, return it
             if secondary_json in secondary_schema_files:
-                return secondary_json
+                return properties_dict["oneOf"][0]["$ref"]
+
+            # If it's actually just referencing the main schema, return the reference (the last element separated by
+            # the '/'s)
+            elif secondary_json == SchemaStore.SCHEMA_KEY:
+                return properties_dict["oneOf"][0]["$ref"].split("/")[-1]
 
             else:
                 raise ValueError(

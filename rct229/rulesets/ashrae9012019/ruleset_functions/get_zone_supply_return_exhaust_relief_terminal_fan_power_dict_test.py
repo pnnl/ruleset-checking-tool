@@ -28,11 +28,13 @@ TEST_RMD = {
                                     "primary_airflow": 1888,
                                 }
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Zone exhaust fan 1",
-                                "specification_method": "SIMPLE",
-                                "design_electric_power": 20,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Zone exhaust fan 1",
+                                    "specification_method": "SIMPLE",
+                                    "design_electric_power": 20,
+                                }
+                            ],
                         },
                         {
                             "id": "Thermal Zone 2",
@@ -57,15 +59,17 @@ TEST_RMD = {
                                     "id": "PTAC Terminal 3-1",
                                     "is_supply_ducted": False,
                                     "type": "CONSTANT_AIR_VOLUME",
-                                    "served_by_heating_ventilating_air_conditioning_system": "PTAC 1",
+                                    "served_by_heating_ventilating_air_conditioning_system": "PTAC 2",
                                     "primary_airflow": 800,
                                 }
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Zone exhaust fan 1",
-                                "specification_method": "SIMPLE",
-                                "design_electric_power": 20,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Zone exhaust fan 1",
+                                    "specification_method": "SIMPLE",
+                                    "design_electric_power": 20,
+                                }
+                            ],
                         },
                         {
                             "id": "Thermal Zone 4",
@@ -222,7 +226,14 @@ TEST_RMD = {
 TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
@@ -240,40 +251,21 @@ def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_one_zone
         get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMD)
     )
     # check supply fans
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 1"][
-            "supply_fans_power"
-        ]
-        - 35 * ureg("W")
-        < 0.001 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 1"][
-            "return_fans_power"
-        ]
-        - 30 * ureg("W")
-        < 0.001 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 1"][
-            "exhaust_fans_power"
-        ]
-        - 55 * ureg("W")
-        < 0.001 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 1"][
-            "relief_fans_power"
-        ]
-        - 15 * ureg("W")
-        < 0.001 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 1"][
-            "terminal_fans_power"
-        ]
-        == 0.0 * ureg("W"),
-    )
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 1"][
+        "supply_fans_power"
+    ] - 35 * ureg("W") < 0.001 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 1"][
+        "return_fans_power"
+    ] - 30 * ureg("W") < 0.001 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 1"][
+        "exhaust_fans_power"
+    ] - 55 * ureg("W") < 0.001 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 1"][
+        "relief_fans_power"
+    ] - 15 * ureg("W") < 0.001 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 1"][
+        "terminal_fans_power"
+    ] == 0.0 * ureg("W")
 
 
 def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_two_zone_one_terminal_success():
@@ -281,109 +273,54 @@ def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_two_zone
         get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMD)
     )
     # check supply fans
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 2"][
-            "supply_fans_power"
-        ]
-        - 2 * ureg("W")
-        < 0.001 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 2"][
-            "return_fans_power"
-        ]
-        - 2 * ureg("W")
-        < 0.001 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 2"][
-            "exhaust_fans_power"
-        ]
-        - 2 * ureg("W")
-        < 0.001 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 2"][
-            "relief_fans_power"
-        ]
-        - 2 * ureg("W")
-        < 0.001 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 2"][
-            "terminal_fans_power"
-        ]
-        == 0.0 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 3"][
-            "supply_fans_power"
-        ]
-        - 8 * ureg("W")
-        < 0.001 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 3"][
-            "return_fans_power"
-        ]
-        - 8 * ureg("W")
-        < 0.001 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 3"][
-            "exhaust_fans_power"
-        ]
-        - 8 * ureg("W")
-        < 0.001 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 3"][
-            "relief_fans_power"
-        ]
-        - 8 * ureg("W")
-        < 0.001 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 3"][
-            "terminal_fans_power"
-        ]
-        == 0.0 * ureg("W"),
-    )
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 2"][
+        "supply_fans_power"
+    ] - 2 * ureg("W") < 0.001 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 2"][
+        "return_fans_power"
+    ] - 2 * ureg("W") < 0.001 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 2"][
+        "exhaust_fans_power"
+    ] - 2 * ureg("W") < 0.001 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 2"][
+        "relief_fans_power"
+    ] - 2 * ureg("W") < 0.001 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 2"][
+        "terminal_fans_power"
+    ] == 0.0 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 3"][
+        "supply_fans_power"
+    ] - 8 * ureg("W") < 0.001 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 3"][
+        "return_fans_power"
+    ] - 8 * ureg("W") < 0.001 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 3"][
+        "exhaust_fans_power"
+    ] - 8 * ureg("W") < 0.001 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 3"][
+        "relief_fans_power"
+    ] - 8 * ureg("W") < 0.001 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 3"][
+        "terminal_fans_power"
+    ] == 0.0 * ureg("W")
 
 
 def test__get_zone_supply_return_exhaust_relief_terminal_fan_power_dict_no_central_fan_success():
     zone_supply_return_exhaust_relief_terminal_fan_power_dict = (
         get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(TEST_RMD)
     )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 4"][
-            "supply_fans_power"
-        ]
-        - 10 * ureg("W")
-        < 0.0001 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 4"][
-            "return_fans_power"
-        ]
-        == 0.0 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 4"][
-            "exhaust_fans_power"
-        ]
-        == 0.0 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 4"][
-            "relief_fans_power"
-        ]
-        == 0.0 * ureg("W"),
-    )
-    assert (
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 4"][
-            "terminal_fans_power"
-        ]
-        - 10 * ureg("W")
-        < 0.0001 * ureg("W"),
-    )
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 4"][
+        "supply_fans_power"
+    ] - 10 * ureg("W") < 0.0001 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 4"][
+        "return_fans_power"
+    ] == 0.0 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 4"][
+        "exhaust_fans_power"
+    ] == 0.0 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 4"][
+        "relief_fans_power"
+    ] == 0.0 * ureg("W")
+    assert zone_supply_return_exhaust_relief_terminal_fan_power_dict["Thermal Zone 4"][
+        "terminal_fans_power"
+    ] - 10 * ureg("W") < 0.0001 * ureg("W")

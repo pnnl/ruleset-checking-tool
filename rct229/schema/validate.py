@@ -1,5 +1,6 @@
 import json
 import os
+from collections import Counter
 from referencing import Registry
 from jsonschema import Draft7Validator
 from referencing.jsonschema import DRAFT7
@@ -24,6 +25,62 @@ SCHEMA_ENUM_PATH = os.path.join(file_dir, SCHEMA_ENUM_KEY)
 SCHEMA_T24_ENUM_PATH = os.path.join(file_dir, SCHEMA_T24_ENUM_KEY)
 SCHEMA_RESNET_ENUM_PATH = os.path.join(file_dir, SCHEMA_RESNET_ENUM_KEY)
 SCHEMA_OUTPUT_PATH = os.path.join(file_dir, SCHEMA_OUTPUT_KEY)
+
+
+def check_associated_data_elements(rpd: dict) -> list[str]:
+    """
+    Check validity of separate data elements that are associated with each other.
+    e.g. if SWH use is populated, SWH use_units must also be populated.
+    e.g. if efficiency_metric_values is populated, it must have the same length as efficiency_metric_types
+
+    Parameters
+    ----------
+    rpd
+
+    Returns list of object ids where the associated lists are not the same length
+    -------
+
+    """
+    mismatch_errors = []
+
+    associated_list_data_elements = [
+        ("use_units", "use"),
+        ("efficiency_metric_types", "efficiency_metric_values"),
+    ]
+    associated_list_jsonpaths = [
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].heating_system",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].preheat_system",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system",
+        "$.ruleset_model_descriptions[*].boilers[*]",
+        "$.ruleset_model_descriptions[*].chillers[*]",
+        "$.ruleset_model_descriptions[*].service_water_heating_equipment[*]",
+        "$.ruleset_model_descriptions[*].service_water_heating_uses[*]",
+    ]
+
+    for jsonpath in associated_list_jsonpaths:
+        object_list = find_all(jsonpath, rpd)
+
+        for obj in object_list:
+            for key_1, key_2 in associated_list_data_elements:
+                val_1, val_2 = obj.get(key_1, None), obj.get(key_2, None)
+                if val_1 is None and val_2 is None:
+                    continue
+                # XOR operation
+                if (val_1 is None) != (val_2 is None):
+                    mismatch_errors.append(
+                        f"'{obj['id']}' has populated '{key_1 if val_1 else key_2}' but is missing '{key_1 if not val_1 else key_2}'."
+                    )
+                    continue
+
+                # Ensure when both are lists they have the same length
+                if isinstance(val_1, list) and isinstance(val_2, list):
+                    val_1, val_2 = obj[key_1], obj[key_2]
+                    if val_1 and val_2 and len(val_1) != len(val_2):
+                        mismatch_errors.append(
+                            f"'{obj['id']}' lists at '{key_1}' and '{key_2}' are not the same length."
+                        )
+
+    return mismatch_errors
 
 
 def check_fluid_loop_association(rpd: dict) -> list:
@@ -184,7 +241,7 @@ def check_fluid_loop_or_piping_association(rpd: dict) -> list:
     mismatch_list = []
     fluid_loop_or_piping_id_jsonpaths = [
         "$.ruleset_model_descriptions[*].fluid_loops[*].id",
-        "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].service_water_piping[*].id",
+        "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].service_water_piping.id",
         "$.ruleset_model_descriptions[*].fluid_loops[*].child_loops[*].id",
     ]
 
@@ -264,6 +321,50 @@ def check_hvac_association(rpd: dict) -> list:
     return mismatch_list
 
 
+def check_annual_schedule_lengths(rpd: dict) -> list[str]:
+    """
+    Verify that all schedules in the rpd file have the same length for hourly_values: either 8760 or 8784 entries.
+
+    Parameters
+    ----------
+    rpd : dict
+        The ruleset model description object.
+
+    Returns
+    -------
+    list[str]
+        A list of error messages for schedules that do not have 8760 or 8784 entries.
+    """
+    error_messages = []
+
+    schedules = find_all(
+        "$.ruleset_model_descriptions[*].schedules[?(@.hourly_values)]", rpd
+    )
+    lengths = [len(schedule) for schedule in schedules]
+
+    if not lengths:
+        return []  # No schedules with hourly_values — no errors
+
+    # Compute the mode of the lengths
+    length_counts = Counter(lengths)
+    common_length, _ = length_counts.most_common(1)[0]
+
+    # Check if common length is valid
+    if common_length not in (8760, 8784):
+        error_messages.append(
+            f"The most common schedule length is {common_length}, which is not 8760 or 8784."
+        )
+
+    for schedule, length in zip(schedules, lengths):
+        schedule_id = schedule.get["id"]
+        if length != common_length:
+            error_messages.append(
+                f"Schedule '{schedule_id}' has {length} hourly values; expected {common_length}."
+            )
+
+    return error_messages
+
+
 def check_unique_ids_in_ruleset_model_descriptions(rpd):
     """Checks that the ids within each group inside a
     RuleSetModelInstance are unique
@@ -334,7 +435,7 @@ def json_paths_to_lists(val, path="$"):
 
 
 def json_paths_to_lists_from_dict(rmd_dict, path):
-    """Determines all the generic json paths to lists inside an dictionary
+    """Determines all the generic json paths to lists inside a dictionary
 
     If a json path has a list index, that index is replaced with [*] to make it
     generic.
@@ -368,7 +469,7 @@ def json_paths_to_lists_from_list(rmd_list, path):
 
     Parameters
     ----------
-    rmd_list : dict
+    rmd_list : list
 
     path : str
         A json path representing a generic path to rmd_list in a larger structure
@@ -439,10 +540,20 @@ def non_schema_validate_rpd(rmd_obj):
             f"Cannot find service water heating {mismatch_service_water_heating_errors} in the ServiceWaterHeatingDistributionSystems data group."
         )
 
+    mismatch_associated_data_elements_errors = check_associated_data_elements(rmd_obj)
+    passed = passed and not mismatch_associated_data_elements_errors
+    if mismatch_associated_data_elements_errors:
+        error.extend(mismatch_associated_data_elements_errors)
+
+    mismatch_annual_schedule_length_errors = check_annual_schedule_lengths(rmd_obj)
+    passed = passed and not mismatch_annual_schedule_length_errors
+    if mismatch_annual_schedule_length_errors:
+        error.extend(mismatch_annual_schedule_length_errors)
+
     return {"passed": passed, "error": error if error else None}
 
 
-def schema_validate_rpd(rpd):
+def schema_validate_rpd(rpd, full_errors: bool = False):
     """Validates an RMD against the schema
 
     This code follows the outline given in
@@ -497,14 +608,19 @@ def schema_validate_rpd(rpd):
 
                 # Construct the error message
                 parent_id = parent_id[0] if parent_id else parent_id
-                truncated_message = (
-                    (error.message[:20] + ".........." + error.message[-130:])
-                    if len(error.message) > 160
-                    else error.message
-                )
-                error_message = f"{truncated_message}. Path: {error_path}." + (
-                    f" Parent ID: {parent_id}" if parent_id else ""
-                )
+                if not full_errors:
+                    truncated_message = (
+                        (error.message[:20] + ".........." + error.message[-130:])
+                        if len(error.message) > 160
+                        else error.message
+                    )
+                    error_message = f"{truncated_message}. Path: {error_path}." + (
+                        f" Parent ID: {parent_id}" if parent_id else ""
+                    )
+                else:
+                    error_message = f"{error.message}. Path: {error_path}." + (
+                        f" Parent ID: {parent_id}" if parent_id else ""
+                    )
                 error_details.append(error_message)
 
             return {"passed": False, "errors": error_details}

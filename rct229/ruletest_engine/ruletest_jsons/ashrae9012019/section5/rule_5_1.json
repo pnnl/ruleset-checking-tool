@@ -18,21 +18,17 @@
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -88,21 +84,17 @@
             },
             "proposed": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -158,21 +150,17 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -226,17 +214,14 @@
                     },
                     {
                         "id": "RMD 1",
-                        "output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -290,17 +275,14 @@
                     },
                     {
                         "id": "RMD 1",
-                        "output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -354,17 +336,14 @@
                     },
                     {
                         "id": "RMD 1",
-                        "output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -439,21 +418,17 @@
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -509,21 +484,17 @@
             },
             "proposed": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -579,21 +550,17 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -668,21 +635,17 @@
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -738,21 +701,17 @@
             },
             "proposed": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
@@ -808,21 +767,17 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
-                        "output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 25000
-                            }
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {

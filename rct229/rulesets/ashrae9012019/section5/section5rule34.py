@@ -7,15 +7,15 @@ from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.match_lists import match_lists_by_id
 
 
-class Section5Rule34(RuleDefinitionListIndexedBase):
+class PRM9012019Rule69u47(RuleDefinitionListIndexedBase):
     """Rule 34 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule34, self).__init__(
+        super(PRM9012019Rule69u47, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section5Rule34.BuildingRule(),
+            each_rule=PRM9012019Rule69u47.BuildingRule(),
             index_rmd=PROPOSED,
             id="5-34",
             description="The infiltration shall be modeled using the same methodology and adjustments for weather and building operation in both the proposed design and the baseline building design.",
@@ -27,7 +27,7 @@ class Section5Rule34(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section5Rule34.BuildingRule, self).__init__(
+            super(PRM9012019Rule69u47.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),

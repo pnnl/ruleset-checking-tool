@@ -13,35 +13,30 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -73,20 +68,14 @@
                                                                 "u_factor": 3.2366105565544463
                                                             }
                                                         ],
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "Construction 1"
                                                     },
                                                     {
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 75,
                                                         "area": 92.90303999999999,
-                                                        "construction": {
-                                                            "id": "construction_2",
-                                                            "u_factor": 3.2366105565544463
-                                                        },
+                                                        "construction": "construction_2",
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 3",
@@ -117,36 +106,41 @@
                                 ]
                             }
                         ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "u_factor": 3.2366105565544463
+                            },
+                            {
+                                "id": "construction_2",
+                                "u_factor": 3.2366105565544463
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "RPD 1",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -178,20 +172,14 @@
                                                                 "u_factor": 3.2366105565544463
                                                             }
                                                         ],
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        }
+                                                        "construction": "Construction 1"
                                                     },
                                                     {
                                                         "id": "Surface 2",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 75,
                                                         "area": 92.90303999999999,
-                                                        "construction": {
-                                                            "id": "construction_2",
-                                                            "u_factor": 3.2366105565544463
-                                                        },
+                                                        "construction": "construction_2",
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 3",
@@ -220,6 +208,16 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "u_factor": 3.2366105565544463
+                            },
+                            {
+                                "id": "construction_2",
+                                "u_factor": 3.2366105565544463
                             }
                         ],
                         "type": "BASELINE_0"
@@ -243,35 +241,30 @@
             "rule_assertion": "=",
             "comparison_value": "Proposed Model",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -287,10 +280,7 @@
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "area": 92.90303999999999,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        },
+                                                        "construction": "Construction 1",
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 1",
@@ -313,10 +303,7 @@
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 75,
                                                         "area": 92.90303999999999,
-                                                        "construction": {
-                                                            "id": "construction_2",
-                                                            "u_factor": 3.2366105565544463
-                                                        },
+                                                        "construction": "construction_2",
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 3",
@@ -347,36 +334,41 @@
                                 ]
                             }
                         ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "u_factor": 3.2366105565544463
+                            },
+                            {
+                                "id": "construction_2",
+                                "u_factor": 3.2366105565544463
+                            }
+                        ],
                         "type": "PROPOSED"
                     }
                 ]
             },
             "baseline": {
                 "id": "RPD 1",
-                "weather": {
-                    "climate_zone": "CZ4A",
-                    "data_source_type": "OTHER"
-                },
-                "data_timestamp": "2024-02-12T12:00Z",
                 "ruleset_model_descriptions": [
                     {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "occupant_multiplier_schedule": "Required Occupancy Sched 1",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -392,10 +384,7 @@
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
                                                         "area": 92.90303999999999,
-                                                        "construction": {
-                                                            "id": "Construction 1",
-                                                            "u_factor": 3.2366105565544463
-                                                        },
+                                                        "construction": "Construction 1",
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 1",
@@ -418,10 +407,7 @@
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 75,
                                                         "area": 92.90303999999999,
-                                                        "construction": {
-                                                            "id": "construction_2",
-                                                            "u_factor": 3.2366105565544463
-                                                        },
+                                                        "construction": "construction_2",
                                                         "subsurfaces": [
                                                             {
                                                                 "id": "SubSurface 3",
@@ -450,6 +436,16 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "u_factor": 3.2366105565544463
+                            },
+                            {
+                                "id": "construction_2",
+                                "u_factor": 3.2366105565544463
                             }
                         ],
                         "type": "BASELINE_0"

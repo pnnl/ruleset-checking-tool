@@ -11,19 +11,19 @@ from rct229.utils.std_comparisons import std_equal
 SKYLIGHT_THRESHOLD = 0.03
 
 
-class Section5Rule25(RuleDefinitionListIndexedBase):
+class PRM9012019Rule84u02(RuleDefinitionListIndexedBase):
     """Rule 25 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule25, self).__init__(
+        super(PRM9012019Rule84u02, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
             },
-            each_rule=Section5Rule25.BuildingRule(),
+            each_rule=PRM9012019Rule84u02.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-25",
             description="If the skylight area of the proposed design is greater than 3%, baseline skylight area shall be decreased in all roof components in which skylights are located to reach 3%.",
@@ -31,16 +31,27 @@ class Section5Rule25(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
+            data_items={
+                "climate_zone": (
+                    BASELINE_0,
+                    "ruleset_model_descriptions[0]/weather/climate_zone",
+                )
+            },
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        constructions = rpd_b["ruleset_model_descriptions"][0].get("constructions")
+        return {"climate_zone": climate_zone, "constructions": constructions}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule25.BuildingRule, self).__init__(
+            super(PRM9012019Rule84u02.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section5Rule25.BuildingRule.BuildingSegmentRule(),
+                each_rule=PRM9012019Rule84u02.BuildingRule.BuildingSegmentRule(),
                 index_rmd=BASELINE_0,
                 list_path="building_segments[*]",
             )
@@ -50,16 +61,18 @@ class Section5Rule25(RuleDefinitionListIndexedBase):
             building_p = context.PROPOSED
             return {
                 "skylight_roof_areas_dictionary_b": get_building_segment_skylight_roof_areas_dict(
-                    data["climate_zone"], building_b
+                    data["climate_zone"], data["constructions"], building_b
                 ),
                 "skylight_roof_areas_dictionary_p": get_building_segment_skylight_roof_areas_dict(
-                    data["climate_zone"], building_p
+                    data["climate_zone"], data["constructions"], building_p
                 ),
             }
 
         class BuildingSegmentRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule25.BuildingRule.BuildingSegmentRule, self).__init__(
+                super(
+                    PRM9012019Rule84u02.BuildingRule.BuildingSegmentRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -122,4 +135,4 @@ class Section5Rule25(RuleDefinitionListIndexedBase):
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 skylight_roof_ratio_b = calc_vals["skylight_roof_ratio_b"]
-                return std_equal(skylight_roof_ratio_b, SKYLIGHT_THRESHOLD)
+                return std_equal(SKYLIGHT_THRESHOLD, skylight_roof_ratio_b)

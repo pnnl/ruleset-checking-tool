@@ -1,3 +1,5 @@
+from typing import List, Dict
+
 from rct229.rulesets.ashrae9012019.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
     get_hvac_zone_list_w_area_dict,
@@ -6,7 +8,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type imp
     get_opaque_surface_type,
 )
 from rct229.schema.config import ureg
-from rct229.utils.assertions import assert_, get_first_attr_, getattr_
+from rct229.utils.assertions import assert_, get_first_attr_, getattr_, RCTException
 from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields, find_one
 from rct229.utils.pint_utils import ZERO
 
@@ -44,9 +46,6 @@ GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
         "building_segments[*].zones[*].surfaces[*].subsurfaces[*]": [
             "u_factor",
         ],
-        "building_segments[*].zones[*].terminals[*]": [
-            "served_by_heating_ventilating_air_conditioning_system"
-        ],
     }
 }
 
@@ -71,16 +70,17 @@ def get_zone_conditioning_category_rmd_dict(
         SEMI_HEATED, UNCONDITIONED, UNENCOLOSED
     """
     zone_conditioning_category_rmd_dict = {}
+    constructions = rmd.get("constructions", [])
     for building in find_all("$.buildings[*]", rmd):
         zone_conditioning_category_dict = get_zone_conditioning_category_dict(
-            climate_zone, building
+            climate_zone, building, constructions
         )
         zone_conditioning_category_rmd_dict.update(zone_conditioning_category_dict)
     return zone_conditioning_category_rmd_dict
 
 
 def get_zone_conditioning_category_dict(
-    climate_zone: str, building: dict
+    climate_zone: str, building: dict, constructions: list
 ) -> dict[str, ZoneConditioningCategory]:
     """Determines the zone conditioning category for every zone in a building
 
@@ -90,6 +90,8 @@ def get_zone_conditioning_category_dict(
         One of the ClimateZoneOptions2019ASHRAE901 enumerated values
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
+    constructions : list
+        A list of construction dictionaries as defined by the ASHRAE229 schema
     Returns
     -------
     dict
@@ -97,6 +99,9 @@ def get_zone_conditioning_category_dict(
         CONDITIONED_MIXED, CONDITIONED_NON_RESIDENTIAL, CONDITIONED_RESIDENTIAL,
         SEMI_HEATED, UNCONDITIONED, UNENCOLOSED
     """
+    if constructions is None:
+        constructions = []
+
     find_exactly_required_fields(
         GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS["building"], building
     )
@@ -192,17 +197,18 @@ def get_zone_conditioning_category_dict(
         for terminal in find_all("terminals[*]", zone):
             # Note: there is only one hvac system even though the field name is plural
             # This will change to singular in schema version 0.0.8
-            hvac_sys_id = terminal[
+            hvac_sys_id = terminal.get(
                 "served_by_heating_ventilating_air_conditioning_system"
-            ]
+            )
 
             # Add cooling and heating capacites for the terminal
             zone_capacity["sensible_cooling"] += hvac_cool_capacity_dict.get(
                 hvac_sys_id, ZERO.THERMAL_CAPACITY
             )
+            # Terminal heating_capacity will include baseboard capacity when hvac_sys_id is None
             zone_capacity["heating"] += hvac_heat_capacity_dict.get(
                 hvac_sys_id, ZERO.THERMAL_CAPACITY
-            ) + (terminal.get("heat_capacity", ZERO.POWER) / zone_area)
+            ) + (terminal.get("heating_capacity", ZERO.POWER) / zone_area)
 
     # Determine eligibility for directly conditioned (heated or cooled) and
     # semi-heated zones
@@ -270,10 +276,10 @@ def get_zone_conditioning_category_dict(
                     non_subsurfaces_area = (
                         getattr_(surface, "surface", "area") - subsurfaces_area
                     )
+                    surface_construction = find_construction_by_surface(
+                        surface, constructions
+                    )
                     # Calculate the UA for the surface
-                    surface_construction = getattr_(surface, "surface", "construction")
-                    # TODO Temp code for test
-                    surface_ua = ZERO.UA
                     try:
                         surface_ua = (
                             get_first_attr_(
@@ -290,12 +296,21 @@ def get_zone_conditioning_category_dict(
                     # Add the surface UA to one of the running totals for the zone
                     # according to whether the surface is adjacent to a directly conditioned
                     # zone or not
-                    if (
-                        getattr_(surface, "surface", "adjacent_to") == "INTERIOR"
-                        and getattr_(surface, "surface", "adjacent_zone")
-                        in directly_conditioned_zone_ids
-                    ):
-                        zone_directly_conditioned_ua += surface_ua  # zone_1_4
+                    if getattr_(surface, "surface", "adjacent_to") == "INTERIOR":
+                        if (
+                            len(find_all("$.spaces[*]", zone)) <= 1
+                            and getattr_(surface, "surface", "adjacent_zone")
+                            in directly_conditioned_zone_ids
+                        ):
+                            # 1. check zone has only one space, if yes, use getattr_, if more than 1, can skip the ua calculation.
+                            zone_directly_conditioned_ua += surface_ua  # zone_1_4
+                        elif (
+                            surface.get("adjacent_zone")
+                            in directly_conditioned_zone_ids
+                        ):
+                            zone_directly_conditioned_ua += surface_ua  # zone_1_4
+                        else:
+                            zone_other_ua += surface_ua
                     else:
                         zone_other_ua += surface_ua  # zone_1_4
 
@@ -402,7 +417,12 @@ def get_zone_conditioning_category_dict(
                 )
                 if zone_volume / zone_floor_area < CRAWLSPACE_HEIGHT_THRESHOLD and any(
                     [
-                        get_opaque_surface_type(surface)
+                        get_opaque_surface_type(
+                            surface,
+                            find_construction_by_surface(surface, constructions).get(
+                                "has_radiant_heat"
+                            ),
+                        )
                         in ["HEATED SLAB-ON-GRADE", "UNHEATED SLAB-ON-GRADE"]
                         and surface["adjacent_to"] == "GROUND"
                         for surface in zone["surfaces"]
@@ -429,3 +449,16 @@ def get_zone_conditioning_category_dict(
                     ] = ZoneConditioningCategory.UNCONDITIONED  # zone_1_9
 
     return zone_conditioning_category_dict
+
+
+def find_construction_by_surface(surface: dict, constructions: List[Dict]) -> dict:
+    surface_construction_id = getattr_(surface, "Surface", "construction")
+    surface_construction = next(
+        (
+            construction
+            for construction in constructions
+            if construction["id"] == surface_construction_id
+        ),
+        {},  # empty dict if not found, to allow constructions to be optional
+    )
+    return surface_construction

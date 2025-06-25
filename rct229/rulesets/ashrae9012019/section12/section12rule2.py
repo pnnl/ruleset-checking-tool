@@ -31,15 +31,15 @@ FAIL_MSG_CASE_2 = "The baseline miscellaneous equipment schedule has automatic r
 FAIL_MSG_CASE_6 = "Rule evaluation fails with a conservative outcome. The proposed schedule equivalent full load hours is greater than the baseline."
 
 
-class Section12Rule2(RuleDefinitionListIndexedBase):
+class PRM9012019Rule66e91(RuleDefinitionListIndexedBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 12 (Receptacle)"""
 
     def __init__(self):
-        super(Section12Rule2, self).__init__(
+        super(PRM9012019Rule66e91, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section12Rule2.RMDRule(),
+            each_rule=PRM9012019Rule66e91.RMDRule(),
             index_rmd=BASELINE_0,
             id="12-2",
             description=(
@@ -49,17 +49,15 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1-12 Proposed Building Performance column",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
-            required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
-            data_items={"is_leap_year": (BASELINE_0, "calendar/is_leap_year")},
         )
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section12Rule2.RMDRule, self).__init__(
+            super(PRM9012019Rule66e91.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section12Rule2.RMDRule.SpaceRule(),
+                each_rule=PRM9012019Rule66e91.RMDRule.SpaceRule(),
                 index_rmd=BASELINE_0,
                 list_path="buildings[*].building_segments[*].zones[*].spaces[*]",
             )
@@ -89,11 +87,11 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
 
         class SpaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section12Rule2.RMDRule.SpaceRule, self).__init__(
+                super(PRM9012019Rule66e91.RMDRule.SpaceRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
-                    each_rule=Section12Rule2.RMDRule.SpaceRule.MiscellaneousEquipmentRule(),
+                    each_rule=PRM9012019Rule66e91.RMDRule.SpaceRule.MiscellaneousEquipmentRule(),
                     index_rmd=BASELINE_0,
                     list_path="$.miscellaneous_equipment[*]",
                 )
@@ -108,7 +106,7 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
             class MiscellaneousEquipmentRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section12Rule2.RMDRule.SpaceRule.MiscellaneousEquipmentRule,
+                        PRM9012019Rule66e91.RMDRule.SpaceRule.MiscellaneousEquipmentRule,
                         self,
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
@@ -117,7 +115,6 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                     )
 
                 def get_calc_vals(self, context, data=None):
-                    is_leap_year = data["is_leap_year"]
                     misc_equip_b = context.BASELINE_0
                     misc_equip_p = context.PROPOSED
 
@@ -134,23 +131,26 @@ class Section12Rule2(RuleDefinitionListIndexedBase):
                         misc_equip_schedule_id_p
                     )
 
-                    auto_receptacle_control_b = misc_equip_b.get(
-                        "has_automatic_control"
+                    automatic_controlled_percentage_b = misc_equip_b.get(
+                        "automatic_controlled_percentage"
                     )
-                    auto_receptacle_control_p = misc_equip_p.get(
-                        "has_automatic_control"
+                    automatic_controlled_percentage_p = misc_equip_p.get(
+                        "automatic_controlled_percentage"
+                    )
+                    auto_receptacle_control_b = (
+                        automatic_controlled_percentage_b
+                        and automatic_controlled_percentage_b > 0.0
+                    )
+                    auto_receptacle_control_p = (
+                        automatic_controlled_percentage_p
+                        and automatic_controlled_percentage_p > 0.0
                     )
 
-                    mask_schedule = (
-                        [1] * LeapYear.LEAP_YEAR_HOURS
-                        if is_leap_year
-                        else [1] * LeapYear.REGULAR_YEAR_HOURS
-                    )
+                    mask_schedule = [1] * len(misc_equip_schedule_b)
                     schedules_comparison_output = compare_schedules(
                         misc_equip_schedule_b,
                         misc_equip_schedule_p,
                         mask_schedule,
-                        is_leap_year,
                     )
                     return {
                         # No need to report full schedule values.

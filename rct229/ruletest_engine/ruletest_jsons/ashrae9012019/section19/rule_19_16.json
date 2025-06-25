@@ -14,12 +14,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -68,7 +67,7 @@
                                                 "cooling_system": {
                                                     "id": "NonMech_System",
                                                     "type": "NON_MECHANICAL",
-                                                    "is_sized_based_on_design_day": true
+                                                    "is_calculated_size": true
                                                 }
                                             }
                                         ]
@@ -82,7 +81,6 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -131,7 +129,7 @@
                                                 "cooling_system": {
                                                     "id": "NonMech_System",
                                                     "type": "NON_MECHANICAL",
-                                                    "is_sized_based_on_design_day": true
+                                                    "is_calculated_size": true
                                                 }
                                             }
                                         ]
@@ -160,12 +158,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -214,7 +211,7 @@
                                                 "cooling_system": {
                                                     "id": "NonMech_System",
                                                     "type": "NON_MECHANICAL",
-                                                    "is_sized_based_on_design_day": true
+                                                    "is_calculated_size": true
                                                 }
                                             }
                                         ]
@@ -228,7 +225,6 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -277,7 +273,7 @@
                                                 "cooling_system": {
                                                     "id": "NonMech_System",
                                                     "type": "NON_MECHANICAL",
-                                                    "is_sized_based_on_design_day": true
+                                                    "is_calculated_size": true
                                                 }
                                             }
                                         ]
@@ -305,12 +301,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -379,7 +374,6 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",

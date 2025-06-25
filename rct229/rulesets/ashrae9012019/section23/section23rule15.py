@@ -34,15 +34,15 @@ APPLICABLE_SYS_TYPES = [
 DehumidificationOptions = SchemaEnums.schema_enums["DehumidificationOptions"]
 
 
-class Section23Rule15(RuleDefinitionListIndexedBase):
+class PRM9012019Rule71f87(RuleDefinitionListIndexedBase):
     """Rule 15 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule15, self).__init__(
+        super(PRM9012019Rule71f87, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section23Rule15.HVACRule(),
+            each_rule=PRM9012019Rule71f87.HVACRule(),
             index_rmd=PROPOSED,
             id="23-15",
             description="Dehumidification reheat shall be the same as the system heating type.",
@@ -91,7 +91,7 @@ class Section23Rule15(RuleDefinitionListIndexedBase):
 
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section23Rule15.HVACRule, self).__init__(
+            super(PRM9012019Rule71f87.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),

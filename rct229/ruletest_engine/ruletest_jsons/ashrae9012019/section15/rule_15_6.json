@@ -8,15 +8,15 @@
         "standard": {
             "rule_id": "15-6",
             "ruleset_reference": "-",
-            "rule_description": "Transformer efficiency reported in User RMR equals Table 8.4.4",
-            "applicable_rmr": "User RMR",
+            "rule_description": "Transformer efficiency reported in User RMD equals Table 8.4.4",
+            "applicable_RMD": "User RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
+            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMD is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.29"
+            "schema_version": "0.1.7"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ashrae229",
                 "ruleset_model_descriptions": [
@@ -46,15 +46,15 @@
         "standard": {
             "rule_id": "15-6",
             "ruleset_reference": "-",
-            "rule_description": "Transformer efficiency reported in User RMR equals Table 8.4.4",
-            "applicable_rmr": "User RMR",
+            "rule_description": "Transformer efficiency reported in User RMD equals Table 8.4.4",
+            "applicable_RMD": "User RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
+            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMD is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.29"
+            "schema_version": "0.1.7"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ashrae229",
                 "ruleset_model_descriptions": [
@@ -84,15 +84,15 @@
         "standard": {
             "rule_id": "15-6",
             "ruleset_reference": "-",
-            "rule_description": "Transformer efficiency reported in User RMR equals Table 8.4.4",
-            "applicable_rmr": "User RMR",
+            "rule_description": "Transformer efficiency reported in User RMD equals Table 8.4.4",
+            "applicable_RMD": "User RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
+            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMD is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.29"
+            "schema_version": "0.1.7"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ashrae229",
                 "ruleset_model_descriptions": [
@@ -122,15 +122,15 @@
         "standard": {
             "rule_id": "15-6",
             "ruleset_reference": "-",
-            "rule_description": "Transformer efficiency reported in User RMR equals Table 8.4.4",
-            "applicable_rmr": "User RMR",
+            "rule_description": "Transformer efficiency reported in User RMD equals Table 8.4.4",
+            "applicable_RMD": "User RMD",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
-            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMR is greater than Table 8.4.4",
+            "rule_dependency": "Rule 15-3 = true and xfrm_type = drytype and xfrm_efficiency in User RMD is greater than Table 8.4.4",
             "mandatory_rule": 0,
-            "schema_version": "0.0.29"
+            "schema_version": "0.1.7"
         },
-        "rmr_transformations": {
+        "rmd_transformations": {
             "user": {
                 "id": "ashrae229",
                 "ruleset_model_descriptions": [

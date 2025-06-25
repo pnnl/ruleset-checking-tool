@@ -138,12 +138,22 @@ TEST_SCC_DICT = {
 TEST_RMD_12 = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMD],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_BUILDING = quantify_rmd(TEST_RMD_12)["ruleset_model_descriptions"][0]["buildings"][
     0
 ]
+TEST_CONSTRUCTIONS = quantify_rmd(TEST_RMD_12)["ruleset_model_descriptions"][0].get(
+    "constructions"
+)
 
 
 def test__TEST_RPD__is_valid():
@@ -158,7 +168,9 @@ def test__TEST_RPD__is_valid():
     return_value=TEST_SCC_DICT,
 )
 def test__get_building_scc_skylight_roof_ratios_dict(mock_get_opaque_surface_type):
-    assert get_building_scc_window_wall_ratios_dict(CLIMATE_ZONE, TEST_BUILDING) == {
+    assert get_building_scc_window_wall_ratios_dict(
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING
+    ) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.5,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.25,
         SCC.EXTERIOR_MIXED: 0.25,

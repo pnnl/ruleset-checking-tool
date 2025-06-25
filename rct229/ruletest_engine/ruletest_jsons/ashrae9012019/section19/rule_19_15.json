@@ -13,12 +13,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -80,7 +79,6 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -129,7 +127,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 75,
                                                             "design_airflow": 117.98686079999996,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -167,12 +165,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -234,7 +231,6 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -283,7 +279,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 75,
                                                             "design_airflow": 117.98686079999996,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -321,12 +317,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -388,7 +383,6 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -437,7 +431,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 90,
                                                             "design_airflow": 141.58423295999995,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -475,12 +469,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -542,7 +535,6 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -591,7 +583,7 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 75,
                                                             "design_airflow": 117.98686079999996,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -630,12 +622,11 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.0.36"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -697,7 +688,6 @@
             },
             "baseline": {
                 "id": "ASHRAE229 1",
-                "data_timestamp": "2024-02-12T09:00Z",
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -746,14 +736,14 @@
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 75,
                                                             "design_airflow": 117.98686079999996,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         },
                                                         {
                                                             "id": "Supply Fan 2",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 75,
                                                             "design_airflow": 117.98686079999996,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "return_fans": [
@@ -761,7 +751,7 @@
                                                             "id": "Return Fan 1",
                                                             "specification_method": "SIMPLE",
                                                             "design_electric_power": 25,
-                                                            "is_airflow_sized_based_on_design_day": true
+                                                            "is_airflow_calculated": true
                                                         }
                                                     ],
                                                     "minimum_outdoor_airflow": 0.0
