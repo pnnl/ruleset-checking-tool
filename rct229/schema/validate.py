@@ -337,10 +337,12 @@ def check_annual_schedule_lengths(rpd: dict) -> list[str]:
     """
     error_messages = []
 
-    schedules = find_all(
-        "$.ruleset_model_descriptions[*].schedules[?(@.hourly_values)]", rpd
-    )
-    lengths = [len(schedule) for schedule in schedules]
+    schedules = [
+        sched
+        for sched in find_all("$.ruleset_model_descriptions[*].schedules[*]", rpd)
+        if "hourly_values" in sched
+    ]
+    lengths = [len(schedule["hourly_values"]) for schedule in schedules]
 
     if not lengths:
         return []  # No schedules with hourly_values — no errors
@@ -351,15 +353,16 @@ def check_annual_schedule_lengths(rpd: dict) -> list[str]:
 
     # Check if common length is valid
     if common_length not in (8760, 8784):
-        error_messages.append(
-            f"The most common schedule length is {common_length}, which is not 8760 or 8784."
-        )
+        return [
+            f"Annual hourly schedules are required to be either 8760 or 8784. The most common schedule length in the project is {common_length}."
+        ]
 
+    # Check each schedule against the common length, after verifying the common length is valid
     for schedule, length in zip(schedules, lengths):
-        schedule_id = schedule.get["id"]
+        schedule_id = schedule["id"]
         if length != common_length:
             error_messages.append(
-                f"Schedule '{schedule_id}' has {length} hourly values; expected {common_length}."
+                f"Schedule '{schedule_id}' has {length} hourly values; all annual schedule lengths are expected to match the common length ({common_length})."
             )
 
     return error_messages

@@ -284,3 +284,51 @@ def test__non_schema_validate_rpd__mismatched_associated_efficiency_lists_2():
             "'Cooling 1' lists at 'efficiency_metric_types' and 'efficiency_metric_values' are not the same length."
         ],
     }
+
+
+def test__non_schema_validate_rpd__unexpected_schedule_length():
+    test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
+    test_rmd["ruleset_model_descriptions"][0]["schedules"] = [
+        {"id": "Schedule 1", "hourly_values": [0.5] * 8759}  # 1 less than 8760
+    ]
+
+    assert non_schema_validate_rpd(test_rmd) == {
+        "passed": False,
+        "error": [
+            "Annual hourly schedules are required to be either 8760 or 8784. The most common schedule length in the project is 8759."
+        ],
+    }
+
+
+def test__non_schema_validate_rpd__mismatched_schedule_length():
+    test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
+    test_rmd["ruleset_model_descriptions"][0]["schedules"] = [
+        {"id": "Schedule 1", "hourly_values": [0.5] * 8760},
+        {"id": "Schedule 2", "hourly_values": [0.6] * 8760},
+        {"id": "Schedule 3", "hourly_values": [1] * 8784},
+    ]
+
+    assert non_schema_validate_rpd(test_rmd) == {
+        "passed": False,
+        "error": [
+            "Schedule 'Schedule 3' has 8784 hourly values; all annual schedule lengths are expected to match the common length (8760)."
+        ],
+    }
+
+
+def test__non_schema_validate_rpd__mismatched_schedule_length_2():
+    test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
+    test_rmd["ruleset_model_descriptions"][0]["schedules"] = [
+        {"id": "Schedule 1", "hourly_values": [0.5] * 8760},
+        {"id": "Schedule 2", "hourly_values": [0.6] * 8760},
+        {"id": "Schedule 3", "hourly_values": [1] * 8784},
+        {"id": "Schedule 4", "hourly_values": [0] * 8784},
+    ]
+
+    assert non_schema_validate_rpd(test_rmd) == {
+        "passed": False,
+        "error": [
+            "Schedule 'Schedule 3' has 8784 hourly values; all annual schedule lengths are expected to match the common length (8760).",
+            "Schedule 'Schedule 4' has 8784 hourly values; all annual schedule lengths are expected to match the common length (8760).",
+        ],
+    }
