@@ -17,12 +17,17 @@ Data Lookup: None
 
 Logic:
 
+- create a list of spaces: `spaces_served = []`
 - find the building_segment that contains this swh_use by looking through each building segment: `for building_segment in RMD.building_segments:`
     - check if the swh_use is in this building segment: `if swh_use in building_segment.service_water_heating_uses:`
-        - create a list of spaces: `spaces_served = []`
-          - look at each space in the building segment to see which of them reference the swh_use: `for space in building_segment...spaces:`
-            - if the swh_use ID is in the list of space ServiceWaterHeatingUses, then the space is one of the spaces and we add it to the list: `if swh_use.id in space.service_water_heating_uses: spaces_served.append(space)`
-        - return space_ids: `return spaces_served`
+      - look at each space in the building segment to see which of them reference the swh_use: `for space in building_segment...spaces:`
+        - if the swh_use ID is in the list of space ServiceWaterHeatingUses, then the space is one of the spaces and we add it to the list - note to Dev team - in this case, we only need to look at the references stored, not the actual objects: `if swh_use.id in space.service_water_heating_uses: spaces_served.append(space)`
+- if there are no spaces served at this point, then the SWH use is a use that is applied to only one space: `if len(spaces_served) == 0:`
+    - look through each space: `for space...in RMD.spaces:`
+        - look for the SWH use id in space.service_water_heating_uses - note to DEV team - in this case, we only need to look at the actual objects, not the references: `if swh_use.id in space.service_water_heating_uses:`
+            - based on the rules - that a ServiceWaterHeatingUse object that is stored in a space cannot be referenced by other spaces, this is the only space served by this service water heating use.  We can return a list with just this space: `return [space]`
+       
+- return the spaces served: `return spaces_served`
 
 
 
