@@ -17,6 +17,108 @@ from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import assert_
 
 
+def count_number_of_secondary_rules(ruleset_standard):
+    """Returns the number of primary rules in a standard
+
+     Parameters
+     ----------
+     ruleset_standard : str
+         Name of the code standard you're interested in counting under the rct229/rulesets directory.
+         Ex: 'ashrae9012019'
+
+     Returns
+    -------
+    count_dict: dict
+        Python dict with keys for each section in a given standard and their respective count.
+        Also contains 'Total' as a key with the sum total rules
+
+    """
+
+    if not _setup_workflow(ruleset_standard):
+        assert_(
+            False,
+            f"Provided ruleset, {ruleset_standard}, does not match the available ones in the RCT. Available: ashrae9012019 ",
+        )
+
+    # Collect rule modules as a list of tuples
+    available_rule_definitions = rulesets.__getrules__()
+    ruleset = rulesets.__getruleset__()
+    # Dictionary with rule counts
+    count_dict = {}
+
+    for rule_definition_tuple in available_rule_definitions:
+        if not rule_definition_tuple[1]().is_primary_rule:
+            section_rule_name = rules_dict.get(rule_definition_tuple[0].lower())
+
+            if section_rule_name is None:
+                print(f"Rule {rule_definition_tuple[0]} not found in rules_dict")
+                continue
+
+            # Parse section name from section{N}rule{N}, then add it to the dictionary count
+            # TODO - try catch error
+            section_name = ruleset.section_dict[
+                section_rule_name.split("rule")[0].lower().split("section")[1]
+            ]
+
+            count_dict[section_name] = count_dict.get(section_name, 0) + 1
+
+    # Get total number of rules
+    count_dict["total"] = sum(count_dict.values())
+
+    return count_dict
+
+
+def count_number_of_primary_rules(ruleset_standard):
+    """Returns the number of primary rules in a standard
+
+     Parameters
+     ----------
+     ruleset_standard : str
+         Name of the code standard you're interested in counting under the rct229/rulesets directory.
+         Ex: 'ashrae9012019'
+
+     Returns
+    -------
+    count_dict: dict
+        Python dict with keys for each section in a given standard and their respective count.
+        Also contains 'Total' as a key with the sum total rules
+
+    """
+
+    if not _setup_workflow(ruleset_standard):
+        assert_(
+            False,
+            f"Provided ruleset, {ruleset_standard}, does not match the available ones in the RCT. Available: ashrae9012019 ",
+        )
+
+    # Collect rule modules as a list of tuples
+    available_rule_definitions = rulesets.__getrules__()
+    ruleset = rulesets.__getruleset__()
+    # Dictionary with rule counts
+    count_dict = {}
+
+    for rule_definition_tuple in available_rule_definitions:
+        if rule_definition_tuple[1]().is_primary_rule:
+            section_rule_name = rules_dict.get(rule_definition_tuple[0].lower())
+
+            if section_rule_name is None:
+                print(f"Rule {rule_definition_tuple[0]} not found in rules_dict")
+                continue
+
+            # Parse section name from section{N}rule{N}, then add it to the dictionary count
+            # TODO - try catch error
+            section_name = ruleset.section_dict[
+                section_rule_name.split("rule")[0].lower().split("section")[1]
+            ]
+
+            count_dict[section_name] = count_dict.get(section_name, 0) + 1
+
+    # Get total number of rules
+    count_dict["total"] = sum(count_dict.values())
+
+    return count_dict
+
+
 def count_number_of_rules(ruleset_standard):
     """Returns the number of rules in a standard
 
@@ -42,7 +144,7 @@ def count_number_of_rules(ruleset_standard):
 
     # Collect rule modules as a list of tuples
     available_rule_definitions = rulesets.__getrules__()
-
+    ruleset = rulesets.__getruleset__()
     # Dictionary with rule counts
     count_dict = {}
 
@@ -54,7 +156,11 @@ def count_number_of_rules(ruleset_standard):
             continue
 
         # Parse section name from section{N}rule{N}, then add it to the dictionary count
-        section_name = section_rule_name.split("rule")[0].lower()
+        # TODO - try catch error
+        section_name = ruleset.section_dict[
+            section_rule_name.split("rule")[0].lower().split("section")[1]
+        ]
+
         count_dict[section_name] = count_dict.get(section_name, 0) + 1
 
     # Get total number of rules

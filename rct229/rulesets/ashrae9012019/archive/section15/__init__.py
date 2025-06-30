@@ -2,10 +2,6 @@
 import importlib
 
 __all__ = [
-    "section15rule1",
-    "section15rule2",
-    "section15rule3",
-    "section15rule4",
     "section15rule5",
     "section15rule6",
 ]
