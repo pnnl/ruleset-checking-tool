@@ -13,19 +13,19 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 
 SERVICE_WATER_HEATING_SPACE = SchemaEnums.schema_enums[
-    "ServiceWaterHeatingSpaceOptions2019ASHRAE901"
+    "ServiceWaterHeatingAreaOptions2019ASHRAE901"
 ]
 
 
-class PRM9012019rule63z32(RuleDefinitionListIndexedBase):
+class PRM9012019Rule63z32(RuleDefinitionListIndexedBase):
     """Rule 17 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(PRM9012019rule63z32, self).__init__(
+        super(PRM9012019Rule63z32, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=PRM9012019rule63z32.RMDRule(),
+            each_rule=PRM9012019Rule63z32.RMDRule(),
             index_rmd=PROPOSED,
             id="11-17",
             description="All buildings that will have service water heating loads must include those loads in the simulation.",
@@ -37,18 +37,18 @@ class PRM9012019rule63z32(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(PRM9012019rule63z32.RMDRule, self).__init__(
+            super(PRM9012019Rule63z32.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
-                each_rule=PRM9012019rule63z32.RMDRule.BuildingSegmentRule(),
+                each_rule=PRM9012019Rule63z32.RMDRule.BuildingSegmentRule(),
                 index_rmd=PROPOSED,
                 list_path="$.buildings[*].building_segments[*]",
             )
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
-            is_leap_year_p = rmd_p["calendar"]["is_leap_year"]
+            is_leap_year_p = True
 
             swh_bat = {
                 bldg_seg_id: get_building_segment_swh_bat(
@@ -70,7 +70,7 @@ class PRM9012019rule63z32(RuleDefinitionListIndexedBase):
 
         class BuildingSegmentRule(RuleDefinitionBase):
             def __init__(self):
-                super(PRM9012019rule63z32.RMDRule.BuildingSegmentRule, self).__init__(
+                super(PRM9012019Rule63z32.RMDRule.BuildingSegmentRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=False, PROPOSED=True
                     )

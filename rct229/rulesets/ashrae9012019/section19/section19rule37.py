@@ -6,11 +6,11 @@ HEATING_DESIGN_DAY = SchemaEnums.schema_enums["HeatingDesignDayOptions"]
 COOLING_DESIGN_DAY = SchemaEnums.schema_enums["CoolingDesignDayOptions"]
 
 
-class Section19Rule37(PartialRuleDefinition):
+class prm9012019rule86o02(PartialRuleDefinition):
     """Rule 37 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule37, self).__init__(
+        super(prm9012019rule86o02, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),

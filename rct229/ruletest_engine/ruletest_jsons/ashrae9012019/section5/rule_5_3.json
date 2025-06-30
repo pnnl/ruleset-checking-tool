@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -51,9 +51,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 90,
-                                                        "construction": {
-                                                            "id": "Construction 1"
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
@@ -73,6 +71,11 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1"
                             }
                         ],
                         "type": "BASELINE_0"
@@ -95,7 +98,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -133,9 +136,7 @@
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
                                                         "tilt": 0,
-                                                        "construction": {
-                                                            "id": "Construction 1"
-                                                        }
+                                                        "construction": "Construction 1"
                                                     }
                                                 ]
                                             }
@@ -155,6 +156,11 @@
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1"
                             }
                         ],
                         "type": "BASELINE_0"

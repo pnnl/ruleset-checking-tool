@@ -27,12 +27,14 @@ TEST_RMD = {
                                     "served_by_heating_ventilating_air_conditioning_system": "PTAC 1",
                                 }
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Zone exhaust fan 1",
-                                "specification_method": "SIMPLE",
-                                "design_electric_power": 200,
-                                "design_airflow": 1500,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Zone exhaust fan 1",
+                                    "specification_method": "SIMPLE",
+                                    "design_electric_power": 200,
+                                    "design_airflow": 1500,
+                                }
+                            ],
                         },
                         {
                             "id": "Thermal Zone 2",
@@ -59,12 +61,14 @@ TEST_RMD = {
                                     "served_by_heating_ventilating_air_conditioning_system": "PTAC 3",
                                 }
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Zone exhaust fan 3-1",
-                                "specification_method": "SIMPLE",
-                                "design_electric_power": 200,
-                                "design_airflow": 1500,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Zone exhaust fan 3-1",
+                                    "specification_method": "SIMPLE",
+                                    "design_electric_power": 200,
+                                    "design_airflow": 1500,
+                                }
+                            ],
                         },
                     ],
                     "heating_ventilating_air_conditioning_systems": [
@@ -180,39 +184,31 @@ def test_get_hvac_sys_and_assoc_zones_largest_exhaust_source_hvac_and_zone_succe
     hvac_sys_and_assoc_zones_largest_exhaust_source_dict = (
         get_hvac_sys_and_assoc_zones_largest_exhaust_source(TEST_RMD_UNIT, "PTAC 1")
     )
-    assert (
-        hvac_sys_and_assoc_zones_largest_exhaust_source_dict["hvac_fan_sys_exhaust_sum"]
-        - 1500 * ureg("liter / second")
-        < 0.001 * ureg("liter / second"),
-    )
+    assert hvac_sys_and_assoc_zones_largest_exhaust_source_dict[
+        "hvac_fan_sys_exhaust_sum"
+    ] - 1500 * ureg("liter / second") < 0.001 * ureg("liter / second")
 
-    assert (
-        hvac_sys_and_assoc_zones_largest_exhaust_source_dict["maximum_zone_exhaust"]
-        - 1500 * ureg("liter / second")
-        < 0.001 * ureg("liter / second"),
-    )
+    assert hvac_sys_and_assoc_zones_largest_exhaust_source_dict[
+        "maximum_zone_exhaust"
+    ] - 1500 * ureg("liter / second") < 0.001 * ureg("liter / second")
 
     assert (
         hvac_sys_and_assoc_zones_largest_exhaust_source_dict["num_hvac_exhaust_fans"]
         == 2
     )
 
-    assert (
-        hvac_sys_and_assoc_zones_largest_exhaust_source_dict["maximum_hvac_exhaust"]
-        - 1000 * ureg("liter / second")
-        < 0.001 * ureg("liter / second"),
-    )
+    assert hvac_sys_and_assoc_zones_largest_exhaust_source_dict[
+        "maximum_hvac_exhaust"
+    ] - 1000 * ureg("liter / second") < 0.001 * ureg("liter / second")
 
 
 def test_get_hvac_sys_and_assoc_zones_largest_exhaust_source_hvac_only_success():
     hvac_sys_and_assoc_zones_largest_exhaust_source_dict = (
         get_hvac_sys_and_assoc_zones_largest_exhaust_source(TEST_RMD_UNIT, "PTAC 2")
     )
-    assert (
-        hvac_sys_and_assoc_zones_largest_exhaust_source_dict["hvac_fan_sys_exhaust_sum"]
-        - 1500 * ureg("liter / second")
-        < 0.001 * ureg("liter / second"),
-    )
+    assert hvac_sys_and_assoc_zones_largest_exhaust_source_dict[
+        "hvac_fan_sys_exhaust_sum"
+    ] - 1500 * ureg("liter / second") < 0.001 * ureg("liter / second")
 
     assert hvac_sys_and_assoc_zones_largest_exhaust_source_dict[
         "maximum_zone_exhaust"
@@ -223,11 +219,9 @@ def test_get_hvac_sys_and_assoc_zones_largest_exhaust_source_hvac_only_success()
         == 2
     )
 
-    assert (
-        hvac_sys_and_assoc_zones_largest_exhaust_source_dict["maximum_hvac_exhaust"]
-        - 1000 * ureg("liter / second")
-        < 0.001 * ureg("liter / second"),
-    )
+    assert hvac_sys_and_assoc_zones_largest_exhaust_source_dict[
+        "maximum_hvac_exhaust"
+    ] - 1000 * ureg("liter / second") < 0.001 * ureg("liter / second")
 
 
 def test_get_hvac_sys_and_assoc_zones_largest_exhaust_source_zone_only_success():
@@ -238,11 +232,9 @@ def test_get_hvac_sys_and_assoc_zones_largest_exhaust_source_zone_only_success()
         "hvac_fan_sys_exhaust_sum"
     ] == 0.0 * ureg("liter / second")
 
-    assert (
-        hvac_sys_and_assoc_zones_largest_exhaust_source_dict["maximum_zone_exhaust"]
-        - 1500 * ureg("liter / second")
-        < 0.001 * ureg("liter / second"),
-    )
+    assert hvac_sys_and_assoc_zones_largest_exhaust_source_dict[
+        "maximum_zone_exhaust"
+    ] - 1500 * ureg("liter / second") < 0.001 * ureg("liter / second")
 
     assert (
         hvac_sys_and_assoc_zones_largest_exhaust_source_dict["num_hvac_exhaust_fans"]

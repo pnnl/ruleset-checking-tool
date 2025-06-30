@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -136,16 +136,13 @@
                             }
                         ],
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 703400.0
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 703400.0
                         },
                         "type": "BASELINE_0"
                     }
@@ -167,7 +164,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -290,16 +287,13 @@
                             }
                         ],
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 703400.0
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 703400.0
                         },
                         "type": "BASELINE_0"
                     }
@@ -321,7 +315,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -446,16 +440,13 @@
                             }
                         ],
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 2813600.0
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 2813600.0
                         },
                         "type": "BASELINE_0"
                     }
@@ -477,7 +468,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -602,16 +593,13 @@
                             }
                         ],
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 2813600.0
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 2813600.0
                         },
                         "type": "BASELINE_0"
                     }
@@ -633,7 +621,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "baseline": {
@@ -701,16 +689,13 @@
                             }
                         ],
                         "model_output": {
-                            "id": "Output 1",
-                            "output_instance": {
-                                "id": "Output Instance 1",
-                                "unmet_load_hours": 0,
-                                "unmet_load_hours_heating": 0,
-                                "unmet_occupied_load_hours_heating": 0,
-                                "unmet_load_hours_cooling": 0,
-                                "unmet_occupied_load_hours_cooling": 0,
-                                "building_peak_cooling_load": 2813600.0
-                            }
+                            "id": "Output Instance 1",
+                            "unmet_load_hours": 0,
+                            "unmet_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 2813600.0
                         },
                         "type": "BASELINE_0"
                     }

@@ -40,7 +40,6 @@ class PRM9012019Rule55z67(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019Rule55z67.RuleSetModelDescriptionRule.ElevatorRule(),
                 index_rmd=BASELINE_0,
                 list_path="buildings[*].elevators[*]",
-                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
             )
 
         def is_applicable(self, context, data=None):
@@ -54,7 +53,6 @@ class PRM9012019Rule55z67(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
-            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             cab_ventilation_fan_multiplier_schedule_b = {
                 sch_id: find_exactly_one_schedule(rmd_b, sch_id)["hourly_values"]
@@ -73,7 +71,6 @@ class PRM9012019Rule55z67(RuleDefinitionListIndexedBase):
             return {
                 "cab_ventilation_fan_multiplier_schedule_b": cab_ventilation_fan_multiplier_schedule_b,
                 "cab_lighting_multiplier_schedule_b": cab_lighting_multiplier_schedule_b,
-                "is_leap_year_b": is_leap_year_b,
             }
 
         class ElevatorRule(RuleDefinitionBase):
@@ -90,7 +87,6 @@ class PRM9012019Rule55z67(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 elevator_b = context.BASELINE_0
-                is_leap_year_b = data["is_leap_year_b"]
 
                 cab_vent_fan_multi_sch_b = getattr_(
                     elevator_b, "elevators", "cab_ventilation_fan_multiplier_schedule"
@@ -106,39 +102,27 @@ class PRM9012019Rule55z67(RuleDefinitionListIndexedBase):
                     cab_lgt_multi_sch_b
                 ]
 
-                total_hours = (
-                    LeapYear.LEAP_YEAR_HOURS
-                    if is_leap_year_b
-                    else LeapYear.REGULAR_YEAR_HOURS
-                )
-
-                continuous_schedule = [1] * total_hours
+                continuous_schedule = [1] * len(cab_vent_sch_b)
 
                 vent_sched_compare_data = compare_schedules(
                     cab_vent_sch_b,
                     continuous_schedule,
                     continuous_schedule,
-                    is_leap_year_b,
                 )["total_hours_matched"]
 
                 light_sched_compare_data = compare_schedules(
                     cab_lgt_sch_b,
                     continuous_schedule,
                     continuous_schedule,
-                    is_leap_year_b,
                 )["total_hours_matched"]
 
                 return {
                     "vent_sched_compare_data": vent_sched_compare_data,
                     "light_sched_compare_data": light_sched_compare_data,
-                    "total_hours": total_hours,
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
                 vent_sched_compare_data = calc_vals["vent_sched_compare_data"]
                 light_sched_compare_data = calc_vals["light_sched_compare_data"]
-                total_hours = calc_vals["total_hours"]
 
-                return (
-                    vent_sched_compare_data == light_sched_compare_data == total_hours
-                )
+                return vent_sched_compare_data == light_sched_compare_data

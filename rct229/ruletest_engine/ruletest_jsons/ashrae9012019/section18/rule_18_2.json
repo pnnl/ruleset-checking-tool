@@ -12,16 +12,13 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -218,9 +215,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -437,16 +431,13 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -646,9 +637,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -868,16 +856,13 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -1061,9 +1046,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -1267,16 +1249,13 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -1460,9 +1439,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -1666,16 +1642,13 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -1827,9 +1800,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -2001,16 +1971,13 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -2226,9 +2193,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -2256,10 +2220,12 @@
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone Exhaust Fan 1",
-                                                    "design_airflow": 7551.159091199997
-                                                },
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone Exhaust Fan 1",
+                                                        "design_airflow": 7551.159091199997
+                                                    }
+                                                ],
                                                 "floor_name": "flr 1"
                                             },
                                             {
@@ -2470,16 +2436,13 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -2757,9 +2720,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -2787,10 +2747,12 @@
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone Exhaust Fan 1",
-                                                    "design_airflow": 7551.159091199997
-                                                },
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone Exhaust Fan 1",
+                                                        "design_airflow": 7551.159091199997
+                                                    }
+                                                ],
                                                 "floor_name": "flr 1"
                                             },
                                             {
@@ -3063,16 +3025,13 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -3288,9 +3247,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -3318,10 +3274,12 @@
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone Exhaust Fan 1",
-                                                    "design_airflow": 4719.474431999998
-                                                },
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone Exhaust Fan 1",
+                                                        "design_airflow": 4719.474431999998
+                                                    }
+                                                ],
                                                 "floor_name": "flr 1"
                                             },
                                             {
@@ -3538,16 +3496,13 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Yes",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -3792,9 +3747,6 @@
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "id": "RMD 1",
                         "buildings": [
                             {
@@ -3822,10 +3774,12 @@
                                                         "heating_from_loop": "Boiler Loop 1"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone Exhaust Fan 1",
-                                                    "design_airflow": 7551.159091199997
-                                                },
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone Exhaust Fan 1",
+                                                        "design_airflow": 7551.159091199997
+                                                    }
+                                                ],
                                                 "floor_name": "flr 1"
                                             },
                                             {

@@ -19,6 +19,8 @@ __all__ = [
     "section21",
     "section22",
     "section23",
+    "section_list",
+    "section_dict",
 ]
 
 rules_dict = {
@@ -86,7 +88,7 @@ rules_dict = {
     "prm9012019rule22c86": "section6rule9",
     "prm9012019rule34l34": "section10rule1",
     "prm9012019rule34l50": "section10rule7",
-    "prm9012019rule73m45": "section10rule10",
+    # "prm9012019rule73m45": "section10rule10",
     "prm9012019rule10p28": "section10rule14",
     "prm9012019rule10p01": "section10rule15",
     "prm9012019rule72v93": "section11rule1",
@@ -106,12 +108,6 @@ rules_dict = {
     "prm9012019rule66e91": "section12rule2",
     "prm9012019rule79w60": "section12rule3",
     "prm9012019rule60e48": "section12rule4",
-    "prm9012019rule53e59": "section15rule1",
-    "prm9012019rule13w27": "section15rule2",
-    "prm9012019rule87p01": "section15rule3",
-    "prm9012019rule80l56": "section15rule4",
-    "prm9012019rule88q15": "section15rule5",
-    "prm9012019rule70w33": "section15rule6",
     "prm9012019rule98t42": "section16rule1",
     "prm9012019rule66a48": "section16rule2",
     "prm9012019rule92n36": "section16rule3",
@@ -263,7 +259,6 @@ section_dict = {
     "10": "HVAC General",
     "11": "Service Hot Water",
     "12": "Receptacles",
-    "15": "Transformers",
     "16": "Elevator",
     "18": "HVAC-Baseline",
     "19": "HVAC-General",
@@ -274,17 +269,20 @@ section_dict = {
 
 if SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901"):
     RMD = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")
+    COMMON_RMD = SchemaEnums.schema_enums.get("CommonRulesetModelOptions")
+
 else:
     SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
     SchemaEnums.update_schema_enum()
     RMD = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")
+    COMMON_RMD = SchemaEnums.schema_enums.get("CommonRulesetModelOptions")
 
 BASELINE_0 = RMD.BASELINE_0
 BASELINE_90 = RMD.BASELINE_90
 BASELINE_180 = RMD.BASELINE_180
 BASELINE_270 = RMD.BASELINE_270
-USER = RMD.USER
-PROPOSED = RMD.PROPOSED
+USER = COMMON_RMD.USER
+PROPOSED = COMMON_RMD.PROPOSED
 
 
 def __getattr__(name):

@@ -92,9 +92,8 @@ class PRM9012019Rule51v53(RuleDefinitionListIndexedBase):
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
                 required_fields={
-                    "$": ["weather", "calendar"],
+                    "$": ["weather"],
                     "weather": ["climate_zone"],
-                    "calendar": ["is_leap_year"],
                 },
             )
 
@@ -102,7 +101,6 @@ class PRM9012019Rule51v53(RuleDefinitionListIndexedBase):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
             climate_zone_b = rmd_b["weather"]["climate_zone"]
-            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
             applicable_hvac_sys_ids_b = [
@@ -117,7 +115,7 @@ class PRM9012019Rule51v53(RuleDefinitionListIndexedBase):
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
             )
             lab_zone_hvac_systems = get_lab_zone_hvac_systems(
-                rmd_b, rmd_p, climate_zone_b, is_leap_year_b
+                rmd_b, rmd_p, climate_zone_b
             )
             building_total_lab_zone_exhaust_b = (
                 get_building_total_lab_exhaust_from_zone_exhaust_fans(rmd_b)

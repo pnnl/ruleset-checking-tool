@@ -82,11 +82,11 @@ def get_hvac_sys_and_assoc_zones_largest_exhaust_source(
         filter(
             None,
             [
-                find_one(
-                    "$.zonal_exhaust_fan.design_airflow",
-                    find_exactly_one_zone(rmd, zone_id),
-                )
+                exhaust_fan.get("design_airflow")
                 for zone_id in zone_id_list
+                for exhaust_fan in find_exactly_one_zone(rmd, zone_id).get(
+                    "zonal_exhaust_fans", []
+                )
             ],
         )
     )

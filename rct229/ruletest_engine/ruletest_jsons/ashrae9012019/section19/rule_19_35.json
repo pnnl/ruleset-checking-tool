@@ -14,7 +14,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -154,9 +154,6 @@
                         ],
                         "weather": {
                             "climate_zone": "CZ5A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "schedules": [
                             {
@@ -9067,9 +9064,6 @@
                         ],
                         "weather": {
                             "climate_zone": "CZ5A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "schedules": [
                             {
@@ -17860,7 +17854,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -17994,9 +17988,6 @@
                         ],
                         "weather": {
                             "climate_zone": "CZ4A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "schedules": [
                             {
@@ -26906,9 +26897,6 @@
                         ],
                         "weather": {
                             "climate_zone": "CZ4A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "schedules": [
                             {
@@ -35699,7 +35687,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -35805,9 +35793,6 @@
                         ],
                         "weather": {
                             "climate_zone": "CZ5A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "schedules": [
                             {
@@ -44690,9 +44675,6 @@
                         "weather": {
                             "climate_zone": "CZ5A"
                         },
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "schedules": [
                             {
                                 "id": "Min OA CFM Schedule",
@@ -53481,7 +53463,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Applicability",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -53592,9 +53574,6 @@
                         ],
                         "weather": {
                             "climate_zone": "CZ4A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "schedules": [
                             {
@@ -62478,9 +62457,6 @@
                         ],
                         "weather": {
                             "climate_zone": "CZ4A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "schedules": [
                             {

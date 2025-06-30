@@ -13,7 +13,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -94,11 +94,13 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 9"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone exhaust fan 1",
-                                                    "specification_method": "SIMPLE",
-                                                    "design_electric_power": 59
-                                                }
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone exhaust fan 1",
+                                                        "specification_method": "SIMPLE",
+                                                        "design_electric_power": 59
+                                                    }
+                                                ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -168,7 +170,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -249,11 +251,13 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone exhaust fan 1",
-                                                    "specification_method": "SIMPLE",
-                                                    "design_electric_power": 80
-                                                }
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone exhaust fan 1",
+                                                        "specification_method": "SIMPLE",
+                                                        "design_electric_power": 80
+                                                    }
+                                                ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -324,7 +328,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -405,11 +409,13 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone exhaust fan 1",
-                                                    "specification_method": "SIMPLE",
-                                                    "design_electric_power": 60
-                                                }
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone exhaust fan 1",
+                                                        "specification_method": "SIMPLE",
+                                                        "design_electric_power": 60
+                                                    }
+                                                ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -486,7 +492,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -511,7 +517,12 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ],
-                                                "non_mechanical_cooling_fan_airflow": 117.98686079999996
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone Fan 1",
+                                                        "design_airflow": 117.98686079999996
+                                                    }
+                                                ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -568,11 +579,13 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone exhaust fan 1",
-                                                    "specification_method": "SIMPLE",
-                                                    "design_electric_power": 60
-                                                }
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone exhaust fan 1",
+                                                        "specification_method": "SIMPLE",
+                                                        "design_electric_power": 60
+                                                    }
+                                                ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
@@ -643,7 +656,7 @@
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
-            "schema_version": "0.1.3"
+            "schema_version": "0.1.7"
         },
         "rmd_transformations": {
             "proposed": {
@@ -724,11 +737,13 @@
                                                         "served_by_heating_ventilating_air_conditioning_system": "System 10"
                                                     }
                                                 ],
-                                                "zonal_exhaust_fan": {
-                                                    "id": "Zone exhaust fan 1",
-                                                    "specification_method": "SIMPLE",
-                                                    "design_electric_power": 80
-                                                }
+                                                "zonal_exhaust_fans": [
+                                                    {
+                                                        "id": "Zone exhaust fan 1",
+                                                        "specification_method": "SIMPLE",
+                                                        "design_electric_power": 80
+                                                    }
+                                                ]
                                             }
                                         ],
                                         "heating_ventilating_air_conditioning_systems": [
