@@ -1,0 +1,350 @@
+{
+    "rule-19-5-a": {
+        "Section": 19,
+        "Rule": 5,
+        "Test": "a",
+        "test_description": "The project has one building segment with one zone. The unmet load hours of the proposed design are defined and less than 300 hours.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-5",
+            "ruleset_reference": "G3.1.2.3",
+            "rule_description": "Unmet load hours for the proposed design shall not exceed 300 (of the 8760 hours simulated). ",
+            "applicable_rmd": "Proposed RMD",
+            "rule_assertion": "<=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System Type 3",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "FURNACE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours_heating": 0,
+                            "unmet_load_hours_cooling": 0,
+                            "unmet_load_hours": 200,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 703400.0
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-19-5-b": {
+        "Section": 19,
+        "Rule": 5,
+        "Test": "b",
+        "test_description": "The project has one building segment with one zone. The unmet load hours of the proposed design are defined and greater than 300 hours, but the unmet heating hours and unmet cooling hours are also defined and the sum is less than 300 hours.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-5",
+            "ruleset_reference": "G3.1.2.3",
+            "rule_description": "Unmet load hours for the proposed design shall not exceed 300 (of the 8760 hours simulated). ",
+            "applicable_rmd": "Proposed RMD",
+            "rule_assertion": "<=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System Type 3",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "FURNACE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours_heating": 50,
+                            "unmet_load_hours_cooling": 100,
+                            "unmet_load_hours": 350,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 703400.0
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-19-5-c": {
+        "Section": 19,
+        "Rule": 5,
+        "Test": "c",
+        "test_description": "The project has one building segment with one zone. The unmet load hours of the proposed design are defined and greater than 300 hours, and the unmet heating hours and unmet cooling hours are also defined and the sum is greater than 300 hours.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "19-5",
+            "ruleset_reference": "G3.1.2.3",
+            "rule_description": "Unmet load hours for the proposed design shall not exceed 300 (of the 8760 hours simulated). ",
+            "applicable_rmd": "Proposed RMD",
+            "rule_assertion": "<=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System Type 3",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "FURNACE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours_heating": 400,
+                            "unmet_load_hours_cooling": 400,
+                            "unmet_load_hours": 350,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 703400.0
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-19-5-d": {
+        "Section": 19,
+        "Rule": 5,
+        "Test": "d",
+        "test_description": "The project has one building segment with one zone. The unmet load hours of the proposed design are defined and greater than 300 hours, and the unmet heating hours and unmet cooling hours are also defined and the sum is greater than 300 hours.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "19-5",
+            "ruleset_reference": "G3.1.2.3",
+            "rule_description": "Unmet load hours for the proposed design shall not exceed 300 (of the 8760 hours simulated). ",
+            "applicable_rmd": "Proposed RMD",
+            "rule_assertion": "<=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "Air Terminal",
+                                                        "is_supply_ducted": true,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System Type 3"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System Type 3",
+                                                "cooling_system": {
+                                                    "id": "DX Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "Furnace Coil 1",
+                                                    "type": "FURNACE"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "model_output": {
+                            "id": "Output Instance 1",
+                            "unmet_load_hours_heating": 200,
+                            "unmet_load_hours_cooling": 500,
+                            "unmet_load_hours": 350,
+                            "unmet_occupied_load_hours_heating": 0,
+                            "unmet_occupied_load_hours_cooling": 0,
+                            "building_peak_cooling_load": 703400.0
+                        },
+                        "type": "PROPOSED"
+                    }
+                ]
+            }
+        }
+    }
+}

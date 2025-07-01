@@ -439,7 +439,9 @@ def remove_index_references_from_key(key):
     return clean_key
 
 
-def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
+def disaggregate_master_ruletest_json(
+    master_json_name, ruleset_doc, section_dir_name=""
+):
     """Ingests a string representing a JSON file name from rct229/ruletest_engine/ruletest_jsons. JSONs in that
     directory contain ALL ruletests for a particular grouping of rules (e.g., 'envelope_tests.json' has every test case
     for envelope based rules). This scripts breaks out test cases into individual section + rule JSONs.
@@ -451,6 +453,11 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
              String representing a name of master JSON file in rct229/ruletest_engine/ruletest_jsons
              E.g., 'envelope_tests.json''
          ruleset_doc : str
+            String representing ruleset document. Generated files will be placed under their respective rule set
+            folder
+         section_dir_name : str
+            Different sections have different section names. E.g., Section 1 ruletests relates to performance
+            calculations and goes under "CALC"
 
 
     """
@@ -484,11 +491,19 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
     prev_rule = ""
 
     # Inner function used for writing out ruletest JSONs
-    def write_ruletest_json(section, rule, ruleset_doc):
+    def write_ruletest_json(section, rule, ruleset_doc, section_dir_name=""):
+
+        if section_dir_name == "":
+            section_dir_name = f"section{section}"
+
         # Initialize ruletest json name
         json_name = f"rule_{section}_{rule}.json"
-        ruletest_json_name = os.path.join(f"section{section}", f"{json_name}")
+        ruletest_json_name = os.path.join(section_dir_name, f"{json_name}")
         json_file_path = os.path.join(file_dir, "..", ruleset_doc, ruletest_json_name)
+
+        # Ensure directory exists
+        output_dir = os.path.dirname(json_file_path)
+        os.makedirs(output_dir, exist_ok=True)
 
         # Dump JSON to string for writing
         json_string = json.dumps(rule_dictionary, indent=4)
@@ -542,9 +557,11 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
         if prev_section != "":
             if rule_id != prev_rule_id:
                 # Write out previous rule dictionary, then initialize a new one
-                write_ruletest_json(prev_section, prev_rule, ruleset_doc)
+                write_ruletest_json(
+                    prev_section, prev_rule, ruleset_doc, section_dir_name
+                )
 
-                # Wipe and reinitailize rule_dictionary for new section + rule
+                # Wipe and reinitialize rule_dictionary for new section + rule
                 rule_dictionary = {}
 
         # Add this test case to the existing rule_dictionary
@@ -555,7 +572,7 @@ def disaggregate_master_ruletest_json(master_json_name, ruleset_doc):
         prev_rule = rule
 
     # Write out final rule dictionary
-    write_ruletest_json(prev_section, prev_rule, ruleset_doc)
+    write_ruletest_json(prev_section, prev_rule, ruleset_doc, section_dir_name)
 
 
 def disaggregate_master_rmd_json(master_json_name, output_dir, ruleset_doc):

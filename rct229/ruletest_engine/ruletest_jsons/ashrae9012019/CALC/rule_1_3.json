@@ -1,0 +1,1185 @@
+{
+    "rule-1-3-a": {
+        "Section": 1,
+        "Rule": 3,
+        "Test": "a",
+        "test_description": "A one building segment, single zone building has specified the performance cost index target correctly according to the equation in Section 4.2.1.1.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "1-3",
+            "ruleset_reference": "4.2.1.1",
+            "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
+            "applicable_rmd": "Proposed RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline RMD",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "USER"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            }
+        }
+    },
+    "rule-1-3-b": {
+        "Section": 1,
+        "Rule": 3,
+        "Test": "b",
+        "test_description": "A one building segment, single zone building has specified the performance cost index target incorrectly according to the equation in Section 4.2.1.1.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "1-3",
+            "ruleset_reference": "4.2.1.1",
+            "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
+            "applicable_rmd": "Proposed RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline RMD",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "USER"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.4,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.4,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.4,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            }
+        }
+    },
+    "rule-1-3-c": {
+        "Section": 1,
+        "Rule": 3,
+        "Test": "c",
+        "test_description": "A one building segment, single zone building has specified the performance cost index target correctly according to the equation in Section 4.2.1.1, however the building performance factor was not specified uniformly in any/all ruleset model descriptions.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Ruleset expects exactly one BPF value to be used in the project.",
+        "standard": {
+            "rule_id": "1-3",
+            "ruleset_reference": "4.2.1.1",
+            "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
+            "applicable_rmd": "Proposed RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline RMD",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "USER"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.8,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            }
+        }
+    },
+    "rule-1-3-d": {
+        "Section": 1,
+        "Rule": 3,
+        "Test": "d",
+        "test_description": "A one building segment, single zone building does not have the performance cost index target specified in any ruleset model descriptions.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "At least one `performance_cost_index_target` value must exist.",
+        "standard": {
+            "rule_id": "1-3",
+            "ruleset_reference": "4.2.1.1",
+            "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
+            "applicable_rmd": "Proposed RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline RMD",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "USER"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            }
+        }
+    },
+    "rule-1-3-e": {
+        "Section": 1,
+        "Rule": 3,
+        "Test": "e",
+        "test_description": "A one building segment, single zone building does not have the building performance factor specified in any ruleset model descriptions.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "At least one `bpf_set` value must exist.",
+        "standard": {
+            "rule_id": "1-3",
+            "ruleset_reference": "4.2.1.1",
+            "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
+            "applicable_rmd": "Proposed RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline RMD",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "USER"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            }
+        }
+    },
+    "rule-1-3-f": {
+        "Section": 1,
+        "Rule": 3,
+        "Test": "f",
+        "test_description": "A one building segment, single zone building does not have the baseline building regulated energy cost specified in any ruleset model descriptions.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "At least one `bbrec_set` value must exist.",
+        "standard": {
+            "rule_id": "1-3",
+            "ruleset_reference": "4.2.1.1",
+            "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
+            "applicable_rmd": "Proposed RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline RMD",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "USER"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            }
+        }
+    },
+    "rule-1-3-g": {
+        "Section": 1,
+        "Rule": 3,
+        "Test": "g",
+        "test_description": "A one building segment, single zone building does not have the baseline building unregulated energy cost specified in any ruleset model descriptions.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "At least one `bbuec_set` value must exist.",
+        "standard": {
+            "rule_id": "1-3",
+            "ruleset_reference": "4.2.1.1",
+            "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
+            "applicable_rmd": "Proposed RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline RMD",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "USER"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_regulated_energy_cost": 250000
+                }
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_regulated_energy_cost": 250000
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "baseline_building_performance_energy_cost": 300000,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_regulated_energy_cost": 250000
+                }
+            }
+        }
+    },
+    "rule-1-3-h": {
+        "Section": 1,
+        "Rule": 3,
+        "Test": "h",
+        "test_description": "A one building segment, single zone building does not have the baseline building performance specified in any ruleset model descriptions.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "At least one `bbp_set` value must exist.",
+        "standard": {
+            "rule_id": "1-3",
+            "ruleset_reference": "4.2.1.1",
+            "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
+            "applicable_rmd": "Proposed RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline RMD",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "user": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "USER"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            },
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ],
+                "output": {
+                    "id": "Output 1",
+                    "total_area_weighted_building_performance_factor": 0.4,
+                    "performance_cost_index_target": 0.5,
+                    "baseline_building_regulated_energy_cost": 250000,
+                    "baseline_building_unregulated_energy_cost": 50000
+                }
+            }
+        }
+    }
+}

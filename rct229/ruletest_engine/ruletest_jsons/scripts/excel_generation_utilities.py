@@ -6,6 +6,7 @@ import re
 import pandas as pd
 from openpyxl import utils
 from openpyxl.styles import Alignment, Font, PatternFill
+from rct229.ruletest_engine.ruletest_jsons.ashrae9012019 import section_rule_to_rule_id
 from rct229.utils.natural_sort import natural_keys
 
 
@@ -98,19 +99,19 @@ def generate_rule_test_dictionary(ruleset_standard, test_json_branch="master"):
     # Format ruletest_dict[SECTION_NAME] = ['ruletest1.json', 'ruletest2.json', ...]
     ruletest_dict = {}
 
-    # Use os.scandir to get directory entries
+    # Loop through all subdirectories (e.g., "LTG", "HVAC-GEN", etc.)
     with os.scandir(ruletest_path) as entries:
         for entry in entries:
-            if entry.is_dir() and entry.name.startswith("section"):
-                # Section is last subdirectory
+            if entry.is_dir():
                 subdirectory = entry.path
-                section = subdirectory.split("\\")[-1]
+                section_key = entry.name  # Use actual folder name, not just "sectionX"
 
-                # Initialize the dictionary as a list then populate it with rule test JSONs
-                ruletest_dict[section] = []
-                ruletest_dict[section].extend(
-                    glob.glob(os.path.join(subdirectory, "rule*.json"))
-                )
+                # Look for JSONs starting with rule_ in this directory
+                rule_files = glob.glob(os.path.join(subdirectory, "rule_*.json"))
+
+                # Only add to dict if there are rule_*.json files
+                if rule_files:
+                    ruletest_dict[section_key] = rule_files
 
     # Reorder sections to be in numerical order (i.e., avoid section1, section11, section12, section5, section6)
     sections_list = list(ruletest_dict)
@@ -151,6 +152,7 @@ def generate_rule_test_dictionary(ruleset_standard, test_json_branch="master"):
                 case_dict = ruletest_json_dict[test_case]
                 section = case_dict["Section"]
                 rule = case_dict["Rule"]
+
                 master_rule_data_dict[section_key]["Rule"].append(f"{section}-{rule}")
                 master_rule_data_dict[section_key]["Rule_Unit_Test"].append(
                     f"{section}-{rule}-{case_dict['Test']}"
@@ -162,7 +164,7 @@ def generate_rule_test_dictionary(ruleset_standard, test_json_branch="master"):
                     case_dict["expected_rule_outcome"]
                 )
                 master_rule_data_dict[section_key]["Rule_Unit_Test_JSON"].append(
-                    f"{ruletest_url}/section{section}/rule_{section}_{rule}.json"
+                    f"{ruletest_url}/{section_key}/{os.path.basename(ruletest_json)}"
                 )
 
         # Zipping all corresponding elements together to sort by rule test name (e.g., 5-2-a should be before 5-10-a)
@@ -250,8 +252,8 @@ def write_rule_test_excel_from_dictionary(master_ruletest_dict, excel_path):
                 hyperlink_cell = f'{header_to_letter["Rule_Unit_Test_JSON"]}{row}'
 
                 # Apply hyperlinks to cells in the Rule_Unit_Test_JSON column linked to URLs in the Rule column
-                json_name = worksheet[f'{header_to_letter["Rule"]}{row}'].value
-                display_value = f"rule{json_name}.json"
+                section_rule_id = worksheet[f'{header_to_letter["Rule"]}{row}'].value
+                display_value = section_rule_to_rule_id[section_rule_id]
                 url_value = worksheet[hyperlink_cell].value
 
                 worksheet[

@@ -1,0 +1,114 @@
+{
+    "rule-6-6-a": {
+        "Section": 6,
+        "Rule": 6,
+        "Test": "a",
+        "test_description": "Project has one building segment with one zone and one space. The space has interior lighting. The baseline building is not modeled with daylighting controls.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "6-6",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
+            "rule_description": "Baseline building shall not be modeled with daylighting control.",
+            "applicable_rmr": "Baseline Design",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Lighting 1",
+                                                                "daylighting_control_type": "NONE"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-6-6-b": {
+        "Section": 6,
+        "Rule": 6,
+        "Test": "b",
+        "test_description": "Project has one building segment with one zone and one space. The space has interior lighting. The baseline building is modeled with daylighting controls.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "6-6",
+            "ruleset_reference": "Table G3.1(6) Baseline Building Performance",
+            "rule_description": "Baseline building shall not be modeled with daylighting control.",
+            "applicable_rmr": "Baseline Design",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "-",
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 92.90303999999999,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Lighting 1",
+                                                                "daylighting_control_type": "STEPPED"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}
