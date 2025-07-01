@@ -699,7 +699,7 @@
         "AppG B_RMD Equals P_RMD": true,
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -812,7 +812,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "service_water_heating_uses": {
         "Description": "List of IDs of service water heating uses",
@@ -824,7 +824,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": "unknown",
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -5511,7 +5511,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -5543,7 +5543,7 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "specification_method": {
         "Description": "Options for how the pump is specified",
@@ -5554,7 +5554,7 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "design_electric_power": {
         "Description": "Pump design electric power",
@@ -5567,7 +5567,7 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "motor_nameplate_power": {
         "Description": "Pump motor nameplate power",
@@ -5580,7 +5580,7 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "design_head": {
         "Description": "Head of the pump at design flow conditions",
@@ -5593,7 +5593,7 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "impeller_efficiency": {
         "Description": "Full load efficiency of the impeller",
@@ -5606,7 +5606,7 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "motor_efficiency": {
         "Description": "Full load efficiency of the pump motor",
@@ -5619,7 +5619,7 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "speed_control": {
         "Description": "Options for pump speed control",
@@ -5630,7 +5630,7 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "design_flow": {
         "Description": "Design Pump Flowrate",
@@ -5643,7 +5643,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG 11-1 P_RMD Equals B_RMD": false
       },
       "is_flow_calculated": {
         "Description": "True if the design_flow is sized by software",
@@ -5655,7 +5655,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "operating_points": {
         "Description": "Operating points",
@@ -5667,7 +5667,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -5715,7 +5715,7 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "power": {
         "Description": "Power",
@@ -5728,7 +5728,7 @@
         "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -6723,7 +6723,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -6755,7 +6755,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "design_supply_temperature_difference": {
         "Description": "Design supply temperature difference (deltaT) of service water heating loop",
@@ -6768,7 +6768,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "tanks": {
         "Description": "Tanks within service water heating distribution system",
@@ -6780,7 +6780,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "is_central_system": {
         "Description": "Indicates whether it is a central service water heater distribution system",
@@ -6792,7 +6792,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "service_water_piping": {
         "Description": "Connected service water piping",
@@ -6804,7 +6804,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "distribution_compactness": {
         "Description": "Type of compact distribution system",
@@ -6816,7 +6816,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "control_type": {
         "Description": "Type of distribution system",
@@ -6828,7 +6828,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "configuration_type": {
         "Description": "Type of configuration",
@@ -6840,7 +6840,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "is_recovered_heat_from_drain_used_by_water_heater": {
         "Description": "Indicates whether the recovered heat from the shower drain used by the service water heater",
@@ -6852,7 +6852,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG 11-1 P_RMD Equals B_RMD": false
       },
       "drain_heat_recovery_efficiency": {
         "Description": "Shower heat drain recovery efficiency",
@@ -6865,7 +6865,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG 11-1 P_RMD Equals B_RMD": false
       },
       "drain_heat_recovery_type": {
         "Description": "Drain heat recovery type",
@@ -6877,7 +6877,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG 11-1 P_RMD Equals B_RMD": false
       },
       "flow_multiplier_schedule": {
         "Description": "ID of the Schedule containing a multiplier for the service water heating loop flow",
@@ -6889,7 +6889,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "entering_water_mains_temperature_schedule": {
         "Description": "ID of the Schedule containing the temperature for unheated entering water to the building site often referenced as mains temperature",
@@ -6901,7 +6901,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "is_ground_temperature_used_for_entering_water": {
         "Description": "Indicates whether ground temperature is the source of the entering water temperature",
@@ -6912,7 +6912,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -6993,7 +6993,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -7023,7 +7023,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "are_thermal_losses_modeled": {
         "Description": "Indicates if thermal losses from the service water heating piping are modeled",
@@ -7034,7 +7034,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "insulation_thickness": {
         "Description": "Pipe insulation thickness",
@@ -7048,7 +7048,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG 11-1 P_RMD Equals B_RMD": false
       },
       "loop_pipe_location": {
         "Description": "Loop pipe location",
@@ -7060,7 +7060,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "location_zone": {
         "Description": "ID of the Zone where the piping is located when IN_ZONE is selected from ComponentLocationOptions",
@@ -7072,7 +7072,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "length": {
         "Description": "Pipe length",
@@ -7086,7 +7086,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "diameter": {
         "Description": "Pipe section diameter",
@@ -7100,7 +7100,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "child": {
         "Description": "Other service water piping connected to this one as children.",
@@ -7111,7 +7111,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "service_water_heating_design_and_control": {
         "Description": "Design and control used for service heating piping",
@@ -7138,7 +7138,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -7169,7 +7169,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "solar_savings_fraction": {
         "Description": "Solar savings fraction",
@@ -7181,7 +7181,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "collector_area": {
         "Description": "Solar collector area",
@@ -7193,7 +7193,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "collector_type_description": {
         "Description": "Description of solar collector type",
@@ -7205,7 +7205,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "collector_slope": {
         "Description": "Solar slope from horizontal",
@@ -7217,7 +7217,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "tank": {
         "Description": "Tank that is part of the solar thermal system",
@@ -7229,7 +7229,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -7246,7 +7246,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -7276,7 +7276,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "distribution_system": {
         "Description": "ID of the ServiceWaterHeatingDistributionSystem connected to the ServiceWaterHeatingEquipment",
@@ -7289,7 +7289,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "efficiency_metric_types": {
         "Description": "List of efficiency metrics that correspond to the values in efficiency_metric_values list",
@@ -7300,7 +7300,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": "unknown",
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "efficiency_metric_values": {
         "Description": "List of efficiency metric values that correspond to the descriptors in efficiency_metric_types list",
@@ -7311,7 +7311,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": "unknown",
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "draw_pattern": {
         "Description": "Draw pattern",
@@ -7323,7 +7323,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": false,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG 11-1 P_RMD Equals B_RMD": false
       },
       "first_hour_rating": {
         "Description": "First hour rating volume",
@@ -7337,7 +7337,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "operating_points": {
         "Description": "Operating points",
@@ -7349,7 +7349,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "input_power": {
         "Description": "Input power",
@@ -7363,7 +7363,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "rated_capacity": {
         "Description": "Rated capacity",
@@ -7376,7 +7376,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "minimum_capacity": {
         "Description": "Minimum capacity",
@@ -7390,7 +7390,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "recovery_efficiency": {
         "Description": "Recovery efficiency",
@@ -7402,7 +7402,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "setpoint_temperature": {
         "Description": "Set point temperature",
@@ -7414,7 +7414,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "compressor_location": {
         "Description": "Description of where the heat pump for the water heater is located",
@@ -7426,7 +7426,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "compressor_zone": {
         "Description": "ID of the Zone where the heat pump for the water heater is located",
@@ -7438,7 +7438,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "compressor_heat_rejection_source": {
         "Description": "Heat pump heat rejection source",
@@ -7450,7 +7450,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "compressor_heat_rejection_zone": {
         "Description": "ID of the Zone for rejecting heat pump heat",
@@ -7462,7 +7462,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "compressor_capacity_operating_points": {
         "Description": "Compressor capacity operating points",
@@ -7474,7 +7474,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "compressor_power_operating_points": {
         "Description": "Compressor power operating points",
@@ -7486,7 +7486,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "draft_fan": {
         "Description": "Draft fan ",
@@ -7498,7 +7498,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "has_electrical_ignition": {
         "Description": "Indicates whether the water heater has electrical ignition",
@@ -7510,7 +7510,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "tank": {
         "Description": "Tank that is part of the service water heating equipment",
@@ -7522,7 +7522,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "status_type": {
         "Description": "Choice of new, existing, addition, alteration, etc. for each ruleset.",
@@ -7533,7 +7533,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "solar_thermal_systems": {
         "Description": "Solar thermal systems used for heating service water",
@@ -7545,7 +7545,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "hot_water_loop": {
         "Description": "ID of the FluidLoop for hot water",
@@ -7557,7 +7557,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -7661,7 +7661,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "power": {
         "Description": "power",
@@ -7674,7 +7674,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -7692,7 +7692,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "condenser_water_temperature": {
         "Description": "Entering condenser temperature of water",
@@ -7704,7 +7704,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "evaporator_air_flow": {
         "Description": "Air flow across evaporator",
@@ -7716,7 +7716,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "condenser_water_flow": {
         "Description": "Water flow across condenser",
@@ -7728,7 +7728,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "capacity": {
         "Description": "Result",
@@ -7741,7 +7741,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -7759,7 +7759,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "condenser_water_temperature": {
         "Description": "Entering condenser temperature of water",
@@ -7771,7 +7771,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "evaporator_air_flow": {
         "Description": "Air flow across evaporator",
@@ -7783,7 +7783,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "condenser_water_flow": {
         "Description": "Water flow across condenser",
@@ -7795,7 +7795,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "load": {
         "Description": "Load",
@@ -7807,7 +7807,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "power": {
         "Description": "Result",
@@ -7820,7 +7820,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": false,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -7837,7 +7837,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -7870,7 +7870,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "type": {
         "Description": "Service water heater tank type",
@@ -7881,7 +7881,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "height": {
         "Description": "Tank height",
@@ -7895,7 +7895,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "interior_insulation": {
         "Description": "Tank interior insulation R-value",
@@ -7909,7 +7909,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "exterior_insulation": {
         "Description": "Tank exterior insulation R-value",
@@ -7923,7 +7923,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "location": {
         "Description": "Location",
@@ -7935,7 +7935,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "location_zone": {
         "Description": "ID of the Zone containing the Tank",
@@ -7947,7 +7947,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       }
     }
   },
@@ -8001,7 +8001,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -8032,7 +8032,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "water_serves_type": {
         "Description": "The use of the water serves the type",
@@ -8043,7 +8043,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "served_by_distribution_system": {
         "Description": "ID of the ServiceWaterHeatingDistributionSystem that serves this end use",
@@ -8056,7 +8056,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "use": {
         "Description": "Usage of service hot water",
@@ -8068,7 +8068,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG 11-1 P_RMD Equals B_RMD": false
       },
       "use_units": {
         "Description": "Type of units for use of service hot water",
@@ -8079,7 +8079,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG 11-1 P_RMD Equals B_RMD": false
       },
       "use_multiplier_schedule": {
         "Description": "ID of the Schedule containing the multiplier for the use of service hot water",
@@ -8091,7 +8091,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "temperature_at_fixture": {
         "Description": "Temperature leaving the fixture that is result of mixing hot water from the water heater and cold water from the tap.",
@@ -8104,7 +8104,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": true
+        "AppG 11-1 P_RMD Equals B_RMD": true
       },
       "is_heat_recovered_by_drain": {
         "Description": "Indicates if heat is being recovered from the drain",
@@ -8116,7 +8116,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG 11-1 P_RMD Equals B_RMD": false
       },
       "is_recovered_heat_used_by_cold_side_feed": {
         "Description": "Indicates if heat is being recovered from the drain is used on the cold side feed",
@@ -8128,7 +8128,7 @@
         "AppG B_RMD Equals P_RMD": "unknown",
         "AppG B_RMDs Same": true,
         "AppG 11-1 P_RMD Equals U_RMD": true,
-        "AppG 11-3 P_RMD Equals B_RMD": false
+        "AppG 11-1 P_RMD Equals B_RMD": false
       }
     }
   },

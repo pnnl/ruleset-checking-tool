@@ -33,7 +33,7 @@ class PRM9012019Rule86j27(RuleDefinitionListIndexedBase):
             "When the proposed design includes humidification and does not comply with Section 6.5.2.4 then the baseline building design shall use adiabatic humidification.",
             ruleset_section_title="HVAC General",
             standard_section="Section G3.1-10 HVAC Systems for the baseline building",
-            is_primary_rule=True,
+            is_primary_rule=False,
             list_path="$.buildings[*].building_segments[*].zones[*]",
             rmd_context="ruleset_model_descriptions/0",
         )
