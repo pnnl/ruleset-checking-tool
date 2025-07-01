@@ -15,9 +15,7 @@ SERVICE_WATER_HEATING_USE_UNIT = SchemaEnums.schema_enums[
 ]
 
 
-def get_building_segment_swh_bat(
-    rmd: dict, building_segment_id: str, is_leap_year: bool = False
-) -> str:
+def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
     """
     This function determines the SWH BAT for the given building segment.
     Returns None if there is no service water heating uses and no service_water_heating_area_type under building segment,
@@ -30,8 +28,6 @@ def get_building_segment_swh_bat(
         RMD at RuleSetModelDescription level
     building_segment_id: str
         building segment id
-    is_leap_year: bool, default: False
-        Whether the year is a leap year or not.
 
     Returns
     -------
