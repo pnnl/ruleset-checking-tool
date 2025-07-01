@@ -1,0 +1,4 @@
+from rct229.rule_engine.rulesets import RuleSet
+from rct229.web_application import count_number_of_primary_rules
+
+print(count_number_of_primary_rules(RuleSet.ASHRAE9012019_RULESET))
