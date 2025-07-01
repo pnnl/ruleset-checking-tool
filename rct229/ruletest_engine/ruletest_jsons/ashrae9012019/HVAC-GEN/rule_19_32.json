@@ -1,0 +1,234 @@
+{
+    "rule-19-32-a": {
+        "Section": 19,
+        "Rule": 32,
+        "Test": "a",
+        "test_description": "The project has one building segment with one zone. Project contains a computer room served by a baseline system type 2. HVAC fans correctly operate continuously during unoccupied hours.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "19-32",
+            "ruleset_reference": "Table G3.1 Section 4 Exception (3)",
+            "rule_description": "HVAC fans shall remain on during unoccupied hours in systems primarily serving computer rooms in the baseline design.",
+            "applicable_rmd": "Baseline RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "PTHP Terminal 1",
+                                                        "is_supply_ducted": false,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "PTHP 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 586.1422222222222,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
+                                                        "floor_area": 92.90303999999999,
+                                                        "lighting_space_type": "COMPUTER_ROOM"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "PTHP 1",
+                                                "cooling_system": {
+                                                    "id": "HP Cooling Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Heating Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "operation_during_unoccupied": "CONTINUOUS",
+                                                    "minimum_outdoor_airflow": 47.194744319999984
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-19-32-b": {
+        "Section": 19,
+        "Rule": 32,
+        "Test": "b",
+        "test_description": "The project has one building segment with one zone. Project contains a computer room served by a baseline system type 2. HVAC fans incorrectly cycle on and off during unoccupied hours.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "19-32",
+            "ruleset_reference": "Table G3.1 Section 4 Exception (3)",
+            "rule_description": "HVAC fans shall remain on during unoccupied hours in systems primarily serving computer rooms in the baseline design.",
+            "applicable_rmd": "Baseline RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "PTHP Terminal 1",
+                                                        "is_supply_ducted": false,
+                                                        "type": "CONSTANT_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "PTHP 1"
+                                                    }
+                                                ],
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "number_of_occupants": 10,
+                                                        "occupant_sensible_heat_gain": 586.1422222222222,
+                                                        "occupant_multiplier_schedule": "Occupant Schedule",
+                                                        "floor_area": 92.90303999999999,
+                                                        "lighting_space_type": "COMPUTER_ROOM"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "PTHP 1",
+                                                "cooling_system": {
+                                                    "id": "HP Cooling Coil 1",
+                                                    "type": "DIRECT_EXPANSION"
+                                                },
+                                                "heating_system": {
+                                                    "id": "HP Heating Coil 1",
+                                                    "type": "HEAT_PUMP"
+                                                },
+                                                "fan_system": {
+                                                    "id": "CAV Fan System 1",
+                                                    "fan_control": "CONSTANT",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "operation_during_unoccupied": "CYCLING",
+                                                    "minimum_outdoor_airflow": 47.194744319999984
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "schedules": [
+                            {
+                                "id": "Occupant Schedule",
+                                "hourly_cooling_design_day": [
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

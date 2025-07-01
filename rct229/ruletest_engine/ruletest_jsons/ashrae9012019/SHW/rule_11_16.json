@@ -1,0 +1,637 @@
+{
+    "rule-11-16-a": {
+        "Section": 11,
+        "Rule": 16,
+        "Test": "a",
+        "test_description": "A one story single zone building has service water heating. The proposed design includes a gas water heater with natural gas as its fuel source. The baseline correctly includes a gas water heater with natural gas as its fuel source.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "11-16",
+            "ruleset_reference": "Table G3.1(11), Baseline Building Performance, (g)",
+            "rule_description": "Gas water heaters shall be modeled using natural gas as their fuel. Exceptions: Where natural gas is not available for the proposed building site, as determined by the rating authority, gas water heaters shall be modeled using propane as their fuel",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                }
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-16-b": {
+        "Section": 11,
+        "Rule": 16,
+        "Test": "b",
+        "test_description": "A one story single zone building has service water heating. The baseline and proposed service water heating systems utilize an electric water heater with electricity as the fuel source. Requirements for fuel source do not apply to electric water heaters.",
+        "expected_rule_outcome": "not_applicable",
+        "standard": {
+            "rule_id": "11-16",
+            "ruleset_reference": "Table G3.1(11), Baseline Building Performance, (g)",
+            "rule_description": "Gas water heaters shall be modeled using natural gas as their fuel. Exceptions: Where natural gas is not available for the proposed building site, as determined by the rating authority, gas water heaters shall be modeled using propane as their fuel",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "ELECTRICITY",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                }
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "ELECTRICITY",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-16-c": {
+        "Section": 11,
+        "Rule": 16,
+        "Test": "c",
+        "test_description": "A one story single zone building has service water heating. The proposed service water heating system utilizes a gas water heater with natural gas fuel source. The baseline service water heating system incorrectly uses propane as its service water heater fuel source.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "The fuel source for the baseline is propane, however the fuel source for the proposed is Natural Gas. When natural gas is available on-site, natural gas is the required fuel source for the baseline model.",
+        "standard": {
+            "rule_id": "11-16",
+            "ruleset_reference": "Table G3.1(11), Baseline Building Performance, (g)",
+            "rule_description": "Gas water heaters shall be modeled using natural gas as their fuel. Exceptions: Where natural gas is not available for the proposed building site, as determined by the rating authority, gas water heaters shall be modeled using propane as their fuel",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "energy_source_type": "NATURAL_GAS",
+                                "loop": "Boiler Loop 1"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "NATURAL_GAS",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                }
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "energy_source_type": "PROPANE",
+                                "loop": "Boiler Loop 1"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "PROPANE",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-16-d": {
+        "Section": 11,
+        "Rule": 16,
+        "Test": "d",
+        "test_description": "A one story single zone building has service water heating. The proposed service water heating system utilizes a gas water heater with propane fuel source. The baseline service water heating system also uses propane, but it cannot be determined if natural gas was available.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "The baseline service water heating has propane as a fuel source. Natural gas is the required fuel source for the baseline model except in cases where natural gas is not available on-site. Verify that natural gas is not available for the proposed building site as determined by the rating authority.",
+        "standard": {
+            "rule_id": "11-16",
+            "ruleset_reference": "Table G3.1(11), Baseline Building Performance, (g)",
+            "rule_description": "Gas water heaters shall be modeled using natural gas as their fuel. Exceptions: Where natural gas is not available for the proposed building site, as determined by the rating authority, gas water heaters shall be modeled using propane as their fuel",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "energy_source_type": "PROPANE",
+                                "loop": "Boiler Loop 1"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "PROPANE",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                }
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "energy_source_type": "PROPANE",
+                                "loop": "Boiler Loop 1"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "PROPANE",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-11-16-e": {
+        "Section": 11,
+        "Rule": 16,
+        "Test": "e",
+        "test_description": "A one story single zone building has service water heating. The baseline and proposed service water heaters utilize a gas water heater. Both baseline and proposed incorrectly utilize fuel oil as the fuel source.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "11-16",
+            "ruleset_reference": "Table G3.1(11), Baseline Building Performance, (g)",
+            "rule_description": "Gas water heaters shall be modeled using natural gas as their fuel. Exceptions: Where natural gas is not available for the proposed building site, as determined by the rating authority, gas water heaters shall be modeled using propane as their fuel",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed Model",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "energy_source_type": "FUEL_OIL",
+                                "loop": "Boiler Loop 1"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "FUEL_OIL",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                }
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "energy_source_type": "FUEL_OIL",
+                                "loop": "Boiler Loop 1"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
+                            }
+                        ],
+                        "service_water_heating_equipment": [
+                            {
+                                "id": "SHW Equipment 1",
+                                "distribution_system": "SHW Distribution 1",
+                                "heater_fuel_type": "FUEL_OIL",
+                                "tank": {
+                                    "id": "SHW Tank",
+                                    "type": "COMMERCIAL_STORAGE"
+                                }
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}
