@@ -1,0 +1,419 @@
+{
+    "rule-12-1-a": {
+        "Section": 12,
+        "Rule": 1,
+        "Test": "a",
+        "test_description": "A one building segment, single zone office building has its baseline miscellaneous power equal in both the proposed and baseline RMDs. Both RMDs are following the code compliant path.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "12-1",
+            "ruleset_reference": "Table G3.1-12",
+            "rule_description": "Receptacle and process power shall be modeled as identical to the proposed design",
+            "applicable_rmd": "Baseline RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMD",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN",
+                                                        "miscellaneous_equipment": [
+                                                            {
+                                                                "id": "Plug Load 1",
+                                                                "power": 60
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ],
+                "compliance_path": "CODE_COMPLIANT"
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN",
+                                                        "miscellaneous_equipment": [
+                                                            {
+                                                                "id": "Plug Load 1",
+                                                                "power": 60
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ],
+                "compliance_path": "CODE_COMPLIANT"
+            }
+        }
+    },
+    "rule-12-1-b": {
+        "Section": 12,
+        "Rule": 1,
+        "Test": "b",
+        "test_description": "A one building segment, single zone office building has its miscellaneous power higher in its proposed RMD than the baseline RMD.  Both RMDs are following beyond code compliance path.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "12-1",
+            "ruleset_reference": "Table G3.1-12",
+            "rule_description": "Receptacle and process power shall be modeled as identical to the proposed design",
+            "applicable_rmd": "Baseline RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMD",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN",
+                                                        "miscellaneous_equipment": [
+                                                            {
+                                                                "id": "Plug Load 1",
+                                                                "power": 80
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ],
+                "compliance_path": "BEYOND_CODE"
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN",
+                                                        "miscellaneous_equipment": [
+                                                            {
+                                                                "id": "Plug Load 1",
+                                                                "power": 60
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ],
+                "compliance_path": "BEYOND_CODE"
+            }
+        }
+    },
+    "rule-12-1-c": {
+        "Section": 12,
+        "Rule": 1,
+        "Test": "c",
+        "test_description": "A one building segment, single zone office building has its miscellaneous power lower in its proposed RMD than the baseline RMD.  Both RMDs are following beyond code compliance path.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "The proposed building miscellaneous equipment load is less than the baseline, which is only permitted when the model is being used to quantify performance that exceeds the requirements of Standard 90.1.",
+        "standard": {
+            "rule_id": "12-1",
+            "ruleset_reference": "Table G3.1-12",
+            "rule_description": "Receptacle and process power shall be modeled as identical to the proposed design",
+            "applicable_rmd": "Baseline RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMD",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN",
+                                                        "miscellaneous_equipment": [
+                                                            {
+                                                                "id": "Plug Load 1",
+                                                                "power": 40
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ],
+                "compliance_path": "BEYOND_CODE"
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN",
+                                                        "miscellaneous_equipment": [
+                                                            {
+                                                                "id": "Plug Load 1",
+                                                                "power": 60
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ],
+                "compliance_path": "BEYOND_CODE"
+            }
+        }
+    },
+    "rule-12-1-d": {
+        "Section": 12,
+        "Rule": 1,
+        "Test": "d",
+        "test_description": "A one building segment, single zone office building has its miscellaneous power lower in its proposed RMD than the baseline RMD.  Both RMDs are following the code compliant path.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "12-1",
+            "ruleset_reference": "Table G3.1-12",
+            "rule_description": "Receptacle and process power shall be modeled as identical to the proposed design",
+            "applicable_rmd": "Baseline RMD",
+            "rule_assertion": "=",
+            "comparison_value": "Proposed RMD",
+            "rule_dependency": 0,
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN",
+                                                        "miscellaneous_equipment": [
+                                                            {
+                                                                "id": "Plug Load 1",
+                                                                "power": 40
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ],
+                "compliance_path": "CODE_COMPLIANT"
+            },
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "floor_name": "Floor 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 1393.5456,
+                                                        "lighting_space_type": "OFFICE_OPEN_PLAN",
+                                                        "miscellaneous_equipment": [
+                                                            {
+                                                                "id": "Plug Load 1",
+                                                                "power": 60
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ],
+                "compliance_path": "CODE_COMPLIANT"
+            }
+        }
+    }
+}

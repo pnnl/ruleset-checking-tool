@@ -1,0 +1,370 @@
+{
+    "rule-23-8-a": {
+        "Section": 23,
+        "Rule": 8,
+        "Test": "a",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7. The part load VAV fan power is modeled as defined by method 1 in Table G3.1.3.15.",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "23-8",
+            "ruleset_reference": "G3.1.3.15",
+            "rule_description": "For baseline systems 5-8 and 11, part load VAV fan power shall be modeled using either method 1 or 2 in Standard 90.1-2019 Table G3.1.3.15.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "System 5,8,11 (Rule18-a, to be confirmed)",
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Purchased HW Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Purchased HW Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Chilled Water Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Purchased HW Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 47.194744319999984,
+                                                            "design_electric_power": 100,
+                                                            "operating_points": [
+                                                                {
+                                                                    "airflow": 0.0,
+                                                                    "power": 0
+                                                                },
+                                                                {
+                                                                    "airflow": 4.719474431999998,
+                                                                    "power": 3
+                                                                },
+                                                                {
+                                                                    "airflow": 9.438948863999997,
+                                                                    "power": 7
+                                                                },
+                                                                {
+                                                                    "airflow": 14.158423295999995,
+                                                                    "power": 13
+                                                                },
+                                                                {
+                                                                    "airflow": 18.877897727999994,
+                                                                    "power": 21
+                                                                },
+                                                                {
+                                                                    "airflow": 23.597372159999992,
+                                                                    "power": 30
+                                                                },
+                                                                {
+                                                                    "airflow": 28.31684659199999,
+                                                                    "power": 41
+                                                                },
+                                                                {
+                                                                    "airflow": 33.03632102399999,
+                                                                    "power": 54
+                                                                },
+                                                                {
+                                                                    "airflow": 37.75579545599999,
+                                                                    "power": 68
+                                                                },
+                                                                {
+                                                                    "airflow": 42.475269887999985,
+                                                                    "power": 83
+                                                                },
+                                                                {
+                                                                    "airflow": 47.194744319999984,
+                                                                    "power": 100
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "external_fluid_sources": [
+                            {
+                                "id": "Purchased HW 1",
+                                "loop": "Purchased HW Loop 1",
+                                "type": "HOT_WATER"
+                            },
+                            {
+                                "id": "Purchased CW 1",
+                                "loop": "Chilled Water Loop 1",
+                                "type": "CHILLED_WATER"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "HW Pump 1",
+                                "loop_or_piping": "Purchased HW Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "CHW Pump 1",
+                                "loop_or_piping": "Chilled Water Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Purchased HW Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chilled Water Loop 1",
+                                "type": "COOLING"
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-23-8-b": {
+        "Section": 23,
+        "Rule": 8,
+        "Test": "b",
+        "test_description": "The project has one building segment with two zones served by baseline system type 7. The part load VAV fan power is not modeled as defined by method 1 or 2 in Table G3.1.3.15.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "23-8",
+            "ruleset_reference": "G3.1.3.15",
+            "rule_description": "For baseline systems 5-8 and 11, part load VAV fan power shall be modeled using either method 1 or 2 in Standard 90.1-2019 Table G3.1.3.15.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "System 5,8,11 (Rule18-a, to be confirmed)",
+            "mandatory_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1",
+                                                            "design_airflow": 47.194744319999984,
+                                                            "design_electric_power": 100,
+                                                            "operating_points": [
+                                                                {
+                                                                    "airflow": 0.0,
+                                                                    "power": 0
+                                                                },
+                                                                {
+                                                                    "airflow": 4.719474431999998,
+                                                                    "power": 10
+                                                                },
+                                                                {
+                                                                    "airflow": 9.438948863999997,
+                                                                    "power": 20
+                                                                },
+                                                                {
+                                                                    "airflow": 14.158423295999995,
+                                                                    "power": 30
+                                                                },
+                                                                {
+                                                                    "airflow": 18.877897727999994,
+                                                                    "power": 40
+                                                                },
+                                                                {
+                                                                    "airflow": 23.597372159999992,
+                                                                    "power": 50
+                                                                },
+                                                                {
+                                                                    "airflow": 28.31684659199999,
+                                                                    "power": 60
+                                                                },
+                                                                {
+                                                                    "airflow": 33.03632102399999,
+                                                                    "power": 70
+                                                                },
+                                                                {
+                                                                    "airflow": 37.75579545599999,
+                                                                    "power": 80
+                                                                },
+                                                                {
+                                                                    "airflow": 42.475269887999985,
+                                                                    "power": 90
+                                                                },
+                                                                {
+                                                                    "airflow": 47.194744319999984,
+                                                                    "power": 100
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1"
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

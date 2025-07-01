@@ -1,0 +1,143 @@
+{
+    "rule-5-33-a": {
+        "Section": 5,
+        "Rule": 33,
+        "Test": "a",
+        "test_description": "Project has one building segment with one zone. Infiltration has been specified for the zone. weather-driven infiltration modeling method is used",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-33",
+            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "rule_description": "The infiltration modeling method in the baseline includes adjustment for weather and building operation.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-33-b": {
+        "Section": 5,
+        "Rule": 33,
+        "Test": "b",
+        "test_description": "Project has one building segment with one zone. Infiltration has been specified for the zone. Pressure-based infiltration modeling method is used",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-33",
+            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "rule_description": "The infiltration modeling method in the baseline includes adjustment for weather and building operation.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "PRESSURE_BASED"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-33-c": {
+        "Section": 5,
+        "Rule": 33,
+        "Test": "c",
+        "test_description": "Project has one building segment with one zone. Infiltration has been specified for the zone. Constant infiltration modeling method is used",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-33",
+            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "rule_description": "The infiltration modeling method in the baseline includes adjustment for weather and building operation.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "CONSTANT"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}
