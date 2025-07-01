@@ -1,3 +1,19 @@
+from rct229.ruletest_engine.ruletest_jsons.ashrae9012019 import (
+    ELEVATOR_DIR,
+    ENVELOPE_DIR,
+    HVAC_AIRSIDE_DIR,
+    HVAC_BASELINE_DIR,
+    HVAC_CHILLED_WATER_DIR,
+    HVAC_GENERAL_DIR,
+    HVAC_HOT_WATER_DIR,
+    LIGHTING_DIR,
+    PERFORMANCE_CALC_DIR,
+    RECEPTACLE_DIR,
+    SCHEDULE_DIR,
+    SERVICE_HOT_WATER_DIR,
+)
+
+
 # Ruleset enumerator
 class RuleSet:
     ASHRAE9012019_RULESET = "ashrae9012019"
@@ -5,19 +21,18 @@ class RuleSet:
 
 class RuleSetTest:
     ASHRAE9012019_TEST_LIST = [
-        "section1",
-        "section4",
-        "section5",
-        "section6",
-        "section10",
-        "section11",
-        "section12",
-        "section16",
-        "section18",
-        "section19",
-        "section21",
-        "section22",
-        "section23",
+        PERFORMANCE_CALC_DIR,
+        ELEVATOR_DIR,
+        ENVELOPE_DIR,
+        HVAC_AIRSIDE_DIR,
+        HVAC_CHILLED_WATER_DIR,
+        HVAC_GENERAL_DIR,
+        HVAC_HOT_WATER_DIR,
+        HVAC_BASELINE_DIR,
+        LIGHTING_DIR,
+        RECEPTACLE_DIR,
+        SCHEDULE_DIR,
+        SERVICE_HOT_WATER_DIR,
     ]
 
 
