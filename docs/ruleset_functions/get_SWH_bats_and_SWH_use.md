@@ -18,7 +18,9 @@ Logic:
 - look at each building segment: `for building_segment in RMD.building_segments:`
     - get the swh_bat by using the function: get_building_segment_SWH_bat: `swh_bat = get_building_segment_SWH_bat(RMD,building_segment["id"])`
     - add this bat to swh_and_SWH_use_dict if it doesnt exist yet: `swh_and_SWH_use_dict.setdefault(swh_bat,[])`
-    - get the service water heating use ids in the building segment `service_water_heating_use_ids = find_all(               f'$.buildings[*].building_segments[*][?(@.id="{bldg_seg_id}")].zones[*].spaces[*].service_water_heating_uses[*].id', rmd)`
+    - get the service water heating use ids in the building segment that are stored at the space level - note that in the list of service_water_heating_uses there can be uses, and references to uses elsewhere in the model.  References may need to be resolved: `service_water_heating_use_ids = find_all(f'$.buildings[*].building_segments[*][?(@.id="{bldg_seg_id}")].zones[*].spaces[*].service_water_heating_uses[*].id', rmd)`
+    - get all of the service water heating use ids that are stored at the building segment level - note that in the list of service_water_heating_uses there can be uses, and references to uses elsewhere in the model.  References may need to be resolved: `service_water_heating_use_ids = service_water_heating_use_ids + [swh.id for swh in buildign_segment.service_water_heating_uses]`
+    - now make sure that there are only unique ids in the list: `service_water_heating_use_ids = list(set(service_water_heating_use_ids))`
     - add all of the swh_use ids in the building segment to the list: `service_water_heating_use_ids[swh_bat].extend(service_water_heating_use_ids) `
 
 **Returns** swh_and_SWH_use_dict
