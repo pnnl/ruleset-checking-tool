@@ -240,7 +240,7 @@ def run_project_evaluation(
 
     Parameters
     ----------
-    rpds: list[dict] list of dictionary
+    rpds: list[json] list of Json
     ruleset: str ruleset key
     reports: list[str] list of strings and each string is the enum value of a report
     saving_dir: directory to save report.

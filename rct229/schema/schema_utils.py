@@ -224,6 +224,7 @@ def return_json_schema_reference(object_dict, key):
             return properties_dict["items"]["$ref"].split("/")[-1]
         else:
             # Some elements have an oddball "oneOf" that allows for a reference or "string".
+            # Use in cautions because this only works with properties that are meant for reference (string) or object
             return properties_dict["items"]["oneOf"][0]["$ref"].split("/")[-1]
 
     elif "$ref" in properties_dict:

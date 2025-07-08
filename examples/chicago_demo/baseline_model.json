@@ -4,7 +4,7 @@
   "metadata": {
     "id": "meta",
     "schema_name": "ASHRAE229.SCHEMA.JSON",
-    "schema_version": "0.1.3",
+    "schema_version": "0.1.7",
     "schema_author": "PNNL",
     "author": "PNNL",
     "description": "Demo RPD model",
@@ -147,11 +147,7 @@
                       "azimuth": 0.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Slab on Grade Floor_Core_bot_ZN_5_Floor_0.73",
-                        "primary_layers": [],
-                        "u_factor": 0.006
-                      }
+                      "construction": "PRM Slab on Grade Floor_Core_bot_ZN_5_Floor_0.73"
                     },
                     {
                       "id": "CORE_BOT_ZN_5_WALL_EAST",
@@ -162,26 +158,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_2 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000001",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "CORE_BOT_ZN_5_WALL_NORTH",
@@ -192,26 +169,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_3 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000002",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000003",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000004",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "CORE_BOT_ZN_5_WALL_SOUTH",
@@ -222,26 +180,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_1 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000005",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000006",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000007",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "CORE_BOT_ZN_5_WALL_WEST",
@@ -252,26 +191,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_4 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000008",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000009",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000010",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "CORE_BOTTOM_CEILING",
@@ -282,19 +202,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "FIRSTFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     }
                   ],
                   "infiltration": {
@@ -371,16 +279,7 @@
                         }
                       ],
                       "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
-                      "service_water_heating_uses": [
-                        {
-                          "id": "SHW 1",
-                          "served_by_distribution_system": "SHW Distribution 1",
-                          "use": 5000,
-                          "use_units": "POWER",
-                          "use_multiplier_schedule": "ALWAYS ON DISCRETE",
-                          "temperature_at_fixture": 54.44444444444446
-                        }
-                      ]
+                      "service_water_heating_uses": ["SHW 1"]
                     }
                   ]
                 },
@@ -402,23 +301,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "FIRSTFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Typical Interior Floor",
-                        "primary_layers": [
-                          {
-                            "id": "CP02 CARPET PAD",
-                            "r_value": 0.21648
-                          },
-                          {
-                            "id": "100mm Normalweight concrete floor",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Floor"
                     },
                     {
                       "id": "CORE_MID_ZN_5_WALL_EAST",
@@ -429,26 +312,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_2 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000011",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000012",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000013",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "CORE_MID_ZN_5_WALL_NORTH",
@@ -459,26 +323,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_3 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000014",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000015",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000016",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "CORE_MID_ZN_5_WALL_SOUTH",
@@ -489,26 +334,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_1 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000017",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000018",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000019",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "CORE_MID_ZN_5_WALL_WEST",
@@ -519,26 +345,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_4 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000020",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000021",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000022",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "CORE_MID_CEILING",
@@ -549,19 +356,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "MIDFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000023",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000024",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     }
                   ],
                   "infiltration": {
@@ -615,14 +410,7 @@
                       ],
                       "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                       "service_water_heating_uses": [
-                        {
-                          "id": "SHW 2",
-                          "served_by_distribution_system": "SHW Distribution 1",
-                          "use": 5000,
-                          "use_units": "POWER",
-                          "use_multiplier_schedule": "ALWAYS ON DISCRETE",
-                          "temperature_at_fixture": 54.44444444444446
-                        }
+                        "SHW 2"
                       ]
                     }
                   ]
@@ -645,19 +433,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "TOPFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000025",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000026",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "CORE_TOP_ZN_5_FLOOR",
@@ -668,23 +444,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "MIDFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Typical Interior Floor~~~00000027",
-                        "primary_layers": [
-                          {
-                            "id": "CP02 CARPET PAD~~~00000028",
-                            "r_value": 0.21648
-                          },
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000029",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Floor"
                     },
                     {
                       "id": "CORE_TOP_ZN_5_WALL_EAST",
@@ -695,26 +455,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_2 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000030",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000031",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000032",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "CORE_TOP_ZN_5_WALL_NORTH",
@@ -725,26 +466,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_3 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000033",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000034",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000035",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "CORE_TOP_ZN_5_WALL_SOUTH",
@@ -755,26 +477,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_1 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000036",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000037",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000038",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "CORE_TOP_ZN_5_WALL_WEST",
@@ -785,26 +488,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_4 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000039",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000040",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000041",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     }
                   ],
                   "infiltration": {
@@ -858,14 +542,7 @@
                       ],
                       "ventilation_space_type": "OFFICE_BUILDINGS_OFFICE_SPACE",
                       "service_water_heating_uses": [
-                        {
-                          "id": "SHW 3",
-                          "served_by_distribution_system": "SHW Distribution 1",
-                          "use": 5000,
-                          "use_units": "POWER",
-                          "use_multiplier_schedule": "ALWAYS ON DISCRETE",
-                          "temperature_at_fixture": 54.44444444444446
-                        }
+                        "SHW 3"
                       ]
                     }
                   ]
@@ -883,23 +560,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_1 ZN",
-                      "construction": {
-                        "id": "Typical Interior Ceiling",
-                        "primary_layers": [
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000042",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          },
-                          {
-                            "id": "CP02 CARPET PAD~~~00000043",
-                            "r_value": 0.21648
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Ceiling"
                     },
                     {
                       "id": "FIRSTFLOOR_PLENUM_CEILING_2",
@@ -910,23 +571,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_2 ZN",
-                      "construction": {
-                        "id": "Typical Interior Ceiling~~~00000044",
-                        "primary_layers": [
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000045",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          },
-                          {
-                            "id": "CP02 CARPET PAD~~~00000046",
-                            "r_value": 0.21648
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Ceiling"
                     },
                     {
                       "id": "FIRSTFLOOR_PLENUM_CEILING_3",
@@ -937,23 +582,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_3 ZN",
-                      "construction": {
-                        "id": "Typical Interior Ceiling~~~00000047",
-                        "primary_layers": [
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000048",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          },
-                          {
-                            "id": "CP02 CARPET PAD~~~00000049",
-                            "r_value": 0.21648
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Ceiling"
                     },
                     {
                       "id": "FIRSTFLOOR_PLENUM_CEILING_4",
@@ -964,23 +593,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_4 ZN",
-                      "construction": {
-                        "id": "Typical Interior Ceiling~~~00000050",
-                        "primary_layers": [
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000051",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          },
-                          {
-                            "id": "CP02 CARPET PAD~~~00000052",
-                            "r_value": 0.21648
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Ceiling"
                     },
                     {
                       "id": "FIRSTFLOOR_PLENUM_CEILING_5",
@@ -991,23 +604,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_MID ZN",
-                      "construction": {
-                        "id": "Typical Interior Ceiling~~~00000053",
-                        "primary_layers": [
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000054",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          },
-                          {
-                            "id": "CP02 CARPET PAD~~~00000055",
-                            "r_value": 0.21648
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Ceiling"
                     },
                     {
                       "id": "FIRSTFLOOR_PLENUM_FLOOR_1",
@@ -1018,19 +615,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_1 ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000056",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000057",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "FIRSTFLOOR_PLENUM_FLOOR_2",
@@ -1041,19 +626,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_2 ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000058",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000059",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "FIRSTFLOOR_PLENUM_FLOOR_3",
@@ -1064,19 +637,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_3 ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000060",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000061",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "FIRSTFLOOR_PLENUM_FLOOR_4",
@@ -1087,19 +648,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_4 ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000062",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000063",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "FIRSTFLOOR_PLENUM_FLOOR_5",
@@ -1110,19 +659,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_BOTTOM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000064",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000065",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "PERIMETER_BOT_PLENUM_WALL_EAST",
@@ -1132,37 +669,7 @@
                       "azimuth": 90.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000066",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_BOT_PLENUM_WALL_NORTH",
@@ -1172,37 +679,7 @@
                       "azimuth": 0.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000067",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000068",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000069",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000070",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000071",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_BOT_PLENUM_WALL_SOUTH",
@@ -1212,37 +689,7 @@
                       "azimuth": 180.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000072",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000073",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000074",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000075",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000076",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_BOT_PLENUM_WALL_WEST",
@@ -1252,37 +699,7 @@
                       "azimuth": 270.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000077",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000078",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000079",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000080",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000081",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     }
                   ],
                   "infiltration": {
@@ -1313,23 +730,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_1 ZN",
-                      "construction": {
-                        "id": "Typical Interior Ceiling~~~00000082",
-                        "primary_layers": [
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000083",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          },
-                          {
-                            "id": "CP02 CARPET PAD~~~00000084",
-                            "r_value": 0.21648
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Ceiling"
                     },
                     {
                       "id": "MIDFLOOR_PLENUM_CEILING_2",
@@ -1340,23 +741,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_2 ZN",
-                      "construction": {
-                        "id": "Typical Interior Ceiling~~~00000085",
-                        "primary_layers": [
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000086",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          },
-                          {
-                            "id": "CP02 CARPET PAD~~~00000087",
-                            "r_value": 0.21648
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Ceiling"
                     },
                     {
                       "id": "MIDFLOOR_PLENUM_CEILING_3",
@@ -1367,23 +752,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_3 ZN",
-                      "construction": {
-                        "id": "Typical Interior Ceiling~~~00000088",
-                        "primary_layers": [
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000089",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          },
-                          {
-                            "id": "CP02 CARPET PAD~~~00000090",
-                            "r_value": 0.21648
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Ceiling"
                     },
                     {
                       "id": "MIDFLOOR_PLENUM_CEILING_4",
@@ -1394,23 +763,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_4 ZN",
-                      "construction": {
-                        "id": "Typical Interior Ceiling~~~00000091",
-                        "primary_layers": [
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000092",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          },
-                          {
-                            "id": "CP02 CARPET PAD~~~00000093",
-                            "r_value": 0.21648
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Ceiling"
                     },
                     {
                       "id": "MIDFLOOR_PLENUM_CEILING_5",
@@ -1421,23 +774,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_TOP ZN",
-                      "construction": {
-                        "id": "Typical Interior Ceiling~~~00000094",
-                        "primary_layers": [
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000095",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          },
-                          {
-                            "id": "CP02 CARPET PAD~~~00000096",
-                            "r_value": 0.21648
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Ceiling"
                     },
                     {
                       "id": "MIDFLOOR_PLENUM_FLOOR_1",
@@ -1448,19 +785,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_1 ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000097",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000098",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "MIDFLOOR_PLENUM_FLOOR_2",
@@ -1471,19 +796,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_2 ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000099",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000100",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "MIDFLOOR_PLENUM_FLOOR_3",
@@ -1494,19 +807,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_3 ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000101",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000102",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "MIDFLOOR_PLENUM_FLOOR_4",
@@ -1517,19 +818,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_4 ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000103",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000104",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "MIDFLOOR_PLENUM_FLOOR_5",
@@ -1540,19 +829,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_MID ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000105",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000106",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "PERIMETER_MID_PLENUM_WALL_EAST",
@@ -1562,37 +839,7 @@
                       "azimuth": 90.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000107",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000108",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000109",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000110",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000111",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_MID_PLENUM_WALL_NORTH",
@@ -1602,37 +849,7 @@
                       "azimuth": 0.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000112",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000113",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000114",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000115",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000116",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_MID_PLENUM_WALL_SOUTH",
@@ -1642,37 +859,7 @@
                       "azimuth": 180.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000117",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000118",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000119",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000120",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000121",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_MID_PLENUM_WALL_WEST",
@@ -1682,37 +869,7 @@
                       "azimuth": 270.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000122",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000123",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000124",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000125",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000126",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     }
                   ],
                   "infiltration": {
@@ -1748,19 +905,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "FIRSTFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000127",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000128",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_1_FLOOR",
@@ -1770,11 +915,7 @@
                       "azimuth": 0.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Slab on Grade Floor_Perimeter_bot_ZN_1_Floor_0.73",
-                        "primary_layers": [],
-                        "u_factor": 0.303
-                      }
+                      "construction": "PRM Slab on Grade Floor_Perimeter_bot_ZN_1_Floor_0.73"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_1_WALL_EAST",
@@ -1785,26 +926,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_2 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000129",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000130",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000131",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_1_WALL_NORTH",
@@ -1815,26 +937,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_BOTTOM ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000132",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000133",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000134",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_1_WALL_SOUTH",
@@ -1856,37 +959,7 @@
                           "has_automatic_shades": false
                         }
                       ],
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000135",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000136",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000137",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000138",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000139",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_1_WALL_WEST",
@@ -1897,26 +970,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_4 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000140",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000141",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000142",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     }
                   ],
                   "infiltration": {
@@ -1990,19 +1044,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "FIRSTFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000143",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000144",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_2_FLOOR",
@@ -2012,11 +1054,7 @@
                       "azimuth": 45.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Slab on Grade Floor_Perimeter_bot_ZN_2_Floor_0.73",
-                        "primary_layers": [],
-                        "u_factor": 0.32
-                      }
+                      "construction": "PRM Slab on Grade Floor_Perimeter_bot_ZN_2_Floor_0.73_0.32"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_2_WALL_EAST",
@@ -2038,37 +1076,7 @@
                           "has_automatic_shades": false
                         }
                       ],
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000145",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000146",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000147",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000148",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000149",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_2_WALL_NORTH",
@@ -2079,26 +1087,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_3 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000150",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000151",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000152",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_2_WALL_SOUTH",
@@ -2109,26 +1098,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_1 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000153",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000154",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000155",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_2_WALL_WEST",
@@ -2139,26 +1109,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_BOTTOM ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000156",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000157",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000158",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     }
                   ],
                   "infiltration": {
@@ -2232,19 +1183,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "FIRSTFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000159",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000160",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_3_FLOOR",
@@ -2254,11 +1193,7 @@
                       "azimuth": 0.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Slab on Grade Floor_Perimeter_bot_ZN_3_Floor_0.73",
-                        "primary_layers": [],
-                        "u_factor": 0.303
-                      }
+                      "construction": "PRM Slab on Grade Floor_Perimeter_bot_ZN_3_Floor_0.73_0.303"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_3_WALL_EAST",
@@ -2269,26 +1204,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_2 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000161",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000162",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000163",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_3_WALL_NORTH",
@@ -2310,37 +1226,7 @@
                           "has_automatic_shades": false
                         }
                       ],
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000164",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000165",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000166",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000167",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000168",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_3_WALL_SOUTH",
@@ -2351,26 +1237,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_BOTTOM ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000169",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000170",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000171",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_3_WALL_WEST",
@@ -2381,26 +1248,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_4 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000172",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000173",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000174",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     }
                   ],
                   "infiltration": {
@@ -2474,19 +1322,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "FIRSTFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000175",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000176",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_4_FLOOR",
@@ -2496,11 +1332,7 @@
                       "azimuth": 270.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Slab on Grade Floor_Perimeter_bot_ZN_4_Floor_0.73",
-                        "primary_layers": [],
-                        "u_factor": 0.32
-                      }
+                      "construction": "PRM Slab on Grade Floor_Perimeter_bot_ZN_2_Floor_0.73_0.32"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_4_WALL_EAST",
@@ -2511,26 +1343,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_BOTTOM ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000177",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000178",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000179",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_4_WALL_NORTH",
@@ -2541,26 +1354,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_3 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000180",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000181",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000182",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_4_WALL_SOUTH",
@@ -2571,26 +1365,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_BOT_ZN_1 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000183",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000184",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000185",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_BOT_ZN_4_WALL_WEST",
@@ -2612,37 +1387,7 @@
                           "has_automatic_shades": false
                         }
                       ],
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000186",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000187",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000188",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000189",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000190",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     }
                   ],
                   "infiltration": {
@@ -2716,19 +1461,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "MIDFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000191",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000192",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_1_FLOOR",
@@ -2739,23 +1472,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "FIRSTFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Typical Interior Floor~~~00000193",
-                        "primary_layers": [
-                          {
-                            "id": "CP02 CARPET PAD~~~00000194",
-                            "r_value": 0.21648
-                          },
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000195",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Floor"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_1_WALL_EAST",
@@ -2766,26 +1483,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_2 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000196",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000197",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000198",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_1_WALL_NORTH",
@@ -2796,26 +1494,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_MID ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000199",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000200",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000201",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_1_WALL_SOUTH",
@@ -2837,37 +1516,7 @@
                           "has_automatic_shades": false
                         }
                       ],
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000202",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000203",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000204",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000205",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000206",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_1_WALL_WEST",
@@ -2878,26 +1527,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_4 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000207",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000208",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000209",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     }
                   ],
                   "infiltration": {
@@ -2971,19 +1601,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "MIDFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000210",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000211",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_2_FLOOR",
@@ -2994,23 +1612,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "FIRSTFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Typical Interior Floor~~~00000212",
-                        "primary_layers": [
-                          {
-                            "id": "CP02 CARPET PAD~~~00000213",
-                            "r_value": 0.21648
-                          },
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000214",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Floor"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_2_WALL_EAST",
@@ -3032,37 +1634,7 @@
                           "has_automatic_shades": false
                         }
                       ],
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000215",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000216",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000217",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000218",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000219",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_2_WALL_NORTH",
@@ -3073,26 +1645,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_3 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000220",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000221",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000222",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_2_WALL_SOUTH",
@@ -3103,26 +1656,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_1 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000223",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000224",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000225",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_2_WALL_WEST",
@@ -3133,26 +1667,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_MID ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000226",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000227",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000228",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     }
                   ],
                   "infiltration": {
@@ -3226,19 +1741,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "MIDFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000229",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000230",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_3_FLOOR",
@@ -3249,23 +1752,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "FIRSTFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Typical Interior Floor~~~00000231",
-                        "primary_layers": [
-                          {
-                            "id": "CP02 CARPET PAD~~~00000232",
-                            "r_value": 0.21648
-                          },
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000233",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Floor"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_3_WALL_EAST",
@@ -3276,26 +1763,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_2 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000234",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000235",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000236",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_3_WALL_NORTH",
@@ -3317,37 +1785,7 @@
                           "has_automatic_shades": false
                         }
                       ],
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000237",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000238",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000239",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000240",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000241",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_3_WALL_SOUTH",
@@ -3358,26 +1796,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_MID ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000242",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000243",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000244",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_3_WALL_WEST",
@@ -3388,26 +1807,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_4 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000245",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000246",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000247",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     }
                   ],
                   "infiltration": {
@@ -3481,19 +1881,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "MIDFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000248",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000249",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_4_FLOOR",
@@ -3504,23 +1892,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "FIRSTFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Typical Interior Floor~~~00000250",
-                        "primary_layers": [
-                          {
-                            "id": "CP02 CARPET PAD~~~00000251",
-                            "r_value": 0.21648
-                          },
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000252",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Floor"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_4_WALL_EAST",
@@ -3531,26 +1903,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_MID ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000253",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000254",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000255",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_4_WALL_NORTH",
@@ -3561,26 +1914,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_3 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000256",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000257",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000258",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_4_WALL_SOUTH",
@@ -3591,26 +1925,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_MID_ZN_1 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000259",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000260",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000261",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_MID_ZN_4_WALL_WEST",
@@ -3632,37 +1947,7 @@
                           "has_automatic_shades": false
                         }
                       ],
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000262",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000263",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000264",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000265",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000266",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     }
                   ],
                   "infiltration": {
@@ -3736,19 +2021,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "TOPFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000267",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000268",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_1_FLOOR",
@@ -3759,23 +2032,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "MIDFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Typical Interior Floor~~~00000269",
-                        "primary_layers": [
-                          {
-                            "id": "CP02 CARPET PAD~~~00000270",
-                            "r_value": 0.21648
-                          },
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000271",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Floor"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_1_WALL_EAST",
@@ -3786,26 +2043,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_2 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000272",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000273",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000274",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_1_WALL_NORTH",
@@ -3816,26 +2054,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_TOP ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000275",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000276",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000277",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_1_WALL_SOUTH",
@@ -3857,37 +2076,7 @@
                           "has_automatic_shades": false
                         }
                       ],
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000278",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000279",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000280",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000281",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000282",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_1_WALL_WEST",
@@ -3898,26 +2087,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_4 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000283",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000284",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000285",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     }
                   ],
                   "infiltration": {
@@ -3991,19 +2161,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "TOPFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000286",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000287",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_2_FLOOR",
@@ -4014,23 +2172,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "MIDFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Typical Interior Floor~~~00000288",
-                        "primary_layers": [
-                          {
-                            "id": "CP02 CARPET PAD~~~00000289",
-                            "r_value": 0.21648
-                          },
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000290",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Floor"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_2_WALL_EAST",
@@ -4052,37 +2194,7 @@
                           "has_automatic_shades": false
                         }
                       ],
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000291",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000292",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000293",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000294",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000295",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_2_WALL_NORTH",
@@ -4093,26 +2205,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_3 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000296",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000297",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000298",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_2_WALL_SOUTH",
@@ -4123,26 +2216,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_1 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000299",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000300",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000301",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_2_WALL_WEST",
@@ -4153,26 +2227,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_TOP ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000302",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000303",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000304",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     }
                   ],
                   "infiltration": {
@@ -4246,19 +2301,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "TOPFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000305",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000306",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_3_FLOOR",
@@ -4269,23 +2312,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "MIDFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Typical Interior Floor~~~00000307",
-                        "primary_layers": [
-                          {
-                            "id": "CP02 CARPET PAD~~~00000308",
-                            "r_value": 0.21648
-                          },
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000309",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Floor"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_3_WALL_EAST",
@@ -4296,26 +2323,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_2 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000310",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000311",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000312",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_3_WALL_NORTH",
@@ -4337,37 +2345,7 @@
                           "has_automatic_shades": false
                         }
                       ],
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000313",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000314",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000315",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000316",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000317",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_3_WALL_SOUTH",
@@ -4378,26 +2356,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_TOP ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000318",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000319",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000320",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_3_WALL_WEST",
@@ -4408,26 +2367,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_4 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000321",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000322",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000323",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     }
                   ],
                   "infiltration": {
@@ -4501,19 +2441,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "TOPFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000324",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000325",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_4_FLOOR",
@@ -4524,23 +2452,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "MIDFLOOR_PLENUM ZN",
-                      "construction": {
-                        "id": "Typical Interior Floor~~~00000326",
-                        "primary_layers": [
-                          {
-                            "id": "CP02 CARPET PAD~~~00000327",
-                            "r_value": 0.21648
-                          },
-                          {
-                            "id": "100mm Normalweight concrete floor~~~00000328",
-                            "thickness": 0.1016,
-                            "thermal_conductivity": 2.31,
-                            "density": 2322,
-                            "specific_heat": 832
-                          }
-                        ],
-                        "u_factor": 1.887
-                      }
+                      "construction": "Typical Interior Floor"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_4_WALL_EAST",
@@ -4551,26 +2463,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_TOP ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000329",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000330",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000331",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_4_WALL_NORTH",
@@ -4581,26 +2474,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_3 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000332",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000333",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000334",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_4_WALL_SOUTH",
@@ -4611,26 +2485,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_1 ZN",
-                      "construction": {
-                        "id": "Typical Interior Wall~~~00000335",
-                        "primary_layers": [
-                          {
-                            "id": "G01 13mm gypsum board~~~00000336",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "G01 13mm gypsum board~~~00000337",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.16,
-                            "density": 800,
-                            "specific_heat": 1090
-                          }
-                        ],
-                        "u_factor": 2.511
-                      }
+                      "construction": "Typical Interior Wall"
                     },
                     {
                       "id": "PERIMETER_TOP_ZN_4_WALL_WEST",
@@ -4652,37 +2507,7 @@
                           "has_automatic_shades": false
                         }
                       ],
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000338",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000339",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000340",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000341",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000342",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     }
                   ],
                   "infiltration": {
@@ -4750,30 +2575,7 @@
                       "azimuth": 0.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM IEAD Roof R-15.87",
-                        "primary_layers": [
-                          {
-                            "id": "Typical Insulation R-14.76",
-                            "r_value": 2.59864112987226
-                          },
-                          {
-                            "id": "Metal Roof Surface",
-                            "thickness": 0.000799999999999998,
-                            "thermal_conductivity": 45.2799999999999,
-                            "density": 7823.99999999999,
-                            "specific_heat": 499.999999999996
-                          },
-                          {
-                            "id": "Roof Membrane",
-                            "thickness": 0.0095,
-                            "thermal_conductivity": 0.16,
-                            "density": 1121.29,
-                            "specific_heat": 1460
-                          }
-                        ],
-                        "u_factor": 0.358
-                      }
+                      "construction": "PRM IEAD Roof R-15.87"
                     },
                     {
                       "id": "PERIMETER_TOP_PLENUM_WALL_EAST",
@@ -4783,37 +2585,7 @@
                       "azimuth": 90.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000343",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000344",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000345",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000346",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000347",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_TOP_PLENUM_WALL_NORTH",
@@ -4823,37 +2595,7 @@
                       "azimuth": 0.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000348",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000349",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000350",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000351",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000352",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_TOP_PLENUM_WALL_SOUTH",
@@ -4863,37 +2605,7 @@
                       "azimuth": 180.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000353",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000354",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000355",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000356",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000357",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "PERIMETER_TOP_PLENUM_WALL_WEST",
@@ -4903,37 +2615,7 @@
                       "azimuth": 270.0,
                       "adjacent_to": "EXTERIOR",
                       "does_cast_shade": true,
-                      "construction": {
-                        "id": "PRM Steel Framed Exterior Wall R-8.06~~~00000358",
-                        "primary_layers": [
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000359",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Typical Insulation R-6.01~~~00000360",
-                            "r_value": 1.05841645736724
-                          },
-                          {
-                            "id": "5/8 in. Gypsum Board~~~00000361",
-                            "thickness": 0.0159,
-                            "thermal_conductivity": 0.159999999999999,
-                            "density": 799.999999999999,
-                            "specific_heat": 1090
-                          },
-                          {
-                            "id": "Stucco - 3/8 in.~~~00000362",
-                            "thickness": 0.009652,
-                            "thermal_conductivity": 0.721197135476959,
-                            "density": 1855.09824333832,
-                            "specific_heat": 837.36
-                          }
-                        ],
-                        "u_factor": 0.704
-                      }
+                      "construction": "PRM Steel Framed Exterior Wall R-8.06"
                     },
                     {
                       "id": "TOPFLOOR_PLENUM_FLOOR_1",
@@ -4944,19 +2626,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_1 ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000363",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000364",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "TOPFLOOR_PLENUM_FLOOR_2",
@@ -4967,19 +2637,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_2 ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000365",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000366",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "TOPFLOOR_PLENUM_FLOOR_3",
@@ -4990,19 +2648,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_3 ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000367",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000368",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "TOPFLOOR_PLENUM_FLOOR_4",
@@ -5013,19 +2659,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "PERIMETER_TOP_ZN_4 ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000369",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000370",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     },
                     {
                       "id": "TOPFLOOR_PLENUM_FLOOR_5",
@@ -5036,19 +2670,7 @@
                       "adjacent_to": "INTERIOR",
                       "does_cast_shade": true,
                       "adjacent_zone": "CORE_TOP ZN",
-                      "construction": {
-                        "id": "Plenum Acoustical Tile~~~00000371",
-                        "primary_layers": [
-                          {
-                            "id": "Acoustic Tile - 1/2 in.~~~00000372",
-                            "thickness": 0.0127,
-                            "thermal_conductivity": 0.0576334643901673,
-                            "density": 288.332340731282,
-                            "specific_heat": 795.492
-                          }
-                        ],
-                        "u_factor": 2.042
-                      }
+                      "construction": "Plenum Acoustical Tile"
                     }
                   ],
                   "infiltration": {
@@ -5233,7 +2855,6 @@
           "fan_type": "AXIAL",
           "type": "OPEN_CIRCUIT_COOLING_TOWER",
           "rated_water_flowrate": 146.335,
-          "fan_shaft_power":44193.9806597599,
           "fan_speed_control": "VARIABLE_SPEED",
           "leaving_water_setpoint_temperature": 29.4444444444445
         }
@@ -102173,32 +99794,192 @@
       "weather": {
           "file_name": "New York J F Kennedy IntL Ar NY USA TMY3 WMO#=744860",
           "data_source_type": "OTHER",
-          "climate_zone": "CZ4A",
-          "cooling_design_day_type": "COOLING_1_0",
-          "heating_design_day_type": "HEATING_99_6"
+          "climate_zone": "CZ4A"
       },
       "calendar": {
           "notes": "name environment: RUN PERIOD 1",
-          "day_of_week_for_january_1": "SUNDAY",
-          "is_leap_year": false,
-          "has_daylight_saving_time": true
-      }
-    }
-  ],
-  "output": {
-        "id": "Baseline_0 Output",
-        "reporting_name": "Simulation Output",
-        "output_instance": {
+          "day_of_week_for_january_1": "SUNDAY"
+      },
+      "constructions": [
+        {
+          "id": "PRM Slab on Grade Floor_Core_bot_ZN_5_Floor_0.73",
+          "u_factor": 0.006
+        },
+        {
+          "id": "Typical Interior Wall",
+          "primary_layers": [
+            {
+              "id": "G01 13mm gypsum board",
+              "thickness": 0.0127,
+              "thermal_conductivity": 0.16,
+              "density": 800,
+              "specific_heat": 1090
+            },
+            {
+              "id": "G01 13mm gypsum board~~~00000001",
+              "thickness": 0.0127,
+              "thermal_conductivity": 0.16,
+              "density": 800,
+              "specific_heat": 1090
+            }
+          ],
+          "u_factor": 2.511
+        },
+        {
+          "id": "Plenum Acoustical Tile",
+          "primary_layers": [
+            {
+              "id": "Acoustic Tile - 1/2 in.",
+              "thickness": 0.0127,
+              "thermal_conductivity": 0.0576334643901673,
+              "density": 288.332340731282,
+              "specific_heat": 795.492
+            }
+          ],
+          "u_factor": 2.042
+        },
+        {
+          "id": "Typical Interior Floor",
+          "primary_layers": [
+            {
+              "id": "CP02 CARPET PAD",
+              "r_value": 0.21648
+            },
+            {
+              "id": "100mm Normalweight concrete floor",
+              "thickness": 0.1016,
+              "thermal_conductivity": 2.31,
+              "density": 2322,
+              "specific_heat": 832
+            }
+          ],
+          "u_factor": 1.887
+        },
+        {
+          "id": "Typical Interior Ceiling",
+          "primary_layers": [
+            {
+              "id": "100mm Normalweight concrete floor~~~00000042",
+              "thickness": 0.1016,
+              "thermal_conductivity": 2.31,
+              "density": 2322,
+              "specific_heat": 832
+            },
+            {
+              "id": "CP02 CARPET PAD~~~00000043",
+              "r_value": 0.21648
+            }
+          ],
+          "u_factor": 1.887
+        },
+        {
+          "id": "PRM Steel Framed Exterior Wall R-8.06",
+          "primary_layers": [
+            {
+              "id": "5/8 in. Gypsum Board",
+              "thickness": 0.0159,
+              "thermal_conductivity": 0.159999999999999,
+              "density": 799.999999999999,
+              "specific_heat": 1090
+            },
+            {
+              "id": "Typical Insulation R-6.01",
+              "r_value": 1.05841645736724
+            },
+            {
+              "id": "5/8 in. Gypsum Board~~~00000066",
+              "thickness": 0.0159,
+              "thermal_conductivity": 0.159999999999999,
+              "density": 799.999999999999,
+              "specific_heat": 1090
+            },
+            {
+              "id": "Stucco - 3/8 in.",
+              "thickness": 0.009652,
+              "thermal_conductivity": 0.721197135476959,
+              "density": 1855.09824333832,
+              "specific_heat": 837.36
+            }
+          ],
+          "u_factor": 0.704
+        },
+        {
+          "id": "PRM Slab on Grade Floor_Perimeter_bot_ZN_1_Floor_0.73",
+          "u_factor": 0.303
+        },
+        {
+          "id": "PRM Slab on Grade Floor_Perimeter_bot_ZN_2_Floor_0.73_0.32",
+          "u_factor": 0.32
+        },
+        {
+          "id": "PRM Slab on Grade Floor_Perimeter_bot_ZN_3_Floor_0.73_0.303",
+          "u_factor": 0.303
+        },
+        {
+          "id": "PRM IEAD Roof R-15.87",
+          "primary_layers": [
+            {
+              "id": "Typical Insulation R-14.76",
+              "r_value": 2.59864112987226
+            },
+            {
+              "id": "Metal Roof Surface",
+              "thickness": 0.000799999999999998,
+              "thermal_conductivity": 45.2799999999999,
+              "density": 7823.99999999999,
+              "specific_heat": 499.999999999996
+            },
+            {
+              "id": "Roof Membrane",
+              "thickness": 0.0095,
+              "thermal_conductivity": 0.16,
+              "density": 1121.29,
+              "specific_heat": 1460
+            }
+          ],
+          "u_factor": 0.358
+        }
+      ],
+      "service_water_heating_uses": [
+        {
+          "id": "SHW 1",
+          "served_by_distribution_system": "SHW Distribution 1",
+          "use": 5000,
+          "use_units": "POWER",
+          "use_multiplier_schedule": "ALWAYS ON DISCRETE",
+          "temperature_at_fixture": 54.44444444444446
+        },
+        {
+          "id": "SHW 2",
+          "served_by_distribution_system": "SHW Distribution 1",
+          "use": 5000,
+          "use_units": "POWER",
+          "use_multiplier_schedule": "ALWAYS ON DISCRETE",
+          "temperature_at_fixture": 54.44444444444446
+        },
+        {
+          "id": "SHW 3",
+          "served_by_distribution_system": "SHW Distribution 1",
+          "use": 5000,
+          "use_units": "POWER",
+          "use_multiplier_schedule": "ALWAYS ON DISCRETE",
+          "temperature_at_fixture": 54.44444444444446
+        }
+      ],
+      "model_output": {
           "id": "Outputs",
-          "ruleset_model_type": "BASELINE_0",
-          "rotation_angle": 0,
           "unmet_load_hours": 200.17,
           "unmet_load_hours_heating": 197.67,
           "unmet_occupied_load_hours_heating": 96.33,
           "unmet_load_hours_cooling": 2.50,
           "unmet_occupied_load_hours_cooling": 2.33,
           "building_peak_cooling_load": 2620298.85
-        },
+      }
+    }
+  ],
+  "output": {
+        "id": "Baseline_0 Output",
+        "reporting_name": "Simulation Output",
         "total_area_weighted_building_performance_factor": 0.51,
         "performance_cost_index_target": 0.89,
         "performance_cost_index": 0.89,

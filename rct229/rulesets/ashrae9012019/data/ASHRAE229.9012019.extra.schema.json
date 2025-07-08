@@ -1653,7 +1653,7 @@
       },
       "primary_layers": {
         "Description": "List of IDs for materials as layer descriptions starting from the outside surface for the primary heat path",
-        "Data Type": "[Reference]",
+        "Data Type": "[{Material}]",
         "Notes": "For constructions with framing and cavity heat transfer paths, use this for the cavity. For constructions with homogeneous layer, use this element only. Air films should not be included in the list of layers. When Construction.primary_layers are specified, the Construction.r_values should not be used. The list of primary_layers should include at least one Material that has mass with Material.density and Material.specific_heat specified. The constraint to use when implemented is to :Material:",
         "RMD Test": "Primary",
         "AppG Used By TCDs": false,
@@ -1663,7 +1663,7 @@
       },
       "framing_layers": {
         "Description": "List of IDs for materials as layer descriptions starting from the outside surface for the  framing heat path",
-        "Data Type": "[Reference]",
+        "Data Type": "[{Material}]",
         "Notes": "For constructions with framing and cavity heat transfer paths, use this for the framing otherwise leave blank. Air films should not be included in the list of layers. Only used when primary_layers is also populated. The constraint to use when implemented is to :Material:",
         "RMD Test": false,
         "AppG Used By TCDs": false,
