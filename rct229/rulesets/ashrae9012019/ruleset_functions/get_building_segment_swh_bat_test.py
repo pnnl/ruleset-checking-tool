@@ -100,6 +100,30 @@ TEST_RMD = {
                         }
                     ],
                 },
+                {
+                    "id": "Building Segment 6",
+                    "service_water_heating_uses": [
+                        "service water heating uses 6_2",
+                    ],
+                    "zones": [
+                        {
+                            "id": "Zone 6",
+                            "spaces": [
+                                {
+                                    "id": "Space 6_1",
+                                    "service_water_heating_area_type": "MUSEUM",
+                                    "service_water_heating_uses": [
+                                        "service water heating uses 6_1",
+                                    ],
+                                },
+                                {
+                                    "id": "Space 6_2",
+                                    "service_water_heating_area_type": "CONVENIENCE_STORE",
+                                },
+                            ],
+                        }
+                    ],
+                },
             ],
         }
     ],
@@ -114,14 +138,6 @@ TEST_RMD = {
         },
     ],
     "service_water_heating_uses": [
-        {
-            "id": "service water heating uses 5_1",
-            "use": 400,
-            "use_units": "POWER",
-            "is_heat_recovered_by_drain": True,
-            "served_by_distribution_system": "SWH Distribution 1",
-            "use_multiplier_schedule": "SWH Schedule 1",
-        },
         {
             "id": "service water heating uses 2_1",
             "use": 10,
@@ -165,6 +181,30 @@ TEST_RMD = {
         {
             "id": "service water heating uses 4_2",
             "use": 300,
+            "use_units": "POWER",
+            "is_heat_recovered_by_drain": True,
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "service water heating uses 5_1",
+            "use": 400,
+            "use_units": "POWER",
+            "is_heat_recovered_by_drain": True,
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "service water heating uses 6_1",
+            "use": 200,
+            "use_units": "POWER",
+            "is_heat_recovered_by_drain": True,
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "service water heating uses 6_2",
+            "use": 400,
             "use_units": "POWER",
             "is_heat_recovered_by_drain": True,
             "served_by_distribution_system": "SWH Distribution 1",
@@ -254,3 +294,10 @@ def test__TEST_RPD__two_spaces_one_undetermined():
 
 def test__TEST_RPD__two_spaces_none_undetermined():
     assert get_building_segment_swh_bat(TEST_RMD, "Building Segment 5") == "HOTEL"
+
+
+def test__TEST_RPD__area_type_diff_service_water_heating_uses_location():
+    assert (
+        get_building_segment_swh_bat(TEST_RMD, "Building Segment 6")
+        == "CONVENIENCE_STORE"
+    )

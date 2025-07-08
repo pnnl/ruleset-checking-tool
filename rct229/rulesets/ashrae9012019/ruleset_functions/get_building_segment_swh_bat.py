@@ -42,11 +42,16 @@ def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
 
     if building_segment_swh_bat is None:
         swh_use_dict = {}
-        # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
-        for swh_use_id in find_all(
+        swh_uses_from_spaces = find_all(
             f'$.buildings[*].building_segments[*][?(@.id="{building_segment["id"]}")].zones[*].spaces[*].service_water_heating_uses[*]',
             rmd,
-        ):
+        )
+        swh_uses_direct = find_all(
+            f'$.buildings[*].building_segments[*][?(@.id="{building_segment["id"]}")].service_water_heating_uses[*]',
+            rmd,
+        )
+
+        for swh_use_id in swh_uses_from_spaces + swh_uses_direct:
             swh_use = find_exactly_one_service_water_heating_use(rmd, swh_use_id)
             if (
                 swh_use.get("use_units", SERVICE_WATER_HEATING_USE_UNIT.OTHER)
