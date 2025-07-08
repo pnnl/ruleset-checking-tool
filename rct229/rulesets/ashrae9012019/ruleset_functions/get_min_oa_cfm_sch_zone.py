@@ -6,9 +6,7 @@ LEAP_YEAR_HRS = 8784
 NON_LEAP_YEAR_HRS = 8760
 
 
-def get_min_oa_cfm_sch_zone(
-    rmd: dict, zone_id: str, is_leap_year: bool = False
-) -> list[float | int]:
+def get_min_oa_cfm_sch_zone(rmd: dict, zone_id: str) -> list[float | int]:
     """Each zone can have multiple terminal units sering it in the proposed RMD and each of these units could supply OA CFM. In order to obtain a zone level OA CFM schedule the OA CFM provided by each terminal unit needs to be aggregated for each hour of the year. This function receives an RMD (B, U, or P) and a zone ID and loops through each terminal unit associated with the zone to create an aggregated 8760 for OA CFM for the zone.
 
     Parameters
@@ -17,8 +15,6 @@ def get_min_oa_cfm_sch_zone(
         The RMD in which the OA CFM schedule will be determined for the specific Zone ID.
     zone_id:
         The Zone ID in which the aggregated (across the terminal units serving the zone) hourly OA CFM schedule will be determined.
-    is_leap_year: bool, default: False
-        Whether the year is a leap year or not.
 
     Returns
     -------
@@ -26,10 +22,7 @@ def get_min_oa_cfm_sch_zone(
           None if the zone has no terminal or every terminal in the zone do not use minimum_outdoor_airflow_multiplier_schedule.
     """
 
-    LEAP_YEAR_HRS = 8784
-    NON_LEAP_YEAR_HRS = 8760
-    year_hrs = LEAP_YEAR_HRS if is_leap_year else NON_LEAP_YEAR_HRS
-
+    year_hrs = None
     min_oa_cfm_sch_zone_array_list = []
     for terminal in find_all(
         f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id}")].terminals[*]',
@@ -58,6 +51,9 @@ def get_min_oa_cfm_sch_zone(
             if not isinstance(minimum_outdoor_airflow_multiplier_schedule, list):
                 raise TypeError
 
+            if year_hrs is None:
+                year_hrs = len(minimum_outdoor_airflow_multiplier_schedule)
+
             assert_(
                 year_hrs == len(minimum_outdoor_airflow_multiplier_schedule),
                 f"The length of schedule has to be {year_hrs}, but is {len(minimum_outdoor_airflow_multiplier_schedule)}.",
@@ -80,6 +76,6 @@ def get_min_oa_cfm_sch_zone(
 
         min_OA_CFM_schedule_for_zones = min_OA_CFM_schedule_for_zones_array.tolist()
     else:
-        min_OA_CFM_schedule_for_zones = [0] * year_hrs
+        min_OA_CFM_schedule_for_zones = [0] * (year_hrs or 8760)
 
     return min_OA_CFM_schedule_for_zones

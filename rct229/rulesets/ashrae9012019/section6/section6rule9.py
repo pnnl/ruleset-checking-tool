@@ -46,13 +46,11 @@ class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
                 index_rmd=PROPOSED,
                 list_path="buildings[*]",
                 required_fields={
-                    "$": ["schedules", "calendar"],
-                    "calendar": ["is_leap_year"],
+                    "$": ["schedules"],
                 },
                 data_items={
                     "schedules_b": (BASELINE_0, "schedules"),
                     "schedules_p": (PROPOSED, "schedules"),
-                    "is_leap_year": (PROPOSED, "calendar/is_leap_year"),
                 },
             )
 
@@ -140,7 +138,6 @@ class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
                         schedules_b = data["schedules_b"]
                         schedules_p = data["schedules_p"]
                         building_open_schedule_p = data["building_open_schedule_p"]
-                        is_leap_year = data["is_leap_year"]
 
                         normalized_schedule_b = normalize_interior_lighting_schedules(
                             space_b,
@@ -158,7 +155,6 @@ class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
                             normalized_schedule_p,
                             normalized_schedule_b,
                             building_open_schedule_p,
-                            is_leap_year=is_leap_year,
                         )
                         daylight_control = any(
                             find_all(

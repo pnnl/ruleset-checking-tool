@@ -50,6 +50,9 @@ class PRM9012019Rule57c26(RuleDefinitionListIndexedBase):
         climate_zone = rmd_baseline["ruleset_model_descriptions"][0]["weather"][
             "climate_zone"
         ]
+        constructions = rmd_baseline["ruleset_model_descriptions"][0].get(
+            "constructions"
+        )
 
         # TODO It is determined later we will modify this function to RMD level -
         # The implementation is temporary
@@ -57,10 +60,13 @@ class PRM9012019Rule57c26(RuleDefinitionListIndexedBase):
         for building_b in find_all(self.list_path, rmd_baseline):
             bldg_scc_wwr_ratio_dict[
                 building_b["id"]
-            ] = get_building_scc_window_wall_ratios_dict(climate_zone, building_b)
+            ] = get_building_scc_window_wall_ratios_dict(
+                climate_zone, constructions, building_b
+            )
 
         return {
             "climate_zone": climate_zone,
+            "constructions": constructions,
             "bldg_scc_wwr_ratio_dict": bldg_scc_wwr_ratio_dict,
         }
 
@@ -78,6 +84,7 @@ class PRM9012019Rule57c26(RuleDefinitionListIndexedBase):
         def create_data(self, context, data=None):
             building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
+            constructions = data["constructions"]
             bldg_scc_wwr_ratio = data["bldg_scc_wwr_ratio_dict"][building_b["id"]]
             # manual flag required?
             manual_check_required_flag = bldg_scc_wwr_ratio[
@@ -195,7 +202,7 @@ class PRM9012019Rule57c26(RuleDefinitionListIndexedBase):
             return {
                 # TODO this function will likely need to be revised to RMD level later.
                 "scc_dict_b": get_surface_conditioning_category_dict(
-                    climate_zone, building_b
+                    climate_zone, building_b, constructions
                 ),
                 "manual_check_required_flag": manual_check_required_flag,
                 "target_u_factor_mix": target_u_factor_mix,

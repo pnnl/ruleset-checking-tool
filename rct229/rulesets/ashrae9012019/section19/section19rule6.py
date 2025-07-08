@@ -24,8 +24,7 @@ class PRM9012019Rule97a53(RuleDefinitionBase):
             rmd_context="ruleset_model_descriptions/0",
             required_fields={
                 "$": ["model_output"],
-                "model_output": ["output_instance"],
-                "output_instance": [
+                "model_output": [
                     "unmet_load_hours_heating",
                     "unmet_load_hours_cooling",
                     "unmet_load_hours",
@@ -43,7 +42,7 @@ class PRM9012019Rule97a53(RuleDefinitionBase):
 
     def get_calc_vals(self, context, data=None):
         rmd_b = context.BASELINE_0
-        output_instance_b = rmd_b["model_output"]["output_instance"]
+        output_instance_b = rmd_b["model_output"]
 
         unmet_load_hours_heating_b = output_instance_b["unmet_load_hours_heating"]
         unmet_load_hours_cooling_b = output_instance_b["unmet_load_hours_cooling"]

@@ -22,10 +22,12 @@ TEST_RMD = {
                                     "function": "LABORATORY",
                                 },
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Exhaust Fan 1",
-                                "design_airflow": 1000,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Exhaust Fan 1",
+                                    "design_airflow": 1000,
+                                }
+                            ],
                         },
                         {
                             "id": "Thermal Zone 2",
@@ -39,9 +41,11 @@ TEST_RMD = {
                                     "function": "KITCHEN",
                                 },
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Exhaust Fan 2",
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Exhaust Fan 2",
+                                }
+                            ],
                         },
                         {
                             "id": "Thermal Zone 3",

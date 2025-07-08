@@ -18,22 +18,22 @@ from rct229.utils.utility_functions import (
 HUMIDIFICATION = SchemaEnums.schema_enums["HumidificationOptions"]
 
 
-class prm9012019rule34l34(RuleDefinitionListIndexedBase):
+class PRM9012019Rule86j27(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 10 (HVAC General)"""
 
     def __init__(self):
-        super(prm9012019rule34l34, self).__init__(
+        super(PRM9012019Rule86j27, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=prm9012019rule34l34.ZoneRule(),
+            each_rule=PRM9012019Rule86j27.ZoneRule(),
             index_rmd=BASELINE_0,
             id="10-1",
             description="When the proposed design includes humidification and complies with Section 6.5.2.4, then the baseline building design shall use nonadiabatic humidification. "
             "When the proposed design includes humidification and does not comply with Section 6.5.2.4 then the baseline building design shall use adiabatic humidification.",
             ruleset_section_title="HVAC General",
             standard_section="Section G3.1-10 HVAC Systems for the baseline building",
-            is_primary_rule=True,
+            is_primary_rule=False,
             list_path="$.buildings[*].building_segments[*].zones[*]",
             rmd_context="ruleset_model_descriptions/0",
         )
@@ -80,7 +80,7 @@ class prm9012019rule34l34(RuleDefinitionListIndexedBase):
 
     class ZoneRule(PartialRuleDefinition):
         def __init__(self):
-            super(prm9012019rule34l34.ZoneRule, self).__init__(
+            super(PRM9012019Rule86j27.ZoneRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),

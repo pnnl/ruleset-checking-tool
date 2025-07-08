@@ -183,9 +183,6 @@
                         "weather": {
                             "climate_zone": "CZ4A"
                         },
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -255,9 +252,6 @@
                         "id": "RMD 1",
                         "weather": {
                             "climate_zone": "CZ4A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "buildings": [
                             {
@@ -349,9 +343,6 @@
                         "weather": {
                             "climate_zone": "CZ4A"
                         },
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -421,9 +412,6 @@
                         "id": "RMD 1",
                         "weather": {
                             "climate_zone": "CZ4A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "buildings": [
                             {
@@ -520,9 +508,6 @@
                         "weather": {
                             "climate_zone": "CZ4A"
                         },
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -592,9 +577,6 @@
                         "id": "RMD 1",
                         "weather": {
                             "climate_zone": "CZ4A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "buildings": [
                             {
@@ -691,9 +673,6 @@
                         "weather": {
                             "climate_zone": "CZ4A"
                         },
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -757,9 +736,6 @@
                         "id": "RMD 1",
                         "weather": {
                             "climate_zone": "CZ4A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "buildings": [
                             {
@@ -856,9 +832,6 @@
                         "weather": {
                             "climate_zone": "CZ4A"
                         },
-                        "calendar": {
-                            "is_leap_year": false
-                        },
                         "buildings": [
                             {
                                 "id": "Building 1",
@@ -933,9 +906,6 @@
                         "id": "RMD 1",
                         "weather": {
                             "climate_zone": "CZ4A"
-                        },
-                        "calendar": {
-                            "is_leap_year": false
                         },
                         "buildings": [
                             {

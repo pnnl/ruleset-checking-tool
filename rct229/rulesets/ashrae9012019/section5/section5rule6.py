@@ -17,6 +17,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 )
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
+from rct229.utils.assertions import assert_
 
 
 class PRM9012019Rule70u00(RuleDefinitionListIndexedBase):
@@ -36,7 +37,7 @@ class PRM9012019Rule70u00(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(b) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             required_fields={
-                "$.ruleset_model_descriptions[*]": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather", "constructions"],
                 "weather": ["climate_zone"],
             },
         )
@@ -44,7 +45,11 @@ class PRM9012019Rule70u00(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        return {"climate_zone": climate_zone}
+        constructions = rpd_b["ruleset_model_descriptions"][0]["constructions"]
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -62,7 +67,7 @@ class PRM9012019Rule70u00(RuleDefinitionListIndexedBase):
             building = context.BASELINE_0
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building
+                    data["climate_zone"], building, data["constructions"]
                 ),
             }
 
@@ -84,7 +89,6 @@ class PRM9012019Rule70u00(RuleDefinitionListIndexedBase):
                     ),
                     required_fields={
                         "$": ["construction"],
-                        "construction": ["c_factor"],
                     },
                     precision={
                         "bg_wall_c_factor_b": {
@@ -96,12 +100,22 @@ class PRM9012019Rule70u00(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 climate_zone: str = data["climate_zone"]
+                constructions = data["constructions"]
                 below_grade_wall = context.BASELINE_0
                 scc: str = data["surface_conditioning_category_dict"][
                     below_grade_wall["id"]
                 ]
-                wall_c_factor = below_grade_wall["construction"]["c_factor"]
-
+                wall_c_factor = next(
+                    (
+                        construction.get("c_factor")
+                        for construction in constructions
+                        if construction["id"] == below_grade_wall["construction"]
+                    )
+                )
+                assert_(
+                    wall_c_factor is not None,
+                    f"C-factor for below grade wall construction '{below_grade_wall['construction']}' is missing",
+                )
                 target_c_factor = None
                 target_c_factor_res = None
                 target_c_factor_nonres = None

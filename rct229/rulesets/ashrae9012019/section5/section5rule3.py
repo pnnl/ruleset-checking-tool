@@ -25,7 +25,7 @@ class PRM9012019Rule73o42(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$.ruleset_model_descriptions[*]": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather", "constructions"],
                 "weather": ["climate_zone"],
             },
             each_rule=PRM9012019Rule73o42.BuildingRule(),
@@ -41,7 +41,11 @@ class PRM9012019Rule73o42(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        return {"climate_zone": climate_zone}
+        constructions = rpd_b["ruleset_model_descriptions"][0]["constructions"]
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -59,7 +63,7 @@ class PRM9012019Rule73o42(RuleDefinitionListIndexedBase):
             building_b = context.BASELINE_0
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building_b
+                    data["climate_zone"], building_b, data["constructions"]
                 ),
             }
 

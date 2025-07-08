@@ -1,0 +1,156 @@
+{
+    "rule-5-34-a": {
+        "Section": 5,
+        "Rule": 34,
+        "Test": "a",
+        "test_description": "Project has one building segment with one zone. Infiltration has been specified for the zone. The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
+        "expected_rule_outcome": "pass",
+        "standard": {
+            "rule_id": "5-34",
+            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "rule_description": "The infiltration modeling method in the proposed includes adjustment for weather and building operation.",
+            "applicable_rmr": "Proposed Model",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "AIR-CHANGE"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "AIR-CHANGE"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-34-b": {
+        "Section": 5,
+        "Rule": 34,
+        "Test": "b",
+        "test_description": "Project has one building segment with one zone. Infiltration has been specified for the zone. The proposed infiltration modeling method is the same as the baseline infiltration modeling method",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-34",
+            "ruleset_reference": "Table G3.1(5) Proposed Building Performance (b)",
+            "rule_description": "The infiltration modeling method in the proposed includes adjustment for weather and building operation.",
+            "applicable_rmr": "Proposed Model",
+            "rule_assertion": "=",
+            "comparison_value": "Baseline Model",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "proposed": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "ASHRAE-ENHANCED"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "PROPOSED"
+                    }
+                ]
+            },
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "infiltration": {
+                                                    "id": "Infiltration 1",
+                                                    "modeling_method": "WEATHER_DRIVEN",
+                                                    "algorithm_name": "AIR-CHANGE"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}

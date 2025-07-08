@@ -20,15 +20,15 @@ FAIL_MSG = (
 )
 
 
-class PRM9012019rule23k17(RuleDefinitionListIndexedBase):
+class PRM9012019Rule23k17(RuleDefinitionListIndexedBase):
     """Rule 16 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(PRM9012019rule23k17, self).__init__(
+        super(PRM9012019Rule23k17, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=PRM9012019rule23k17.RMDRule(),
+            each_rule=PRM9012019Rule23k17.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-16",
             description="Gas water heaters shall be modeled using natural gas as their fuel. Exceptions: Where natural gas is not available for the proposed building site, as determined by the rating authority, gas water heaters shall be modeled using propane as their fuel.",
@@ -40,11 +40,11 @@ class PRM9012019rule23k17(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(PRM9012019rule23k17.RMDRule, self).__init__(
+            super(PRM9012019Rule23k17.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=PRM9012019rule23k17.RMDRule.SWHEquipRule(),
+                each_rule=PRM9012019Rule23k17.RMDRule.SWHEquipRule(),
                 index_rmd=BASELINE_0,
                 # TODO, change the path if the service_water_heating_uses moved to building_segment level
                 list_path="$.service_water_heating_equipment[*]",
@@ -59,7 +59,7 @@ class PRM9012019rule23k17(RuleDefinitionListIndexedBase):
 
         class SWHEquipRule(RuleDefinitionBase):
             def __init__(self):
-                super(PRM9012019rule23k17.RMDRule.SWHEquipRule, self).__init__(
+                super(PRM9012019Rule23k17.RMDRule.SWHEquipRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False,
                         BASELINE_0=True,
