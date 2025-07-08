@@ -240,7 +240,9 @@ def check_construction_association(rpd: dict) -> list:
     """
     mismatch_list = []
 
-    construction_id_list = find_all("$.ruleset_model_descriptions[*].constructions[*].id", rpd)
+    construction_id_list = find_all(
+        "$.ruleset_model_descriptions[*].constructions[*].id", rpd
+    )
     construction_reference_jsonpaths = [
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].surfaces[*].construction",
     ]
@@ -272,7 +274,11 @@ def check_material_association(rpd: dict) -> list:
         "$.ruleset_model_descriptions[*].constructions[*].framing_layers",
     ]
 
-    referenced_id_list = [material_id for sublist in find_all_by_jsonpaths(material_reference_jsonpaths, rpd) for material_id in sublist]
+    referenced_id_list = [
+        material_id
+        for sublist in find_all_by_jsonpaths(material_reference_jsonpaths, rpd)
+        for material_id in sublist
+    ]
 
     for material_id in referenced_id_list:
         if material_id not in material_id_list:
@@ -584,14 +590,20 @@ def non_schema_validate_rpd(rmd_obj):
     passed = passed and not mismatch_construction_errors
     if mismatch_construction_errors:
         error.extend(
-            [f"Cannot find construction '{mismatch_construction_id}' in the list of Construction data groups." for mismatch_construction_id in mismatch_construction_errors]
+            [
+                f"Cannot find construction '{mismatch_construction_id}' in the list of Construction data groups."
+                for mismatch_construction_id in mismatch_construction_errors
+            ]
         )
 
     mismatch_material_errors = check_material_association(rmd_obj)
     passed = passed and not mismatch_material_errors
     if mismatch_material_errors:
         error.extend(
-            [f"Cannot find material '{mismatch_material_id}' in the list of Material data groups." for mismatch_material_id in mismatch_material_errors]
+            [
+                f"Cannot find material '{mismatch_material_id}' in the list of Material data groups."
+                for mismatch_material_id in mismatch_material_errors
+            ]
         )
 
     mismatch_fluid_loop_piping_errors = check_fluid_loop_or_piping_association(rmd_obj)

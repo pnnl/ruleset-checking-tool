@@ -190,13 +190,7 @@ TEST_MISMATCHED_LISTS_RMD = {
                     ],
                 }
             ],
-            "materials": [
-                {
-                    "id": "Material 1",
-                    "thickness": 0.2,
-                    "conductivity": 0.04
-                }
-            ],
+            "materials": [{"id": "Material 1", "thickness": 0.2, "conductivity": 0.04}],
             "boilers": [{"id": "Boiler 1"}],
             "chillers": [{"id": "Chiller 1"}],
             "service_water_heating_equipment": [{"id": "SWH Equipment 1"}],
@@ -320,7 +314,9 @@ def test__non_schema_validate_rpd__missing_associated_construction():
 
 def test__non_schema_validate_rpd__missing_associated_material():
     test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
-    test_rmd["ruleset_model_descriptions"][0]["constructions"][0]["primary_layers"][0] = "Missing Material"
+    test_rmd["ruleset_model_descriptions"][0]["constructions"][0]["primary_layers"][
+        0
+    ] = "Missing Material"
 
     assert non_schema_validate_rpd(test_rmd) == {
         "passed": False,
