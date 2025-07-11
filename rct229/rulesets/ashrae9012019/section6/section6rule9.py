@@ -85,7 +85,7 @@ class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
                         find_exactly_one_with_field_value(
                             "$[*]",
                             "id",
-                            building_p["building_open_schedule"],
+                            getattr_(building_p, "RMD", "building_open_schedule"),
                             schedules_p,
                         ),
                         "schedule",
