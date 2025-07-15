@@ -253,6 +253,11 @@ def create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set):
 
         # If test_id has not yet been added, add it's content to json_dict
         else:
+
+            # Establish ruleset for this ruletest JSON
+            key_list = [test_id, "standard", "ruleset"]
+            set_nested_dict(json_dict, key_list, rule_set)
+
             # Iterate through both keys and rule values
             for row_i in range(rule_value_list.size):
                 # row_value = what will be set to the dictionary's key/value pair
@@ -388,9 +393,14 @@ def create_test_json_from_excel(
     json_file_path = os.path.join(file_dir, "..", rule_set, json_name)
 
     # Load Schemas
-    if rule_set == RuleSet.ASHRAE9012019_RULESET:
-        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
-        SchemaEnums.update_schema_enum()
+    match rule_set:
+
+        case RuleSet.ASHRAE9012019_RULESET:
+            SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+            SchemaEnums.update_schema_enum()
+        case RuleSet.ASHRAE9012022_RULESET:
+            SchemaStore.set_ruleset(RuleSet.ASHRAE9012022_RULESET)
+            SchemaEnums.update_schema_enum()
 
     json_dict = create_dictionary_from_excel(spreadsheet_name, sheet_name, rule_set)
 
@@ -616,12 +626,18 @@ def set_systems_to_zones(json_dict, system_to_zone_dict, rule_set):
 
     file_dir = os.path.dirname(__file__)
 
+    match rule_set:
+        case RuleSet.ASHRAE9012019_RULESET | RuleSet.ASHRAE9012022_RULESET:
+            system_type_dir = "90.1_system_types"
+        case _:
+            raise ValueError(f"Invalid rule set for system to zone mapping: {rule_set}")
+
     for system in system_to_zone_dict["system_zone_assignment"]["systems"]:
         system_name = system["baseline_system"]
         zone_list = system["zones"]
 
         system_type_path = os.path.join(
-            file_dir, "..", rule_set, "system_types", f"{system_name}.json"
+            file_dir, "resources", "system_types", system_type_dir, f"{system_name}.json"
         )
 
         # Get system RMD

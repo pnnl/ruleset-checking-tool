@@ -17,6 +17,7 @@ from rct229.ruletest_engine.ruletest_jsons.ashrae9012019 import (
 # Ruleset enumerator
 class RuleSet:
     ASHRAE9012019_RULESET = "ashrae9012019"
+    ASHRAE9012022_RULESET = "ashrae9012022"
 
 
 class RuleSetTest:
