@@ -397,6 +397,9 @@ def generate_software_test_report(ruleset, section_list, output_json_path):
         SchemaEnums.update_schema_enum()
         report_dict = ASHRAE9012019SoftwareTestReport()
         report_dict.initialize_ruleset_report()
+    elif ruleset == RuleSet.ASHRAE9012022_RULESET:
+        # TODO - add software test report logic here
+        return
     else:
         raise Exception(f"Ruleset '{ruleset}' has no default software test report.")
 
