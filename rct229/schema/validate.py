@@ -227,6 +227,65 @@ def check_schedule_association(rpd: dict) -> list:
     return mismatch_list
 
 
+def check_construction_association(rpd: dict) -> list:
+    """
+    Check the association between constructions and the various objects which reference them.
+    Parameters
+    ----------
+    rpd
+
+    Returns list of mismatched construction ids
+    -------
+
+    """
+    mismatch_list = []
+
+    construction_id_list = find_all(
+        "$.ruleset_model_descriptions[*].constructions[*].id", rpd
+    )
+    construction_reference_jsonpaths = [
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].surfaces[*].construction",
+    ]
+
+    referenced_id_list = find_all_by_jsonpaths(construction_reference_jsonpaths, rpd)
+
+    for construction_id in referenced_id_list:
+        if construction_id not in construction_id_list:
+            mismatch_list.append(construction_id)
+    return mismatch_list
+
+
+def check_material_association(rpd: dict) -> list:
+    """
+    Check the association between materials and the various objects which reference them.
+    Parameters
+    ----------
+    rpd
+
+    Returns list of mismatched material ids
+    -------
+
+    """
+    mismatch_list = []
+
+    material_id_list = find_all("$.ruleset_model_descriptions[*].materials[*].id", rpd)
+    material_reference_jsonpaths = [
+        "$.ruleset_model_descriptions[*].constructions[*].primary_layers",
+        "$.ruleset_model_descriptions[*].constructions[*].framing_layers",
+    ]
+
+    referenced_id_list = [
+        material_id
+        for sublist in find_all_by_jsonpaths(material_reference_jsonpaths, rpd)
+        for material_id in sublist
+    ]
+
+    for material_id in referenced_id_list:
+        if material_id not in material_id_list:
+            mismatch_list.append(material_id)
+    return mismatch_list
+
+
 def check_fluid_loop_or_piping_association(rpd: dict) -> list:
     """
     Check the association between fluid loops or piping and pumps that reference them.
@@ -503,44 +562,66 @@ def non_schema_validate_rpd(rmd_obj):
     passed = passed and not mismatch_hvac_errors
     if mismatch_hvac_errors:
         error.append(
-            f"Cannot find HVAC systems {mismatch_hvac_errors} in the HeatingVentilationAirConditioningSystems data group."
+            f"Cannot find HVAC systems {mismatch_hvac_errors} in the list of HeatingVentilationAirConditioningSystem data groups."
         )
 
     mismatch_zone_errors = check_zone_association(rmd_obj)
     passed = passed and not mismatch_zone_errors
     if mismatch_zone_errors:
         error.append(
-            f"Cannot find zones {mismatch_zone_errors} in the Zone data group."
+            f"Cannot find zones {mismatch_zone_errors} in the lists of Zone data groups."
         )
 
     mismatch_fluid_loop_errors = check_fluid_loop_association(rmd_obj)
     passed = passed and not mismatch_fluid_loop_errors
     if mismatch_fluid_loop_errors:
         error.append(
-            f"Cannot find fluid loop {mismatch_fluid_loop_errors} in the FluidLoop data group."
+            f"Cannot find fluid loop {mismatch_fluid_loop_errors} in the lists of FluidLoop data groups."
         )
 
     mismatch_schedule_errors = check_schedule_association(rmd_obj)
     passed = passed and not mismatch_schedule_errors
     if mismatch_schedule_errors:
         error.append(
-            f"Cannot find schedule {mismatch_schedule_errors} in the Schedule data group."
+            f"Cannot find schedule {mismatch_schedule_errors} in the list of Schedule data groups."
+        )
+
+    mismatch_construction_errors = check_construction_association(rmd_obj)
+    passed = passed and not mismatch_construction_errors
+    if mismatch_construction_errors:
+        error.extend(
+            [
+                f"Cannot find construction '{mismatch_construction_id}' in the list of Construction data groups."
+                for mismatch_construction_id in mismatch_construction_errors
+            ]
+        )
+
+    mismatch_material_errors = check_material_association(rmd_obj)
+    passed = passed and not mismatch_material_errors
+    if mismatch_material_errors:
+        error.extend(
+            [
+                f"Cannot find material '{mismatch_material_id}' in the list of Material data groups."
+                for mismatch_material_id in mismatch_material_errors
+            ]
         )
 
     mismatch_fluid_loop_piping_errors = check_fluid_loop_or_piping_association(rmd_obj)
     passed = passed and not mismatch_fluid_loop_piping_errors
     if mismatch_fluid_loop_piping_errors:
         error.append(
-            f"Cannot find piping {mismatch_schedule_errors} in the FluidLoop or ServiceWaterHeatingDistributionSystems data group."
+            f"Cannot find piping {mismatch_fluid_loop_piping_id} in the FluidLoop or ServiceWaterPiping data group."
+            for mismatch_fluid_loop_piping_id in mismatch_fluid_loop_piping_errors
         )
 
-    mismatch_service_water_heating_errors = check_service_water_heating_association(
-        rmd_obj
+    mismatch_service_water_heating_distribution_errors = (
+        check_service_water_heating_association(rmd_obj)
     )
-    passed = passed and not mismatch_service_water_heating_errors
-    if mismatch_service_water_heating_errors:
+    passed = passed and not mismatch_service_water_heating_distribution_errors
+    if mismatch_service_water_heating_distribution_errors:
         error.append(
-            f"Cannot find service water heating {mismatch_service_water_heating_errors} in the ServiceWaterHeatingDistributionSystems data group."
+            f"Cannot find service water heating {mismatch_service_water_heating_distribution_id} in the ServiceWaterHeatingDistributionSystems data group."
+            for mismatch_service_water_heating_distribution_id in mismatch_service_water_heating_distribution_errors
         )
 
     mismatch_associated_data_elements_errors = check_associated_data_elements(rmd_obj)

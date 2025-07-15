@@ -158,6 +158,12 @@ TEST_MISMATCHED_LISTS_RMD = {
                                             ],
                                         }
                                     ],
+                                    "surfaces": [
+                                        {
+                                            "id": "Surface 1",
+                                            "construction": "Construction 1",
+                                        }
+                                    ],
                                 }
                             ],
                             "heating_ventilating_air_conditioning_systems": [
@@ -175,12 +181,18 @@ TEST_MISMATCHED_LISTS_RMD = {
                     ],
                 }
             ],
+            "constructions": [
+                {
+                    "id": "Construction 1",
+                    "construction_type": "Opaque",
+                    "primary_layers": [
+                        "Material 1",
+                    ],
+                }
+            ],
+            "materials": [{"id": "Material 1", "thickness": 0.2, "conductivity": 0.04}],
             "boilers": [{"id": "Boiler 1"}],
             "chillers": [{"id": "Chiller 1"}],
-            "service_water_heating_uses": [
-                {"id": "Typical SWH Use"},
-                {"id": "SWH Use 1"},
-            ],
             "service_water_heating_equipment": [{"id": "SWH Equipment 1"}],
             "service_water_heating_uses": [
                 {"id": "SWH Use 1"},
@@ -282,6 +294,34 @@ def test__non_schema_validate_rpd__mismatched_associated_efficiency_lists_2():
         "passed": False,
         "error": [
             "'Cooling 1' lists at 'efficiency_metric_types' and 'efficiency_metric_values' are not the same length."
+        ],
+    }
+
+
+def test__non_schema_validate_rpd__missing_associated_construction():
+    test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
+    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
+        "zones"
+    ][0]["surfaces"][0]["construction"] = "Missing Construction"
+
+    assert non_schema_validate_rpd(test_rmd) == {
+        "passed": False,
+        "error": [
+            "Cannot find construction 'Missing Construction' in the list of Construction data groups."
+        ],
+    }
+
+
+def test__non_schema_validate_rpd__missing_associated_material():
+    test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
+    test_rmd["ruleset_model_descriptions"][0]["constructions"][0]["primary_layers"][
+        0
+    ] = "Missing Material"
+
+    assert non_schema_validate_rpd(test_rmd) == {
+        "passed": False,
+        "error": [
+            "Cannot find material 'Missing Material' in the list of Material data groups."
         ],
     }
 
