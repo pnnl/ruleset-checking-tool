@@ -234,7 +234,7 @@ def check_construction_association(rpd: dict) -> list:
     ----------
     rpd
 
-    Returns list of mismatched schedule ids
+    Returns list of mismatched construction ids
     -------
 
     """
@@ -262,7 +262,7 @@ def check_material_association(rpd: dict) -> list:
     ----------
     rpd
 
-    Returns list of mismatched schedule ids
+    Returns list of mismatched material ids
     -------
 
     """
@@ -610,16 +610,18 @@ def non_schema_validate_rpd(rmd_obj):
     passed = passed and not mismatch_fluid_loop_piping_errors
     if mismatch_fluid_loop_piping_errors:
         error.append(
-            f"Cannot find piping {mismatch_schedule_errors} in the FluidLoop or ServiceWaterHeatingDistributionSystems data group."
+            f"Cannot find piping {mismatch_fluid_loop_piping_id} in the FluidLoop or ServiceWaterPiping data group."
+            for mismatch_fluid_loop_piping_id in mismatch_fluid_loop_piping_errors
         )
 
-    mismatch_service_water_heating_errors = check_service_water_heating_association(
-        rmd_obj
+    mismatch_service_water_heating_distribution_errors = (
+        check_service_water_heating_association(rmd_obj)
     )
-    passed = passed and not mismatch_service_water_heating_errors
-    if mismatch_service_water_heating_errors:
+    passed = passed and not mismatch_service_water_heating_distribution_errors
+    if mismatch_service_water_heating_distribution_errors:
         error.append(
-            f"Cannot find service water heating {mismatch_service_water_heating_errors} in the ServiceWaterHeatingDistributionSystems data group."
+            f"Cannot find service water heating {mismatch_service_water_heating_distribution_id} in the ServiceWaterHeatingDistributionSystems data group."
+            for mismatch_service_water_heating_distribution_id in mismatch_service_water_heating_distribution_errors
         )
 
     mismatch_associated_data_elements_errors = check_associated_data_elements(rmd_obj)
