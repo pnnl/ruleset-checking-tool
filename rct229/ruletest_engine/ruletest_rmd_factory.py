@@ -15,7 +15,6 @@ from rct229.utils.assertions import getattr_
 def get_ruletest_rmd_models(test_dict: dict):
     rmd = None
 
-
     match SchemaStore.SELECTED_RULESET:
         case RuleSet.ASHRAE9012019_RULESET:
             rmd = get_901_rmd_models(test_dict)

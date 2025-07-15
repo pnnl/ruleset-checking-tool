@@ -637,7 +637,11 @@ def set_systems_to_zones(json_dict, system_to_zone_dict, rule_set):
         zone_list = system["zones"]
 
         system_type_path = os.path.join(
-            file_dir, "resources", "system_types", system_type_dir, f"{system_name}.json"
+            file_dir,
+            "resources",
+            "system_types",
+            system_type_dir,
+            f"{system_name}.json",
         )
 
         # Get system RMD
