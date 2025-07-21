@@ -32,6 +32,24 @@ CRAWLSPACE_HEIGHT_THRESHOLD = CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY.to("m").magni
 # This single rmd is intended to exercise all the get_building_scc_skylight_roof_ratios_dict function
 TEST_rmd = {
     "id": "test_rmd",
+    "constructions": [
+        {
+            "id": "const_1_5_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_1_6_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_3_5_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_3_6_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+    ],
     "buildings": [
         {
             "id": "bldg_1",
@@ -306,10 +324,7 @@ TEST_rmd = {
                                     "adjacent_zone": "zone_2_2",  # directly conditioned
                                     "area": 10,  # m2
                                     "tilt": 0,  # above grade wall
-                                    "construction": {
-                                        "id": "const_1_5_1",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_1_5_1",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_2_1_1_1",
@@ -352,10 +367,7 @@ TEST_rmd = {
                                     "adjacent_zone": "zone_2_1",  # directly conditioned
                                     "area": 10,  # m2
                                     "tilt": 0,  # above grade wall
-                                    "construction": {
-                                        "id": "const_1_6_1",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_1_6_1",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_2_2_1_1",
@@ -434,10 +446,7 @@ TEST_rmd = {
                                     "adjacent_zone": "zone_3_2",  # directly conditioned
                                     "area": 10,  # m2
                                     "tilt": 0,  # above grade wall
-                                    "construction": {
-                                        "id": "const_3_5_1",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_3_5_1",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_3_1_1_1",
@@ -491,10 +500,7 @@ TEST_rmd = {
                                     "adjacent_zone": "zone_3_1",  # directly conditioned
                                     "area": 10,  # m2
                                     "tilt": 0,  # above grade wall
-                                    "construction": {
-                                        "id": "const_3_6_1",
-                                        "u_factor": 0.1,  # W/(m2 * K)
-                                    },
+                                    "construction": "const_3_6_1",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_3_2_1_1",
@@ -520,6 +526,24 @@ TEST_rmd = {
             ],
         }
     ],
+    "constructions": [
+        {
+            "id": "const_1_5_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_3_6_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_3_5_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_1_6_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+    ],
     "type": "BASELINE_0",
 }
 
@@ -530,6 +554,9 @@ TEST_RMD_12 = {
 
 TEST_BUILDING = quantify_rmd(TEST_RMD_12)["ruleset_model_descriptions"][0]["buildings"][
     0
+]
+TEST_CONSTRUCTIONS = quantify_rmd(TEST_RMD_12)["ruleset_model_descriptions"][0][
+    "constructions"
 ]
 
 # The purpose of below is to test out when all the summed areas equal 0.
@@ -617,6 +644,12 @@ TEST_BUILDING_BRANCH_COVERAGE = quantify_rmd(TEST_RMD_BRANCH_COVERAGE)[
 
 TEST_RMD_BRANCH_COVERAGE2 = {
     "id": "test_rmd_branch_coverage2",
+    "constructions": [
+        {
+            "id": "Construction 1",
+            "u_factor": 0.35773064046128095,
+        }
+    ],
     "buildings": [
         {
             "id": "bldg_1",
@@ -660,10 +693,7 @@ TEST_RMD_BRANCH_COVERAGE2 = {
                                     "adjacent_zone": "zone_1_2",
                                     "area": 10,  # m2
                                     "tilt": 30,  # roof
-                                    "construction": {
-                                        "id": "Construction 1",
-                                        "u_factor": 0.35773064046128095,
-                                    },
+                                    "construction": "Construction 1",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_1_1_1",
@@ -679,6 +709,12 @@ TEST_RMD_BRANCH_COVERAGE2 = {
                     ],
                 },
             ],
+        }
+    ],
+    "constructions": [
+        {
+            "id": "Construction 1",
+            "u_factor": 0.35773064046128095,
         }
     ],
 }
@@ -710,7 +746,9 @@ def test__TEST_RPD__is_valid():
 
 
 def test__get_building_scc_skylight_roof_ratios_dict():
-    assert get_building_scc_skylight_roof_ratios_dict(CLIMATE_ZONE, TEST_BUILDING) == {
+    assert get_building_scc_skylight_roof_ratios_dict(
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING
+    ) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.2,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.2,
         SCC.SEMI_EXTERIOR: 0.2,
@@ -720,7 +758,7 @@ def test__get_building_scc_skylight_roof_ratios_dict():
 
 def test__get_building_scc_skylight_roof_ratios_dict__branch_coverage():
     assert get_building_scc_skylight_roof_ratios_dict(
-        CLIMATE_ZONE, TEST_BUILDING_BRANCH_COVERAGE
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING_BRANCH_COVERAGE
     ) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.0,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.0,
@@ -731,7 +769,7 @@ def test__get_building_scc_skylight_roof_ratios_dict__branch_coverage():
 
 def test__get_building_scc_skylight_roof_ratios_dict__branch_coverage2():
     assert get_building_scc_skylight_roof_ratios_dict(
-        CLIMATE_ZONE, TEST_BUILDING_BRANCH_COVERAGE2
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING_BRANCH_COVERAGE2
     ) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.0,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.0,

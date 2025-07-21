@@ -42,7 +42,11 @@ class PRM9012019Rule04o58(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        return {"climate_zone": climate_zone}
+        constructions = rpd_b["ruleset_model_descriptions"][0].get("constructions")
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
@@ -68,7 +72,7 @@ class PRM9012019Rule04o58(RuleDefinitionListIndexedBase):
         def is_applicable(self, context, data=None):
             building_b = context.BASELINE_0
             area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
-                data["climate_zone"], building_b
+                data["climate_zone"], data["constructions"], building_b
             )
             return OTHER in area_type_window_wall_area_dict_b
 
@@ -77,10 +81,10 @@ class PRM9012019Rule04o58(RuleDefinitionListIndexedBase):
             building_p = context.PROPOSED
 
             area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
-                data["climate_zone"], building_b
+                data["climate_zone"], data["constructions"], building_b
             )
             area_type_window_wall_area_dict_p = get_area_type_window_wall_area_dict(
-                data["climate_zone"], building_p
+                data["climate_zone"], data["constructions"], building_p
             )
 
             wwr_b = (

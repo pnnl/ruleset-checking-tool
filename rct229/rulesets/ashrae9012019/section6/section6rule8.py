@@ -52,13 +52,11 @@ class PRM9012019Rule16x33(RuleDefinitionListIndexedBase):
                 index_rmd=PROPOSED,
                 list_path="buildings[*]",
                 required_fields={
-                    "$": ["schedules", "calendar"],
-                    "calendar": ["is_leap_year"],
+                    "$": ["schedules"],
                 },
                 data_items={
                     "schedules_b": (BASELINE_0, "schedules"),
                     "schedules_p": (PROPOSED, "schedules"),
-                    "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
                 },
             )
 
@@ -133,7 +131,6 @@ class PRM9012019Rule16x33(RuleDefinitionListIndexedBase):
                         schedules_b = data["schedules_b"]
                         schedules_p = data["schedules_p"]
                         building_open_schedule_p = data["building_open_schedule_p"]
-                        is_leap_year = data["is_leap_year"]
 
                         normalized_interior_lighting_schedule_b = (
                             normalize_interior_lighting_schedules(
@@ -155,7 +152,6 @@ class PRM9012019Rule16x33(RuleDefinitionListIndexedBase):
                             normalized_interior_lighting_schedule_p,
                             normalized_interior_lighting_schedule_b,
                             building_open_schedule_p,
-                            is_leap_year=is_leap_year,
                         )
 
                         return {

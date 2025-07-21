@@ -28,7 +28,7 @@ class PRM9012019Rule73r04(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
-                "$.ruleset_model_descriptions[*]": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather", "constructions"],
                 "weather": ["climate_zone"],
             },
             each_rule=PRM9012019Rule73r04.BuildingRule(),
@@ -43,8 +43,15 @@ class PRM9012019Rule73r04(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
+        rpd_p = context.PROPOSED
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        return {"climate_zone": climate_zone}
+        constructions_b = rpd_b["ruleset_model_descriptions"][0]["constructions"]
+        constructions_p = rpd_p["ruleset_model_descriptions"][0]["constructions"]
+        return {
+            "climate_zone": climate_zone,
+            "constructions_b": constructions_b,
+            "constructions_p": constructions_p,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -62,7 +69,7 @@ class PRM9012019Rule73r04(RuleDefinitionListIndexedBase):
             building = context.BASELINE_0
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building
+                    data["climate_zone"], building, data["constructions_b"]
                 ),
             }
 
@@ -100,10 +107,33 @@ class PRM9012019Rule73r04(RuleDefinitionListIndexedBase):
                 surface_b = context.BASELINE_0
                 surface_p = context.PROPOSED
 
-                surface_b_type = get_opaque_surface_type(surface_b)
-                surface_b_construction = surface_b["construction"]
-                surface_p_type = get_opaque_surface_type(surface_p)
-                surface_p_construction = surface_p["construction"]
+                construction_id_b = getattr_(surface_b, "Surface", "construction")
+                construction_id_p = getattr_(surface_p, "Surface", "construction")
+
+                surface_b_construction = next(
+                    (
+                        construction
+                        for construction in data["constructions_b"]
+                        if construction["id"] == construction_id_b
+                    )
+                )
+                surface_p_construction = next(
+                    (
+                        construction
+                        for construction in data["constructions_p"]
+                        if construction["id"] == construction_id_p
+                    )
+                )
+
+                has_radiant_heat_b = surface_b_construction.get(
+                    "has_radiant_heat", False
+                )
+                has_radiant_heat_p = surface_p_construction.get(
+                    "has_radiant_heat", False
+                )
+
+                surface_b_type = get_opaque_surface_type(surface_b, has_radiant_heat_b)
+                surface_p_type = get_opaque_surface_type(surface_p, has_radiant_heat_p)
 
                 calc_vals = {
                     "baseline_surface_type": surface_b_type,
@@ -116,13 +146,13 @@ class PRM9012019Rule73r04(RuleDefinitionListIndexedBase):
                         "baseline_surface_u_factor": CalcQ(
                             "thermal_transmittance",
                             getattr_(
-                                surface_b_construction, "construction", "u_factor"
+                                surface_b_construction, "Construction", "u_factor"
                             ),
                         ),
                         "proposed_surface_u_factor": CalcQ(
                             "thermal_transmittance",
                             getattr_(
-                                surface_p_construction, "construction", "u_factor"
+                                surface_p_construction, "Construction", "u_factor"
                             ),
                         ),
                     }

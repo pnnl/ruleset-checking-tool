@@ -10,58 +10,47 @@ from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
 
-def get_aggregated_zone_hvac_fan_operating_schedule(
-    rmd: dict, zone_id: str, is_leap_year: Optional[bool] = False
-) -> list:
+def get_aggregated_zone_hvac_fan_operating_schedule(rmd: dict, zone_id: str) -> list:
     """
-     This function loops through all of the HVAC system fan operating schedules associated with a specific zone and
-     creates an aggregated fan operating schedule for the zone. More specifically, if any of the fan operating schedules
-     associated with any of the hvac systems serving the zone have a 1 for a particular hour of the year then the aggregated schedule will equal 1
-     for that particular hour of the year. The function will check this for each hour of the year and return an 8760 aggregated fan operating schedule.
-
-    Parameters
-    ----------
-    rmd: dict A zone id associated with the rmd for which to create the aggregated fan operating schedule as described above.
-    zone_id: str A zone id associated with the rmd for which to create the aggregated fan operating schedule as described above.
-    is_leap_year: bool, indicate whether the comparison is in a leap year or not. True / False
-
-
-    Returns
-    ----------
-    aggregated_zone_hvac_fan_operating_schedule: 8760 aggregated fan operating schedule for the zone.
+    This function loops through all of the HVAC system fan operating schedules associated with a specific zone and
+    creates an aggregated fan operating schedule for the zone. If any schedule has a 1 for a particular hour, the
+    aggregated schedule will also have a 1 at that hour. Returns an aggregated schedule matching the schedule length.
+    If any HVAC system lacks a schedule, a constant schedule of 1s is assumed for that system.
     """
-    num_hours = (
-        LeapYear.LEAP_YEAR_HOURS if is_leap_year else LeapYear.REGULAR_YEAR_HOURS
-    )
-
     schedules = []
+    assume_constant = False
+
     for hvac_id in get_list_hvac_systems_associated_with_zone(rmd, zone_id):
         hvac = find_exactly_one_hvac_system(rmd, hvac_id)
         fan_sys = getattr_(hvac, "hvac", "fan_system")
 
         fan_sys_operating_sch = fan_sys.get("operating_schedule")
         if fan_sys_operating_sch:
-            schedules.append(
-                getattr_(
-                    find_one(
-                        f'$.schedules[*][?(@.id = "{fan_sys_operating_sch}")]', rmd
-                    ),
-                    "schedules",
-                    "hourly_values",
-                )
+            schedule_values = getattr_(
+                find_one(f'$.schedules[*][?(@.id = "{fan_sys_operating_sch}")]', rmd),
+                "schedules",
+                "hourly_values",
             )
+            schedules.append(schedule_values)
         else:
-            schedules.append([1] * num_hours)
+            assume_constant = True
 
     assert_(
-        len(schedules) > 0,
-        "Please make sure the provided ZONE 'zone_id' is connected with at least one HVAC system",
+        len(schedules) > 0 or assume_constant,
+        f"No fan operating schedules found for zone '{zone_id}', and no fallback assumed.",
     )
 
-    # determine if all the schedules operate. If so, assign 1, else 0.
+    # If any schedule is missing, use constant 1s schedule of same length as existing schedules
+    if assume_constant:
+        # Try to get the reference length from existing schedules
+        schedule_length = (
+            len(schedules[0]) if schedules else 8760
+        )  # fallback to 8760 if none exist
+        schedules.append([1] * schedule_length)
+
     schedules_df = pd.DataFrame(schedules)
     aggregated_zone_hvac_fan_operating_schedule = (
-        (schedules_df.gt(0).all(axis=0)).astype(int).tolist()
+        (schedules_df.gt(0).any(axis=0)).astype(int).tolist()
     )
 
     return aggregated_zone_hvac_fan_operating_schedule

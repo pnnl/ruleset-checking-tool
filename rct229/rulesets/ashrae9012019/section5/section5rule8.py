@@ -17,6 +17,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 )
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
+from rct229.utils.assertions import assert_
 
 
 class PRM9012019Rule48v87(RuleDefinitionListIndexedBase):
@@ -28,7 +29,7 @@ class PRM9012019Rule48v87(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$.ruleset_model_descriptions[*]": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather", "constructions"],
                 "weather": ["climate_zone"],
             },
             each_rule=PRM9012019Rule48v87.BuildingRule(),
@@ -44,7 +45,11 @@ class PRM9012019Rule48v87(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        return {"climate_zone": climate_zone}
+        constructions = rpd_b["ruleset_model_descriptions"][0]["constructions"]
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -62,7 +67,7 @@ class PRM9012019Rule48v87(RuleDefinitionListIndexedBase):
             building = context.BASELINE_0
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building
+                    data["climate_zone"], building, data["constructions"]
                 ),
             }
 
@@ -82,7 +87,9 @@ class PRM9012019Rule48v87(RuleDefinitionListIndexedBase):
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
-                    required_fields={},
+                    required_fields={
+                        "$": ["construction"],
+                    },
                     precision={
                         "ag_wall_u_factor_b": {
                             "precision": 0.001,
@@ -93,11 +100,22 @@ class PRM9012019Rule48v87(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 climate_zone: str = data["climate_zone"]
+                constructions = data["constructions"]
                 above_grade_wall = context.BASELINE_0
                 scc: str = data["surface_conditioning_category_dict"][
                     above_grade_wall["id"]
                 ]
-                above_grade_wall_u_factor = above_grade_wall["construction"]["u_factor"]
+                wall_u_factor = next(
+                    (
+                        construction.get("u_factor")
+                        for construction in constructions
+                        if construction["id"] == above_grade_wall["construction"]
+                    )
+                )
+                assert_(
+                    wall_u_factor is not None,
+                    f"U-factor for above grade wall construction '{above_grade_wall['construction']}' is missing",
+                )
 
                 target_u_factor = None
                 target_u_factor_res = None
@@ -123,7 +141,7 @@ class PRM9012019Rule48v87(RuleDefinitionListIndexedBase):
 
                 return {
                     "above_grade_wall_u_factor": CalcQ(
-                        "thermal_transmittance", above_grade_wall_u_factor
+                        "thermal_transmittance", wall_u_factor
                     ),
                     "target_u_factor": CalcQ("thermal_transmittance", target_u_factor),
                     "target_u_factor_res": CalcQ(

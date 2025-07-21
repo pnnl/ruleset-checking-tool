@@ -135,12 +135,12 @@ def test__TEST_RMD_FIXED_TYPE__is_valid():
 
 
 def test__get_zone_eflh_thermal_zone_1__success():
-    assert get_zone_eflh(TEST_RMD_UNIT, "Zone 1", False) == 8760
+    assert get_zone_eflh(TEST_RMD_UNIT, "Zone 1") == 8760
 
 
 def test__get_zone_eflh_thermal_zone_2__success():
-    assert get_zone_eflh(TEST_RMD_UNIT, "Zone 2", False) == 0
+    assert get_zone_eflh(TEST_RMD_UNIT, "Zone 2") == 0
 
 
 def test__get_zone_eflh_thermal_zone_3__success():
-    assert get_zone_eflh(TEST_RMD_UNIT, "Zone 3", False) == 8760
+    assert get_zone_eflh(TEST_RMD_UNIT, "Zone 3") == 8760

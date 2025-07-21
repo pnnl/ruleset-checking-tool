@@ -104,10 +104,13 @@ class PRM9012019Rule34r52(RuleDefinitionListIndexedBase):
 
             # get zone conditions from buildings
             zone_conditioning_category_dict = {}
+            constructions = find_all("$.constructions[*]", rmd_b)
             for bldg in find_all("$.buildings[*]", rmd_b):
                 zone_conditioning_category_dict = {
                     **zone_conditioning_category_dict,
-                    **get_zone_conditioning_category_dict(climate_zone, bldg),
+                    **get_zone_conditioning_category_dict(
+                        climate_zone, bldg, constructions
+                    ),
                 }
 
             loop_zone_list_w_area_dict = get_hw_loop_zone_list_w_area(rmd_b)

@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import RMD
+from rct229.rulesets.ashrae9012019 import COMMON_RMD, RMD
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_7_fns import table_G3_7_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_8_fns import table_G3_8_lookup
 from rct229.utils.jsonpath_utils import find_all
@@ -24,7 +24,7 @@ class PRM9012019Rule99c05(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
             each_rule=PRM9012019Rule99c05.BuildingSegmentRule(),
-            index_rmd=RMD.PROPOSED,
+            index_rmd=COMMON_RMD.PROPOSED,
             id="6-1",
             description="The total building interior lighting power shall not exceed the interior lighting power "
             "allowance determined using either Table G3.7 or G3.8",

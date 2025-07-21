@@ -113,13 +113,13 @@ def test__get_aggregated_zone_hvac_fan_operating_schedule__no_operating_schedule
 def test__get_aggregated_zone_hvac_fan_operating_schedule__correct_mapping():
     assert (
         get_aggregated_zone_hvac_fan_operating_schedule(TEST_RMD, "zone 2")
-        == [0] * 8760
+        == [1] * 8760
     )
 
 
 def test__get_aggregated_zone_hvac_fan_operating_schedule__assertion():
     with pytest.raises(
         RCTFailureException,
-        match="Please make sure the provided ZONE 'zone_id' is connected with at least one HVAC system",
+        match="No fan operating schedules found for zone 'zone_not_exist', and no fallback assumed.",
     ):
         get_aggregated_zone_hvac_fan_operating_schedule(TEST_RMD, "zone_not_exist")

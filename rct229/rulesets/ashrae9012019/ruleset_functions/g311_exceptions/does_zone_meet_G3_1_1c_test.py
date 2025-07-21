@@ -350,7 +350,6 @@ def test__does_zone_meet_g_3_1_1c_thermal_zone_1__false():
         does_zone_meet_g3_1_1c(
             TEST_RMD_UNIT,
             "Thermal Zone 1",
-            False,
             {
                 "Thermal Zone 1": {"expected_system_type": HVAC_SYS.SYS_7},
                 "Thermal Zone 2": {"expected_system_type": HVAC_SYS.SYS_7},
@@ -368,7 +367,6 @@ def test__does_zone_meet_g_3_1_1c_thermal_zone_2__true():
         does_zone_meet_g3_1_1c(
             TEST_RMD_UNIT,
             "Thermal Zone 2",
-            False,
             {
                 "Thermal Zone 1": {"expected_system_type": HVAC_SYS.SYS_7},
                 "Thermal Zone 2": {"expected_system_type": HVAC_SYS.SYS_7},
@@ -386,7 +384,6 @@ def test__does_zone_meet_g_3_1_1c_thermal_zone_3__true():
         does_zone_meet_g3_1_1c(
             TEST_RMD_UNIT,
             "Thermal Zone 3",
-            False,
             {
                 "Thermal Zone 1": {"expected_system_type": HVAC_SYS.SYS_7},
                 "Thermal Zone 2": {"expected_system_type": HVAC_SYS.SYS_7},

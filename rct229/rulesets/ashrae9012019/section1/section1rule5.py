@@ -30,7 +30,6 @@ class PRM9012019Rule86h31(RuleDefinitionBase):
             ruleset_section_title="Performance Calculations",
             standard_section="Section 4.2.1.1",
             is_primary_rule=True,
-            rmd_context="ruleset_model_descriptions/0",
         )
 
     def is_applicable(self, context, data=None):
@@ -48,19 +47,19 @@ class PRM9012019Rule86h31(RuleDefinitionBase):
             if rmd is not None:
                 pbp_set.append(
                     find_one(
-                        "$.model_output.total_proposed_building_energy_cost_including_renewable_energy",
+                        "$.output.total_proposed_building_energy_cost_including_renewable_energy",
                         rmd,
                     )
                 )
                 bbp_set.append(
                     find_one(
-                        "$.model_output.baseline_building_performance_energy_cost",
+                        "$.output.baseline_building_performance_energy_cost",
                         rmd,
                     )
                 )
                 pbp_nre_set.append(
                     find_one(
-                        "$.model_output.total_proposed_building_energy_cost_excluding_renewable_energy",
+                        "$.output.total_proposed_building_energy_cost_excluding_renewable_energy",
                         rmd,
                     )
                 )
@@ -105,31 +104,31 @@ class PRM9012019Rule86h31(RuleDefinitionBase):
             if rmd is not None:
                 pbp_set.append(
                     find_one(
-                        "$.model_output.total_proposed_building_energy_cost_including_renewable_energy",
+                        "$.output.total_proposed_building_energy_cost_including_renewable_energy",
                         rmd,
                     )
                 )
                 bbp_set.append(
                     find_one(
-                        "$.model_output.baseline_building_performance_energy_cost",
+                        "$.output.baseline_building_performance_energy_cost",
                         rmd,
                     )
                 )
                 pbp_nre_set.append(
                     find_one(
-                        "$.model_output.total_proposed_building_energy_cost_excluding_renewable_energy",
+                        "$.output.total_proposed_building_energy_cost_excluding_renewable_energy",
                         rmd,
                     )
                 )
                 pci_set.append(
                     find_one(
-                        "$.model_output.performance_cost_index",
+                        "$.output.performance_cost_index",
                         rmd,
                     )
                 )
                 pci_target_set.append(
                     find_one(
-                        "$.model_output.performance_cost_index_target",
+                        "$.output.performance_cost_index_target",
                         rmd,
                     )
                 )

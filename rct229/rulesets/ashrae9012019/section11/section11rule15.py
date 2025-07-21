@@ -48,7 +48,7 @@ class PRM9012019Rule06k20(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019Rule06k20.RMDRule.SWHUseRule(),
                 index_rmd=BASELINE_0,
                 # TODO, change the path if the service_water_heating_uses moved to building_segment level
-                list_path="$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+                list_path="$.service_water_heating_uses[*]",
             )
 
         def is_applicable(self, context, data=None):
