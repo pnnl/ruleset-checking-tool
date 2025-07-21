@@ -12,7 +12,7 @@ def test__compare_schedules__identical_compare_all_hours():
     schedule_1 = [1.0] * 8760
     schedule_2 = [1.0] * 8760
     mask_schedule = [1] * 8760
-    results = compare_schedules(schedule_1, schedule_2, mask_schedule, False)
+    results = compare_schedules(schedule_1, schedule_2, mask_schedule)
     assert (
         results["total_hours_compared"] == 8760.0
         and results["total_hours_matched"] == 8760.0
@@ -28,7 +28,7 @@ def test__compare_schedules__identical_compare_no_hours():
     schedule_1 = [1.0] * 8760
     schedule_2 = [1.0] * 8760
     mask_schedule = [0.0] * 8760
-    results = compare_schedules(schedule_1, schedule_2, mask_schedule, False)
+    results = compare_schedules(schedule_1, schedule_2, mask_schedule)
     assert (
         results["total_hours_compared"] == 0.0
         and results["total_hours_matched"] == 0.0
@@ -45,7 +45,7 @@ def test__compare_schedules__not_identical_compare_all_hours():
     # `schedule_2` has different schedules with `schedule_1` for the first 100 hrs to test out the `if schedule_1[index] == schedule_2[index]:` logic
     schedule_2 = [0.0] * 100 + [1.0] * 8660
     mask_schedule = [1] * 8760
-    results = compare_schedules(schedule_1, schedule_2, mask_schedule, False)
+    results = compare_schedules(schedule_1, schedule_2, mask_schedule)
     assert (
         results["total_hours_compared"] == 8760.0
         and results["total_hours_matched"] == 8660.0
@@ -63,7 +63,7 @@ def test__compare_schedules__identical_compare_all_hours_leap_year():
     schedule_2 = [1.0] * 8760
     mask_schedule = [1.0] * 8760
     try:
-        results = compare_schedules(schedule_1, schedule_2, mask_schedule, True)
+        results = compare_schedules(schedule_1, schedule_2, mask_schedule)
     except RCTFailureException as rfe:
         assert str(rfe) == (
             "Failed when comparing hourly schedules with target number of hours. target "

@@ -7,6 +7,7 @@ from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
     find_exactly_one_building_segment,
     find_exactly_one_space,
+    find_exactly_one_service_water_heating_use,
 )
 
 SERVICE_WATER_HEATING_USE_UNIT = SchemaEnums.schema_enums[
@@ -14,9 +15,7 @@ SERVICE_WATER_HEATING_USE_UNIT = SchemaEnums.schema_enums[
 ]
 
 
-def get_building_segment_swh_bat(
-    rmd: dict, building_segment_id: str, is_leap_year: bool = False
-) -> str:
+def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
     """
     This function determines the SWH BAT for the given building segment.
     Returns None if there is no service water heating uses and no service_water_heating_area_type under building segment,
@@ -29,8 +28,6 @@ def get_building_segment_swh_bat(
         RMD at RuleSetModelDescription level
     building_segment_id: str
         building segment id
-    is_leap_year: bool, default: False
-        Whether the year is a leap year or not.
 
     Returns
     -------
@@ -46,10 +43,11 @@ def get_building_segment_swh_bat(
     if building_segment_swh_bat is None:
         swh_use_dict = {}
         # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
-        for swh_use in find_all(
+        for swh_use_id in find_all(
             f'$.buildings[*].building_segments[*][?(@.id="{building_segment["id"]}")].zones[*].spaces[*].service_water_heating_uses[*]',
             rmd,
         ):
+            swh_use = find_exactly_one_service_water_heating_use(rmd, swh_use_id)
             if (
                 swh_use.get("use_units", SERVICE_WATER_HEATING_USE_UNIT.OTHER)
                 == SERVICE_WATER_HEATING_USE_UNIT.OTHER
@@ -57,7 +55,7 @@ def get_building_segment_swh_bat(
                 building_segment_swh_bat = "UNDETERMINED"
             else:
                 swh_use_energy_by_space = get_energy_required_to_heat_swh_use(
-                    swh_use["id"], rmd, building_segment["id"], is_leap_year
+                    swh_use["id"], rmd, building_segment["id"]
                 )
 
                 if swh_use.get("area_type"):

@@ -118,11 +118,3 @@ def test__TEST_RMD_WRONG_LENGTH__is_valid():
 
 def test__get_min_oa_cfm_sch_zone__pass():
     assert get_min_oa_cfm_sch_zone(TEST_RMD_CORRECT_LENGTH, "Zone 1") == [7.0] * 8760
-
-
-def test__get_min_oa_cfm_sch_zone__wrong_length():
-    with pytest.raises(
-        RCTFailureException,
-        match="The length of schedule has to be 8760, but is 8700.",
-    ):
-        get_min_oa_cfm_sch_zone(TEST_RMD_WRONG_LENGTH, "Zone 1")

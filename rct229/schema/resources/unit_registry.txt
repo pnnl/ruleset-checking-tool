@@ -168,6 +168,7 @@ gpm = gallon / min
 # Force
 [force] = [mass] * [acceleration]
 newton = kilogram * meter / second ** 2 = N
+force_pound = 4.4482216152605 * newton = lbf = pound_force
 
 # Energy
 [energy] = [force] * [length]

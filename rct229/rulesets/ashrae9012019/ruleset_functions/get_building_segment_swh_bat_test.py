@@ -24,29 +24,13 @@ TEST_RMD = {
                                 {
                                     "id": "Space 2_1",
                                     "service_water_heating_uses": [
-                                        {
-                                            "id": "service water heating uses 2_1",
-                                            "use": 10,
-                                            "use_units": "VOLUME_PER_PERSON",
-                                            "area_type": "OFFICE",
-                                            "is_heat_recovered_by_drain": True,
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
+                                        "service water heating uses 2_1",
                                     ],
                                 },
                                 {
                                     "id": "Space 2_2",
                                     "service_water_heating_uses": [
-                                        {
-                                            "id": "service water heating uses 2_2",
-                                            "use": 100,
-                                            "use_units": "POWER",
-                                            "area_type": "CONVENIENCE_STORE",
-                                            "is_heat_recovered_by_drain": True,
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
+                                        "service water heating uses 2_2"
                                     ],
                                 },
                             ],
@@ -62,12 +46,7 @@ TEST_RMD = {
                                 {
                                     "id": "Space 3_1",
                                     "service_water_heating_uses": [
-                                        {
-                                            "id": "service water heating uses 3_1",
-                                            "use": 5,
-                                            "use_units": "OTHER",
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                        },
+                                        "service water heating uses 3_1"
                                     ],
                                 },
                             ],
@@ -84,27 +63,13 @@ TEST_RMD = {
                                     "id": "Space 4_1",
                                     "service_water_heating_area_type": "MUSEUM",
                                     "service_water_heating_uses": [
-                                        {
-                                            "id": "service water heating uses 4_1",
-                                            "use": 100,
-                                            "use_units": "VOLUME_PER_PERSON",
-                                            "is_heat_recovered_by_drain": True,
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
+                                        "service water heating uses 4_1",
                                     ],
                                 },
                                 {
                                     "id": "Space 4_2",
                                     "service_water_heating_uses": [
-                                        {
-                                            "id": "service water heating uses 4_2",
-                                            "use": 300,
-                                            "use_units": "POWER",
-                                            "is_heat_recovered_by_drain": True,
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
+                                        "service water heating uses 4_2",
                                     ],
                                 },
                             ],
@@ -121,28 +86,14 @@ TEST_RMD = {
                                     "id": "Space 5_1",
                                     "service_water_heating_area_type": "HOTEL",
                                     "service_water_heating_uses": [
-                                        {
-                                            "id": "service water heating uses 5_1",
-                                            "use": 400,
-                                            "use_units": "POWER",
-                                            "is_heat_recovered_by_drain": True,
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
+                                        "service water heating uses 5_1",
                                     ],
                                 },
                                 {
                                     "id": "Space 5_2",
                                     "service_water_heating_area_type": "CONVENIENCE_STORE",
                                     "service_water_heating_uses": [
-                                        {
-                                            "id": "service water heating uses 5_2",
-                                            "use": 300,
-                                            "use_units": "POWER",
-                                            "is_heat_recovered_by_drain": True,
-                                            "served_by_distribution_system": "SWH Distribution 1",
-                                            "use_multiplier_schedule": "SWH Schedule 1",
-                                        },
+                                        "service water heating uses 5_2"
                                     ],
                                 },
                             ],
@@ -160,6 +111,64 @@ TEST_RMD = {
         {
             "id": "SWH Entering Water Temp Schedule 1",
             "hourly_values": [50] * 8760,
+        },
+    ],
+    "service_water_heating_uses": [
+        {
+            "id": "service water heating uses 5_1",
+            "use": 400,
+            "use_units": "POWER",
+            "is_heat_recovered_by_drain": True,
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "service water heating uses 2_1",
+            "use": 10,
+            "use_units": "VOLUME_PER_PERSON",
+            "area_type": "OFFICE",
+            "is_heat_recovered_by_drain": True,
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "service water heating uses 2_2",
+            "use": 100,
+            "use_units": "POWER",
+            "area_type": "CONVENIENCE_STORE",
+            "is_heat_recovered_by_drain": True,
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "service water heating uses 4_1",
+            "use": 100,
+            "use_units": "VOLUME_PER_PERSON",
+            "is_heat_recovered_by_drain": True,
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "service water heating uses 5_2",
+            "use": 300,
+            "use_units": "POWER",
+            "is_heat_recovered_by_drain": True,
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
+        },
+        {
+            "id": "service water heating uses 3_1",
+            "use": 5,
+            "use_units": "OTHER",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
+        {
+            "id": "service water heating uses 4_2",
+            "use": 300,
+            "use_units": "POWER",
+            "is_heat_recovered_by_drain": True,
+            "served_by_distribution_system": "SWH Distribution 1",
+            "use_multiplier_schedule": "SWH Schedule 1",
         },
     ],
     "service_water_heating_distribution_systems": [

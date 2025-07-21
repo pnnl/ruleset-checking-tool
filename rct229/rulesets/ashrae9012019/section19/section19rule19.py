@@ -128,17 +128,23 @@ class PRM9012019Rule51d17(RuleDefinitionListIndexedBase):
                 zone_b = find_exactly_one_zone(rmd_b, zone_id_b)
                 zone_p = find_exactly_one_zone(rmd_p, zone_id_b)
 
-                hvac_map[hvac_id_b][
-                    "zonal_exhaust_fan_elec_power_b"
-                ] += get_fan_object_electric_power(zone_b.get("zonal_exhaust_fan"))
+                zone_b_exhaust_fans = zone_b.get("zonal_exhaust_fans", [])
+                zone_p_exhaust_fans = zone_p.get("zonal_exhaust_fans", [])
+                zone_p_supply_fans = zone_p.get("supply_fans", [])
+
+                for zone_b_exhaust_fan in zone_b_exhaust_fans:
+                    hvac_map[hvac_id_b][
+                        "zonal_exhaust_fan_elec_power_b"
+                    ] += get_fan_object_electric_power(zone_b_exhaust_fan)
+
+                zone_p_has_non_mech_cooling = any(
+                    fan.get("design_airflow", 0) > ZERO.FLOW
+                    for fan in zone_p_exhaust_fans + zone_p_supply_fans
+                )
 
                 hvac_map[hvac_id_b].update(
                     {
-                        "zones_served_by_hvac_has_non_mech_cooling_bool_p": zone_p.get(
-                            "non_mechanical_cooling_fan_airflow"
-                        )
-                        is not None
-                        and zone_p["non_mechanical_cooling_fan_airflow"] > ZERO.FLOW
+                        "zones_served_by_hvac_has_non_mech_cooling_bool_p": zone_p_has_non_mech_cooling
                     }
                 )
 
