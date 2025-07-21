@@ -4,9 +4,9 @@
 **Rule ID:** 6-7  
 **Rule Description:** Proposed building is modeled with daylighting controls directly or through schedule adjustments.  
 **Appendix G Section:** Section 6 Lighting  
-**Appendix G Section Reference:** Section G3.1-6(h) Lighting: Modeling Requirements for the Proposed design  
+**Appendix G Section Reference:** Section G3.1-6(h) Lighting: Modeling Requirements for the Proposed design, Table 9.6.1 Minimum Control Requirements
 
-**Applicability:** All required data elements exist for P_RMR  
+**Applicability:** All required data elements exist for P_RMD  
 **Applicability Checks:** None  
 **Manual Check:** Yes  
 **Evaluation Context:** Each Data Element  
@@ -14,7 +14,7 @@
 ## Rule Logic: 
 - List lighting space types that have no daylighting control requirements: `not_applicable_space_types = ["DORMITORY_LIVING_QUARTERS", "FIRE_STATION_SLEEPING_QUARTERS", "HEALTHCARE_FACILITY_OPERATING_ROOM", "OUTPATIENT_HEALTH_CARE_FACILITIES_CLASS_1_IMAGING_ROOMS", "DWELLING_UNIT", "GUEST_ROOM", "STORAGE_ROOM_SMALL", "PARKING_AREA_INTERIOR"]`
 
-- Check if each zone has window or skylight in the building segment in the Proposed model: `For zone_p in P_RMR...zones:`
+- Check if each zone has window or skylight in the building segment in the Proposed model: `For zone_p in P_RMD...zones:`
 
   - Check if all spaces in the zone are in the list of not_applicable space types, if so, skip the zone: `if all(space.lighting_space_type in not_applicable_space_types for space in zone_p.spaces): continue`
 
@@ -47,7 +47,7 @@
 **Notes:**
   1. Updated the Rule ID from 6-12 to 6-8 on 6/3/2022
   2. Updated the Rule ID from 6-8 to 6-7 on 6/8/2022
-  3. The rule has been written to apply to user RMR, it should instead be implemented to apply to P-RMR- should discuss
+  3. Lighting space types that have no daylighting control requirements are taken from Table 9.6.1 rows with no REQ under the daylighting control columns.
 
 
 **[Back](../_toc.md)**
