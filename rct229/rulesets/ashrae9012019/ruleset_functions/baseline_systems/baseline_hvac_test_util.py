@@ -18,7 +18,7 @@ SYSTEM_TYPE_TEST_FILE_PATH = os.path.join(
     "scripts",
     "resources",
     "system_types",
-    "90.1_system_types"
+    "90.1_system_types",
 )
 
 
