@@ -119,6 +119,9 @@ TEST_RMD = {
                                 {
                                     "id": "Space 6_2",
                                     "service_water_heating_area_type": "CONVENIENCE_STORE",
+                                    "service_water_heating_uses": [
+                                        "service water heating uses 6_2",
+                                    ],
                                 },
                             ],
                         }

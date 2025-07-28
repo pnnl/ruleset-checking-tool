@@ -1,4 +1,5 @@
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.assertions import assert_
 
 
 def get_spaces_served_by_swh_use(rmd: dict, swh_use_id: str) -> list[str]:
@@ -18,21 +19,28 @@ def get_spaces_served_by_swh_use(rmd: dict, swh_use_id: str) -> list[str]:
     spaces_served: list of str
         list of space ids that has the sane service_water_heating_uses value
     """
-    # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
 
-    spaces_served = [
-        space["id"]
+    spaces_served = []
+    for bldg_segment in find_all("$.buildings[*].building_segments[*]", rmd):
+        # Check if `swh_use_id` is in the building segment level
+        if swh_use_id in bldg_segment.get("service_water_heating_uses", []):
+            for space in find_all("$.zones[*].spaces[*]", bldg_segment):
+                # if `swh_use_id` is in the list of space `service_water_heating_uses`, add the space id into the `spaces_served` list
+                if swh_use_id in space.get("service_water_heating_uses", []):
+                    spaces_served.append(space["id"])
+
+    # if `spaces_served` is an empty list, the SHW use is applied to only one space
+    if not spaces_served:
         for space in find_all(
             "$.buildings[*].building_segments[*].zones[*].spaces[*]", rmd
-        )
-        for space_swh_use_id in find_all("$.service_water_heating_uses[*]", space)
-        if swh_use_id == space_swh_use_id
-    ]
+        ):
+            if swh_use_id in space.get("service_water_heating_uses", []):
+                spaces_served.append(space["id"])
 
-    # if `spaces_served` is an empty list, apply to all spaces
-    if not spaces_served:
-        spaces_served = find_all(
-            "$.buildings[*].building_segments[*].zones[*].spaces[*].id", rmd
+        # Make sure `swh_use_id` is not referenced by multiple spaces
+        assert_(
+            len(spaces_served) == 1,
+            f"{swh_use_id} can't be referenced by multiple spaces.",
         )
 
     return spaces_served
