@@ -29,7 +29,8 @@ def get_swh_uses_associated_with_each_building_segment(
         ):
             swh_uses_id_list.append(swh_use_list)
 
-        swh_uses_id_list = list(set(swh_uses_id_list))
+        # The reason why `list(set(swh_uses_id_list))` isn't used is when it's used, the order of swh uses id changed and this causes unexpected error in the unit test.
+        swh_uses_id_list = list(dict.fromkeys(swh_uses_id_list))
         assert_(
             swh_uses_id_list,
             "The `service_water_heating_uses` object must exist and can't be empty.",
