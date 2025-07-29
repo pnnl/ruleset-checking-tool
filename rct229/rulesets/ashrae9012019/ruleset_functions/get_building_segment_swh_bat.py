@@ -2,12 +2,13 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_energy_required_to_heat
     get_energy_required_to_heat_swh_use,
 )
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
     find_exactly_one_building_segment,
-    find_exactly_one_space,
     find_exactly_one_service_water_heating_use,
+    find_exactly_one_space,
 )
 
 SERVICE_WATER_HEATING_USE_UNIT = SchemaEnums.schema_enums[
@@ -50,8 +51,14 @@ def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
             f'$.buildings[*].building_segments[*][?(@.id="{building_segment["id"]}")].service_water_heating_uses[*]',
             rmd,
         )
+        swh_uses_all = list(set(swh_uses_from_spaces + swh_uses_direct))
 
-        for swh_use_id in swh_uses_from_spaces + swh_uses_direct:
+        assert_(
+            swh_uses_all,
+            "The `service_water_heating_uses` object is empty in both building segment and space levels.",
+        )
+
+        for swh_use_id in swh_uses_all:
             swh_use = find_exactly_one_service_water_heating_use(rmd, swh_use_id)
             if (
                 swh_use.get("use_units", SERVICE_WATER_HEATING_USE_UNIT.OTHER)

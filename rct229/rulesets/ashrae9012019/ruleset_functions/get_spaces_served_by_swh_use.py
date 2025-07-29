@@ -25,9 +25,7 @@ def get_spaces_served_by_swh_use(rmd: dict, swh_use_id: str) -> list[str]:
         # Check if `swh_use_id` is in the building segment level
         if swh_use_id in bldg_segment.get("service_water_heating_uses", []):
             for space in find_all("$.zones[*].spaces[*]", bldg_segment):
-                # if `swh_use_id` is in the list of space `service_water_heating_uses`, add the space id into the `spaces_served` list
-                if swh_use_id in space.get("service_water_heating_uses", []):
-                    spaces_served.append(space["id"])
+                spaces_served.append(space["id"])
 
     # if `spaces_served` is an empty list, the SHW use is applied to only one space
     if not spaces_served:

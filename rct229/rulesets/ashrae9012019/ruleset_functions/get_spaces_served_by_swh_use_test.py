@@ -106,7 +106,7 @@ def test__get_spaces_served_by_swh_use__exist_in_bldg_seg_and_space():
     assert get_spaces_served_by_swh_use(
         TEST_RMD,
         "SWH use 1_1",
-    ) == ["Space 1"]
+    ) == ["Space 1", "Space 2"]
 
 
 def test__get_spaces_served_by_swh_use__not_in_bldg_seg():
