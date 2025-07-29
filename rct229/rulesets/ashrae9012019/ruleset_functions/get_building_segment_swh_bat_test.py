@@ -207,7 +207,7 @@ TEST_RMD = {
         },
         {
             "id": "service water heating uses 6_2",
-            "use": 400,
+            "use": 150,
             "use_units": "POWER",
             "is_heat_recovered_by_drain": True,
             "served_by_distribution_system": "SWH Distribution 1",
@@ -300,7 +300,4 @@ def test__TEST_RPD__two_spaces_none_undetermined():
 
 
 def test__TEST_RPD__area_type_diff_service_water_heating_uses_location():
-    assert (
-        get_building_segment_swh_bat(TEST_RMD, "Building Segment 6")
-        == "CONVENIENCE_STORE"
-    )
+    assert get_building_segment_swh_bat(TEST_RMD, "Building Segment 6") == "MUSEUM"
