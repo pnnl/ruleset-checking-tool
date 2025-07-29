@@ -62,11 +62,11 @@ class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
                 precision={
                     "minimum_retail_display_W": {
                         "precision": 1,
-                        "unit": "W/",
+                        "unit": "W",
                     },
                     "maximum_retail_display_W": {
                         "precision": 1,
-                        "unit": "W/",
+                        "unit": "W",
                     },
                 },
                 manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
