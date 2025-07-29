@@ -53,10 +53,9 @@ def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
         )
         swh_uses_all = list(set(swh_uses_from_spaces + swh_uses_direct))
 
-        assert_(
-            swh_uses_all,
-            "The `service_water_heating_uses` object is empty in both building segment and space levels.",
-        )
+        # If `swh_uses_all` is empty, assign `UNDETERMINED`
+        if not swh_uses_all:
+            building_segment_swh_bat == "UNDETERMINED"
 
         for swh_use_id in swh_uses_all:
             swh_use = find_exactly_one_service_water_heating_use(rmd, swh_use_id)
