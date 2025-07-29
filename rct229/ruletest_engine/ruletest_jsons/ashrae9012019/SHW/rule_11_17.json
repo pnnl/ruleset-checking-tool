@@ -17703,13 +17703,32 @@
                                                 "floor_name": "Floor1",
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 1"
+                                                        "id": "Space 1",
+                                                        "service_water_heating_uses": [
+                                                            "SHW 1"
+                                                        ]
+
                                                     }
                                                 ]
                                             }
                                         ]
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "area_type": "OFFICE",
+                                "use": 0,
+                                "use_units": "OTHER",
+                                "use_multiplier_schedule": "Water Use Schedule"
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
                             }
                         ],
                         "type": "PROPOSED"
@@ -17753,7 +17772,11 @@
                                                 "floor_name": "Floor1",
                                                 "spaces": [
                                                     {
-                                                        "id": "Space 1"
+                                                        "id": "Space 1",
+                                                        "service_water_heating_uses": [
+                                                            "SHW 1"
+                                                        ]
+
                                                     }
                                                 ]
                                             }
@@ -17761,6 +17784,21 @@
                                         "service_water_heating_area_type": "PARKING_GARAGE"
                                     }
                                 ]
+                            }
+                        ],
+                        "service_water_heating_uses": [
+                            {
+                                "id": "SHW 1",
+                                "served_by_distribution_system": "SHW Distribution 1",
+                                "area_type": "ALL_OTHERS",
+                                "use": 0,
+                                "use_units": "OTHER",
+                                "use_multiplier_schedule": "Water Use Schedule"
+                            }
+                        ],
+                        "service_water_heating_distribution_systems": [
+                            {
+                                "id": "SHW Distribution 1"
                             }
                         ],
                         "type": "PROPOSED"
