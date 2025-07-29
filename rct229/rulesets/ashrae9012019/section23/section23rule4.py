@@ -38,9 +38,8 @@ class PRM9012019Rule68z84(RuleDefinitionListIndexedBase):
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
             required_fields={
-                "$.ruleset_model_descriptions[*]": ["calendar", "weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
                 "weather": ["climate_zone"],
-                "calendar": ["is_leap_year"],
             },
         )
 
@@ -56,7 +55,6 @@ class PRM9012019Rule68z84(RuleDefinitionListIndexedBase):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
             climate_zone_b = rmd_b["weather"]["climate_zone"]
-            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
@@ -69,7 +67,7 @@ class PRM9012019Rule68z84(RuleDefinitionListIndexedBase):
             ]
 
             hvac_systems_serving_lab_zones = get_lab_zone_hvac_systems(
-                rmd_b, rmd_p, climate_zone_b, is_leap_year_b
+                rmd_b, rmd_p, climate_zone_b
             )
 
             return {

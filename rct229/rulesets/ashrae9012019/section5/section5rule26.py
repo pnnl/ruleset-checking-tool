@@ -47,7 +47,11 @@ class PRM9012019Rule34b75(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        return {"climate_zone": climate_zone}
+        constructions = rpd_b["ruleset_model_descriptions"][0].get("constructions")
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -65,13 +69,13 @@ class PRM9012019Rule34b75(RuleDefinitionListIndexedBase):
             building_p = context.PROPOSED
             return {
                 "scc_dict_b": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building_b
+                    data["climate_zone"], building_b, data["constructions"]
                 ),
                 "skylight_roof_areas_dictionary_b": get_building_segment_skylight_roof_areas_dict(
-                    data["climate_zone"], building_b
+                    data["climate_zone"], data["constructions"], building_b
                 ),
                 "skylight_roof_areas_dictionary_p": get_building_segment_skylight_roof_areas_dict(
-                    data["climate_zone"], building_p
+                    data["climate_zone"], data["constructions"], building_p
                 ),
             }
 

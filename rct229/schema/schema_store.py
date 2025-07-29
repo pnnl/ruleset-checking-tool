@@ -13,17 +13,22 @@ class SchemaStore:
 
     @staticmethod
     def get_enum_schema_by_ruleset():
-        if SchemaStore.SELECTED_RULESET == RuleSet.ASHRAE9012019_RULESET:
-            return SchemaStore.SCHEMA_9012019_ENUM_KEY
-        elif SchemaStore.SELECTED_RULESET == RuleSet.ASHRAE9012019_RULESET:
-            return SchemaStore.SCHEMA_9012022_ENUM_KEY
+
+        match SchemaStore.SELECTED_RULESET:
+
+            case RuleSet.ASHRAE9012019_RULESET:
+                return SchemaStore.SCHEMA_9012019_ENUM_KEY
+            case RuleSet.ASHRAE9012022_RULESET:
+                return SchemaStore.SCHEMA_9012022_ENUM_KEY
 
     @staticmethod
     def get_output_schema_by_ruleset():
-        if SchemaStore.SELECTED_RULESET == RuleSet.ASHRAE9012019_RULESET:
-            return SchemaStore.SCHEMA_9012019_OUTPUT_KEY
-        elif SchemaStore.SELECTED_RULESET == RuleSet.ASHRAE9012022_RULESET:
-            return SchemaStore.SCHEMA_9012022_OUTPUT_KEY
+
+        match SchemaStore.SELECTED_RULESET:
+            case RuleSet.ASHRAE9012019_RULESET:
+                return SchemaStore.SCHEMA_9012019_OUTPUT_KEY
+            case RuleSet.ASHRAE9012022_RULESET:
+                return SchemaStore.SCHEMA_9012022_OUTPUT_KEY
 
     @staticmethod
     def set_ruleset(ruleset: RuleSet):

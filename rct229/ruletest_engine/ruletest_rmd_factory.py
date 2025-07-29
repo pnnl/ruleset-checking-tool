@@ -14,13 +14,17 @@ from rct229.utils.assertions import getattr_
 
 def get_ruletest_rmd_models(test_dict: dict):
     rmd = None
-    if SchemaStore.SELECTED_RULESET == RuleSet.ASHRAE9012019_RULESET:
-        rmd = get_9012019_rmd_models(test_dict)
+
+    match SchemaStore.SELECTED_RULESET:
+        case RuleSet.ASHRAE9012019_RULESET:
+            rmd = get_901_rmd_models(test_dict)
+        case RuleSet.ASHRAE9012022_RULESET:
+            rmd = get_901_rmd_models(test_dict)
 
     return rmd
 
 
-def get_9012019_rmd_models(test_dict: dict):
+def get_901_rmd_models(test_dict: dict):
     # Each of these will remain None unless it is specified in
     # rmd_transformations.
     user_rmd = None

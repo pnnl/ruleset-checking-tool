@@ -19,7 +19,7 @@ from rct229.utils.utility_functions import (
 ZONE_OCCUPANTS_RATIO_THRESHOLD = 0.05
 
 
-def get_zone_eflh(rmd: dict, zone_id: str, is_leap_year: bool) -> int:
+def get_zone_eflh(rmd: dict, zone_id: str) -> int:
     """
     provides the equivalent full load hours of the zone. Equivalent full load hours are defined as: any hour where
     the occupancy fraction is greater than 5% AND the HVAC system is in occupied mode. For this function,
@@ -41,11 +41,30 @@ def get_zone_eflh(rmd: dict, zone_id: str, is_leap_year: bool) -> int:
     flh int a number equal to the total equivalent full load hours for the year
     """
     # 1. get data needed for processing
-    num_hours = (
-        LeapYear.LEAP_YEAR_HOURS if is_leap_year else LeapYear.REGULAR_YEAR_HOURS
-    )
     thermal_zone = find_exactly_one_zone(rmd, zone_id)
     hvac_systems_list = get_list_hvac_systems_associated_with_zone(rmd, zone_id)
+
+    num_hours = None
+    for hvac_id in hvac_systems_list:
+        hvac = find_exactly_one_hvac_system(rmd, hvac_id)
+        sched_id = find_one("$.fan_system.operating_schedule", hvac)
+        values = find_one(f'$.schedules[*][?(@.id="{sched_id}")].hourly_values', rmd)
+        if values:
+            num_hours = len(values)
+            break
+
+    if num_hours is None:
+        for space in find_all("$.spaces[*]", thermal_zone):
+            sched_id = space.get("occupant_multiplier_schedule")
+            values = find_one(
+                f'$.schedules[*][?(@.id="{sched_id}")].hourly_values', rmd
+            )
+            if values:
+                num_hours = len(values)
+                break
+
+    if num_hours is None:
+        num_hours = 8760  # fallback default
 
     # 2. functions
     # get fan operation schedule from an HVAC,
@@ -113,7 +132,7 @@ def get_zone_eflh(rmd: dict, zone_id: str, is_leap_year: bool) -> int:
         )
     )
 
-    # make sure all operation schedule has the same hours and they are equal to num_hours
+    # make sure all operation schedules have the same hours
     assert_(
         all(
             map(

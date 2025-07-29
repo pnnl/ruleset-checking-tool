@@ -164,6 +164,7 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                 standby_loss_target_metric_b = None
                 modeled_efficiency_b = None
                 modeled_standby_loss_b = None
+                standby_loss_is_estimated_b = False
 
                 # Get Electric Storage Water Heater Efficiency Data
                 if (
@@ -219,7 +220,7 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                             "Btu/h"
                         ) and (
                             (
-                                swh_setpoint_temperature_b
+                                swh_setpoint_temperature_b is not None
                                 and swh_setpoint_temperature_b > 180 * ureg("degF")
                             )
                             or swh_tank_storage_volume_b > 120 * ureg("gallon")
@@ -240,6 +241,9 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                     to_remove = None
                     for efficiency in efficiency_data:
                         if "STANDBY" in efficiency["metric"]:
+                            standby_loss_target_metric_b = efficiency["metric"]
+
+                            # Always compute the target from the equation
                             standby_loss_target_b = eval(
                                 efficiency["equation"],
                                 {"__builtins__": None},
@@ -250,10 +254,37 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                                     "q": swh_input_power_b.to("Btu/h").magnitude,
                                 },
                             )
-                            standby_loss_target_metric_b = efficiency["metric"]
-                            modeled_standby_loss_b = swh_efficiency_b.get(
+
+                            standby_loss_is_estimated_b = False  # Default
+
+                            if (
                                 standby_loss_target_metric_b
-                            )
+                                == SWHEfficiencyMetricOptions.STANDBY_LOSS_ENERGY
+                            ):
+                                modeled_standby_loss_b = swh_efficiency_b.get(
+                                    SWHEfficiencyMetricOptions.STANDBY_LOSS_ENERGY
+                                )
+                                if modeled_standby_loss_b is None:
+                                    modeled_standby_loss_fraction_b = swh_efficiency_b.get(
+                                        SWHEfficiencyMetricOptions.STANDBY_LOSS_FRACTION
+                                    )
+                                    if modeled_standby_loss_fraction_b is not None:
+                                        modeled_standby_loss_b = (
+                                            modeled_standby_loss_fraction_b
+                                            * 8.25
+                                            * swh_tank_storage_volume_b.to(
+                                                "gallon"
+                                            ).magnitude
+                                            * 70
+                                        )
+                                        standby_loss_is_estimated_b = True
+                                    else:
+                                        modeled_standby_loss_b = None
+                            else:
+                                modeled_standby_loss_b = swh_efficiency_b.get(
+                                    standby_loss_target_metric_b
+                                )
+
                             to_remove = efficiency
                             break
 
@@ -291,6 +322,7 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                     "expected_efficiency_metric_b": expected_efficiency_metric_b,
                     "standby_loss_target_b": standby_loss_target_b,
                     "standby_loss_target_metric_b": standby_loss_target_metric_b,
+                    "standby_loss_is_estimated_b": standby_loss_is_estimated_b,
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
@@ -302,6 +334,7 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                 modeled_standby_loss_b = calc_vals["modeled_standby_loss_b"]
                 expected_efficiency_metric_b = calc_vals["expected_efficiency_metric_b"]
                 standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
+                standby_loss_is_estimated_b = calc_vals["standby_loss_is_estimated_b"]
 
                 invalid_fuel_type = swh_fuel_type_b not in [
                     EnergySourceOptions.ELECTRICITY,
@@ -345,6 +378,8 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                         )
                         and not invalid_fuel_type
                     )
+                    # The standby loss energy was required but not provided. Instead, standby loss fraction was provided
+                    or standby_loss_is_estimated_b
                 )
 
             def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
@@ -356,9 +391,26 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                 modeled_efficiency_b = calc_vals["modeled_efficiency_b"]
                 modeled_standby_loss_b = calc_vals["modeled_standby_loss_b"]
                 expected_efficiency_metric_b = calc_vals["expected_efficiency_metric_b"]
+                standby_loss_target_b = calc_vals["standby_loss_target_b"]
                 standby_loss_target_metric_b = calc_vals["standby_loss_target_metric_b"]
+                standby_loss_is_estimated_b = calc_vals["standby_loss_is_estimated_b"]
 
                 manual_check_msg = []
+
+                if (
+                    standby_loss_is_estimated_b
+                    and modeled_standby_loss_b
+                    and standby_loss_target_b
+                    and modeled_standby_loss_b <= standby_loss_target_b
+                ):
+                    manual_check_msg.append(
+                        "No standby loss was given. We have calculated an approximate standby loss using the given Standby Loss Fraction given the formula: Standby_Loss = Standby_Loss_Fraction * 8.25 * volume * 70. This calculated loss is less than or equal to the expected loss. Rule passes if assessor determines that this equation is appropriate for this project."
+                    )
+
+                elif standby_loss_is_estimated_b and modeled_standby_loss_b:
+                    manual_check_msg.append(
+                        "No standby loss was given. We have calculated an approximate standby loss using the given Standby Loss Fraction given the formula: Standby_Loss = Standby_Loss_Fraction * 8.25 * volume * 70. This calculated loss is greater than the expected loss. Rule fails unless the assessor determines that the standby loss is appropriate for this project."
+                    )
 
                 if swh_tank_type_b in INSTANTANEOUS_TYPES:
                     manual_check_msg.append(

@@ -17,6 +17,12 @@ POWER_THRESHOLD_100 = (CAPACITY_THRESHOLD_QUANTITY * 100 * ureg("m2")).to("W").m
 
 TEST_RMD_B_G311B = {
     "id": "test_rmd",
+    "constructions": [
+        {
+            "id": "construction_1",
+            "u_factor": 1.2,
+        }
+    ],
     "buildings": [
         {
             "id": "Building 1",
@@ -110,10 +116,7 @@ TEST_RMD_B_G311B = {
                                     "adjacent_zone": "zone_1_2",
                                     "area": 10,
                                     "tilt": 90,
-                                    "construction": {
-                                        "id": "construction_1",
-                                        "u_factor": 1.2,
-                                    },
+                                    "construction": "construction_1",
                                 }
                             ],
                         },
@@ -122,11 +125,27 @@ TEST_RMD_B_G311B = {
             ],
         },
     ],
+    "constructions": [
+        {
+            "id": "construction_1",
+            "u_factor": 1.2,
+        }
+    ],
     "type": "BASELINE_0",
 }
 
 TEST_RMD_B_G311C = {
     "id": "RMD 1",
+    "constructions": [
+        {
+            "id": "Construction 3",
+            "u_factor": 0.35773064046128095,
+        },
+        {
+            "id": "const_1_4_2",
+            "u_factor": 0.1,
+        },
+    ],
     "buildings": [
         {
             "id": "Building 1",
@@ -186,10 +205,7 @@ TEST_RMD_B_G311C = {
                                     "area": 100,
                                     "tilt": 0,
                                     "adjacent_zone": "Thermal Zone 1",
-                                    "construction": {
-                                        "id": "Construction 3",
-                                        "u_factor": 0.35773064046128095,
-                                    },
+                                    "construction": "Construction 3",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_3_1",
@@ -205,10 +221,7 @@ TEST_RMD_B_G311C = {
                                     "adjacent_zone": "Thermal Zone 1",
                                     "area": 10,
                                     "tilt": 90,
-                                    "construction": {
-                                        "id": "const_1_4_2",
-                                        "u_factor": 0.1,
-                                    },
+                                    "construction": "const_1_4_2",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_4_2_1",
@@ -248,6 +261,16 @@ TEST_RMD_B_G311C = {
                 }
             ],
         }
+    ],
+    "constructions": [
+        {
+            "id": "Construction 3",
+            "u_factor": 0.35773064046128095,
+        },
+        {
+            "id": "const_1_4_2",
+            "u_factor": 0.1,
+        },
     ],
     "boilers": [
         {
@@ -448,10 +471,7 @@ TEST_RMD_B_G311D = {
                                     "area": 100,
                                     "tilt": 0,
                                     "adjacent_zone": "Thermal Zone 1",
-                                    "construction": {
-                                        "id": "Construction 3",
-                                        "u_factor": 0.35773064046128095,
-                                    },
+                                    "construction": "Construction 3",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_3_1",
@@ -467,10 +487,7 @@ TEST_RMD_B_G311D = {
                                     "adjacent_zone": "Thermal Zone 1",
                                     "area": 10,
                                     "tilt": 90,
-                                    "construction": {
-                                        "id": "const_1_4_2",
-                                        "u_factor": 0.1,
-                                    },
+                                    "construction": "const_1_4_2",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface_1_4_2_1",
@@ -481,14 +498,26 @@ TEST_RMD_B_G311D = {
                                     ],
                                 },
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Exhaust Fan 1",
-                                "design_airflow": 1000,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Exhaust Fan 1",
+                                    "design_airflow": 1000,
+                                }
+                            ],
                         }
                     ],
                 },
             ],
+        },
+    ],
+    "constructions": [
+        {
+            "id": "Construction 3",
+            "u_factor": 0.35773064046128095,
+        },
+        {
+            "id": "const_1_4_2",
+            "u_factor": 0.1,
         },
     ],
     "type": "BASELINE_0",
@@ -630,6 +659,12 @@ TEST_RMD_B_G311F = {
 
 TEST_RMD_B_G311G = {
     "id": "test_rmd",
+    "constructions": [
+        {
+            "id": "construction 1",
+            "u_factor": 0.1,
+        }
+    ],
     "buildings": [
         {
             "id": "Building 1",
@@ -692,10 +727,7 @@ TEST_RMD_B_G311G = {
                                     "adjacent_to": "EXTERIOR",
                                     "area": 100,
                                     "tilt": 90,
-                                    "construction": {
-                                        "id": "construction 1",
-                                        "u_factor": 0.1,
-                                    },
+                                    "construction": "construction 1",
                                     "subsurfaces": [
                                         {
                                             "id": "subsurface 3",
@@ -720,6 +752,12 @@ TEST_RMD_B_G311G = {
             "hourly_cooling_design_day": [1] * 24,
         },
         {"id": "occupant_schedule_1", "hourly_cooling_design_day": [1] * 23 + [2] * 1},
+    ],
+    "constructions": [
+        {
+            "id": "construction 1",
+            "u_factor": 0.1,
+        }
     ],
     "type": "BASELINE_0",
 }
@@ -828,7 +866,7 @@ def test__TEST_RMD_P_is_valid():
 
 def test__get_zone_target_baseline_system_G3_1_1_b__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311B, TEST_RMD_UNIT_P, "CZ4A", False
+        TEST_RMD_B_UNIT_G311B, TEST_RMD_UNIT_P, "CZ4A"
     ) == {
         "Thermal Zone 1": {
             "expected_system_type": HVAC_SYS.SYS_5,
@@ -843,7 +881,7 @@ def test__get_zone_target_baseline_system_G3_1_1_b__true():
 
 def test__get_zone_target_baseline_system_G3_1_1_c__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311C, TEST_RMD_UNIT_P, "CZ5A", False
+        TEST_RMD_B_UNIT_G311C, TEST_RMD_UNIT_P, "CZ5A"
     ) == {
         "Thermal Zone 1": {
             "expected_system_type": HVAC_SYS.SYS_7,
@@ -854,7 +892,7 @@ def test__get_zone_target_baseline_system_G3_1_1_c__true():
 
 def test__get_zone_target_baseline_system_G3_1_1_d__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311D, TEST_RMD_UNIT_P, "CZ4A", False
+        TEST_RMD_B_UNIT_G311D, TEST_RMD_UNIT_P, "CZ4A"
     ) == {
         "Thermal Zone 1": {
             "expected_system_type": HVAC_SYS.SYS_5,
@@ -865,7 +903,7 @@ def test__get_zone_target_baseline_system_G3_1_1_d__true():
 
 def test__get_zone_target_baseline_system_G3_1_1_e__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311E, TEST_RMD_UNIT_P, "CZ3A", False
+        TEST_RMD_B_UNIT_G311E, TEST_RMD_UNIT_P, "CZ3A"
     ) == {
         "Thermal Zone 2": {
             "expected_system_type": HVAC_SYS.SYS_10,
@@ -876,7 +914,7 @@ def test__get_zone_target_baseline_system_G3_1_1_e__true():
 
 def test__get_zone_target_baseline_system_G3_1_1_f__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311F, TEST_RMD_UNIT_P, "CZ4A", False
+        TEST_RMD_B_UNIT_G311F, TEST_RMD_UNIT_P, "CZ4A"
     ) == {
         "Thermal Zone 2": {
             "expected_system_type": HVAC_SYS.SYS_5,
@@ -887,7 +925,7 @@ def test__get_zone_target_baseline_system_G3_1_1_f__true():
 
 def test__get_zone_target_baseline_system_G3_1_1_g__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311G, TEST_RMD_UNIT_P, "CZ4A", False
+        TEST_RMD_B_UNIT_G311G, TEST_RMD_UNIT_P, "CZ4A"
     ) == {
         "Thermal Zone 1": {
             "expected_system_type": HVAC_SYS.SYS_11_1,

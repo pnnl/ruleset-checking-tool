@@ -108,7 +108,8 @@ class PRM9012019Rule98t42(RuleDefinitionListIndexedBase):
                     - elevator_cab_counterweight_b.to("lb")
                 )
                 * elevator_speed_b.to("ft/min")
-                / (33000 * elevator_mechanical_efficiency_b)
+                / ureg("hp").to("ft*lbf/min")
+                / elevator_mechanical_efficiency_b
             ).m * ureg("hp")
 
             elevator_motor_efficiency_b = (

@@ -33,9 +33,8 @@ class PRM9012019Rule00u91(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 required_fields={
-                    "$": ["calendar", "weather"],
+                    "$": ["weather"],
                     "weather": ["climate_zone"],
-                    "calendar": ["is_leap_year"],
                 },
             )
 
@@ -43,10 +42,9 @@ class PRM9012019Rule00u91(RuleDefinitionListIndexedBase):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
             climate_zone_b = rmd_b["weather"]["climate_zone"]
-            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             target_baseline_systems_b = get_zone_target_baseline_system(
-                rmd_b, rmd_p, climate_zone_b, is_leap_year_b
+                rmd_b, rmd_p, climate_zone_b
             )
 
             return {"target_baseline_systems_b": target_baseline_systems_b}

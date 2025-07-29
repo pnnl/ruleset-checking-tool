@@ -48,13 +48,11 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
                 index_rmd=BASELINE_0,
                 list_path="buildings[*]",
                 required_fields={
-                    "$": ["schedules", "calendar"],
-                    "calendar": ["is_leap_year"],
+                    "$": ["schedules"],
                 },
                 data_items={
                     "schedules_b": (BASELINE_0, "schedules"),
                     "schedules_p": (PROPOSED, "schedules"),
-                    "is_leap_year_b": (BASELINE_0, "calendar/is_leap_year"),
                 },
             )
 
@@ -146,7 +144,6 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
                             "building_open_schedule_b",
                             "hourly_values",
                         )
-                        is_leap_year_b = data["is_leap_year_b"]
                         schedules_b = data["schedules_b"]
                         schedules_p = data["schedules_p"]
                         space_height_b = data["avg_zone_height_b"]
@@ -173,7 +170,6 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
                             normalized_interior_lighting_schedule_b,
                             normalized_interior_lighting_schedule_p,
                             mask_schedule=invert_mask(hourly_building_open_schedule_b),
-                            is_leap_year=is_leap_year_b,
                         )
 
                         return {

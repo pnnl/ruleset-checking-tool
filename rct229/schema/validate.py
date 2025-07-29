@@ -1,5 +1,6 @@
 import json
 import os
+from collections import Counter
 from referencing import Registry
 from jsonschema import Draft7Validator
 from referencing.jsonschema import DRAFT7
@@ -47,14 +48,13 @@ def check_associated_data_elements(rpd: dict) -> list[str]:
         ("efficiency_metric_types", "efficiency_metric_values"),
     ]
     associated_list_jsonpaths = [
-        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].service_water_heating_uses[*]",
-        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].heating_system",
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].preheat_system",
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system",
         "$.ruleset_model_descriptions[*].boilers[*]",
         "$.ruleset_model_descriptions[*].chillers[*]",
         "$.ruleset_model_descriptions[*].service_water_heating_equipment[*]",
+        "$.ruleset_model_descriptions[*].service_water_heating_uses[*]",
     ]
 
     for jsonpath in associated_list_jsonpaths:
@@ -321,6 +321,53 @@ def check_hvac_association(rpd: dict) -> list:
     return mismatch_list
 
 
+def check_annual_schedule_lengths(rpd: dict) -> list[str]:
+    """
+    Verify that all schedules in the rpd file have the same length for hourly_values: either 8760 or 8784 entries.
+
+    Parameters
+    ----------
+    rpd : dict
+        The ruleset model description object.
+
+    Returns
+    -------
+    list[str]
+        A list of error messages for schedules that do not have 8760 or 8784 entries.
+    """
+    error_messages = []
+
+    schedules = [
+        sched
+        for sched in find_all("$.ruleset_model_descriptions[*].schedules[*]", rpd)
+        if "hourly_values" in sched
+    ]
+    lengths = [len(schedule["hourly_values"]) for schedule in schedules]
+
+    if not lengths:
+        return []  # No schedules with hourly_values — no errors
+
+    # Compute the mode of the lengths
+    length_counts = Counter(lengths)
+    common_length, _ = length_counts.most_common(1)[0]
+
+    # Check if common length is valid
+    if common_length not in (8760, 8784):
+        return [
+            f"Annual hourly schedules are required to be either 8760 or 8784. The most common schedule length in the project is {common_length}."
+        ]
+
+    # Check each schedule against the common length, after verifying the common length is valid
+    for schedule, length in zip(schedules, lengths):
+        schedule_id = schedule["id"]
+        if length != common_length:
+            error_messages.append(
+                f"Schedule '{schedule_id}' has {length} hourly values; all annual schedule lengths are expected to match the common length ({common_length})."
+            )
+
+    return error_messages
+
+
 def check_unique_ids_in_ruleset_model_descriptions(rpd):
     """Checks that the ids within each group inside a
     RuleSetModelInstance are unique
@@ -501,10 +548,15 @@ def non_schema_validate_rpd(rmd_obj):
     if mismatch_associated_data_elements_errors:
         error.extend(mismatch_associated_data_elements_errors)
 
+    mismatch_annual_schedule_length_errors = check_annual_schedule_lengths(rmd_obj)
+    passed = passed and not mismatch_annual_schedule_length_errors
+    if mismatch_annual_schedule_length_errors:
+        error.extend(mismatch_annual_schedule_length_errors)
+
     return {"passed": passed, "error": error if error else None}
 
 
-def schema_validate_rpd(rpd):
+def schema_validate_rpd(rpd, full_errors: bool = False):
     """Validates an RMD against the schema
 
     This code follows the outline given in
@@ -559,14 +611,19 @@ def schema_validate_rpd(rpd):
 
                 # Construct the error message
                 parent_id = parent_id[0] if parent_id else parent_id
-                truncated_message = (
-                    (error.message[:20] + ".........." + error.message[-130:])
-                    if len(error.message) > 160
-                    else error.message
-                )
-                error_message = f"{truncated_message}. Path: {error_path}." + (
-                    f" Parent ID: {parent_id}" if parent_id else ""
-                )
+                if not full_errors:
+                    truncated_message = (
+                        (error.message[:20] + ".........." + error.message[-130:])
+                        if len(error.message) > 160
+                        else error.message
+                    )
+                    error_message = f"{truncated_message}. Path: {error_path}." + (
+                        f" Parent ID: {parent_id}" if parent_id else ""
+                    )
+                else:
+                    error_message = f"{error.message}. Path: {error_path}." + (
+                        f" Parent ID: {parent_id}" if parent_id else ""
+                    )
                 error_details.append(error_message)
 
             return {"passed": False, "errors": error_details}

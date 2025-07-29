@@ -1,4 +1,5 @@
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.utility_functions import find_exactly_one_service_water_heating_use
 
 
 def get_swh_uses_associated_with_each_building_segment(
@@ -17,12 +18,13 @@ def get_swh_uses_associated_with_each_building_segment(
     swh_uses_dict: dict
         A dictionary where the keys are all the building segment ids and the value is `service_water_heating_uses` object under the `service_water_heating_uses`.
     """
-
     swh_uses_dict = {
-        bldg_seg["id"]: find_all(
-            "$.zones[*].spaces[*].service_water_heating_uses[*]",
-            bldg_seg,
-        )
+        bldg_seg["id"]: [
+            find_exactly_one_service_water_heating_use(rmd, swh_use_id)
+            for swh_use_id in find_all(
+                "$.zones[*].spaces[*].service_water_heating_uses[*]", bldg_seg
+            )
+        ]
         for bldg_seg in find_all("$.buildings[*].building_segments[*]", rmd)
     }
     return swh_uses_dict
