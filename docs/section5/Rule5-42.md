@@ -9,7 +9,7 @@ a. A separate model of the assembly within the energy simulation model.
 b. Adjustment of the clear-field U-factor in accordance with Section A10.2.    
 
 **Rule Assertion:** B-RMR = expected value                                           
-**Appendix G Section:** Section G3.1-5 Building Envelope Modeling Requirements for the Proposed building
+**Appendix G Section:** Section G3.1-5 Building Envelope Modeling Requirements for the Proposed building  
 **Appendix G Section Reference:** Table G3.1 Section 5(a) Exception #1   
 **Data Lookup:** None  
 **Evaluation Context:** Evaluate each Project   
