@@ -28,7 +28,7 @@
 
 **Rule Assertion:**
 - Case 1: If the baseline does not have shading devices, the list automatic_shades_modeled will be empty, PASS: `if len(automatic_shades_modeled) == 0: PASS`
-- Case 2: Otherwise FAIL: `else: FAIL`
+- Case 2: Otherwise FAIL and raise a message listing the subsurface IDs that failed: `else: FAIL and raise_message("Baseline model incorrectly includes automatic fenestration shading devices. Address this issue for the following subsurfaces: " + ", ".join(automatic_shades_modeled))`
 
 
 **Notes:**
