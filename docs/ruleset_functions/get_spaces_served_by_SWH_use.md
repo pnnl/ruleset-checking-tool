@@ -5,35 +5,27 @@ Description: This function determines the spaces served by a given SWH use.  The
 
 Inputs:
 - **RMD**
-- **swh_use**
+- **swh_use_id**
 
 Returns:
-- **spaces_served**: a list of spaces
+- **spaces_served**: a list of space ids
 
-Function Call:
-
-
-Data Lookup: None
 
 Logic:
 
-- create a list of spaces: `spaces_served = []`
-- find the building_segment that contains this swh_use by looking through each building segment: `for building_segment in RMD.building_segments:`
-    - check if the swh_use is in this building segment: `if swh_use in building_segment.service_water_heating_uses:`
-      - look at each space in the building segment to see which of them reference the swh_use: `for space in building_segment...spaces:`
-        - if the swh_use ID is in the list of space ServiceWaterHeatingUses, then the space is one of the spaces and we add it to the list - note to Dev team - in this case, we only need to look at the references stored, not the actual objects: `if swh_use.id in space.service_water_heating_uses: spaces_served.append(space)`
-- if there are no spaces served at this point, then the SWH use is a use that is applied to only one space: `if len(spaces_served) == 0:`
-    - look through each space: `for space...in RMD.spaces:`
-        - look for the SWH use id in space.service_water_heating_uses - note to DEV team - in this case, we only need to look at the actual objects, not the references: `if swh_use.id in space.service_water_heating_uses:`
-            - based on the rules - that a ServiceWaterHeatingUse object that is stored in a space cannot be referenced by other spaces, this is the only space served by this service water heating use.  We can return a list with just this space: `return [space]`
-       
+- Initialize a list of spaces served: `spaces_served = []`
+- Look through each building segment: `for building_segment in RMD...building_segments:`
+    - if the swh_use is referenced by a building segment, then that use applies to every space within that building segment: `if swh_use_id in building_segment["service_water_heating_uses"]:`
+      - return all spaces in that building segment: `return [space["id"] for space in building_segment...spaces]`
+    - else, look through each space within the building segment: `for space in building_segment...spaces:`
+        - if the swh_use is referenced directly by a space, add the space id to spaces_served: `if swh_use_id in space["service_water_heating_uses"]:`
+            - append the space id to spaces_served: `spaces_served.append(space["id"])` 
 - return the spaces served: `return spaces_served`
 
 
 
-**Returns** space_ids
+**Returns** space_ids list
 
 **[Back](../_toc.md)**
 
-**Notes:**
-1. relies on re-structuring of SWH as in: https://github.com/open229/ruleset-model-description-schema/issues/264
+**Notes:**  None 
