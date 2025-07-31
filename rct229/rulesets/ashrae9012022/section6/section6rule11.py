@@ -45,7 +45,9 @@ class PRM9012019Rule12d80(RuleDefinitionListIndexedBase):
 
         return any(
             interior_lighting_p.get("purpose_type") == LIGHTING_PURPOSE_TYPE
-            for space_p in find_all("$.buildings[*].building_segments[*].zones[*].spaces[*]", rmd_p)
+            for space_p in find_all(
+                "$.buildings[*].building_segments[*].zones[*].spaces[*]", rmd_p
+            )
             if space_p.get("lighting_space_type") == SALES_AREA
             for interior_lighting_p in space_p.get("interior_lighting", [])
         )

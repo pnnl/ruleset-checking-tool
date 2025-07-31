@@ -32,7 +32,7 @@ def run_ashrae9012019_tests(section=None):
 
 
 def generate_ashrae9012019_software_test_report(
-        section_list=None, output_dir=os.path.dirname(__file__)
+    section_list=None, output_dir=os.path.dirname(__file__)
 ):
     """
     Generate a software test JSON for ASHRAE 90.1 RCT for a given set of sections If section is None, then this
