@@ -6,16 +6,12 @@
         "RulesetModelOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
-                "USER",
-                "PROPOSED",
                 "BASELINE_0",
                 "BASELINE_90",
                 "BASELINE_180",
                 "BASELINE_270"
             ],
             "descriptions": [
-                "The building model as described without consideration of the ruleset",
-                "The building model that corresponds with the Proposed Buildings Performance column of Appendix G Table G3.1",
                 "The building model that corresponds with the Baseline Buildings Performance column of Appendix G Table G3.1 with no rotation",
                 "The building model that corresponds with the Baseline Buildings Performance column of Appendix G Table G3.1 with 90 degree rotation",
                 "The building model that corresponds with the Baseline Buildings Performance column of Appendix G Table G3.1 with 180 degree rotation",
@@ -31,6 +27,21 @@
             "descriptions": [
                 "Code Compliance",
                 "Beyond Code"
+            ]
+        },
+        "EnvelopeSpaceOptions2019ASHRAE901": {
+            "type": "string",
+            "enum": [
+                "NONRESIDENTIAL_CONDITIONED",
+                "RESIDENTIAL_CONDITIONED",
+                "SEMIHEATED",
+                "UNCONDITIONED"
+            ],
+            "descriptions": [
+                "Nonresidential conditioned",
+                "Residential conditioned",
+                "Semiheated",
+                "Unconditioned"
             ]
         },
         "LightingBuildingAreaOptions2019ASHRAE901T951TG38": {
@@ -465,12 +476,14 @@
                 "GENERAL",
                 "TASK",
                 "DECORATIVE",
+                "RETAIL_DISPLAY",
                 "UNREGULATED"
             ],
             "descriptions": [
                 "General",
                 "Task",
                 "Decorative",
+                "Retail display",
                 "Unregulated"
             ]
         },
@@ -792,7 +805,7 @@
                 "Transient Residential - Dwelling unit"
             ]
         },
-        "ServiceWaterHeatingSpaceOptions2019ASHRAE901": {
+        "ServiceWaterHeatingAreaOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
                 "AUTOMOTIVE_FACILITY",
@@ -805,6 +818,7 @@
                 "DORMITORY",
                 "EXERCISE_CENTER",
                 "FIRE_STATION",
+                "GROCERY_STORE",
                 "GYMNASIUM",
                 "HEALTH_CARE_CLINIC",
                 "HOSPITAL_AND_OUTPATIENT_SURGERY",
@@ -842,6 +856,7 @@
                 "Dormitory",
                 "Exercise center",
                 "Fire station",
+                "Grocery store",
                 "Gymnasium",
                 "Health-care clinic",
                 "Hospital and outpatient surgery center",
@@ -991,30 +1006,13 @@
                 "No prescribed schedules for Appendix G of ASHRAE Standard 90.1-2019. This field may be relavent for other rulesets."
             ]
         },
-        "SpaceStatusOptions2019ASHRAE901": {
+        "ConstructionClassificationOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
-                "NEW",
-                "EXISTING"
+                "STEEL_FRAMED"
             ],
             "descriptions": [
-                "New",
-                "Existing"
-            ]
-        },
-        "AdditionalSurfaceAdjacentToOptions2019ASHRAE901": {
-            "type": "string",
-            "enum": [
-                "UNENCLOSED",
-                "UNCONDITIONED",
-                "UNHEATED",
-                "SEMIHEATED"
-            ],
-            "descriptions": [
-                "The space on the other side of the surface is assumed to be unenclosed. The space on the other side of the surface is not explicity modeled.",
-                "The space on the other side of the surface is assumed to be unconditioned. The space on the other side of the surface is not explicity modeled.",
-                "Surface adjacent to a environment that is not heated but enclosed. The space on the other side of the surface is not explicity modeled.",
-                "Surface adjacent to a environment that is semi-heated. The space on the other side of the surface is not explicity modeled."
+                "Steel-framed"
             ]
         },
         "SubsurfaceSubclassificationOptions2019ASHRAE901": {
@@ -1045,6 +1043,7 @@
                 "PUBLIC_ASSEMBLY",
                 "RETAIL",
                 "HOSPITAL",
+                "HEATED_ONLY_STORAGE",
                 "OTHER_NON_RESIDENTIAL"
             ],
             "descriptions": [
@@ -1052,19 +1051,20 @@
                 "Public assembly",
                 "Retail",
                 "Hospital",
+                "Heated only storage",
                 "Other non-residential"
             ]
         },
         "OutputSchemaOptions2019ASHRAE901": {
             "type": "string",
             "enum": [
-                "OUTPUT_SCHEMA_ASHRAE901_2019",
-                "OTHER"
+                "OUTPUT_SCHEMA_ASHRAE901_2019"
             ],
             "descriptions": [
-                "Output schema for ASHRAE 90.1 2019",
-                "other"
+                "Output schema for ASHRAE 90.1 2019"
             ]
         }
-    }
+    },
+    "version": "0.1.7",
+    "$ref": "ASHRAE229_extra.schema.json#/definitions/RulesetProjectDescription"
 }

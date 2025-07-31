@@ -1,5 +1,5 @@
 import pytest
-from masks import invert_mask
+from rct229.utils.masks import invert_mask
 
 
 def test__invert_mask():

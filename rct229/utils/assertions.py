@@ -1,6 +1,3 @@
-from rct229.utils.jsonpath_utils import find_all
-
-
 class AssertionStatusCategory:
     """Enumeration class for RCT execution status"""
 
@@ -25,27 +22,14 @@ class MissingKeyException(RCTException):
         super().__init__(message)
 
 
-def assert_(bool, err_msg):
-    if not bool:
+def assert_(flag: bool, err_msg: str) -> bool:
+    if not flag:
         raise RCTFailureException(err_msg)
+    return flag
 
 
-def assert_nonempty_lists(req_nonempty_lists, obj):
-    for jpath in req_nonempty_lists:
-        for req_list in find_all(jpath + "[*]", obj):
-            assert len(req_list) > 0, f"{jpath} id:{req_list['id']} is empty"
-
-
-def assert_required_fields(req_fields, obj):
-    for (jpath, fields) in req_fields.items():
-        for element in find_all(jpath, obj):
-            for field in fields:
-                if field not in element:
-                    raise MissingKeyException(jpath, element.get("id"), field)
-
-
-def getattr_(obj, obj_name: str, first_key, *remaining_keys):
-    """Gets the value inside a dictionary described by a key path or raises an expection
+def getattr_(obj: dict, obj_name: str, first_key: str, *remaining_keys: str) -> any:
+    """Gets the value inside a dictionary described by a key path or raises an exception
 
     Parameters
     ----------
@@ -62,7 +46,7 @@ def getattr_(obj, obj_name: str, first_key, *remaining_keys):
     Returns
     -------
     any
-        The value stored the the given key path
+        The value stored the given key path
 
     Raises
     ------
@@ -86,7 +70,7 @@ def getattr_(obj, obj_name: str, first_key, *remaining_keys):
 
 
 def get_first_attr_(obj, obj_name: str, key_list):
-    """Gets first value inside a dictionary described by a list of keys or raises an expection
+    """Gets first value inside a dictionary described by a list of keys or raises an exception
 
     Parameters
     ----------

@@ -2,47 +2,55 @@ import json
 import os
 from copy import deepcopy
 
-import pytest
-
 from rct229.schema.validate import (
-    check_unique_ids_in_ruleset_model_instances,
+    check_unique_ids_in_ruleset_model_descriptions,
     json_paths_to_lists,
     json_paths_to_lists_from_dict,
     json_paths_to_lists_from_list,
-    non_schema_validate_rmr,
-    validate_rmr,
+    non_schema_validate_rpd,
+    validate_rpd,
 )
-
-EXAMPLES_PATH = "examples"
-
-# Testing validate_rmr; intended to make sure the referenced schemas are connected
-# properly and that the example rmr files are schema valid
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.schema.schema_store import SchemaStore, RuleSet
 
 
-def test__validate_rmr__with_baseline_rmr():
-    with open(os.path.join(EXAMPLES_PATH, "baseline_rmr.json")) as rmr_file:
-        rmr_obj = json.load(rmr_file)
-    assert validate_rmr(rmr_obj) == {"passed": True, "error": None}
+SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+SchemaEnums.update_schema_enum()
+EXAMPLES_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "examples")
+
+ServiceWaterHeatingUseUnitOptions = SchemaEnums.schema_enums[
+    "ServiceWaterHeatingUseUnitOptions"
+]
+HeatingMetricOptions = SchemaEnums.schema_enums["HeatingMetricOptions"]
+CoolingMetricOptions = SchemaEnums.schema_enums["CoolingMetricOptions"]
 
 
-def test__validate_rmr__with_proposed_rmr():
-    with open(os.path.join(EXAMPLES_PATH, "proposed_rmr.json")) as rmr_file:
-        rmr_obj = json.load(rmr_file)
-    assert validate_rmr(rmr_obj) == {"passed": True, "error": None}
+# Testing validate_rmd; intended to make sure the referenced schemas are connected
+# properly and that the example rmd files are schema valid
+def test__validate_rmd__with_baseline_rmd():
+    with open(os.path.join(EXAMPLES_PATH, "baseline_rmd.json")) as rmd_file:
+        rmd_obj = json.load(rmd_file)
+    assert validate_rpd(rmd_obj) == {"passed": True, "error": None}
 
 
-def test__validate_rmr__with_user_rmr():
-    with open(os.path.join(EXAMPLES_PATH, "user_rmr.json")) as rmr_file:
-        rmr_obj = json.load(rmr_file)
-    assert validate_rmr(rmr_obj) == {"passed": True, "error": None}
+def test__validate_rmd__with_proposed_rmd():
+    with open(os.path.join(EXAMPLES_PATH, "proposed_rmd.json")) as rmd_file:
+        rmd_obj = json.load(rmd_file)
+    assert validate_rpd(rmd_obj) == {"passed": True, "error": None}
 
 
-## Testing the three companion functions that find json paths to list
+def test__validate_rmd__with_user_rmd():
+    with open(os.path.join(EXAMPLES_PATH, "user_rmd.json")) as rmd_file:
+        rmd_obj = json.load(rmd_file)
+    assert validate_rpd(rmd_obj) == {"passed": True, "error": None}
+
+
+# Testing the three companion functions that find json paths to list
 
 TEST_IDS_RMD = {
-    "ruleset_model_instances": [
+    "ruleset_model_descriptions": [
         {
-            "id": "rmi_1",
+            "id": "rmd_1",
             "buildings": [
                 {
                     "id": "bldg_1_1",
@@ -65,63 +73,302 @@ TEST_IDS_RMD = {
 }
 
 TEST_UNIQUE_IDS_RMD = deepcopy(TEST_IDS_RMD)
-TEST_UNIQUE_IDS_RMD["ruleset_model_instances"][0]["buildings"][1]["building_segments"][
-    1
-]["id"] = "bs_1_2_2"
+TEST_UNIQUE_IDS_RMD["ruleset_model_descriptions"][0]["buildings"][1][
+    "building_segments"
+][1]["id"] = "bs_1_2_2"
 
 
 def test__json_paths_to_lists_from_dict():
     assert json_paths_to_lists_from_dict(TEST_IDS_RMD, "$") == {
-        "$.ruleset_model_instances",
-        "$.ruleset_model_instances[*].buildings",
-        "$.ruleset_model_instances[*].buildings[*].building_segments",
+        "$.ruleset_model_descriptions",
+        "$.ruleset_model_descriptions[*].buildings",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments",
     }
 
 
 def test__json_paths_to_lists_from_list():
     assert json_paths_to_lists_from_list(
-        TEST_IDS_RMD["ruleset_model_instances"], "$.ruleset_model_instances"
+        TEST_IDS_RMD["ruleset_model_descriptions"], "$.ruleset_model_descriptions"
     ) == {
-        "$.ruleset_model_instances",
-        "$.ruleset_model_instances[*].buildings",
-        "$.ruleset_model_instances[*].buildings[*].building_segments",
+        "$.ruleset_model_descriptions",
+        "$.ruleset_model_descriptions[*].buildings",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments",
     }
 
 
 def test__json_paths_to_lists():
     assert json_paths_to_lists(TEST_IDS_RMD) == {
-        "$.ruleset_model_instances",
-        "$.ruleset_model_instances[*].buildings",
-        "$.ruleset_model_instances[*].buildings[*].building_segments",
+        "$.ruleset_model_descriptions",
+        "$.ruleset_model_descriptions[*].buildings",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments",
     }
 
 
 # -----------------------------------------------
 
 
-def test__check_unique_ids_in_ruleset_model_instances__not_unique():
+def test__check_unique_ids_in_ruleset_model_descriptions__not_unique():
     assert (
-        check_unique_ids_in_ruleset_model_instances(TEST_IDS_RMD)
-        == "Non-unique ids for paths: ruleset_model_instances[0].buildings[*].building_segments"
+        check_unique_ids_in_ruleset_model_descriptions(TEST_IDS_RMD)
+        == "Non-unique ids for paths: ruleset_model_descriptions[0].buildings[*].building_segments"
     )
 
 
-def test__check_unique_ids_in_ruleset_model_instances__unique():
-    assert check_unique_ids_in_ruleset_model_instances(TEST_UNIQUE_IDS_RMD) == ""
+def test__check_unique_ids_in_ruleset_model_descriptions__unique():
+    assert check_unique_ids_in_ruleset_model_descriptions(TEST_UNIQUE_IDS_RMD) == ""
 
 
 # -----------------------------------------------
 
 
-def test__non_schema_validate_rmr__not_unique():
-    assert non_schema_validate_rmr(TEST_IDS_RMD) == {
+def test__non_schema_validate_rpd__not_unique():
+    assert non_schema_validate_rpd(TEST_IDS_RMD) == {
         "passed": False,
-        "error": "Non-unique ids for paths: ruleset_model_instances[0].buildings[*].building_segments",
+        "error": [
+            "Non-unique ids for paths: ruleset_model_descriptions[0].buildings[*].building_segments",
+        ],
     }
 
 
-def test__non_schema_validate_rmr__unique():
-    assert non_schema_validate_rmr(TEST_UNIQUE_IDS_RMD) == {
+def test__non_schema_validate_rpd__unique():
+    assert non_schema_validate_rpd(TEST_UNIQUE_IDS_RMD) == {
         "passed": True,
         "error": None,
+    }
+
+
+TEST_MISMATCHED_LISTS_RMD = {
+    "ruleset_model_descriptions": [
+        {
+            "id": "RMD 1",
+            "buildings": [
+                {
+                    "id": "Bldg 1",
+                    "building_segments": [
+                        {
+                            "id": "Segment 1",
+                            "zones": [
+                                {
+                                    "id": "Zone 1",
+                                    "spaces": [
+                                        {
+                                            "id": "Space 1",
+                                            "service_water_heating_uses": [
+                                                "SWH Use 1",
+                                            ],
+                                        }
+                                    ],
+                                    "surfaces": [
+                                        {
+                                            "id": "Surface 1",
+                                            "construction": "Construction 1",
+                                        }
+                                    ],
+                                }
+                            ],
+                            "heating_ventilating_air_conditioning_systems": [
+                                {
+                                    "id": "HVAC 1",
+                                    "preheat_system": {"id": "Preheat 1"},
+                                    "heating_system": {"id": "Heating 1"},
+                                    "cooling_system": {"id": "Cooling 1"},
+                                }
+                            ],
+                            "service_water_heating_uses": [
+                                "Typical SWH Use",
+                            ],
+                        },
+                    ],
+                }
+            ],
+            "constructions": [
+                {
+                    "id": "Construction 1",
+                    "construction_type": "Opaque",
+                    "primary_layers": [
+                        "Material 1",
+                    ],
+                }
+            ],
+            "materials": [{"id": "Material 1", "thickness": 0.2, "conductivity": 0.04}],
+            "boilers": [{"id": "Boiler 1"}],
+            "chillers": [{"id": "Chiller 1"}],
+            "service_water_heating_equipment": [{"id": "SWH Equipment 1"}],
+            "service_water_heating_uses": [
+                {"id": "SWH Use 1"},
+                {"id": "Typical SWH Use"},
+            ],
+        }
+    ]
+}
+
+
+def test__non_schema_validate_rpd__missing_associated_swh_use_lists_1():
+    test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
+    test_rmd["ruleset_model_descriptions"][0]["service_water_heating_uses"][1][
+        "use"
+    ] = [3]
+    assert non_schema_validate_rpd(test_rmd) == {
+        "passed": False,
+        "error": ["'Typical SWH Use' has populated 'use' but is missing 'use_units'."],
+    }
+
+
+def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_1():
+    test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
+    test_rmd["ruleset_model_descriptions"][0]["service_water_heating_uses"][1][
+        "use"
+    ] = [3, 4, 5]
+    test_rmd["ruleset_model_descriptions"][0]["service_water_heating_uses"][1][
+        "use_units"
+    ] = [
+        ServiceWaterHeatingUseUnitOptions.POWER,
+        ServiceWaterHeatingUseUnitOptions.VOLUME,
+    ]
+
+    assert non_schema_validate_rpd(test_rmd) == {
+        "passed": False,
+        "error": [
+            "'Typical SWH Use' lists at 'use_units' and 'use' are not the same length."
+        ],
+    }
+
+
+def test__non_schema_validate_rpd__mismatched_associated_swh_use_lists_2():
+    test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
+    test_rmd["ruleset_model_descriptions"][0]["service_water_heating_uses"][0][
+        "use"
+    ] = [3, 4, 5]
+    test_rmd["ruleset_model_descriptions"][0]["service_water_heating_uses"][0][
+        "use_units"
+    ] = [
+        ServiceWaterHeatingUseUnitOptions.POWER,
+        ServiceWaterHeatingUseUnitOptions.VOLUME,
+    ]
+
+    assert non_schema_validate_rpd(test_rmd) == {
+        "passed": False,
+        "error": [
+            "'SWH Use 1' lists at 'use_units' and 'use' are not the same length."
+        ],
+    }
+
+
+def test__non_schema_validate_rpd__mismatched_associated_efficiency_lists_1():
+    test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
+    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
+        "heating_ventilating_air_conditioning_systems"
+    ][0]["preheat_system"]["efficiency_metric_types"] = [
+        HeatingMetricOptions.THERMAL_EFFICIENCY
+    ]
+    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
+        "heating_ventilating_air_conditioning_systems"
+    ][0]["preheat_system"]["efficiency_metric_values"] = [
+        0.8,
+        3.4,
+    ]
+
+    assert non_schema_validate_rpd(test_rmd) == {
+        "passed": False,
+        "error": [
+            "'Preheat 1' lists at 'efficiency_metric_types' and 'efficiency_metric_values' are not the same length."
+        ],
+    }
+
+
+def test__non_schema_validate_rpd__mismatched_associated_efficiency_lists_2():
+    test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
+    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
+        "heating_ventilating_air_conditioning_systems"
+    ][0]["cooling_system"]["efficiency_metric_types"] = [
+        CoolingMetricOptions.FULL_LOAD_COEFFICIENT_OF_PERFORMANCE
+    ]
+    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
+        "heating_ventilating_air_conditioning_systems"
+    ][0]["cooling_system"]["efficiency_metric_values"] = [
+        3.4,
+        3.2,
+    ]
+
+    assert non_schema_validate_rpd(test_rmd) == {
+        "passed": False,
+        "error": [
+            "'Cooling 1' lists at 'efficiency_metric_types' and 'efficiency_metric_values' are not the same length."
+        ],
+    }
+
+
+def test__non_schema_validate_rpd__missing_associated_construction():
+    test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
+    test_rmd["ruleset_model_descriptions"][0]["buildings"][0]["building_segments"][0][
+        "zones"
+    ][0]["surfaces"][0]["construction"] = "Missing Construction"
+
+    assert non_schema_validate_rpd(test_rmd) == {
+        "passed": False,
+        "error": [
+            "Cannot find construction 'Missing Construction' in the list of Construction data groups."
+        ],
+    }
+
+
+def test__non_schema_validate_rpd__missing_associated_material():
+    test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
+    test_rmd["ruleset_model_descriptions"][0]["constructions"][0]["primary_layers"][
+        0
+    ] = "Missing Material"
+
+    assert non_schema_validate_rpd(test_rmd) == {
+        "passed": False,
+        "error": [
+            "Cannot find material 'Missing Material' in the list of Material data groups."
+        ],
+    }
+
+
+def test__non_schema_validate_rpd__unexpected_schedule_length():
+    test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
+    test_rmd["ruleset_model_descriptions"][0]["schedules"] = [
+        {"id": "Schedule 1", "hourly_values": [0.5] * 8759}  # 1 less than 8760
+    ]
+
+    assert non_schema_validate_rpd(test_rmd) == {
+        "passed": False,
+        "error": [
+            "Annual hourly schedules are required to be either 8760 or 8784. The most common schedule length in the project is 8759."
+        ],
+    }
+
+
+def test__non_schema_validate_rpd__mismatched_schedule_length():
+    test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
+    test_rmd["ruleset_model_descriptions"][0]["schedules"] = [
+        {"id": "Schedule 1", "hourly_values": [0.5] * 8760},
+        {"id": "Schedule 2", "hourly_values": [0.6] * 8760},
+        {"id": "Schedule 3", "hourly_values": [1] * 8784},
+    ]
+
+    assert non_schema_validate_rpd(test_rmd) == {
+        "passed": False,
+        "error": [
+            "Schedule 'Schedule 3' has 8784 hourly values; all annual schedule lengths are expected to match the common length (8760)."
+        ],
+    }
+
+
+def test__non_schema_validate_rpd__mismatched_schedule_length_2():
+    test_rmd = deepcopy(TEST_MISMATCHED_LISTS_RMD)
+    test_rmd["ruleset_model_descriptions"][0]["schedules"] = [
+        {"id": "Schedule 1", "hourly_values": [0.5] * 8760},
+        {"id": "Schedule 2", "hourly_values": [0.6] * 8760},
+        {"id": "Schedule 3", "hourly_values": [1] * 8784},
+        {"id": "Schedule 4", "hourly_values": [0] * 8784},
+    ]
+
+    assert non_schema_validate_rpd(test_rmd) == {
+        "passed": False,
+        "error": [
+            "Schedule 'Schedule 3' has 8784 hourly values; all annual schedule lengths are expected to match the common length (8760).",
+            "Schedule 'Schedule 4' has 8784 hourly values; all annual schedule lengths are expected to match the common length (8760).",
+        ],
     }

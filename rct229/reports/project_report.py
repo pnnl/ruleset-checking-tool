@@ -1,5 +1,4 @@
 import json
-import os
 
 from rct229.reports.utils import aggregate_outcomes
 
@@ -15,8 +14,8 @@ def print_rule_report(report):
         print(f"Rule: {str(outcome['id'])}")
         print(f"Description: {str(outcome['description'])}")
         print(
-            f"RMR context: {str(outcome['rmr_context'])}"
-        ) if "rmr_context" in outcome else print("RMR context: full scope")
+            f"RMD context: {str(outcome['rmd_context'])}"
+        ) if "rmd_context" in outcome else print("RMD context: full scope")
         # print(f"Element context: {str(outcome['element_context'])}")
         # print(f"Applicable: {str(outcome['applicable'])}")
         # print(f"Manual check required: {str(outcome['manual_check_required'])}")
@@ -26,10 +25,10 @@ def print_rule_report(report):
 
 
 def print_summary_report(report):
-    invalid_rmrs = report["invalid_rmrs"]
-    if invalid_rmrs:
+    invalid_rmds = report["invalid_rmds"]
+    if invalid_rmds:
         print("----------------------------------")
-        print(f"Invalid RMRs: {str(invalid_rmrs)}")
+        print(f"Invalid RMDs: {str(invalid_rmds)}")
     else:
         outcomes = report["outcomes"]
         summary_dict = aggregate_outcomes(outcomes)

@@ -2,6 +2,7 @@
 # CHW&CW - Rule 22-4  
 
 **Rule ID:** 22-4  
+**Schema Version:** 0.0.23
 **Rule Description:** For Baseline chilled water loop that is not purchased chilled water and does not serve any computer room HVAC systems, chilled-water supply temperature shall be reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.  
 **Rule Assertion:** B-RMR = expected value  
 **Appendix G Section:** Section 22 CHW&CW Loop  

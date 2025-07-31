@@ -1,0 +1,41 @@
+from rct229.ruletest_engine.ruletest_jsons.ashrae9012019 import (
+    ELEVATOR_DIR,
+    ENVELOPE_DIR,
+    HVAC_AIRSIDE_DIR,
+    HVAC_BASELINE_DIR,
+    HVAC_CHILLED_WATER_DIR,
+    HVAC_GENERAL_DIR,
+    HVAC_HOT_WATER_DIR,
+    LIGHTING_DIR,
+    PERFORMANCE_CALC_DIR,
+    RECEPTACLE_DIR,
+    SCHEDULE_DIR,
+    SERVICE_HOT_WATER_DIR,
+)
+
+
+# Ruleset enumerator
+class RuleSet:
+    ASHRAE9012019_RULESET = "ashrae9012019"
+
+
+class RuleSetTest:
+    ASHRAE9012019_TEST_LIST = [
+        PERFORMANCE_CALC_DIR,
+        ELEVATOR_DIR,
+        ENVELOPE_DIR,
+        HVAC_AIRSIDE_DIR,
+        HVAC_CHILLED_WATER_DIR,
+        HVAC_GENERAL_DIR,
+        HVAC_HOT_WATER_DIR,
+        HVAC_BASELINE_DIR,
+        LIGHTING_DIR,
+        RECEPTACLE_DIR,
+        SCHEDULE_DIR,
+        SERVICE_HOT_WATER_DIR,
+    ]
+
+
+class LeapYear:
+    LEAP_YEAR_HOURS = 8784
+    REGULAR_YEAR_HOURS = 8760

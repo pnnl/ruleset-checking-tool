@@ -2,10 +2,10 @@
 # Envelope - Rule 5-36  
 
 **Rule ID:** 5-36  
-**Rule Description:**  Skylight area must be allocated to surfaces in the same proportion in the baseline as in the proposed design.  
-**Rule Assertion:** B-RMR (subsurface.glazed_area+subsurface.opaque_area) = expected value for each zone  
-**Appendix G Section:** Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building  
-**Appendix G Section Reference:** None  
+**Rule Description:** The air leakage rate in unconditioned and unenclosed spaces must be the same the baseline and proposed design.  
+**Rule Assertion:** B-RMD infiltration:air_leakage_rate = P-RMR infiltration:air_leakage_rate  
+**Appendix G Section:** Section 5 Envelope  
+**Appendix G Section Reference:** Section G3.1-1 Building Envelope Modeling Requirements for the Proposed design and Baseline building  
 
 **Applicability:** All required data elements exist for B_RMR  
 **Applicability Checks:**  None  
@@ -13,43 +13,34 @@
 **Manual Check:** None  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
-**Function Call:**  
+**Function Call:** 
 
-  1. get_building_segment_skylight_roof_areas()  
-  2. get_surface_conditioning_category()
-  3. get_opaque_surface_type()
-  4. match_data_element()
+  1. match_data_element()
+  2. get_zone_conditioning_category()
 
-## Rule Logic:
+## Rule Logic:  
 
-- Get building segment skylight roof areas dictionary for B_RMR: `skylight_roof_areas_dictionary_b = get_building_segment_skylight_roof_areas(B_RMR)`
+- Get zone conditioning category for B_RMR: `zcc_b = get_zone_conditioning_category(B_RMR)`
 
-- Get building segment skylight roof areas dictionary for P_RMR: `skylight_roof_areas_dictionary_p = get_building_segment_skylight_roof_areas(P_RMR)`
+- For each zone in B_RMR: `for zone_b in B_RMR...zones:`
 
-- Get surface conditioning category dictionary for B_RMR: `scc_dictionary_b = get_surface_conditioning_category(B_RMR)`  
+  - Check if zone is unconditioned or unenclosed: `if zcc_b[zone_b.id] in ["UNENCLOSED", "UNCONDITIONED"]:`
 
-- For each building segment in the Baseline model: `For building_segment_b in B_RMR.building.building_segments:`
+    - Get zone infiltration: `infiltration_b = zone_b.infiltration`
 
-  - Get total skylight area for building segment: `total_skylight_area_b = skylight_roof_areas_dictionary_b[building_segment_b.id][0]`
+    - Get matching zone in P_RMR: `zone_p = match_data_element(P_RMR, Zones, zone_b.id)`
 
-  - Get matching building segment in P_RMR: `building_segment_p = match_data_element(P_RMR, BuildingSegments, building_segment_b.id)`
-  
-    - Get total skylight area for building segment in P_RMR: `total_skylight_area_p = skylight_roof_areas_dictionary_p[building_segment_p.id][0]`
+      - Get zone infiltration in P_RMR: `infiltration_p = zone_p.infiltration`
 
-  - For each zone in building segment: `for zone_b in building_segment_b.zones:`
-  
-    - For each surface in zone: `for surface_b in zone_b.surfaces:`  
+        **Rule Assertion:**  
 
-      - Check if surface is roof and is regulated: `if ( get_opaque_surface_type(surface_b.id) == "ROOF" ) AND ( scc_dictionary_b[surface_b.id] != "UNREGULATED" ):`
+        - Case 1: For each unconditioned and unenclosed zone, if zone infiltration flow rate in B_RMR matches that in P_RMR: `if infiltration_b.infiltration_flow_rate == infiltration_p.infiltration_flow_rate: PASS`  
 
-        - Add total skylight area to roof total skylight area: `total_skylight_area_surface_b = sum(subsurface.glazed_area + subsurface.opaque_area for subsurface in surface_b.subsurfaces)`
+        - Case 2: Else: `Else: FAIL`
 
-        - Get matching surface in P_RMR: `surface_p = match_data_element(P_RMR, Surfaces, surface_b.id)`
+**Notes:**
 
-          - Add total skylight area to roof total skylight area in P_RMR: `total_skylight_area_surface_p = sum(subsurface.glazed_area + subsurface.opaque_area for subsurface in surface_p.subsurfaces)`
+1. Update Rule ID from 5-48 to 5-37 on 10/26/2023
+2. Update Rule ID from 5-37 to 5-36 on 12/22/2023
 
-          **Rule Assertion:**
-
-          - Case 1: For each surface, if total skylight area in B_RMR is in the same proportion as in P_RMR: `if total_skylight_area_surface_b / total_skylight_area_b == total_skylight_area_surface_p / total_skylight_area_p: PASS`
-
-          - Case 2: Else: `else: FAIL`
+**[Back](../_toc.md)**

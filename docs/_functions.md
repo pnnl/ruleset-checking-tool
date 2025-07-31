@@ -19,20 +19,20 @@ Returns:
 - **table_value**: The data table value to be returned.
 
 ## match_data_element 
-Description: Get the data element with the matching `name` for either a User, Proposed or Baseline RMR.   
+Description: Get the data element with the matching `name` for either a User, Proposed or Baseline RMD.   
 Inputs:  
-- **rmr:** The RMR data object (U_RMR, P_RMR, B_RMR) for retrieving the data element.  
-- **data_group:** The name of the RMR schema Data Group for retrieving the data element.   
+- **rmd:** The RMD data object (U_RMD, P_RMD, B_RMD) for retrieving the data element.  
+- **data_group:** The name of the RMD schema Data Group for retrieving the data element.   
 - **name:** The name parameter used for looking up the Data Element
 
 Returns:  
-- **data_element**: A RMR Data Element object.
+- **data_element**: A RMD Data Element object.
 
 ## match_data_element_exist
-Description: Returns a true or false to indicate whether there is a data element with the matching `name` in either a User, Proposed or Baseline RMR. True means that it exists and false means that it does not exist.
+Description: Returns a true or false to indicate whether there is a data element with the matching `name` in either a User, Proposed or Baseline RMD. True means that it exists and false means that it does not exist.
 Inputs:  
-- **rmr:** The RMR data object (U_RMR, P_RMR, B_RMR) for determining if there is a matching data element.  
-- **data_group:** The name of the RMR schema Data Group for looking up the data element.   
+- **rmd:** The RMD data object (U_RMD, P_RMD, B_RMD) for determining if there is a matching data element.  
+- **data_group:** The name of the RMD schema Data Group for looking up the data element.   
 - **name:** The name parameter used for looking up the Data Element.
 
 Returns:  
