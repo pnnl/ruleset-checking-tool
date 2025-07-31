@@ -20,15 +20,15 @@ MANUAL_CHECK_REQUIRED_MSG = (
 )
 
 
-class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
+class PRM9012019Rule12d80(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(PRM9012019Rule22c86, self).__init__(
+        super(PRM9012019Rule12d80, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=PRM9012019Rule22c86.SpaceRule(),
+            each_rule=PRM9012019Rule12d80.SpaceRule(),
             index_rmd=PROPOSED,
             id="6-11",
             description="Where retail display lighting is included in the proposed building design the display lighting"
@@ -42,16 +42,17 @@ class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
 
     def is_applicable(self, context, data=None):
         rmd_p = context.PROPOSED
+
         return any(
-            space_p.get("lighting_space_type") is not None
-            for space_p in find_all(
-                "$.buildings[*].building_segments[*].zones[*].spaces[*]", rmd_p
-            )
+            interior_lighting_p.get("purpose_type") == LIGHTING_PURPOSE_TYPE
+            for space_p in find_all("$.buildings[*].building_segments[*].zones[*].spaces[*]", rmd_p)
+            if space_p.get("lighting_space_type") == SALES_AREA
+            for interior_lighting_p in space_p.get("interior_lighting", [])
         )
 
     class SpaceRule(RuleDefinitionBase):
         def __init__(self):
-            super(PRM9012019Rule22c86.SpaceRule, self).__init__(
+            super(PRM9012019Rule12d80.SpaceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
@@ -92,9 +93,15 @@ class PRM9012019Rule22c86(RuleDefinitionListIndexedBase):
             minimum_retail_display_W = calc_vals["minimum_retail_display_W"]
             proposed_interior_display_W = calc_vals["proposed_interior_display_W"]
             return (
-                minimum_retail_display_W
-                <= proposed_interior_display_W
-                <= maximum_retail_display_W
+                minimum_retail_display_W < proposed_interior_display_W
+                or self.precision_comparison["minimum_retail_display_W"](
+                    proposed_interior_display_W, minimum_retail_display_W
+                )
+            ) and (
+                proposed_interior_display_W < maximum_retail_display_W
+                or self.precision_comparison["maximum_retail_display_W"](
+                    proposed_interior_display_W, maximum_retail_display_W
+                )
             )
 
         def rule_check(self, context, calc_vals=None, data=None):

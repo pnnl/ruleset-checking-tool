@@ -32,7 +32,7 @@ def run_ashrae9012019_tests(section=None):
 
 
 def generate_ashrae9012019_software_test_report(
-    section_list=None, output_dir=os.path.dirname(__file__)
+        section_list=None, output_dir=os.path.dirname(__file__)
 ):
     """
     Generate a software test JSON for ASHRAE 90.1 RCT for a given set of sections If section is None, then this
@@ -282,8 +282,8 @@ def run_test_one_jsontest(test_json):
     return run_section_tests(test_json, RuleSet.ASHRAE9012019_RULESET)
 
 
-# if __name__ == "__main__":
-#     outcome = run_ashrae9012019_tests(section="section5")
+if __name__ == "__main__":
+    outcome = run_ashrae9012019_tests(section="section23")
 
 # run_transformer_tests()
 
@@ -302,7 +302,7 @@ def run_test_one_jsontest(test_json):
 # run_service_water_heater_tests()
 
 
-# run_test_one_jsontest("ashrae9012019/HVAC-GEN/rule_19_10.json")
+# run_test_one_jsontest("ashrae9012019/section23/rule_23_8.json")
 # run_ashrae9012019_tests()
 # output_dir = os.path.dirname(__file__)
 # generate_ashrae9012019_software_test_report(['tester'])
