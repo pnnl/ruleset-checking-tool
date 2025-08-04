@@ -35,7 +35,7 @@
 
   - Check if skylight roof ratio in the proposed building is greater than 3%: `if skylight_roof_ratio_p > 0.03:`
 
-    - If so, then this rule is applicable: `CONTINUE TO RULE LOGIC`
+    - If so, then this rule is applicable: `CONTINUE TO RULE ASSERTION`
     
     - If skylight roof ratio in the proposed building is less than or equal to 3%, Rule is not applicable: `else: NOT_APPLICABLE`
 

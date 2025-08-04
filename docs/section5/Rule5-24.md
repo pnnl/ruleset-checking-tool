@@ -7,7 +7,7 @@
 **Appendix G Section:** Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building  
 **Appendix G Section Reference:** None  
 
-**Applicability:** All required data elements exist for B_RMD
+**Applicability:** All required data elements exist for B_RMD  
 **Applicability Checks:**  
 1. the skylight area in the proposed design is 3% or less.
 
@@ -34,7 +34,7 @@
 
   - Check if skylight roof ratio in the proposed building is 3% or less: `if skylight_roof_ratio_p <= 0.03:`
 
-    - If so, then this rule is applicable: `CONTINUE TO RULE LOGIC`
+    - If so, then this rule is applicable: `CONTINUE TO RULE ASSERTION`
     
     - If skylight roof ratio in the proposed building is greater than 3%, Rule is not applicable: `else: NOT_APPLICABLE` 
 
