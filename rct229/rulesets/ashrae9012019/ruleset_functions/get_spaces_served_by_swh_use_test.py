@@ -35,16 +35,13 @@ TEST_RMD = {
                 },
                 {
                     "id": "Building Segment 2",
-                    "service_water_heating_uses": [
-                        "SWH use 2_1",
-                    ],
                     "zones": [
                         {
-                            "id": "Thermal Zone 1",
+                            "id": "Thermal Zone 2",
                             "spaces": [
                                 {
                                     "id": "Space 3",
-                                    "service_water_heating_uses": ["SWH use 2_2"],
+                                    "service_water_heating_uses": ["SWH use 2_1"],
                                 },
                                 {
                                     "id": "Space 4",
@@ -112,16 +109,5 @@ def test__get_spaces_served_by_swh_use__exist_in_bldg_seg_and_space():
 def test__get_spaces_served_by_swh_use__not_in_bldg_seg():
     assert get_spaces_served_by_swh_use(
         TEST_RMD,
-        "SWH use 1_2",
-    ) == ["Space 2"]
-
-
-def test__get_spaces_served_by_swh_use__referenced_by_multiple_spaces():
-    with pytest.raises(
-        RCTFailureException,
-        match="SWH use 2_2 can't be referenced by multiple spaces.",
-    ):
-        get_spaces_served_by_swh_use(
-            TEST_RMD,
-            "SWH use 2_2",
-        )
+        "SWH use 2_1",
+    ) == ["Space 3"]

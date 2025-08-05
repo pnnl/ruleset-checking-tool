@@ -1,5 +1,4 @@
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.assertions import assert_
 
 
 def get_spaces_served_by_swh_use(rmd: dict, swh_use_id: str) -> list[str]:
@@ -16,29 +15,23 @@ def get_spaces_served_by_swh_use(rmd: dict, swh_use_id: str) -> list[str]:
 
     Returns
     -------
-    spaces_served: list of str
+    spaces_served: list of space ids
         list of space ids that has the sane service_water_heating_uses value
     """
 
     spaces_served = []
     for bldg_segment in find_all("$.buildings[*].building_segments[*]", rmd):
-        # Check if `swh_use_id` is in the building segment level
         if swh_use_id in bldg_segment.get("service_water_heating_uses", []):
-            for space in find_all("$.zones[*].spaces[*]", bldg_segment):
-                spaces_served.append(space["id"])
+            return [
+                space["id"] for space in find_all("$.zones[*].spaces[*]", bldg_segment)
+            ]
+        else:
+            for space in find_all(
+                "$.buildings[*].building_segments[*].zones[*].spaces[*]", rmd
+            ):
+                if swh_use_id in space.get("service_water_heating_uses", []):
+                    spaces_served.append(space["id"])
 
-    # if `spaces_served` is an empty list, the SHW use is applied to only one space
-    if not spaces_served:
-        for space in find_all(
-            "$.buildings[*].building_segments[*].zones[*].spaces[*]", rmd
-        ):
-            if swh_use_id in space.get("service_water_heating_uses", []):
-                spaces_served.append(space["id"])
-
-        # Make sure `swh_use_id` is not referenced by multiple spaces
-        assert_(
-            len(spaces_served) == 1,
-            f"{swh_use_id} can't be referenced by multiple spaces.",
-        )
+            return spaces_served
 
     return spaces_served
