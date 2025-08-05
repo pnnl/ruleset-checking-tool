@@ -34,7 +34,7 @@ Logic:
         - check if the distribution system referenced is the same as the distribution system we're currently looking at: `if swh_equip.distribution_system == distribution:`
             - this swh equipment is connected, append it to the list: `swh_and_equip_dict[distribution.id]["SWHHeatingEq"].append(swh_equip.id)`
             - this also means that any solarthermal attached to this swh_equip is connected, append the SolarThermal ids: `for solar_t in swh_equip.solar_thermal_systems: swh_and_equip_dict[distribution.id]["SolarThermal"].append(solar_t.id)`
-- now go through each SWH Use in the RMD: `for swh_use in RMD...service_water_heating_uses:`
+- now go through each SWH Use in the RMD - note to DEV team - find the actual Objects, don't worry about the references.  This will be stored in building_segment.service_water_heating_uses and space.service_water_heating_uses: `for swh_use in RMD...service_water_heating_uses:`
     - find the distribution system: `distribution = swh_use.served_by_distribution_system`
     - add the swh_use id to the dictionary for the distribution: `swh_and_equip_dict[distribution.id]["USES"].append(swh_use.id)`
     - now get the ids of spaces served by this SWH Use by using the function get_spaces_served_by_SWH_use, and add all of them to the list: `swh_and_equip_dict[distribution.id]["SPACES_SERVED"].append(space.id for space in get_spaces_served_by_SWH_use(RMD,swh_use))
