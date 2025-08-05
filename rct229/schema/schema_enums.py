@@ -86,12 +86,13 @@ class SchemaEnums:
 # Convert the enumerations as dictionaries to classes for easier access
 
 
-def print_schema_enums():
+def print_schema_enums(ruleset: RuleSet):
     """Print all the schema enumerations with their names and values
 
     This is primarily useful for debugging purposes
     """
-    SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+
+    SchemaStore.set_ruleset(ruleset)
     SchemaEnums.update_schema_enum()
     for key in SchemaEnums.schema_enums:
         print(f"{key}:")
