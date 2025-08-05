@@ -5,7 +5,7 @@
 **Mandatory Rule:** True  
 **Rule ID:** 23-9  
 **Rule Description:** System 11 Minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate and the minimum ventilation airflow rate or the airflow required to comply with codes or accredidation standards.      
-**Rule Assertion:** B-RMD = expected value  
+**Rule Assertion:** B_RMD = expected value  
 **Appendix G Section:** Section 23 Air-side  
 **90.1 Section Reference:** Exception to G3.1.3.13  
 **Data Lookup:** None  
@@ -13,7 +13,7 @@
 
 **Applicability Checks:**  
 
-1. B-RMD is modeled with at least one air-side system that is Type-11.  
+1. B_RMD is modeled with at least one air-side system that is Type-11.  
 
 **Function Calls:**  
 
@@ -21,15 +21,15 @@
 2. baseline_system_type_compare()
 3. get_dict_of_zones_and_terminal_units_served_by_hvac_sys()
 
-**Applicability Checks:**  
-- Create a list of the target system types: `APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_11]`
-- Get the system types dict for the baseline model: `baseline_system_types_dict = get_baseline_system_types(B-RMD)`
-
-- Loop through the applicable system types: `for target_sys_type in APPLICABLE_SYS_TYPES:`
-    - Loop through the baseline system types dict to check the system types of the baseline systems: `for system_type in baseline_system_types_dict:`
-        - Determine whether the baseline system type is System 11: `if((baseline_system_type_compare(system_type, target_sys_type, false)):`
-            - If it is, the rule applies to this system: `CONTINUE TO RULE LOGIC`
-        - Otherwise, the rule not applicable to this system: `else: NOT_APPLICABLE`
+**Applicability Checks:**
+- Get the system types dict for the baseline model: `baseline_system_types_dict = get_baseline_system_types(B_RMD)`
+- Invert the dictionary to map each system ID to its system type: `hvac_id_to_sys_type = {hvac_system_id: system_type for system_type, hvac_ids in baseline_system_types_dict.items() for hvac_system_id in hvac_ids}`
+- For each baseline HVAC system: `for baseline_hvac_system in B_RMD...heating_ventilating_air_conditioning_systems:`
+    - Get the HVAC system ID: `hvac_system_id = baseline_hvac_system["id"]`
+    - Get the HVAC system type: `hvac_system_type = hvac_id_to_sys_type[hvac_system_id]`
+    - Determine whether the baseline system type is System 11: `if((baseline_system_type_compare(hvac_system_type, HVAC_SYS.SYS_11, False)):`
+        - If it is System 11, the rule applies to the system: `CONTINUE TO RULE LOGIC`
+    - Otherwise, the rule not applicable to the system : `else: NOT_APPLICABLE`
  
 **Rule Logic:**  
 
