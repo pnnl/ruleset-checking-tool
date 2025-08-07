@@ -1,22 +1,22 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 
 EXTERIOR = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"].EXTERIOR
 
 
-class PRM9012019Rule86r63(RuleDefinitionListIndexedBase):
-    """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
+class PRM9012022Rule86r63(RuleDefinitionListIndexedBase):
+    """Rule 11 of ASHRAE 90.1-2022 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(PRM9012019Rule86r63, self).__init__(
+        super(PRM9012022Rule86r63, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=PRM9012019Rule86r63.SpaceRule(),
+            each_rule=PRM9012022Rule86r63.SpaceRule(),
             index_rmd=BASELINE_0,
             id="5-43",
             description="Automatic fenestration shading devices shall not be modeled in the Baseline.",
@@ -41,7 +41,7 @@ class PRM9012019Rule86r63(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
-            super(PRM9012019Rule86r63.BuildingRule, self).__init__(
+            super(PRM9012022Rule86r63.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -50,7 +50,7 @@ class PRM9012019Rule86r63(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             building_b = context.BASELINE_0
             automatic_shades_modeled = [
-                subsurface_b.get("has_automatic_shades")
+                subsurface_b["has_automatic_shades"]
                 for surface_b in find_all(
                     "$.building_segments[*].zones[*].surfaces[*]", building_b
                 )
@@ -62,4 +62,12 @@ class PRM9012019Rule86r63(RuleDefinitionListIndexedBase):
 
         def rule_check(self, context, calc_vals=None, data=None):
             automatic_shades_modeled = calc_vals["automatic_shades_modeled"]
-            return len(automatic_shades_modeled) > 0
+            return len(automatic_shades_modeled) == 0
+
+        def get_fail_msg(self, context, calc_vals=None, data=None):
+            automatic_shades_modeled = calc_vals["automatic_shades_modeled"]
+            FAIL_MSG = (
+                "Baseline model incorrectly includes automatic fenestration shading devices. Address this "
+                "issue for the following subsurfaces: "
+            ) + ", ".join(automatic_shades_modeled)
+            return FAIL_MSG
