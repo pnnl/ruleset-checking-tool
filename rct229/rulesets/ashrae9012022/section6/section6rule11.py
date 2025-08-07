@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import PROPOSED
+from rct229.rulesets.ashrae9012022 import PROPOSED
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 
@@ -20,15 +20,15 @@ MANUAL_CHECK_REQUIRED_MSG = (
 )
 
 
-class PRM9012019Rule12d80(RuleDefinitionListIndexedBase):
-    """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
+class PRM9012022Rule12d80(RuleDefinitionListIndexedBase):
+    """Rule 11 of ASHRAE 90.1-2022 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(PRM9012019Rule12d80, self).__init__(
+        super(PRM9012022Rule12d80, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=PRM9012019Rule12d80.SpaceRule(),
+            each_rule=PRM9012022Rule12d80.SpaceRule(),
             index_rmd=PROPOSED,
             id="6-11",
             description="Where retail display lighting is included in the proposed building design the display lighting"
@@ -54,7 +54,7 @@ class PRM9012019Rule12d80(RuleDefinitionListIndexedBase):
 
     class SpaceRule(RuleDefinitionBase):
         def __init__(self):
-            super(PRM9012019Rule12d80.SpaceRule, self).__init__(
+            super(PRM9012022Rule12d80.SpaceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
