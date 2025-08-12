@@ -59,19 +59,6 @@
                                                     }
                                                 ]
                                             }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 3517.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 9378.275555555556
-                                                }
-                                            }
                                         ]
                                     }
                                 ]
@@ -144,19 +131,6 @@
                                                     }
                                                 ]
                                             }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 3517.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 9378.275555555556
-                                                }
-                                            }
                                         ]
                                     }
                                 ]
@@ -216,19 +190,6 @@
                                                         "adjacent_to": "EXTERIOR"
                                                     }
                                                 ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 3517.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 9378.275555555556
-                                                }
                                             }
                                         ]
                                     }
