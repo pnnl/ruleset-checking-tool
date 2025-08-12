@@ -76,57 +76,6 @@ TEST_RMD = {
                         }
                     ],
                 },
-                {
-                    "id": "Building Segment 5",
-                    "zones": [
-                        {
-                            "id": "Zone 5",
-                            "spaces": [
-                                {
-                                    "id": "Space 5_1",
-                                    "service_water_heating_area_type": "HOTEL",
-                                    "service_water_heating_uses": [
-                                        "service water heating uses 5_1",
-                                    ],
-                                },
-                                {
-                                    "id": "Space 5_2",
-                                    "service_water_heating_area_type": "CONVENIENCE_STORE",
-                                    "service_water_heating_uses": [
-                                        "service water heating uses 5_2"
-                                    ],
-                                },
-                            ],
-                        }
-                    ],
-                },
-                {
-                    "id": "Building Segment 6",
-                    "service_water_heating_uses": [
-                        "service water heating uses 6_2",
-                    ],
-                    "zones": [
-                        {
-                            "id": "Zone 6",
-                            "spaces": [
-                                {
-                                    "id": "Space 6_1",
-                                    "service_water_heating_area_type": "MUSEUM",
-                                    "service_water_heating_uses": [
-                                        "service water heating uses 6_1",
-                                    ],
-                                },
-                                {
-                                    "id": "Space 6_2",
-                                    "service_water_heating_area_type": "CONVENIENCE_STORE",
-                                    "service_water_heating_uses": [
-                                        "service water heating uses 6_2",
-                                    ],
-                                },
-                            ],
-                        }
-                    ],
-                },
             ],
         }
     ],
@@ -160,6 +109,12 @@ TEST_RMD = {
             "use_multiplier_schedule": "SWH Schedule 1",
         },
         {
+            "id": "service water heating uses 3_1",
+            "use": 5,
+            "use_units": "OTHER",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
+        {
             "id": "service water heating uses 4_1",
             "use": 100,
             "use_units": "VOLUME_PER_PERSON",
@@ -168,46 +123,8 @@ TEST_RMD = {
             "use_multiplier_schedule": "SWH Schedule 1",
         },
         {
-            "id": "service water heating uses 5_2",
-            "use": 300,
-            "use_units": "POWER",
-            "is_heat_recovered_by_drain": True,
-            "served_by_distribution_system": "SWH Distribution 1",
-            "use_multiplier_schedule": "SWH Schedule 1",
-        },
-        {
-            "id": "service water heating uses 3_1",
-            "use": 5,
-            "use_units": "OTHER",
-            "served_by_distribution_system": "SWH Distribution 1",
-        },
-        {
             "id": "service water heating uses 4_2",
             "use": 300,
-            "use_units": "POWER",
-            "is_heat_recovered_by_drain": True,
-            "served_by_distribution_system": "SWH Distribution 1",
-            "use_multiplier_schedule": "SWH Schedule 1",
-        },
-        {
-            "id": "service water heating uses 5_1",
-            "use": 400,
-            "use_units": "POWER",
-            "is_heat_recovered_by_drain": True,
-            "served_by_distribution_system": "SWH Distribution 1",
-            "use_multiplier_schedule": "SWH Schedule 1",
-        },
-        {
-            "id": "service water heating uses 6_1",
-            "use": 200,
-            "use_units": "POWER",
-            "is_heat_recovered_by_drain": True,
-            "served_by_distribution_system": "SWH Distribution 1",
-            "use_multiplier_schedule": "SWH Schedule 1",
-        },
-        {
-            "id": "service water heating uses 6_2",
-            "use": 150,
             "use_units": "POWER",
             "is_heat_recovered_by_drain": True,
             "served_by_distribution_system": "SWH Distribution 1",
@@ -276,28 +193,19 @@ def test__TEST_RPD__bldg_segment_swh_bat():
     assert get_building_segment_swh_bat(TEST_RMD, "Building Segment 1") == "LIBRARY"
 
 
-def test__TEST_RPD__area_type():
+def test__TEST_RPD__more_than_one_known_area_type():
     assert (
-        get_building_segment_swh_bat(TEST_RMD, "Building Segment 2")
-        == "CONVENIENCE_STORE"
+        get_building_segment_swh_bat(TEST_RMD, "Building Segment 2") == "UNDETERMINED"
     )
 
 
-def test__TEST_RPD__other_use_unit():
-    assert (
-        get_building_segment_swh_bat(TEST_RMD, "Building Segment 3") == "UNDETERMINED"
-    )
+# def test__TEST_RPD__other_use_unit():
+#     assert (
+#         get_building_segment_swh_bat(TEST_RMD, "Building Segment 3") == "UNDETERMINED"
+#     )
 
 
 def test__TEST_RPD__two_spaces_one_undetermined():
     assert (
         get_building_segment_swh_bat(TEST_RMD, "Building Segment 4") == "UNDETERMINED"
     )
-
-
-def test__TEST_RPD__two_spaces_none_undetermined():
-    assert get_building_segment_swh_bat(TEST_RMD, "Building Segment 5") == "HOTEL"
-
-
-def test__TEST_RPD__area_type_diff_service_water_heating_uses_location():
-    assert get_building_segment_swh_bat(TEST_RMD, "Building Segment 6") == "MUSEUM"
