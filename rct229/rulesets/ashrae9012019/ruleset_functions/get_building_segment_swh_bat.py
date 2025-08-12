@@ -2,6 +2,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_energy_required_to_heat
     get_energy_required_to_heat_swh_use,
 )
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.utility_functions import (
     find_exactly_one_building_segment,
@@ -77,14 +78,18 @@ def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
                         swh_use_dict.setdefault(
                             space["service_water_heating_area_type"], 0
                         )
-                        swh_use_dict[
-                            space["service_water_heating_area_type"]
-                        ] += swh_use_energy_by_space[space_id]
+                        swh_use_dict[space["service_water_heating_area_type"]] += (
+                            swh_use_energy_by_space[space_id]
+                            if swh_use_energy_by_space[space_id] is not None
+                            else 0
+                        )
                     else:
                         swh_use_dict.setdefault("UNDETERMINED", 0)
-                        swh_use_dict["UNDETERMINED"] += swh_use_energy_by_space[
-                            space_id
-                        ]
+                        swh_use_dict["UNDETERMINED"] += (
+                            swh_use_energy_by_space[space_id]
+                            if swh_use_energy_by_space[space_id] is not None
+                            else 0
+                        )
 
         total_energy = sum(swh_use_dict.values())
         assigned_energy = total_energy - swh_use_dict.get("UNDETERMINED", 0)
@@ -97,6 +102,11 @@ def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
         elif len(known_area_types) > 1:
             building_segment_swh_bat = "UNDETERMINED"
         else:
+            assert_(
+                len(known_area_types) > 0,
+                "At least one building area type must exist other than UNDETERMINED",
+            )
+
             building_segment_swh_bat = known_area_types[0]
 
     if building_segment.get("service_water_heating_building_area_type"):

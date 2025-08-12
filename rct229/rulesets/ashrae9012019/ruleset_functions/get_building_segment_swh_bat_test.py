@@ -48,6 +48,7 @@ TEST_RMD = {
                                     "service_water_heating_uses": [
                                         "service water heating uses 3_1"
                                     ],
+                                    "service_water_heating_area_type": "HOTEL",
                                 },
                             ],
                         }
@@ -193,16 +194,14 @@ def test__TEST_RPD__bldg_segment_swh_bat():
     assert get_building_segment_swh_bat(TEST_RMD, "Building Segment 1") == "LIBRARY"
 
 
-def test__TEST_RPD__more_than_one_known_area_type():
+def test__TEST_RPD__OTHER_shw_use():
     assert (
         get_building_segment_swh_bat(TEST_RMD, "Building Segment 2") == "UNDETERMINED"
     )
 
 
-# def test__TEST_RPD__other_use_unit():
-#     assert (
-#         get_building_segment_swh_bat(TEST_RMD, "Building Segment 3") == "UNDETERMINED"
-#     )
+def test__TEST_RPD__more_than_one_type():
+    assert get_building_segment_swh_bat(TEST_RMD, "Building Segment 3") == "HOTEL"
 
 
 def test__TEST_RPD__two_spaces_one_undetermined():
