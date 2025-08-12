@@ -76,7 +76,6 @@
         },
         "test_description": "This test uses a simple building model with 1,000 ft\u00b2 of gross floor area containing a single zone and space. The space has 2,000 watts of interior display lighting power, which exceeds the ASHRAE 90.1 maximum allowance of 1,750 watts for this space.",
         "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "Space lighting schedule EFLH in P-RMD is",
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
@@ -136,7 +135,7 @@
         },
         "test_description": "This test uses a simple building model with 1,000 ft\u00b2 of gross floor area containing a single zone and space. The space has 1,000 watts of interior display lighting power, which falls between the minimum allowance (750W) and maximum allowance (1,750W).",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "Space models at least one daylight control using schedule. Verify if other programmable lighting control is modeled correctly using schedule. Lighting schedule EFLH in P-RMD is",
+        "expected_raised_message_includes": "It could not be determined whether the proposed retail display lighting power is less than or equal to the allowance calculated according to the formulas in ASHRAE 90.1 Section 9.5.2.2",
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
