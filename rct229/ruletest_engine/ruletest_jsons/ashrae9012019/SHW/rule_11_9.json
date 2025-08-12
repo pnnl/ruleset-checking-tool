@@ -36,7 +36,8 @@
                                                         "id": "Space 1",
                                                         "service_water_heating_uses": [
                                                             "SHW 1"
-                                                        ]
+                                                        ],
+														"service_water_heating_area_type": "OFFICE"
                                                     }
                                                 ]
                                             }
