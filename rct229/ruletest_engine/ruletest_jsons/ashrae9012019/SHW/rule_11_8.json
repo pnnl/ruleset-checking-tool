@@ -391,6 +391,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
+														"floor_area": 92.90303999999999,
                                                         "service_water_heating_uses": [
                                                             "SHW 2"
                                                         ]
@@ -473,6 +474,7 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 2",
+														"floor_area": 92.90303999999999,
                                                         "service_water_heating_uses": [
                                                             "SHW 2"
                                                         ]
