@@ -73,10 +73,12 @@ def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
             else:
                 for space_id in swh_use_energy_by_space:
                     space = find_exactly_one_space(rmd, space_id)
-                    if space.get("service_water_heating_bat"):
-                        swh_use_dict.setdefault(space["service_water_heating_bat"], 0)
+                    if space.get("service_water_heating_area_type"):
+                        swh_use_dict.setdefault(
+                            space["service_water_heating_area_type"], 0
+                        )
                         swh_use_dict[
-                            space["service_water_heating_bat"]
+                            space["service_water_heating_area_type"]
                         ] += swh_use_energy_by_space[space_id]
                     else:
                         swh_use_dict.setdefault("UNDETERMINED", 0)
