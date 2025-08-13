@@ -23,7 +23,7 @@
 - Iterate through the spaces in the proposed model: `for space_p in P_RMD...spaces`  
   - Get the lighting space type: `space_type_p = space_p.lighting_space_type`  
   - Iterate through the miscellaneous equipment loads in the space: `for misc_equip_p in space_p.miscellaneous_equipment:`  
-    - Get the proposed automatic receptacle control: `auto_receptacle_control_p = misc_equip_p.has_automatic_control`  
+    - Get the proposed automatic receptacle control: `auto_receptacle_control_p = misc_equip_p.automatic_controlled_percentage > 0.0 `  
     - If the space type is not in the list of space types where receptacle controls may be required, and the space has automatic receptacle controls installed: `if space_type_p not in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES and auto_receptacle_control_p:`  
       - Add the space to the list of spaces with receptacle controls installed where not required: `spaces_with_receptacle_controls_beyond_req.append(space_p.id)` 
 - Rule is applicable if the list of spaces with receptacle controls installed where not required is not empty: `applicable = len(spaces_with_receptacle_controls_beyond_req) > 0`
@@ -33,7 +33,7 @@
 - Iterate through the spaces in the proposed model: `for space_p in P_RMD...spaces`  
   - Get the lighting space type: `space_type_p = space_p.lighting_space_type` 
   - Iterate through the miscellaneous equipment loads in the space: `for misc_equip_p in space_p.miscellaneous_equipment:`  
-    - Get the proposed automatic receptacle control: `auto_receptacle_control_p = misc_equip_p.has_automatic_control`  
+    - Get the proposed automatic receptacle control: `auto_receptacle_control_p = misc_equip_p.automatic_controlled_percentage > 0.0 `  
     - If the space type is not in the list of space types where receptacle controls may be required, and the space has automatic receptacle controls installed: `if space_type_p not in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES and auto_receptacle_control_p:`  
       - Get the percentage of controlled receptacles: `controlled_percentage = misc_equip_p.automatic_controlled_percentage`
       - Calculate the expected receptacle power credit: `expected_receptacle_power_credit = 0.10 * controlled_percentage`

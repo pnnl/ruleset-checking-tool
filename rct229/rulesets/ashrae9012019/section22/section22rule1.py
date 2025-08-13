@@ -40,15 +40,15 @@ APPLICABLE_SYS_TYPES = [
 DESIGN_SUPPLY_TEMP = 44 * ureg("degF")
 
 
-class Section22Rule1(RuleDefinitionListIndexedBase):
+class PRM9012019Rule92r39(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule1, self).__init__(
+        super(PRM9012019Rule92r39, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule1.ChillerFluidLoopRule(),
+            each_rule=PRM9012019Rule92r39.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-1",
             description="Baseline chilled water design supply temperature shall be modeled at 44F.",
@@ -87,7 +87,7 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule1.ChillerFluidLoopRule, self).__init__(
+            super(PRM9012019Rule92r39.ChillerFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -96,6 +96,12 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
                     "cooling_or_condensing_design_and_control": [
                         "design_supply_temperature"
                     ],
+                },
+                precision={
+                    "design_supply_temperature": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
                 },
             )
 
@@ -113,6 +119,15 @@ class Section22Rule1(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            design_supply_temperature = calc_vals["design_supply_temperature"]
+            required_supply_temperature = calc_vals["required_supply_temperature"]
+
+            return self.precision_comparison["design_supply_temperature"](
+                design_supply_temperature.to(ureg.kelvin),
+                required_supply_temperature.to(ureg.kelvin),
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             design_supply_temperature = calc_vals["design_supply_temperature"]
             required_supply_temperature = calc_vals["required_supply_temperature"]
             return std_equal(

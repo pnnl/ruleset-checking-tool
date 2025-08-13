@@ -2,6 +2,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import (
     get_building_scc_skylight_roof_ratios_dict,
@@ -18,7 +19,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
@@ -29,19 +29,19 @@ MANUAL_CHECK_APPLICABLE = (
 DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 
 
-class Section5Rule27(RuleDefinitionListIndexedBase):
+class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
     """Rule 27 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule27, self).__init__(
+        super(PRM9012019Rule69v04, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$": ["weather"],
-                "weather": ["climate_zone"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
             },
-            each_rule=Section5Rule27.BuildingRule(),
+            each_rule=PRM9012019Rule69v04.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-27",
             description="Skylight U-factors for residential, non-residential and semi-heated spaces in the baseline model must match the appropriate requirements in Table G3.4-1 through G3.4-8.",
@@ -49,16 +49,24 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(e) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        constructions = rpd_b["ruleset_model_descriptions"][0].get("constructions")
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule27.BuildingRule, self).__init__(
+            super(PRM9012019Rule69v04.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section5Rule27.BuildingRule.RoofRule(),
+                each_rule=PRM9012019Rule69v04.BuildingRule.RoofRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
                 manual_check_required_msg=MANUAL_CHECK_MSG,
@@ -70,8 +78,11 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
             # then set the manual check required and stop execution.
             building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
+            constructions = data["constructions"]
             building_scc_skylight_roof_ratios_dict_b = (
-                get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
+                get_building_scc_skylight_roof_ratios_dict(
+                    climate_zone, constructions, building_b
+                )
             )
             target_exterior_2per_residential = table_G34_lookup(
                 climate_zone,
@@ -111,8 +122,11 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
         def create_data(self, context, data=None):
             building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
+            constructions = data["constructions"]
             building_scc_skylight_roof_ratios_dict_b = (
-                get_building_scc_skylight_roof_ratios_dict(climate_zone, building_b)
+                get_building_scc_skylight_roof_ratios_dict(
+                    climate_zone, constructions, building_b
+                )
             )
 
             # Process target_u_factor_res
@@ -173,7 +187,7 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
 
             return {
                 "surface_conditioning_category_dict_b": get_surface_conditioning_category_dict(
-                    climate_zone, building_b
+                    climate_zone, building_b, constructions
                 ),
                 # at this point, target_u_factor_mixed should be same regardless of
                 # residential <2% or >2%, skylight.
@@ -195,11 +209,11 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
 
         class RoofRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section5Rule27.BuildingRule.RoofRule, self).__init__(
+                super(PRM9012019Rule69v04.BuildingRule.RoofRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
-                    each_rule=Section5Rule27.BuildingRule.RoofRule.SubsurfaceRule(),
+                    each_rule=PRM9012019Rule69v04.BuildingRule.RoofRule.SubsurfaceRule(),
                     index_rmd=BASELINE_0,
                     list_path="subsurfaces[*]",
                 )
@@ -212,8 +226,7 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
             class SubsurfaceRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section5Rule27.BuildingRule.RoofRule.SubsurfaceRule,
-                        self,
+                        PRM9012019Rule69v04.BuildingRule.RoofRule.SubsurfaceRule, self
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=False
@@ -226,6 +239,12 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
                                 "opaque_area",
                                 "u_factor",
                             ]
+                        },
+                        precision={
+                            "subsurface_u_factor_b": {
+                                "precision": 0.01,
+                                "unit": "Btu/(hr*ft2*R)",
+                            }
                         },
                     )
 
@@ -244,7 +263,6 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
                     target_u_factor_res_b = data["target_u_factor_res_b"]
                     target_u_factor_nonres_b = data["target_u_factor_nonres_b"]
                     target_u_factor_semiheated_b = data["target_u_factor_semiheated_b"]
-                    target_u_factor = ZERO.U_FACTOR
                     if (
                         scc_type == SCC.EXTERIOR_MIXED
                         or scc_type == SCC.EXTERIOR_RESIDENTIAL
@@ -265,6 +283,11 @@ class Section5Rule27(RuleDefinitionListIndexedBase):
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
+                    return self.precision_comparison["subsurface_u_factor_b"](
+                        calc_vals["subsurface_b_u_factor"], calc_vals["target_u_factor"]
+                    )
+
+                def is_tolerance_fail(self, context, calc_vals=None, data=None):
                     subsurface_b_u_factor = calc_vals["subsurface_b_u_factor"]
                     target_u_factor = calc_vals["target_u_factor"]
-                    return std_equal(std_val=target_u_factor, val=subsurface_b_u_factor)
+                    return std_equal(target_u_factor, subsurface_b_u_factor)

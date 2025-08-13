@@ -21,8 +21,8 @@ find_exactly_one_schedule, find_all, compare_schedules
     - Get the corresponding miscellaneous equipment load from the proposed RMD: `misc_equip_p = match_data_element(P_RMD, MiscellaneousEquipment, misc_equip_b.id)`
     - Get the baseline miscellaneous equipment load schedule: `misc_equip_schedule_b = misc_equip_b.multiplier_schedule`
     - Get the proposed miscellaneous equipment load schedule: `misc_equip_schedule_p = misc_equip_p.multiplier_schedule`
-    - Get the baseline automatic receptacle control: `auto_receptacle_control_b = misc_equip_b.has_automatic_control`
-    - Get the proposed automatic receptacle control: `auto_receptacle_control_p = misc_equip_p.has_automatic_control`
+    - Get the baseline automatic receptacle control: `auto_receptacle_control_b = misc_equip_b.automatic_controlled_percentage > 0.0`
+    - Get the proposed automatic receptacle control: `auto_receptacle_control_p = misc_equip_p.automatic_controlled_percentage > 0.0`
     - If it is a leap year, set the schedule comparison mask to 8784 hours, else set it to 8760 hours: `mask_schedule = [1] * 8784 if is_leap_year else [1] * 8760`
     - Compare the baseline miscellaneous equipment load schedule to the proposed miscellaneous equipment load schedule: `comparison_data = compare_schedules(misc_equip_schedule_b, misc_equip_schedule_p, mask_schedule)`
     

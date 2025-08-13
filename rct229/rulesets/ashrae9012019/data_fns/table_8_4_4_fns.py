@@ -47,7 +47,7 @@ def table_8_4_4_lookup(phase, capacity):
     with capacities >= 15KVA and
     <= 333kVA for single-phase or
     <= 1000kVA for three-phase.
-    For capacities bewteen the listed values, linear interpolation is used.
+    For capacities between the listed values, linear interpolation is used.
 
     Parameters
     ----------

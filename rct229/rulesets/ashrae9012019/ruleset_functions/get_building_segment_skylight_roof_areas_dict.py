@@ -33,7 +33,7 @@ class BuildingSegmentRoofAreas(TypedDict):
 
 
 def get_building_segment_skylight_roof_areas_dict(
-    climate_zone: str, building: dict
+    climate_zone: str, constructions: list, building: dict
 ) -> dict[str, BuildingSegmentRoofAreas]:
     """Gets a dictionary mapping building segment id to a dictionary of (total area of
     skylights) and (total area of envelope roofs) for the building_segment
@@ -42,6 +42,8 @@ def get_building_segment_skylight_roof_areas_dict(
     ----------
     climate_zone : str
         One of the ClimateZoneOptions2019ASHRAE901 enumerated values
+    constructions : list
+        A list of construction dictionaries as defined by the ASHRAE229 schema
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
 
@@ -56,11 +58,15 @@ def get_building_segment_skylight_roof_areas_dict(
             }
         }
     """
-    zcc_dict = get_zone_conditioning_category_dict(climate_zone, building)
-    scc_dict = get_surface_conditioning_category_dict(climate_zone, building)
+    zcc_dict = get_zone_conditioning_category_dict(
+        climate_zone, building, constructions
+    )
+    scc_dict = get_surface_conditioning_category_dict(
+        climate_zone, building, constructions
+    )
     building_segment_roof_areas_dict = {}
 
-    for building_segment in find_all("building_segments[*]", building):
+    for building_segment in find_all("$.building_segments[*]", building):
         building_segment_roof_areas_dict[
             building_segment["id"]
         ] = building_segment_roof_areas = {
@@ -68,14 +74,14 @@ def get_building_segment_skylight_roof_areas_dict(
             "total_skylight_area": ZERO.AREA,
         }
 
-        for zone in find_all("zones[*]", building_segment):
+        for zone in find_all("$.zones[*]", building_segment):
             if zcc_dict[zone["id"]] in [
                 ZCC.CONDITIONED_RESIDENTIAL,
                 ZCC.CONDITIONED_NON_RESIDENTIAL,
                 ZCC.CONDITIONED_MIXED,
                 ZCC.SEMI_HEATED,
             ]:
-                for surface in find_all("surfaces[*]", zone):
+                for surface in find_all("$.surfaces[*]", zone):
                     if get_opaque_surface_type(surface) == OST.ROOF and scc_dict[
                         surface["id"]
                     ] in [
@@ -89,9 +95,9 @@ def get_building_segment_skylight_roof_areas_dict(
                         ] += getattr_(surface, "surface", "area")
 
                         building_segment_roof_areas["total_skylight_area"] += sum(
-                            find_all("subsurfaces[*].glazed_area", surface), ZERO.AREA
+                            find_all("$.subsurfaces[*].glazed_area", surface), ZERO.AREA
                         ) + sum(
-                            find_all("subsurfaces[*].opaque_area", surface), ZERO.AREA
+                            find_all("$.subsurfaces[*].opaque_area", surface), ZERO.AREA
                         )
 
     return building_segment_roof_areas_dict

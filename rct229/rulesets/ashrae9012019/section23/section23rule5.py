@@ -20,15 +20,15 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section23Rule5(RuleDefinitionListIndexedBase):
+class PRM9012019Rule69z86(RuleDefinitionListIndexedBase):
     """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule5, self).__init__(
+        super(PRM9012019Rule69z86, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section23Rule5.TerminalRule(),
+            each_rule=PRM9012019Rule69z86.TerminalRule(),
             index_rmd=BASELINE_0,
             id="23-5",
             description="For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall run as the first stage of heating before the reheat coil is energized.",
@@ -62,7 +62,7 @@ class Section23Rule5(RuleDefinitionListIndexedBase):
 
     class TerminalRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section23Rule5.TerminalRule, self).__init__(
+            super(PRM9012019Rule69z86.TerminalRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

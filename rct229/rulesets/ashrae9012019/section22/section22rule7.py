@@ -24,16 +24,16 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section22Rule7(RuleDefinitionBase):
+class PRM9012019Rule52s13(RuleDefinitionBase):
     """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule7, self).__init__(
+        super(PRM9012019Rule52s13, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="22-7",
-            description="Baseline chilled water system that does not use purchased chilled water shall be modeled as primary/secondary systems.",
+            description="Baseline chilled water systems that do not use purchased chilled water shall be modeled as primary/secondary systems.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-Water Pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=True,

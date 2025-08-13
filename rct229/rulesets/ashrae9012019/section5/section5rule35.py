@@ -24,19 +24,19 @@ TARGET_AIR_LEAKAGE_COEFF = 1.0 * ureg("cfm / foot**2")
 TOTAL_AIR_LEAKAGE_FACTOR = 0.112
 
 
-class Section5Rule35(RuleDefinitionListIndexedBase):
+class PRM9012019Rule39k65(RuleDefinitionListIndexedBase):
     """Rule 35 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule35, self).__init__(
+        super(PRM9012019Rule39k65, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$": ["weather"],
-                "weather": ["climate_zone"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
             },
-            each_rule=Section5Rule35.BuildingRule(),
+            each_rule=PRM9012019Rule39k65.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-35",
             description="The baseline air leakage rate of the building envelope (I_75Pa) at a fixed building pressure differential of 0.3 in. of water shall be 1 cfm/ft2. The air leakage rate of the building envelope shall be converted to appropriate units for the simulation program using one of the methods in Section G3.1.1.4.",
@@ -44,26 +44,40 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5(h) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        constructions = rpd_b["ruleset_model_descriptions"][0].get("constructions")
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section5Rule35.BuildingRule, self).__init__(
+            super(PRM9012019Rule39k65.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={"$.building_segments[*].zones[*]": ["surfaces"]},
+                precision={
+                    "building_total_air_leakage_rate": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    }
+                },
             )
 
         def get_calc_vals(self, context, data=None):
             building_b = context.BASELINE_0
 
             scc_dict_b = get_surface_conditioning_category_dict(
-                data["climate_zone"], building_b
+                data["climate_zone"], building_b, data["constructions"]
             )
             zcc_dict_b = get_zone_conditioning_category_dict(
-                data["climate_zone"], building_b
+                data["climate_zone"], building_b, data["constructions"]
             )
 
             building_total_air_leakage_rate = ZERO.FLOW
@@ -96,14 +110,24 @@ class Section5Rule35(RuleDefinitionListIndexedBase):
 
             return {
                 "building_total_air_leakage_rate": CalcQ(
-                    "volumetric_flow_rate", building_total_air_leakage_rate
+                    "air_flow_rate", building_total_air_leakage_rate
                 ),
                 "target_air_leakage_rate_75pa_b": CalcQ(
-                    "volumetric_flow_rate", target_air_leakage_rate_75pa_b
+                    "air_flow_rate", target_air_leakage_rate_75pa_b
                 ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            building_total_air_leakage_rate = calc_vals[
+                "building_total_air_leakage_rate"
+            ]
+            target_air_leakage_rate_75pa_b = calc_vals["target_air_leakage_rate_75pa_b"]
+            return self.precision_comparison["building_total_air_leakage_rate"](
+                building_total_air_leakage_rate,
+                target_air_leakage_rate_75pa_b * TOTAL_AIR_LEAKAGE_FACTOR,
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             building_total_air_leakage_rate = calc_vals[
                 "building_total_air_leakage_rate"
             ]

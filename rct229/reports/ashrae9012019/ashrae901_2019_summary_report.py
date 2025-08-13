@@ -3,6 +3,7 @@ import re
 from pydash import find
 from rct229.report_engine.rct_report import RCTReport
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
+from rct229.rulesets.ashrae9012019 import section_dict, section_list
 
 
 class ASHRAE9012019SummaryReport(RCTReport):
@@ -14,35 +15,7 @@ class ASHRAE9012019SummaryReport(RCTReport):
         self.ruleset_report_file = f"{self.__class__.__name__}.md"
 
     def initialize_ruleset_report(self, rule_outcome=None):
-        self.section_list = [
-            "All",
-            "Performance Calculations",
-            "Schedules Setpoints",
-            "Envelope",
-            "Lighting",
-            "HVAC General",
-            "Receptacles",
-            "Transformers",
-            "HVAC-Baseline",
-            "HVAC-General",
-            "HVAC-HotWaterSide",
-            "HVAC-ChilledWaterSide",
-            "HVAC-AirSide",
-        ]  # TODO: need to expand as more sections are developed
-        self.section_dict = {
-            "1": "Performance Calculations",
-            "4": "Schedules Setpoints",
-            "5": "Envelope",
-            "6": "Lighting",
-            "10": "HVAC General",
-            "12": "Receptacles",
-            "15": "Transformers",
-            "18": "HVAC-Baseline",
-            "19": "HVAC-General",
-            "21": "HVAC-HotWaterSide",
-            "22": "HVAC-ChilledWaterSide",
-            "23": "HVAC-AirSide",
-        }
+
         self.ruleset_outcome = {
             name: {
                 RCTOutcomeLabel.PASS: 0,
@@ -50,7 +23,7 @@ class ASHRAE9012019SummaryReport(RCTReport):
                 RCTOutcomeLabel.UNDETERMINED: 0,
                 RCTOutcomeLabel.NOT_APPLICABLE: 0,
             }
-            for name in self.section_list
+            for name in section_list
         }
 
         rpd_files = rule_outcome["rpd_files"]
@@ -81,13 +54,13 @@ class ASHRAE9012019SummaryReport(RCTReport):
 - user: {user_match["file_name"] if user_match else "N/A"}
 - proposed: {proposed_match["file_name"] if proposed_match else "N/A"}
 - baseline_0: {baseline_0_match["file_name"] if baseline_0_match else "N/A"}
-- baseline_90: {baseline_90_match["file_name"] if baseline_90_match else ""}
+- baseline_90: {baseline_90_match["file_name"] if baseline_90_match else "N/A"}
 - baseline_180: {baseline_180_match["file_name"] if baseline_180_match else "N/A"}
 - baseline_270: {baseline_270_match["file_name"] if baseline_270_match else "N/A"}
 
 ### Summary: All Primary Rules
-|                              | All | Performance Calculations | Schedules Setpoints | Envelope | Lighting | HVAC General |  Receptacles | Transformers | HVAC-HotWaterSide | HVAC - ChilledWaterSide | HVAC-AirSide | HVAC-General| HVAC-Baseline
-|:----------------------------:|:---:|:--------:|:--------:|:--------:|:--------:|:-----------:|:------------:|:------------:|:--------------:|:--------------:|:--------------:|:--------------:|:-----------:|
+|                              | All | Performance Calculations | Schedules Setpoints | Envelope | Lighting | HVAC General |  Service Hot Water | Receptacles | Transformers | Elevator | HVAC-HotWaterSide | HVAC - ChilledWaterSide | HVAC-AirSide | HVAC-General| HVAC-Baseline
+|:----------------------------:|:---:|:--------:|:--------:|:--------:|:--------:|:-----------:|:------------:|:------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:-----------:|
 Replace-Rules
 Replace-Pass
 Replace-Fail
@@ -121,7 +94,7 @@ Replace-Undetermined
 
         # determine whether overall outcome is pass/fail/undetermined/not_applicable
         overall_result = self.calculate_rule_outcome(rule_outcome_result_dict)
-        self.ruleset_outcome[self.section_dict[rule_outcome["id"].split("-")[0]]][
+        self.ruleset_outcome[section_dict[rule_outcome["id"].split("-")[0]]][
             overall_result
         ] += 1
         self.ruleset_outcome["All"][overall_result] += 1
@@ -158,7 +131,7 @@ Replace-Undetermined
         self.summary_report = "".join([self.summary_report, rule_report])
 
     def save_ruleset_report(self, ruleset_report, report_dir):
-        overall_rules_count = {name: 0 for name in self.section_list}
+        overall_rules_count = {name: 0 for name in section_list}
 
         for key in self.ruleset_outcome:
             for outcome in [
@@ -192,9 +165,9 @@ Replace-Undetermined
 
     def _section_name_helper(self, rule_outcome):
         section_no = rule_outcome.split("-")[0]
-        if f"Section: {self.section_dict[section_no]}" not in self.summary_report:
+        if f"Section: {section_dict[section_no]}" not in self.summary_report:
             return f"""
-### Section: {self.section_dict[section_no]}
+### Section: {section_dict[section_no]}
             """
         else:
             return None
@@ -209,7 +182,7 @@ Replace-Undetermined
         for section_name, count in overall_rules_count.items():
             rule_line += f"{overall_rules_count[section_name]}|"
 
-        for section in self.section_list:
+        for section in section_list:
             pass_line += f"{outcome_data[section][RCTOutcomeLabel.PASS]}|"
             fail_line += f"{outcome_data[section][RCTOutcomeLabel.FAILED]}|"
             not_applicable_line += (

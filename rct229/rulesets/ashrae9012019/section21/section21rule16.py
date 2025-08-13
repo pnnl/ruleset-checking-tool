@@ -37,11 +37,11 @@ APPLICABLE_SYS_TYPES = [
 HEATING = SchemaEnums.schema_enums["FluidLoopOptions"].HEATING
 
 
-class Section21Rule16(RuleDefinitionBase):
+class PRM9012019Rule31d63(RuleDefinitionBase):
     """Rule 16 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule16, self).__init__(
+        super(PRM9012019Rule31d63, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),

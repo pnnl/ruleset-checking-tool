@@ -5,16 +5,16 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_sta
 )
 
 
-class Section22Rule41(PartialRuleDefinition):
+class PRM9012019Rule68r93(PartialRuleDefinition):
     """Rule 41 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule41, self).__init__(
+        super(PRM9012019Rule68r93, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="22-41",
-            description="Purchased CHW systems must be modeled with only one external fluid loop in the baseline design.",
+            description="Baseline chilled water systems that use purchased chilled water shall be modeled with a single chilled water loop.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",
             is_primary_rule=False,

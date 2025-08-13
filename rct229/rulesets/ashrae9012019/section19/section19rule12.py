@@ -23,15 +23,15 @@ CLIMATE_ZONE_75F = [
 ]
 
 
-class Section19Rule12(RuleDefinitionListIndexedBase):
+class PRM9012019Rule98o22(RuleDefinitionListIndexedBase):
     """Rule 12 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule12, self).__init__(
+        super(PRM9012019Rule98o22, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule12.HVACRule(),
+            each_rule=PRM9012019Rule98o22.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-12",
             description="The baseline system economizer high-limit shutoff shall be a dry-bulb fixed switch with set-point temperatures in accordance with the values in Table G3.1.2.7.",
@@ -40,20 +40,30 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             list_path="$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             required_fields={
-                "$": ["weather"],
-                "weather": ["climate_zone"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
             },
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        return {"climate_zone": climate_zone}
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule12.HVACRule, self).__init__(
+            super(PRM9012019Rule98o22.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
                     "$": ["fan_system"],
+                },
+                precision={
+                    "high_limit_temp_b": {
+                        "precision": 0.1,
+                        "unit": "K",
+                    },
                 },
             )
 
@@ -99,6 +109,19 @@ class Section19Rule12(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            req_high_limit_temp = calc_vals["req_high_limit_temp"]
+            high_limit_temp_b = calc_vals["high_limit_temp_b"]
+            air_economizer_type_b = calc_vals["air_economizer_type_b"]
+
+            return (
+                self.precision_comparison["high_limit_temp_b"](
+                    high_limit_temp_b.to(ureg.kelvin),
+                    req_high_limit_temp.to(ureg.kelvin),
+                )
+                and air_economizer_type_b == AIR_ECONOMIZER.TEMPERATURE
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             req_high_limit_temp = calc_vals["req_high_limit_temp"]
             high_limit_temp_b = calc_vals["high_limit_temp_b"]
             air_economizer_type_b = calc_vals["air_economizer_type_b"]

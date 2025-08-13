@@ -29,18 +29,18 @@ APPLICABLE_SYS_TYPES = [
 PumpSpeedControl = SchemaEnums.schema_enums["PumpSpeedControlOptions"]
 
 
-class Section22Rule24(RuleDefinitionListIndexedBase):
+class PRM9012019Rule47d94(RuleDefinitionListIndexedBase):
     """Rule 24 of ASHRAE 90.1-2019 Appendix G Section 22 (Hot water loop)"""
 
     def __init__(self):
-        super(Section22Rule24, self).__init__(
+        super(PRM9012019Rule47d94, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule24.PrimaryPumpRule(),
+            each_rule=PRM9012019Rule47d94.PrimaryPumpRule(),
             index_rmd=BASELINE_0,
             id="22-24",
-            description="For baseline chilled-water systems served by chiller(s), the primary pump shall be modeled as constant volume.",
+            description="Baseline chilled water loops that do not use purchased chilled water shall have the primary pump modeled as constant volume.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=True,
@@ -82,7 +82,7 @@ class Section22Rule24(RuleDefinitionListIndexedBase):
 
     class PrimaryPumpRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule24.PrimaryPumpRule, self).__init__(
+            super(PRM9012019Rule47d94.PrimaryPumpRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

@@ -84,3 +84,22 @@ def find_ruleset_model_type(rmd):
 
     """
     return find_exactly_one("$.type", rmd)
+
+
+def convert_absolute_path_list_to_jsonpath(input_list):
+    jsonpath = "$"  # Start with the root '$'
+    for i, item in enumerate(input_list):
+        if isinstance(item, str):
+            jsonpath += f".{item}"  # Append strings as keys
+        elif isinstance(item, int):
+            jsonpath += f"[{item}]"  # Append integers as array indices
+
+    return jsonpath
+
+
+def format_jsonpath_with_id(input_list):
+    if not input_list:
+        return
+    # Replace the last item in the list with 'id'
+    input_list = input_list[:-1] + ["id"]
+    return convert_absolute_path_list_to_jsonpath(input_list)

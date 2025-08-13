@@ -2,7 +2,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_fu
     get_number_of_floors,
 )
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_RMD_HAS_NOF = {
     "id": "test_rmd",
@@ -122,14 +122,20 @@ TEST_RMD_FLOOR_NAMES = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
 TEST_RPD_HAS_NOF = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD_HAS_NOF],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RMD_HAS_NOF_UNIT = quantify_rmd(TEST_RPD_HAS_NOF)["ruleset_model_descriptions"][0]
@@ -139,7 +145,7 @@ TEST_RMD_FLOOR_NAMES_UNIT = quantify_rmd(TEST_RMD_FLOOR_NAMES)[
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_FLOOR_NAMES)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_FLOOR_NAMES)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

@@ -29,7 +29,7 @@ GET_BUILDING_SCC_WINDOW_WALL_RATIO_DICT__REQUIRED_FIELDS = {
 
 
 def get_building_scc_window_wall_ratios_dict(
-    climate_zone: str, building: dict
+    climate_zone: str, constructions: list, building: dict
 ) -> ZoneConditioningDataDict:
     """Determines the window to wall ratio for each surface conditioning category
     in a building
@@ -38,6 +38,8 @@ def get_building_scc_window_wall_ratios_dict(
     ----------
     climate_zone : str
         One of the ClimateZoneOptions2019ASHRAE901 enumerated values
+    constructions : list
+        A list of construction dictionaries as defined by the ASHRAE229 schema
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
 
@@ -52,7 +54,9 @@ def get_building_scc_window_wall_ratios_dict(
     )
 
     # Get the conditioning category for all the surfaces in the building
-    scc_dict = get_surface_conditioning_category_dict(climate_zone, building)
+    scc_dict = get_surface_conditioning_category_dict(
+        climate_zone, building, constructions
+    )
 
     # Initialize total window areas
     total_res_window_area = ZERO.AREA
@@ -74,7 +78,7 @@ def get_building_scc_window_wall_ratios_dict(
         if get_opaque_surface_type(surface) == OST.ABOVE_GRADE_WALL:
             surface_area = surface["area"]
             surface_window_area = ZERO.AREA
-            for subsurface in find_all("subsurfaces[*]", surface):
+            for subsurface in find_all("$.subsurfaces[*]", surface):
                 glazed_area = subsurface.get("glazed_area", ZERO.AREA)
                 opaque_area = subsurface.get("opaque_area", ZERO.AREA)
                 surface_window_area += (

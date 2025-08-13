@@ -27,18 +27,18 @@ APPLICABLE_SYS_TYPES = [
 REQUIRED_PUMP_FLOW_RATE = 13 * ureg("W/gpm")
 
 
-class Section22Rule11(RuleDefinitionListIndexedBase):
+class PRM9012019Rule57w94(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule11, self).__init__(
+        super(PRM9012019Rule57w94, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule11.ChillerFluidLoopRule(),
+            each_rule=PRM9012019Rule57w94.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-11",
-            description="For Baseline chilled-water system that does not use purchased chilled water, variable-flow secondary pump shall be modeled as 13W/gpm at design conditions.",
+            description="Baseline chilled water systems that do not use purchased chilled water shall have a variable-flow secondary pump power of 13 W/gpm at design conditions.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
@@ -84,11 +84,11 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
 
     class ChillerFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section22Rule11.ChillerFluidLoopRule, self).__init__(
+            super(PRM9012019Rule57w94.ChillerFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section22Rule11.ChillerFluidLoopRule.SecondaryChildLoopRule(),
+                each_rule=PRM9012019Rule57w94.ChillerFluidLoopRule.SecondaryChildLoopRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.child_loops[*]",
             )
@@ -96,13 +96,20 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
         class SecondaryChildLoopRule(RuleDefinitionBase):
             def __init__(self):
                 super(
-                    Section22Rule11.ChillerFluidLoopRule.SecondaryChildLoopRule, self
+                    PRM9012019Rule57w94.ChillerFluidLoopRule.SecondaryChildLoopRule,
+                    self,
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     required_fields={
                         "$": ["pump_power_per_flow_rate"],
+                    },
+                    precision={
+                        "secondary_loop_pump_power_per_flow_rate": {
+                            "precision": 1,
+                            "unit": "W/gpm",
+                        },
                     },
                 )
 
@@ -124,6 +131,19 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
                 }
 
             def rule_check(self, context, calc_vals=None, data=None):
+                secondary_loop_pump_power_per_flow_rate = calc_vals[
+                    "secondary_loop_pump_power_per_flow_rate"
+                ]
+                req_pump_flow_rate = calc_vals["req_pump_flow_rate"]
+
+                return self.precision_comparison[
+                    "secondary_loop_pump_power_per_flow_rate"
+                ](
+                    secondary_loop_pump_power_per_flow_rate,
+                    req_pump_flow_rate,
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
                 secondary_loop_pump_power_per_flow_rate = calc_vals[
                     "secondary_loop_pump_power_per_flow_rate"
                 ]

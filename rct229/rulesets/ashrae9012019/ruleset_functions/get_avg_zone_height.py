@@ -32,7 +32,7 @@ def get_avg_zone_height(zone: dict) -> Quantity:
     find_exactly_required_fields(GET_AVG_ZONE_HEIGHT__REQUIRED_FIELDS["zone"], zone)
 
     zone_volume = zone["volume"]
-    zone_floor_area = sum(find_all("spaces[*].floor_area", zone))
+    zone_floor_area = sum(find_all("$.spaces[*].floor_area", zone))
 
     assert_(
         zone_floor_area > ZERO.AREA, f"zone:{zone['id']} has zero total floor area."

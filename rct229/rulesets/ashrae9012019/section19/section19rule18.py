@@ -54,15 +54,15 @@ VARIABLE_VOLUME_SYS_TYPES = [
 ]
 
 
-class Section19Rule18(RuleDefinitionListIndexedBase):
+class PRM9012019Rule49c09(RuleDefinitionListIndexedBase):
     """Rule 18 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule18, self).__init__(
+        super(PRM9012019Rule49c09, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule18.HVACRule(),
+            each_rule=PRM9012019Rule49c09.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-18",
             description="For baseline systems 3 through 8, and 11, 12, and 13, the system fan electrical power for supply, return, exhaust, "
@@ -132,12 +132,18 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule18.HVACRule, self).__init__(
+            super(PRM9012019Rule49c09.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
                     "$": ["fan_system"],
+                },
+                precision={
+                    "total_fan_power_b": {
+                        "precision": 1,
+                        "unit": "W",
+                    },
                 },
             )
 
@@ -276,10 +282,7 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             return (
                 not exactly_one_supply_fan
                 or more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
-                or (
-                    not std_equal(total_fan_power_b, expected_fan_wattage_b)
-                    and total_fan_power_b > expected_fan_wattage_b
-                )
+                or (total_fan_power_b > expected_fan_wattage_b)
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
@@ -321,7 +324,19 @@ class Section19Rule18(RuleDefinitionListIndexedBase):
             total_fan_power_b = calc_vals["total_fan_power_b"]
             expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
 
-            return std_equal(expected_fan_wattage_b, total_fan_power_b)
+            return self.precision_comparison["total_fan_power_b"](
+                total_fan_power_b,
+                expected_fan_wattage_b,
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            total_fan_power_b = calc_vals["total_fan_power_b"]
+            expected_fan_wattage_b = calc_vals["expected_fan_wattage_b"]
+
+            return std_equal(
+                total_fan_power_b,
+                expected_fan_wattage_b,
+            )
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
             total_fan_power_b = calc_vals["total_fan_power_b"]

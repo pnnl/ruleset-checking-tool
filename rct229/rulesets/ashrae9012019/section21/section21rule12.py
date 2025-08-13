@@ -41,15 +41,15 @@ FLUID_LOOP_FLOW_CONTROL = SchemaEnums.schema_enums["FluidLoopFlowControlOptions"
 FLUID_LOOP_FLOW_OPERATION = SchemaEnums.schema_enums["FluidLoopOperationOptions"]
 
 
-class Section21Rule12(RuleDefinitionListIndexedBase):
+class PRM9012019Rule22a24(RuleDefinitionListIndexedBase):
     """Rule 12 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule12, self).__init__(
+        super(PRM9012019Rule22a24, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section21Rule12.HeatingFluidLoopRule(),
+            each_rule=PRM9012019Rule22a24.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="21-12",
             description="The baseline building design uses boilers or purchased hot water, the hot water pumping system shall be modeled with continuous variable flow.",
@@ -82,7 +82,7 @@ class Section21Rule12(RuleDefinitionListIndexedBase):
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule12.HeatingFluidLoopRule, self).__init__(
+            super(PRM9012019Rule22a24.HeatingFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

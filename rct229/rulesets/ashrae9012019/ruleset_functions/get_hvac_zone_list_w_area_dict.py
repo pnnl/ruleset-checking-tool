@@ -11,9 +11,6 @@ GET_HVAC_ZONE_LIST_W_AREA_DICT__REQUIRED_FIELDS = {
         "building_segments[*].zones[*].spaces[*]": [
             "floor_area",
         ],
-        "building_segments[*].zones[*].terminals[*]": [
-            "served_by_heating_ventilating_air_conditioning_system"
-        ],
     }
 }
 
@@ -82,9 +79,11 @@ def get_hvac_zone_list_w_area_dict(building: dict) -> dict[str, HVACZoneListArea
             zone_area = sum(find_all("spaces[*].floor_area", zone), ZERO.AREA)
             assert_(zone_area > ZERO.AREA, f"zone:{zone['id']} has zero floor area")
             for terminal in terminals:
-                hvac_sys_id = terminal[
+                hvac_sys_id = terminal.get(
                     "served_by_heating_ventilating_air_conditioning_system"
-                ]
+                )
+                if hvac_sys_id is None:
+                    continue
 
                 # Initialize the hvac_sys entry if not already there
                 if hvac_sys_id not in hvac_zone_list_w_area_dict:

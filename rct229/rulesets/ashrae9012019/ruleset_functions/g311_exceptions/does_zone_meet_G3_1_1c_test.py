@@ -5,7 +5,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.does_zone_m
     does_zone_meet_g3_1_1c,
 )
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_RPD_FULL = {
     "id": "ASHRAE229 1",
@@ -332,7 +332,6 @@ TEST_RPD_FULL = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
@@ -340,7 +339,7 @@ TEST_RMD_UNIT = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -351,7 +350,6 @@ def test__does_zone_meet_g_3_1_1c_thermal_zone_1__false():
         does_zone_meet_g3_1_1c(
             TEST_RMD_UNIT,
             "Thermal Zone 1",
-            False,
             {
                 "Thermal Zone 1": {"expected_system_type": HVAC_SYS.SYS_7},
                 "Thermal Zone 2": {"expected_system_type": HVAC_SYS.SYS_7},
@@ -369,7 +367,6 @@ def test__does_zone_meet_g_3_1_1c_thermal_zone_2__true():
         does_zone_meet_g3_1_1c(
             TEST_RMD_UNIT,
             "Thermal Zone 2",
-            False,
             {
                 "Thermal Zone 1": {"expected_system_type": HVAC_SYS.SYS_7},
                 "Thermal Zone 2": {"expected_system_type": HVAC_SYS.SYS_7},
@@ -387,7 +384,6 @@ def test__does_zone_meet_g_3_1_1c_thermal_zone_3__true():
         does_zone_meet_g3_1_1c(
             TEST_RMD_UNIT,
             "Thermal Zone 3",
-            False,
             {
                 "Thermal Zone 1": {"expected_system_type": HVAC_SYS.SYS_7},
                 "Thermal Zone 2": {"expected_system_type": HVAC_SYS.SYS_7},

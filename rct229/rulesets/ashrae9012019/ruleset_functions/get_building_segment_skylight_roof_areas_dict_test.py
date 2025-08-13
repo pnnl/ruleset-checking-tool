@@ -7,7 +7,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 CLIMATE_ZONE = "CZ0A"
 POWER_DELTA = 1
@@ -25,6 +25,12 @@ CRAWLSPACE_HEIGHT_THRESHOLD = CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY.to("m").magni
 # This single RMD is intended to exercise all the get_zone_conditioning_category_dict() code
 TEST_RMD = {
     "id": "test_rmd",
+    "constructions": [
+        {
+            "id": "construction_1",
+            "u_factor": 3.2366105565544463,
+        }
+    ],
     "buildings": [
         {
             "id": "bldg_1",
@@ -130,10 +136,7 @@ TEST_RMD = {
                                     "adjacent_zone": "zone_1_1",
                                     "area": 10,  # m2
                                     "tilt": 90,  # wall
-                                    "construction": {
-                                        "id": "construction_1",
-                                        "u_factor": 3.2366105565544463,
-                                    },
+                                    "construction": "construction_1",
                                 }
                             ],
                         },
@@ -142,22 +145,38 @@ TEST_RMD = {
             ],
         }
     ],
+    "constructions": [
+        {
+            "id": "construction_1",
+            "u_factor": 3.2366105565544463,
+        }
+    ],
     "type": "BASELINE_0",
 }
 
 TEST_RMD_12 = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMD],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_BUILDING = quantify_rmd(TEST_RMD_12)["ruleset_model_descriptions"][0]["buildings"][
     0
 ]
+TEST_CONSTRUCTIONS = quantify_rmd(TEST_RMD_12)["ruleset_model_descriptions"][0].get(
+    "constructions"
+)
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD_12)
+    schema_validation_result = schema_validate_rpd(TEST_RMD_12)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -165,7 +184,7 @@ def test__TEST_RPD__is_valid():
 
 def test__get_building_segment_skylight_roof_areas_dict():
     assert get_building_segment_skylight_roof_areas_dict(
-        CLIMATE_ZONE, TEST_BUILDING
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING
     ) == {
         "bldg_seg_1": {
             "total_envelope_roof_area": 10 * ureg("m2"),

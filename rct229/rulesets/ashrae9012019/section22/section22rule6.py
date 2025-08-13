@@ -21,18 +21,18 @@ APPLICABLE_SYS_TYPES = [
 REQUIRED_LOOP_SUPPLY_TEMP_AT_LOW_LOAD = ureg("54 degF")
 
 
-class Section22Rule6(RuleDefinitionListIndexedBase):
+class PRM9012019Rule52t53(RuleDefinitionListIndexedBase):
     """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule6, self).__init__(
+        super(PRM9012019Rule52t53, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule6.ChillerFluidLoopRule(),
+            each_rule=PRM9012019Rule52t53.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-6",
-            description="For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), The maximum reset chilled-water supply temperature shall be 54F.",
+            description="Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (i.e., baseline system type 11) shall have a maximum reset chilled water supply temperature setpoint of 54F.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.9 Chilled-water supply temperature reset (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
@@ -58,7 +58,7 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
-        chiller_loop_ids_list = find_all("chillers[*].cooling_loop", rmd_b)
+        chiller_loop_ids_list = find_all("$.chillers[*].cooling_loop", rmd_b)
         return {"chiller_loop_ids_list": chiller_loop_ids_list}
 
     def list_filter(self, context_item, data):
@@ -68,7 +68,7 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule6.ChillerFluidLoopRule, self).__init__(
+            super(PRM9012019Rule52t53.ChillerFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -77,6 +77,12 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
                     "cooling_or_condensing_design_and_control": [
                         "loop_supply_temperature_at_low_load",
                     ],
+                },
+                precision={
+                    "loop_supply_temperature_at_low_load": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
                 },
             )
 
@@ -96,6 +102,19 @@ class Section22Rule6(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            loop_supply_temperature_at_low_load = calc_vals[
+                "loop_supply_temperature_at_low_load"
+            ]
+            required_loop_supply_temperature_at_low_load = calc_vals[
+                "required_loop_supply_temperature_at_low_load"
+            ]
+
+            return self.precision_comparison["loop_supply_temperature_at_low_load"](
+                loop_supply_temperature_at_low_load.to(ureg.kelvin),
+                required_loop_supply_temperature_at_low_load.to(ureg.kelvin),
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             loop_supply_temperature_at_low_load = calc_vals[
                 "loop_supply_temperature_at_low_load"
             ]

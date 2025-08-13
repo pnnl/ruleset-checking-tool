@@ -31,15 +31,15 @@ FanSystemTemperatureControl = SchemaEnums.schema_enums[
 REQUIRED_RESET_DIFF_TEMP = 5.0 * ureg("degR")
 
 
-class Section23Rule2(RuleDefinitionListIndexedBase):
+class PRM9012019Rule52x31(RuleDefinitionListIndexedBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule2, self).__init__(
+        super(PRM9012019Rule52x31, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section23Rule2.HVACRule(),
+            each_rule=PRM9012019Rule52x31.HVACRule(),
             index_rmd=BASELINE_0,
             id="23-2",
             description="For baseline systems 5-8 and 11, the SAT is reset higher by 5F under minimum cooling load conditions.",
@@ -85,7 +85,7 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section23Rule2.HVACRule, self).__init__(
+            super(PRM9012019Rule52x31.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -95,6 +95,12 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
                         "temperature_control",
                         "reset_differential_temperature",
                     ],
+                },
+                precision={
+                    "reset_differential_temperature_b": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
                 },
             )
 
@@ -117,6 +123,20 @@ class Section23Rule2(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            temperature_control_b = calc_vals["temperature_control_b"]
+            reset_differential_temperature_b = calc_vals[
+                "reset_differential_temperature_b"
+            ]
+
+            return (
+                temperature_control_b == FanSystemTemperatureControl.ZONE_RESET
+                and self.precision_comparison["reset_differential_temperature_b"](
+                    reset_differential_temperature_b,
+                    REQUIRED_RESET_DIFF_TEMP,
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             temperature_control_b = calc_vals["temperature_control_b"]
             reset_differential_temperature_b = calc_vals[
                 "reset_differential_temperature_b"

@@ -4,7 +4,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_suppl
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 from rct229.utils.std_comparisons import std_equal
 
 TEST_RMD = {
@@ -29,11 +29,13 @@ TEST_RMD = {
                                     "served_by_heating_ventilating_air_conditioning_system": "PTAC 1",
                                 }
                             ],
-                            "zonal_exhaust_fan": {
-                                "id": "Zone exhaust fan 1",
-                                "specification_method": "SIMPLE",
-                                "design_electric_power": 200,
-                            },
+                            "zonal_exhaust_fans": [
+                                {
+                                    "id": "Zone exhaust fan 1",
+                                    "specification_method": "SIMPLE",
+                                    "design_electric_power": 200,
+                                }
+                            ],
                         }
                     ],
                     "heating_ventilating_air_conditioning_systems": [
@@ -136,7 +138,14 @@ TEST_RMD = {
 TEST_RPD_FULL = {
     "id": "229",
     "ruleset_model_descriptions": [TEST_RMD],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_FAN_SYSTEM = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0][
@@ -147,7 +156,7 @@ TEST_FAN_SYSTEM = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0][
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_FULL)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_FULL)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

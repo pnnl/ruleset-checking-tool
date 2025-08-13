@@ -1,6 +1,6 @@
 from rct229.schema.config_functions import get_pint_unit_registry
 from rct229.schema.schema_utils import clean_schema_units, quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 
 # Testing clean_schema_units()
@@ -27,12 +27,11 @@ TEST_RMD = {
             "type": "BASELINE_0",
         },
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RMD)
+    schema_validation_result = schema_validate_rpd(TEST_RMD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
@@ -56,5 +55,4 @@ def test__quantify_rmd():
                 "type": "BASELINE_0",
             },
         ],
-        "data_timestamp": "2024-02-12T09:00Z",
     }

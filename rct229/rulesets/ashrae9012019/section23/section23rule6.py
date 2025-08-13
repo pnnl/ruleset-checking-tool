@@ -19,17 +19,18 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_6,
     HVAC_SYS.SYS_8,
 ]
+REQUIRED_DESIGN_ELEC_POWER_DESIGN_AIRFLOW_RATIO = 0.35 * ureg("W/cfm")
 
 
-class Section23Rule6(RuleDefinitionListIndexedBase):
+class PRM9012019Rule98g04(RuleDefinitionListIndexedBase):
     """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule6, self).__init__(
+        super(PRM9012019Rule98g04, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section23Rule6.TerminalRule(),
+            each_rule=PRM9012019Rule98g04.TerminalRule(),
             index_rmd=BASELINE_0,
             id="23-6",
             description="For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.",
@@ -80,7 +81,7 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
 
     class TerminalRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section23Rule6.TerminalRule, self).__init__(
+            super(PRM9012019Rule98g04.TerminalRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -90,6 +91,16 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
                         "design_airflow",
                         "design_electric_power",
                     ],
+                },
+                precision={
+                    "design_airflow_b": {
+                        "precision": 0.1,
+                        "unit": "cfm",
+                    },
+                    "design_electric_power_b/design_airflow_b": {
+                        "precision": 0.01,
+                        "unit": "W/cfm",
+                    },
                 },
             )
 
@@ -108,6 +119,19 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            design_airflow_b = calc_vals["design_airflow_b"]
+            primary_airflow_b = calc_vals["primary_airflow_b"]
+            design_electric_power_b = calc_vals["design_electric_power_b"]
+
+            return self.precision_comparison["design_airflow_b"](
+                design_airflow_b,
+                0.5 * primary_airflow_b,
+            ) and self.precision_comparison["design_electric_power_b/design_airflow_b"](
+                design_electric_power_b / design_airflow_b,
+                REQUIRED_DESIGN_ELEC_POWER_DESIGN_AIRFLOW_RATIO,
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             design_airflow_b = calc_vals["design_airflow_b"]
             primary_airflow_b = calc_vals["primary_airflow_b"]
             design_electric_power_b = calc_vals["design_electric_power_b"]

@@ -44,15 +44,15 @@ COOLING_SYSTEM = SchemaEnums.schema_enums["CoolingSystemOptions"]
 REQ_FAN_POWER_FLOW_RATIO = 0.3 * ureg("W/cfm")
 
 
-class Section19Rule19(RuleDefinitionListIndexedBase):
+class PRM9012019Rule51d17(RuleDefinitionListIndexedBase):
     """Rule 19 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule19, self).__init__(
+        super(PRM9012019Rule51d17, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule19.HVACRule(),
+            each_rule=PRM9012019Rule51d17.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-19",
             description="For baseline systems 9 and 10 the system fan electrical power (Pfan) for supply, return, exhaust, and relief shall be CFMs × 0.3, where, CFMs = the baseline system maximum design supply fan airflow rate, cfm. "
@@ -128,17 +128,23 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
                 zone_b = find_exactly_one_zone(rmd_b, zone_id_b)
                 zone_p = find_exactly_one_zone(rmd_p, zone_id_b)
 
-                hvac_map[hvac_id_b][
-                    "zonal_exhaust_fan_elec_power_b"
-                ] += get_fan_object_electric_power(zone_b.get("zonal_exhaust_fan"))
+                zone_b_exhaust_fans = zone_b.get("zonal_exhaust_fans", [])
+                zone_p_exhaust_fans = zone_p.get("zonal_exhaust_fans", [])
+                zone_p_supply_fans = zone_p.get("supply_fans", [])
+
+                for zone_b_exhaust_fan in zone_b_exhaust_fans:
+                    hvac_map[hvac_id_b][
+                        "zonal_exhaust_fan_elec_power_b"
+                    ] += get_fan_object_electric_power(zone_b_exhaust_fan)
+
+                zone_p_has_non_mech_cooling = any(
+                    fan.get("design_airflow", 0) > ZERO.FLOW
+                    for fan in zone_p_exhaust_fans + zone_p_supply_fans
+                )
 
                 hvac_map[hvac_id_b].update(
                     {
-                        "zones_served_by_hvac_has_non_mech_cooling_bool_p": zone_p.get(
-                            "non_mechanical_cooling_fan_airflow"
-                        )
-                        is not None
-                        and zone_p["non_mechanical_cooling_fan_airflow"] > ZERO.FLOW
+                        "zones_served_by_hvac_has_non_mech_cooling_bool_p": zone_p_has_non_mech_cooling
                     }
                 )
 
@@ -156,12 +162,18 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule19.HVACRule, self).__init__(
+            super(PRM9012019Rule51d17.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 required_fields={
                     "$": ["fan_system"],
+                },
+                precision={
+                    "fan_power_per_flow_b": {
+                        "precision": 0.1,
+                        "unit": "W/cfm",
+                    },
                 },
             )
 
@@ -250,7 +262,13 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             ]
 
             return more_than_one_supply_fan_b or (
-                fan_power_per_flow_b >= REQ_FAN_POWER_FLOW_RATIO
+                (
+                    fan_power_per_flow_b > REQ_FAN_POWER_FLOW_RATIO
+                    or self.precision_comparison["fan_power_per_flow_b"](
+                        fan_power_per_flow_b,
+                        REQ_FAN_POWER_FLOW_RATIO,
+                    )
+                )
                 and (
                     zone_hvac_has_non_mech_cooling_p
                     or zones_served_by_hvac_has_non_mech_cooling_bool_p
@@ -263,13 +281,31 @@ class Section19Rule19(RuleDefinitionListIndexedBase):
             more_than_one_supply_fan_b = calc_vals["more_than_one_supply_fan_b"]
 
             if more_than_one_supply_fan_b:
-                UNDERMINED_MSG = f"{hvac_id_b} has more than one supply fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC sytem. Conduct manual check for compliance with G3.1.2.9."
+                UNDETERMINED_MSG = f"{hvac_id_b} has more than one supply fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC sytem. Conduct manual check for compliance with G3.1.2.9."
             else:
-                UNDERMINED_MSG = f"{hvac_id_b} has zone(s) with non-mechanical cooling in the proposed design, conduct a manual check that the baseline building design includes a fan power allowance of <insert IP or SI version as applicable Pfan = CFMnmc × 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling fan in additional to the 0.3 W/CFM allowance for the HVAC system>."
+                UNDETERMINED_MSG = f"{hvac_id_b} has zone(s) with non-mechanical cooling in the proposed design, conduct a manual check that the baseline building design includes a fan power allowance of <insert IP or SI version as applicable Pfan = CFMnmc × 0.054, where, CFMnmc = the baseline non-mechanical cooling fan airflow, cfm for the non-mechanical cooling fan in additional to the 0.3 W/CFM allowance for the HVAC system>."
 
-            return UNDERMINED_MSG
+            return UNDETERMINED_MSG
 
         def rule_check(self, context, calc_vals=None, data=None):
+            zones_served_by_hvac_has_non_mech_cooling_bool_p = calc_vals[
+                "zones_served_by_hvac_has_non_mech_cooling_bool_p"
+            ]
+            zone_hvac_has_non_mech_cooling_p = calc_vals[
+                "zone_hvac_has_non_mech_cooling_p"
+            ]
+            fan_power_per_flow_b = calc_vals["fan_power_per_flow_b"]
+
+            return (
+                not zone_hvac_has_non_mech_cooling_p
+                and not zones_served_by_hvac_has_non_mech_cooling_bool_p
+                and self.precision_comparison["fan_power_per_flow_b"](
+                    fan_power_per_flow_b,
+                    REQ_FAN_POWER_FLOW_RATIO,
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             zones_served_by_hvac_has_non_mech_cooling_bool_p = calc_vals[
                 "zones_served_by_hvac_has_non_mech_cooling_bool_p"
             ]

@@ -28,22 +28,28 @@ REQUIRED_BUILDING_PEAK_LOAD_600 = 600 * ureg("ton")
 CHILLER_SIZE_800 = 800 * ureg("ton")
 
 
-class Section22Rule31(RuleDefinitionBase):
+class PRM9012019Rule30m88(RuleDefinitionBase):
     """Rule 31 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule31, self).__init__(
+        super(PRM9012019Rule30m88, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             id="22-31",
-            description="The baseline building design's chiller plant shall be modeled with chillers having the number as indicated in Table G3.1.3.7 as a function of building peak cooling load.",
+            description="The baseline chiller plant shall be modeled with the chiller quantity specified in Table G3.1.3.7, as a function of building peak cooling load.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.1 Type and Number of Chillers (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
             required_fields={
-                "$": ["output"],
+                "$": ["model_output"],
+            },
+            precision={
+                "building_peak_load_b": {
+                    "precision": 1,
+                    "unit": "ton",
+                },
             },
         )
 
@@ -67,15 +73,20 @@ class Section22Rule31(RuleDefinitionBase):
         rmd_b = context.BASELINE_0
         chiller_number = len(rmd_b["chillers"])
 
-        output_b = rmd_b["output"]
+        output_b = rmd_b["model_output"]
         building_peak_load_b = getattr_(
             output_b,
             "building_peak_cooling_load",
-            "output_instance",
             "building_peak_cooling_load",
         )
 
-        if building_peak_load_b <= REQUIRED_BUILDING_PEAK_LOAD_300:
+        if (
+            building_peak_load_b < REQUIRED_BUILDING_PEAK_LOAD_300
+            or self.precision_comparison["building_peak_load_b"](
+                building_peak_load_b,
+                REQUIRED_BUILDING_PEAK_LOAD_300,
+            )
+        ):
             target_chiller_number = 1
         elif building_peak_load_b < REQUIRED_BUILDING_PEAK_LOAD_600:
             target_chiller_number = 2

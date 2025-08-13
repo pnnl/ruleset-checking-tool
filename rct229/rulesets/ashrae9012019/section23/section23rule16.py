@@ -30,15 +30,15 @@ FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
 REQUIRED_SET_POINT_REDUCTION = 20.0 * ureg("delta_degF")
 
 
-class Section23Rule16(RuleDefinitionListIndexedBase):
+class PRM9012019Rule79i34(RuleDefinitionListIndexedBase):
     """Rule 16 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule16, self).__init__(
+        super(PRM9012019Rule79i34, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section23Rule16.HVACRule(),
+            each_rule=PRM9012019Rule79i34.HVACRule(),
             index_rmd=BASELINE_0,
             id="23-16",
             description="Systems 5 - 8, the baseline system shall be modeled with preheat coils controlled to a fixed set point 20F less than the design room heating temperature setpoint.",
@@ -122,7 +122,7 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section23Rule16.HVACRule, self,).__init__(
+            super(PRM9012019Rule79i34.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -133,6 +133,12 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
                         "hot_water_loop",
                         "heating_coil_setpoint",
                     ],
+                },
+                precision={
+                    "heating_coil_setpoint": {
+                        "precision": 0.1,
+                        "unit": "delta_degC",
+                    },
                 },
             )
 
@@ -159,6 +165,21 @@ class Section23Rule16(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            heating_system_type_b = calc_vals["heating_system_type_b"]
+            hot_water_loop_type = calc_vals["hot_water_loop_type"]
+            heating_coil_setpoint = calc_vals["heating_coil_setpoint"]
+            hvac_max_zone_setpoint = calc_vals["hvac_max_zone_setpoint"]
+
+            return (
+                heating_system_type_b == HEATING_SYSTEM.FLUID_LOOP
+                and hot_water_loop_type == FLUID_LOOP.HEATING
+                and self.precision_comparison["heating_coil_setpoint"](
+                    heating_coil_setpoint,
+                    hvac_max_zone_setpoint - REQUIRED_SET_POINT_REDUCTION,
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             heating_system_type_b = calc_vals["heating_system_type_b"]
             hot_water_loop_type = calc_vals["hot_water_loop_type"]
             heating_coil_setpoint = calc_vals["heating_coil_setpoint"]

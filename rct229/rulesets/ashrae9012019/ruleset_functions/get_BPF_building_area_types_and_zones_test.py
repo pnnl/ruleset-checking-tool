@@ -3,7 +3,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_BPF_building_area_types
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_BUILDING_WITH_LGT_BAT = {
     "id": "test_rmd",
@@ -117,13 +117,11 @@ TEST_BUILDING_WITHOUT_LGT_BAT = {
 TEST_RPD_WITH_LGT_BAT = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_BUILDING_WITH_LGT_BAT],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 TEST_RPD_WITHOUT_LGT_BAT = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_BUILDING_WITHOUT_LGT_BAT],
-    "data_timestamp": "2024-02-12T09:00Z",
 }
 
 
@@ -136,14 +134,14 @@ TEST_RMD_WITHOUT_LGT_BAT = quantify_rmd(TEST_RPD_WITHOUT_LGT_BAT)[
 
 
 def test__TEST_WITH_LGT_BAT__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_WITH_LGT_BAT)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_WITH_LGT_BAT)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__TEST_WITHOUT_LGT_BAT__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_WITHOUT_LGT_BAT)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_WITHOUT_LGT_BAT)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

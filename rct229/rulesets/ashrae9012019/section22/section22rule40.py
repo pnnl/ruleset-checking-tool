@@ -35,21 +35,16 @@ AIR_SIDE_SYSTEMS_USING_COOLING_SOURCE_OTHER_THAN_PURCHASED_CHILLED_WATER = [
 ]
 
 
-class Section22Rule40(RuleDefinitionBase):
+class PRM9012019Rule48h16(RuleDefinitionBase):
     """Rule 40 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule40, self).__init__(
+        super(PRM9012019Rule48h16, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             id="22-40",
-            description="For systems using purchased chilled water, the cooling source "
-            "shall be modeled as purchased chilled water in both the proposed design "
-            "and baseline building design. If any system in the proposed design "
-            "uses purchased chilled water, all baseline systems with chilled water "
-            "coils shall use purchased chilled water. On-site chillers and direct "
-            "expansion equipment shall not be modeled in the baseline building design.",
+            description="Chilled water loops that use purchased chilled water in the proposed design shall also use purchased chilled water in the baseline. On-site chillers and direct expansion equipment shall not be modeled in the baseline.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.1.1 & G3.1.1.3.1 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,

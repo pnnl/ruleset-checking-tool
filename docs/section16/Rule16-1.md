@@ -33,7 +33,7 @@ data_lookup
     - Get the elevator motor efficiency associated with the next shaft input power greater than the bhp from Table G3.9.1: `elevator_motor_efficiency_b = data_lookup('table_g3.9.1', motor_brake_horsepower_b)['motor_efficiency']`
   - Else:
     - Get the elevator motor efficiency associated with the next shaft input power greater than the bhp from Table G3.9.3: `elevator_motor_efficiency_b = data_lookup('table_g3.9.3', motor_brake_horsepower_b)['motor_efficiency']`
-  - Calculate the expected peak motor power: `expected_peak_motor_power = motor_brake_horsepower_b * 746 / elevator_motor_efficiency_b`
+  - Calculate the expected peak motor power: `expected_peak_motor_power = motor_brake_horsepower_b * 745.7 / elevator_motor_efficiency_b`
     
   **Rule Assertion:**  
   - Case 1: If the number of floors in the building could not be determined or any detailed elevator data parameters are not defined, outcome = UNDETERMINED: `if has_undetermined: UNDETERMINED`

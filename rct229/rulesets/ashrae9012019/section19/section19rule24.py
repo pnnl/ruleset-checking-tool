@@ -9,20 +9,21 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_proposed_hvac_modeled_w
     get_proposed_hvac_modeled_with_virtual_heating,
 )
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.assertions import getattr_
+from rct229.utils.pint_utils import ZERO, CalcQ
 
 FAN_SYSTEM_OPERATION = SchemaEnums.schema_enums["FanSystemOperationOptions"]
 
 
-class Section19Rule24(RuleDefinitionListIndexedBase):
+class PRM9012019Rule54e25(RuleDefinitionListIndexedBase):
     """Rule 24 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule24, self).__init__(
+        super(PRM9012019Rule54e25, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=Section19Rule24.HVACRule(),
+            each_rule=PRM9012019Rule54e25.HVACRule(),
             index_rmd=PROPOSED,
             id="19-24",
             description="Schedules for HVAC fans that provide outdoor air for ventilation shall run continuously whenever spaces are occupied in the proposed design.",
@@ -48,16 +49,10 @@ class Section19Rule24(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule24.HVACRule, self).__init__(
+            super(PRM9012019Rule54e25.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=True, BASELINE_0=False, PROPOSED=True
+                    USER=False, BASELINE_0=False, PROPOSED=True
                 ),
-                required_fields={
-                    "$": ["fan_system"],
-                    "fan_system": [
-                        "operation_during_occupied",
-                    ],
-                },
             )
 
         def is_applicable(self, context, data=None):
@@ -70,14 +65,24 @@ class Section19Rule24(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             hvac_p = context.PROPOSED
 
-            operation_during_occupied_p = hvac_p["fan_system"][
-                "operation_during_occupied"
-            ]
-            minimum_outdoor_airflow_p = hvac_p["fan_system"]["minimum_outdoor_airflow"]
+            operation_during_occupied_p = getattr_(
+                hvac_p,
+                "heating_ventilating_air_conditioning_systems",
+                "fan_system",
+                "operation_during_occupied",
+            )
+            minimum_outdoor_airflow_p = getattr_(
+                hvac_p,
+                "heating_ventilating_air_conditioning_systems",
+                "fan_system",
+                "minimum_outdoor_airflow",
+            )
 
             return {
                 "operation_during_occupied_p": operation_during_occupied_p,
-                "minimum_outdoor_airflow_p": minimum_outdoor_airflow_p,
+                "minimum_outdoor_airflow_p": CalcQ(
+                    "air_flow_rate", minimum_outdoor_airflow_p
+                ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):

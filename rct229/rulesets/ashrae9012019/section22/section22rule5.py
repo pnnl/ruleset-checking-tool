@@ -19,18 +19,18 @@ APPLICABLE_SYS_TYPES = [
 TEMP_RESET = SchemaEnums.schema_enums["TemperatureResetOptions"]
 
 
-class Section22Rule5(RuleDefinitionListIndexedBase):
+class PRM9012019Rule38u90(RuleDefinitionListIndexedBase):
     """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule5, self).__init__(
+        super(PRM9012019Rule38u90, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule5.ChillerFluidLoopRule(),
+            each_rule=PRM9012019Rule38u90.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-5",
-            description="For Baseline chilled water loop that is not purchased chilled water and serves computer room HVAC systems (System Type-11), chilled-water supply temperature shall be reset higher based on the HVAC system requiring the most cooling.",
+            description="Baseline chilled water loops that do not use purchased chilled water and do serve computer rooms (i.e., baseline system type 11) shall have the chilled water supply temperature reset higher based on the HVAC system requiring the most cooling.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.9 Chilled-water supply temperature reset (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
@@ -66,7 +66,7 @@ class Section22Rule5(RuleDefinitionListIndexedBase):
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule5.ChillerFluidLoopRule, self).__init__(
+            super(PRM9012019Rule38u90.ChillerFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

@@ -1,7 +1,7 @@
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.get_dict_with_terminal_units_and_zones import (
     get_dict_with_terminal_units_and_zones,
 )
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 rpd_model = {
     "id": "ASHRAE229 1",
@@ -222,12 +222,19 @@ rpd_model = {
             "type": "BASELINE_0",
         }
     ],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(rpd_model)
+    schema_validation_result = schema_validate_rpd(rpd_model)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

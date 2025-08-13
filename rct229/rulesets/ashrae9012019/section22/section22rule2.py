@@ -40,15 +40,15 @@ APPLICABLE_SYS_TYPES = [
 DESIGN_RETURN_TEMP = 56 * ureg("degF")
 
 
-class Section22Rule2(RuleDefinitionListIndexedBase):
+class PRM9012019Rule59b18(RuleDefinitionListIndexedBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule2, self).__init__(
+        super(PRM9012019Rule59b18, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule2.ChillerFluidLoopRule(),
+            each_rule=PRM9012019Rule59b18.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-2",
             description="Baseline chilled water design return temperature shall be modeled at 56F.",
@@ -87,7 +87,7 @@ class Section22Rule2(RuleDefinitionListIndexedBase):
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule2.ChillerFluidLoopRule, self).__init__(
+            super(PRM9012019Rule59b18.ChillerFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -96,6 +96,12 @@ class Section22Rule2(RuleDefinitionListIndexedBase):
                     "cooling_or_condensing_design_and_control": [
                         "design_return_temperature"
                     ],
+                },
+                precision={
+                    "design_return_temperature": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
                 },
             )
 
@@ -113,6 +119,15 @@ class Section22Rule2(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            design_return_temperature = calc_vals["design_return_temperature"]
+            required_return_temperature = calc_vals["required_return_temperature"]
+
+            return self.precision_comparison["design_return_temperature"](
+                design_return_temperature.to(ureg.kelvin),
+                required_return_temperature.to(ureg.kelvin),
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             design_return_temperature = calc_vals["design_return_temperature"]
             required_return_temperature = calc_vals["required_return_temperature"]
             return std_equal(

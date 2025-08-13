@@ -13,18 +13,18 @@ TEMP_LOW_LIMIT_55F = 55 * ureg("degF")
 TEMP_HIGH_LIMIT_90F = 90 * ureg("degF")
 
 
-class Section22Rule15(RuleDefinitionListIndexedBase):
+class PRM9012019Rule79g01(RuleDefinitionListIndexedBase):
     """Rule 15 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule15, self).__init__(
+        super(PRM9012019Rule79g01, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule15.HeatRejectionRule(),
+            each_rule=PRM9012019Rule79g01.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-15",
-            description="Heat Rejection Device Approach calculated correctly (T/F), Approach = 25.72-(0.24*WB)",
+            description="The baseline heat rejection device shall have the approach calculated according to the equation 25.72 - (0.24*WB), valid for evaporation design wet-bulb temperatures from 55°F to 90°F.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section 22 CHW&CW Loop",
             is_primary_rule=True,
@@ -42,12 +42,26 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule15.HeatRejectionRule, self).__init__(
+            super(PRM9012019Rule79g01.HeatRejectionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
                     "$": ["approach", "loop", "design_wetbulb_temperature"],
+                },
+                precision={
+                    "approach_b": {
+                        "precision": 0.01,
+                        "unit": "K",
+                    },
+                    "design_wetbulb_temp_b_low_limit": {
+                        "precision": 0.01,
+                        "unit": "K",
+                    },
+                    "design_wetbulb_temp_b_high_limit": {
+                        "precision": 0.01,
+                        "unit": "K",
+                    },
                 },
             )
 
@@ -59,7 +73,18 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
 
             return (
                 heat_rejection_loop_b in heat_rejection_loop_ids_b
-                and TEMP_LOW_LIMIT_55F <= design_wetbulb_temp_b <= TEMP_HIGH_LIMIT_90F
+                and (
+                    design_wetbulb_temp_b > TEMP_LOW_LIMIT_55F
+                    or self.precision_comparison["design_wetbulb_temp_b_low_limit"](
+                        design_wetbulb_temp_b, TEMP_LOW_LIMIT_55F
+                    )
+                )
+                and (
+                    design_wetbulb_temp_b < TEMP_HIGH_LIMIT_90F
+                    or self.precision_comparison["design_wetbulb_temp_b_high_limit"](
+                        design_wetbulb_temp_b, TEMP_HIGH_LIMIT_90F
+                    )
+                )
             )
 
         def get_calc_vals(self, context, data=None):
@@ -75,6 +100,14 @@ class Section22Rule15(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            approach_b = calc_vals["approach_b"]
+            target_approach_b = calc_vals["target_approach_b"]
+
+            return self.precision_comparison["approach_b"](
+                target_approach_b.to(ureg.kelvin), approach_b
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             approach_b = calc_vals["approach_b"]
             target_approach_b = calc_vals["target_approach_b"]
 

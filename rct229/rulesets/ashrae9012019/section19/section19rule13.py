@@ -23,6 +23,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_suppl
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
+from rct229.utils.compare_standard_val import std_le
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
@@ -47,15 +48,15 @@ LABORATORY_TEMP_DELTA = 17.0 * ureg("delta_degF")
 GENERAL_TEMP_DELTA = 20.0 * ureg("delta_degF")
 
 
-class Section19Rule13(RuleDefinitionListIndexedBase):
+class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
     """Rule 13 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule13, self).__init__(
+        super(PRM9012019Rule77j17, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule13.HVACRule(),
+            each_rule=PRM9012019Rule77j17.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-13",
             description="For baseline system types 1-8 and 11-13, system design supply airflow rates shall be based on a supply-air-to-room temperature set-point difference of 20°F or the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater. For systems with multiple zone thermostat setpoints, use the design set point that will result in the lowest supply air cooling set point or highest supply air heating set point.",
@@ -64,6 +65,16 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
             list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+            precision={
+                "delta_supply_and_design_heating_temp": {
+                    "precision": 1,
+                    "unit": "delta_degF",
+                },
+                "delta_supply_and_design_cooling_temp": {
+                    "precision": 1,
+                    "unit": "delta_degF",
+                },
+            },
         )
 
     def is_applicable(self, context, data=None):
@@ -153,13 +164,17 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                                 "all_design_setpoints_delta_Ts_are_per_reqs"
                             ] = all(
                                 [
-                                    std_equal(
-                                        LABORATORY_TEMP_DELTA,
+                                    self.precision_comparison[
+                                        "delta_supply_and_design_heating_temp"
+                                    ](
                                         delta_supply_and_design_heating_temp,
-                                    ),
-                                    std_equal(
                                         LABORATORY_TEMP_DELTA,
+                                    ),
+                                    self.precision_comparison[
+                                        "delta_supply_and_design_cooling_temp"
+                                    ](
                                         delta_supply_and_design_cooling_temp,
+                                        LABORATORY_TEMP_DELTA,
                                     ),
                                 ]
                             )
@@ -168,13 +183,17 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                                 "all_design_setpoints_delta_Ts_are_per_reqs"
                             ] = all(
                                 [
-                                    std_equal(
-                                        GENERAL_TEMP_DELTA,
+                                    self.precision_comparison[
+                                        "delta_supply_and_design_heating_temp"
+                                    ](
                                         delta_supply_and_design_heating_temp,
-                                    ),
-                                    std_equal(
                                         GENERAL_TEMP_DELTA,
+                                    ),
+                                    self.precision_comparison[
+                                        "delta_supply_and_design_cooling_temp"
+                                    ](
                                         delta_supply_and_design_cooling_temp,
+                                        GENERAL_TEMP_DELTA,
                                     ),
                                 ]
                             )
@@ -202,13 +221,19 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule13.HVACRule, self).__init__(
+            super(PRM9012019Rule77j17.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
                     "$": ["fan_system"],
                     "fan_system": ["minimum_outdoor_airflow"],
+                },
+                precision={
+                    "supply_fans_airflow_b": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    },
                 },
             )
 
@@ -249,8 +274,12 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
                 "all_design_setpoints_delta_Ts_are_per_reqs_b"
             ]
 
-            return not all_design_setpoints_delta_Ts_are_per_reqs_b and std_equal(
-                zone_info["supply_flow_p"], supply_fans_airflow_b
+            return (
+                not all_design_setpoints_delta_Ts_are_per_reqs_b
+                and self.precision_comparison["supply_fans_airflow_b"](
+                    supply_fans_airflow_b,
+                    zone_info["supply_flow_p"],
+                )
             )
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
@@ -273,7 +302,37 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             return (
                 all_design_setpoints_delta_Ts_are_per_reqs_b
                 and are_all_hvac_sys_fan_objs_autosized_b
-                and supply_fans_airflow_b >= fan_minimum_outdoor_airflow_b
+                and (
+                    self.precision_comparison["supply_fans_airflow_b"](
+                        supply_fans_airflow_b, fan_minimum_outdoor_airflow_b
+                    )
+                    or supply_fans_airflow_b > fan_minimum_outdoor_airflow_b
+                )
+            ) or (
+                (
+                    not all_design_setpoints_delta_Ts_are_per_reqs_b
+                    and self.precision_comparison["supply_fans_airflow_b"](
+                        fan_minimum_outdoor_airflow_b, supply_fans_airflow_b
+                    )
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            all_design_setpoints_delta_Ts_are_per_reqs_b = calc_vals[
+                "all_design_setpoints_delta_Ts_are_per_reqs_b"
+            ]
+            are_all_hvac_sys_fan_objs_autosized_b = calc_vals[
+                "are_all_hvac_sys_fan_objs_autosized_b"
+            ]
+            supply_fans_airflow_b = calc_vals["supply_fans_airflow_b"]
+            fan_minimum_outdoor_airflow_b = calc_vals["fan_minimum_outdoor_airflow_b"]
+
+            return (
+                all_design_setpoints_delta_Ts_are_per_reqs_b
+                and are_all_hvac_sys_fan_objs_autosized_b
+                and std_le(
+                    val=supply_fans_airflow_b, std_val=fan_minimum_outdoor_airflow_b
+                )
             ) or (
                 (
                     not all_design_setpoints_delta_Ts_are_per_reqs_b

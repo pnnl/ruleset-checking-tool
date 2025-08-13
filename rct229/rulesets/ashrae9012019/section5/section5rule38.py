@@ -12,11 +12,11 @@ UNDETERMINED_MSG = "It cannot be determined if the ground temperature schedule f
 NOT_DEFINED_MSG = "A ground temperature schedule was not found for the project."
 
 
-class Section5Rule38(PartialRuleDefinition):
+class PRM9012019Rule40i28(PartialRuleDefinition):
     """Rule 38 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule38, self).__init__(
+        super(PRM9012019Rule40i28, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
@@ -26,13 +26,15 @@ class Section5Rule38(PartialRuleDefinition):
             standard_section="Section G3.1-14(b) Building Envelope Modeling Requirements for the Proposed design and Baseline",
             is_primary_rule=False,
             required_fields={
-                "$": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
             },
         )
 
     def get_calc_vals(self, context, data=None):
         rpd = context.BASELINE_0
-        ground_temperature_schedule = rpd["weather"].get("ground_temperature_schedule")
+        ground_temperature_schedule = rpd["ruleset_model_descriptions"][0][
+            "weather"
+        ].get("ground_temperature_schedule")
         return {"ground_temperature_schedule": ground_temperature_schedule}
 
     def applicability_check(self, context, calc_vals, data):

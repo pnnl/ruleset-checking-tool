@@ -19,20 +19,20 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_8,
 ]
 
-TERMINAL_TEMPERATURE_CONTROL = SchemaEnums.schema_enums[
-    "TerminalTemperatureControlOptions"
+FANSYSTEM_TEMPERATURE_CONTROL = SchemaEnums.schema_enums[
+    "FanSystemTemperatureControlOptions"
 ]
 
 
-class Section23Rule7(RuleDefinitionListIndexedBase):
+class PRM9012019Rule62j00(RuleDefinitionListIndexedBase):
     """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule7, self).__init__(
+        super(PRM9012019Rule62j00, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section23Rule7.HVACRule(),
+            each_rule=PRM9012019Rule62j00.HVACRule(),
             index_rmd=BASELINE_0,
             id="23-7",
             description="Systems 6&8: Supply air temperature setpoint shall be constant at the design condition.",
@@ -78,7 +78,7 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section23Rule7.HVACRule, self).__init__(
+            super(PRM9012019Rule62j00.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -103,4 +103,4 @@ class Section23Rule7(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             temperature_control_b = calc_vals["temperature_control_b"]
 
-            return temperature_control_b == TERMINAL_TEMPERATURE_CONTROL.CONSTANT
+            return temperature_control_b == FANSYSTEM_TEMPERATURE_CONTROL.CONSTANT

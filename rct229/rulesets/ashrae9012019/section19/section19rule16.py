@@ -27,15 +27,15 @@ APPLICABLE_SYS_TYPES = [
 COOLING_SYSTEM = SchemaEnums.schema_enums["CoolingSystemOptions"]
 
 
-class Section19Rule16((RuleDefinitionListIndexedBase)):
+class PRM9012019Rule04f07(RuleDefinitionListIndexedBase):
     """Rule 16 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule16, self).__init__(
+        super(PRM9012019Rule04f07, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule16.ZoneRule(),
+            each_rule=PRM9012019Rule04f07.ZoneRule(),
             index_rmd=BASELINE_0,
             id="19-16",
             description="For zones served by baseline system types 9 & 10, if the proposed design includes a fan or fans sized and controlled to provide non-mechanical cooling, the baseline building design shall include a separate fan to provide nonmechanical cooling, sized and controlled the same as the proposed design.",
@@ -98,7 +98,7 @@ class Section19Rule16((RuleDefinitionListIndexedBase)):
 
     class ZoneRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section19Rule16.ZoneRule, self).__init__(
+            super(PRM9012019Rule04f07.ZoneRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),

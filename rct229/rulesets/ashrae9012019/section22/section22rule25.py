@@ -36,18 +36,18 @@ NOT_APPLICABLE_SYS_TYPES = [
 REQUIRED_PUMP_POWER_PER_FLOW_RATE = 9 * ureg("W/gpm")
 
 
-class Section22Rule25(RuleDefinitionListIndexedBase):
+class PRM9012019Rule03q09(RuleDefinitionListIndexedBase):
     """Rule 25 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule25, self).__init__(
+        super(PRM9012019Rule03q09, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule25.PrimaryCoolingFluidLoopRule(),
+            each_rule=PRM9012019Rule03q09.PrimaryCoolingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-25",
-            description="For chilled-water systems served by chiller(s) and does not serve baseline System-11, the baseline building constant-volume primary pump power shall be modeled as 9 W/gpm.",
+            description="Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (i.e., do not serve baseline system type 11) shall have a constant-flow primary pump power of 9 W/gpm at design conditions.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.10 Chilled-water pumps (Systems 7, 8, 11, 12, and 13)",
             is_primary_rule=True,
@@ -95,12 +95,18 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
 
     class PrimaryCoolingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule25.PrimaryCoolingFluidLoopRule, self).__init__(
+            super(PRM9012019Rule03q09.PrimaryCoolingFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
                     "$": ["pump_power_per_flow_rate"],
+                },
+                precision={
+                    "primary_pump_power_per_flow_rate": {
+                        "precision": 1,
+                        "unit": "W/gpm",
+                    },
                 },
             )
 
@@ -119,6 +125,19 @@ class Section22Rule25(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            primary_pump_power_per_flow_rate = calc_vals[
+                "primary_pump_power_per_flow_rate"
+            ]
+            required_pump_power_per_flow_rate = calc_vals[
+                "required_pump_power_per_flow_rate"
+            ]
+
+            return self.precision_comparison["primary_pump_power_per_flow_rate"](
+                required_pump_power_per_flow_rate,
+                primary_pump_power_per_flow_rate,
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             primary_pump_power_per_flow_rate = calc_vals[
                 "primary_pump_power_per_flow_rate"
             ]

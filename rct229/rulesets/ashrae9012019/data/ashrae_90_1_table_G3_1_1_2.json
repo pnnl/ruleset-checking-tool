@@ -1,0 +1,148 @@
+{
+    "Baseline_Service_Water_Heating_System": [
+        {
+            "building_area_type": "AUTOMOTIVE_FACILITY",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "CONVENIENCE_STORE",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "CONVENTION_CENTER",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "COURTHOUSE",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "DINING_BAR_LOUNGE_LEISURE",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "DINING_CAFETERIA_FAST_FOOD",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "DINING_FAMILY",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "DORMITORY",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "EXERCISE_CENTER",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "FIRE_STATION",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "GROCERY_STORE",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "GYMNASIUM",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "HEALTH_CARE_CLINIC",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "HOSPITAL_AND_OUTPATIENT_SURGERY",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "HOTEL",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "LIBRARY",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "MANUFACTURING_FACILITY",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "MOTEL",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "Motion picture theater",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "MULTIFAMILY",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "MUSEUM",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "OFFICE",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "PARKING_GARAGE",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "PENITENTIARY",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "PERFORMING_ARTS_THEATER",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "POLICE_STATION",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "POST_OFFICE",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "RELIGIOUS_FACILITY",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "RETAIL",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "SCHOOL_UNIVERSITY",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "SPORTS_ARENA",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "TOWN_HALL",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "TRANSPORTATION",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "WAREHOUSE",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "WORKSHOP",
+            "baseline_heating_method": "ELECTRIC_RESISTANCE_STORAGE_WATER_HEATER"
+        },
+        {
+            "building_area_type": "ALL_OTHERS",
+            "baseline_heating_method": "GAS_STORAGE_WATER_HEATER"
+        }
+    ]
+}

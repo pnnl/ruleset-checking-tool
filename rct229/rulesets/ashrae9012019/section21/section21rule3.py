@@ -25,15 +25,15 @@ APPLICABLE_SYS_TYPES = [
 FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
 
 
-class Section21Rule3(RuleDefinitionListIndexedBase):
+class PRM9012019Rule86n98(RuleDefinitionListIndexedBase):
     """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 23 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule3, self).__init__(
+        super(PRM9012019Rule86n98, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section21Rule3.HeatingFluidLoopRule(),
+            each_rule=PRM9012019Rule86n98.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="21-3",
             description="Heating hot water plant capacity shall be based on coincident loads.",
@@ -66,7 +66,7 @@ class Section21Rule3(RuleDefinitionListIndexedBase):
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule3.HeatingFluidLoopRule, self).__init__(
+            super(PRM9012019Rule86n98.HeatingFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

@@ -27,18 +27,18 @@ APPLICABLE_SYS_TYPES = [
 REQUIRED_TEMP_RANGE = 10 * ureg("degR")
 
 
-class Section22Rule14(RuleDefinitionListIndexedBase):
+class PRM9012019Rule95f90(RuleDefinitionListIndexedBase):
     """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule14, self).__init__(
+        super(PRM9012019Rule95f90, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule14.HeatRejectionRule(),
+            each_rule=PRM9012019Rule95f90.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-14",
-            description="The baseline heat-rejection device shall have a design temperature rise of 10°F.",
+            description="The baseline heat rejection device shall have a design temperature rise of 10°F.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.1.3.11 Heat Rejection (System 7, 8, 11, 12 and 13)",
             is_primary_rule=True,
@@ -64,12 +64,18 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule14.HeatRejectionRule, self).__init__(
+            super(PRM9012019Rule95f90.HeatRejectionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
                     "$": ["range"],
+                },
+                precision={
+                    "heat_rejection_range": {
+                        "precision": 1,
+                        "unit": "K",
+                    },
                 },
             )
 
@@ -88,6 +94,16 @@ class Section22Rule14(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             heat_rejection_range = calc_vals["heat_rejection_range"]
             required_heat_rejection_range = calc_vals["required_heat_rejection_range"]
+
+            return self.precision_comparison["heat_rejection_range"](
+                heat_rejection_range.to(ureg.kelvin),
+                required_heat_rejection_range.to(ureg.kelvin),
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            heat_rejection_range = calc_vals["heat_rejection_range"]
+            required_heat_rejection_range = calc_vals["required_heat_rejection_range"]
+
             return std_equal(
                 heat_rejection_range.to(ureg.kelvin),
                 required_heat_rejection_range.to(ureg.kelvin),

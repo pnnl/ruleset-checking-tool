@@ -8,15 +8,15 @@ SUBSURFACE_DYNAMIC_GLAZING = SchemaEnums.schema_enums["SubsurfaceDynamicGlazingO
 UNDETERMINED_MSG = "SUBSURFACE INCLUDES MANUALLY CONTROLLED DYNAMIC GLAZING IN THE PROPOSED DESIGN. VERIFY THAT SHGC AND VT WERE MODELED AS THE AVERAGE OF THE MINIMUM AND MAXIMUM SHGC AND VT."
 
 
-class Section5Rule18(RuleDefinitionListIndexedBase):
+class PRM9012019Rule82y74(RuleDefinitionListIndexedBase):
     """Rule 18 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule18, self).__init__(
+        super(PRM9012019Rule82y74, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=Section5Rule18.SubsurfaceRule(),
+            each_rule=PRM9012019Rule82y74.SubsurfaceRule(),
             index_rmd=PROPOSED,
             id="5-18",
             description="Manually controlled dynamic glazing shall use the average of the minimum and maximum SHGC and VT.",
@@ -28,7 +28,7 @@ class Section5Rule18(RuleDefinitionListIndexedBase):
 
     class SubsurfaceRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section5Rule18.SubsurfaceRule, self).__init__(
+            super(PRM9012019Rule82y74.SubsurfaceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),

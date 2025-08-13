@@ -2,7 +2,7 @@ import pytest
 from rct229.rulesets.ashrae9012019.ruleset_functions.are_all_hvac_sys_fan_objects_autosized import (
     are_all_hvac_sys_fan_objs_autosized,
 )
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 from rct229.utils.assertions import MissingKeyException
 
 TEST_RMD = {
@@ -22,7 +22,7 @@ TEST_RMD = {
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_4",
                                     "fan": {
                                         "id": "Terminal Fan 1",
-                                        "is_airflow_sized_based_on_design_day": True,
+                                        "is_airflow_calculated": True,
                                     },
                                 },
                                 {
@@ -30,7 +30,7 @@ TEST_RMD = {
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_5",
                                     "fan": {
                                         "id": "Terminal Fan 2",
-                                        "is_airflow_sized_based_on_design_day": True,
+                                        "is_airflow_calculated": True,
                                     },
                                 },
                                 {
@@ -38,7 +38,7 @@ TEST_RMD = {
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_5",
                                     "fan": {
                                         "id": "Terminal Fan 3",
-                                        "is_airflow_sized_based_on_design_day": False,
+                                        "is_airflow_calculated": False,
                                     },
                                 },
                                 {
@@ -46,7 +46,7 @@ TEST_RMD = {
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_6",
                                     "fan": {
                                         "id": "Terminal Fan 4",
-                                        "is_airflow_sized_based_on_design_day": True,
+                                        "is_airflow_calculated": True,
                                     },
                                 },
                                 {
@@ -67,7 +67,7 @@ TEST_RMD = {
                                     "served_by_heating_ventilating_air_conditioning_system": "hvac_2",
                                     "fan": {
                                         "id": "Terminal Fan 6",
-                                        "is_airflow_sized_based_on_design_day": True,
+                                        "is_airflow_calculated": True,
                                     },
                                 }
                             ],
@@ -75,7 +75,7 @@ TEST_RMD = {
                     ],
                     "heating_ventilating_air_conditioning_systems": [
                         {
-                            # Success case - is_airflow_sized_based_on_design_day => True
+                            # Success case - is_airflow_calculated => True
                             "id": "hvac_1",
                             "fan_system": {
                                 "id": "VAV Fan System 1",
@@ -83,13 +83,13 @@ TEST_RMD = {
                                 "supply_fans": [
                                     {
                                         "id": "Supply Fan 1",
-                                        "is_airflow_sized_based_on_design_day": True,
+                                        "is_airflow_calculated": True,
                                     }
                                 ],
                             },
                         },
                         {
-                            # Failed case - is_airflow_sized_based_on_design_day => False (at least one one)
+                            # Failed case - is_airflow_calculated => False (at least one one)
                             "id": "hvac_2",
                             "fan_system": {
                                 "id": "VAV Fan System 2",
@@ -97,17 +97,17 @@ TEST_RMD = {
                                 "supply_fans": [
                                     {
                                         "id": "Supply Fan 2-1",
-                                        "is_airflow_sized_based_on_design_day": True,
+                                        "is_airflow_calculated": True,
                                     },
                                     {
                                         "id": "Supply Fan 2-2",
-                                        "is_airflow_sized_based_on_design_day": False,
+                                        "is_airflow_calculated": False,
                                     },
                                 ],
                             },
                         },
                         {
-                            # Raise exception case - is_airflow_sized_based_on_design_day => Missing
+                            # Raise exception case - is_airflow_calculated => Missing
                             "id": "hvac_3",
                             "fan_system": {
                                 "id": "VAV Fan System 3",
@@ -115,7 +115,7 @@ TEST_RMD = {
                                 "supply_fans": [
                                     {
                                         "id": "Supply Fan 3-1",
-                                        "is_airflow_sized_based_on_design_day": True,
+                                        "is_airflow_calculated": True,
                                     },
                                     {
                                         "id": "Supply Fan 3-2",
@@ -147,12 +147,19 @@ TEST_RMD = {
 TEST_RPD = {
     "id": "ASHRAE229",
     "ruleset_model_descriptions": [TEST_RMD],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 
 def test__TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD)
+    schema_validation_result = schema_validate_rpd(TEST_RPD)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

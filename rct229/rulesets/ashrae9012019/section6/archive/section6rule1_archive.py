@@ -45,10 +45,10 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 space_lighting_power_per_area_user = sum(
-                    find_all("interior_lighting[*].power_per_area", context.USER)
+                    find_all("$.interior_lighting[*].power_per_area", context.USER)
                 )
                 space_lighting_power_per_area_proposed = sum(
-                    find_all("interior_lighting[*].power_per_area", context.PROPOSED)
+                    find_all("$.interior_lighting[*].power_per_area", context.PROPOSED)
                 )
                 space_lighting_power_user = (
                     space_lighting_power_per_area_user * context.USER["floor_area"]

@@ -2,7 +2,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.is_economizer_modeled_in_pr
     is_economizer_modeled_in_proposed,
 )
 from rct229.schema.schema_utils import quantify_rmd
-from rct229.schema.validate import schema_validate_rmd
+from rct229.schema.validate import schema_validate_rpd
 
 TEST_RMD_FIXED_TYPE = {
     "id": "test_rmd",
@@ -178,19 +178,40 @@ TEST_RMD_NO_ECONOMIZER_TYPE = {
 TEST_RPD_FIXED_TYPE = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMD_FIXED_TYPE],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RPD_ENTHALPY_TYPE = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMD_ENTHALPY_TYPE],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RPD_NO_ECONOMIZER_TYPE = {
     "id": "229_01",
     "ruleset_model_descriptions": [TEST_RMD_NO_ECONOMIZER_TYPE],
-    "data_timestamp": "2024-02-12T09:00Z",
+    "metadata": {
+        "schema_author": "ASHRAE SPC 229 Schema Working Group",
+        "schema_name": "Ruleset Evaluation Schema",
+        "schema_version": "0.1.3",
+        "author": "author_example",
+        "description": "description_example",
+        "time_of_creation": "2024-02-12T09:00Z",
+    },
 }
 
 TEST_RMD_FIXED_TYPE_UNIT = quantify_rmd(TEST_RPD_FIXED_TYPE)[
@@ -207,21 +228,21 @@ TEST_RMD_NO_ECONOMIZER_TYPE_UNIT = quantify_rmd(TEST_RPD_NO_ECONOMIZER_TYPE)[
 
 
 def test__BASELINE_TEST_RPD__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_FIXED_TYPE)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_FIXED_TYPE)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__PROPOSED_TEST_RPD_ENTHALPY_ECONOMIZER_TYPE__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_ENTHALPY_TYPE)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_ENTHALPY_TYPE)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"
 
 
 def test__PROPOSED_TEST_RPD_NO_ECONOMIZER_TYPE__is_valid():
-    schema_validation_result = schema_validate_rmd(TEST_RPD_NO_ECONOMIZER_TYPE)
+    schema_validation_result = schema_validate_rpd(TEST_RPD_NO_ECONOMIZER_TYPE)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['error']}"

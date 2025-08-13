@@ -36,8 +36,8 @@
           - Case 2: Else if roof surface thermal emittance in P_RMD matches that in U_RMD but is not equal to 0.9, outcome is UNDETERMINED: ```else if ( surface_p.surface_optical_properties.absorptance_thermal_exterior == surface_u.surface_optical_properties.absorptance_thermal_exterior ) AND ( surface_p.surface_optical_properties.absorptance_thermal_exterior != 0.9 ):
             outcome = UNDETERMINED and raise_message "ROOF SURFACE EMITTANCE IN THE PROPOSED MDOEL (${surface_p.surface_optical_properties.absorptance_thermal_exterior}) MATCHES THAT IN THE USER MODEL BUT IS NOT EQUAL TO THE PRESCRIBED DEFAULT VALUE OF 0.9. VERIFY THAT THE MODELED VALUE IS BASED ON TESTING IN ACCORDANCE WITH SECTION 5.5.3.1.1(a)."```
 
-          - Case 3: Else if roof surface thermal emittance in P_RMD does not match that in U_RMD but is equal to 0.9, outcome is PASS and raise message: ```else if surface_p.surface_optical_properties.absorptance_thermal_exterior == 0.9:
-            outcome = PASS and raise_message "ROOF THERMAL EMITTANCE IS EQUAL TO THE PRESCRIBED DEFAULT VALUE OF 0.9 BUT DIFFERS FROM THE THERMAL EMITTANCE IN THE USER MODEL (${surface_u.surface_optical_properties.absorptance_thermal_exterior})."```
+          - Case 3: Else if roof surface thermal emittance in P_RMD does not match that in U_RMD but is equal to 0.9, outcome is UNDETERMINED and raise message: ```else if surface_p.surface_optical_properties.absorptance_thermal_exterior == 0.9:
+            outcome = UNDETERMINED and raise_message "FAIL IF THE THERMAL EMITTANCE IN THE USER MODEL IS BASED ON AGED TEST DATA. ROOF THERMAL EMITTANCE IS EQUAL TO THE PRESCRIBED DEFAULT VALUE OF 0.9 BUT DIFFERS FROM THE THERMAL EMITTANCE IN THE USER MODEL (${surface_u.surface_optical_properties.absorptance_thermal_exterior})."```
 
           - Case 4: Else, roof surface thermal emittance in P_RMD does not match that in U_RMD and is not equal to 0.9, outcome is FAIL: ```Else: outcome = FAIL```
 

@@ -13,15 +13,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 )
 
 
-class Section19Rule11((RuleDefinitionListIndexedBase)):
+class PRM9012019Rule18u58(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule11, self).__init__(
+        super(PRM9012019Rule18u58, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule11.HVACRule(),
+            each_rule=PRM9012019Rule18u58.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-11",
             description="For systems that serve computer rooms, if the baseline system is HVAC System 11, it shall include an integrated fluid economizer meeting the requirements of Section 6.5.1.2 in the baseline building design.",
@@ -39,7 +39,7 @@ class Section19Rule11((RuleDefinitionListIndexedBase)):
 
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section19Rule11.HVACRule, self).__init__(
+            super(PRM9012019Rule18u58.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

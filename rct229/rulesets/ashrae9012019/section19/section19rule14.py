@@ -40,15 +40,15 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section19Rule14(RuleDefinitionListIndexedBase):
+class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
     """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule14, self).__init__(
+        super(PRM9012019Rule60f12, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule14.HVACRule(),
+            each_rule=PRM9012019Rule60f12.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-14",
             description="For baseline system types 1-8 and 11-13, if return or relief fans are specified in the proposed design, the baseline building design shall also be modeled with fans serving the same functions and sized for the baseline system supply fan air quantity less the minimum outdoor air, or 90% of the supply fan air quantity, whichever is larger.",
@@ -119,12 +119,18 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule14.HVACRule, self).__init__(
+            super(PRM9012019Rule60f12.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
                     "$": ["fan_system"],
+                },
+                precision={
+                    "modeled_cfm": {
+                        "precision": 1,
+                        "unit": "cfm",
+                    },
                 },
             )
 
@@ -223,6 +229,36 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
             return f"{hvac_id_b} has more than one supply or return fan associated with the HVAC system in the baseline and therefore this check could not be conducted for this HVAC system. Conduct manual check for compliance with G3.1.2.8.1."
 
         def rule_check(self, context, calc_vals=None, data=None):
+            return_fans_airflow = calc_vals["return_fans_airflow"]
+            relief_fans_airflow = calc_vals["relief_fans_airflow"]
+            baseline_modeled_return_as_expected = calc_vals[
+                "baseline_modeled_return_as_expected"
+            ]
+            baseline_modeled_relief_as_expected = calc_vals[
+                "baseline_modeled_relief_as_expected"
+            ]
+            modeled_cfm = calc_vals["modeled_cfm"]
+            supply_minus_OA_flow = calc_vals["supply_minus_OA_flow"]
+            supply_cfm_90_percent = calc_vals["supply_cfm_90_percent"]
+            is_modeled_with_return_fan_in_p = calc_vals["is_modeled_with_return_fan_p"]
+            is_modeled_with_relief_fan_p = calc_vals["is_modeled_with_relief_fan_p"]
+
+            return (
+                baseline_modeled_return_as_expected
+                and baseline_modeled_relief_as_expected
+                and (is_modeled_with_return_fan_in_p or is_modeled_with_relief_fan_p)
+                and self.precision_comparison["modeled_cfm"](
+                    modeled_cfm,
+                    max(supply_minus_OA_flow, supply_cfm_90_percent),
+                )
+            ) or (
+                not is_modeled_with_return_fan_in_p
+                and not is_modeled_with_relief_fan_p
+                and std_equal(ZERO.FLOW, return_fans_airflow)
+                and std_equal(ZERO.FLOW, relief_fans_airflow)
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             return_fans_airflow = calc_vals["return_fans_airflow"]
             relief_fans_airflow = calc_vals["relief_fans_airflow"]
             baseline_modeled_return_as_expected = calc_vals[

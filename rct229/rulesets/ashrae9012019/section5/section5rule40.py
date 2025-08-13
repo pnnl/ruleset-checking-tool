@@ -15,17 +15,25 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
     get_surface_conditioning_category_dict,
 )
 from rct229.utils.jsonpath_utils import find_one
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.std_comparisons import std_equal
+
+EXTERIOR = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"].EXTERIOR
 
 
-class Section5Rule40(RuleDefinitionListIndexedBase):
+class PRM9012019Rule33l08(RuleDefinitionListIndexedBase):
     """Rule 40 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule40, self).__init__(
+        super(PRM9012019Rule33l08, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section5Rule40.BuildingRule(),
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
+            },
+            each_rule=PRM9012019Rule33l08.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-40",
             description="Opaque roof surfaces that are not regulated (not part of opaque building envelope) must be "
@@ -35,16 +43,24 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1-5 Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0].buildings[*]",
-            data_items={"climate_zone": (BASELINE_0, "weather/climate_zone")},
         )
+
+    def create_data(self, context, data=None):
+        rpd_b = context.BASELINE_0
+        climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        constructions = rpd_b["ruleset_model_descriptions"][0].get("constructions")
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule40.BuildingRule, self).__init__(
+            super(PRM9012019Rule33l08.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section5Rule40.BuildingRule.RoofRule(),
+                each_rule=PRM9012019Rule33l08.BuildingRule.RoofRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -53,7 +69,7 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
             building_b = context.BASELINE_0
             return {
                 "scc_dict_b": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building_b
+                    data["climate_zone"], building_b, data["constructions"]
                 ),
             }
 
@@ -62,15 +78,26 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
             scc = data["scc_dict_b"][surface_b["id"]]
             return (
                 get_opaque_surface_type(surface_b) == OST.ROOF
+                and surface_b.get("adjacent_to") == EXTERIOR
                 and scc is SCC.UNREGULATED
             )
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule40.BuildingRule.RoofRule, self).__init__(
+                super(PRM9012019Rule33l08.BuildingRule.RoofRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
+                    precision={
+                        "absorptance_thermal_exterior_b": {
+                            "precision": 0.01,
+                            "unit": "",
+                        },
+                        "absorptance_solar_exterior_b": {
+                            "precision": 0.01,
+                            "unit": "",
+                        },
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
@@ -101,7 +128,7 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                     "absorptance_thermal_exterior_p"
                 ]
                 return any(
-                    absorptance_property == None
+                    absorptance_property is None
                     for absorptance_property in [
                         absorptance_solar_exterior_b,
                         absorptance_solar_exterior_p,
@@ -119,7 +146,23 @@ class Section5Rule40(RuleDefinitionListIndexedBase):
                 absorptance_thermal_exterior_p = calc_vals[
                     "absorptance_thermal_exterior_p"
                 ]
-                return (
-                    absorptance_solar_exterior_b == absorptance_solar_exterior_p
-                    and absorptance_thermal_exterior_b == absorptance_thermal_exterior_p
+                return self.precision_comparison["absorptance_solar_exterior_b"](
+                    absorptance_solar_exterior_b, absorptance_solar_exterior_p
+                ) and self.precision_comparison["absorptance_thermal_exterior_b"](
+                    absorptance_thermal_exterior_b, absorptance_thermal_exterior_p
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                absorptance_solar_exterior_b = calc_vals["absorptance_solar_exterior_b"]
+                absorptance_solar_exterior_p = calc_vals["absorptance_solar_exterior_p"]
+                absorptance_thermal_exterior_b = calc_vals[
+                    "absorptance_thermal_exterior_b"
+                ]
+                absorptance_thermal_exterior_p = calc_vals[
+                    "absorptance_thermal_exterior_p"
+                ]
+                return std_equal(
+                    absorptance_solar_exterior_b, absorptance_solar_exterior_p
+                ) and std_equal(
+                    absorptance_thermal_exterior_b, absorptance_thermal_exterior_p
                 )

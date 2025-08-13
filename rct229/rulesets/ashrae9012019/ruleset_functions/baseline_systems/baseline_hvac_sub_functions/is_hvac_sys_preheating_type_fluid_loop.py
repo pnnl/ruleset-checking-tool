@@ -30,7 +30,7 @@ def is_hvac_sys_preheating_type_fluid_loop(rmd_b: dict, hvac_b_id: str) -> bool:
         preheat_system is not None
         and preheat_system.get("hot_water_loop") is not None
         # Silence fail if heating system type data is not in RMD
-        and find_one("type", preheat_system) == HEATING_SYSTEM.FLUID_LOOP
+        and find_one("$.type", preheat_system) == HEATING_SYSTEM.FLUID_LOOP
     )
 
     return is_hvac_sys_preheating_type_fluid_loop_flag

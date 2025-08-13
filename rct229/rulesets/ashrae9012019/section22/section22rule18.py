@@ -13,15 +13,15 @@ HEATREJECTIONFANSPEEDCONTROL = SchemaEnums.schema_enums[
 ]
 
 
-class Section22Rule18(RuleDefinitionListIndexedBase):
+class PRM9012019Rule38d92(RuleDefinitionListIndexedBase):
     """Rule 18 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule18, self).__init__(
+        super(PRM9012019Rule38d92, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule18.HeatRejectionRule(),
+            each_rule=PRM9012019Rule38d92.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-18",
             description="The baseline heat rejection device shall be modeled with variable speed fan control.",
@@ -47,7 +47,7 @@ class Section22Rule18(RuleDefinitionListIndexedBase):
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule18.HeatRejectionRule, self).__init__(
+            super(PRM9012019Rule38d92.HeatRejectionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

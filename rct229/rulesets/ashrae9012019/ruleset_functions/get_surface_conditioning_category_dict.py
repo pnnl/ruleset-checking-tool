@@ -120,7 +120,7 @@ GET_SURFACE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
 }
 
 
-def get_surface_conditioning_category_dict(climate_zone, building):
+def get_surface_conditioning_category_dict(climate_zone, building, constructions):
     """Determines the surface conditioning category for every surface in a building
 
     Parameters
@@ -129,6 +129,8 @@ def get_surface_conditioning_category_dict(climate_zone, building):
         One of the ClimateZoneOptions2019ASHRAE901 enumerated values
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
+    constructions : list
+        A list of construction dictionaries as defined by the ASHRAE229 schema
     Returns
     -------
     dict
@@ -144,7 +146,9 @@ def get_surface_conditioning_category_dict(climate_zone, building):
     surface_conditioning_category_dict = {}
 
     # Get the conditioning category for all the zones in the building
-    zcc_dict = get_zone_conditioning_category_dict(climate_zone, building)
+    zcc_dict = get_zone_conditioning_category_dict(
+        climate_zone, building, constructions
+    )
 
     # Loop through all the zones in the building
     for zone in find_all("building_segments[*].zones[*]", building):

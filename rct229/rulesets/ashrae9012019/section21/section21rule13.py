@@ -10,6 +10,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -40,15 +41,15 @@ FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
 MINIMUM_TURNDOWN_RATIO = 0.25
 
 
-class Section21Rule13(RuleDefinitionListIndexedBase):
+class PRM9012019Rule43l11(RuleDefinitionListIndexedBase):
     """Rule 13 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule13, self).__init__(
+        super(PRM9012019Rule43l11, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section21Rule13.HeatingFluidLoopRule(),
+            each_rule=PRM9012019Rule43l11.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="21-13",
             description="The baseline building design uses boilers or purchased hot water, the hot water pumping system shall be modeled with a minimum turndown ratio of 0.25.",
@@ -81,13 +82,19 @@ class Section21Rule13(RuleDefinitionListIndexedBase):
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule13.HeatingFluidLoopRule, self).__init__(
+            super(PRM9012019Rule43l11.HeatingFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={
                     "$": ["heating_design_and_control"],
                     "heating_design_and_control": ["minimum_flow_fraction"],
+                },
+                precision={
+                    "minimum_flow_fraction": {
+                        "precision": 0.0001,
+                        "unit": "",
+                    }
                 },
             )
 
@@ -104,4 +111,11 @@ class Section21Rule13(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             minimum_flow_fraction = calc_vals["minimum_flow_fraction"]
             required_minimum_flow_fraction = calc_vals["required_minimum_flow_fraction"]
-            return minimum_flow_fraction == required_minimum_flow_fraction
+            return self.precision_comparison["minimum_flow_fraction"](
+                minimum_flow_fraction, required_minimum_flow_fraction
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            minimum_flow_fraction = calc_vals["minimum_flow_fraction"]
+            required_minimum_flow_fraction = calc_vals["required_minimum_flow_fraction"]
+            return std_equal(required_minimum_flow_fraction, minimum_flow_fraction)

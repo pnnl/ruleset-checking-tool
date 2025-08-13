@@ -28,15 +28,15 @@ APPLICABLE_SYS_TYPES = [
 FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
 
 
-class Section21Rule6(RuleDefinitionListIndexedBase):
+class PRM9012019Rule47b05(RuleDefinitionListIndexedBase):
     """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule6, self).__init__(
+        super(PRM9012019Rule47b05, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section21Rule6.HeatingFluidLoopRule(),
+            each_rule=PRM9012019Rule47b05.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="21-6",
             description="When baseline building includes two boilers each shall stage as required by load.",
@@ -80,10 +80,28 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule6.HeatingFluidLoopRule, self).__init__(
+            super(PRM9012019Rule47b05.HeatingFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
+                precision={
+                    "boiler_1_operation_upper_limit": {
+                        "precision": 1,
+                        "unit": "Btu/hr",
+                    },
+                    "boiler_2_operation_upper_limit": {
+                        "precision": 1,
+                        "unit": "Btu/hr",
+                    },
+                    "boiler_1_rated_capacity": {
+                        "precision": 0.001,
+                        "unit": "Btu/hr",
+                    },
+                    "boiler_2_rated_capacity": {
+                        "precision": 0.001,
+                        "unit": "Btu/hr",
+                    },
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -120,6 +138,40 @@ class Section21Rule6(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
+            boiler_1_operation_lower_limit = calc_vals["boiler_1_operation_lower_limit"]
+            boiler_1_operation_upper_limit = calc_vals["boiler_1_operation_upper_limit"]
+            boiler_1_rated_capacity = calc_vals["boiler_1_rated_capacity"]
+            boiler_2_operation_lower_limit = calc_vals["boiler_2_operation_lower_limit"]
+            boiler_2_operation_upper_limit = calc_vals["boiler_2_operation_upper_limit"]
+            boiler_2_rated_capacity = calc_vals["boiler_2_rated_capacity"]
+
+            return (
+                boiler_1_operation_lower_limit == ZERO.POWER
+                and self.precision_comparison["boiler_1_rated_capacity"](
+                    boiler_1_rated_capacity, boiler_1_operation_upper_limit
+                )
+                and self.precision_comparison["boiler_1_rated_capacity"](
+                    boiler_1_rated_capacity, boiler_2_operation_lower_limit
+                )
+                and self.precision_comparison["boiler_2_operation_upper_limit"](
+                    boiler_2_operation_upper_limit,
+                    boiler_1_rated_capacity + boiler_2_rated_capacity,
+                )
+            ) or (
+                boiler_2_operation_lower_limit == ZERO.POWER
+                and self.precision_comparison["boiler_2_rated_capacity"](
+                    boiler_2_rated_capacity, boiler_2_operation_upper_limit
+                )
+                and self.precision_comparison["boiler_2_rated_capacity"](
+                    boiler_2_rated_capacity, boiler_1_operation_lower_limit
+                )
+                and self.precision_comparison["boiler_1_operation_upper_limit"](
+                    boiler_1_operation_upper_limit,
+                    boiler_2_rated_capacity + boiler_1_rated_capacity,
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
             boiler_1_operation_lower_limit = calc_vals["boiler_1_operation_lower_limit"]
             boiler_1_operation_upper_limit = calc_vals["boiler_1_operation_upper_limit"]
             boiler_1_rated_capacity = calc_vals["boiler_1_rated_capacity"]
