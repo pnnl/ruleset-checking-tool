@@ -32,7 +32,7 @@
 
         **Rule Assertion:**  
 
-        - Case 1: If roof surface thermal emittance is equal to 0.9: `if surface_optical_properties_b.absorptance_solar_exterior == 0.75: PASS`
+        - Case 1: If above-grade wall surface solar reflectance is equal to 0.25: `if surface_optical_properties_b.absorptance_solar_exterior == 0.75: PASS`
 
         - Case 2: Else: `Else: FAIL`
 
