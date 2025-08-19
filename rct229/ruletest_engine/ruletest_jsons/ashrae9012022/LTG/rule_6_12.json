@@ -1,0 +1,236 @@
+{
+    "rule-6-12-a": {
+        "Section": 6,
+        "Rule": 12,
+        "Test": "a",
+        "standard": {
+            "ruleset": "ashrae9012022",
+            "rule_id": "6-12",
+            "ruleset_reference": "(Previously 6-14, Then 6-10) Table G3.1(6) Proposed Building Performance (i)",
+            "rule_description": "In buildings >5000 ft2 lighting shall be modeled having occupancy sensors in employee lunch and break rooms, conference/meeting rooms, and classrooms (not including shop classrooms, laboratory classrooms, and preschool through 12th grade classrooms). These controls shall be reflected in the baseline building design lighting schedules.",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "-",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "test_description": "This test uses a simple building model with 7,500 ft\u00b2 of gross floor area containing a single classroom zone and space. The interior lighting is managed by automatic occupancy sensors.",
+        "expected_rule_outcome": "pass",
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                                                        "floor_area": 696.7728,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Lighting 1",
+                                                                "occupancy_control_type": "FULL_AUTO_ON"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-6-12-b": {
+        "Section": 6,
+        "Rule": 12,
+        "Test": "b",
+        "standard": {
+            "ruleset": "ashrae9012022",
+            "rule_id": "6-12",
+            "ruleset_reference": "(Previously 6-14, Then 6-10) Table G3.1(6) Proposed Building Performance (i)",
+            "rule_description": "In buildings >5000 ft2 lighting shall be modeled having occupancy sensors in employee lunch and break rooms, conference/meeting rooms, and classrooms (not including shop classrooms, laboratory classrooms, and preschool through 12th grade classrooms). These controls shall be reflected in the baseline building design lighting schedules.",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "-",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "test_description": "This test uses a simple building model with 7,500 ft\u00b2 of gross floor area containing a single classroom zone and space. The interior lighting has manual occupancy controls without any occupancy sensor schedules.",
+        "expected_rule_outcome": "undetermined",
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                                                        "floor_area": 696.7728,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Lighting 1",
+                                                                "occupancy_control_type": "NONE"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-6-12-c": {
+        "Section": 6,
+        "Rule": 12,
+        "Test": "c",
+        "standard": {
+            "ruleset": "ashrae9012022",
+            "rule_id": "6-12",
+            "ruleset_reference": "(Previously 6-14, Then 6-10) Table G3.1(6) Proposed Building Performance (i)",
+            "rule_description": "In buildings >5000 ft2 lighting shall be modeled having occupancy sensors in employee lunch and break rooms, conference/meeting rooms, and classrooms (not including shop classrooms, laboratory classrooms, and preschool through 12th grade classrooms). These controls shall be reflected in the baseline building design lighting schedules.",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "-",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "test_description": "This test uses a simple building model with 7,500 ft\u00b2 of gross floor area containing a single classroom zone and space. The interior lighting has manual occupancy controls without any occupancy sensor schedules.",
+        "expected_rule_outcome": "undetermined",
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                                                        "floor_area": 696.7728,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Lighting 1",
+                                                                "occupancy_control_type": "MANUAL_ON",
+                                                                "are_schedules_used_for_modeling_occupancy_control": false
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-6-12-d": {
+        "Section": 6,
+        "Rule": 12,
+        "Test": "d",
+        "standard": {
+            "ruleset": "ashrae9012022",
+            "rule_id": "6-12",
+            "ruleset_reference": "(Previously 6-14, Then 6-10) Table G3.1(6) Proposed Building Performance (i)",
+            "rule_description": "In buildings >5000 ft2 lighting shall be modeled having occupancy sensors in employee lunch and break rooms, conference/meeting rooms, and classrooms (not including shop classrooms, laboratory classrooms, and preschool through 12th grade classrooms). These controls shall be reflected in the baseline building design lighting schedules.",
+            "applicable_rmr": "Proposed RMR",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "rule_dependency": "-",
+            "mandatory_rule": "Yes",
+            "schema_version": "0.1.7"
+        },
+        "test_description": "This test uses a simple building model with 7,500 ft\u00b2 of gross floor area containing a single classroom zone and space. The interior lighting has manual occupancy controls and is managed via occupancy sensor schedules.",
+        "expected_rule_outcome": "fail",
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                                                        "floor_area": 696.7728,
+                                                        "interior_lighting": [
+                                                            {
+                                                                "id": "Lighting 1",
+                                                                "occupancy_control_type": "MANUAL_ON",
+                                                                "are_schedules_used_for_modeling_occupancy_control": true
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}
