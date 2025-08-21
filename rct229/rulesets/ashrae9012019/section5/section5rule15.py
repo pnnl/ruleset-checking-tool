@@ -57,7 +57,7 @@ class PRM9012019Rule04o58(RuleDefinitionListIndexedBase):
                 ),
                 required_fields={
                     "$": ["building_segments"],
-                    "building_segments": [
+                    "$.building_segments[*]": [
                         "is_all_new",
                         "area_type_vertical_fenestration",
                     ],
