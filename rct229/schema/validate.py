@@ -1,5 +1,6 @@
 import json
 import os
+from itertools import chain
 from collections import Counter
 from referencing import Registry
 from jsonschema import Draft7Validator
@@ -202,7 +203,7 @@ def check_schedule_association(rpd: dict) -> list:
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].thermostat_heating_setpoint_schedule",
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].minimum_humidity_setpoint_schedule",
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].maximum_humidity_setpoint_schedule",
-        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].exhaust_airflow_rate_multiplier_schedule",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].exhaust_airflow_rate_multiplier_schedules",
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].occupant_multiplier_schedule",
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].interior_lighting[*].lighting_multiplier_schedule",
         "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].flow_multiplier_schedule",
@@ -219,7 +220,12 @@ def check_schedule_association(rpd: dict) -> list:
         "$.ruleset_model_descriptions[*].heating_ventilation_air_conditioning_systems[*].fan_system.operating_schedule",
     ]
 
-    referenced_id_list = find_all_by_jsonpaths(schedule_reference_jsonpaths, rpd)
+    referenced_id_list = list(
+        chain.from_iterable(
+            x if isinstance(x, list) else [x]
+            for x in find_all_by_jsonpaths(schedule_reference_jsonpaths, rpd)
+        )
+    )
 
     for schedule_id in referenced_id_list:
         if schedule_id not in schedule_id_list:
