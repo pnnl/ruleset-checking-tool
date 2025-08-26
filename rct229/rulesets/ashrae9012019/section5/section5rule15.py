@@ -11,6 +11,7 @@ from rct229.utils.std_comparisons import std_equal
 
 MSG_WARN_MATCHED = "Building is not all new and baseline WWR matches values prescribed in Table G3.1.1-1. However, the fenestration area prescribed in Table G3.1.1-1 does not apply to the existing envelope per TABLE G3.1 baseline column #5 (c). For existing Envelope, the baseline fenestration area must equal the existing fenestration area prior to the proposed work. A manual check is required to verify compliance."
 MSG_WARN_MISMATCHED = "Building is not all new and baseline WWR does not match values prescribed in TABLE G3.1.1-1. However, the fenestration area prescribed in TABLE G3.1.1-1 does not apply to the existing envelope per TABLE G3.1 baseline column #5(c). For existing envelope, the baseline fenestration area must equal the existing fenestration area prior to the proposed work. A manual check is required to verify compliance."
+MSG_AREA_TYPE_MISMATCH = "The Proposed building does not have the same area type(s) as the Baseline building for vertical fenestration. A manual check is required to verify compliance."
 WWR_THRESHOLD = 0.4
 OTHER = SchemaEnums.schema_enums[
     "VerticalFenestrationBuildingAreaOptions2019ASHRAE901"
@@ -56,7 +57,7 @@ class PRM9012019Rule04o58(RuleDefinitionListIndexedBase):
                 ),
                 required_fields={
                     "$": ["building_segments"],
-                    "building_segment": [
+                    "$.building_segments[*]": [
                         "is_all_new",
                         "area_type_vertical_fenestration",
                     ],
@@ -79,6 +80,7 @@ class PRM9012019Rule04o58(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             building_b = context.BASELINE_0
             building_p = context.PROPOSED
+            manual_check_flag = False
 
             area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
                 data["climate_zone"], data["constructions"], building_b
@@ -91,12 +93,15 @@ class PRM9012019Rule04o58(RuleDefinitionListIndexedBase):
                 area_type_window_wall_area_dict_b[OTHER]["total_window_area"]
                 / area_type_window_wall_area_dict_b[OTHER]["total_wall_area"]
             )
-            wwr_p = (
-                area_type_window_wall_area_dict_p[OTHER]["total_window_area"]
-                / area_type_window_wall_area_dict_p[OTHER]["total_wall_area"]
-            )
+            if OTHER in area_type_window_wall_area_dict_p:
+                wwr_p = (
+                    area_type_window_wall_area_dict_p[OTHER]["total_window_area"]
+                    / area_type_window_wall_area_dict_p[OTHER]["total_wall_area"]
+                )
+            else:
+                wwr_p = None
+                manual_check_flag = True
 
-            manual_check_flag = False
             for building_segment in find_all("$.building_segments[*]", building_b):
                 if building_segment["area_type_vertical_fenestration"] == OTHER:
                     if not building_segment["is_all_new"]:
@@ -112,15 +117,16 @@ class PRM9012019Rule04o58(RuleDefinitionListIndexedBase):
             return calc_vals["manual_check_flag"]
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            manual_check_msg = ""
-            if calc_vals["manual_check_flag"]:
-                if self.precision_comparison["wwr_b"](
-                    calc_vals["wwr_b"].magnitude,
-                    min(calc_vals["wwr_p"].magnitude, WWR_THRESHOLD),
-                ):
-                    manual_check_msg = MSG_WARN_MATCHED
-                else:
-                    manual_check_msg = MSG_WARN_MISMATCHED
+            if calc_vals["wwr_p"] is None:
+                return MSG_AREA_TYPE_MISMATCH
+
+            if self.precision_comparison["wwr_b"](
+                calc_vals["wwr_b"].magnitude,
+                min(calc_vals["wwr_p"].magnitude, WWR_THRESHOLD),
+            ):
+                manual_check_msg = MSG_WARN_MATCHED
+            else:
+                manual_check_msg = MSG_WARN_MISMATCHED
             return manual_check_msg
 
         def rule_check(self, context, calc_vals=None, data=None):
