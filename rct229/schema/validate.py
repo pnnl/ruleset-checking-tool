@@ -617,8 +617,10 @@ def non_schema_validate_rpd(rmd_obj):
     passed = passed and not mismatch_fluid_loop_piping_errors
     if mismatch_fluid_loop_piping_errors:
         errors.extend(
-            f"Cannot find piping {mismatch_fluid_loop_piping_id} in the FluidLoop or ServiceWaterPiping data group."
-            for mismatch_fluid_loop_piping_id in mismatch_fluid_loop_piping_errors
+            [
+                f"Cannot find piping {mismatch_fluid_loop_piping_id} in the FluidLoop or ServiceWaterPiping data group."
+                for mismatch_fluid_loop_piping_id in mismatch_fluid_loop_piping_errors
+            ]
         )
 
     mismatch_service_water_heating_distribution_errors = (
@@ -627,8 +629,10 @@ def non_schema_validate_rpd(rmd_obj):
     passed = passed and not mismatch_service_water_heating_distribution_errors
     if mismatch_service_water_heating_distribution_errors:
         errors.extend(
-            f"Cannot find service water heating {mismatch_service_water_heating_distribution_id} in the ServiceWaterHeatingDistributionSystems data group."
-            for mismatch_service_water_heating_distribution_id in mismatch_service_water_heating_distribution_errors
+            [
+                f"Cannot find service water heating {mismatch_service_water_heating_distribution_id} in the ServiceWaterHeatingDistributionSystems data group."
+                for mismatch_service_water_heating_distribution_id in mismatch_service_water_heating_distribution_errors
+            ]
         )
 
     mismatch_associated_data_elements_errors = check_associated_data_elements(rmd_obj)
