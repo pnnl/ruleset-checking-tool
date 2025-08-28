@@ -214,6 +214,7 @@ rules_dict = {
     "prm9012019rule33w37": "section22rule39",
     "prm9012019rule48h16": "section22rule40",
     "prm9012019rule68r93": "section22rule41",
+    "prm9012019rule77p21": "section22rule42",
     "prm9012019rule79m01": "section23rule1",
     "prm9012019rule52x31": "section23rule2",
     "prm9012019rule44u85": "section23rule3",
