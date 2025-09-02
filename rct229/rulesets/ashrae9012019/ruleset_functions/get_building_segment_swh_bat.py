@@ -109,9 +109,4 @@ def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
 
             building_segment_swh_bat = known_area_types[0]
 
-    if building_segment.get("service_water_heating_building_area_type"):
-        building_segment_swh_bat = building_segment[
-            "service_water_heating_building_area_type"
-        ]
-
     return building_segment_swh_bat
