@@ -147,28 +147,21 @@ def compare_context_pair(
     elif isinstance(index_context, list) and isinstance(compare_context, list):
         if required_equal and len(compare_context) != len(index_context):
             error_msg_list.append(
-                f"path: {element_json_path}: length of objects ({len(index_context)} in index context != length of objects {len(compare_context)} in compare context."
+                f"path: {element_json_path}: length of objects ({len(index_context)}) in index context != length of objects ({len(compare_context)}) in compare context."
             )
             matched = False
+
+        compare_by_index = "operating_points" in element_json_path.lower()
+
         if any(isinstance(item, dict) for item in index_context):
-            # For list that has mix of objects and strings (primary_layers)
-            # avoid processing any list of primitive data types
-            # sort the proposed and user
-            sorted_dict_index = sorted(
-                [item for item in index_context if isinstance(item, dict)],
-                key=lambda x: x["id"],
-            )
-            sorted_dict_compare = sorted(
-                [item for item in compare_context if isinstance(item, dict)],
-                key=lambda x: x["id"],
-            )
-            for i in range(len(sorted_dict_index)):
-                if i < len(sorted_dict_compare):
-                    # in this case, we are still using the same extra_schema
+            if compare_by_index:
+                # position-based comparison for operating_points
+                limit = min(len(index_context), len(compare_context))
+                for i in range(limit):
                     matched = (
                         compare_context_pair(
-                            sorted_dict_index[i],
-                            sorted_dict_compare[i],
+                            index_context[i],
+                            compare_context[i],
                             f"{element_json_path}[{i}]",
                             extra_schema,
                             if_required(extra_schema.get(search_key)),
@@ -177,7 +170,41 @@ def compare_context_pair(
                         )
                         and matched
                     )
-
+            else:
+                # For list that has mix of objects and strings (primary_layers)
+                # avoid processing any list of primitive data types
+                # sort the proposed and user
+                sorted_dict_index = sorted(
+                    [
+                        item
+                        for item in index_context
+                        if isinstance(item, dict) and "id" in item
+                    ],
+                    key=lambda x: x["id"],
+                )
+                sorted_dict_compare = sorted(
+                    [
+                        item
+                        for item in compare_context
+                        if isinstance(item, dict) and "id" in item
+                    ],
+                    key=lambda x: x["id"],
+                )
+                for i in range(len(sorted_dict_index)):
+                    if i < len(sorted_dict_compare):
+                        # in this case, we are still using the same extra_schema
+                        matched = (
+                            compare_context_pair(
+                                sorted_dict_index[i],
+                                sorted_dict_compare[i],
+                                f"{element_json_path}[{i}]",
+                                extra_schema,
+                                if_required(extra_schema.get(search_key)),
+                                search_key,
+                                error_msg_list,
+                            )
+                            and matched
+                        )
             sorted_str_index = sorted(
                 [item for item in index_context if isinstance(item, str)]
             )
