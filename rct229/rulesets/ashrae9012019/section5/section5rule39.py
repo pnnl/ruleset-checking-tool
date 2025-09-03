@@ -35,6 +35,10 @@ class PRM9012019Rule50m61(RuleDefinitionListIndexedBase):
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
+            },
             each_rule=PRM9012019Rule50m61.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-39",
