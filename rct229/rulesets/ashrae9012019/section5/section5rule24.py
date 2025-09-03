@@ -21,7 +21,7 @@ class PRM9012019Rule78j13(RuleDefinitionListIndexedBase):
             ),
             required_fields={
                 "$.ruleset_model_descriptions[*]": ["weather"],
-                "weather": ["climate_zone"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
             },
             each_rule=PRM9012019Rule78j13.BuildingRule(),
             index_rmd=BASELINE_0,
@@ -42,99 +42,88 @@ class PRM9012019Rule78j13(RuleDefinitionListIndexedBase):
             "constructions": constructions,
         }
 
-    class BuildingRule(RuleDefinitionListIndexedBase):
+    class BuildingRule(RuleDefinitionBase):
         def __init__(self):
             super(PRM9012019Rule78j13.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=PRM9012019Rule78j13.BuildingRule.BuildingSegmentRule(),
-                index_rmd=BASELINE_0,
-                list_path="building_segments[*]",
+                precision={
+                    "skylight_roof_ratio_b": {
+                        "precision": 0.01,
+                        "unit": "",
+                    }
+                },
             )
 
-        def create_data(self, context, data=None):
+        def is_applicable(self, context, data=None):
+            building_p = context.PROPOSED
+            skylight_roof_areas_p = get_building_segment_skylight_roof_areas_dict(
+                data["climate_zone"], data["constructions"], building_p
+            )
+            total_skylight_area = sum(
+                v["total_skylight_area"] for v in skylight_roof_areas_p.values()
+            )
+            total_roof_area = sum(
+                v["total_envelope_roof_area"] for v in skylight_roof_areas_p.values()
+            )
+
+            return (
+                total_roof_area > ZERO.AREA
+                and total_skylight_area / total_roof_area <= SKYLIGHT_THRESHOLD
+            )
+
+        def get_calc_vals(self, context, data=None):
             building_b = context.BASELINE_0
             building_p = context.PROPOSED
-            return {
-                "skylight_roof_areas_dictionary_b": get_building_segment_skylight_roof_areas_dict(
+
+            skylight_roof_areas_dictionary_b = (
+                get_building_segment_skylight_roof_areas_dict(
                     data["climate_zone"], data["constructions"], building_b
-                ),
-                "skylight_roof_areas_dictionary_p": get_building_segment_skylight_roof_areas_dict(
+                )
+            )
+            skylight_roof_areas_dictionary_p = (
+                get_building_segment_skylight_roof_areas_dict(
                     data["climate_zone"], data["constructions"], building_p
-                ),
+                )
+            )
+            total_skylight_area_b = sum(
+                v["total_skylight_area"]
+                for v in skylight_roof_areas_dictionary_b.values()
+            )
+            total_roof_area_b = sum(
+                v["total_envelope_roof_area"]
+                for v in skylight_roof_areas_dictionary_b.values()
+            )
+
+            total_skylight_area_p = sum(
+                v["total_skylight_area"]
+                for v in skylight_roof_areas_dictionary_p.values()
+            )
+            total_roof_area_p = sum(
+                v["total_envelope_roof_area"]
+                for v in skylight_roof_areas_dictionary_p.values()
+            )
+            skylight_roof_ratio_b = total_skylight_area_b / total_roof_area_b
+            skylight_roof_ratio_p = total_skylight_area_p / total_roof_area_p
+
+            return {
+                "total_skylight_area_b": total_skylight_area_b,
+                "total_roof_area_b": total_roof_area_b,
+                "total_skylight_area_p": total_skylight_area_p,
+                "total_roof_area_p": total_roof_area_p,
+                "skylight_roof_ratio_b": skylight_roof_ratio_b,
+                "skylight_roof_ratio_p": skylight_roof_ratio_p,
             }
 
-        class BuildingSegmentRule(RuleDefinitionBase):
-            def __init__(self):
-                super(
-                    PRM9012019Rule78j13.BuildingRule.BuildingSegmentRule, self
-                ).__init__(
-                    rmds_used=produce_ruleset_model_description(
-                        USER=False, BASELINE_0=True, PROPOSED=True
-                    ),
-                    precision={
-                        "skylight_roof_ratio_b": {
-                            "precision": 0.01,
-                            "unit": "",
-                        }
-                    },
-                )
+        def rule_check(self, context, calc_vals=None, data=None):
+            return self.precision_comparison["skylight_roof_ratio_b"](
+                calc_vals["skylight_roof_ratio_b"].magnitude,
+                calc_vals["skylight_roof_ratio_p"].magnitude,
+            )
 
-            def is_applicable(self, context, data=None):
-                building_segment_p = context.PROPOSED
-                skylight_roof_areas_dictionary_p = data[
-                    "skylight_roof_areas_dictionary_p"
-                ]
-
-                total_skylight_area_p = skylight_roof_areas_dictionary_p[
-                    building_segment_p["id"]
-                ]["total_skylight_area"]
-                total_envelope_roof_area_p = skylight_roof_areas_dictionary_p[
-                    building_segment_p["id"]
-                ]["total_envelope_roof_area"]
-                # avoid zero division
-                return (
-                    total_envelope_roof_area_p > ZERO.AREA
-                    and 0
-                    < total_skylight_area_p / total_envelope_roof_area_p
-                    <= SKYLIGHT_THRESHOLD
-                )
-
-            def get_calc_vals(self, context, data=None):
-                building_segment_b = context.BASELINE_0
-                skylight_roof_areas_dictionary_b = data[
-                    "skylight_roof_areas_dictionary_b"
-                ]
-                skylight_roof_areas_dictionary_p = data[
-                    "skylight_roof_areas_dictionary_p"
-                ]
-
-                return {
-                    "skylight_roof_ratio_b": skylight_roof_areas_dictionary_b[
-                        building_segment_b["id"]
-                    ]["total_skylight_area"]
-                    / skylight_roof_areas_dictionary_b[building_segment_b["id"]][
-                        "total_envelope_roof_area"
-                    ],
-                    "skylight_total_roof_ratio_p": sum(
-                        component["total_skylight_area"]
-                        for component in skylight_roof_areas_dictionary_p.values()
-                    )
-                    / sum(
-                        component["total_envelope_roof_area"]
-                        for component in skylight_roof_areas_dictionary_p.values()
-                    ),
-                }
-
-            def rule_check(self, context, calc_vals=None, data=None):
-                return self.precision_comparison["skylight_roof_ratio_b"](
-                    calc_vals["skylight_roof_ratio_b"].magnitude,
-                    calc_vals["skylight_total_roof_ratio_p"].magnitude,
-                )
-
-            def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                return std_equal(
-                    calc_vals["skylight_roof_ratio_b"].magnitude,
-                    calc_vals["skylight_total_roof_ratio_p"].magnitude,
-                )
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            return std_equal(
+                calc_vals["skylight_roof_ratio_b"].magnitude,
+                calc_vals["skylight_roof_ratio_p"].magnitude,
+            )

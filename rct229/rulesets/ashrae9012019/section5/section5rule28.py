@@ -44,7 +44,7 @@ class PRM9012019Rule42c42(RuleDefinitionListIndexedBase):
             list_path="ruleset_model_descriptions[0].buildings[*]",
             required_fields={
                 "$.ruleset_model_descriptions[*]": ["weather"],
-                "weather": ["climate_zone"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
             },
         )
 

@@ -99800,6 +99800,69 @@
           "notes": "name environment: RUN PERIOD 1",
           "day_of_week_for_january_1": "SUNDAY"
       },
+      "materials": [
+        {
+          "id": "G01 13mm gypsum board",
+          "thickness": 0.0127,
+          "thermal_conductivity": 0.16,
+          "density": 800,
+          "specific_heat": 1090
+        },
+        {
+          "id": "Acoustic Tile - 1/2 in.",
+          "thickness": 0.0127,
+          "thermal_conductivity": 0.0576334643901673,
+          "density": 288.332340731282,
+          "specific_heat": 795.492
+        },
+        {
+          "id": "CP02 CARPET PAD",
+          "r_value": 0.21648
+        },
+        {
+          "id": "100mm Normalweight concrete floor",
+          "thickness": 0.1016,
+          "thermal_conductivity": 2.31,
+          "density": 2322,
+          "specific_heat": 832
+        },
+        {
+          "id": "5/8 in. Gypsum Board",
+          "thickness": 0.0159,
+          "thermal_conductivity": 0.159999999999999,
+          "density": 799.999999999999,
+          "specific_heat": 1090
+        },
+        {
+          "id": "Typical Insulation R-6.01",
+          "r_value": 1.05841645736724
+        },
+        {
+          "id": "Stucco - 3/8 in.",
+          "thickness": 0.009652,
+          "thermal_conductivity": 0.721197135476959,
+          "density": 1855.09824333832,
+          "specific_heat": 837.36
+        },
+        {
+          "id": "Typical Insulation R-14.76",
+          "r_value": 2.59864112987226
+        },
+        {
+          "id": "Metal Roof Surface",
+          "thickness": 0.000799999999999998,
+          "thermal_conductivity": 45.2799999999999,
+          "density": 7823.99999999999,
+          "specific_heat": 499.999999999996
+        },
+        {
+          "id": "Roof Membrane",
+          "thickness": 0.0095,
+          "thermal_conductivity": 0.16,
+          "density": 1121.29,
+          "specific_heat": 1460
+        }
+      ],
       "constructions": [
         {
           "id": "PRM Slab on Grade Floor_Core_bot_ZN_5_Floor_0.73",
@@ -99808,98 +99871,41 @@
         {
           "id": "Typical Interior Wall",
           "primary_layers": [
-            {
-              "id": "G01 13mm gypsum board",
-              "thickness": 0.0127,
-              "thermal_conductivity": 0.16,
-              "density": 800,
-              "specific_heat": 1090
-            },
-            {
-              "id": "G01 13mm gypsum board~~~00000001",
-              "thickness": 0.0127,
-              "thermal_conductivity": 0.16,
-              "density": 800,
-              "specific_heat": 1090
-            }
+            "G01 13mm gypsum board",
+            "G01 13mm gypsum board"
           ],
           "u_factor": 2.511
         },
         {
           "id": "Plenum Acoustical Tile",
           "primary_layers": [
-            {
-              "id": "Acoustic Tile - 1/2 in.",
-              "thickness": 0.0127,
-              "thermal_conductivity": 0.0576334643901673,
-              "density": 288.332340731282,
-              "specific_heat": 795.492
-            }
+            "Acoustic Tile - 1/2 in."
           ],
           "u_factor": 2.042
         },
         {
           "id": "Typical Interior Floor",
           "primary_layers": [
-            {
-              "id": "CP02 CARPET PAD",
-              "r_value": 0.21648
-            },
-            {
-              "id": "100mm Normalweight concrete floor",
-              "thickness": 0.1016,
-              "thermal_conductivity": 2.31,
-              "density": 2322,
-              "specific_heat": 832
-            }
+            "CP02 CARPET PAD",
+            "100mm Normalweight concrete floor"
           ],
           "u_factor": 1.887
         },
         {
           "id": "Typical Interior Ceiling",
           "primary_layers": [
-            {
-              "id": "100mm Normalweight concrete floor~~~00000042",
-              "thickness": 0.1016,
-              "thermal_conductivity": 2.31,
-              "density": 2322,
-              "specific_heat": 832
-            },
-            {
-              "id": "CP02 CARPET PAD~~~00000043",
-              "r_value": 0.21648
-            }
+            "100mm Normalweight concrete floor",
+            "CP02 CARPET PAD"
           ],
           "u_factor": 1.887
         },
         {
           "id": "PRM Steel Framed Exterior Wall R-8.06",
           "primary_layers": [
-            {
-              "id": "5/8 in. Gypsum Board",
-              "thickness": 0.0159,
-              "thermal_conductivity": 0.159999999999999,
-              "density": 799.999999999999,
-              "specific_heat": 1090
-            },
-            {
-              "id": "Typical Insulation R-6.01",
-              "r_value": 1.05841645736724
-            },
-            {
-              "id": "5/8 in. Gypsum Board~~~00000066",
-              "thickness": 0.0159,
-              "thermal_conductivity": 0.159999999999999,
-              "density": 799.999999999999,
-              "specific_heat": 1090
-            },
-            {
-              "id": "Stucco - 3/8 in.",
-              "thickness": 0.009652,
-              "thermal_conductivity": 0.721197135476959,
-              "density": 1855.09824333832,
-              "specific_heat": 837.36
-            }
+            "5/8 in. Gypsum Board",
+            "Typical Insulation R-6.01",
+            "5/8 in. Gypsum Board",
+            "Stucco - 3/8 in."
           ],
           "u_factor": 0.704
         },
@@ -99918,24 +99924,9 @@
         {
           "id": "PRM IEAD Roof R-15.87",
           "primary_layers": [
-            {
-              "id": "Typical Insulation R-14.76",
-              "r_value": 2.59864112987226
-            },
-            {
-              "id": "Metal Roof Surface",
-              "thickness": 0.000799999999999998,
-              "thermal_conductivity": 45.2799999999999,
-              "density": 7823.99999999999,
-              "specific_heat": 499.999999999996
-            },
-            {
-              "id": "Roof Membrane",
-              "thickness": 0.0095,
-              "thermal_conductivity": 0.16,
-              "density": 1121.29,
-              "specific_heat": 1460
-            }
+            "Typical Insulation R-14.76",
+            "Metal Roof Surface",
+            "Roof Membrane"
           ],
           "u_factor": 0.358
         }
