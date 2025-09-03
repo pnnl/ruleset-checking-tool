@@ -83,6 +83,9 @@ class PRM9012019Rule88f26(RuleDefinitionListIndexedBase):
                     fan_operating_schedule_vals_b
                 )
 
+            else:
+                always_on = True  # If no schedule is defined, assume always on
+
             return hvac_id_b in applicable_hvac_systems_list_b and not always_on
 
         def get_calc_vals(self, context, data=None):
