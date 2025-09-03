@@ -39,7 +39,9 @@ class PRM9012019Rule09g49(RuleDefinitionListIndexedBase):
             get_hvac_systems_serving_zone_health_safety_vent_reqs(rmd_p)
         )
         fan_operating_schedules_p = {
-            sch_id: find_exactly_one_schedule(rmd_p, sch_id)["hourly_values"]
+            sch_id: getattr_(
+                find_exactly_one_schedule(rmd_p, sch_id), "Schedule", "hourly_values"
+            )
             for sch_id in find_all(
                 "buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].fan_system.operating_schedule",
                 rmd_p,
@@ -70,7 +72,6 @@ class PRM9012019Rule09g49(RuleDefinitionListIndexedBase):
             hvac_id_p = hvac_p["id"]
             applicable_hvac_systems_list_p = data["applicable_hvac_systems_list_p"]
             fan_operating_schedules_p = data["fan_operating_schedules_p"]
-            always_on = False
 
             fan_operating_schedule_id_p = hvac_p["fan_system"].get("operating_schedule")
             if fan_operating_schedule_id_p is not None:
@@ -80,6 +81,9 @@ class PRM9012019Rule09g49(RuleDefinitionListIndexedBase):
                 always_on = sum(fan_operating_schedule_vals_p) == len(
                     fan_operating_schedule_vals_p
                 )
+
+            else:
+                always_on = True  # If no schedule is defined, assume always on
 
             return hvac_id_p in applicable_hvac_systems_list_p and not always_on
 
