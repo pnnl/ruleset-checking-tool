@@ -30,7 +30,7 @@
 
 
 ## Rule Logic:  
-- Iterate through the spaces in the proposed model: `for space_p in P_RMD...spaces`  
+- Iterate through the spaces in the proposed model that are not plenums, crawlspaces, nor interstitial spaces: `for space_p in P_RMD...spaces[?(@.function!='PLENUM' && @.function!='CRAWL_SPACE' && @.function!='INTERSTITIAL_SPACE')]`  
   - Get the lighting space type: `space_type_p = space_p.lighting_space_type` 
   - Iterate through the miscellaneous equipment loads in the space: `for misc_equip_p in space_p.miscellaneous_equipment:`  
     - Get the proposed automatic receptacle control: `auto_receptacle_control_p = misc_equip_p.automatic_controlled_percentage > 0.0 `  
