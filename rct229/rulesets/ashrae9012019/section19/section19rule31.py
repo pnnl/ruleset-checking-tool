@@ -87,7 +87,10 @@ class PRM9012019Rule58x03(RuleDefinitionListIndexedBase):
             else:
                 always_on = True  # If no schedule is defined, assume always on
 
-            return hvac_id_p in hvac_systems_primarily_serving_comp_room_p and not always_on
+            return (
+                hvac_id_p in hvac_systems_primarily_serving_comp_room_p
+                and not always_on
+            )
 
         def get_calc_vals(self, context, data=None):
             hvac_p = context.PROPOSED
