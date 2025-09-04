@@ -27,13 +27,9 @@
 
     - Get lighting status type dictionary for P_RMR: `space_lighting_status_type_dict_p = get_lighting_status_type(building_segment_p)`  
   
-  - For each thermal block in building segment: `thermal_block_b in building_segment_b.thermal_blocks:`  
-  
-    - For each zone in thermal block: `zone_b in thermal_block_b.zones:`  
+  - For each zone in building segment: `zone_b in building_segment_b.zones:`  
 
-      - For each space in zone: `space_b in zone_b.spaces:`  
-
-        - For each space in zone: `space_b in zone_b.spaces:`  
+      - For each space that is not a plenum, crawlspace nor interstitial space in zone: `space_b in zone_b.spaces[?(@.function!='PLENUM' && @.function!='CRAWL_SPACE' && @.function!='INTERSTITIAL_SPACE')]:`
 
           - Get total lighting power density in space: `total_space_LPD_b = sum(interior_lighting.power_per_area for interior_lighting in space_b.interior_lighting)`
 
