@@ -20,7 +20,7 @@
 ## Applicability Checks:  
 - Create a list of the lighting space types that correspond to space types that may have receptacle control requirements in Section 8.4.2: `EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES = ["OFFICE_ENCLOSED", "CONFERENCE_MEETING_MULTIPURPOSE_ROOM", "COPY_PRINT_ROOM", "LOUNGE_BREAKROOM_HEALTH_CARE_FACILITY", "LOUNGE_BREAKROOM_ALL_OTHERS", "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_PENITENTIARY", "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_SCHOOL", "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER", "OFFICE_OPEN_PLAN"]`  
 - Create a list to store the spaces that have receptacle controls installed where not required by Standard 90.1 2019, Section 8.4.2: `spaces_with_receptacle_controls_beyond_req = []`  
-- Iterate through the spaces in the proposed model: `for space_p in P_RMD...spaces`  
+- Iterate through the spaces in the proposed model that are not plenums, crawlspaces, nor interstitial spaces: `for space_p in P_RMD...spaces[?(@.function!='PLENUM' && @.function!='CRAWL_SPACE' && @.function!='INTERSTITIAL_SPACE')]`  
   - Get the lighting space type: `space_type_p = space_p.lighting_space_type`  
   - Iterate through the miscellaneous equipment loads in the space: `for misc_equip_p in space_p.miscellaneous_equipment:`  
     - Get the proposed automatic receptacle control: `auto_receptacle_control_p = misc_equip_p.automatic_controlled_percentage > 0.0 `  
