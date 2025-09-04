@@ -24,11 +24,6 @@ class PRM9012019Rule75k92(RuleDefinitionBase):
             rmd_context="ruleset_model_descriptions/0",
             required_fields={
                 "$": ["model_output"],
-                "model_output": [
-                    "unmet_load_hours_heating",
-                    "unmet_load_hours_cooling",
-                    "unmet_load_hours",
-                ],
             },
             manual_check_required_msg=UNDETERMINED_MSG,
             precision={
@@ -44,9 +39,9 @@ class PRM9012019Rule75k92(RuleDefinitionBase):
         rmd_p = context.PROPOSED
         output_instance_p = rmd_p["model_output"]
 
-        unmet_load_hours_heating_p = output_instance_p["unmet_load_hours_heating"]
-        unmet_load_hours_cooling_p = output_instance_p["unmet_load_hours_cooling"]
-        coincident_unmet_load_hours_p = output_instance_p["unmet_load_hours"]
+        unmet_load_hours_heating_p = output_instance_p.get("unmet_load_hours_heating")
+        unmet_load_hours_cooling_p = output_instance_p.get("unmet_load_hours_cooling")
+        coincident_unmet_load_hours_p = output_instance_p.get("unmet_load_hours")
 
         return {
             "unmet_load_hours_heating_p": unmet_load_hours_heating_p,
