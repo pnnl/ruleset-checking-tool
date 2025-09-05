@@ -2,18 +2,9 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_3_fns import table_g3_5_3_lookup
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
-    HVAC_SYS,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
-    get_baseline_system_types,
-)
+from rct229.rulesets.ashrae9012022.data_fns.table_J_6_fns import table_J_6_lookup
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.assertions import getattr_, assert_
-from rct229.utils.pint_utils import CalcQ
-from rct229.utils.std_comparisons import std_equal
 
 ENERGY_SOURCE = SchemaEnums.schema_enums["EnergySourceOptions"]
 CHILLER_COMPRESSOR = SchemaEnums.schema_enums["ChillerCompressorOptions"]
@@ -63,8 +54,7 @@ class PRM9012019Rule34d03(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             chiller_b = context.BASELINE_0
 
-            rated_capacity_b = chiller_b["rated_capacity"].to("ton")
-
+            rated_capacity_b = chiller_b["rated_capacity"]
             if chiller_b["compressor_type"] == CHILLER_COMPRESSOR.CENTRIFUGAL:
                 if rated_capacity_b < 150 * ureg("ton"):
                     curve_set = "Z"
@@ -208,20 +198,27 @@ class PRM9012019Rule34d03(RuleDefinitionListIndexedBase):
                                             {"CHWT": chwt, "ECWT": ecwt, "PLR": plr}
                                         )
 
-            return {
-                "non_matching_power_validation_points_len": len(
-                    non_matching_power_validation_points
-                ),
-                "missing_capacity_validation_points_len": len(
-                    missing_capacity_validation_points
-                ),
-                "non_matching_capacity_validation_points_len": len(
-                    non_matching_capacity_validation_points
-                ),
-                "missing_power_validation_points_len": len(
-                    missing_power_validation_points
-                ),
-            }
+                return {
+                    "non_matching_power_validation_points_len": len(
+                        non_matching_power_validation_points
+                    ),
+                    "missing_capacity_validation_points_len": len(
+                        missing_capacity_validation_points
+                    ),
+                    "non_matching_capacity_validation_points_len": len(
+                        non_matching_capacity_validation_points
+                    ),
+                    "missing_power_validation_points_len": len(
+                        missing_power_validation_points
+                    ),
+                }
+            else:
+                return {
+                    "non_matching_power_validation_points_len": None,
+                    "missing_capacity_validation_points_len": None,
+                    "non_matching_capacity_validation_points_len": None,
+                    "missing_power_validation_points_len": None,
+                }
 
         def rule_check(self, context, calc_vals=None, data=None):
             non_matching_power_validation_points_len = calc_vals[
