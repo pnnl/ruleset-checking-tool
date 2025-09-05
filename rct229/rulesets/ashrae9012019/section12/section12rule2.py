@@ -173,9 +173,8 @@ class PRM9012019Rule66e91(RuleDefinitionListIndexedBase):
                     auto_receptacle_control_b = calc_vals["auto_receptacle_control_b"]
                     auto_receptacle_control_p = calc_vals["auto_receptacle_control_p"]
                     space_type_b = calc_vals["space_type_b"]
-                    return (
-                        eflh_difference > 0
-                        and (
+                    return eflh_difference > 0 and (
+                        (
                             auto_receptacle_control_p
                             and space_type_b in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES
                             and not auto_receptacle_control_b
