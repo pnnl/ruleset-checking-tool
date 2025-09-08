@@ -19,19 +19,19 @@ from rct229.utils.pint_utils import ZERO
 FAIL_MSG = "Baseline fenestration was modeled with shading projections and/or overhangs, which is incorrect."
 
 
-class Section5Rule22(RuleDefinitionListIndexedBase):
+class PRM9012019Rule50p59(RuleDefinitionListIndexedBase):
     """Rule 22 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule22, self).__init__(
+        super(PRM9012019Rule50p59, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
                 "$.ruleset_model_descriptions[*]": ["weather"],
-                "weather": ["climate_zone"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
             },
-            each_rule=Section5Rule22.BuildingRule(),
+            each_rule=PRM9012019Rule50p59.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-22",
             description="Baseline fenestration shall be assumed to be flush with the exterior wall, and no shading "
@@ -45,15 +45,19 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        return {"climate_zone": climate_zone}
+        constructions = rpd_b["ruleset_model_descriptions"][0].get("constructions")
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule22.BuildingRule, self).__init__(
+            super(PRM9012019Rule50p59.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section5Rule22.BuildingRule.AboveGradeWallRule(),
+                each_rule=PRM9012019Rule50p59.BuildingRule.AboveGradeWallRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -62,7 +66,7 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
             building_b = context.BASELINE_0
             return {
                 "scc_dict_b": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building_b
+                    data["climate_zone"], building_b, data["constructions"]
                 ),
             }
 
@@ -76,19 +80,21 @@ class Section5Rule22(RuleDefinitionListIndexedBase):
 
         class AboveGradeWallRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(Section5Rule22.BuildingRule.AboveGradeWallRule, self).__init__(
+                super(
+                    PRM9012019Rule50p59.BuildingRule.AboveGradeWallRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     list_path="subsurfaces[*]",
-                    each_rule=Section5Rule22.BuildingRule.AboveGradeWallRule.SubsurfaceRule(),
+                    each_rule=PRM9012019Rule50p59.BuildingRule.AboveGradeWallRule.SubsurfaceRule(),
                     index_rmd=BASELINE_0,
                 )
 
             class SubsurfaceRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        Section5Rule22.BuildingRule.AboveGradeWallRule.SubsurfaceRule,
+                        PRM9012019Rule50p59.BuildingRule.AboveGradeWallRule.SubsurfaceRule,
                         self,
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(

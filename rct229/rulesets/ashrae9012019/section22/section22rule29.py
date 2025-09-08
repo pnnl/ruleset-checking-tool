@@ -30,15 +30,15 @@ REQUIRED_PUMP_POWER = 19 * ureg("W/gpm")
 FluidLoopOptions = SchemaEnums.schema_enums["FluidLoopOptions"]
 
 
-class Section22Rule29(RuleDefinitionListIndexedBase):
+class PRM9012019Rule60w01(RuleDefinitionListIndexedBase):
     """Rule 29 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule29, self).__init__(
+        super(PRM9012019Rule60w01, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule29.CondensingFluidLoopRule(),
+            each_rule=PRM9012019Rule60w01.CondensingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-29",
             description="Baseline chilled water loops that do not use purchased chilled water and do not serve computer rooms (i.e., do not serve baseline system type 11) shall have a condenser water pump power of 19 W/gpm at design conditions.",
@@ -86,7 +86,7 @@ class Section22Rule29(RuleDefinitionListIndexedBase):
 
     class CondensingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule29.CondensingFluidLoopRule, self).__init__(
+            super(PRM9012019Rule60w01.CondensingFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

@@ -8,15 +8,15 @@ from rct229.utils.jsonpath_utils import find_all
 CONSTANT = SchemaEnums.schema_enums["InfiltrationMethodOptions"].CONSTANT
 
 
-class Section5Rule33(RuleDefinitionListIndexedBase):
+class PRM9012019Rule45p36(RuleDefinitionListIndexedBase):
     """Rule 33 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule33, self).__init__(
+        super(PRM9012019Rule45p36, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section5Rule33.BuildingRule(),
+            each_rule=PRM9012019Rule45p36.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-33",
             description="The infiltration modeling method in the baseline includes adjustment for weather and building operation.",
@@ -28,7 +28,7 @@ class Section5Rule33(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section5Rule33.BuildingRule, self).__init__(
+            super(PRM9012019Rule45p36.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

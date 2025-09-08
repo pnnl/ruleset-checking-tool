@@ -32,15 +32,15 @@ CHILLER_EFFICIENCY_METRIC_TYPES = SchemaEnums.schema_enums[
 ]
 
 
-class Section22Rule22(RuleDefinitionListIndexedBase):
+class PRM9012019Rule55f82(RuleDefinitionListIndexedBase):
     """Rule 22 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule22, self).__init__(
+        super(PRM9012019Rule55f82, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule22.ChillerRule(),
+            each_rule=PRM9012019Rule55f82.ChillerRule(),
             index_rmd=BASELINE_0,
             id="22-22",
             description="The baseline chiller efficiencies shall be modeled at the minimum efficiency levels for full load, in accordance with Tables G3.5.3.",
@@ -69,7 +69,7 @@ class Section22Rule22(RuleDefinitionListIndexedBase):
 
     class ChillerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule22.ChillerRule, self).__init__(
+            super(PRM9012019Rule55f82.ChillerRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

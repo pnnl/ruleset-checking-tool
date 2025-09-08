@@ -27,15 +27,15 @@ APPLICABLE_SYS_TYPES = [
 REQUIRED_PUMP_FLOW_RATE = 13 * ureg("W/gpm")
 
 
-class Section22Rule11(RuleDefinitionListIndexedBase):
+class PRM9012019Rule57w94(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule11, self).__init__(
+        super(PRM9012019Rule57w94, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule11.ChillerFluidLoopRule(),
+            each_rule=PRM9012019Rule57w94.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-11",
             description="Baseline chilled water systems that do not use purchased chilled water shall have a variable-flow secondary pump power of 13 W/gpm at design conditions.",
@@ -84,11 +84,11 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
 
     class ChillerFluidLoopRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section22Rule11.ChillerFluidLoopRule, self).__init__(
+            super(PRM9012019Rule57w94.ChillerFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section22Rule11.ChillerFluidLoopRule.SecondaryChildLoopRule(),
+                each_rule=PRM9012019Rule57w94.ChillerFluidLoopRule.SecondaryChildLoopRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.child_loops[*]",
             )
@@ -96,7 +96,8 @@ class Section22Rule11(RuleDefinitionListIndexedBase):
         class SecondaryChildLoopRule(RuleDefinitionBase):
             def __init__(self):
                 super(
-                    Section22Rule11.ChillerFluidLoopRule.SecondaryChildLoopRule, self
+                    PRM9012019Rule57w94.ChillerFluidLoopRule.SecondaryChildLoopRule,
+                    self,
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False

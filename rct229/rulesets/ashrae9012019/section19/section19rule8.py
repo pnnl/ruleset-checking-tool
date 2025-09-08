@@ -7,6 +7,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_d
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.compare_standard_val import std_ge
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
 
@@ -17,15 +18,15 @@ DEMAND_CONTROL_VENTILATION_CONTROL = SchemaEnums.schema_enums[
 ]
 
 
-class Section19Rule8(RuleDefinitionListIndexedBase):
+class PRM9012019Rule02h13(RuleDefinitionListIndexedBase):
     """Rule 8 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule8, self).__init__(
+        super(PRM9012019Rule02h13, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule8.BuildingRule(),
+            each_rule=PRM9012019Rule02h13.BuildingRule(),
             index_rmd=BASELINE_0,
             id="19-8",
             description="Demand control ventilation is modeled in the baseline design in systems with outdoor air capacity greater than 3000 cfm serving areas with an average occupant design capacity greater than 100 people per 1000 ft^2.",
@@ -37,11 +38,11 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section19Rule8.BuildingRule, self).__init__(
+            super(PRM9012019Rule02h13.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=Section19Rule8.BuildingRule.HVACRule(),
+                each_rule=PRM9012019Rule02h13.BuildingRule.HVACRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             )
@@ -73,7 +74,7 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
 
         class HVACRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section19Rule8.BuildingRule.HVACRule, self).__init__(
+                super(PRM9012019Rule02h13.BuildingRule.HVACRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
@@ -157,5 +158,26 @@ class Section19Rule8(RuleDefinitionListIndexedBase):
                             )
                         )
                     )
+                    and not is_DCV_modeled_b
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                hvac_min_OA_flow = calc_vals["hvac_min_OA_flow"]
+                avg_occ_density = calc_vals["avg_occ_density"]
+                is_DCV_modeled_b = calc_vals["is_DCV_modeled_b"]
+
+                return (
+                    (std_ge(hvac_min_OA_flow, MIN_OA_CFM))
+                    and avg_occ_density > OCCUPANT_DENSITY_LIMIT
+                    and is_DCV_modeled_b
+                ) or (
+                    (
+                        hvac_min_OA_flow < MIN_OA_CFM
+                        or self.precision_comparison["hvac_min_OA_flow"](
+                            hvac_min_OA_flow,
+                            MIN_OA_CFM,
+                        )
+                    )
+                    and (std_ge(avg_occ_density, OCCUPANT_DENSITY_LIMIT))
                     and not is_DCV_modeled_b
                 )

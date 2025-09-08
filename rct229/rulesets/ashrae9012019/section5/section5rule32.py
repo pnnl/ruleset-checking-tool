@@ -29,15 +29,19 @@ CASE3_UNDETERMINED_MSG = (
 PASS_DIFFERS_MSG_REGULATED = "Roof surface solar reflectance is equal to the prescribed default value of 0.3 but differs from the solar reflectance in the user model {absorptance_solar_exterior}"
 
 
-class Section5Rule32(RuleDefinitionListIndexedBase):
+class PRM9012019Rule78r30(RuleDefinitionListIndexedBase):
     """Rule 32 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule32, self).__init__(
+        super(PRM9012019Rule78r30, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=Section5Rule32.BuildingRule(),
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
+            },
+            each_rule=PRM9012019Rule78r30.BuildingRule(),
             index_rmd=PROPOSED,
             id="5-32",
             description="The proposed roof surfaces shall be modeled using the same solar reflectance as in the user "
@@ -51,15 +55,19 @@ class Section5Rule32(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rpd_p = context.PROPOSED
         climate_zone = rpd_p["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        return {"climate_zone": climate_zone}
+        constructions = rpd_p["ruleset_model_descriptions"][0].get("constructions")
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule32.BuildingRule, self).__init__(
+            super(PRM9012019Rule78r30.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=True, BASELINE_0=False, PROPOSED=True
                 ),
-                each_rule=Section5Rule32.BuildingRule.RoofRule(),
+                each_rule=PRM9012019Rule78r30.BuildingRule.RoofRule(),
                 index_rmd=PROPOSED,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -68,7 +76,7 @@ class Section5Rule32(RuleDefinitionListIndexedBase):
             building_p = context.PROPOSED
             return {
                 "scc_dict_p": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building_p
+                    data["climate_zone"], building_p, data["constructions"]
                 ),
             }
 
@@ -82,7 +90,7 @@ class Section5Rule32(RuleDefinitionListIndexedBase):
 
         class RoofRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule32.BuildingRule.RoofRule, self).__init__(
+                super(PRM9012019Rule78r30.BuildingRule.RoofRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=True, BASELINE_0=False, PROPOSED=True
                     ),

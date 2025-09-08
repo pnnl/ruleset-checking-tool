@@ -23,15 +23,15 @@ APPLICABLE_SYS_TYPES = [
 VENT_THRESHOLD_FACTOR = 0.5
 
 
-class Section23Rule9(RuleDefinitionListIndexedBase):
+class PRM9012019Rule46w18(RuleDefinitionListIndexedBase):
     """Rule 9 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule9, self).__init__(
+        super(PRM9012019Rule46w18, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section23Rule9.HVACRule(),
+            each_rule=PRM9012019Rule46w18.HVACRule(),
             index_rmd=BASELINE_0,
             id="23-9",
             description="System 11 Minimum volume setpoint shall be the largest of 50% of the maximum design airflow rate, the minimum ventilation airflow rate or the airflow required to comply with codes or accredidation standards.",
@@ -78,7 +78,7 @@ class Section23Rule9(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section23Rule9.HVACRule, self).__init__(
+            super(PRM9012019Rule46w18.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

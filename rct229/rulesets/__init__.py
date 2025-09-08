@@ -18,6 +18,13 @@ from rct229.schema.schema_store import SchemaStore
 MODULE_EXCEPTION_LIST = ["math", "itertools"]
 
 
+def __getruleset__():
+    ruleset_list = inspect.getmembers(rulesets, inspect.ismodule)
+    for ruleset in ruleset_list:
+        if ruleset[0] == SchemaStore.SELECTED_RULESET:
+            return ruleset[1]
+
+
 def __getrules__():
     modules = []
     ruleset_list = inspect.getmembers(rulesets, inspect.ismodule)
@@ -81,6 +88,14 @@ def _meet_exception_modules(inspection_results):
 
     """
     return any(f[0] in MODULE_EXCEPTION_LIST for f in inspection_results)
+
+
+def __getrulemap__():
+    ruleset_list = inspect.getmembers(rulesets, inspect.ismodule)
+    for ruleset in ruleset_list:
+        if ruleset[0] == SchemaStore.SELECTED_RULESET:
+            rules_dict = getattr(ruleset[1], "rules_dict", None)
+            return rules_dict
 
 
 def __getattr__(name):

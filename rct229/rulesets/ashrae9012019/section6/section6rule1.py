@@ -1,11 +1,12 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import RMT
+from rct229.rulesets.ashrae9012019 import COMMON_RMD, RMD
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_7_fns import table_G3_7_lookup
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_8_fns import table_G3_8_lookup
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 CASE3_WARNING = "Project passes based on space-by-space method. Verify if project sues space-by-space method."
 CASE4_WARNING = "Project fails based on space-by-space method. LIGHTING_BUILDING_AREA_TYPE is not known to determine building area method allowance."
@@ -14,16 +15,16 @@ CASE6_WARNING = "Project fails based on building area method. LIGHTING_SPACE_TYP
 CASE7_WARNING = "LIGHTING_BUILDING_AREA_TYPE is not known and LIGHTING_SPACE_TYPE is not known in all spaces to determine allowance."
 
 
-class Section6Rule1(RuleDefinitionListIndexedBase):
+class PRM9012019Rule99c05(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(Section6Rule1, self).__init__(
+        super(PRM9012019Rule99c05, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=Section6Rule1.BuildingSegmentRule(),
-            index_rmd=RMT.PROPOSED,
+            each_rule=PRM9012019Rule99c05.BuildingSegmentRule(),
+            index_rmd=COMMON_RMD.PROPOSED,
             id="6-1",
             description="The total building interior lighting power shall not exceed the interior lighting power "
             "allowance determined using either Table G3.7 or G3.8",
@@ -35,7 +36,7 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
 
     class BuildingSegmentRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section6Rule1.BuildingSegmentRule, self).__init__(
+            super(PRM9012019Rule99c05.BuildingSegmentRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
@@ -142,6 +143,39 @@ class Section6Rule1(RuleDefinitionListIndexedBase):
                     ](
                         building_segment_design_lighting_wattage,
                         allowable_lighting_wattage_SBS,
+                    )
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            allowable_LPD_BAM = calc_vals["allowable_LPD_BAM"]
+            check_BAM_flag = calc_vals["check_BAM_flag"]
+            building_segment_design_lighting_wattage = calc_vals[
+                "building_segment_design_lighting_wattage"
+            ]
+            total_building_segment_area_p = calc_vals["total_building_segment_area_p"]
+            allowable_lighting_wattage_SBS = calc_vals["allowable_lighting_wattage_SBS"]
+
+            allowable_LPD_wattage_BAM = (
+                allowable_LPD_BAM * total_building_segment_area_p
+                if allowable_LPD_BAM
+                else ZERO.POWER
+            )
+
+            return (
+                (allowable_LPD_BAM or not check_BAM_flag)
+                and (
+                    building_segment_design_lighting_wattage < allowable_LPD_wattage_BAM
+                )
+                or std_equal(
+                    allowable_LPD_wattage_BAM, building_segment_design_lighting_wattage
+                )
+                or (
+                    building_segment_design_lighting_wattage
+                    < allowable_lighting_wattage_SBS
+                    or std_equal(
+                        allowable_lighting_wattage_SBS,
+                        building_segment_design_lighting_wattage,
                     )
                 )
             )

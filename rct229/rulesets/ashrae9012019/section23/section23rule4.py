@@ -21,15 +21,15 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section23Rule4(RuleDefinitionListIndexedBase):
+class PRM9012019Rule68z84(RuleDefinitionListIndexedBase):
     """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule4, self).__init__(
+        super(PRM9012019Rule68z84, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section23Rule4.RuleSetModelInstanceRule(),
+            each_rule=PRM9012019Rule68z84.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="23-4",
             description="Baseline systems 5 & 7 serving lab spaces per G3.1.1c shall reduce lab exhaust and makeup air during unoccupied periods to 50% of zone peak airflow, the minimum outdoor airflow, or rate required to comply with minimum accreditation standards whichever is larger.",
@@ -38,15 +38,14 @@ class Section23Rule4(RuleDefinitionListIndexedBase):
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0]",
             required_fields={
-                "$.ruleset_model_descriptions[*]": ["calendar", "weather"],
-                "weather": ["climate_zone"],
-                "calendar": ["is_leap_year"],
+                "$.ruleset_model_descriptions[*]": ["weather"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
             },
         )
 
     class RuleSetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section23Rule4.RuleSetModelInstanceRule, self).__init__(
+            super(PRM9012019Rule68z84.RuleSetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
@@ -56,7 +55,6 @@ class Section23Rule4(RuleDefinitionListIndexedBase):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
             climate_zone_b = rmd_b["weather"]["climate_zone"]
-            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             baseline_system_types_dict = get_baseline_system_types(rmd_b)
 
@@ -69,7 +67,7 @@ class Section23Rule4(RuleDefinitionListIndexedBase):
             ]
 
             hvac_systems_serving_lab_zones = get_lab_zone_hvac_systems(
-                rmd_b, rmd_p, climate_zone_b, is_leap_year_b
+                rmd_b, rmd_p, climate_zone_b
             )
 
             return {

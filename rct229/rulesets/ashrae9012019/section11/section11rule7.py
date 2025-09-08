@@ -18,19 +18,19 @@ from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
 
 SERVICE_WATER_HEATING_SPACE = SchemaEnums.schema_enums[
-    "ServiceWaterHeatingSpaceOptions2019ASHRAE901"
+    "ServiceWaterHeatingAreaOptions2019ASHRAE901"
 ]
 
 
-class Section11Rule7(RuleDefinitionListIndexedBase):
+class PRM9012019Rule49y39(RuleDefinitionListIndexedBase):
     """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule7, self).__init__(
+        super(PRM9012019Rule49y39, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section11Rule7.RMDRule(),
+            each_rule=PRM9012019Rule49y39.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-7",
             description="Except in buildings that will have no service water heating loads, the service water heating system type in the baseline building design shall be as specified in Table G3.1.1-2 for each building area type in the proposed design.",
@@ -42,27 +42,24 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule7.RMDRule, self).__init__(
+            super(PRM9012019Rule49y39.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False,
                     BASELINE_0=True,
                     PROPOSED=True,
                 ),
                 index_rmd=BASELINE_0,
-                each_rule=Section11Rule7.RMDRule.SWHBATRule(),
-                required_fields={"$": ["calendar"], "$.calendar": ["is_leap_year"]},
+                each_rule=PRM9012019Rule49y39.RMDRule.SWHBATRule(),
             )
 
         def create_data(self, context, data):
             rmd_p = context.PROPOSED
             rmd_b = context.BASELINE_0
-            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             service_water_heating_uses_p = {
                 swh_use["id"]: swh_use.get("use", 0.0)
                 for swh_use in find_all(
-                    # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
-                    "$.buildings[*].building_segments[*].zones[*].spaces[*].service_water_heating_uses[*]",
+                    "$.service_water_heating_uses[*]",
                     rmd_p,
                 )
             }
@@ -77,16 +74,14 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
             return {
                 "service_water_heating_uses_p": service_water_heating_uses_p,
                 "swh_equip_type_b": swh_equip_type_b,
-                "is_leap_year_b": is_leap_year_b,
             }
 
         def create_context_list(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            is_leap_year_b = data["is_leap_year_b"]
 
             swh_bats_and_equip_association_b = (
-                get_swh_components_associated_with_each_swh_bat(rmd_b, is_leap_year_b)
+                get_swh_components_associated_with_each_swh_bat(rmd_b)
             )
             swh_bats_and_uses_p = get_swh_bats_and_swh_use(rmd_p)
 
@@ -119,7 +114,7 @@ class Section11Rule7(RuleDefinitionListIndexedBase):
 
         class SWHBATRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section11Rule7.RMDRule.SWHBATRule, self).__init__(
+                super(PRM9012019Rule49y39.RMDRule.SWHBATRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

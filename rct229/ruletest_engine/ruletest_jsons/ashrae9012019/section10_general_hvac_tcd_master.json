@@ -1,12 +1,10 @@
 {
-    "rule-10-7-a": {
-        "Section": 10,
-        "Rule": 7,
+    "rule-34l50-a": {
         "Test": "a",
         "test_description": "A one story building includes a baseline system 3. The capacity is 70 kBtu/hr and the cooling efficiency of the system matches the expected efficiency based on the capacity range from Table G3.5.1.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "10-7",
+            "rule_id": "34l50",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -95,14 +93,12 @@
             }
         }
     },
-    "rule-10-7-b": {
-        "Section": 10,
-        "Rule": 7,
+    "rule-34l50-b": {
         "Test": "b",
         "test_description": "A one story building includes a baseline system 4. The capacity is 70 kBtu/hr and the cooling efficiency of the system matches the expected efficiency based on the capacity range from Table G3.5.2.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "10-7",
+            "rule_id": "34l50",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -191,14 +187,12 @@
             }
         }
     },
-    "rule-10-7-c": {
-        "Section": 10,
-        "Rule": 7,
+    "rule-34l50-c": {
         "Test": "c",
         "test_description": "A one story building includes a baseline system 4. The cooling capacity is 150 kBtu/hr and the cooling efficiency of the system matches the expected efficiency based on the capacity range from Table G3.5.2.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "10-7",
+            "rule_id": "34l50",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -287,14 +281,12 @@
             }
         }
     },
-    "rule-10-7-d": {
-        "Section": 10,
-        "Rule": 7,
+    "rule-34l50-d": {
         "Test": "d",
         "test_description": "A one story building includes a baseline system 4. The cooling capacity is 150 kBtu/hr and the cooling efficiency of the system does not match the expected efficiency based on the capacity range from Table G3.5.2.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "10-7",
+            "rule_id": "34l50",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -383,14 +375,12 @@
             }
         }
     },
-    "rule-10-7-e": {
-        "Section": 10,
-        "Rule": 7,
+    "rule-34l50-e": {
         "Test": "e",
         "test_description": "A one story building includes a baseline system 4. The cooling capacity is undefined and the cooling efficiency of the system does not match the most conservative cooling efficiency from Table G3.5.2.",
         "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "10-7",
+            "rule_id": "34l50",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -486,14 +476,12 @@
             }
         }
     },
-    "rule-10-7-f": {
-        "Section": 10,
-        "Rule": 7,
+    "rule-34l50-f": {
         "Test": "f",
         "test_description": "A two story building includes a baseline system 5. The system serves more than 1 floor.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "10-7",
+            "rule_id": "34l50",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the COPnfcooling HVAC system efficiency per Tables G3.5.1-G3.5.6.  Where multiple HVAC zones or residential spaces are combined into a single thermal block the cooling efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -623,15 +611,13 @@
             }
         }
     },
-    "rule-10-14-a": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-a": {
         "Test": "a",
         "test_description": "A one story building includes a baseline system 3. The capacity is undefined and the heating efficiency of the system matches the most conservative heating efficiency from Table G3.5.5.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Check if the modeled baseline heating efficiency was established correctly based upon equipment capacity and type. The modeled efficiency matches the capacity bracket in Appendix G efficiency tables with the highest efficiency (i.e., most conservative efficiency has been modeled).",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -718,15 +704,13 @@
             }
         }
     },
-    "rule-10-14-b": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-b": {
         "Test": "b",
         "test_description": "A one story building includes a baseline system 4. The capacity is undefined and the heating efficiency of the system matches the most conservative heating efficiency from Table G3.5.2.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Check if the modeled baseline heating efficiency was established correctly based upon equipment capacity and type. The modeled efficiency at Tdb 47F was modeled with an efficiency per the capacity bracket in Appendix G efficiency tables with the highest efficiency (i.e., most conservative efficiency has been modeled). It is often the case that the Tdb 17F efficiency is captured in the model via the performance curves as opposed to an explicit efficiency value entry. If there is no explicit option to enter an efficiency value at Tdb 17F check that appropriate performance curves were modeled.",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -813,14 +797,12 @@
             }
         }
     },
-    "rule-10-14-c": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-c": {
         "Test": "c",
         "test_description": "A one story building includes a baseline system 3. The capacity is 200,000 Btu/hr and the heating efficiency of the system matches the expected efficiency based on the capacity range from Table G3.5.5.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -908,14 +890,12 @@
             }
         }
     },
-    "rule-10-14-d": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-d": {
         "Test": "d",
         "test_description": "A one story building includes a baseline system 4. The capacity is undefined and the heating efficiency of the system does not match the most conservative heating efficiency from Table G3.5.2.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -1002,14 +982,12 @@
             }
         }
     },
-    "rule-10-14-e": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-e": {
         "Test": "e",
         "test_description": "A one story building includes a baseline system 4. The capacity is 50,000 Btu/hr and the heating efficiency of the system matches the expected efficiency based on the capacity range from Table G3.5.2.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -1097,14 +1075,12 @@
             }
         }
     },
-    "rule-10-14-f": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-f": {
         "Test": "f",
         "test_description": "A one story building includes a baseline system 4. The capacity is 50,000 Btu/hr and the heating efficiency of the system does not match the expected efficiency based on the capacity range from Table G3.5.2.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -1192,14 +1168,12 @@
             }
         }
     },
-    "rule-10-14-g": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-g": {
         "Test": "g",
         "test_description": "A one story building includes a baseline system 4. The capacity is 100,000 Btu/hr and the (high and low-temperature) heating efficiencies of the system match the expected efficiencies based on the capacity range from Table G3.5.2.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -1290,14 +1264,12 @@
             }
         }
     },
-    "rule-10-14-h": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-h": {
         "Test": "h",
         "test_description": "A one story building includes a baseline system 4. The capacity is 100,000 Btu/hr and the high-temperature heating efficiency of the system does not match the expected high-temperature heating efficiency based on the capacity range from Table G3.5.2 but the low-temperature heating efficiency does match.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -1388,14 +1360,12 @@
             }
         }
     },
-    "rule-10-14-i": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-i": {
         "Test": "i",
         "test_description": "A one story building includes a baseline system 4. The capacity is 100,000 Btu/hr and the high-temperature heating efficiency of the system matches the expected high-temperature heating efficiency based on the capacity range from Table G3.5.2 but the low-temperature heating efficiency does not match.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -1486,14 +1456,12 @@
             }
         }
     },
-    "rule-10-14-j": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-j": {
         "Test": "j",
         "test_description": "A one story building includes a baseline system 4. The capacity is 100,000 Btu/hr and the (high and low-temperature) heating efficiency values of the system match the expected heating efficiencies based on the capacity range from Table G3.5.2, however the efficiency metric is incorrect.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -1584,14 +1552,12 @@
             }
         }
     },
-    "rule-10-14-k": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-k": {
         "Test": "k",
         "test_description": "A one story building includes a baseline system 4. The capacity is 100,000 Btu/hr the (high and low-temperature) heating efficiencies of the system match the expected heating efficiencies based on the capacity range from Table G3.5.2.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -1682,14 +1648,12 @@
             }
         }
     },
-    "rule-10-14-l": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-l": {
         "Test": "l",
         "test_description": "A two story building includes a baseline system 5. The system serves more than 1 floor.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -1813,14 +1777,12 @@
             }
         }
     },
-    "rule-10-14-m": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-m": {
         "Test": "m",
         "test_description": "A one story building includes a baseline system 9. The capacity is undefined and the heating efficiency of the system matches the most conservative heating efficiency from Table G3.5.5.",
         "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -1904,14 +1866,12 @@
             }
         }
     },
-    "rule-10-14-n": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-n": {
         "Test": "n",
         "test_description": "A one story building includes a baseline system 9. The capacity is undefined and the heating efficiency of the system does not match the heating efficiency from Table G3.5.5.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -1995,14 +1955,12 @@
             }
         }
     },
-    "rule-10-14-o": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-o": {
         "Test": "o",
         "test_description": "A one story building includes a baseline system 3 with a zone that has defined an aggregation factor greater than 1. The heating capacity is 1,000,000 Btu/hr and the heating efficiency of the system matches the expected heating efficiency from Table G3.5.5 based on the capacity range associated with the average heating capacity per disaggregated zone.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",
@@ -2091,14 +2049,12 @@
             }
         }
     },
-    "rule-10-14-p": {
-        "Section": 10,
-        "Rule": 14,
+    "rule-10p28-p": {
         "Test": "p",
         "test_description": "A one story building utilizes system 4. The capacity is 80,000 Btu/hr and the (high and low-temperature) heating efficiencies of the system are defined but the zone aggregation factor is undefined so it cannot be determined if the correct capacity range was used to establish the baseline efficiency.",
         "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "10-14",
+            "rule_id": "10p28",
             "ruleset_reference": "G3.1.2.1",
             "rule_description": "Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces. ",
             "applicable_rmr": "Baseline Model",

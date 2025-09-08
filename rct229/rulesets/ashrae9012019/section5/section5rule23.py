@@ -4,15 +4,15 @@ from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_descr
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 
 
-class Section5Rule23(RuleDefinitionListIndexedBase):
+class PRM9012019Rule11q41(RuleDefinitionListIndexedBase):
     """Rule 23 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule23, self).__init__(
+        super(PRM9012019Rule11q41, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section5Rule23.BuildingRule(),
+            each_rule=PRM9012019Rule11q41.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-23",
             description="Manual fenestration shading devices, such as blinds or shades, shall be modeled or not modeled the same as in the baseline building design.",
@@ -24,18 +24,18 @@ class Section5Rule23(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section5Rule23.BuildingRule, self).__init__(
+            super(PRM9012019Rule11q41.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 list_path="$.building_segments[*].zones[*].surfaces[*].subsurfaces[*]",
-                each_rule=Section5Rule23.BuildingRule.SubsurfaceRule(),
+                each_rule=PRM9012019Rule11q41.BuildingRule.SubsurfaceRule(),
                 index_rmd=BASELINE_0,
             )
 
         class SubsurfaceRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section5Rule23.BuildingRule.SubsurfaceRule, self).__init__(
+                super(PRM9012019Rule11q41.BuildingRule.SubsurfaceRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

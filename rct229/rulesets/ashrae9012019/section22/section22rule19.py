@@ -27,15 +27,15 @@ APPLICABLE_SYS_TYPES = [
 TEMPERATURE_RESET = SchemaEnums.schema_enums["TemperatureResetOptions"]
 
 
-class Section22Rule19(RuleDefinitionListIndexedBase):
+class PRM9012019Rule68h16(RuleDefinitionListIndexedBase):
     """Rule 19 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule19, self).__init__(
+        super(PRM9012019Rule68h16, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule19.HeatRejectionRule(),
+            each_rule=PRM9012019Rule68h16.HeatRejectionRule(),
             index_rmd=BASELINE_0,
             id="22-19",
             description="The baseline heat rejection device shall be controlled to maintain a constant leaving water temperature.",
@@ -74,7 +74,7 @@ class Section22Rule19(RuleDefinitionListIndexedBase):
 
     class HeatRejectionRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule19.HeatRejectionRule, self).__init__(
+            super(PRM9012019Rule68h16.HeatRejectionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

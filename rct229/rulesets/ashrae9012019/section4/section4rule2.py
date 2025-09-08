@@ -22,15 +22,15 @@ FAIL_MSG_B = "Fail because a humidity schedule is defined in the baseline but no
 FAIL_MSG_P = "Fail because a humidity schedule is defined in the proposed but not in the baseline."
 
 
-class Section4Rule2(RuleDefinitionListIndexedBase):
+class PRM9012019Rule85i93(RuleDefinitionListIndexedBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
-        super(Section4Rule2, self).__init__(
+        super(PRM9012019Rule85i93, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section4Rule2.RuleSetModelInstanceRule(),
+            each_rule=PRM9012019Rule85i93.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="4-2",
             description="Humidity Control Setpoints shall be the same for proposed design and baseline building design.",
@@ -42,17 +42,16 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section4Rule2.RuleSetModelInstanceRule, self).__init__(
+            super(PRM9012019Rule85i93.RuleSetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section4Rule2.RuleSetModelInstanceRule.ZoneRule(),
+                each_rule=PRM9012019Rule85i93.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
                 required_fields={
-                    "$": ["weather", "calendar"],
+                    "$": ["weather"],
                     "weather": ["climate_zone"],
-                    "calendar": ["is_leap_year"],
                 },
             )
 
@@ -60,10 +59,8 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
             climate_zone = rmd_b["weather"]["climate_zone"]
-            is_leap_year = rmd_b["calendar"]["is_leap_year"]
             return {
                 "climate_zone": climate_zone,
-                "is_leap_year": is_leap_year,
                 "schedules_b": rmd_b.get("schedules"),
                 "schedules_p": rmd_p.get("schedules"),
                 "zcc_dict_b": get_zone_conditioning_category_rmd_dict(
@@ -78,7 +75,9 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section4Rule2.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
+                super(
+                    PRM9012019Rule85i93.RuleSetModelInstanceRule.ZoneRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -86,12 +85,6 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                is_leap_year = data["is_leap_year"]
-                number_of_hours = (
-                    LeapYear.LEAP_YEAR_HOURS
-                    if is_leap_year
-                    else LeapYear.REGULAR_YEAR_HOURS
-                )
 
                 zone_b = context.BASELINE_0
                 zone_p = context.PROPOSED
@@ -125,12 +118,6 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                         "schedules",
                         "hourly_values",
                     )
-                    assert_(
-                        len(minimum_humidity_stpt_hourly_values_b) == number_of_hours,
-                        f"minimum humidity setpoint hourly schedule {minimum_humidity_stpt_sch_id_b} have unexpected "
-                        f"number of hours. The hours should be {number_of_hours}, but got "
-                        f"{len(minimum_humidity_stpt_hourly_values_b)} instead. ",
-                    )
 
                 minimum_humidity_stpt_hourly_values_p = None
                 if minimum_humidity_stpt_sch_id_p:
@@ -142,12 +129,6 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                         ),
                         "schedules",
                         "hourly_values",
-                    )
-                    assert_(
-                        len(minimum_humidity_stpt_hourly_values_p) == number_of_hours,
-                        f"minimum humidity setpoint hourly schedule {minimum_humidity_stpt_sch_id_p} have unexpected "
-                        f"number of hours. The hours should be {number_of_hours}, but got "
-                        f"{len(minimum_humidity_stpt_hourly_values_p)} instead. ",
                     )
 
                 maximum_humidity_stpt_hourly_values_b = None
@@ -163,12 +144,6 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                         "schedules",
                         "hourly_values",
                     )
-                    assert_(
-                        len(maximum_humidity_stpt_hourly_values_b) == number_of_hours,
-                        f"maximum humidity setpoint hourly schedule {maximum_humidity_stpt_sch_id_b} have unexpected "
-                        f"number of hours. The hours should be {number_of_hours}, but got "
-                        f"{len(maximum_humidity_stpt_hourly_values_b)} instead. ",
-                    )
 
                 maximum_humidity_stpt_hourly_values_p = None
                 if maximum_humidity_stpt_sch_id_p:
@@ -180,12 +155,6 @@ class Section4Rule2(RuleDefinitionListIndexedBase):
                         ),
                         "schedules",
                         "hourly_values",
-                    )
-                    assert_(
-                        len(maximum_humidity_stpt_hourly_values_p) == number_of_hours,
-                        f"maximum humidity setpoint hourly schedule {maximum_humidity_stpt_sch_id_p} have unexpected "
-                        f"number of hours. The hours should be {number_of_hours}, but got "
-                        f"{len(maximum_humidity_stpt_hourly_values_p)} instead. ",
                     )
 
                 # None matches None or hourly values matched exactly.

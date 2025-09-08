@@ -13,11 +13,11 @@ APPLICABLE_GENERAL_STATUS = [
 ]
 
 
-class Section5Rule17(RuleDefinitionListIndexedBase):
+class PRM9012019Rule87g56(RuleDefinitionListIndexedBase):
     """Rule 17 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule17, self).__init__(
+        super(PRM9012019Rule87g56, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
@@ -27,14 +27,14 @@ class Section5Rule17(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5(c) Building Envelope Modeling Requirements for the Baseline building",
             is_primary_rule=False,
-            each_rule=Section5Rule17.ZoneRule(),
+            each_rule=PRM9012019Rule87g56.ZoneRule(),
             index_rmd=BASELINE_0,
             list_path="ruleset_model_descriptions[0].buildings[*].building_segments[*].zones[*]",
         )
 
     class ZoneRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section5Rule17.ZoneRule, self).__init__(
+            super(PRM9012019Rule87g56.ZoneRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

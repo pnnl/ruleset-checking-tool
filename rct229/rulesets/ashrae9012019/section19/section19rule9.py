@@ -19,15 +19,15 @@ APPLICABLE_SYS_TYPES = [HVAC_SYS.SYS_1, HVAC_SYS.SYS_2, HVAC_SYS.SYS_9, HVAC_SYS
 AIR_ECONOMIZER = SchemaEnums.schema_enums["AirEconomizerOptions"]
 
 
-class Section19Rule9(RuleDefinitionListIndexedBase):
+class PRM9012019Rule23q51(RuleDefinitionListIndexedBase):
     """Rule 9 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule9, self).__init__(
+        super(PRM9012019Rule23q51, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule9.HVACRule(),
+            each_rule=PRM9012019Rule23q51.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-9",
             description="Air economizers shall not be included in baseline HVAC Systems 1, 2, 9, and 10.",
@@ -64,7 +64,7 @@ class Section19Rule9(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule9.HVACRule, self).__init__(
+            super(PRM9012019Rule23q51.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

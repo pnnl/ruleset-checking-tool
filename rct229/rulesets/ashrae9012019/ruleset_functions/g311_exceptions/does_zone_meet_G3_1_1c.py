@@ -21,6 +21,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_peak_internal_load
     get_zone_peak_internal_load_floor_area_dict,
 )
 from rct229.schema.config import ureg
+from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 
 ELIGIBLE_PRIMARY_SYSTEM_TYPES = [
@@ -39,7 +40,6 @@ EFLH_THRESHOLD = 40
 def does_zone_meet_g3_1_1c(
     rmd: dict,
     zone_id: str,
-    is_leap_year: bool,
     zones_and_systems: dict[str, dict[Literal["expected_system_type"], Type[HVAC_SYS]]],
 ) -> bool:
     """
@@ -67,15 +67,20 @@ def does_zone_meet_g3_1_1c(
     -------
     boolean, true or false
     """
+    # Infer number of hours in the year (from any valid schedule)
+    num_hours = None
+    for sched in find_all("$.schedules[*].hourly_values", rmd):
+        if isinstance(sched, list) and len(sched) > 0:
+            num_hours = len(sched)
+            break
+    if num_hours is None:
+        num_hours = 8760  # fallback default
+
+    num_weeks = num_hours / 168.0
 
     def get_zone_weekly_eflh(z_id: str) -> float:
-        # function to get weekly zone eflh
-        zone_eflh = get_zone_eflh(rmd, z_id, is_leap_year)
-        return (
-            zone_eflh / NUMBER_OF_WEEKS_IN_LEAP_YEAR
-            if is_leap_year
-            else zone_eflh / NUMBER_OF_WEEKS_IN_YEAR
-        )
+        zone_eflh = get_zone_eflh(rmd, z_id)
+        return zone_eflh / num_weeks if num_weeks else 0.0
 
     expected_system_type = zones_and_systems[zone_id]["expected_system_type"]
     system_matched = any(

@@ -25,15 +25,15 @@ HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD = 40 * ureg("F")
 HeatpumpAuxiliaryHeatOptions = SchemaEnums.schema_enums["HeatpumpAuxiliaryHeatOptions"]
 
 
-class Section23Rule1(RuleDefinitionListIndexedBase):
+class PRM9012019Rule79m01(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule1, self).__init__(
+        super(PRM9012019Rule79m01, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section23Rule1.HVACRule(),
+            each_rule=PRM9012019Rule79m01.HVACRule(),
             index_rmd=BASELINE_0,
             id="23-1",
             description="System 2 and 4 - Electric air-source heat pumps shall be modeled with electric auxiliary heat and an outdoor air thermostat. The systems shall be controlled to energize auxiliary heat only when the outdoor air temperature is less than 40°F.",
@@ -83,7 +83,7 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section23Rule1.HVACRule, self).__init__(
+            super(PRM9012019Rule79m01.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -91,8 +91,8 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
                     "$": ["heating_system"],
                 },
                 precision={
-                    "heatpump_auxiliary_heat_high_shutoff_temperature": {
-                        "precision": 0.1,
+                    "heatpump_low_shutoff_b": {
+                        "precision": 1,
                         "unit": "F",
                     },
                 },
@@ -124,8 +124,14 @@ class Section23Rule1(RuleDefinitionListIndexedBase):
             ]
 
             return (
-                heatpump_aux_high_temp_shutoff
-                <= HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD
+                (
+                    heatpump_aux_high_temp_shutoff
+                    < HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD
+                    or self.precision_comparison["heatpump_low_shutoff_b"](
+                        heatpump_aux_high_temp_shutoff,
+                        HEATPUMP_AUX_HEAT_HIGH_SHUTOFF_THRESHOLD,
+                    )
+                )
                 and heatpump_aux_heat_energy_source
                 == HeatpumpAuxiliaryHeatOptions.ELECTRIC_RESISTANCE
             )

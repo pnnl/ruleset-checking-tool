@@ -21,15 +21,15 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section23Rule17(RuleDefinitionListIndexedBase):
+class PRM9012019Rule40y63(RuleDefinitionListIndexedBase):
     """Rule 17 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule17, self).__init__(
+        super(PRM9012019Rule40y63, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section23Rule17.HVACRule(),
+            each_rule=PRM9012019Rule40y63.HVACRule(),
             index_rmd=BASELINE_0,
             id="23-17",
             description="System 2 and 4 - Electric air-source heat pumps shall shall be modeled to continue to operate while auxiliary heat is energized.",
@@ -79,7 +79,7 @@ class Section23Rule17(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section23Rule17.HVACRule, self).__init__(
+            super(PRM9012019Rule40y63.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

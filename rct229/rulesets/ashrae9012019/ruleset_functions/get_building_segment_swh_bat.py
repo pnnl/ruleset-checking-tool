@@ -2,10 +2,11 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_energy_required_to_heat
     get_energy_required_to_heat_swh_use,
 )
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
     find_exactly_one_building_segment,
+    find_exactly_one_service_water_heating_use,
     find_exactly_one_space,
 )
 
@@ -14,9 +15,7 @@ SERVICE_WATER_HEATING_USE_UNIT = SchemaEnums.schema_enums[
 ]
 
 
-def get_building_segment_swh_bat(
-    rmd: dict, building_segment_id: str, is_leap_year: bool = False
-) -> str:
+def get_building_segment_swh_bat(rmd: dict, building_segment_id: str) -> str:
     """
     This function determines the SWH BAT for the given building segment.
     Returns None if there is no service water heating uses and no service_water_heating_area_type under building segment,
@@ -29,8 +28,6 @@ def get_building_segment_swh_bat(
         RMD at RuleSetModelDescription level
     building_segment_id: str
         building segment id
-    is_leap_year: bool, default: False
-        Whether the year is a leap year or not.
 
     Returns
     -------
@@ -40,60 +37,76 @@ def get_building_segment_swh_bat(
     """
 
     building_segment = find_exactly_one_building_segment(rmd, building_segment_id)
+    building_segment_swh_bat = building_segment.get(
+        "service_water_heating_area_type", "UNDETERMINED"
+    )
 
-    building_segment_swh_bat = building_segment.get("service_water_heating_area_type")
-
-    if building_segment_swh_bat is None:
+    if building_segment_swh_bat == "UNDETERMINED":
         swh_use_dict = {}
-        # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
-        for swh_use in find_all(
-            f'$.buildings[*].building_segments[*][?(@.id="{building_segment["id"]}")].zones[*].spaces[*].service_water_heating_uses[*]',
+        bldg_seg_id = building_segment["id"]
+        swh_uses_from_spaces = find_all(
+            f'$.buildings[*].building_segments[*][?(@.id = "{bldg_seg_id}")].zones[*].spaces[*].service_water_heating_uses[*]',
             rmd,
-        ):
+        )
+        swh_uses_from_building_segment = find_all(
+            f'$.buildings[*].building_segments[*][?(@.id = "{bldg_seg_id}")].service_water_heating_uses[*]',
+            rmd,
+        )
+        swh_uses_all = list(set(swh_uses_from_spaces + swh_uses_from_building_segment))
+
+        for swh_use_id in swh_uses_all:
+            swh_use = find_exactly_one_service_water_heating_use(rmd, swh_use_id)
             if (
-                swh_use.get("use_units", SERVICE_WATER_HEATING_USE_UNIT.OTHER)
-                == SERVICE_WATER_HEATING_USE_UNIT.OTHER
+                swh_use
+                and swh_use.get("use_units") == SERVICE_WATER_HEATING_USE_UNIT.OTHER
             ):
                 building_segment_swh_bat = "UNDETERMINED"
+
+            swh_use_energy_by_space = get_energy_required_to_heat_swh_use(
+                swh_use_id, rmd, building_segment["id"]
+            )
+
+            if swh_use.get("area_type"):
+                swh_use_dict.setdefault(swh_use["area_type"], 0)
+                swh_use_dict[swh_use["area_type"]] += sum(
+                    v for v in swh_use_energy_by_space.values() if v is not None
+                )
             else:
-                swh_use_energy_by_space = get_energy_required_to_heat_swh_use(
-                    swh_use["id"], rmd, building_segment["id"], is_leap_year
-                )
+                for space_id in swh_use_energy_by_space:
+                    space = find_exactly_one_space(rmd, space_id)
+                    if space.get("service_water_heating_area_type"):
+                        swh_use_dict.setdefault(
+                            space["service_water_heating_area_type"], 0
+                        )
+                        swh_use_dict[space["service_water_heating_area_type"]] += (
+                            swh_use_energy_by_space[space_id]
+                            if swh_use_energy_by_space[space_id] is not None
+                            else 0
+                        )
+                    else:
+                        swh_use_dict.setdefault("UNDETERMINED", 0)
+                        swh_use_dict["UNDETERMINED"] += (
+                            swh_use_energy_by_space[space_id]
+                            if swh_use_energy_by_space[space_id] is not None
+                            else 0
+                        )
 
-                if swh_use.get("area_type"):
-                    area_type = swh_use["area_type"]
-                    swh_use_dict.setdefault(area_type, ZERO.ENERGY)
-                    swh_use_dict[area_type] += sum(
-                        filter(None, list(swh_use_energy_by_space.values()))
-                    )
-                else:
-                    for space_id in swh_use_energy_by_space:
-                        if space_id != "no_spaces_assigned":
-                            space = find_exactly_one_space(rmd, space_id)
-                            if space.get("service_water_heating_area_type"):
-                                service_water_heating_bat = space[
-                                    "service_water_heating_area_type"
-                                ]
-                                swh_use_dict.setdefault(
-                                    service_water_heating_bat, ZERO.ENERGY
-                                )
-                                if swh_use_energy_by_space[space_id] is not None:
-                                    swh_use_dict[
-                                        service_water_heating_bat
-                                    ] += swh_use_energy_by_space[space_id]
-                            else:
-                                swh_use_dict.setdefault("UNDETERMINED", ZERO.ENERGY)
-                                swh_use_dict["UNDETERMINED"] += swh_use_energy_by_space[
-                                    space_id
-                                ]
+        total_energy = sum(swh_use_dict.values())
+        assigned_energy = total_energy - swh_use_dict.get("UNDETERMINED", 0)
+        known_area_types = [k for k in swh_use_dict if k != "UNDETERMINED"]
 
-                building_segment_swh_bat = (
-                    max(swh_use_dict, key=swh_use_dict.get)
-                    if swh_use_dict
-                    else "UNDETERMINED"
-                )
+        # If less than 50% of energy is assigned to a known area type
+        if assigned_energy < 0.5 * total_energy:
+            building_segment_swh_bat = "UNDETERMINED"
+        # If more than one know SWH area type exists
+        elif len(known_area_types) > 1:
+            building_segment_swh_bat = "UNDETERMINED"
+        else:
+            assert_(
+                len(known_area_types) > 0,
+                "At least one building area type must exist other than UNDETERMINED",
+            )
 
-    else:
-        building_segment_swh_bat = building_segment["service_water_heating_area_type"]
+            building_segment_swh_bat = known_area_types[0]
 
     return building_segment_swh_bat

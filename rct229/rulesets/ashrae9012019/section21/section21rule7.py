@@ -28,15 +28,15 @@ DESIGN_SUPPLY_TEMP = 180 * ureg("degF")
 DESIGN_RETURN_TEMP = 130 * ureg("degF")
 
 
-class Section21Rule7(RuleDefinitionListIndexedBase):
+class PRM9012019Rule92f56(RuleDefinitionListIndexedBase):
     """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule7, self).__init__(
+        super(PRM9012019Rule92f56, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section21Rule7.HeatingFluidLoopRule(),
+            each_rule=PRM9012019Rule92f56.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="21-7",
             description="When baseline building requires boilers, systems 1,5,7,11 and 12 - Model HWST = 180F and return design temp = 130F.",
@@ -75,7 +75,7 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule7.HeatingFluidLoopRule, self).__init__(
+            super(PRM9012019Rule92f56.HeatingFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -88,11 +88,11 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "design_supply_temperature": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                     "design_return_temperature": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                 },
@@ -118,19 +118,23 @@ class Section21Rule7(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            design_supply_temperature = calc_vals["design_supply_temperature"]
-            design_return_temperature = calc_vals["design_return_temperature"]
-            required_supply_temperature = calc_vals["required_supply_temperature"]
-            required_return_temperature = calc_vals["required_return_temperature"]
+            design_supply_temperature = calc_vals["design_supply_temperature"].to(
+                ureg.kelvin
+            )
+            design_return_temperature = calc_vals["design_return_temperature"].to(
+                ureg.kelvin
+            )
+            required_supply_temperature = calc_vals["required_supply_temperature"].to(
+                ureg.kelvin
+            )
+            required_return_temperature = calc_vals["required_return_temperature"].to(
+                ureg.kelvin
+            )
 
-            return design_supply_temperature.to(
-                ureg.kelvin
-            ) == required_supply_temperature.to(
-                ureg.kelvin
-            ) and design_return_temperature.to(
-                ureg.kelvin
-            ) == required_return_temperature.to(
-                ureg.kelvin
+            return self.precision_comparison["design_supply_temperature"](
+                design_supply_temperature, required_supply_temperature
+            ) and self.precision_comparison["design_return_temperature"](
+                design_return_temperature, required_return_temperature
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):

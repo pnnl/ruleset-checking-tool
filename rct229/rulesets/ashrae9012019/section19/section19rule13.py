@@ -48,15 +48,15 @@ LABORATORY_TEMP_DELTA = 17.0 * ureg("delta_degF")
 GENERAL_TEMP_DELTA = 20.0 * ureg("delta_degF")
 
 
-class Section19Rule13(RuleDefinitionListIndexedBase):
+class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
     """Rule 13 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule13, self).__init__(
+        super(PRM9012019Rule77j17, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule13.HVACRule(),
+            each_rule=PRM9012019Rule77j17.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-13",
             description="For baseline system types 1-8 and 11-13, system design supply airflow rates shall be based on a supply-air-to-room temperature set-point difference of 20°F or the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater. For systems with multiple zone thermostat setpoints, use the design set point that will result in the lowest supply air cooling set point or highest supply air heating set point.",
@@ -221,7 +221,7 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule13.HVACRule, self).__init__(
+            super(PRM9012019Rule77j17.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -302,11 +302,18 @@ class Section19Rule13(RuleDefinitionListIndexedBase):
             return (
                 all_design_setpoints_delta_Ts_are_per_reqs_b
                 and are_all_hvac_sys_fan_objs_autosized_b
-                and supply_fans_airflow_b >= fan_minimum_outdoor_airflow_b
+                and (
+                    self.precision_comparison["supply_fans_airflow_b"](
+                        supply_fans_airflow_b, fan_minimum_outdoor_airflow_b
+                    )
+                    or supply_fans_airflow_b > fan_minimum_outdoor_airflow_b
+                )
             ) or (
                 (
                     not all_design_setpoints_delta_Ts_are_per_reqs_b
-                    and fan_minimum_outdoor_airflow_b == supply_fans_airflow_b
+                    and self.precision_comparison["supply_fans_airflow_b"](
+                        fan_minimum_outdoor_airflow_b, supply_fans_airflow_b
+                    )
                 )
             )
 

@@ -11,7 +11,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
+from rct229.utils.compare_standard_val import std_le
 from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -34,15 +36,15 @@ BOILER_EFFICIENCY_METRIC_TYPE = SchemaEnums.schema_enums[
 ]
 
 
-class Section21Rule17(RuleDefinitionListIndexedBase):
+class PRM9012019Rule35d81(RuleDefinitionListIndexedBase):
     """Rule 17 of ASHRAE 90.1-2019 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
-        super(Section21Rule17, self).__init__(
+        super(PRM9012019Rule35d81, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section21Rule17.BoilerRule(),
+            each_rule=PRM9012019Rule35d81.BoilerRule(),
             index_rmd=BASELINE_0,
             id="21-17",
             description="All boilers in the baseline building design shall be modeled at the minimum efficiency levels, both part load and full load, in accordance with Tables G3.5.6.",
@@ -71,7 +73,7 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
 
     class BoilerRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section21Rule17.BoilerRule, self).__init__(
+            super(PRM9012019Rule35d81.BoilerRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -85,6 +87,10 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
                 precision={
                     "boiler_efficiency_b": {
                         "precision": 0.01,
+                    },
+                    "boiler_rated_capacity_b": {
+                        "precision": 0.0001,
+                        "unit": "Btu/hr",
                     },
                 },
             )
@@ -138,7 +144,12 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
                     BOILER_EFFICIENCY_80,
                 )
                 or (
-                    boiler_rated_capacity_b <= BOILER_RATED_CAPACITY_HIGH_LIMIT
+                    (
+                        boiler_rated_capacity_b < BOILER_RATED_CAPACITY_HIGH_LIMIT
+                        or self.precision_comparison["boiler_rated_capacity_b"](
+                            boiler_rated_capacity_b, BOILER_RATED_CAPACITY_HIGH_LIMIT
+                        )
+                    )
                     and boiler_thermal_efficiency_b
                     and self.precision_comparison["boiler_efficiency_b"](
                         boiler_thermal_efficiency_b,
@@ -151,6 +162,37 @@ class Section21Rule17(RuleDefinitionListIndexedBase):
                     and self.precision_comparison["boiler_efficiency_b"](
                         boiler_combustion_efficiency_b,
                         BOILER_EFFICIENCY_80,
+                    )
+                )
+            )
+
+        def is_tolerance_fail(self, context, calc_vals=None, data=None):
+            boiler_rated_capacity_b = calc_vals["boiler_rated_capacity_b"]
+            boiler_annual_fuel_utilization_efficiency_b = calc_vals[
+                "boiler_annual_fuel_utilization_efficiency_b"
+            ]
+            boiler_thermal_efficiency_b = calc_vals["boiler_thermal_efficiency_b"]
+            boiler_combustion_efficiency_b = calc_vals["boiler_combustion_efficiency_b"]
+
+            return (
+                boiler_rated_capacity_b < BOILER_RATED_CAPACITY_LOW_LIMIT
+                and boiler_annual_fuel_utilization_efficiency_b
+                and std_equal(
+                    BOILER_EFFICIENCY_80, boiler_annual_fuel_utilization_efficiency_b
+                )
+                or (
+                    std_le(
+                        val=boiler_rated_capacity_b,
+                        std_val=BOILER_RATED_CAPACITY_HIGH_LIMIT,
+                    )
+                    and boiler_thermal_efficiency_b
+                    and std_equal(BOILER_EFFICIENCY_75, boiler_thermal_efficiency_b)
+                )
+                or (
+                    boiler_rated_capacity_b > BOILER_RATED_CAPACITY_HIGH_LIMIT
+                    and boiler_combustion_efficiency_b
+                    and std_equal(
+                        val=boiler_combustion_efficiency_b, std_val=BOILER_EFFICIENCY_80
                     )
                 )
             )

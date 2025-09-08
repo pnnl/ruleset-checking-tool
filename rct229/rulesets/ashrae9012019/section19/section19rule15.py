@@ -36,15 +36,15 @@ APPLICABLE_SYS_TYPES = [
 REQ_DESIGN_SUPPLY_AIR_TEMP_SETPOINT = 105.0 * ureg("degF")
 
 
-class Section19Rule15(RuleDefinitionListIndexedBase):
+class PRM9012019Rule03j97(RuleDefinitionListIndexedBase):
     """Rule 15 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule15, self).__init__(
+        super(PRM9012019Rule03j97, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule15.HVACRule(),
+            each_rule=PRM9012019Rule03j97.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-15",
             description="For baseline system types 9 & 10, the system design supply airflow rates shall be based on the temperature difference between a supply air temperature set point of 105°F and the design space-heating temperature set point, the minimum outdoor airflow rate, or the airflow rate required to comply with applicable codes or accreditation standards, whichever is greater.",
@@ -129,7 +129,7 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule15.HVACRule, self).__init__(
+            super(PRM9012019Rule03j97.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
@@ -246,7 +246,9 @@ class Section19Rule15(RuleDefinitionListIndexedBase):
                 )
                 or (
                     not all_design_setpoints_105
-                    and minimum_outdoor_airflow_b == supply_fan_airflow_b
+                    and self.precision_comparison["supply_fan_airflow_b"](
+                        minimum_outdoor_airflow_b, supply_fan_airflow_b
+                    )
                 )
             )
 

@@ -23,15 +23,15 @@ FAIL_MSG = (
 )
 
 
-class Section6Rule8(RuleDefinitionListIndexedBase):
+class PRM9012019Rule16x33(RuleDefinitionListIndexedBase):
     """Rule 8 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(Section6Rule8, self).__init__(
+        super(PRM9012019Rule16x33, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section6Rule8.RulesetModelInstanceRule(),
+            each_rule=PRM9012019Rule16x33.RulesetModelInstanceRule(),
             index_rmd=PROPOSED,
             id="6-8",
             description="Additional occupancy sensor controls in the proposed building are modeled through schedule "
@@ -44,33 +44,31 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section6Rule8.RulesetModelInstanceRule, self).__init__(
+            super(PRM9012019Rule16x33.RulesetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section6Rule8.RulesetModelInstanceRule.BuildingRule(),
+                each_rule=PRM9012019Rule16x33.RulesetModelInstanceRule.BuildingRule(),
                 index_rmd=PROPOSED,
                 list_path="buildings[*]",
                 required_fields={
-                    "$": ["schedules", "calendar"],
-                    "calendar": ["is_leap_year"],
+                    "$": ["schedules"],
                 },
                 data_items={
                     "schedules_b": (BASELINE_0, "schedules"),
                     "schedules_p": (PROPOSED, "schedules"),
-                    "is_leap_year": (BASELINE_0, "calendar/is_leap_year"),
                 },
             )
 
         class BuildingRule(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(
-                    Section6Rule8.RulesetModelInstanceRule.BuildingRule, self
+                    PRM9012019Rule16x33.RulesetModelInstanceRule.BuildingRule, self
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
-                    each_rule=Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
+                    each_rule=PRM9012019Rule16x33.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
                     index_rmd=PROPOSED,
                     list_path="$..zones[*]",
                 )
@@ -83,7 +81,7 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                         find_exactly_one_with_field_value(
                             "$[*]",
                             "id",
-                            building_p["building_open_schedule"],
+                            getattr_(building_p, "RMD", "building_open_schedule"),
                             schedules_p,
                         ),
                         "schedule",
@@ -94,13 +92,13 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
             class ZoneRule(RuleDefinitionListIndexedBase):
                 def __init__(self):
                     super(
-                        Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule,
+                        PRM9012019Rule16x33.RulesetModelInstanceRule.BuildingRule.ZoneRule,
                         self,
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
-                        each_rule=Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
+                        each_rule=PRM9012019Rule16x33.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule(),
                         index_rmd=PROPOSED,
                         list_path="spaces[*]",
                         required_fields={"$": ["volume"]},
@@ -116,7 +114,7 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                 class SpaceRule(RuleDefinitionBase):
                     def __init__(self):
                         super(
-                            Section6Rule8.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule,
+                            PRM9012019Rule16x33.RulesetModelInstanceRule.BuildingRule.ZoneRule.SpaceRule,
                             self,
                         ).__init__(
                             rmds_used=produce_ruleset_model_description(
@@ -133,7 +131,6 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                         schedules_b = data["schedules_b"]
                         schedules_p = data["schedules_p"]
                         building_open_schedule_p = data["building_open_schedule_p"]
-                        is_leap_year = data["is_leap_year"]
 
                         normalized_interior_lighting_schedule_b = (
                             normalize_interior_lighting_schedules(
@@ -155,7 +152,6 @@ class Section6Rule8(RuleDefinitionListIndexedBase):
                             normalized_interior_lighting_schedule_p,
                             normalized_interior_lighting_schedule_b,
                             building_open_schedule_p,
-                            is_leap_year=is_leap_year,
                         )
 
                         return {

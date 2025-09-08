@@ -16,11 +16,11 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section23Rule12(PartialRuleDefinition):
+class PRM9012019Rule71k98(PartialRuleDefinition):
     """Rule 12 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule12, self).__init__(
+        super(PRM9012019Rule71k98, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),

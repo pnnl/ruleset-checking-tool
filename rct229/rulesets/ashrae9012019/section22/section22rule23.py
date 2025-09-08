@@ -22,11 +22,11 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section22Rule23(RuleDefinitionBase):
+class PRM9012019Rule67l25(RuleDefinitionBase):
     """Rule 23 of ASHRAE 90.1-2019 Appendix G Section 22 (Hot water loop)"""
 
     def __init__(self):
-        super(Section22Rule23, self).__init__(
+        super(PRM9012019Rule67l25, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),

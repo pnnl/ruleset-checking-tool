@@ -63,15 +63,15 @@ SINGLE_ZONE_APPLICABLE_SYS_TYPES = [
 AIRFLOW_15000_CFM = 15000 * ureg("cfm")
 
 
-class Section18Rule2(RuleDefinitionListIndexedBase):
+class PRM9012019Rule51v53(RuleDefinitionListIndexedBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 18 (HVAC - System Zone Assignment)"""
 
     def __init__(self):
-        super(Section18Rule2, self).__init__(
+        super(PRM9012019Rule51v53, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section18Rule2.RMDRule(),
+            each_rule=PRM9012019Rule51v53.RMDRule(),
             index_rmd=BASELINE_0,
             id="18-2",
             description="Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and "
@@ -84,17 +84,16 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section18Rule2.RMDRule, self).__init__(
+            super(PRM9012019Rule51v53.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section18Rule2.RMDRule.HVACRule(),
+                each_rule=PRM9012019Rule51v53.RMDRule.HVACRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
                 required_fields={
-                    "$": ["weather", "calendar"],
+                    "$": ["weather"],
                     "weather": ["climate_zone"],
-                    "calendar": ["is_leap_year"],
                 },
             )
 
@@ -102,7 +101,6 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
             climate_zone_b = rmd_b["weather"]["climate_zone"]
-            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
 
             baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
             applicable_hvac_sys_ids_b = [
@@ -117,7 +115,7 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
                 get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
             )
             lab_zone_hvac_systems = get_lab_zone_hvac_systems(
-                rmd_b, rmd_p, climate_zone_b, is_leap_year_b
+                rmd_b, rmd_p, climate_zone_b
             )
             building_total_lab_zone_exhaust_b = (
                 get_building_total_lab_exhaust_from_zone_exhaust_fans(rmd_b)
@@ -281,7 +279,7 @@ class Section18Rule2(RuleDefinitionListIndexedBase):
 
         class HVACRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section18Rule2.RMDRule.HVACRule, self).__init__(
+                super(PRM9012019Rule51v53.RMDRule.HVACRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),

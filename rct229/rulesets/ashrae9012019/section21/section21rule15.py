@@ -7,15 +7,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_sta
 )
 
 
-class Section21Rule15(RuleDefinitionListIndexedBase):
+class PRM9012019Rule62u16(RuleDefinitionListIndexedBase):
     """Rule 15 of ASHRAE 90.1-2019 Appendix G Section 21 (HVAC - Water Side)"""
 
     def __init__(self):
-        super(Section21Rule15, self).__init__(
+        super(PRM9012019Rule62u16, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section21Rule15.RulesetModelInstanceRule(),
+            each_rule=PRM9012019Rule62u16.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="21-15",
             description="When the baseline building is modeled with a hot water plant, served by purchased HW "
@@ -33,7 +33,7 @@ class Section21Rule15(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section21Rule15.RulesetModelInstanceRule, self,).__init__(
+            super(PRM9012019Rule62u16.RulesetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

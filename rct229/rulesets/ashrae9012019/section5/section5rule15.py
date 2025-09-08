@@ -11,25 +11,26 @@ from rct229.utils.std_comparisons import std_equal
 
 MSG_WARN_MATCHED = "Building is not all new and baseline WWR matches values prescribed in Table G3.1.1-1. However, the fenestration area prescribed in Table G3.1.1-1 does not apply to the existing envelope per TABLE G3.1 baseline column #5 (c). For existing Envelope, the baseline fenestration area must equal the existing fenestration area prior to the proposed work. A manual check is required to verify compliance."
 MSG_WARN_MISMATCHED = "Building is not all new and baseline WWR does not match values prescribed in TABLE G3.1.1-1. However, the fenestration area prescribed in TABLE G3.1.1-1 does not apply to the existing envelope per TABLE G3.1 baseline column #5(c). For existing envelope, the baseline fenestration area must equal the existing fenestration area prior to the proposed work. A manual check is required to verify compliance."
+MSG_AREA_TYPE_MISMATCH = "The Proposed building does not have the same area type(s) as the Baseline building for vertical fenestration. A manual check is required to verify compliance."
 WWR_THRESHOLD = 0.4
 OTHER = SchemaEnums.schema_enums[
     "VerticalFenestrationBuildingAreaOptions2019ASHRAE901"
 ].OTHER
 
 
-class Section5Rule15(RuleDefinitionListIndexedBase):
+class PRM9012019Rule04o58(RuleDefinitionListIndexedBase):
     """Rule 15 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(Section5Rule15, self).__init__(
+        super(PRM9012019Rule04o58, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
                 "$.ruleset_model_descriptions[*]": ["weather"],
-                "weather": ["climate_zone"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
             },
-            each_rule=Section5Rule15.BuildingRule(),
+            each_rule=PRM9012019Rule04o58.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-15",
             description="For building areas not shown in Table G3.1.1-1, vertical fenestration areas for new buildings and additions shall equal that in the proposed design or 40% of gross above-grade wall area, whichever is smaller.",
@@ -42,17 +43,21 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        return {"climate_zone": climate_zone}
+        constructions = rpd_b["ruleset_model_descriptions"][0].get("constructions")
+        return {
+            "climate_zone": climate_zone,
+            "constructions": constructions,
+        }
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section5Rule15.BuildingRule, self).__init__(
+            super(PRM9012019Rule04o58.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 required_fields={
                     "$": ["building_segments"],
-                    "building_segment": [
+                    "$.building_segments[*]": [
                         "is_all_new",
                         "area_type_vertical_fenestration",
                     ],
@@ -68,31 +73,35 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
         def is_applicable(self, context, data=None):
             building_b = context.BASELINE_0
             area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
-                data["climate_zone"], building_b
+                data["climate_zone"], data["constructions"], building_b
             )
             return OTHER in area_type_window_wall_area_dict_b
 
         def get_calc_vals(self, context, data=None):
             building_b = context.BASELINE_0
             building_p = context.PROPOSED
+            manual_check_flag = False
 
             area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
-                data["climate_zone"], building_b
+                data["climate_zone"], data["constructions"], building_b
             )
             area_type_window_wall_area_dict_p = get_area_type_window_wall_area_dict(
-                data["climate_zone"], building_p
+                data["climate_zone"], data["constructions"], building_p
             )
 
             wwr_b = (
                 area_type_window_wall_area_dict_b[OTHER]["total_window_area"]
                 / area_type_window_wall_area_dict_b[OTHER]["total_wall_area"]
             )
-            wwr_p = (
-                area_type_window_wall_area_dict_p[OTHER]["total_window_area"]
-                / area_type_window_wall_area_dict_p[OTHER]["total_wall_area"]
-            )
+            if OTHER in area_type_window_wall_area_dict_p:
+                wwr_p = (
+                    area_type_window_wall_area_dict_p[OTHER]["total_window_area"]
+                    / area_type_window_wall_area_dict_p[OTHER]["total_wall_area"]
+                )
+            else:
+                wwr_p = None
+                manual_check_flag = True
 
-            manual_check_flag = False
             for building_segment in find_all("$.building_segments[*]", building_b):
                 if building_segment["area_type_vertical_fenestration"] == OTHER:
                     if not building_segment["is_all_new"]:
@@ -108,14 +117,16 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
             return calc_vals["manual_check_flag"]
 
         def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
-            manual_check_msg = ""
-            if calc_vals["manual_check_flag"]:
-                if std_equal(
-                    calc_vals["wwr_b"], min(calc_vals["wwr_p"], WWR_THRESHOLD)
-                ):
-                    manual_check_msg = MSG_WARN_MATCHED
-                else:
-                    manual_check_msg = MSG_WARN_MISMATCHED
+            if calc_vals["wwr_p"] is None:
+                return MSG_AREA_TYPE_MISMATCH
+
+            if self.precision_comparison["wwr_b"](
+                calc_vals["wwr_b"].magnitude,
+                min(calc_vals["wwr_p"].magnitude, WWR_THRESHOLD),
+            ):
+                manual_check_msg = MSG_WARN_MATCHED
+            else:
+                manual_check_msg = MSG_WARN_MISMATCHED
             return manual_check_msg
 
         def rule_check(self, context, calc_vals=None, data=None):
@@ -125,4 +136,7 @@ class Section5Rule15(RuleDefinitionListIndexedBase):
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
-            return std_equal(calc_vals["wwr_b"], min(calc_vals["wwr_p"], WWR_THRESHOLD))
+            return std_equal(
+                calc_vals["wwr_b"].magnitude,
+                min(calc_vals["wwr_p"].magnitude, WWR_THRESHOLD),
+            )

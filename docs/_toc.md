@@ -260,7 +260,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [6-9](section6/Rule6-9.md): Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction in buildings less than 5,000sq.ft.  
 
 ## Section 10 - Airside systems
-  * [10-1](section10/10-1.md): The proposed design includes humidification and the baseline building design has been modeled with adiabatic humidification if proposed design does not comply with 90.1-2019 Section 6.5.2.4 and non-adiabatic humidification otherwise.
+  * [10-1](section10/10-1.md): When the proposed design includes humidification and complies with Section 6.5.2.4, then the baseline building design shall use nonadiabatic humidification. When the proposed design includes humidification and does not comply with Section 6.5.2.4 then the baseline building design shall use adiabatic humidification.
   * [10-3](section10/10-3.md): For systems serving computer rooms, the baseline building design shall not have reheat for the purpose of dehumidification.
   * [10-4](section10/10-4.md): Baseline HVAC systems using fossil fuel shall be modeled using natural gas. Except where natural gas is not available for the proposed building site, propane shall be used as the heating fuel.
   * [10-6](section10/10-6.md): For HVAC systems designed, mechanical cooling equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
@@ -271,6 +271,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [10-13A](section10/10-13A.md): For HVAC systems designed, mechanical heating equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
   * [10-13B](section10/10-13B.md): For proposed HVAC systems designed, mechanical preheating equipment efficiencies shall be adjusted to remove the supply fan energy from the efficiency rating.
   * [10-14](section10/10-14.md): Baseline shall be modeled with the heating HVAC system efficiency per Tables G3.5.1-G3.5.6 (applies only to the heating efficiency of baseline furnaces and heat pumps).  Where multiple HVAC zones or residential spaces are combined into a single thermal block the heating efficiencies (for baseline HVAC System Types 3 and 4) shall be based on the  equipment capacity of the thermal block divided by the number of HVAC zones or residential spaces.
+  * [10-15](section10/10-15.md): The proposed design includes humidification and the baseline building design has been modeled with humidification.
 
 ## Section 11 - Service Hot Water System
   * [11-1](section11/Rule11-1.md): Where a complete service water-heating system exists, the proposed design shall reflect the actual system type. Where a service water-heating system has been designed the service waterheating type shall be consistent with design documents.  Where no service water-heating system exists or has been designed and submitted with design documents but the building will have service water-heating loads, a service water-heating system shall be modeled that matches the system type in the baseline building design.
@@ -278,6 +279,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [11-7](section11/Rule11-7.md): Except in buildings that will have no service water heating loads, the service water heating system type in the baseline building design shall be as specified in Table G3.1.1-2 for each building area type in the proposed design.
   * [11-8](section11/Rule11-8.md): One system per building area type shall be modeled in the baseline.
   * [11-9](section11/Rule11-9.md): The baseline system must be sized according to Standard 90.1 2019, Section 7.4.1.
+  * [11-10](section11/Rule11-10.md): The service water heating system type in the baseline building design shall match the minimum efficiency requirements in Section 7.4.2.
   * [11-11](section11/Rule11-11.md): For buildings that will have no service water-heating loads, no service water-heating shall be modeled in baseline building model.
   * [11-12](section11/Rule11-12.md): For large, 24-hour-per-day facilities that meet the prescriptive criteria for use of condenser heat recovery systems described in Section 6.5.6.2, a system meeting the requirements of that section shall be included in the baseline building design regardless of the exceptions to Section 6.5.6.2.
   * [11-13](section11/Rule11-13.md): Service water-heating energy consumption shall be calculated explicitly based upon the volume of service water heating required and the entering makeup water and the leaving service water-heating temperatures. Entering water temperatures shall be estimated based upon the location. Leaving temperatures shall be based upon the end-use requirements.
@@ -353,6 +355,7 @@ These conventions are used in all RDS below, and the logic of evaluating rules f
   * [19-34](section19/Rule19-34.md): Where no heating and/or cooling system is to be installed, and a heating or cooling system is being simulated only to meet the requirements described in this table, heating and/or cooling system fans shall not be simulated as running continuously during occupied hours but shall be cycled ON and OFF to meet heating and cooling loads during all hours in the baseline design.
   * [19-35](section19/Rule19-35.md): For baseline systems serving only laboratory spaces that are prohibited from recirculating return air by code or accreditation standards, the baseline system shall be modeled as 100% outdoor air. Rule only applies when baseline outdoor air CFM is modeled as greater than proposed design outdoor air CFM.
   * [19-36](section19/Rule19-36.md): Baseline systems required to model energy recovery per G3.1.2.10 shall be modeled with a 50% enthalpy recovery ratio.
+  * [19-37](section19/Rule19-37.md): Weather conditions used in sizing runs for the 99.6% heating design temperature and 1% dry-bulb and 1% wet-bulb cooling design temperatures are consistent with the site location.
 
 ## Section 21 - Central Heating Hot Water Systems
   * [21-1](section21/Rule21-1.md): For systems using purchased hot water or steam, the heating source shall be modeled as purchased hot water or steam in both the proposed design and baseline building design. If any system in the proposed design uses purchased hot water or steam, all baseline systems with hot water coils shall use the same type of purchased hot water or steam.

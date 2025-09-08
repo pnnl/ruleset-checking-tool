@@ -22,15 +22,15 @@ APPLICABLE_SYS_TYPES = [
 REQUIRED_DESIGN_ELEC_POWER_DESIGN_AIRFLOW_RATIO = 0.35 * ureg("W/cfm")
 
 
-class Section23Rule6(RuleDefinitionListIndexedBase):
+class PRM9012019Rule98g04(RuleDefinitionListIndexedBase):
     """Rule 6 of ASHRAE 90.1-2019 Appendix G Section 23 (Air-side)"""
 
     def __init__(self):
-        super(Section23Rule6, self).__init__(
+        super(PRM9012019Rule98g04, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section23Rule6.TerminalRule(),
+            each_rule=PRM9012019Rule98g04.TerminalRule(),
             index_rmd=BASELINE_0,
             id="23-6",
             description="For baseline systems 6 and 8, Fans in parallel VAV fan-powered boxes shall be sized for 50% of the peak design primary air (from the VAV air-handling unit) flow rate and shall be modeled with 0.35 W/cfm fan power.",
@@ -81,7 +81,7 @@ class Section23Rule6(RuleDefinitionListIndexedBase):
 
     class TerminalRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section23Rule6.TerminalRule, self).__init__(
+            super(PRM9012019Rule98g04.TerminalRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

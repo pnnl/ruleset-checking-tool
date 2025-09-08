@@ -1,14 +1,11 @@
 {
-    "rule-18-1-a": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-a": {
         "Test": "a",
         "test_description": "The project located in climate zone 3A has one 60,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 4.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -168,16 +165,13 @@
             }
         }
     },
-    "rule-18-1-b": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-b": {
         "Test": "b",
         "test_description": "The project located in climate zone 3A has one 60,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 5.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -391,16 +385,13 @@
             }
         }
     },
-    "rule-18-1-c": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-c": {
         "Test": "c",
         "test_description": "The project located in climate zone 3A has one 130,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 13.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -622,16 +613,13 @@
             }
         }
     },
-    "rule-18-1-d": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-d": {
         "Test": "d",
         "test_description": "The project located in climate zone 3A has one 130,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 5.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -845,16 +833,13 @@
             }
         }
     },
-    "rule-18-1-e": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-e": {
         "Test": "e",
         "test_description": "The project located in climate zone 5B has one 60,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 3.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -1014,16 +999,13 @@
             }
         }
     },
-    "rule-18-1-f": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-f": {
         "Test": "f",
         "test_description": "The project located in climate zone 5B has one 60,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 5.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -1237,16 +1219,13 @@
             }
         }
     },
-    "rule-18-1-g": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-g": {
         "Test": "g",
         "test_description": "The project located in climate zone 5B has one 130,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 12.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -1502,16 +1481,13 @@
             }
         }
     },
-    "rule-18-1-h": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-h": {
         "Test": "h",
         "test_description": "The project located in climate zone 5B has one 130,000 ft2 building segment with one zone on one floor. It is a public assembly building area type served by baseline system type 5.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -1725,16 +1701,13 @@
             }
         }
     },
-    "rule-18-1-i": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-i": {
         "Test": "i",
         "test_description": "The project located in climate zone 5B has one 120,000 ft2 building segment with one zone on one floor. It is a hospital building area type served by baseline system type 5.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -1948,16 +1921,13 @@
             }
         }
     },
-    "rule-18-1-j": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-j": {
         "Test": "j",
         "test_description": "The project located in climate zone 5B has one 120,000 ft2 building segment with one zone on one floor. It is a hospital building area type served by baseline system type 13.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -2179,16 +2149,13 @@
             }
         }
     },
-    "rule-18-1-k": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-k": {
         "Test": "k",
         "test_description": "The project located in climate zone 5B has one 160,000 ft2 building segment with one zone on one floor. It is a laboratory space type with a total exhaust rate greater than 15,000 cfm modeled in the proposed, but less than 15,000 cfm modeled in the baseline and is served by baseline system type 7.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -2467,16 +2434,13 @@
             }
         }
     },
-    "rule-18-1-l": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-l": {
         "Test": "l",
         "test_description": "The project located in climate zone 5B has one 120,000 ft2 building segment with six zones on six floors. All zones are laboratories with a total exhaust rate greater than 15,000 cfm and are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -3184,16 +3148,13 @@
             }
         }
     },
-    "rule-18-1-m": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-m": {
         "Test": "m",
         "test_description": "The project located in climate zone 5B has one 120,000 ft2 building segment with six zones on six floors. It is a hospital building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -3799,16 +3760,13 @@
             }
         }
     },
-    "rule-18-1-n": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-n": {
         "Test": "n",
         "test_description": "The project located in climate zone 3A has one 160,000 ft2 building segment with one zone on one floor. It is a retail building area type served by baseline system type 4.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -3968,16 +3926,13 @@
             }
         }
     },
-    "rule-18-1-o": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-o": {
         "Test": "o",
         "test_description": "The project located in climate zone 3A has one 160,000 ft2 building segment with one zone on one floor. It is a retail building area type served by baseline system type 5.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -4191,16 +4146,13 @@
             }
         }
     },
-    "rule-18-1-p": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-p": {
         "Test": "p",
         "test_description": "The project located in climate zone 5A has one 160,000 ft2 building segment with one zone on one floor. It is a retail building area type served by baseline system type 3.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -4360,16 +4312,13 @@
             }
         }
     },
-    "rule-18-1-q": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-q": {
         "Test": "q",
         "test_description": "The project located in climate zone 5A has one 160,000 ft2 building segment with one zone on one floor. It is a retail building area type served by baseline system type 5.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -4583,16 +4532,13 @@
             }
         }
     },
-    "rule-18-1-r": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-r": {
         "Test": "r",
         "test_description": "The project located in climate zone 3A has one 20,000 ft2 building segment with one zone on one floor. It is an \"Other nonresidential\" building area type and is served by baseline system type 4.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -4752,16 +4698,13 @@
             }
         }
     },
-    "rule-18-1-s": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-s": {
         "Test": "s",
         "test_description": "The project located in climate zone 3A has one 20,000 ft2 building segment with one zone on one floor. It is an \"Other nonresidential\" building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -4975,16 +4918,13 @@
             }
         }
     },
-    "rule-18-1-t": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-t": {
         "Test": "t",
         "test_description": "The project located in climate zone 6A has one 20,000 ft2 building segment with one zone on one floor. It is an \"Other nonresidential\" building area type and is served by baseline system type 3.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -5144,16 +5084,13 @@
             }
         }
     },
-    "rule-18-1-u": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-u": {
         "Test": "u",
         "test_description": "The project located in climate zone 6A has one 20,000 ft2 building segment with one zone on one floor. It is an \"Other nonresidential\" building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -5367,16 +5304,13 @@
             }
         }
     },
-    "rule-18-1-v": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-v": {
         "Test": "v",
         "test_description": "The project located in climate zone 3A has one building segment with four zones on four floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 6.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -5810,16 +5744,13 @@
             }
         }
     },
-    "rule-18-1-w": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-w": {
         "Test": "w",
         "test_description": "The project located in climate zone 3A has one 20,000 ft2 building segment with one zone on one floor. It is an \"Other nonresidential\" building area type and is served by baseline system type 10.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -5961,16 +5892,13 @@
             }
         }
     },
-    "rule-18-1-x": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-x": {
         "Test": "x",
         "test_description": "The project located in climate zone 6A has one 20,000 ft2 building segment with four zones on four floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -6426,16 +6354,13 @@
             }
         }
     },
-    "rule-18-1-y": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-y": {
         "Test": "y",
         "test_description": "The project located in climate zone 6A has one 20,000 ft2 building segment with four zones on four floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 6.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -6869,16 +6794,13 @@
             }
         }
     },
-    "rule-18-1-z": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-z": {
         "Test": "z",
         "test_description": "The project located in climate zone 3A has one 40,000 ft2 building segment with four zones on four floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 4.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -7402,16 +7324,13 @@
             }
         }
     },
-    "rule-18-1-aa": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-aa": {
         "Test": "aa",
         "test_description": "The project located in climate zone 3A has one 40,000 ft2 building segment with one zone on one floor. It is an \"Other nonresidential\" building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -7625,16 +7544,13 @@
             }
         }
     },
-    "rule-18-1-ab": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-ab": {
         "Test": "ab",
         "test_description": "The project located in climate zone 6A has one 40,000 ft2 building segment with four zones on four floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -7962,16 +7878,13 @@
             }
         }
     },
-    "rule-18-1-ac": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-ac": {
         "Test": "ac",
         "test_description": "The project located in climate zone 6A has one 40,000 ft2 building segment with four zones on four floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 6.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -8405,16 +8318,13 @@
             }
         }
     },
-    "rule-18-1-ad": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-ad": {
         "Test": "ad",
         "test_description": "The project located in climate zone 3A has one 60,000 ft2 building segment with six zones on six floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 8.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -9116,16 +9026,13 @@
             }
         }
     },
-    "rule-18-1-ae": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-ae": {
         "Test": "ae",
         "test_description": "The project located in climate zone 3A has one 60,000 ft2 building segment with six zones on six floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 5.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -9727,16 +9634,13 @@
             }
         }
     },
-    "rule-18-1-af": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-af": {
         "Test": "af",
         "test_description": "The project located in climate zone 3A has one 160,000 ft2 building segment with four zones on four floors. It is an \"Other nonresidential\" building area type and is served by baseline system type 8.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -10276,16 +10180,13 @@
             }
         }
     },
-    "rule-18-1-ag": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-ag": {
         "Test": "ag",
         "test_description": "The project located in climate zone 5A has one 60,000 ft2 building segment with six zones on six floors. All zones are laboratories with a total exhaust rate greater than 15,000 cfm and are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -10993,16 +10894,13 @@
             }
         }
     },
-    "rule-18-1-ah": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-ah": {
         "Test": "ah",
         "test_description": "The project located in climate zone 5A has one 60,000 ft2 building segment with six zones on six floors. It is an \"Other nonresidential\" building area type and is served by two baseline system type 5 and two baseline system type 1.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -11560,16 +11458,13 @@
             }
         }
     },
-    "rule-18-1-ai": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-ai": {
         "Test": "ai",
         "test_description": "The project located in climate zone 5A has one 160,000 ft2 building segment with four zones on four floors. All zones are laboratories with a total exhaust rate greater than 15,000 cfm and are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -12117,16 +12012,13 @@
             }
         }
     },
-    "rule-18-1-aj": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-aj": {
         "Test": "aj",
         "test_description": "The project located in climate zone 3A has one building segment with six zones on six floors. Thermal Zone 1 is a 25,000 ft2 office space and all other zones are 20,000 ft2 each laboratories with a total exhaust rate greater than 15,000 cfm. Thermal zone 1 is served by baseline system type 8 and the laboratories are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -12837,16 +12729,13 @@
             }
         }
     },
-    "rule-18-1-ak": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-ak": {
         "Test": "ak",
         "test_description": "The project located in climate zone 3A has one building segment with six zones and six floors. Thermal Zone 1 is a 25,000 ft2 office space and all other zones are 20,000 ft2 each healthcare spaces. Thermal zone 1 is served by baseline system type 6 and the healthcare spaces are served by baseline system type 7.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -13519,16 +13408,13 @@
             }
         }
     },
-    "rule-18-1-al": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-al": {
         "Test": "al",
         "test_description": "The project located in climate zone 3A has one building segment with one zone on one floor. It is a residential building area type and is served by baseline system type 2.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -13678,16 +13564,13 @@
             }
         }
     },
-    "rule-18-1-am": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-am": {
         "Test": "am",
         "test_description": "The project located in climate zone 3A has one building segment with one zone on one floor. It is a residential building area type and is served by baseline system type 3.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -13847,16 +13730,13 @@
             }
         }
     },
-    "rule-18-1-an": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-an": {
         "Test": "an",
         "test_description": "The project located in climate zone 4A has one building segment with one zone on one floor. It is a residential building area type and is served by baseline system type 1.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -14034,16 +13914,13 @@
             }
         }
     },
-    "rule-18-1-ao": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-ao": {
         "Test": "ao",
         "test_description": "The project located in climate zone 4A has one building segment with one zone on one floor. It is a residential building area type and is served by baseline system type 3.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -14203,16 +14080,13 @@
             }
         }
     },
-    "rule-18-1-ap": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-ap": {
         "Test": "ap",
         "test_description": "The project located in climate zone 4A has one building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h\u22c5ft2 but all zones are served by baseline system 5.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -14437,7 +14311,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lights",
-                                                                "power_per_area": 1,
+                                                                "power_per_area": true,
                                                                 "lighting_multiplier_schedule": "Ltg Mul Sch"
                                                             }
                                                         ],
@@ -14475,7 +14349,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 3 Equip",
-                                                                "power_per_area": 1,
+                                                                "power_per_area": true,
                                                                 "lighting_multiplier_schedule": "Ltg Mul Sch"
                                                             }
                                                         ],
@@ -14513,7 +14387,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 4 Lights",
-                                                                "power_per_area": 1,
+                                                                "power_per_area": true,
                                                                 "lighting_multiplier_schedule": "Ltg Mul Sch"
                                                             }
                                                         ],
@@ -40987,16 +40861,13 @@
             }
         }
     },
-    "rule-18-1-aq": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-aq": {
         "Test": "aq",
         "test_description": "The project located in climate zone 4A has one building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h\u22c5ft2. Thermal Zone 1 is served by baseline system type 8 and all other zones are served by baseline system type 5.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -41287,7 +41158,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lights",
-                                                                "power_per_area": 1,
+                                                                "power_per_area": true,
                                                                 "lighting_multiplier_schedule": "Ltg Mul Sch"
                                                             }
                                                         ],
@@ -41325,7 +41196,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 3 Equip",
-                                                                "power_per_area": 1,
+                                                                "power_per_area": true,
                                                                 "lighting_multiplier_schedule": "Ltg Mul Sch"
                                                             }
                                                         ],
@@ -41363,7 +41234,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 4 Lights",
-                                                                "power_per_area": 1,
+                                                                "power_per_area": true,
                                                                 "lighting_multiplier_schedule": "Ltg Mul Sch"
                                                             }
                                                         ],
@@ -67895,16 +67766,13 @@
             }
         }
     },
-    "rule-18-1-ar": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-ar": {
         "Test": "ar",
         "test_description": "The project located in climate zone 1A has one building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h\u22c5ft2 but all zones are served by baseline system 6.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -68123,7 +67991,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lights",
-                                                                "power_per_area": 1,
+                                                                "power_per_area": true,
                                                                 "lighting_multiplier_schedule": "Ltg Mul Sch"
                                                             }
                                                         ],
@@ -68164,7 +68032,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 3 Equip",
-                                                                "power_per_area": 1,
+                                                                "power_per_area": true,
                                                                 "lighting_multiplier_schedule": "Ltg Mul Sch"
                                                             }
                                                         ],
@@ -68205,7 +68073,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 4 Lights",
-                                                                "power_per_area": 1,
+                                                                "power_per_area": true,
                                                                 "lighting_multiplier_schedule": "Ltg Mul Sch"
                                                             }
                                                         ],
@@ -94661,16 +94529,13 @@
             }
         }
     },
-    "rule-18-1-as": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-as": {
         "Test": "as",
         "test_description": "The project located in climate zone 1A has one building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 has peak internal gains that differ by more than 10 Btu/h\u22c5ft2. Thermal Zone 1 is served by baseline system type 4 and all other zones are served by baseline system type 6.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -94906,7 +94771,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lights",
-                                                                "power_per_area": 1,
+                                                                "power_per_area": true,
                                                                 "lighting_multiplier_schedule": "Ltg Mul Sch"
                                                             }
                                                         ],
@@ -94947,7 +94812,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 3 Equip",
-                                                                "power_per_area": 1,
+                                                                "power_per_area": true,
                                                                 "lighting_multiplier_schedule": "Ltg Mul Sch"
                                                             }
                                                         ],
@@ -94988,7 +94853,7 @@
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 4 Lights",
-                                                                "power_per_area": 1,
+                                                                "power_per_area": true,
                                                                 "lighting_multiplier_schedule": "Ltg Mul Sch"
                                                             }
                                                         ],
@@ -121471,16 +121336,13 @@
             }
         }
     },
-    "rule-18-1-at": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-at": {
         "Test": "at",
         "test_description": "The project located in climate zone 1A has one building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is type Laboratory with 16,000 cfm of zone exhaust. Thermal Zone 1 is served by baseline system type 5 and all other zones are served by baseline system type 6.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -121898,16 +121760,13 @@
             }
         }
     },
-    "rule-18-1-au": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-au": {
         "Test": "au",
         "test_description": "The project located in climate zone 1A has one building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a laboratory space with 16,000 cfm of zone exhaust in the proposed but no zone exhaust defined in the baseline. All zones are served by baseline system type 6.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -122223,16 +122082,13 @@
             }
         }
     },
-    "rule-18-1-av": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-av": {
         "Test": "av",
         "test_description": "The project located in climate zone 1A has one 640,000 ft2 building segment with four zones on one floor. All zones in the building are laboratory spaces with a total zonal exhaust rate of 16,000 cfm and are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -122627,16 +122483,13 @@
             }
         }
     },
-    "rule-18-1-aw": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-aw": {
         "Test": "aw",
         "test_description": "The project located in climate zone 1A has one 20,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a laboratory space with a total zonal exhaust rate of 16,000 cfm. All zones are served by baseline system type 6.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -122956,16 +122809,13 @@
             }
         }
     },
-    "rule-18-1-ax": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-ax": {
         "Test": "ax",
         "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a laboratory space with a total zonal exhaust rate of 12,000 cfm. Thermal Zone 1 is served by baseline system type 7 and all other zones are served by baseline system type 6.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -123432,16 +123282,13 @@
             }
         }
     },
-    "rule-18-1-ay": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-ay": {
         "Test": "ay",
         "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zones 1 and 2 are laboratory space types with a total zonal exhaust rate of 16,000 cfm and central system exhaust rate of 16,000 cfm. Thermal Zones 1 and 2 are served by baseline system type 7 and Thermal Zones 3 and 4 are served by baseline system type 6.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "was selected for this zone based on ASHRAE 90.1 Appendix G3.1.1.d",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -123909,16 +123756,13 @@
             }
         }
     },
-    "rule-18-1-az": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-az": {
         "Test": "az",
         "test_description": "The project located in climate zone 1A has one 500 ft2 building segment with one zone on one floor. The zone is a heated-only stairwell matching the description of G3.1.1.e. The zone is served by baseline system type 10.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -124061,16 +123905,13 @@
             }
         }
     },
-    "rule-18-1-ba": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-ba": {
         "Test": "ba",
         "test_description": "The project located in climate zone 1A has one 500 ft2 building segment with one zone on one floor. The zone is a stairwell with heating and cooling so it does not match the description of G3.1.1.e. The zone is served by baseline system type 10.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -124218,16 +124059,13 @@
             }
         }
     },
-    "rule-18-1-bb": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-bb": {
         "Test": "bb",
         "test_description": "The project located in climate zone 1A has one 20,000 ft2 building segment with four zones on one floor. It is a heated-only storage building area type where Thermal Zone 1 is a warehouse space type and all other zones are office space types. Thermal Zone 1 is served by baseline system type 10 and all other zones are served by baseline system type 4.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -124634,16 +124472,13 @@
             }
         }
     },
-    "rule-18-1-bc": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-bc": {
         "Test": "bc",
         "test_description": "The project located in climate zone 1A has one 20,000 ft2 building segment with four zones on one floor. It is a heated-only storage building area type where Thermal Zone 1 is a warehouse space type and all other zones are office space types. Thermal Zone 1 is incorrectly modeled with baseline system type 10 in the baseline despite having a DX coil in the proposed model and all other zones are served by baseline system type 3.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -125054,16 +124889,13 @@
             }
         }
     },
-    "rule-18-1-bd": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-bd": {
         "Test": "bd",
         "test_description": "The project located in climate zone 4A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load greater than 600,000btu/hr. Thermal Zone 1 is served by a baseline system type 11 and all other zones are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -125540,16 +125372,13 @@
             }
         }
     },
-    "rule-18-1-be": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-be": {
         "Test": "be",
         "test_description": "The project located in climate zone 4A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load greater than 600,000btu/hr. All zones are served by baseline system type 7.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -125970,16 +125799,13 @@
             }
         }
     },
-    "rule-18-1-bf": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-bf": {
         "Test": "bf",
         "test_description": "The project located in climate zone 4A has one 120,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load greater than 3,000,000 Btu/hr. Thermal Zone 1 is served by baseline system type 11 and all other zones are served by baseline system type 5.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -126454,16 +126280,13 @@
             }
         }
     },
-    "rule-18-1-bg": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-bg": {
         "Test": "bg",
         "test_description": "The project located in climate zone 4A has one 120,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load greater than 3,000,000 Btu/hr. All zones are served by baseline system type 5.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -126834,16 +126657,13 @@
             }
         }
     },
-    "rule-18-1-bh": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-bh": {
         "Test": "bh",
         "test_description": "The project located in climate zone 4A has one 120,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load less than 3,000,000 Btu/hr. All zones are served by baseline system type 5.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -127214,16 +127034,13 @@
             }
         }
     },
-    "rule-18-1-bi": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-bi": {
         "Test": "bi",
         "test_description": "The project located in climate zone 4A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load less than 600,000 Btu/hr. Thermal Zone 1 is served by baseline system type 3 and all other zones are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -127648,16 +127465,13 @@
             }
         }
     },
-    "rule-18-1-bj": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-bj": {
         "Test": "bj",
         "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load less than 600,000 Btu/hr. All zones are served by baseline system type 8.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -128108,16 +127922,13 @@
             }
         }
     },
-    "rule-18-1-bk": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-bk": {
         "Test": "bk",
         "test_description": "The project located in climate zone 4A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 is a computer room with a peak cooling load less than 600,000 Btu/hr. Thermal Zone 1 is served by baseline system type 4 and all other zones are served by baseline system type 7.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -128588,16 +128399,13 @@
             }
         }
     },
-    "rule-18-1-bl": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-bl": {
         "Test": "bl",
         "test_description": "The project located in climate zone 4A has one 20,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and all zones are served by baseline system type 3.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -129022,16 +128830,13 @@
             }
         }
     },
-    "rule-18-1-bm": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-bm": {
         "Test": "bm",
         "test_description": "The project located in climate zone 4A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and all zones are served by baseline system type 7.",
         "expected_rule_outcome": "pass",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -129480,16 +129285,13 @@
             }
         }
     },
-    "rule-18-1-bn": {
-        "Section": 18,
-        "Rule": 1,
+    "rule-77j55-bn": {
         "Test": "bn",
         "test_description": "The project located in climate zone 4A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and all zones are served by baseline system type 9.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "was selected based on",
         "standard": {
-            "rule_id": "18-1",
-            "ruleset_reference": 0,
+            "rule_id": "77j55",
             "rule_description": "HVAC system type selection is based on ASHRAE 90.1 G3.1.1 (a-h)",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -129882,15 +129684,12 @@
             }
         }
     },
-    "rule-18-2-a": {
-        "Section": 18,
-        "Rule": 2,
+    "rule-51v53-a": {
         "Test": "a",
         "test_description": "The project located in climate zone 4A has one 160,000 ft2 building segment with four zones on one floor. It is a residential building area type and each zone is served by a dedicated baseline system type 1.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "18-2",
-            "ruleset_reference": 0,
+            "rule_id": "51v53",
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -130308,15 +130107,12 @@
             }
         }
     },
-    "rule-18-2-b": {
-        "Section": 18,
-        "Rule": 2,
+    "rule-51v53-b": {
         "Test": "b",
         "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with two zones on each of two floors. It is a retail building area type and each zone is served by a dedicated baseline system type 4.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "18-2",
-            "ruleset_reference": 0,
+            "rule_id": "51v53",
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -130740,15 +130536,12 @@
             }
         }
     },
-    "rule-18-2-c": {
-        "Section": 18,
-        "Rule": 2,
+    "rule-51v53-c": {
         "Test": "c",
         "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with two zones on each of two floors. It is a retail building area type and the zones are served by a baseline system type 5 per floor.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "18-2",
-            "ruleset_reference": 0,
+            "rule_id": "51v53",
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -131140,15 +130933,12 @@
             }
         }
     },
-    "rule-18-2-d": {
-        "Section": 18,
-        "Rule": 2,
+    "rule-51v53-d": {
         "Test": "d",
         "test_description": "The project located in climate zone 4A has one 50,000 ft2 building segment with two zones on each of two floors. It is an \"Other nonresidential\" building area type and zones are served by a baseline system type 5 per floor.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "18-2",
-            "ruleset_reference": 0,
+            "rule_id": "51v53",
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -131540,15 +131330,12 @@
             }
         }
     },
-    "rule-18-2-e": {
-        "Section": 18,
-        "Rule": 2,
+    "rule-51v53-e": {
         "Test": "e",
         "test_description": "The project located in climate zone 4A has one 50,000 ft2 building segment with two zones on each of two floors. It is an \"Other nonresidential\" building area type and zones are served by a single baseline system.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "18-2",
-            "ruleset_reference": 0,
+            "rule_id": "51v53",
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -131876,15 +131663,12 @@
             }
         }
     },
-    "rule-18-2-f": {
-        "Section": 18,
-        "Rule": 2,
+    "rule-51v53-f": {
         "Test": "f",
         "test_description": "The project located in climate zone 4A has one 50,000 ft2 building segment with two zones on each of two floors. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate greater than 15,000 cfm. The two laboratory zones are served by a single baseline system type 5 and the other two zones are each served by a baseline system type 5 (one per floor). ",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "18-2",
-            "ruleset_reference": 0,
+            "rule_id": "51v53",
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -132346,15 +132130,12 @@
             }
         }
     },
-    "rule-18-2-g": {
-        "Section": 18,
-        "Rule": 2,
+    "rule-51v53-g": {
         "Test": "g",
         "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate greater than 15,000 cfm. Each zone is served by a dedicated baseline system type 7.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "18-2",
-            "ruleset_reference": 0,
+            "rule_id": "51v53",
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -132940,15 +132721,12 @@
             }
         }
     },
-    "rule-18-2-i": {
-        "Section": 18,
-        "Rule": 2,
-        "Test": "i",
+    "rule-51v53-h": {
+        "Test": "h",
         "test_description": "The project located in climate zone 4A has one 50,000 ft2 building segment with two zones on each of two floors. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate less than 15,000 cfm but 4,000 cfm of central system exhaust. It cannot be determined if the building has a total laboratory exhaust rate greater than 15,000 cfm.",
         "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "18-2",
-            "ruleset_reference": 0,
+            "rule_id": "51v53",
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -133416,15 +133194,12 @@
             }
         }
     },
-    "rule-18-2-j": {
-        "Section": 18,
-        "Rule": 2,
-        "Test": "j",
+    "rule-51v53-i": {
+        "Test": "i",
         "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with two zones on each of two floors. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate less than 15,000 cfm. The two laboratory zones are served by a single baseline system type 7 and the other zones are each served by a baseline system type 7 (one per floor).",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "18-2",
-            "ruleset_reference": 0,
+            "rule_id": "51v53",
             "rule_description": "Does the modeled system serve the appropriate zones (one system per zone for system types 1, 2, 3, 4, 9, 10, 11, 12, and 13 and one system per floor for system types 5, 6, 7, and 8, with the exception of system types 5 or 7 serving laboratory spaces - these systems should serve ALL laboratory zones in the buidling).",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -133944,15 +133719,12 @@
             }
         }
     },
-    "rule-18-3-a": {
-        "Section": 18,
-        "Rule": 3,
+    "rule-00u91-a": {
         "Test": "a",
         "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate greater than 15,000 cfm.",
         "expected_rule_outcome": "undetermined",
         "standard": {
-            "rule_id": "18-3",
-            "ruleset_reference": 0,
+            "rule_id": "00u91",
             "rule_description": "The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -134376,15 +134148,12 @@
             }
         }
     },
-    "rule-18-3-b": {
-        "Section": 18,
-        "Rule": 3,
+    "rule-00u91-b": {
         "Test": "b",
         "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type and Thermal Zone 1 and 2 are laboratory spaces with a total zonal exhaust rate less than 15,000 cfm and no central system exhaust could possibly contribute to this total.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "18-3",
-            "ruleset_reference": 0,
+            "rule_id": "00u91",
             "rule_description": "The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",
@@ -134808,15 +134577,12 @@
             }
         }
     },
-    "rule-18-3-c": {
-        "Section": 18,
-        "Rule": 3,
+    "rule-00u91-c": {
         "Test": "c",
         "test_description": "The project located in climate zone 1A has one 160,000 ft2 building segment with four zones on one floor. It is an \"Other nonresidential\" building area type. Thermal Zone 1 and 2 have a total zonal exhaust rate greater than 15,000 cfm but have no laboratory spaces.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "18-3",
-            "ruleset_reference": 0,
+            "rule_id": "00u91",
             "rule_description": "The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline",
             "applicable_rmr": "Baseline RMR",
             "rule_assertion": "=",

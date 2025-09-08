@@ -1,7 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rule_engine.rulesets import LeapYear
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
@@ -23,15 +22,15 @@ MANUAL_CHECK_MSG = (
 )
 
 
-class Section4Rule1(RuleDefinitionListIndexedBase):
+class PRM9012019Rule96q77(RuleDefinitionListIndexedBase):
     """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
-        super(Section4Rule1, self).__init__(
+        super(PRM9012019Rule96q77, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section4Rule1.RuleSetModelInstanceRule(),
+            each_rule=PRM9012019Rule96q77.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="4-1",
             description="Temperature control setpoints shall be the same for proposed design and baseline building design.",
@@ -43,17 +42,16 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section4Rule1.RuleSetModelInstanceRule, self).__init__(
+            super(PRM9012019Rule96q77.RuleSetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section4Rule1.RuleSetModelInstanceRule.ZoneRule(),
+                each_rule=PRM9012019Rule96q77.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
                 required_fields={
-                    "$": ["schedules", "weather", "calendar"],
+                    "$": ["schedules", "weather"],
                     "weather": ["climate_zone"],
-                    "calendar": ["is_leap_year"],
                 },
             )
 
@@ -61,12 +59,10 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
             climate_zone_b = rmd_b["weather"]["climate_zone"]
-            is_leap_year_b = rmd_b["calendar"]["is_leap_year"]
             return {
                 "schedules_b": rmd_b["schedules"],
                 "schedules_p": rmd_p["schedules"],
                 "climate_zone_b": climate_zone_b,
-                "is_leap_year_b": is_leap_year_b,
                 "zcc_dict_b": get_zone_conditioning_category_rmd_dict(
                     climate_zone_b, rmd_b
                 ),
@@ -79,7 +75,9 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section4Rule1.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
+                super(
+                    PRM9012019Rule96q77.RuleSetModelInstanceRule.ZoneRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
@@ -87,133 +85,90 @@ class Section4Rule1(RuleDefinitionListIndexedBase):
                 )
 
             def get_calc_vals(self, context, data=None):
-                is_leap_year = data["is_leap_year_b"]
-                number_of_hours = (
-                    LeapYear.LEAP_YEAR_HOURS
-                    if is_leap_year
-                    else LeapYear.REGULAR_YEAR_HOURS
-                )
-
                 zone_b = context.BASELINE_0
                 zone_p = context.PROPOSED
 
                 schedules_b = data["schedules_b"]
                 schedules_p = data["schedules_p"]
 
-                thermostat_cooling_stpt_sch_id_b = zone_b.get(
-                    "thermostat_cooling_setpoint_schedule"
-                )
+                cooling_id_b = zone_b.get("thermostat_cooling_setpoint_schedule")
+                cooling_id_p = zone_p.get("thermostat_cooling_setpoint_schedule")
+                heating_id_b = zone_b.get("thermostat_heating_setpoint_schedule")
+                heating_id_p = zone_p.get("thermostat_heating_setpoint_schedule")
 
-                thermostat_cooling_stpt_sch_id_p = zone_p.get(
-                    "thermostat_cooling_setpoint_schedule"
-                )
-                thermostat_heating_stpt_sch_id_b = zone_b.get(
-                    "thermostat_heating_setpoint_schedule"
-                )
-                thermostat_heating_stpt_sch_id_p = zone_p.get(
-                    "thermostat_heating_setpoint_schedule"
-                )
-
-                thermostat_cooling_stpt_hourly_values_b = (
-                    getattr_(
-                        find_exactly_one(
-                            f'$[*][?(@.id="{thermostat_cooling_stpt_sch_id_b}")]',
-                            schedules_b,
-                        ),
-                        "schedules",
-                        "hourly_values",
+                # Cooling
+                if cooling_id_b is not None:
+                    cooling_match_b = find_exactly_one(
+                        f'$[*][?(@.id="{cooling_id_b}")]', schedules_b
                     )
-                    if thermostat_cooling_stpt_sch_id_b
-                    else [
-                        getattr_(
-                            zone_b, "zones", "design_thermostat_cooling_setpoint"
-                        ).magnitude
-                    ]
-                    * number_of_hours
-                )
+                    cooling_vals_b = getattr_(
+                        cooling_match_b, "schedules", "hourly_values"
+                    )
+                else:
+                    cooling_vals_b = None
+
+                if cooling_id_p is not None:
+                    cooling_match_p = find_exactly_one(
+                        f'$[*][?(@.id="{cooling_id_p}")]', schedules_p
+                    )
+                    cooling_vals_p = getattr_(
+                        cooling_match_p, "schedules", "hourly_values"
+                    )
+                else:
+                    cooling_vals_p = None
 
                 assert_(
-                    len(thermostat_cooling_stpt_hourly_values_b) == number_of_hours,
-                    f"Schedule id: {thermostat_cooling_stpt_sch_id_b} has number of hours of {len(thermostat_cooling_stpt_hourly_values_b)}, expecting {number_of_hours}",
+                    (cooling_vals_b is None) == (cooling_vals_p is None),
+                    "Cooling schedule must be found or not found for both Baseline and Proposed models.",
                 )
 
-                thermostat_cooling_stpt_hourly_values_p = (
-                    getattr_(
-                        find_exactly_one(
-                            f'$[*][?(@.id="{thermostat_cooling_stpt_sch_id_p}")]',
-                            schedules_p,
-                        ),
-                        "schedules",
-                        "hourly_values",
+                if cooling_vals_b is None:
+                    cooling_val_b = getattr_(
+                        zone_b, "zones", "design_thermostat_cooling_setpoint"
+                    ).magnitude
+                    cooling_val_p = getattr_(
+                        zone_p, "zones", "design_thermostat_cooling_setpoint"
+                    ).magnitude
+                    cooling_schedule_matched = cooling_val_b == cooling_val_p
+                else:
+                    cooling_schedule_matched = cooling_vals_b == cooling_vals_p
+
+                # Heating
+                if heating_id_b is not None:
+                    heating_match_b = find_exactly_one(
+                        f'$[*][?(@.id="{heating_id_b}")]', schedules_b
                     )
-                    if thermostat_cooling_stpt_sch_id_p
-                    else [
-                        zone_p.getattr_(
-                            zone_p, "design_thermostat_cooling_setpoint"
-                        ).magnitude
-                    ]
-                    * number_of_hours
-                )
+                    heating_vals_b = getattr_(
+                        heating_match_b, "schedules", "hourly_values"
+                    )
+                else:
+                    heating_vals_b = None
+
+                if heating_id_p is not None:
+                    heating_match_p = find_exactly_one(
+                        f'$[*][?(@.id="{heating_id_p}")]', schedules_p
+                    )
+                    heating_vals_p = getattr_(
+                        heating_match_p, "schedules", "hourly_values"
+                    )
+                else:
+                    heating_vals_p = None
 
                 assert_(
-                    len(thermostat_cooling_stpt_hourly_values_p) == number_of_hours,
-                    f"Schedule id: {thermostat_cooling_stpt_sch_id_p} has number of hours of {len(thermostat_cooling_stpt_hourly_values_p)}, expecting {number_of_hours}",
+                    (heating_vals_b is None) == (heating_vals_p is None),
+                    "Heating schedule must be found or not found for both Baseline and Proposed models.",
                 )
 
-                thermostat_heating_stpt_hourly_values_b = (
-                    getattr_(
-                        find_exactly_one(
-                            f'$[*][?(@.id="{thermostat_heating_stpt_sch_id_b}")]',
-                            schedules_b,
-                        ),
-                        "schedules",
-                        "hourly_values",
-                    )
-                    if thermostat_heating_stpt_sch_id_b
-                    else [
-                        zone_b.getattr_(
-                            zone_b, "design_thermostat_heating_setpoint"
-                        ).magnitude
-                    ]
-                    * number_of_hours
-                )
-
-                assert_(
-                    len(thermostat_heating_stpt_hourly_values_b) == number_of_hours,
-                    f"Schedule id: {thermostat_heating_stpt_sch_id_b} has number of hours of {len(thermostat_heating_stpt_hourly_values_b)}, expecting {number_of_hours}",
-                )
-
-                thermostat_heating_stpt_hourly_values_p = (
-                    getattr_(
-                        find_exactly_one(
-                            f'$[*][?(@.id="{thermostat_heating_stpt_sch_id_p}")]',
-                            schedules_p,
-                        ),
-                        "schedules",
-                        "hourly_values",
-                    )
-                    if thermostat_heating_stpt_sch_id_p
-                    else [
-                        zone_p.getattr_(
-                            zone_p, "design_thermostat_heating_setpoint"
-                        ).magnitude
-                    ]
-                    * number_of_hours
-                )
-
-                assert_(
-                    len(thermostat_heating_stpt_hourly_values_p) == number_of_hours,
-                    f"Schedule id: {thermostat_heating_stpt_sch_id_p} has number of hours of {len(thermostat_heating_stpt_hourly_values_p)}, expecting {number_of_hours}",
-                )
-
-                cooling_schedule_matched = (
-                    thermostat_cooling_stpt_hourly_values_b
-                    == thermostat_cooling_stpt_hourly_values_p
-                )
-                heating_schedule_matched = (
-                    thermostat_heating_stpt_hourly_values_b
-                    == thermostat_heating_stpt_hourly_values_p
-                )
+                if heating_vals_b is None:
+                    heating_val_b = getattr_(
+                        zone_b, "zones", "design_thermostat_heating_setpoint"
+                    ).magnitude
+                    heating_val_p = getattr_(
+                        zone_p, "zones", "design_thermostat_heating_setpoint"
+                    ).magnitude
+                    heating_schedule_matched = heating_val_b == heating_val_p
+                else:
+                    heating_schedule_matched = heating_vals_b == heating_vals_p
 
                 return {
                     "cooling_schedule_matched": cooling_schedule_matched,

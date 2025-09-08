@@ -35,15 +35,15 @@ HEATING_SOURCE = SchemaEnums.schema_enums["HeatingSourceOptions"]
 FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
 
 
-class Section19Rule2(RuleDefinitionListIndexedBase):
+class PRM9012019Rule93f21(RuleDefinitionListIndexedBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule2, self).__init__(
+        super(PRM9012019Rule93f21, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section19Rule2.FluidLoopRule(),
+            each_rule=PRM9012019Rule93f21.FluidLoopRule(),
             index_rmd=BASELINE_0,
             id="19-2",
             description="Baseline building plant capacities shall be based on coincident loads.",
@@ -167,7 +167,7 @@ class Section19Rule2(RuleDefinitionListIndexedBase):
 
     class FluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule2.FluidLoopRule, self).__init__(
+            super(PRM9012019Rule93f21.FluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

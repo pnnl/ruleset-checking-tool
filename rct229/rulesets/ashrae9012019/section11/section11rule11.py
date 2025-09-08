@@ -8,15 +8,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
 from rct229.utils.jsonpath_utils import find_all
 
 
-class Section11Rule11(RuleDefinitionListIndexedBase):
+class PRM9012019Rule29i55(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(Section11Rule11, self).__init__(
+        super(PRM9012019Rule29i55, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section11Rule11.RMDRule(),
+            each_rule=PRM9012019Rule29i55.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-11",
             description=(
@@ -31,11 +31,11 @@ class Section11Rule11(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section11Rule11.RMDRule, self).__init__(
+            super(PRM9012019Rule29i55.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section11Rule11.RMDRule.BuildingSegmentRule(),
+                each_rule=PRM9012019Rule29i55.RMDRule.BuildingSegmentRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*]",
             )
@@ -74,7 +74,7 @@ class Section11Rule11(RuleDefinitionListIndexedBase):
 
         class BuildingSegmentRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section11Rule11.RMDRule.BuildingSegmentRule, self).__init__(
+                super(PRM9012019Rule29i55.RMDRule.BuildingSegmentRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),

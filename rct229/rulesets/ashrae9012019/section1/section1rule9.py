@@ -5,11 +5,11 @@ from rct229.rulesets.ashrae9012019.data_fns.extra_schema_fns import (
 )
 
 
-class Section1Rule9(RuleDefinitionBase):
+class PRM9012019Rule51z38(RuleDefinitionBase):
     """Rule 9 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculation)"""
 
     def __init__(self):
-        super(Section1Rule9, self).__init__(
+        super(PRM9012019Rule51z38, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False,
                 BASELINE_0=True,

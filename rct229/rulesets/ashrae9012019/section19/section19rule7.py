@@ -26,15 +26,15 @@ DEMAND_CONTROL_VENTILATION_CONTROL = SchemaEnums.schema_enums[
 ]
 
 
-class Section19Rule7(RuleDefinitionListIndexedBase):
+class PRM9012019Rule29n92(RuleDefinitionListIndexedBase):
     """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule7, self).__init__(
+        super(PRM9012019Rule29n92, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule7.HVACRule(),
+            each_rule=PRM9012019Rule29n92.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-7",
             description="Minimum ventilation system outdoor air intake flow shall be the same for the proposed design and baseline building design except when any of the 4 exceptions defined in Section G3.1.2.5 are met."
@@ -168,7 +168,7 @@ class Section19Rule7(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule7.HVACRule, self).__init__(
+            super(PRM9012019Rule29n92.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

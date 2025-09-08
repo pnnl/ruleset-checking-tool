@@ -53,15 +53,15 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section4Rule11(RuleDefinitionListIndexedBase):
+class PRM9012019Rule18y74(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
-        super(Section4Rule11, self).__init__(
+        super(PRM9012019Rule18y74, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section4Rule11.RuleSetModelInstanceRule(),
+            each_rule=PRM9012019Rule18y74.RuleSetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="4-11",
             description="Fan schedules shall be modeled identically in the baseline and proposed unless Table G3.1 Section 4 baseline exceptions are applicable. Fan Schedules may be allowed to differ when Section 4 Baseline Column Exceptions #1, #2 Or #3 are applicable.",
@@ -73,24 +73,22 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(Section4Rule11.RuleSetModelInstanceRule, self).__init__(
+            super(PRM9012019Rule18y74.RuleSetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=Section4Rule11.RuleSetModelInstanceRule.ZoneRule(),
+                each_rule=PRM9012019Rule18y74.RuleSetModelInstanceRule.ZoneRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].zones[*]",
                 required_fields={
-                    "$": ["weather", "calendar"],
+                    "$": ["weather"],
                     "weather": ["climate_zone"],
-                    "calendar": ["is_leap_year"],
                 },
             )
 
         def create_data(self, context, data=None):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
-            is_leap_year = rmd_b["calendar"]["is_leap_year"]
             climate_zone = rmd_b["weather"]["climate_zone"]
 
             zone_p_hvac_list_dict = {
@@ -101,9 +99,7 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             }
 
             zone_p_fan_schedule_dict = {
-                zone_id: get_aggregated_zone_hvac_fan_operating_schedule(
-                    rmd_p, zone_id, is_leap_year
-                )
+                zone_id: get_aggregated_zone_hvac_fan_operating_schedule(rmd_p, zone_id)
                 for zone_id in find_all(
                     "$.buildings[*].building_segments[*].zones[*].id", rmd_p
                 )
@@ -121,9 +117,7 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
             }
 
             zone_b_fan_schedule_dict = {
-                zone_id: get_aggregated_zone_hvac_fan_operating_schedule(
-                    rmd_b, zone_id, is_leap_year
-                )
+                zone_id: get_aggregated_zone_hvac_fan_operating_schedule(rmd_b, zone_id)
                 for zone_id in find_all(
                     "$.buildings[*].building_segments[*].zones[*].id", rmd_b
                 )
@@ -140,7 +134,6 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
 
             return {
                 "climate_zone": climate_zone,
-                "is_leap_year": is_leap_year,
                 "baseline_hvac_sys_type_ids_dict_b": get_baseline_system_types(rmd_b),
                 "zone_p_hvac_list_dict": zone_p_hvac_list_dict,
                 "zone_b_hvac_zone_list_dict": zone_b_hvac_zone_list_dict,
@@ -162,7 +155,9 @@ class Section4Rule11(RuleDefinitionListIndexedBase):
 
         class ZoneRule(RuleDefinitionBase):
             def __init__(self):
-                super(Section4Rule11.RuleSetModelInstanceRule.ZoneRule, self,).__init__(
+                super(
+                    PRM9012019Rule18y74.RuleSetModelInstanceRule.ZoneRule, self
+                ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),

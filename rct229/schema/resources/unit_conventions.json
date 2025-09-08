@@ -10,7 +10,7 @@
         "linear_thermal_transmittance": "W/m-K",
         "cooling_capacity": "W",
         "capacity": "W",
-        "volumetric_flow_rate": "m3/s",
+        "volumetric_flow_rate": "L/s",
         "fluid_flow_rate": "L/s",
         "temperature": "C",
         "cooling_efficiency": "W/W",

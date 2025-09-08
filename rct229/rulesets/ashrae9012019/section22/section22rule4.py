@@ -36,15 +36,15 @@ REQUIRED_LOOP_SUPPLY_TEMP_OUTDOOR_HIGH = ureg("44 degF")
 REQUIRED_LOOP_SUPPLY_TEMP_OUTDOOR_LOW = ureg("54 degF")
 
 
-class Section22Rule4(RuleDefinitionListIndexedBase):
+class PRM9012019Rule13x50(RuleDefinitionListIndexedBase):
     """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule4, self).__init__(
+        super(PRM9012019Rule13x50, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule4.ChillerFluidLoopRule(),
+            each_rule=PRM9012019Rule13x50.ChillerFluidLoopRule(),
             index_rmd=BASELINE_0,
             id="22-4",
             description="Baseline chilled water loops that do not use purchased cooling and do not serve any computer rooms (i.e., do not serve baseline system type 11) shall have the chilled water supply temperature reset using the following schedule: 44F at outdoor dry-bulb temperature of 80F and above, 54F at 60F and below, and ramped linearly between 44F and 54F at temperature between 80F and 60F.",
@@ -88,7 +88,7 @@ class Section22Rule4(RuleDefinitionListIndexedBase):
 
     class ChillerFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section22Rule4.ChillerFluidLoopRule, self).__init__(
+            super(PRM9012019Rule13x50.ChillerFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -103,19 +103,19 @@ class Section22Rule4(RuleDefinitionListIndexedBase):
                 },
                 precision={
                     "outdoor_high_for_loop_supply_reset_temperature": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                     "outdoor_low_for_loop_supply_reset_temperature": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                     "loop_supply_temperature_at_outdoor_high": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                     "loop_supply_temperature_at_outdoor_low": {
-                        "precision": 0.1,
+                        "precision": 1,
                         "unit": "K",
                     },
                 },

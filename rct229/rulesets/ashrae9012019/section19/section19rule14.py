@@ -40,15 +40,15 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section19Rule14(RuleDefinitionListIndexedBase):
+class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
     """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule14, self).__init__(
+        super(PRM9012019Rule60f12, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule14.HVACRule(),
+            each_rule=PRM9012019Rule60f12.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-14",
             description="For baseline system types 1-8 and 11-13, if return or relief fans are specified in the proposed design, the baseline building design shall also be modeled with fans serving the same functions and sized for the baseline system supply fan air quantity less the minimum outdoor air, or 90% of the supply fan air quantity, whichever is larger.",
@@ -119,7 +119,7 @@ class Section19Rule14(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule14.HVACRule, self).__init__(
+            super(PRM9012019Rule60f12.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

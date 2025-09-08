@@ -35,11 +35,11 @@ AIR_SIDE_SYSTEMS_USING_COOLING_SOURCE_OTHER_THAN_PURCHASED_CHILLED_WATER = [
 ]
 
 
-class Section22Rule40(RuleDefinitionBase):
+class PRM9012019Rule48h16(RuleDefinitionBase):
     """Rule 40 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule40, self).__init__(
+        super(PRM9012019Rule48h16, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),

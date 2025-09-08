@@ -7,15 +7,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_sta
 )
 
 
-class Section22Rule37(RuleDefinitionListIndexedBase):
+class PRM9012019Rule81j88(RuleDefinitionListIndexedBase):
     """Rule 37 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule37, self).__init__(
+        super(PRM9012019Rule81j88, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=Section22Rule37.RulesetModelInstanceRule(),
+            each_rule=PRM9012019Rule81j88.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="22-37",
             description="Baseline chilled water loops that use purchased chilled water shall be modeled with a variable-speed distribution pump.",
@@ -27,7 +27,7 @@ class Section22Rule37(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section22Rule37.RulesetModelInstanceRule, self,).__init__(
+            super(PRM9012019Rule81j88.RulesetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

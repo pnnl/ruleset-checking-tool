@@ -24,11 +24,11 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class Section22Rule33(RuleDefinitionBase):
+class PRM9012019Rule88r57(RuleDefinitionBase):
     """Rule 33 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(Section22Rule33, self).__init__(
+        super(PRM9012019Rule88r57, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),

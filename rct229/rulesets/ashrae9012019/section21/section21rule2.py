@@ -7,15 +7,15 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_sta
 )
 
 
-class Section21Rule2(RuleDefinitionListIndexedBase):
+class PRM9012019Rule83m55(RuleDefinitionListIndexedBase):
     """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 21 (HVAC - Water Side)"""
 
     def __init__(self):
-        super(Section21Rule2, self).__init__(
+        super(PRM9012019Rule83m55, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=Section21Rule2.RulesetModelInstanceRule(),
+            each_rule=PRM9012019Rule83m55.RulesetModelInstanceRule(),
             index_rmd=PROPOSED,
             id="21-2",
             description="For purchased HW/steam in the proposed model, the baseline shall have the same number of "
@@ -29,7 +29,7 @@ class Section21Rule2(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(PartialRuleDefinition):
         def __init__(self):
-            super(Section21Rule2.RulesetModelInstanceRule, self,).__init__(
+            super(PRM9012019Rule83m55.RulesetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),

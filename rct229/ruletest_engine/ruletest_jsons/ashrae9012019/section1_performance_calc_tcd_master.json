@@ -1,12 +1,10 @@
 {
-    "rule-1-1-a": {
-        "Section": 1,
-        "Rule": 1,
+    "rule-73j65-a": {
         "Test": "a",
         "test_description": "A one building segment, single zone office building has the building performance factor defined and it is equal to the expected building performance factor from Table 4.2.1.1.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "1-1",
+            "rule_id": "73j65",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1 \u201cAll others\u201d shall be used to determine the BPF. Where a building has multiple building area types, the required BPF shall be equal to the area-weighted average of the building area types.",
             "applicable_rmd": "Proposed RMD",
@@ -145,14 +143,12 @@
             }
         }
     },
-    "rule-1-1-b": {
-        "Section": 1,
-        "Rule": 1,
+    "rule-73j65-b": {
         "Test": "b",
         "test_description": "A one building segment, two zone building has both office and hotel building areas. The total area weighted building performance factor is equal to the area-weighted average of the office and hotel BPF values specified in Table 4.2.1.1.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "1-1",
+            "rule_id": "73j65",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1 \u201cAll others\u201d shall be used to determine the BPF. Where a building has multiple building area types, the required BPF shall be equal to the area-weighted average of the building area types.",
             "applicable_rmd": "Proposed RMD",
@@ -324,14 +320,12 @@
             }
         }
     },
-    "rule-1-1-c": {
-        "Section": 1,
-        "Rule": 1,
+    "rule-73j65-c": {
         "Test": "c",
         "test_description": "A one building segment, single zone office building has the building performance factor defined and it is not equal to the expected building performance factor from Table 4.2.1.1.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "1-1",
+            "rule_id": "73j65",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1 \u201cAll others\u201d shall be used to determine the BPF. Where a building has multiple building area types, the required BPF shall be equal to the area-weighted average of the building area types.",
             "applicable_rmd": "Proposed RMD",
@@ -470,14 +464,12 @@
             }
         }
     },
-    "rule-1-1-d": {
-        "Section": 1,
-        "Rule": 1,
+    "rule-73j65-d": {
         "Test": "d",
         "test_description": "A one building segment, two zone building has both office and hotel building areas. The total area weighted building performance factor is not equal to the area-weighted average of the office and hotel BPF values specified in Table 4.2.1.1.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "1-1",
+            "rule_id": "73j65",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1 \u201cAll others\u201d shall be used to determine the BPF. Where a building has multiple building area types, the required BPF shall be equal to the area-weighted average of the building area types.",
             "applicable_rmd": "Proposed RMD",
@@ -649,15 +641,13 @@
             }
         }
     },
-    "rule-1-1-e": {
-        "Section": 1,
-        "Rule": 1,
+    "rule-73j65-e": {
         "Test": "e",
         "test_description": "A one building segment, single zone building has only a restroom space so the building area type, and therefore the expected building performance factor, cannot be determined",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "One or more building area types could not be determined for the project's building segments. Assigning a lighting building area type to all building segments will fix this issue.",
         "standard": {
-            "rule_id": "1-1",
+            "rule_id": "73j65",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1 \u201cAll others\u201d shall be used to determine the BPF. Where a building has multiple building area types, the required BPF shall be equal to the area-weighted average of the building area types.",
             "applicable_rmd": "Proposed RMD",
@@ -796,15 +786,13 @@
             }
         }
     },
-    "rule-1-1-f": {
-        "Section": 1,
-        "Rule": 1,
+    "rule-73j65-f": {
         "Test": "f",
         "test_description": "A one building segment, two zone building has a lighting space type that differs in the baseline ruleset model description. The expected total area weighted building performance factor cannot be calculated.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "One or more building area types could not be determined for the project's building segments. Assigning a lighting building area type to all building segments will fix this issue.",
         "standard": {
-            "rule_id": "1-1",
+            "rule_id": "73j65",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the building area type and climate zone. For building area types not listed in Table 4.2.1.1 \u201cAll others\u201d shall be used to determine the BPF. Where a building has multiple building area types, the required BPF shall be equal to the area-weighted average of the building area types.",
             "applicable_rmd": "Proposed RMD",
@@ -976,14 +964,12 @@
             }
         }
     },
-    "rule-1-2-a": {
-        "Section": 1,
-        "Rule": 2,
+    "rule-63e94-a": {
         "Test": "a",
         "test_description": "A one building segment, single zone office space type building has the performance cost index correctly set as the ratio of proposed and baseline building energy cost as described in G1.2.2. ",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "1-2",
+            "rule_id": 630000000000000034969974983672956124128569805293123684744636475214030818724699644415300522213376,
             "ruleset_reference": "G1.2.2",
             "rule_description": "The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), where both the PBP and the BBP include all end-use load components associated with the building when calculating the Performance Cost Index (PCI).",
             "applicable_rmd": "Proposed RMD",
@@ -1125,14 +1111,12 @@
             }
         }
     },
-    "rule-1-2-b": {
-        "Section": 1,
-        "Rule": 2,
+    "rule-63e94-b": {
         "Test": "b",
         "test_description": "A one building segment, single zone office building does not have the performance cost index correctly set as the ratio of proposed and baseline building energy cost as described in G1.2.2. ",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "1-2",
+            "rule_id": 630000000000000034969974983672956124128569805293123684744636475214030818724699644415300522213376,
             "ruleset_reference": "G1.2.2",
             "rule_description": "The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), where both the PBP and the BBP include all end-use load components associated with the building when calculating the Performance Cost Index (PCI).",
             "applicable_rmd": "Proposed RMD",
@@ -1274,15 +1258,13 @@
             }
         }
     },
-    "rule-1-2-c": {
-        "Section": 1,
-        "Rule": 2,
+    "rule-63e94-c": {
         "Test": "c",
         "test_description": "A one building segment, single zone office building does not have the performance cost index specified uniformly in any/all ruleset model descriptions.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Ruleset expects exactly one PCI value to be used in the project.",
         "standard": {
-            "rule_id": "1-2",
+            "rule_id": 630000000000000034969974983672956124128569805293123684744636475214030818724699644415300522213376,
             "ruleset_reference": "G1.2.2",
             "rule_description": "The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), where both the PBP and the BBP include all end-use load components associated with the building when calculating the Performance Cost Index (PCI).",
             "applicable_rmd": "Proposed RMD",
@@ -1424,15 +1406,13 @@
             }
         }
     },
-    "rule-1-2-d": {
-        "Section": 1,
-        "Rule": 2,
+    "rule-63e94-d": {
         "Test": "d",
         "test_description": "A one building segment, single zone office space type building does not have a performance cost index defined.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `performance_cost_index` value must exist.",
         "standard": {
-            "rule_id": "1-2",
+            "rule_id": 630000000000000034969974983672956124128569805293123684744636475214030818724699644415300522213376,
             "ruleset_reference": "G1.2.2",
             "rule_description": "The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), where both the PBP and the BBP include all end-use load components associated with the building when calculating the Performance Cost Index (PCI).",
             "applicable_rmd": "Proposed RMD",
@@ -1571,15 +1551,13 @@
             }
         }
     },
-    "rule-1-2-e": {
-        "Section": 1,
-        "Rule": 2,
+    "rule-63e94-e": {
         "Test": "e",
         "test_description": "A one building segment, single zone office building does not have proposed building performance defined.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `total_proposed_building_energy_cost_including_renewable_energy` value must exist.",
         "standard": {
-            "rule_id": "1-2",
+            "rule_id": 630000000000000034969974983672956124128569805293123684744636475214030818724699644415300522213376,
             "ruleset_reference": "G1.2.2",
             "rule_description": "The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), where both the PBP and the BBP include all end-use load components associated with the building when calculating the Performance Cost Index (PCI).",
             "applicable_rmd": "Proposed RMD",
@@ -1719,15 +1697,13 @@
             }
         }
     },
-    "rule-1-2-f": {
-        "Section": 1,
-        "Rule": 2,
+    "rule-63e94-f": {
         "Test": "f",
         "test_description": "A one building segment, single zone office building does not have a baseline building performance defined.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `baseline_building_performance_energy_cost` value must exist.",
         "standard": {
-            "rule_id": "1-2",
+            "rule_id": 630000000000000034969974983672956124128569805293123684744636475214030818724699644415300522213376,
             "ruleset_reference": "G1.2.2",
             "rule_description": "The performance of the proposed design is calculated in accordance with Standard 90.1-2019 Appendix G, where Performance Cost Index = Proposed building performance (PBP) /Baseline building performance (BBP), where both the PBP and the BBP include all end-use load components associated with the building when calculating the Performance Cost Index (PCI).",
             "applicable_rmd": "Proposed RMD",
@@ -1868,14 +1844,12 @@
             }
         }
     },
-    "rule-1-3-a": {
-        "Section": 1,
-        "Rule": 3,
+    "rule-88z11-a": {
         "Test": "a",
         "test_description": "A one building segment, single zone building has specified the performance cost index target correctly according to the equation in Section 4.2.1.1.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "1-3",
+            "rule_id": "88z11",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
             "applicable_rmd": "Proposed RMD",
@@ -2026,14 +2000,12 @@
             }
         }
     },
-    "rule-1-3-b": {
-        "Section": 1,
-        "Rule": 3,
+    "rule-88z11-b": {
         "Test": "b",
         "test_description": "A one building segment, single zone building has specified the performance cost index target incorrectly according to the equation in Section 4.2.1.1.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "1-3",
+            "rule_id": "88z11",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
             "applicable_rmd": "Proposed RMD",
@@ -2184,15 +2156,13 @@
             }
         }
     },
-    "rule-1-3-c": {
-        "Section": 1,
-        "Rule": 3,
+    "rule-88z11-c": {
         "Test": "c",
         "test_description": "A one building segment, single zone building has specified the performance cost index target correctly according to the equation in Section 4.2.1.1, however the building performance factor was not specified uniformly in any/all ruleset model descriptions.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Ruleset expects exactly one BPF value to be used in the project.",
         "standard": {
-            "rule_id": "1-3",
+            "rule_id": "88z11",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
             "applicable_rmd": "Proposed RMD",
@@ -2343,15 +2313,13 @@
             }
         }
     },
-    "rule-1-3-d": {
-        "Section": 1,
-        "Rule": 3,
+    "rule-88z11-d": {
         "Test": "d",
         "test_description": "A one building segment, single zone building does not have the performance cost index target specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `performance_cost_index_target` value must exist.",
         "standard": {
-            "rule_id": "1-3",
+            "rule_id": "88z11",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
             "applicable_rmd": "Proposed RMD",
@@ -2499,15 +2467,13 @@
             }
         }
     },
-    "rule-1-3-e": {
-        "Section": 1,
-        "Rule": 3,
+    "rule-88z11-e": {
         "Test": "e",
         "test_description": "A one building segment, single zone building does not have the building performance factor specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `bpf_set` value must exist.",
         "standard": {
-            "rule_id": "1-3",
+            "rule_id": "88z11",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
             "applicable_rmd": "Proposed RMD",
@@ -2655,15 +2621,13 @@
             }
         }
     },
-    "rule-1-3-f": {
-        "Section": 1,
-        "Rule": 3,
+    "rule-88z11-f": {
         "Test": "f",
         "test_description": "A one building segment, single zone building does not have the baseline building regulated energy cost specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `bbrec_set` value must exist.",
         "standard": {
-            "rule_id": "1-3",
+            "rule_id": "88z11",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
             "applicable_rmd": "Proposed RMD",
@@ -2811,15 +2775,13 @@
             }
         }
     },
-    "rule-1-3-g": {
-        "Section": 1,
-        "Rule": 3,
+    "rule-88z11-g": {
         "Test": "g",
         "test_description": "A one building segment, single zone building does not have the baseline building unregulated energy cost specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `bbuec_set` value must exist.",
         "standard": {
-            "rule_id": "1-3",
+            "rule_id": "88z11",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
             "applicable_rmd": "Proposed RMD",
@@ -2967,15 +2929,13 @@
             }
         }
     },
-    "rule-1-3-h": {
-        "Section": 1,
-        "Rule": 3,
+    "rule-88z11-h": {
         "Test": "h",
         "test_description": "A one building segment, single zone building does not have the baseline building performance specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `bbp_set` value must exist.",
         "standard": {
-            "rule_id": "1-3",
+            "rule_id": "88z11",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "The Performance Cost Index-Target (PCIt) shall be calculated using the procedures defined in Section 4.2.1.1. The PCIt shall be equal to baseline building unregulated energy cost (BBUEC) + BPF x baseline building regulated energy cost (BBREC)/ BBP",
             "applicable_rmd": "Proposed RMD",
@@ -3123,14 +3083,12 @@
             }
         }
     },
-    "rule-1-4-a": {
-        "Section": 1,
-        "Rule": 4,
+    "rule-60m79-a": {
         "Test": "a",
         "test_description": "A one building segment, single zone building has a performance cost index that is less than the performance cost index target.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "1-4",
+            "rule_id": "60m79",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1",
             "applicable_rmd": "Proposed RMD",
@@ -3272,14 +3230,12 @@
             }
         }
     },
-    "rule-1-4-b": {
-        "Section": 1,
-        "Rule": 4,
+    "rule-60m79-b": {
         "Test": "b",
         "test_description": "A one building segment, single zone building has a performance cost index that is equal to the performance cost index target.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "1-4",
+            "rule_id": "60m79",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1",
             "applicable_rmd": "Proposed RMD",
@@ -3421,14 +3377,12 @@
             }
         }
     },
-    "rule-1-4-c": {
-        "Section": 1,
-        "Rule": 4,
+    "rule-60m79-c": {
         "Test": "c",
         "test_description": "A one building segment, single zone building has a performance cost index that is greater than the performance cost index target.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "1-4",
+            "rule_id": "60m79",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1",
             "applicable_rmd": "Proposed RMD",
@@ -3570,15 +3524,13 @@
             }
         }
     },
-    "rule-1-4-d": {
-        "Section": 1,
-        "Rule": 4,
+    "rule-60m79-d": {
         "Test": "d",
         "test_description": "A one building segment, single zone building has a performance cost index that is less than the performance cost index target, but the performance cost index is not specified uniformly in any/all ruleset model descriptions.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Ruleset expects exactly one PCI value to be used in the project.",
         "standard": {
-            "rule_id": "1-4",
+            "rule_id": "60m79",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1",
             "applicable_rmd": "Proposed RMD",
@@ -3720,15 +3672,13 @@
             }
         }
     },
-    "rule-1-4-e": {
-        "Section": 1,
-        "Rule": 4,
+    "rule-60m79-e": {
         "Test": "e",
         "test_description": "A one building segment, single zone building does not have performance cost index specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `pci_set` value must exist.",
         "standard": {
-            "rule_id": "1-4",
+            "rule_id": "60m79",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1",
             "applicable_rmd": "Proposed RMD",
@@ -3867,15 +3817,13 @@
             }
         }
     },
-    "rule-1-4-f": {
-        "Section": 1,
-        "Rule": 4,
+    "rule-60m79-f": {
         "Test": "f",
         "test_description": "A one building segment, single zone building does not have performance cost index target specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "At least one `pci_target_set` value must exist.",
         "standard": {
-            "rule_id": "1-4",
+            "rule_id": "60m79",
             "ruleset_reference": "4.2.1.1",
             "rule_description": "The PCI shall be less than or equal to the PCIt when calculated in accordance with Standard 90.1 2019, Section 4.2.1.1",
             "applicable_rmd": "Proposed RMD",
@@ -4014,14 +3962,12 @@
             }
         }
     },
-    "rule-1-5-a": {
-        "Section": 1,
-        "Rule": 5,
+    "rule-86h31-a": {
         "Test": "a",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production. The performance cost index only including the 5% renewable energy threshold is less than the performance cost index target.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "1-5",
+            "rule_id": "86h31",
             "ruleset_reference": "4.2.1.2",
             "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
             "applicable_rmd": "Proposed RMD",
@@ -4164,14 +4110,12 @@
             }
         }
     },
-    "rule-1-5-b": {
-        "Section": 1,
-        "Rule": 5,
+    "rule-86h31-b": {
         "Test": "b",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production that offsets more than 5% of the baseline building performance. The performance cost index only including the 5% renewable energy threshold is greater than the performance cost index target.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "1-5",
+            "rule_id": "86h31",
             "ruleset_reference": "4.2.1.2",
             "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
             "applicable_rmd": "Proposed RMD",
@@ -4314,14 +4258,12 @@
             }
         }
     },
-    "rule-1-5-c": {
-        "Section": 1,
-        "Rule": 5,
+    "rule-86h31-c": {
         "Test": "c",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production. The on site renewable energy production offsets less than 5% of the baseline building performance.",
         "expected_rule_outcome": "not_applicable",
         "standard": {
-            "rule_id": "1-5",
+            "rule_id": "86h31",
             "ruleset_reference": "4.2.1.2",
             "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
             "applicable_rmd": "Proposed RMD",
@@ -4464,15 +4406,13 @@
             }
         }
     },
-    "rule-1-5-d": {
-        "Section": 1,
-        "Rule": 5,
+    "rule-86h31-d": {
         "Test": "d",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production and the proposed building performance is not specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Ruleset expects exactly one PBP value to be used in the project.",
         "standard": {
-            "rule_id": "1-5",
+            "rule_id": "86h31",
             "ruleset_reference": "4.2.1.2",
             "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
             "applicable_rmd": "Proposed RMD",
@@ -4613,15 +4553,13 @@
             }
         }
     },
-    "rule-1-5-e": {
-        "Section": 1,
-        "Rule": 5,
+    "rule-86h31-e": {
         "Test": "e",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production and baseline building performance is not specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Ruleset expects exactly one BBP value to be used in the project.",
         "standard": {
-            "rule_id": "1-5",
+            "rule_id": "86h31",
             "ruleset_reference": "4.2.1.2",
             "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
             "applicable_rmd": "Proposed RMD",
@@ -4762,15 +4700,13 @@
             }
         }
     },
-    "rule-1-5-f": {
-        "Section": 1,
-        "Rule": 5,
+    "rule-86h31-f": {
         "Test": "f",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production and performance cost index is not specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Ruleset expects exactly one PCI value to be used in the project.",
         "standard": {
-            "rule_id": "1-5",
+            "rule_id": "86h31",
             "ruleset_reference": "4.2.1.2",
             "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
             "applicable_rmd": "Proposed RMD",
@@ -4911,15 +4847,13 @@
             }
         }
     },
-    "rule-1-5-g": {
-        "Section": 1,
-        "Rule": 5,
+    "rule-86h31-g": {
         "Test": "g",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production and performance cost index target is not specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Ruleset expects exactly one PCI Target value to be used in the project.",
         "standard": {
-            "rule_id": "1-5",
+            "rule_id": "86h31",
             "ruleset_reference": "4.2.1.2",
             "rule_description": "When on-site renewable energy generation exceeds the thresholds defined in Section 4.2.1.1, the methodology defined in this section shall be used to calculate the PCIt. ",
             "applicable_rmd": "Proposed RMD",
@@ -5060,14 +4994,12 @@
             }
         }
     },
-    "rule-1-6-a": {
-        "Section": 1,
-        "Rule": 6,
+    "rule-10d53-a": {
         "Test": "a",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production. An end use result has an energy source with \"ON_SITE_RENEWABLES\" and has annual set energy use greater than 0",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "1-6",
+            "rule_id": "10d53",
             "ruleset_reference": "G3.11 18 Baseline",
             "rule_description": "On-site renewable energy shall not be included in the baseline building performance.",
             "applicable_rmd": "Baseline RMD",
@@ -5140,14 +5072,12 @@
             }
         }
     },
-    "rule-1-6-b": {
-        "Section": 1,
-        "Rule": 6,
+    "rule-10d53-b": {
         "Test": "b",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production. An end use result has an energy source with \"ON_SITE_RENEWABLES\" and but has annual site energy set to 0.",
         "expected_rule_outcome": "fail",
         "standard": {
-            "rule_id": "1-6",
+            "rule_id": "10d53",
             "ruleset_reference": "G3.11 18 Baseline",
             "rule_description": "On-site renewable energy shall not be included in the baseline building performance.",
             "applicable_rmd": "Baseline RMD",
@@ -5220,14 +5150,12 @@
             }
         }
     },
-    "rule-1-7-a": {
-        "Section": 1,
-        "Rule": 7,
+    "rule-37e66-a": {
         "Test": "a",
         "test_description": "A one story building's baseline and proposed RMDs have matching values as determined by Table G3.1(1) Baseline Building Performance and https://github.com/open229/ruleset-model-description-schema/blob/main/schema-source/ASHRAE229_extra.schema.yaml.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "1-7",
+            "rule_id": 36999999999999997415709724390088749061041947327733493664758043246592,
             "ruleset_reference": "Table G3.1(1) Baseline Building Performance (a)",
             "rule_description": "The proposed design shall be the same as the baseline design for all data elements identified in the schema hosted at data.standards.ashrae {{https://github.com/open229/ruleset-model-description-schema/blob/main/docs229/ASHRAE229_extra.schema.json}}",
             "applicable_rmd": "Proposed RMD",
@@ -40586,15 +40514,13 @@
             }
         }
     },
-    "rule-1-7-b": {
-        "Section": 1,
-        "Rule": 7,
+    "rule-37e66-b": {
         "Test": "b",
         "test_description": "A one story building's baseline and proposed RMDs fail to have matching list lengths for value determined by Table G3.1(1) Baseline Building Performance and https://github.com/open229/ruleset-model-description-schema/blob/main/schema-source/ASHRAE229_extra.schema.yaml.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": " in index context != length of objects",
         "standard": {
-            "rule_id": "1-7",
+            "rule_id": 36999999999999997415709724390088749061041947327733493664758043246592,
             "ruleset_reference": "Table G3.1(1) Baseline Building Performance (a)",
             "rule_description": "The proposed design shall be the same as the baseline design for all data elements identified in the schema hosted at data.standards.ashrae {{https://github.com/open229/ruleset-model-description-schema/blob/main/docs229/ASHRAE229_extra.schema.json}}",
             "applicable_rmd": "Proposed RMD",
@@ -75956,15 +75882,13 @@
             }
         }
     },
-    "rule-1-7-c": {
-        "Section": 1,
-        "Rule": 7,
+    "rule-37e66-c": {
         "Test": "c",
         "test_description": "A one story building's baseline and proposed RMDs fail to have matching IDs in their lists for value determined by Table G3.1(1) Baseline Building Performance and https://github.com/open229/ruleset-model-description-schema/blob/main/schema-source/ASHRAE229_extra.schema.yaml.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "in index context does not match the one",
         "standard": {
-            "rule_id": "1-7",
+            "rule_id": 36999999999999997415709724390088749061041947327733493664758043246592,
             "ruleset_reference": "Table G3.1(1) Baseline Building Performance (a)",
             "rule_description": "The proposed design shall be the same as the baseline design for all data elements identified in the schema hosted at data.standards.ashrae {{https://github.com/open229/ruleset-model-description-schema/blob/main/docs229/ASHRAE229_extra.schema.json}}",
             "applicable_rmd": "Proposed RMD",
@@ -111323,15 +111247,13 @@
             }
         }
     },
-    "rule-1-7-d": {
-        "Section": 1,
-        "Rule": 7,
+    "rule-37e66-d": {
         "Test": "d",
         "test_description": "A one story building's baseline and proposed RMDs fail to have matching IDs for a non-array value that should match as determined by Table G3.1(1) Baseline Building Performance and https://github.com/open229/ruleset-model-description-schema/blob/main/schema-source/ASHRAE229_extra.schema.yaml.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "does not equal to compare context data:",
         "standard": {
-            "rule_id": "1-7",
+            "rule_id": 36999999999999997415709724390088749061041947327733493664758043246592,
             "ruleset_reference": "Table G3.1(1) Baseline Building Performance (a)",
             "rule_description": "The proposed design shall be the same as the baseline design for all data elements identified in the schema hosted at data.standards.ashrae {{https://github.com/open229/ruleset-model-description-schema/blob/main/docs229/ASHRAE229_extra.schema.json}}",
             "applicable_rmd": "Proposed RMD",
@@ -146690,14 +146612,12 @@
             }
         }
     },
-    "rule-1-8-a": {
-        "Section": 1,
-        "Rule": 8,
+    "rule-71o26-a": {
         "Test": "a",
         "test_description": "A one story building includes a user and proposed ruleset model description where all values which are expected to match between the ruleset model descriptions do match.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "1-8",
+            "rule_id": "71o26",
             "ruleset_reference": "Table G3.1(1) Proposed Building Performance (a)",
             "rule_description": "The proposed design shall be the same as the user design for all data elements identified in the schema hosted at data.standards.ashrae {{https://github.com/open229/ruleset-model-description-schema/blob/main/docs229/ASHRAE229_extra.schema.json}}",
             "applicable_rmd": "Proposed RMD",
@@ -182044,15 +181964,13 @@
             }
         }
     },
-    "rule-1-8-b": {
-        "Section": 1,
-        "Rule": 8,
+    "rule-71o26-b": {
         "Test": "b",
         "test_description": "A one story building includes a user and proposed ruleset model description where all values which are expected to match between the ruleset model descriptions do not match because an array is not the same size.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "in index context != length of objects",
         "standard": {
-            "rule_id": "1-8",
+            "rule_id": "71o26",
             "ruleset_reference": "Table G3.1(1) Proposed Building Performance (a)",
             "rule_description": "The proposed design shall be the same as the user design for all data elements identified in the schema hosted at data.standards.ashrae {{https://github.com/open229/ruleset-model-description-schema/blob/main/docs229/ASHRAE229_extra.schema.json}}",
             "applicable_rmd": "Proposed RMD",
@@ -217402,15 +217320,13 @@
             }
         }
     },
-    "rule-1-8-c": {
-        "Section": 1,
-        "Rule": 8,
+    "rule-71o26-c": {
         "Test": "c",
         "test_description": "A one story building includes a user and proposed ruleset model description where all values which are expected to match between the ruleset model descriptions do not match because the ID of an object does not match.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "in index context does not match the one",
         "standard": {
-            "rule_id": "1-8",
+            "rule_id": "71o26",
             "ruleset_reference": "Table G3.1(1) Proposed Building Performance (a)",
             "rule_description": "The proposed design shall be the same as the user design for all data elements identified in the schema hosted at data.standards.ashrae {{https://github.com/open229/ruleset-model-description-schema/blob/main/docs229/ASHRAE229_extra.schema.json}}",
             "applicable_rmd": "Proposed RMD",
@@ -252757,15 +252673,13 @@
             }
         }
     },
-    "rule-1-8-d": {
-        "Section": 1,
-        "Rule": 8,
+    "rule-71o26-d": {
         "Test": "d",
         "test_description": "A one story building includes a user and proposed ruleset model description where all values which are expected to match between the ruleset model descriptions do not match because the value of a data element does not match.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "does not equal to compare context data:",
         "standard": {
-            "rule_id": "1-8",
+            "rule_id": "71o26",
             "ruleset_reference": "Table G3.1(1) Proposed Building Performance (a)",
             "rule_description": "The proposed design shall be the same as the user design for all data elements identified in the schema hosted at data.standards.ashrae {{https://github.com/open229/ruleset-model-description-schema/blob/main/docs229/ASHRAE229_extra.schema.json}}",
             "applicable_rmd": "Proposed RMD",

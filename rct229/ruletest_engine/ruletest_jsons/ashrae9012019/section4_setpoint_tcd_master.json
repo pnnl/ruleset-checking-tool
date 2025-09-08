@@ -1,12 +1,10 @@
 {
-    "rule-4-1-a": {
-        "Section": 4,
-        "Rule": 1,
+    "rule-96q77-a": {
         "Test": "a",
         "test_description": "A building has one building segment and one zone with an HVAC system that provides heating and cooling. The zone heating and cooling thermostat schedules match between the baseline and proposed ruleset model descriptions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "4-1",
+            "rule_id": "96q77",
             "ruleset_reference": "Table G3.1 Section 4",
             "rule_description": "Temperature Control Setpoints shall be the same for proposed design and baseline building design.",
             "applicable_rmr": "Proposed RMR",
@@ -35202,15 +35200,13 @@
             }
         }
     },
-    "rule-4-1-b": {
-        "Section": 4,
-        "Rule": 1,
+    "rule-96q77-b": {
         "Test": "b",
         "test_description": "A building has one building segment and one zone with an HVAC system that provides heating and cooling. The zone heating and cooling thermostat schedules do not match between the baseline and proposed ruleset model descriptions.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "There is a temperature schedule mismatch between the baseline and proposed RMDs.",
         "standard": {
-            "rule_id": "4-1",
+            "rule_id": "96q77",
             "ruleset_reference": "Table G3.1 Section 4",
             "rule_description": "Temperature Control Setpoints shall be the same for proposed design and baseline building design.",
             "applicable_rmr": "Proposed RMR",
@@ -70406,14 +70402,12 @@
             }
         }
     },
-    "rule-4-2-a": {
-        "Section": 4,
-        "Rule": 2,
+    "rule-85i93-a": {
         "Test": "a",
         "test_description": "A building has one building segment and one zone with an HVAC system that provides heating and cooling. The zone minimum humidity schedules match between the baseline and proposed ruleset model descriptions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "4-2",
+            "rule_id": "85i93",
             "ruleset_reference": "Table G3.1 Section 4",
             "rule_description": "Humidity Control Setpoints shall be the same for proposed design and baseline building design.",
             "applicable_rmr": "Proposed RMR",
@@ -88075,15 +88069,13 @@
             }
         }
     },
-    "rule-4-2-b": {
-        "Section": 4,
-        "Rule": 2,
+    "rule-85i93-b": {
         "Test": "b",
         "test_description": "A building has one building segment and one zone with an HVAC system that provides heating and cooling. The zone minimum humidity schedules do not match between the baseline and proposed ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "There is a humidity schedule mismatch between the baseline and proposed. Fail unless Table G3.1 #4 baseline column exception #s 1 and/or 2 are applicable",
         "standard": {
-            "rule_id": "4-2",
+            "rule_id": "85i93",
             "ruleset_reference": "Table G3.1 Section 4",
             "rule_description": "Humidity Control Setpoints shall be the same for proposed design and baseline building design.",
             "applicable_rmr": "Proposed RMR",
@@ -105745,14 +105737,12 @@
             }
         }
     },
-    "rule-4-2-c": {
-        "Section": 4,
-        "Rule": 2,
+    "rule-85i93-c": {
         "Test": "c",
         "test_description": "A building has one building segment and one zone with an HVAC system that provides heating and cooling. The zone minimum humidity schedules do not exist in the baseline or proposed ruleset model descriptions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "4-2",
+            "rule_id": "85i93",
             "ruleset_reference": "Table G3.1 Section 4",
             "rule_description": "Humidity Control Setpoints shall be the same for proposed design and baseline building design.",
             "applicable_rmr": "Proposed RMR",
@@ -105876,15 +105866,13 @@
             }
         }
     },
-    "rule-4-2-d": {
-        "Section": 4,
-        "Rule": 2,
+    "rule-85i93-d": {
         "Test": "d",
         "test_description": "A building has one building segment and one zone with an HVAC system that provides heating and cooling. The zone minimum humidity schedules exists in the baseline ruleset model description but not the proposed.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Fail because a humidity schedule is defined in the baseline but not in the proposed.",
         "standard": {
-            "rule_id": "4-2",
+            "rule_id": "85i93",
             "ruleset_reference": "Table G3.1 Section 4",
             "rule_description": "Humidity Control Setpoints shall be the same for proposed design and baseline building design.",
             "applicable_rmr": "Proposed RMR",
@@ -114777,15 +114765,13 @@
             }
         }
     },
-    "rule-4-2-e": {
-        "Section": 4,
-        "Rule": 2,
+    "rule-85i93-e": {
         "Test": "e",
         "test_description": "A building has one building segment and one zone with an HVAC system that provides heating and cooling. The zone minimum humidity schedules exists in the proposed ruleset model description but not the baseline.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Fail because a humidity schedule is defined in the proposed but not in the baseline.",
         "standard": {
-            "rule_id": "4-2",
+            "rule_id": "85i93",
             "ruleset_reference": "Table G3.1 Section 4",
             "rule_description": "Humidity Control Setpoints shall be the same for proposed design and baseline building design.",
             "applicable_rmr": "Proposed RMR",
@@ -123678,14 +123664,12 @@
             }
         }
     },
-    "rule-4-11-a": {
-        "Section": 4,
-        "Rule": 11,
+    "rule-18y74-a": {
         "Test": "a",
         "test_description": "A building has one building segment and two zones served by a multi-zone HVAC system. The HVAC system fan schedules match between the baseline and proposed ruleset model descriptions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "4-11",
+            "rule_id": "18y74",
             "ruleset_reference": "Table G3.1 Section 4 Exception 3",
             "rule_description": "Fan schedules shall be modeled identically in the baseline and proposed unless Table G3.1 Section 4 baseline exceptions are applicable. ",
             "applicable_rmr": "Proposed RMR",
@@ -141541,14 +141525,12 @@
             }
         }
     },
-    "rule-4-11-b": {
-        "Section": 4,
-        "Rule": 11,
+    "rule-18y74-b": {
         "Test": "b",
         "test_description": "A building has one building segment and one zone served by a single-zone HVAC system. The HVAC system fan schedules match between the baseline and proposed ruleset model descriptions.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "4-11",
+            "rule_id": "18y74",
             "ruleset_reference": "Table G3.1 Section 4 Exception 3",
             "rule_description": "Fan schedules shall be modeled identically in the baseline and proposed unless Table G3.1 Section 4 baseline exceptions are applicable. ",
             "applicable_rmr": "Proposed RMR",
@@ -159246,15 +159228,13 @@
             }
         }
     },
-    "rule-4-11-c": {
-        "Section": 4,
-        "Rule": 11,
+    "rule-18y74-c": {
         "Test": "c",
         "test_description": "A building has one building segment. Baseline has one zone, and proposed has two zones. Baseline uses a single zone system 7, proposed multizone system 7. Fan schedules do not match.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "There is a fan operating schedule mismatch between the baseline and proposed but section g3.1.1(c) appears applicable. Verify mismatch is appropriate per section G3.1.1(c) and that the fan operating schedule in the baseline is in alignment with the occupancy schedules.",
         "standard": {
-            "rule_id": "4-11",
+            "rule_id": "18y74",
             "ruleset_reference": "Table G3.1 Section 4 Exception 3",
             "rule_description": "Fan schedules shall be modeled identically in the baseline and proposed unless Table G3.1 Section 4 baseline exceptions are applicable. ",
             "applicable_rmr": "Proposed RMR",
@@ -177074,15 +177054,13 @@
             }
         }
     },
-    "rule-4-11-d": {
-        "Section": 4,
-        "Rule": 11,
+    "rule-18y74-d": {
         "Test": "d",
         "test_description": "A building has one building segment and two zones. Zones are served by single-zone HVAC systems in both the baseline and proposed ruleset model descriptions but fan schedules do not match between the baseline and proposed ruleset model descriptions.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "There is a fan schedule mismatch between the baseline and proposed RMDs for the hvac system(s) serving this zone. Fail unless table G3.1 section 4 baseline column exceptions #1, #2 or #3 is applicable.",
         "standard": {
-            "rule_id": "4-11",
+            "rule_id": "18y74",
             "ruleset_reference": "Table G3.1 Section 4 Exception 3",
             "rule_description": "Fan schedules shall be modeled identically in the baseline and proposed unless Table G3.1 Section 4 baseline exceptions are applicable. ",
             "applicable_rmr": "Proposed RMR",
@@ -194780,15 +194758,13 @@
             }
         }
     },
-    "rule-4-11-e": {
-        "Section": 4,
-        "Rule": 11,
+    "rule-18y74-e": {
         "Test": "e",
         "test_description": "A building has one building segment and two zones. The proposed building is served by a modified, multizone system 3 HVAC and the baseline building served by two system 3 HVACs. The systems fan schedules match.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "Fan schedules match between the baseline and proposed for the hvac system(s) serving this zone. Verify that matching schedules are appropriate in that none of the section 4 baseline column exceptions #1, #2 or #3 are applicable.",
         "standard": {
-            "rule_id": "4-11",
+            "rule_id": "18y74",
             "ruleset_reference": "Table G3.1 Section 4 Exception 3",
             "rule_description": "Fan schedules shall be modeled identically in the baseline and proposed unless Table G3.1 Section 4 baseline exceptions are applicable. ",
             "applicable_rmr": "Proposed RMR",
@@ -212551,14 +212527,12 @@
             }
         }
     },
-    "rule-4-14-a": {
-        "Section": 4,
-        "Rule": 14,
+    "rule-66c61-a": {
         "Test": "a",
         "test_description": "A building has one building segment and one zone. The space in the zone has its lighting space type defined as a computer room and the proposed room equipment power density exceeds 20 W/ft2.",
         "expected_rule_outcome": "pass",
         "standard": {
-            "rule_id": "4-14",
+            "rule_id": "66c61",
             "ruleset_reference": "Section 3 Definitions",
             "rule_description": "A computer room is defined as a room whose primary function is to house equipment for the processing and storage of electronic data and that has a design electronic data equipment power density exceeding 20 W/ft2 of conditioned floor area.",
             "applicable_rmr": "Proposed RMR",
@@ -221403,15 +221377,13 @@
             }
         }
     },
-    "rule-4-14-b": {
-        "Section": 4,
-        "Rule": 14,
+    "rule-66c61-b": {
         "Test": "b",
         "test_description": "A building has one building segment and one zone. The space in the zone has its lighting space type defined as a computer room and the proposed room equipment power density does not exceed 20 W/ft2.",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "The space has been classed as a computer room in terms of the lighting space type but the electronic data equipment power density does not appear to exceed 20 w/sf.",
         "standard": {
-            "rule_id": "4-14",
+            "rule_id": "66c61",
             "ruleset_reference": "Section 3 Definitions",
             "rule_description": "A computer room is defined as a room whose primary function is to house equipment for the processing and storage of electronic data and that has a design electronic data equipment power density exceeding 20 W/ft2 of conditioned floor area.",
             "applicable_rmr": "Proposed RMR",

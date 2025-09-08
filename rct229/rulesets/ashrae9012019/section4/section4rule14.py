@@ -14,15 +14,15 @@ ENERGY_SOURCE = SchemaEnums.schema_enums["EnergySourceOptions"]
 REQ_EQUIP_POWER_DENSITY = 20 * ureg("W/ft2")
 
 
-class Section4Rule14(RuleDefinitionListIndexedBase):
+class PRM9012019Rule66c61(RuleDefinitionListIndexedBase):
     """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 4 (Schedules Setpoints)"""
 
     def __init__(self):
-        super(Section4Rule14, self).__init__(
+        super(PRM9012019Rule66c61, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=Section4Rule14.SpaceRule(),
+            each_rule=PRM9012019Rule66c61.SpaceRule(),
             index_rmd=PROPOSED,
             id="4-14",
             description="A computer room is defined as a room whose primary function is to house equipment for the processing and storage of electronic data and that has a design electronic data equipment power density exceeding 20 W/ft2 of conditioned floor area.",
@@ -54,7 +54,7 @@ class Section4Rule14(RuleDefinitionListIndexedBase):
 
     class SpaceRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section4Rule14.SpaceRule, self).__init__(
+            super(PRM9012019Rule66c61.SpaceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),

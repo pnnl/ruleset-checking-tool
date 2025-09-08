@@ -22,15 +22,15 @@ from rct229.utils.pint_utils import ZERO, CalcQ
 FAN_SYSTEM_OPERATION = SchemaEnums.schema_enums["FanSystemOperationOptions"]
 
 
-class Section19Rule25(RuleDefinitionListIndexedBase):
+class PRM9012019Rule10q01(RuleDefinitionListIndexedBase):
     """Rule 25 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(Section19Rule25, self).__init__(
+        super(PRM9012019Rule10q01, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=Section19Rule25.HVACRule(),
+            each_rule=PRM9012019Rule10q01.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-25",
             description="Schedules for HVAC fans that provide outdoor air for ventilation shall run continuously whenever spaces are occupied in the baseline design.",
@@ -84,7 +84,7 @@ class Section19Rule25(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(Section19Rule25.HVACRule, self).__init__(
+            super(PRM9012019Rule10q01.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

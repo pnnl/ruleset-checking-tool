@@ -97,7 +97,11 @@ def compare_context_pair(
 
     """
     matched = True
-    if isinstance(index_context, dict) and isinstance(compare_context, dict):
+    if (
+        isinstance(index_context, dict)
+        and isinstance(compare_context, dict)
+        and not isinstance(extra_schema, str)
+    ):
         # context shall be aligned and have the same data type.
         if compare_context.get("id") and index_context["id"] != compare_context["id"]:
             error_msg_list.append(
@@ -143,21 +147,21 @@ def compare_context_pair(
     elif isinstance(index_context, list) and isinstance(compare_context, list):
         if required_equal and len(compare_context) != len(index_context):
             error_msg_list.append(
-                f"path: {element_json_path}: length of objects ({len(index_context)} in index context != length of objects {len(compare_context)} in compare context."
+                f"path: {element_json_path}: length of objects ({len(index_context)}) in index context != length of objects ({len(compare_context)}) in compare context."
             )
             matched = False
-        if all(isinstance(item, dict) for item in index_context):
-            # avoid processing any list of primitive data types
-            # sort the proposed and user
-            sorted_index = sorted(index_context, key=lambda x: x["id"])
-            sorted_compare = sorted(compare_context, key=lambda x: x["id"])
-            for i in range(len(sorted_index)):
-                if i < len(sorted_compare):
-                    # in this case, we are still using the same extra_schema
+
+        compare_by_index = "operating_points" in element_json_path.lower()
+
+        if any(isinstance(item, dict) for item in index_context):
+            if compare_by_index:
+                # position-based comparison for operating_points
+                limit = min(len(index_context), len(compare_context))
+                for i in range(limit):
                     matched = (
                         compare_context_pair(
-                            sorted_index[i],
-                            sorted_compare[i],
+                            index_context[i],
+                            compare_context[i],
                             f"{element_json_path}[{i}]",
                             extra_schema,
                             if_required(extra_schema.get(search_key)),
@@ -166,6 +170,51 @@ def compare_context_pair(
                         )
                         and matched
                     )
+            else:
+                # For list that has mix of objects and strings (primary_layers)
+                # avoid processing any list of primitive data types
+                # sort the proposed and user
+                sorted_dict_index = sorted(
+                    [
+                        item
+                        for item in index_context
+                        if isinstance(item, dict) and "id" in item
+                    ],
+                    key=lambda x: x["id"],
+                )
+                sorted_dict_compare = sorted(
+                    [
+                        item
+                        for item in compare_context
+                        if isinstance(item, dict) and "id" in item
+                    ],
+                    key=lambda x: x["id"],
+                )
+                for i in range(len(sorted_dict_index)):
+                    if i < len(sorted_dict_compare):
+                        # in this case, we are still using the same extra_schema
+                        matched = (
+                            compare_context_pair(
+                                sorted_dict_index[i],
+                                sorted_dict_compare[i],
+                                f"{element_json_path}[{i}]",
+                                extra_schema,
+                                if_required(extra_schema.get(search_key)),
+                                search_key,
+                                error_msg_list,
+                            )
+                            and matched
+                        )
+            sorted_str_index = sorted(
+                [item for item in index_context if isinstance(item, str)]
+            )
+            sorted_str_compare = sorted(
+                [item for item in compare_context if isinstance(item, str)]
+            )
+            for i in range(len(sorted_str_index)):
+                # This should be the leaf, no need further nest
+                if i < len(sorted_str_compare):
+                    matched = sorted_str_index[i] == sorted_str_compare[i] and matched
 
     elif isinstance(extra_schema, str):
         # in this case, it is either string, numerical, references or other simple data type
@@ -175,7 +224,7 @@ def compare_context_pair(
             index_context, Quantity
         ):
             index_value = index_context.magnitude
-            compare_value = compare_value.magnitude
+            compare_value = compare_context.magnitude
 
         if required_equal and index_value != compare_value:
             # the != takes care of None data type. if both None, this will still pass.
