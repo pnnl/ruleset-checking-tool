@@ -122,7 +122,7 @@ class PRM9012019Rule62z26(RuleDefinitionListIndexedBase):
 
             # post-processing the piping info b to convert all quantities to CalcQ.
             for piping_id in piping_info_b:
-                if piping_info_b[piping_id]["PUMP_POWER"]:
+                if "PUMP_POWER" in piping_info_b[piping_id]:
                     piping_info_b[piping_id]["PUMP_POWER"] = CalcQ(
                         "capacity", piping_info_b[piping_id]["PUMP_POWER"]
                     )
