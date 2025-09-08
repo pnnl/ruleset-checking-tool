@@ -55,14 +55,22 @@ class PRM9012019Rule55z67(RuleDefinitionListIndexedBase):
             rmd_b = context.BASELINE_0
 
             cab_ventilation_fan_multiplier_schedule_b = {
-                sch_id: find_exactly_one_schedule(rmd_b, sch_id)["hourly_values"]
+                sch_id: getattr_(
+                    find_exactly_one_schedule(rmd_b, sch_id),
+                    "Schedule",
+                    "hourly_values",
+                )
                 for sch_id in find_all(
                     "buildings[*].elevators[*].cab_ventilation_fan_multiplier_schedule",
                     rmd_b,
                 )
             }
             cab_lighting_multiplier_schedule_b = {
-                sch_id: find_exactly_one_schedule(rmd_b, sch_id)["hourly_values"]
+                sch_id: getattr_(
+                    find_exactly_one_schedule(rmd_b, sch_id),
+                    "Schedule",
+                    "hourly_values",
+                )
                 for sch_id in find_all(
                     "buildings[*].elevators[*].cab_lighting_multiplier_schedule", rmd_b
                 )

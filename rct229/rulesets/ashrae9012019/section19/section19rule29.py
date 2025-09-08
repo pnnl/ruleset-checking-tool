@@ -8,6 +8,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_primarily_
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_serving_zone_health_safety_vent_reqs import (
     get_hvac_systems_serving_zone_health_safety_vent_reqs,
 )
+from rct229.utils.assertions import getattr_
+from rct229.utils.utility_functions import find_exactly_one_schedule
+from rct229.utils.jsonpath_utils import find_all
 from rct229.schema.schema_enums import SchemaEnums
 
 FAN_SYSTEM_OPERATION = SchemaEnums.schema_enums["FanSystemOperationOptions"]
@@ -44,8 +47,20 @@ class PRM9012019Rule20z34(RuleDefinitionListIndexedBase):
                 + get_hvac_systems_serving_zone_health_safety_vent_reqs(rmd_b)
             )
         )
+        fan_operating_schedules_b = {
+            sch_id: getattr_(
+                find_exactly_one_schedule(rmd_b, sch_id), "Schedule", "hourly_values"
+            )
+            for sch_id in find_all(
+                "buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].fan_system.operating_schedule",
+                rmd_b,
+            )
+        }
 
-        return {"inapplicable_hvac_sys_list_b": inapplicable_hvac_sys_list_b}
+        return {
+            "inapplicable_hvac_sys_list_b": inapplicable_hvac_sys_list_b,
+            "fan_operating_schedules_b": fan_operating_schedules_b,
+        }
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
@@ -55,9 +70,6 @@ class PRM9012019Rule20z34(RuleDefinitionListIndexedBase):
                 ),
                 required_fields={
                     "$": ["fan_system"],
-                    "fan_system": [
-                        "operation_during_unoccupied",
-                    ],
                 },
             )
 
@@ -65,15 +77,29 @@ class PRM9012019Rule20z34(RuleDefinitionListIndexedBase):
             hvac_b = context.BASELINE_0
             hvac_id_b = hvac_b["id"]
             inapplicable_hvac_sys_list_b = data["inapplicable_hvac_sys_list_b"]
+            fan_operating_schedules_b = data["fan_operating_schedules_b"]
+            always_on = False
 
-            return hvac_id_b not in inapplicable_hvac_sys_list_b
+            fan_operating_schedule_id_b = hvac_b["fan_system"].get("operating_schedule")
+            if fan_operating_schedule_id_b is not None:
+                fan_operating_schedule_vals_b = fan_operating_schedules_b[
+                    fan_operating_schedule_id_b
+                ]
+                always_on = sum(fan_operating_schedule_vals_b) == len(
+                    fan_operating_schedule_vals_b
+                )
+
+            else:
+                always_on = True  # If no schedule is defined, assume always on
+
+            return hvac_id_b not in inapplicable_hvac_sys_list_b and not always_on
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
 
-            operation_during_unoccupied_b = hvac_b["fan_system"][
-                "operation_during_unoccupied"
-            ]
+            operation_during_unoccupied_b = getattr_(
+                hvac_b["fan_system"], "FanSystem", "operation_during_unoccupied"
+            )
 
             return {"operation_during_unoccupied_b": operation_during_unoccupied_b}
 
