@@ -14,6 +14,7 @@ from rct229.ruletest_engine.ruletest_jsons.ashrae9012019 import (
 )
 
 
+
 # Ruleset enumerator
 class RuleSet:
     ASHRAE9012019_RULESET = "ashrae9012019"
@@ -35,7 +36,7 @@ class RuleSetTest:
         SCHEDULE_DIR,
         SERVICE_HOT_WATER_DIR,
     ]
-    ASHRAE9012022_TEST_LIST = []
+    ASHRAE9012022_TEST_LIST = [ENVELOPE_DIR, LIGHTING_DIR]
 
 
 class LeapYear:

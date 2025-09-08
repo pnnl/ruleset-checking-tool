@@ -1,26 +1,44 @@
 import importlib
+
 from rct229.rule_engine.rulesets import RuleSet
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 
-
 # Add all available rule modules in __all__
-__all__ = []
+__all__ = ["section5", "section6"]
+
+rules_dict = {
+    "PRM9012022Rule86r63": "section5rule43",
+    "PRM9012022Rule12d80": "section6rule11",
+}
+
+section_list = [
+    "Env",
+    "LTG",
+]
+
+section_dict = {
+    "5": "Envelope",
+    "6": "Lighting",
+}
 
 # Update this field if 2022 uses different term.
 if SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901"):
     RMD = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")
+    COMMON_RMD = SchemaEnums.schema_enums.get("CommonRulesetModelOptions")
+
 else:
     SchemaStore.set_ruleset(RuleSet.ASHRAE9012022_RULESET)
     SchemaEnums.update_schema_enum()
     RMD = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")
+    COMMON_RMD = SchemaEnums.schema_enums.get("CommonRulesetModelOptions")
 
 BASELINE_0 = RMD.BASELINE_0
 BASELINE_90 = RMD.BASELINE_90
 BASELINE_180 = RMD.BASELINE_180
 BASELINE_270 = RMD.BASELINE_270
-USER = RMD.USER
-PROPOSED = RMD.PROPOSED
+USER = COMMON_RMD.USER
+PROPOSED = COMMON_RMD.PROPOSED
 
 
 def __getattr__(name):
