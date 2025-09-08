@@ -21,12 +21,12 @@ TEST_RMD = {
                             "spaces": [
                                 {
                                     "id": "Space 1",
-                                    "service_water_heating_area_type": "LIBRARY",
                                     "service_water_heating_uses": ["SWH Use 1"],
+                                    "service_water_heating_area_type": "LIBRARY",
                                 },
                                 {
                                     "id": "Space 2",
-                                    "service_water_heating_area_type": "CONVENIENCE_STORE",
+                                    "service_water_heating_area_type": "LIBRARY",
                                     "service_water_heating_uses": ["SWH Use 2"],
                                 },
                                 {

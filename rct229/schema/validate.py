@@ -1,5 +1,6 @@
 import json
 import os
+from itertools import chain
 from collections import Counter
 from referencing import Registry
 from jsonschema import Draft7Validator
@@ -202,7 +203,8 @@ def check_schedule_association(rpd: dict) -> list:
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].thermostat_heating_setpoint_schedule",
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].minimum_humidity_setpoint_schedule",
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].maximum_humidity_setpoint_schedule",
-        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].exhaust_airflow_rate_multiplier_schedule",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].exhaust_airflow_rate_multiplier_schedules",
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].supply_airflow_rate_multiplier_schedules",
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].occupant_multiplier_schedule",
         "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].spaces[*].interior_lighting[*].lighting_multiplier_schedule",
         "$.ruleset_model_descriptions[*].service_water_heating_distribution_systems[*].flow_multiplier_schedule",
@@ -219,11 +221,75 @@ def check_schedule_association(rpd: dict) -> list:
         "$.ruleset_model_descriptions[*].heating_ventilation_air_conditioning_systems[*].fan_system.operating_schedule",
     ]
 
-    referenced_id_list = find_all_by_jsonpaths(schedule_reference_jsonpaths, rpd)
+    referenced_id_list = list(
+        chain.from_iterable(
+            x if isinstance(x, list) else [x]
+            for x in find_all_by_jsonpaths(schedule_reference_jsonpaths, rpd)
+        )
+    )
 
     for schedule_id in referenced_id_list:
         if schedule_id not in schedule_id_list:
             mismatch_list.append(schedule_id)
+    return mismatch_list
+
+
+def check_construction_association(rpd: dict) -> list:
+    """
+    Check the association between constructions and the various objects which reference them.
+    Parameters
+    ----------
+    rpd
+
+    Returns list of mismatched construction ids
+    -------
+
+    """
+    mismatch_list = []
+
+    construction_id_list = find_all(
+        "$.ruleset_model_descriptions[*].constructions[*].id", rpd
+    )
+    construction_reference_jsonpaths = [
+        "$.ruleset_model_descriptions[*].buildings[*].building_segments[*].zones[*].surfaces[*].construction",
+    ]
+
+    referenced_id_list = find_all_by_jsonpaths(construction_reference_jsonpaths, rpd)
+
+    for construction_id in referenced_id_list:
+        if construction_id not in construction_id_list:
+            mismatch_list.append(construction_id)
+    return mismatch_list
+
+
+def check_material_association(rpd: dict) -> list:
+    """
+    Check the association between materials and the various objects which reference them.
+    Parameters
+    ----------
+    rpd
+
+    Returns list of mismatched material ids
+    -------
+
+    """
+    mismatch_list = []
+
+    material_id_list = find_all("$.ruleset_model_descriptions[*].materials[*].id", rpd)
+    material_reference_jsonpaths = [
+        "$.ruleset_model_descriptions[*].constructions[*].primary_layers",
+        "$.ruleset_model_descriptions[*].constructions[*].framing_layers",
+    ]
+
+    referenced_id_list = [
+        material_id
+        for sublist in find_all_by_jsonpaths(material_reference_jsonpaths, rpd)
+        for material_id in sublist
+    ]
+
+    for material_id in referenced_id_list:
+        if material_id not in material_id_list:
+            mismatch_list.append(material_id)
     return mismatch_list
 
 
@@ -337,10 +403,12 @@ def check_annual_schedule_lengths(rpd: dict) -> list[str]:
     """
     error_messages = []
 
-    schedules = find_all(
-        "$.ruleset_model_descriptions[*].schedules[?(@.hourly_values)]", rpd
-    )
-    lengths = [len(schedule) for schedule in schedules]
+    schedules = [
+        sched
+        for sched in find_all("$.ruleset_model_descriptions[*].schedules[*]", rpd)
+        if "hourly_values" in sched
+    ]
+    lengths = [len(schedule["hourly_values"]) for schedule in schedules]
 
     if not lengths:
         return []  # No schedules with hourly_values — no errors
@@ -351,15 +419,16 @@ def check_annual_schedule_lengths(rpd: dict) -> list[str]:
 
     # Check if common length is valid
     if common_length not in (8760, 8784):
-        error_messages.append(
-            f"The most common schedule length is {common_length}, which is not 8760 or 8784."
-        )
+        return [
+            f"Annual hourly schedules are required to be either 8760 or 8784. The most common schedule length in the project is {common_length}."
+        ]
 
+    # Check each schedule against the common length, after verifying the common length is valid
     for schedule, length in zip(schedules, lengths):
-        schedule_id = schedule.get["id"]
+        schedule_id = schedule["id"]
         if length != common_length:
             error_messages.append(
-                f"Schedule '{schedule_id}' has {length} hourly values; expected {common_length}."
+                f"Schedule '{schedule_id}' has {length} hourly values; all annual schedule lengths are expected to match the common length ({common_length})."
             )
 
     return error_messages
@@ -490,67 +559,93 @@ def json_paths_to_lists_from_list(rmd_list, path):
 
 def non_schema_validate_rpd(rmd_obj):
     """Provides non-schema validation for an RMD"""
-    error = []
+    errors = []
     unique_id_error = check_unique_ids_in_ruleset_model_descriptions(rmd_obj)
     passed = not unique_id_error
     if not passed:
-        error.append(unique_id_error)
+        errors.append(unique_id_error)
 
     mismatch_hvac_errors = check_hvac_association(rmd_obj)
     passed = passed and not mismatch_hvac_errors
     if mismatch_hvac_errors:
-        error.append(
-            f"Cannot find HVAC systems {mismatch_hvac_errors} in the HeatingVentilationAirConditioningSystems data group."
+        errors.append(
+            f"Cannot find HVAC systems {mismatch_hvac_errors} in the list of HeatingVentilationAirConditioningSystem data groups."
         )
 
     mismatch_zone_errors = check_zone_association(rmd_obj)
     passed = passed and not mismatch_zone_errors
     if mismatch_zone_errors:
-        error.append(
-            f"Cannot find zones {mismatch_zone_errors} in the Zone data group."
+        errors.append(
+            f"Cannot find zones {mismatch_zone_errors} in the lists of Zone data groups."
         )
 
     mismatch_fluid_loop_errors = check_fluid_loop_association(rmd_obj)
     passed = passed and not mismatch_fluid_loop_errors
     if mismatch_fluid_loop_errors:
-        error.append(
-            f"Cannot find fluid loop {mismatch_fluid_loop_errors} in the FluidLoop data group."
+        errors.append(
+            f"Cannot find fluid loop {mismatch_fluid_loop_errors} in the lists of FluidLoop data groups."
         )
 
     mismatch_schedule_errors = check_schedule_association(rmd_obj)
     passed = passed and not mismatch_schedule_errors
     if mismatch_schedule_errors:
-        error.append(
-            f"Cannot find schedule {mismatch_schedule_errors} in the Schedule data group."
+        errors.append(
+            f"Cannot find schedule {mismatch_schedule_errors} in the list of Schedule data groups."
+        )
+
+    mismatch_construction_errors = check_construction_association(rmd_obj)
+    passed = passed and not mismatch_construction_errors
+    if mismatch_construction_errors:
+        errors.extend(
+            [
+                f"Cannot find construction '{mismatch_construction_id}' in the list of Construction data groups."
+                for mismatch_construction_id in mismatch_construction_errors
+            ]
+        )
+
+    mismatch_material_errors = check_material_association(rmd_obj)
+    passed = passed and not mismatch_material_errors
+    if mismatch_material_errors:
+        errors.extend(
+            [
+                f"Cannot find material '{mismatch_material_id}' in the list of Material data groups."
+                for mismatch_material_id in mismatch_material_errors
+            ]
         )
 
     mismatch_fluid_loop_piping_errors = check_fluid_loop_or_piping_association(rmd_obj)
     passed = passed and not mismatch_fluid_loop_piping_errors
     if mismatch_fluid_loop_piping_errors:
-        error.append(
-            f"Cannot find piping {mismatch_schedule_errors} in the FluidLoop or ServiceWaterHeatingDistributionSystems data group."
+        errors.extend(
+            [
+                f"Cannot find piping {mismatch_fluid_loop_piping_id} in the FluidLoop or ServiceWaterPiping data group."
+                for mismatch_fluid_loop_piping_id in mismatch_fluid_loop_piping_errors
+            ]
         )
 
-    mismatch_service_water_heating_errors = check_service_water_heating_association(
-        rmd_obj
+    mismatch_service_water_heating_distribution_errors = (
+        check_service_water_heating_association(rmd_obj)
     )
-    passed = passed and not mismatch_service_water_heating_errors
-    if mismatch_service_water_heating_errors:
-        error.append(
-            f"Cannot find service water heating {mismatch_service_water_heating_errors} in the ServiceWaterHeatingDistributionSystems data group."
+    passed = passed and not mismatch_service_water_heating_distribution_errors
+    if mismatch_service_water_heating_distribution_errors:
+        errors.extend(
+            [
+                f"Cannot find service water heating {mismatch_service_water_heating_distribution_id} in the ServiceWaterHeatingDistributionSystems data group."
+                for mismatch_service_water_heating_distribution_id in mismatch_service_water_heating_distribution_errors
+            ]
         )
 
     mismatch_associated_data_elements_errors = check_associated_data_elements(rmd_obj)
     passed = passed and not mismatch_associated_data_elements_errors
     if mismatch_associated_data_elements_errors:
-        error.extend(mismatch_associated_data_elements_errors)
+        errors.extend(mismatch_associated_data_elements_errors)
 
     mismatch_annual_schedule_length_errors = check_annual_schedule_lengths(rmd_obj)
     passed = passed and not mismatch_annual_schedule_length_errors
     if mismatch_annual_schedule_length_errors:
-        error.extend(mismatch_annual_schedule_length_errors)
+        errors.extend(mismatch_annual_schedule_length_errors)
 
-    return {"passed": passed, "error": error if error else None}
+    return {"passed": passed, "errors": errors if errors else None}
 
 
 def schema_validate_rpd(rpd, full_errors: bool = False):
