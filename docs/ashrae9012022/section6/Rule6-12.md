@@ -33,7 +33,7 @@
         - Create a list of boolean values indicating if occupancy sensors were modeled via schedule adjustments: `occupancy_sensor_schedules_b = [interior_lighting_b.get("are_schedules_used_for_modeling_occupancy_control") for interior_lighting_b in space_b["interior_lighting"]`
         
         - **Rule Assertion:**
-        - Case 1: All interior lighting in the space is controlled by occupancy sensors and modeled via adjustments to the schedules: PASS `if not any(val in ["NONE", "MANUAL_ON", None] for val in occupancy_controls_b): PASS`
+        - Case 1: All interior lighting in the space is controlled by occupancy sensors and modeled via adjustments to the schedules: PASS `if not any(val in ["NONE", "MANUAL_ON", None] for val in occupancy_controls_b) and all(occupancy_sensor_schedules_b): PASS`
         - Case 2: Any interior lighting in the space is missing definitions for occupancy sensor type and schedule adjustments: UNDETERMINED `elif any(val is None for val in occupancy_controls_b) or any(val is None for val in occupancy_sensor_schedules_b): UNDETERMINED`
         - Case 3: Else, at least one interior lighting data group in the space is not controlled by occupancy sensors or modeled via adjustments to the schedules: FAIL `else: FAIL`
 
