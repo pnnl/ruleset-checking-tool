@@ -1,8 +1,10 @@
+import pytest
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_spaces_served_by_swh_use import (
     get_spaces_served_by_swh_use,
 )
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rpd
+from rct229.utils.assertions import RCTFailureException
 
 TEST_RMD = {
     "id": "test_rmd",
@@ -12,40 +14,58 @@ TEST_RMD = {
             "building_segments": [
                 {
                     "id": "Building Segment 1",
+                    "service_water_heating_uses": [
+                        "SWH use 1_1",
+                    ],
                     "zones": [
                         {
                             "id": "Thermal Zone 1",
                             "spaces": [
                                 {
                                     "id": "Space 1",
-                                    "service_water_heating_uses": ["SWH use 1"],
+                                    "service_water_heating_uses": ["SWH use 1_1"],
                                 },
                                 {
                                     "id": "Space 2",
-                                    "service_water_heating_uses": ["SWH use 1"],
-                                },
-                                {
-                                    "id": "Space 3",
-                                    "service_water_heating_uses": ["SWH use 2"],
-                                },
-                                {
-                                    "id": "Space 4",
+                                    "service_water_heating_uses": ["SWH use 1_2"],
                                 },
                             ],
                         }
                     ],
-                }
+                },
+                {
+                    "id": "Building Segment 2",
+                    "zones": [
+                        {
+                            "id": "Thermal Zone 2",
+                            "spaces": [
+                                {
+                                    "id": "Space 3",
+                                    "service_water_heating_uses": ["SWH use 2_1"],
+                                },
+                                {
+                                    "id": "Space 4",
+                                    "service_water_heating_uses": ["SWH use 2_2"],
+                                },
+                            ],
+                        }
+                    ],
+                },
             ],
         }
     ],
     "type": "BASELINE_0",
     "service_water_heating_uses": [
         {
-            "id": "SWH use 2",
+            "id": "SWH use 1_1",
             "served_by_distribution_system": "SWH Distribution 1",
         },
         {
-            "id": "SWH use 1",
+            "id": "SWH use 1_2",
+            "served_by_distribution_system": "SWH Distribution 1",
+        },
+        {
+            "id": "SWH use 2_2",
             "served_by_distribution_system": "SWH Distribution 1",
         },
     ],
@@ -79,15 +99,15 @@ def test__TEST_RPD__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test__get_spaces_served_by_swh_use__apply_to_2_spaces():
+def test__get_spaces_served_by_swh_use__exist_in_bldg_seg_and_space():
     assert get_spaces_served_by_swh_use(
         TEST_RMD,
-        "SWH use 1",
+        "SWH use 1_1",
     ) == ["Space 1", "Space 2"]
 
 
-def test__get_spaces_served_by_swh_use__apply_to_all_spaces():
+def test__get_spaces_served_by_swh_use__not_in_bldg_seg():
     assert get_spaces_served_by_swh_use(
         TEST_RMD,
-        "SWH use 5",
-    ) == ["Space 1", "Space 2", "Space 3", "Space 4"]
+        "SWH use 2_1",
+    ) == ["Space 3"]

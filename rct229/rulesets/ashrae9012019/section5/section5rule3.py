@@ -26,7 +26,7 @@ class PRM9012019Rule73o42(RuleDefinitionListIndexedBase):
             ),
             required_fields={
                 "$.ruleset_model_descriptions[*]": ["weather", "constructions"],
-                "weather": ["climate_zone"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
             },
             each_rule=PRM9012019Rule73o42.BuildingRule(),
             index_rmd=BASELINE_0,

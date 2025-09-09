@@ -38,7 +38,7 @@ class PRM9012019Rule70u00(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             required_fields={
                 "$.ruleset_model_descriptions[*]": ["weather", "constructions"],
-                "weather": ["climate_zone"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
             },
         )
 
