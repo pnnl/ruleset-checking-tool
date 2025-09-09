@@ -14,7 +14,7 @@
             "primary_rule": "Full",
             "schema_version": "0.1.7"
         },
-        "test_description": "Project has one building segment with one space that includes a window subsurface. The baseline building's window has automated shades",
+        "test_description": "Project has one building segment with one space that includes a window subsurface. The baseline building's window does not have automated shades",
         "expected_rule_outcome": "pass",
         "rmd_transformations": {
             "baseline": {
@@ -53,7 +53,7 @@
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 3.7161215999999997,
                                                                 "opaque_area": 1.8580607999999998,
-                                                                "has_automatic_shades": true
+                                                                "has_automatic_shades": false
                                                             }
                                                         ]
                                                     }
@@ -85,7 +85,7 @@
             "primary_rule": "Full",
             "schema_version": "0.1.7"
         },
-        "test_description": "Project has one building segment with one space that includes a window subsurface. The baseline building's window does not have automated shades",
+        "test_description": "Project has one building segment with one space that includes a window subsurface. The baseline building's window has automated shades",
         "expected_rule_outcome": "fail",
         "expected_raised_message_includes": "Baseline model incorrectly includes automatic fenestration shading devices. Address this issue for the following subsurfaces",
         "rmd_transformations": {
@@ -125,7 +125,7 @@
                                                                 "classification": "WINDOW",
                                                                 "glazed_area": 3.7161215999999997,
                                                                 "opaque_area": 1.8580607999999998,
-                                                                "has_automatic_shades": false
+                                                                "has_automatic_shades": true
                                                             }
                                                         ]
                                                     }
