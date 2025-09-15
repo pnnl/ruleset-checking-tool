@@ -130,7 +130,7 @@ def get_zone_conditioning_category_dict(
                 ]
                 if assert_(
                     hvac_systems_dict.get(hvac_sys_id),
-                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAirConditioningSystems data group.",
                 )
                 and find_one(
                     "$.cooling_system.design_sensible_cool_capacity",
@@ -151,7 +151,7 @@ def get_zone_conditioning_category_dict(
                 hvac_systems_dict[hvac_sys_id]["heating_system"]["design_capacity"]
                 if assert_(
                     hvac_systems_dict.get(hvac_sys_id),
-                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAirConditioningSystems data group.",
                 )
                 and find_one(
                     "$.heating_system.design_capacity", hvac_systems_dict[hvac_sys_id]
@@ -163,7 +163,7 @@ def get_zone_conditioning_category_dict(
                 hvac_systems_dict[hvac_sys_id]["preheat_system"]["design_capacity"]
                 if assert_(
                     hvac_systems_dict.get(hvac_sys_id),
-                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAirConditioningSystems data group.",
                 )
                 and find_one(
                     "$.preheat_system.design_capacity", hvac_systems_dict[hvac_sys_id]
