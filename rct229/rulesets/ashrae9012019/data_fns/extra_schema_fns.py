@@ -97,6 +97,8 @@ def compare_context_pair(
 
     """
     matched = True
+    index_context_str = search_key.split("Equals")[0].strip().replace("AppG ", "").replace("B_RMD", "Baseline").replace("P_RMD", "Proposed").replace("U_RMD", "User")
+    compare_context_str = search_key.split("Equals")[-1].strip().replace("AppG ", "").replace("B_RMD", "Baseline").replace("P_RMD", "Proposed").replace("U_RMD", "User")
     if (
         isinstance(index_context, dict)
         and isinstance(compare_context, dict)
@@ -105,7 +107,7 @@ def compare_context_pair(
         # context shall be aligned and have the same data type.
         if compare_context.get("id") and index_context["id"] != compare_context["id"]:
             error_msg_list.append(
-                f'path: {element_json_path}: data object {index_context["id"]} in index context does not match the one {compare_context["id"]} in compare context'
+                f'ID mismatch ("{index_context["id"]}" {index_context_str} vs. "{compare_context["id"]}" {compare_context_str}). path: {element_json_path}'
             )
             matched = False
 
@@ -147,7 +149,7 @@ def compare_context_pair(
     elif isinstance(index_context, list) and isinstance(compare_context, list):
         if required_equal and len(compare_context) != len(index_context):
             error_msg_list.append(
-                f"path: {element_json_path}: length of objects ({len(index_context)}) in index context != length of objects ({len(compare_context)}) in compare context."
+                f"List length mismatch ({len(index_context)} {index_context_str} vs. {len(compare_context)} {compare_context_str}) path: {element_json_path}"
             )
             matched = False
 
@@ -229,7 +231,7 @@ def compare_context_pair(
         if required_equal and index_value != compare_value:
             # the != takes care of None data type. if both None, this will still pass.
             error_msg_list.append(
-                f"path: {element_json_path}: index context data: {index_context} does not equal to compare context data: {compare_context}"
+                f"Value mismatch ({index_context} {index_context_str} vs. {compare_context} {compare_context_str}). path: {element_json_path}"
             )
             matched = False
     else:
