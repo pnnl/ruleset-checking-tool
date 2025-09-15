@@ -41,7 +41,7 @@ class PRM9012019Rule98o22(RuleDefinitionListIndexedBase):
             list_path="$.ruleset_model_descriptions[*].buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
             required_fields={
                 "$.ruleset_model_descriptions[*]": ["weather"],
-                "weather": ["climate_zone"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
             },
         )
 
