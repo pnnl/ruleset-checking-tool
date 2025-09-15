@@ -39,7 +39,7 @@ class PRM9012022Rule86d29(RuleDefinitionListIndexedBase):
                 ),
                 each_rule=PRM9012022Rule86d29.BuildingRule.SpaceRule(),
                 index_rmd=BASELINE_0,
-                list_path="spaces[*]",
+                list_path="$.building_segments[*].zones[*].spaces[*]",
             )
 
         def is_applicable(self, context, data=None):
@@ -47,7 +47,7 @@ class PRM9012022Rule86d29(RuleDefinitionListIndexedBase):
 
             building_area_b = sum(
                 find_all(
-                    "$.building_segments[*].zones[*].spaces[*].floor_area[*]",
+                    "$.building_segments[*].zones[*].spaces[*].floor_area",
                     building_b,
                 )
             )
@@ -66,12 +66,14 @@ class PRM9012022Rule86d29(RuleDefinitionListIndexedBase):
             def is_applicable(self, context, data=None):
                 space_b = context.BASELINE_0
                 lighting_space_type_b = space_b["lighting_space_type"]
-                space_function_b = getattr_(space_b, "spaces", "function")
+                space_function_b = space_b.get("function")
 
                 return lighting_space_type_b in (
                     LIGHTING_SPACE.LOUNGE_BREAKROOM_ALL_OTHERS,
                     LIGHTING_SPACE.CONFERENCE_MEETING_MULTIPURPOSE_ROOM,
                     LIGHTING_SPACE.CLASSROOM_LECTURE_HALL_TRAINING_ROOM_PENITENTIARY,
+                    LIGHTING_SPACE.CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER,
+                    LIGHTING_SPACE.LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM,
                 ) or (
                     space_function_b == SPACE_FUNCTION.LABORATORY
                     and lighting_space_type_b
