@@ -10,15 +10,15 @@ ENERGY_SOURCE = SchemaEnums.schema_enums["EnergySourceOptions"]
 CHILLER_COMPRESSOR = SchemaEnums.schema_enums["ChillerCompressorOptions"]
 
 
-class PRM9012019Rule34d03(RuleDefinitionListIndexedBase):
-    """Rule 42 of ASHRAE 90.1-2019 Appendix G Section 22 (Chilled water loop)"""
+class PRM9012022Rule34d03(RuleDefinitionListIndexedBase):
+    """Rule 42 of ASHRAE 90.1-2022 Appendix G Section 22 (Chilled water loop)"""
 
     def __init__(self):
-        super(PRM9012019Rule34d03, self).__init__(
+        super(PRM9012022Rule34d03, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=PRM9012019Rule34d03.ChillerRule(),
+            each_rule=PRM9012022Rule34d03.ChillerRule(),
             index_rmd=BASELINE_0,
             id="22-42",
             description="The sets of performance curves specified in Table J-2 should be used to represent part-load performance of chillers in the baseline building design.",
@@ -31,7 +31,7 @@ class PRM9012019Rule34d03(RuleDefinitionListIndexedBase):
 
     class ChillerRule(RuleDefinitionBase):
         def __init__(self):
-            super(PRM9012019Rule34d03.ChillerRule, self).__init__(
+            super(PRM9012022Rule34d03.ChillerRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
@@ -77,45 +77,47 @@ class PRM9012019Rule34d03(RuleDefinitionListIndexedBase):
                 curve_set = None
 
             if curve_set is not None:
-                rated_power = chiller_b["rated_capacity"] / chiller_b.get(
-                    "full_load_efficiency"
-                )  # TODO: consider 0 full load efficiency case
+                rated_power = (
+                    chiller_b["rated_capacity"] / chiller_b["full_load_efficiency"]
+                    if chiller_b.get("full_load_efficiency")
+                    else 0.0
+                )
                 expected_validation_plr = [0.25, 0.5, 0.75, 1]
                 expected_chwt_temps = [39, 45, 50, 55]
                 expected_ecwt_temps = [60, 104, 85, 72.5, 97.5]
                 eir_f_t_coefficients = table_J_6_lookup(curve_set, "EIR-f-T")
-                cap_f_t_coefficients = table_J_6_lookup(curve_set, "Cap-f-T")
+                cap_f_t_coefficients = table_J_6_lookup(curve_set, "CAP-f-T")
                 plr_coefficients = table_J_6_lookup(curve_set, "EIR-f-PLR")
 
                 capacity_validation_pts_dict = {}
                 for capacity_validation_point in chiller_b.get(
-                    "capacity_validation_points", []
+                    "capacity_operating_points", []
                 ):
                     chilled_water_supply_temp_b = capacity_validation_point.get(
-                        "chilled_water_supply_temperature", ""
-                    )
+                        "chilled_water_supply_temperature", 0.0 * ureg("degC")
+                    ).to("degF")
                     condenser_temp_b = capacity_validation_point.get(
-                        "condenser_temperature", ""
-                    )
+                        "condenser_temperature", 0.0 * ureg("degC")
+                    ).to("degF")
 
-                    dict_key = f"{chilled_water_supply_temp_b}, {condenser_temp_b}"
+                    dict_key = f"{int(round(chilled_water_supply_temp_b.m,1))}, {int(round(condenser_temp_b.m,1))}"
                     capacity_validation_pts_dict[
                         dict_key
-                    ] = capacity_validation_point.get("result")
+                    ] = capacity_validation_point.get("capacity")
 
                 power_validation_pts_dict = {}
                 for power_validation_point in chiller_b.get(
-                    "power_validation_points", []
+                    "power_operating_points", []
                 ):
                     chilled_water_supply_temp_b = power_validation_point.get(
-                        "chilled_water_supply_temperature", ""
-                    )
+                        "chilled_water_supply_temperature", 0.0 * ureg("degC")
+                    ).to("degF")
                     condenser_temp_b = power_validation_point.get(
-                        "condenser_temperature", ""
-                    )
-                    dict_key = f"{chilled_water_supply_temp_b}, {condenser_temp_b}"
+                        "condenser_temperature", 0.0 * ureg("degC")
+                    ).to("degF")
+                    dict_key = f"{int(round(chilled_water_supply_temp_b.m,1))}, {int(round(condenser_temp_b.m,1))}"
 
-                    power_validation_pts_dict.setdefault([dict_key], [])
+                    power_validation_pts_dict.setdefault(dict_key, [])
                     power_validation_pts_dict[dict_key].append(power_validation_point)
 
                 given_capacities = {}
@@ -124,15 +126,14 @@ class PRM9012019Rule34d03(RuleDefinitionListIndexedBase):
                 for chwt in expected_chwt_temps:
                     for ecwt in expected_ecwt_temps:
                         dict_key = f"{chwt}, {ecwt}"
-                        if capacity_validation_pts_dict[dict_key]:
+                        if capacity_validation_pts_dict.get(dict_key):
                             expected_capacity = (
                                 cap_f_t_coefficients[0]
                                 + cap_f_t_coefficients[1] * chwt
-                                + cap_f_t_coefficients[2] * chwt
-                                ^ 2
+                                + cap_f_t_coefficients[2] * chwt**2
                                 + cap_f_t_coefficients[3] * ecwt
-                                + cap_f_t_coefficients[4] * ecwt
-                                ^ 2 + cap_f_t_coefficients[5] * chwt * ecwt
+                                + cap_f_t_coefficients[4] * ecwt**2
+                                + cap_f_t_coefficients[5] * chwt * ecwt
                             ) * rated_capacity_b.to("ton")
 
                             given_capacity = capacity_validation_pts_dict[dict_key]
@@ -152,7 +153,7 @@ class PRM9012019Rule34d03(RuleDefinitionListIndexedBase):
                 for chwt in expected_chwt_temps:
                     for ecwt in expected_ecwt_temps:
                         dict_key = f"{chwt}, {ecwt}"
-                        if power_validation_pts_dict[dict_key]:
+                        if power_validation_pts_dict.get(dict_key):
                             given_plrs = []
                             for power_validation_point in power_validation_pts_dict[
                                 dict_key
@@ -168,17 +169,15 @@ class PRM9012019Rule34d03(RuleDefinitionListIndexedBase):
                                     eir_plr = (
                                         plr_coefficients[0]
                                         + plr_coefficients[1] * plr
-                                        + plr_coefficients[2] * plr
-                                        ^ 2
+                                        + plr_coefficients[2] * plr**2
                                     )
                                     eir_ft = (
                                         eir_f_t_coefficients[0]
                                         + eir_f_t_coefficients[1] * chwt
-                                        + eir_f_t_coefficients[2] * chwt
-                                        ^ 2
+                                        + eir_f_t_coefficients[2] * chwt**2
                                         + eir_f_t_coefficients[3] * ecwt
-                                        + eir_f_t_coefficients[4] * ecwt
-                                        ^ 2 + eir_f_t_coefficients[5] * chwt * ecwt
+                                        + eir_f_t_coefficients[4] * ecwt**2
+                                        + eir_f_t_coefficients[5] * chwt * ecwt
                                     )
 
                                     expected_power = (
