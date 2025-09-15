@@ -21,7 +21,7 @@ def table_J_6_lookup(Set: str, output_variable: str) -> list[float]:
     if Set not in ("V", "X", "Y", "Z", "AA", "AB"):
         return None
 
-    if output_variable not in ("EIR-f-T", "CAP-f-T", "EIR-f_PLR"):
+    if output_variable not in ("EIR-f-T", "CAP-f-T", "EIR-f-PLR"):
         return None
 
     osstd_entry = find_osstd_table_entry(

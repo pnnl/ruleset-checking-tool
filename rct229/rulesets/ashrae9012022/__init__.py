@@ -5,21 +5,24 @@ from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 
 # Add all available rule modules in __all__
-__all__ = ["section5", "section6"]
+__all__ = ["section5", "section6", "section22"]
 
 rules_dict = {
     "PRM9012022Rule86r63": "section5rule43",
     "PRM9012022Rule12d80": "section6rule11",
+    "PRM9012022Rule34d03": "section22rule42",
 }
 
 section_dict = [
     "Env",
     "LTG",
+    "HVAC-ChilledWaterSide",
 ]
 
 section_dict = {
     "5": "Envelope",
     "6": "Lighting",
+    "22": "HVAC-ChilledWaterSide",
 }
 
 # Update this field if 2022 uses different term.
