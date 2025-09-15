@@ -33,5 +33,10 @@ class SchemaStore:
     @staticmethod
     def set_ruleset(ruleset: RuleSet):
         # prevent overriding the ruleset if multi-processing.
-        if not SchemaStore.SELECTED_RULESET:
+        if SchemaStore.SELECTED_RULESET in (
+            RuleSet.ASHRAE9012019_RULESET,
+            RuleSet.ASHRAE9012022_RULESET,
+        ):
+            SchemaStore.SELECTED_RULESET = ruleset
+        elif not SchemaStore.SELECTED_RULESET:
             SchemaStore.SELECTED_RULESET = ruleset

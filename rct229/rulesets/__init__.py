@@ -10,7 +10,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rulesets import RuleSet
 
 # All list for registering a ruleset.
-__all__ = [RuleSet.ASHRAE9012019_RULESET]
+__all__ = [RuleSet.ASHRAE9012019_RULESET, RuleSet.ASHRAE9012022_RULESET]
 
 # Added to remove the sub-module that are not rules.
 from rct229.schema.schema_store import SchemaStore
