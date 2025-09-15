@@ -40,11 +40,11 @@ class PRM9012022Rule23o29(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(PRM9012022Rule23o29.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=False, BASELINE_0=False, PROPOSED=True
+                    USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=PRM9012022Rule23o29.BuildingRule.SpaceRule(),
                 index_rmd=BASELINE_0,
-                list_path="spaces[*]",
+                list_path="$.building_segments[*].zones[*].spaces[*]",
             )
 
         def is_applicable(self, context, data=None):
@@ -74,7 +74,7 @@ class PRM9012022Rule23o29(RuleDefinitionListIndexedBase):
                     ),
                     required_fields={"$": ["interior_lighting"]},
                     precision={
-                        "minimum_retail_display_W": {
+                        "minimum_retail_display_w": {
                             "precision": 1,
                             "unit": "W",
                         },
@@ -116,7 +116,7 @@ class PRM9012022Rule23o29(RuleDefinitionListIndexedBase):
                     [
                         interior_lighting_p.get("power_per_area", 0.0 * ureg("W/m2"))
                         * space_p.get("floor_area", 0.0 * ureg("m2"))
-                        for interior_lighting_p in space_p["interior_lighting_P"]
+                        for interior_lighting_p in space_p["interior_lighting"]
                         if (
                             interior_lighting_p.get("purpose_type")
                             == LIGHTING_PURPOSE.RETAIL_DISPLAY
