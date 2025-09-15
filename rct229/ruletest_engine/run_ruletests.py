@@ -275,15 +275,22 @@ def run_test_helper(test_list, ruleset_doc):
     return all(test_results)
 
 
-def run_test_one_jsontest(test_json):
+def run_test_one_ASHRAE9012019_jsontest(test_json):
     """
     Test function developed to facilitate running a single rule test json
     """
     return run_section_tests(test_json, RuleSet.ASHRAE9012019_RULESET)
 
 
+def run_test_one_ASHRAE9012022_jsontest(test_json):
+    """
+    Test function developed to facilitate running a single rule test json
+    """
+    return run_section_tests(test_json, RuleSet.ASHRAE9012022_RULESET)
+
+
 # if __name__ == "__main__":
-#     outcome = run_ashrae9012019_tests(section="section5")
+#     outcome = run_ashrae9012019_tests(section="section23")
 
 # run_transformer_tests()
 
@@ -302,7 +309,8 @@ def run_test_one_jsontest(test_json):
 # run_service_water_heater_tests()
 
 
-# run_test_one_jsontest("ashrae9012019/HVAC-GEN/rule_19_10.json")
+# run_test_one_ASHRAE9012019_jsontest("ashrae9012019/section23/rule_23_8.json")
+run_test_one_ASHRAE9012022_jsontest("ashrae9012022/LTG/rule_6_11.json")
 # run_ashrae9012019_tests()
 # output_dir = os.path.dirname(__file__)
 # generate_ashrae9012019_software_test_report(['tester'])
