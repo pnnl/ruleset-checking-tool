@@ -97,8 +97,12 @@ def compare_context_pair(
 
     """
     matched = True
-    index_context_str = index_context.replace("_", "-").title()
-    compare_context_str = index_context.replace("_", "-").title()
+    if "Equals" in search_key:
+        index_context_str = search_key.split("Equals")[0].strip().replace("AppG ", "").replace("B_RMD", "Baseline").replace("P_RMD", "Proposed").replace("U_RMD", "User")
+        compare_context_str = search_key.split("Equals")[-1].strip().replace("AppG ", "").replace("B_RMD", "Baseline").replace("P_RMD", "Proposed").replace("U_RMD", "User")
+    else:
+        index_context_str = "Baseline"
+        compare_context_str = "Baseline Rotation"
     if (
         isinstance(index_context, dict)
         and isinstance(compare_context, dict)
