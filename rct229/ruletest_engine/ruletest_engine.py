@@ -7,6 +7,7 @@ from copy import deepcopy
 from typing import Optional
 
 from pint import Quantity
+
 from rct229.reports.ashrae9012019.ashrae901_2019_software_test_report import (
     ASHRAE9012019SoftwareTestReport,
 )
@@ -406,6 +407,8 @@ def generate_software_test_report(ruleset, section_list, output_json_path):
     if section_list is None:
         if ruleset == RuleSet.ASHRAE9012019_RULESET:
             section_list = RuleSetTest.ASHRAE9012019_TEST_LIST
+        elif ruleset == RuleSet.ASHRAE9012022_RULESET:
+            section_list = RuleSetTest.ASHRAE9012022_TEST_LIST
         else:
             raise Exception(
                 f"Ruleset '{ruleset}' has no default list of section tests."
