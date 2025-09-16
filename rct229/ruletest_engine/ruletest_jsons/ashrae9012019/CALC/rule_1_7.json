@@ -35371,7 +35371,7 @@
         "Test": "b",
         "test_description": "A one story building's baseline and proposed RMDs fail to have matching list lengths for value determined by Table G3.1(1) Baseline Building Performance and https://github.com/open229/ruleset-model-description-schema/blob/main/schema-source/ASHRAE229_extra.schema.yaml.",
         "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": " in index context != length of objects",
+        "expected_raised_message_includes": "List length mismatch (Baseline: [1] vs. Proposed: [2]) path: $.ruleset_model_descriptions[0].buildings[0].building_segments[0].zones",
         "standard": {
             "rule_id": "1-7",
             "ruleset_reference": "Table G3.1(1) Baseline Building Performance (a)",
@@ -70741,7 +70741,7 @@
         "Test": "c",
         "test_description": "A one story building's baseline and proposed RMDs fail to have matching IDs in their lists for value determined by Table G3.1(1) Baseline Building Performance and https://github.com/open229/ruleset-model-description-schema/blob/main/schema-source/ASHRAE229_extra.schema.yaml.",
         "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "in index context does not match the one",
+        "expected_raised_message_includes": "ID mismatch (Baseline: [System_3_PSZ_AC_Gas_Furnace - Terminal for Thermal Zone 1] vs. Proposed: [Terminal One]). path: $.ruleset_model_descriptions[0].buildings[0].building_segments[0].zones[0].terminals[0]",
         "standard": {
             "rule_id": "1-7",
             "ruleset_reference": "Table G3.1(1) Baseline Building Performance (a)",
@@ -106108,7 +106108,7 @@
         "Test": "d",
         "test_description": "A one story building's baseline and proposed RMDs fail to have matching IDs for a non-array value that should match as determined by Table G3.1(1) Baseline Building Performance and https://github.com/open229/ruleset-model-description-schema/blob/main/schema-source/ASHRAE229_extra.schema.yaml.",
         "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "does not equal to compare context data:",
+        "expected_raised_message_includes": "Value mismatch (Baseline: [CZ4A] vs. Proposed: [CZ3A]). path: $.ruleset_model_descriptions[0].weather.climate_zone",
         "standard": {
             "rule_id": "1-7",
             "ruleset_reference": "Table G3.1(1) Baseline Building Performance (a)",
