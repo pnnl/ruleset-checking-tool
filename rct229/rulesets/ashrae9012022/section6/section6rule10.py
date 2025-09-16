@@ -78,7 +78,7 @@ class PRM9012022Rule23o29(RuleDefinitionListIndexedBase):
                             "precision": 1,
                             "unit": "W",
                         },
-                        "proposed_interior_display_w": {
+                        "baseline_interior_display_w": {
                             "precision": 1,
                             "unit": "W",
                         },
@@ -145,20 +145,16 @@ class PRM9012022Rule23o29(RuleDefinitionListIndexedBase):
                 baseline_interior_display_w = calc_vals["baseline_interior_display_w"]
                 proposed_interior_display_w = calc_vals["proposed_interior_display_w"]
 
-                return not (
-                    (
-                        (
-                            proposed_interior_display_w < minimum_retail_display_w
-                            or self.precision_comparison["minimum_retail_display_w"](
-                                proposed_interior_display_w, minimum_retail_display_w
-                            )
-                        )
-                        and self.precision_comparison["proposed_interior_display_w"](
-                            baseline_interior_display_w, proposed_interior_display_w
-                        )
+                return (
+                    (proposed_interior_display_w > minimum_retail_display_w)
+                    or (baseline_interior_display_w != proposed_interior_display_w)
+                ) and (
+                    baseline_interior_display_w
+                    < min(proposed_interior_display_w, maximum_retail_display_w)
+                    or self.precision_comparison["baseline_interior_display_w"](
+                        baseline_interior_display_w,
+                        min(proposed_interior_display_w, maximum_retail_display_w),
                     )
-                    and baseline_interior_display_w
-                    > min(proposed_interior_display_w, maximum_retail_display_w)
                 )
 
             def rule_check(self, context, calc_vals=None, data=None):
@@ -168,8 +164,8 @@ class PRM9012022Rule23o29(RuleDefinitionListIndexedBase):
 
                 return (
                     proposed_interior_display_w < minimum_retail_display_w
-                ) and self.precision_comparison["proposed_interior_display_w"](
-                    baseline_interior_display_w, proposed_interior_display_w
+                ) and self.precision_comparison["baseline_interior_display_w"](
+                    proposed_interior_display_w, baseline_interior_display_w
                 )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
