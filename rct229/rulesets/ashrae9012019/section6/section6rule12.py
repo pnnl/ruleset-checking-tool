@@ -12,15 +12,15 @@ SPACE_FUNCTION = SchemaEnums.schema_enums["SpaceFunctionOptions"]
 BUILDING_AREA_LIMIT = 5000 * ureg("ft2")
 
 
-class PRM9012022Rule86d29(RuleDefinitionListIndexedBase):
-    """Rule 12 of ASHRAE 90.1-2022 Appendix G Section 6 (Lighting)"""
+class PRM9012019Rule86d29(RuleDefinitionListIndexedBase):
+    """Rule 12 of ASHRAE 90.1-2019 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(PRM9012022Rule86d29, self).__init__(
+        super(PRM9012019Rule86d29, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=PRM9012022Rule86d29.BuildingRule(),
+            each_rule=PRM9012019Rule86d29.BuildingRule(),
             index_rmd=BASELINE_0,
             id="6-12",
             description="In buildings >5000 ft2 lighting shall be modeled having occupancy sensors in employee lunch and break rooms, conference/meeting rooms, and classrooms (not including shop classrooms, laboratory classrooms, and preschool through 12th grade classrooms). These controls shall be reflected in the baseline building design lighting schedules.",
@@ -32,11 +32,11 @@ class PRM9012022Rule86d29(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(PRM9012022Rule86d29.BuildingRule, self).__init__(
+            super(PRM9012019Rule86d29.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=PRM9012022Rule86d29.BuildingRule.SpaceRule(),
+                each_rule=PRM9012019Rule86d29.BuildingRule.SpaceRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].spaces[*]",
             )
@@ -55,7 +55,7 @@ class PRM9012022Rule86d29(RuleDefinitionListIndexedBase):
 
         class SpaceRule(RuleDefinitionBase):
             def __init__(self):
-                super(PRM9012022Rule86d29.BuildingRule.SpaceRule, self).__init__(
+                super(PRM9012019Rule86d29.BuildingRule.SpaceRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
