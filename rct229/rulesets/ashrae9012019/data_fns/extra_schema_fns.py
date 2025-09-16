@@ -98,8 +98,22 @@ def compare_context_pair(
     """
     matched = True
     if "Equals" in search_key:
-        index_context_str = search_key.split("Equals")[0].strip().replace("AppG ", "").replace("B_RMD", "Baseline").replace("P_RMD", "Proposed").replace("U_RMD", "User")
-        compare_context_str = search_key.split("Equals")[-1].strip().replace("AppG ", "").replace("B_RMD", "Baseline").replace("P_RMD", "Proposed").replace("U_RMD", "User")
+        index_context_str = (
+            search_key.split("Equals")[0]
+            .strip()
+            .replace("AppG ", "")
+            .replace("B_RMD", "Baseline")
+            .replace("P_RMD", "Proposed")
+            .replace("U_RMD", "User")
+        )
+        compare_context_str = (
+            search_key.split("Equals")[-1]
+            .strip()
+            .replace("AppG ", "")
+            .replace("B_RMD", "Baseline")
+            .replace("P_RMD", "Proposed")
+            .replace("U_RMD", "User")
+        )
     else:
         index_context_str = "Baseline"
         compare_context_str = "Baseline Rotation"
@@ -111,7 +125,7 @@ def compare_context_pair(
         # context shall be aligned and have the same data type.
         if compare_context.get("id") and index_context["id"] != compare_context["id"]:
             error_msg_list.append(
-                f'ID mismatch ("{index_context["id"]}" {index_context_str} vs. "{compare_context["id"]}" {compare_context_str}). path: {element_json_path}'
+                f'ID mismatch ({index_context_str}: [{index_context["id"]}] vs. {compare_context_str}: [{compare_context["id"]}]). path: {element_json_path}'
             )
             matched = False
 
@@ -153,7 +167,7 @@ def compare_context_pair(
     elif isinstance(index_context, list) and isinstance(compare_context, list):
         if required_equal and len(compare_context) != len(index_context):
             error_msg_list.append(
-                f"List length mismatch ({len(index_context)} {index_context_str} vs. {len(compare_context)} {compare_context_str}) path: {element_json_path}"
+                f"List length mismatch ({index_context_str}: [{len(index_context)}] vs. {compare_context_str}: [{len(compare_context)}]) path: {element_json_path}"
             )
             matched = False
 
@@ -235,7 +249,7 @@ def compare_context_pair(
         if required_equal and index_value != compare_value:
             # the != takes care of None data type. if both None, this will still pass.
             error_msg_list.append(
-                f"Value mismatch ({index_context} {index_context_str} vs. {compare_context} {compare_context_str}). path: {element_json_path}"
+                f"Value mismatch ({index_context_str}: [{index_context}] vs. {compare_context_str}: [{compare_context}]). path: {element_json_path}"
             )
             matched = False
     else:
