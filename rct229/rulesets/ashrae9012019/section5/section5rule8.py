@@ -151,10 +151,7 @@ class PRM9012019Rule48v87(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                target_u_factor_res = calc_vals["target_u_factor_res"]
-                target_u_factor_nonres = calc_vals["target_u_factor_nonres"]
-
-                return target_u_factor_res != target_u_factor_nonres
+                return calc_vals["target_u_factor"] is None
 
             def rule_check(self, context, calc_vals=None, data=None):
                 return self.precision_comparison["ag_wall_u_factor_b"](
