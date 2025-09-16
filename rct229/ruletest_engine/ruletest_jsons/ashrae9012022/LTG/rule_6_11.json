@@ -137,7 +137,7 @@
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "It could not be determined whether the proposed retail display lighting power is less than or equal to the allowance calculated according to the formulas in ASHRAE 90.1 Section 9.5.2.2",
         "rmd_transformations": {
-            "baseline": {
+            "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
@@ -171,7 +171,7 @@
                                 ]
                             }
                         ],
-                        "type": "BASELINE_0"
+                        "type": "PROPOSED"
                     }
                 ]
             }
@@ -196,7 +196,7 @@
         "test_description": "This test uses a simple building model with 1,000 ft2 of gross floor area containing a single zone and mall concourse space. There is no SALES_AREA space.",
         "expected_rule_outcome": "not_applicable",
         "rmd_transformations": {
-            "baseline": {
+            "proposed": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
@@ -230,7 +230,7 @@
                                 ]
                             }
                         ],
-                        "type": "BASELINE_0"
+                        "type": "PROPOSED"
                     }
                 ]
             }
