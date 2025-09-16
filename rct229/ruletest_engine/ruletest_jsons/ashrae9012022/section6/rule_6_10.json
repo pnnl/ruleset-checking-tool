@@ -15,7 +15,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.1.7"
         },
-        "test_description": "This test uses a simple building model with 1,000 ft\u00b2 of gross floor area containing a single zone and space. The proposed and baseline spaces have 650 watts of interior display lighting power, which falls below the ASHRAE 90.1 minimum allowance of 750 watts.",
+        "test_description": "This test uses a simple building model with 1,000 ft2 of gross floor area containing a single zone and space. The proposed and baseline spaces have 650 watts of interior display lighting power, which falls below the ASHRAE 90.1 minimum allowance of 750 watts.",
         "expected_rule_outcome": "pass",
         "rmd_transformations": {
             "proposed": {
@@ -96,10 +96,10 @@
             }
         }
     },
-    "rule-6-10-c": {
+    "rule-6-10-b": {
         "Section": 6,
         "Rule": 10,
-        "Test": "c",
+        "Test": "b",
         "standard": {
             "ruleset": "ashrae9012022",
             "rule_id": "6-10",
@@ -112,7 +112,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.1.7"
         },
-        "test_description": "This test uses a simple building model with 1,000 ft\u00b2 of gross floor area containing a single zone and space. The proposed space has 1200 watts of interior display lighting power while the baseline has 1400 watts.",
+        "test_description": "This test uses a simple building model with 1,000 ft2 of gross floor area containing a single zone and space. The proposed space has 1200 watts of interior display lighting power while the baseline has 1400 watts.",
         "expected_rule_outcome": "fail",
         "rmd_transformations": {
             "proposed": {
@@ -193,10 +193,10 @@
             }
         }
     },
-    "rule-6-10-d": {
+    "rule-6-10-c": {
         "Section": 6,
         "Rule": 10,
-        "Test": "d",
+        "Test": "c",
         "standard": {
             "ruleset": "ashrae9012022",
             "rule_id": "6-10",
@@ -209,7 +209,7 @@
             "mandatory_rule": "Yes",
             "schema_version": "0.1.7"
         },
-        "test_description": "This test uses a simple building model with 1,000 ft\u00b2 of gross floor area containing a single zone and space. The proposed space has 550 watts of interior display lighting power while the baseline has 500 watts.",
+        "test_description": "This test uses a simple building model with 1,000 ft2 of gross floor area containing a single zone and space. The proposed space has 550 watts of interior display lighting power while the baseline has 500 watts.",
         "expected_rule_outcome": "undetermined",
         "expected_raised_message_includes": "It could not be determined whether the baseline retail display lighting power is modeled correctly as the minimum of the proposed retail display lighting power and the allowance calculated according to the formulas in ASHRAE 90.1 Section 9.5.2.2",
         "rmd_transformations": {
