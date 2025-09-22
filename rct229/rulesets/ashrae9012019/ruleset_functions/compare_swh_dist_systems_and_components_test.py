@@ -234,18 +234,6 @@ def test__compare_swh_dist_systems_and_components__pump_not_matched():
     assert compare_swh_dist_systems_and_components(
         TEST_RMD, TEST_RMD_COPIED, "AppG Used By TCDs", "SWH Distribution 2"
     ) == [
-        "ID mismatch (Baseline: [SWH Piping 2] vs. Baseline Rotation: [SWH Piping "
-        "a]). path: $.service_water_heating_distribution_systems[SWH Distribution "
-        "2].service_water_piping",
-        "ID mismatch (Baseline: [SWH Piping Child 2] vs. Baseline Rotation: [SWH "
-        "Piping Child a]). path: $.service_water_heating_distribution_systems[SWH "
-        "Distribution 2].service_water_piping.child[0]",
-        "ID mismatch (Baseline: [Solar Thermal System 3] vs. Baseline Rotation: "
-        "[Solar Thermal System 4]). path: $.service_water_heating_equipment[SWH "
-        "Equipment 2].solar_thermal_systems[0]",
-        "ID mismatch (Baseline: [Solar Thermal System 4] vs. Baseline Rotation: "
-        "[Solar Thermal System a]). path: $.service_water_heating_equipment[SWH "
-        "Equipment 2].solar_thermal_systems[1]",
         "Value mismatch (Baseline: [SWH Piping 2] vs. Baseline Rotation: [SWH Piping "
         "a]). path: $.pumps[Pump 2].loop_or_piping",
     ]  # The change was because we added index to match the id - if id failed matching, the object will be reported in the mismatch report.
