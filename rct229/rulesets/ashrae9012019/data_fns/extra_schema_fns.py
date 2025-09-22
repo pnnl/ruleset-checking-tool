@@ -123,7 +123,11 @@ def compare_context_pair(
         and not isinstance(extra_schema, str)
     ):
         # context shall be aligned and have the same data type.
-        if compare_context.get("id") and index_context["id"] != compare_context["id"]:
+        if (
+            required_equal
+            and compare_context.get("id")
+            and index_context["id"] != compare_context["id"]
+        ):
             error_msg_list.append(
                 f'ID mismatch ({index_context_str}: [{index_context["id"]}] vs. {compare_context_str}: [{compare_context["id"]}]). path: {element_json_path}'
             )
@@ -254,7 +258,7 @@ def compare_context_pair(
             matched = False
     else:
         # if the two index_context and compare_context are identical at this point, then it pass, otherwise it failed
-        if (
+        if required_equal and (
             type(index_context) != type(compare_context)
             or index_context != compare_context
         ):

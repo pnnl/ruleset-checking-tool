@@ -2746,7 +2746,7 @@
         "RMD Test": "Seconary",
         "AppG Used By TCDs": true,
         "AppG P_RMD Equals U_RMD": true,
-        "AppG B_RMD Equals P_RMD": true,
+        "AppG B_RMD Equals P_RMD": false,
         "AppG B_RMDs Same": true
       },
       "hourly_values": {
