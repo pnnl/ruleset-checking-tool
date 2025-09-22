@@ -181,6 +181,9 @@ def compare_context_pair(
             if compare_by_index:
                 # position-based comparison for operating_points
                 limit = min(len(index_context), len(compare_context))
+                extra_schema_directive = extra_schema.get(search_key)
+                if extra_schema_directive is None:
+                    extra_schema_directive = required_equal
                 for i in range(limit):
                     matched = (
                         compare_context_pair(
@@ -188,47 +191,56 @@ def compare_context_pair(
                             compare_context[i],
                             f"{element_json_path}[{i}]",
                             extra_schema,
-                            if_required(extra_schema.get(search_key)),
+                            if_required(extra_schema_directive),
                             search_key,
                             error_msg_list,
                         )
                         and matched
                     )
             else:
-                # For list that has mix of objects and strings (primary_layers)
-                # avoid processing any list of primitive data types
-                # sort the proposed and user
-                sorted_dict_index = sorted(
-                    [
-                        item
-                        for item in index_context
-                        if isinstance(item, dict) and "id" in item
-                    ],
-                    key=lambda x: x["id"],
-                )
-                sorted_dict_compare = sorted(
-                    [
-                        item
+                # For lists that may mix objects and strings (primary_layers)
+                # Only compare dict items with an "id". Use index_context as the source of truth for which ids to compare.
+
+                # Gather (id, original_index) from index_context (preserves original positions for path reporting)
+                index_id_list = []
+                index_id_map = {}
+                for idx, item in enumerate(index_context):
+                    if isinstance(item, dict) and "id" in item:
+                        obj_id = item["id"]
+                        index_id_list.append((obj_id, idx))
+                        index_id_map[obj_id] = item
+
+                # If there are no dicts-with-id in index_context, there's nothing to do here
+                if index_id_list:
+                    # Build id → object map for compare_context
+                    compare_id_map = {
+                        item["id"]: item
                         for item in compare_context
                         if isinstance(item, dict) and "id" in item
-                    ],
-                    key=lambda x: x["id"],
-                )
-                for i in range(len(sorted_dict_index)):
-                    if i < len(sorted_dict_compare):
-                        # in this case, we are still using the same extra_schema
-                        matched = (
-                            compare_context_pair(
-                                sorted_dict_index[i],
-                                sorted_dict_compare[i],
-                                f"{element_json_path}[{i}]",
-                                extra_schema,
-                                if_required(extra_schema.get(search_key)),
-                                search_key,
-                                error_msg_list,
+                    }
+
+                    # Compare only ids that exist in index_context
+                    for obj_id, idx in index_id_list:
+                        if obj_id in compare_id_map:
+                            matched = (
+                                    compare_context_pair(
+                                        index_id_map[obj_id],
+                                        compare_id_map[obj_id],
+                                        f"{element_json_path}[{idx}]",
+                                        extra_schema,
+                                        if_required(extra_schema.get(search_key)),
+                                        search_key,
+                                        error_msg_list,
+                                    )
+                                    and matched
                             )
-                            and matched
-                        )
+                        elif required_equal:
+                            # compare_context is missing an object that exists in index_context
+                            error_msg_list.append(
+                                f"{compare_context_str} model is missing object with id '{obj_id}' at path: {element_json_path}"
+                            )
+                            matched = False
+
             sorted_str_index = sorted(
                 [item for item in index_context if isinstance(item, str)]
             )
