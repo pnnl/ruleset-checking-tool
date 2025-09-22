@@ -223,16 +223,16 @@ def compare_context_pair(
                     for obj_id, idx in index_id_list:
                         if obj_id in compare_id_map:
                             matched = (
-                                    compare_context_pair(
-                                        index_id_map[obj_id],
-                                        compare_id_map[obj_id],
-                                        f"{element_json_path}[{idx}]",
-                                        extra_schema,
-                                        if_required(extra_schema.get(search_key)),
-                                        search_key,
-                                        error_msg_list,
-                                    )
-                                    and matched
+                                compare_context_pair(
+                                    index_id_map[obj_id],
+                                    compare_id_map[obj_id],
+                                    f"{element_json_path}[{idx}]",
+                                    extra_schema,
+                                    if_required(extra_schema.get(search_key)),
+                                    search_key,
+                                    error_msg_list,
+                                )
+                                and matched
                             )
                         elif required_equal:
                             # compare_context is missing an object that exists in index_context
