@@ -30,6 +30,7 @@ _UNIT_LIST = [
     "ft3",
     "ft2",
     "W/ft2",
+    "Btu/ft2",
     "Btu/(hr*ft2*R)",
     "Btu/(hr*ft*R)",
     "ton",
@@ -41,7 +42,7 @@ _UNIT_LIST = [
     "W/gpm",
     "cfm",
     "people/kft2",
-    "hour",
+    "hr",
 ]
 
 _UNIT_CONVENTIONS = {
@@ -67,6 +68,7 @@ _UNIT_CONVENTIONS = {
         "power_per_volume": "W/L3",
         "air_flow_rate": "L/s",
         "flow_per_area": "L/(s*m2)",
+        "time": "s",
     },
     UNIT_SYSTEM.IP: {
         "transformer_capacity": "V*A",
@@ -76,6 +78,7 @@ _UNIT_CONVENTIONS = {
         "area": "ft2",
         "area_occ_density": "people/kft2",
         "power_density": "W/ft2",
+        "energy_density": "Btu/ft2",
         "thermal_transmittance": "Btu/(hr*ft2*R)",
         "linear_thermal_transmittance": "Btu/(hr*ft*R)",
         "cooling_capacity": "ton",
@@ -90,6 +93,7 @@ _UNIT_CONVENTIONS = {
         "power_per_volume": "Btu/h/gallon",
         "air_flow_rate": "cfm",
         "flow_per_area": "cfm/ft2",
+        "time": "hr",
     },
 }
 
