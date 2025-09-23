@@ -40,6 +40,8 @@ _UNIT_LIST = [
     "W/gpm",
     "W/gpm",
     "cfm",
+    "people/kft2",
+    "hour"
 ]
 
 _UNIT_CONVENTIONS = {
@@ -64,6 +66,7 @@ _UNIT_CONVENTIONS = {
         "power_per_liquid_flow_rate": "W-s/L",
         "power_per_volume": "W/L3",
         "air_flow_rate": "L/s",
+        "flow_per_area": "L/(s*m2)",
     },
     UNIT_SYSTEM.IP: {
         "transformer_capacity": "V*A",
@@ -86,6 +89,7 @@ _UNIT_CONVENTIONS = {
         "power_per_liquid_flow_rate": "W/gpm",
         "power_per_volume": "Btu/h/gallon",
         "air_flow_rate": "cfm",
+        "flow_per_area": "cfm/ft2",
     },
 }
 

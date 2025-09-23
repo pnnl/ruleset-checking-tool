@@ -119,7 +119,7 @@ class PRM9012019Rule39k65(RuleDefinitionListIndexedBase):
                 "building_total_envelope_area": CalcQ(
                     "area", building_total_envelope_area
                 ),
-                "target_air_leakage_coefficient": TARGET_AIR_LEAKAGE_COEFF,
+                "target_air_leakage_coefficient": CalcQ("flow_per_area", TARGET_AIR_LEAKAGE_COEFF),
                 "target_air_leakage_rate_75pa_b": CalcQ(
                     "air_flow_rate", target_air_leakage_rate_75pa_b
                 ),
