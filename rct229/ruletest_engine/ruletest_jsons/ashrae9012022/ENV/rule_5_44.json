@@ -1,0 +1,148 @@
+{
+    "rule-5-44-a": {
+        "Section": 5,
+        "Rule": 44,
+        "Test": "a",
+        "standard": {
+            "ruleset": "ashrae9012022",
+            "rule_id": "5-44",
+            "ruleset_reference": "Table G3.1 Section 5(j) Baseline",
+            "rule_description": "The baseline above-grade wall surfaces shall be modeled with a solar reflectance of 0.25.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "test_description": "A project with one building segment has one space with an above grade, unregulated wall. The wall's solar reflectance is equal to 0.25, in agreement with Table G3.1. Section 5(j).",
+        "expected_rule_outcome": "pass",
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
+                                                        "optical_properties": {
+                                                            "id": "Optical Properties 1",
+                                                            "absorptance_solar_exterior": 0.25
+                                                        },
+                                                        "construction": "Construction 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1"
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-44-b": {
+        "Section": 5,
+        "Rule": 44,
+        "Test": "b",
+        "standard": {
+            "ruleset": "ashrae9012022",
+            "rule_id": "5-44",
+            "ruleset_reference": "Table G3.1 Section 5(j) Baseline",
+            "rule_description": "The baseline above-grade wall surfaces shall be modeled with a solar reflectance of 0.25.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "test_description": "A project with one building segment has one space with an above grade, unregulated wall. The wall's solar reflectance is equal to 0.35, in disagreement with Table G3.1. Section 5(j).",
+        "expected_rule_outcome": "fail",
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 9.290303999999999,
+                                                        "optical_properties": {
+                                                            "id": "Optical Properties 1",
+                                                            "absorptance_solar_exterior": 0.35
+                                                        },
+                                                        "construction": "Construction 1"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1"
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}
