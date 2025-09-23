@@ -175,12 +175,12 @@ class PRM9012019Rule06k20(RuleDefinitionListIndexedBase):
                     "swh_use_multiplier_schedule_p": get_swh_use_p(
                         "use_multiplier_schedule"
                     ),
-                    "swh_use_temperature_at_fixture_b": CalcQ("temperature", get_swh_use_b(
-                        "temperature_at_fixture"
-                    )),
-                    "swh_use_temperature_at_fixture_p": CalcQ("temperature", get_swh_use_p(
-                        "temperature_at_fixture"
-                    )),
+                    "swh_use_temperature_at_fixture_b": CalcQ(
+                        "temperature", get_swh_use_b("temperature_at_fixture")
+                    ),
+                    "swh_use_temperature_at_fixture_p": CalcQ(
+                        "temperature", get_swh_use_p("temperature_at_fixture")
+                    ),
                     "swh_use_water_mains_temperature_schedule_b": get_swh_use_b(
                         "entering_water_mains_temperature_schedule"
                     ),
@@ -189,8 +189,12 @@ class PRM9012019Rule06k20(RuleDefinitionListIndexedBase):
                     ),
                     "swh_use_served_by_distribution_system_b": swh_use_served_by_distribution_system_b,
                     "swh_use_served_by_distribution_system_p": swh_use_served_by_distribution_system_p,
-                    "swh_use_design_supply_water_temperature_b": CalcQ("temperature", swh_use_design_supply_water_temperature_b),
-                    "swh_use_design_supply_water_temperature_p": CalcQ("temperature", swh_use_design_supply_water_temperature_p),
+                    "swh_use_design_supply_water_temperature_b": CalcQ(
+                        "temperature", swh_use_design_supply_water_temperature_b
+                    ),
+                    "swh_use_design_supply_water_temperature_p": CalcQ(
+                        "temperature", swh_use_design_supply_water_temperature_p
+                    ),
                     "is_heat_recovered_by_drain_b": get_swh_use_b(
                         "is_heat_recovered_by_drain"
                     ),

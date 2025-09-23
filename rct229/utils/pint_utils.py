@@ -41,7 +41,7 @@ _UNIT_LIST = [
     "W/gpm",
     "cfm",
     "people/kft2",
-    "hour"
+    "hour",
 ]
 
 _UNIT_CONVENTIONS = {
