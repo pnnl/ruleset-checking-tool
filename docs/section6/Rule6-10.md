@@ -79,5 +79,7 @@
 
 **Notes:**
 1. Could the interiorlighting and misc objects have different IDS across the baseline and proposed, if so how do we match them up ?  
+2. Need to add this rule to Workbook.
+3. Need to also add this to 90.1 2019.
 
 **[Back](../_toc.md)**
