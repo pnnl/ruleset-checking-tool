@@ -35359,7 +35359,7 @@
         "Test": "b",
         "test_description": "A one story building includes a user and proposed ruleset model description where all values which are expected to match between the ruleset model descriptions do not match because an array is not the same size.",
         "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "List length mismatch (Proposed: [2] vs. User: [1]) path: $.ruleset_model_descriptions[0].buildings[0].building_segments[0].zones",
+        "expected_raised_message_includes": "in index context != length of objects",
         "standard": {
             "rule_id": "1-8",
             "ruleset_reference": "Table G3.1(1) Proposed Building Performance (a)",
@@ -70717,7 +70717,7 @@
         "Test": "c",
         "test_description": "A one story building includes a user and proposed ruleset model description where all values which are expected to match between the ruleset model descriptions do not match because the ID of an object does not match.",
         "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "User model is missing object with id 'Thermal Zone One' at path: $.ruleset_model_descriptions[0].buildings[0].building_segments[0].zones",
+        "expected_raised_message_includes": "in index context does not match the one",
         "standard": {
             "rule_id": "1-8",
             "ruleset_reference": "Table G3.1(1) Proposed Building Performance (a)",
@@ -106072,7 +106072,7 @@
         "Test": "d",
         "test_description": "A one story building includes a user and proposed ruleset model description where all values which are expected to match between the ruleset model descriptions do not match because the value of a data element does not match.",
         "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "Value mismatch (Proposed: [CZ3A] vs. User: [CZ4A]). path: $.ruleset_model_descriptions[0].weather.climate_zone",
+        "expected_raised_message_includes": "does not equal to compare context data:",
         "standard": {
             "rule_id": "1-8",
             "ruleset_reference": "Table G3.1(1) Proposed Building Performance (a)",
