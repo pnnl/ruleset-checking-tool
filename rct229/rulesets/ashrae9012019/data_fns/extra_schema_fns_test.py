@@ -177,12 +177,12 @@ def test__compare_context_pair__identical():
     user = TEST_RPD_FULL
     error_msg_list = []
     assert compare_context_pair(
-        proposed,
         user,
+        proposed,
         "$",
         EXTRA_SCHEMA["RulesetProjectDescription"]["Data Elements"],
         True,
-        "AppG P_RMD Equals U_RMD",
+        "Proposed Equals User",
         error_msg_list,
     )
 
@@ -192,8 +192,8 @@ def test__proposed_equals_user__identical():
     user = TEST_RPD_FULL
     error_msg_list = []
     assert proposed_equals_user(
-        index_context=proposed,
-        compare_context=user,
+        index_context=user,
+        compare_context=proposed,
         error_msg_list=error_msg_list,
     )
 
@@ -206,17 +206,17 @@ def test__compare_context_pair__different():
     ] = "always_1"
     error_msg_list = []
     assert not compare_context_pair(
-        proposed,
         user,
+        proposed,
         "$",
         EXTRA_SCHEMA["RulesetProjectDescription"]["Data Elements"],
         True,
-        "AppG P_RMD Equals U_RMD",
+        "Proposed Equals User",
         error_msg_list,
     )
     assert (
         error_msg_list[0]
-        == "Value mismatch (Proposed: [Required Building Schedule 1] vs. User: [always_1]). path: $.ruleset_model_descriptions[0].buildings[0].building_open_schedule"
+        == "Value mismatch (User: [always_1] vs. Proposed: [Required Building Schedule 1]). path: $.ruleset_model_descriptions[0].buildings[0].building_open_schedule"
     )
 
 
@@ -228,11 +228,11 @@ def test__proposed_equals_user__different():
     ] = "always_1"
     error_msg_list = []
     assert not proposed_equals_user(
-        index_context=proposed,
-        compare_context=user,
+        index_context=user,
+        compare_context=proposed,
         error_msg_list=error_msg_list,
     )
     assert (
         error_msg_list[0]
-        == "Value mismatch (Proposed: [Required Building Schedule 1] vs. User: [always_1]). path: $.ruleset_model_descriptions[0].buildings[0].building_open_schedule"
+        == "Value mismatch (User: [always_1] vs. Proposed: [Required Building Schedule 1]). path: $.ruleset_model_descriptions[0].buildings[0].building_open_schedule"
     )

@@ -136,7 +136,6 @@ TEST_RPD_FULL = {
 
 TEST_RMD = quantify_rmd(TEST_RPD_FULL)["ruleset_model_descriptions"][0]
 
-
 TEST_RMD_COPIED = copy.deepcopy(TEST_RMD)
 
 # Change the values
@@ -178,7 +177,6 @@ TEST_RMD_COPIED_DIFF_SWH_EQUIP_LEN["service_water_heating_equipment"].append(
 
 TEST_RMD_NO_MATCH = copy.deepcopy(TEST_RMD)
 TEST_RMD_NO_MATCH["pumps"][1]["loop_or_piping"] = "SWH Piping a"
-
 
 TEST_RPD_COPIED_DIFF_SWH_EQUIP_LEN_FULL = {
     "id": "229",
@@ -224,7 +222,10 @@ def test__TEST_RPD_Copied_diff_len__is_valid():
 def test__compare_swh_dist_systems_and_components__all_match():
     assert (
         compare_swh_dist_systems_and_components(
-            TEST_RMD, TEST_RMD, "AppG Used By TCDs", "SWH Distribution 1"
+            TEST_RMD,
+            TEST_RMD,
+            "AppG 11-1 Proposed Equals Baseline",
+            "SWH Distribution 1",
         )
         == []
     )
@@ -232,10 +233,15 @@ def test__compare_swh_dist_systems_and_components__all_match():
 
 def test__compare_swh_dist_systems_and_components__pump_not_matched():
     assert compare_swh_dist_systems_and_components(
-        TEST_RMD, TEST_RMD_COPIED, "AppG Used By TCDs", "SWH Distribution 2"
+        TEST_RMD,
+        TEST_RMD_COPIED,
+        "AppG 11-1 Proposed Equals Baseline",
+        "SWH Distribution 2",
     ) == [
-        "Value mismatch (Baseline: [SWH Piping 2] vs. Baseline Rotation: [SWH Piping "
-        "a]). path: $.pumps[Pump 2].loop_or_piping",
+        "ID mismatch (Baseline: [SWH Piping 2] vs. Proposed: [SWH Piping a]). path: $.service_water_heating_distribution_systems['SWH Distribution 2'].service_water_piping",
+        "Proposed model is missing object with id 'SWH Piping Child 2' at path: $.service_water_heating_distribution_systems['SWH Distribution 2'].service_water_piping.child",
+        "Proposed model is missing object with id 'Solar Thermal System 3' at path: $.service_water_heating_equipment['SWH Equipment 2'].solar_thermal_systems",
+        "Value mismatch (Baseline: [SWH Piping 2] vs. Proposed: [SWH Piping a]). path: $.pumps['Pump 2'].loop_or_piping",
     ]  # The change was because we added index to match the id - if id failed matching, the object will be reported in the mismatch report.
 
 
@@ -243,7 +249,7 @@ def test__compare_swh_dist_systems_and_components__diff_swh_equipment_length():
     assert compare_swh_dist_systems_and_components(
         TEST_RMD,
         TEST_RMD_COPIED_DIFF_SWH_EQUIP_LEN,
-        "AppG Used By TCDs",
+        "AppG 11-1 Proposed Equals Baseline",
         "SWH Distribution 2",
     ) == [
         "Unequal numbers of SWH Equipment between the two models for SWH Distribution 2"

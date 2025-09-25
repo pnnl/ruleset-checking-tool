@@ -98,7 +98,7 @@ def compare_context_pair(
     """
     matched = True
     compare_context_str, index_context_str = (
-        part.strip() for part in search_key.split("Equals", 1)
+        part.strip() for part in search_key.replace("AppG 11-1 ", "").split("Equals", 1)
     )
 
     if (

@@ -74,24 +74,17 @@ class PRM9012019Rule72v93(RuleDefinitionListIndexedBase):
                     proposed_user_comparison = compare_swh_dist_systems_and_components(
                         rmd1=rmd_p,
                         rmd2=rmd_u,
-                        compare_context_str="AppG 11-1 P_RMD Equals U_RMD",
+                        compare_context_str="AppG 11-1 Proposed Equals User",
                         swh_distribution_id=swh_dist_sys_id_u,
                     )
-                    proposed_baseline_comparison = (
-                        compare_swh_dist_systems_and_components(
-                            rmd1=rmd_p,
-                            rmd2=rmd_b,
-                            compare_context_str="AppG 11-1 P_RMD Equals B_RMD",
-                            swh_distribution_id=swh_dist_sys_id_u,
-                        )
-                    )
+
                 else:
                     # no loads
                     proposed_baseline_comparison = (
                         compare_swh_dist_systems_and_components(
                             rmd1=rmd_p,
                             rmd2=rmd_b,
-                            compare_context_str="AppG 11-1 P_RMD Equals B_RMD",
+                            compare_context_str="AppG 11-1 Proposed Equals Baseline",
                             swh_distribution_id=swh_dist_sys_id_u,
                         )
                     )
@@ -122,13 +115,11 @@ class PRM9012019Rule72v93(RuleDefinitionListIndexedBase):
                 if swh_dist_systems_p:
                     # propose has distribution system
                     for swh_dist_sys_id_p in swh_dist_systems_p:
-                        proposed_baseline_comparison = (
-                            compare_swh_dist_systems_and_components(
-                                rmd1=rmd_p,
-                                rmd2=rmd_b,
-                                compare_context_str="AppG 11-1 P_RMD Equals B_RMD",
-                                swh_distribution_id=swh_dist_sys_id_p,
-                            )
+                        proposed_baseline_comparison = compare_swh_dist_systems_and_components(
+                            rmd1=rmd_p,
+                            rmd2=rmd_b,
+                            compare_context_str="AppG 11-1 Proposed Equals Baseline",
+                            swh_distribution_id=swh_dist_sys_id_p,
                         )
                         if swh_dist_sys_id_p not in swh_and_equip_dict_b:
                             proposed_baseline_comparison.append(

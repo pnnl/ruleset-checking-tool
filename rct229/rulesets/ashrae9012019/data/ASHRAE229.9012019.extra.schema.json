@@ -698,8 +698,8 @@
         "Proposed Equals User": true,
         "Baseline Equals Proposed": true,
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -811,8 +811,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "service_water_heating_uses": {
         "Description": "List of IDs of service water heating uses",
@@ -823,8 +823,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": "unknown",
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       }
     }
   },
@@ -5510,8 +5510,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -5542,8 +5542,8 @@
         "Proposed Equals User": true,
         "Baseline Equals Proposed": false,
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "specification_method": {
         "Description": "Options for how the pump is specified",
@@ -5553,8 +5553,8 @@
         "Proposed Equals User": true,
         "Baseline Equals Proposed": false,
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "design_electric_power": {
         "Description": "Pump design electric power",
@@ -5566,8 +5566,8 @@
         "Proposed Equals User": true,
         "Baseline Equals Proposed": false,
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "motor_nameplate_power": {
         "Description": "Pump motor nameplate power",
@@ -5579,8 +5579,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": false,
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "design_head": {
         "Description": "Head of the pump at design flow conditions",
@@ -5592,8 +5592,8 @@
         "Proposed Equals User": false,
         "Baseline Equals Proposed": false,
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "impeller_efficiency": {
         "Description": "Full load efficiency of the impeller",
@@ -5605,8 +5605,8 @@
         "Proposed Equals User": false,
         "Baseline Equals Proposed": false,
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "motor_efficiency": {
         "Description": "Full load efficiency of the pump motor",
@@ -5618,8 +5618,8 @@
         "Proposed Equals User": false,
         "Baseline Equals Proposed": false,
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "speed_control": {
         "Description": "Options for pump speed control",
@@ -5629,8 +5629,8 @@
         "Proposed Equals User": true,
         "Baseline Equals Proposed": false,
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "design_flow": {
         "Description": "Design Pump Flowrate",
@@ -5642,8 +5642,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": false
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": false
       },
       "is_flow_calculated": {
         "Description": "True if the design_flow is sized by software",
@@ -5654,8 +5654,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "operating_points": {
         "Description": "Operating points",
@@ -5666,8 +5666,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       }
     }
   },
@@ -5714,8 +5714,8 @@
         "Proposed Equals User": true,
         "Baseline Equals Proposed": false,
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "power": {
         "Description": "Power",
@@ -5727,8 +5727,8 @@
         "Proposed Equals User": true,
         "Baseline Equals Proposed": false,
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       }
     }
   },
@@ -6722,8 +6722,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -6754,8 +6754,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "design_supply_temperature_difference": {
         "Description": "Design supply temperature difference (deltaT) of service water heating loop",
@@ -6767,8 +6767,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "tanks": {
         "Description": "Tanks within service water heating distribution system",
@@ -6779,8 +6779,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "is_central_system": {
         "Description": "Indicates whether it is a central service water heater distribution system",
@@ -6791,8 +6791,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "service_water_piping": {
         "Description": "Connected service water piping",
@@ -6803,8 +6803,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "distribution_compactness": {
         "Description": "Type of compact distribution system",
@@ -6815,8 +6815,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "control_type": {
         "Description": "Type of distribution system",
@@ -6827,8 +6827,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "configuration_type": {
         "Description": "Type of configuration",
@@ -6839,8 +6839,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "is_recovered_heat_from_drain_used_by_water_heater": {
         "Description": "Indicates whether the recovered heat from the shower drain used by the service water heater",
@@ -6851,8 +6851,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": false
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": false
       },
       "drain_heat_recovery_efficiency": {
         "Description": "Shower heat drain recovery efficiency",
@@ -6864,8 +6864,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": false
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": false
       },
       "drain_heat_recovery_type": {
         "Description": "Drain heat recovery type",
@@ -6876,8 +6876,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": false
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": false
       },
       "flow_multiplier_schedule": {
         "Description": "ID of the Schedule containing a multiplier for the service water heating loop flow",
@@ -6888,8 +6888,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "entering_water_mains_temperature_schedule": {
         "Description": "ID of the Schedule containing the temperature for unheated entering water to the building site often referenced as mains temperature",
@@ -6900,8 +6900,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "is_ground_temperature_used_for_entering_water": {
         "Description": "Indicates whether ground temperature is the source of the entering water temperature",
@@ -6911,8 +6911,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       }
     }
   },
@@ -6992,8 +6992,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -7022,8 +7022,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "are_thermal_losses_modeled": {
         "Description": "Indicates if thermal losses from the service water heating piping are modeled",
@@ -7033,8 +7033,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "insulation_thickness": {
         "Description": "Pipe insulation thickness",
@@ -7047,8 +7047,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": false,
-        "AppG 11-1 P_RMD Equals B_RMD": false
+        "AppG 11-1 Proposed Equals User": false,
+        "AppG 11-1 Proposed Equals Baseline": false
       },
       "loop_pipe_location": {
         "Description": "Loop pipe location",
@@ -7059,8 +7059,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "location_zone": {
         "Description": "ID of the Zone where the piping is located when IN_ZONE is selected from ComponentLocationOptions",
@@ -7071,8 +7071,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "length": {
         "Description": "Pipe length",
@@ -7085,8 +7085,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "diameter": {
         "Description": "Pipe section diameter",
@@ -7099,8 +7099,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "child": {
         "Description": "Other service water piping connected to this one as children.",
@@ -7110,8 +7110,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "service_water_heating_design_and_control": {
         "Description": "Design and control used for service heating piping",
@@ -7137,8 +7137,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -7168,8 +7168,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "solar_savings_fraction": {
         "Description": "Solar savings fraction",
@@ -7180,8 +7180,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "collector_area": {
         "Description": "Solar collector area",
@@ -7192,8 +7192,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "collector_type_description": {
         "Description": "Description of solar collector type",
@@ -7204,8 +7204,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "collector_slope": {
         "Description": "Solar slope from horizontal",
@@ -7216,8 +7216,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "tank": {
         "Description": "Tank that is part of the solar thermal system",
@@ -7228,8 +7228,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       }
     }
   },
@@ -7245,8 +7245,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -7275,8 +7275,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "distribution_system": {
         "Description": "ID of the ServiceWaterHeatingDistributionSystem connected to the ServiceWaterHeatingEquipment",
@@ -7288,8 +7288,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "efficiency_metric_types": {
         "Description": "List of efficiency metrics that correspond to the values in efficiency_metric_values list",
@@ -7299,8 +7299,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": "unknown",
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "efficiency_metric_values": {
         "Description": "List of efficiency metric values that correspond to the descriptors in efficiency_metric_types list",
@@ -7310,8 +7310,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": "unknown",
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "draw_pattern": {
         "Description": "Draw pattern",
@@ -7322,8 +7322,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": false,
-        "AppG 11-1 P_RMD Equals B_RMD": false
+        "AppG 11-1 Proposed Equals User": false,
+        "AppG 11-1 Proposed Equals Baseline": false
       },
       "first_hour_rating": {
         "Description": "First hour rating volume",
@@ -7336,8 +7336,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "operating_points": {
         "Description": "Operating points",
@@ -7348,8 +7348,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "input_power": {
         "Description": "Input power",
@@ -7362,8 +7362,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "rated_capacity": {
         "Description": "Rated capacity",
@@ -7375,8 +7375,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "minimum_capacity": {
         "Description": "Minimum capacity",
@@ -7389,8 +7389,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "recovery_efficiency": {
         "Description": "Recovery efficiency",
@@ -7401,8 +7401,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "setpoint_temperature": {
         "Description": "Set point temperature",
@@ -7413,8 +7413,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "compressor_location": {
         "Description": "Description of where the heat pump for the water heater is located",
@@ -7425,8 +7425,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "compressor_zone": {
         "Description": "ID of the Zone where the heat pump for the water heater is located",
@@ -7437,8 +7437,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "compressor_heat_rejection_source": {
         "Description": "Heat pump heat rejection source",
@@ -7449,8 +7449,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "compressor_heat_rejection_zone": {
         "Description": "ID of the Zone for rejecting heat pump heat",
@@ -7461,8 +7461,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "compressor_capacity_operating_points": {
         "Description": "Compressor capacity operating points",
@@ -7473,8 +7473,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "compressor_power_operating_points": {
         "Description": "Compressor power operating points",
@@ -7485,8 +7485,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "draft_fan": {
         "Description": "Draft fan ",
@@ -7497,8 +7497,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "has_electrical_ignition": {
         "Description": "Indicates whether the water heater has electrical ignition",
@@ -7509,8 +7509,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "tank": {
         "Description": "Tank that is part of the service water heating equipment",
@@ -7521,8 +7521,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "status_type": {
         "Description": "Choice of new, existing, addition, alteration, etc. for each ruleset.",
@@ -7532,8 +7532,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "solar_thermal_systems": {
         "Description": "Solar thermal systems used for heating service water",
@@ -7544,8 +7544,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "hot_water_loop": {
         "Description": "ID of the FluidLoop for hot water",
@@ -7556,8 +7556,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       }
     }
   },
@@ -7660,8 +7660,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "power": {
         "Description": "power",
@@ -7673,8 +7673,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       }
     }
   },
@@ -7691,8 +7691,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "condenser_water_temperature": {
         "Description": "Entering condenser temperature of water",
@@ -7703,8 +7703,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "evaporator_air_flow": {
         "Description": "Air flow across evaporator",
@@ -7715,8 +7715,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "condenser_water_flow": {
         "Description": "Water flow across condenser",
@@ -7727,8 +7727,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "capacity": {
         "Description": "Result",
@@ -7740,8 +7740,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       }
     }
   },
@@ -7758,8 +7758,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "condenser_water_temperature": {
         "Description": "Entering condenser temperature of water",
@@ -7770,8 +7770,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "evaporator_air_flow": {
         "Description": "Air flow across evaporator",
@@ -7782,8 +7782,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "condenser_water_flow": {
         "Description": "Water flow across condenser",
@@ -7794,8 +7794,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "load": {
         "Description": "Load",
@@ -7806,8 +7806,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "power": {
         "Description": "Result",
@@ -7819,8 +7819,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": false,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       }
     }
   },
@@ -7836,8 +7836,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -7869,8 +7869,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "type": {
         "Description": "Service water heater tank type",
@@ -7880,8 +7880,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "height": {
         "Description": "Tank height",
@@ -7894,8 +7894,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "interior_insulation": {
         "Description": "Tank interior insulation R-value",
@@ -7908,8 +7908,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "exterior_insulation": {
         "Description": "Tank exterior insulation R-value",
@@ -7922,8 +7922,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "location": {
         "Description": "Location",
@@ -7934,8 +7934,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "location_zone": {
         "Description": "ID of the Zone containing the Tank",
@@ -7946,8 +7946,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       }
     }
   },
@@ -8000,8 +8000,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "reporting_name": {
         "Description": "Descriptive name used in RCT reports if id is not already a descriptive name",
@@ -8031,8 +8031,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "water_serves_type": {
         "Description": "The use of the water serves the type",
@@ -8042,8 +8042,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "served_by_distribution_system": {
         "Description": "ID of the ServiceWaterHeatingDistributionSystem that serves this end use",
@@ -8055,8 +8055,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "use": {
         "Description": "Usage of service hot water",
@@ -8067,8 +8067,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": false
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": false
       },
       "use_units": {
         "Description": "Type of units for use of service hot water",
@@ -8078,8 +8078,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": false
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": false
       },
       "use_multiplier_schedule": {
         "Description": "ID of the Schedule containing the multiplier for the use of service hot water",
@@ -8090,8 +8090,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "temperature_at_fixture": {
         "Description": "Temperature leaving the fixture that is result of mixing hot water from the water heater and cold water from the tap.",
@@ -8103,8 +8103,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": true
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": true
       },
       "is_heat_recovered_by_drain": {
         "Description": "Indicates if heat is being recovered from the drain",
@@ -8115,8 +8115,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": false
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": false
       },
       "is_recovered_heat_used_by_cold_side_feed": {
         "Description": "Indicates if heat is being recovered from the drain is used on the cold side feed",
@@ -8127,8 +8127,8 @@
         "Proposed Equals User": "unknown",
         "Baseline Equals Proposed": "unknown",
         "Baseline Equals Baseline Rotation": true,
-        "AppG 11-1 P_RMD Equals User": true,
-        "AppG 11-1 P_RMD Equals B_RMD": false
+        "AppG 11-1 Proposed Equals User": true,
+        "AppG 11-1 Proposed Equals Baseline": false
       }
     }
   },

@@ -71,7 +71,7 @@ def compare_swh_dist_systems_and_components(
         compare_context_pair(
             index_context=rmd1_swh_distribution,
             compare_context=rmd2_swh_distribution,
-            element_json_path=f"$.service_water_heating_distribution_systems[{swh_distribution_id}]",
+            element_json_path=f"$.service_water_heating_distribution_systems['{swh_distribution_id}']",
             extra_schema=EXTRA_SCHEMA["ServiceWaterHeatingDistributionSystem"][
                 "Data Elements"
             ],
@@ -102,7 +102,7 @@ def compare_swh_dist_systems_and_components(
                 compare_context_pair(
                     index_context=swh_eq_1,
                     compare_context=swh_eq_2,
-                    element_json_path=f"$.service_water_heating_equipment[{swh_eq_id}]",
+                    element_json_path=f"$.service_water_heating_equipment['{swh_eq_id}']",
                     extra_schema=EXTRA_SCHEMA["ServiceWaterHeatingEquipment"][
                         "Data Elements"
                     ],
@@ -127,7 +127,7 @@ def compare_swh_dist_systems_and_components(
                 compare_context_pair(
                     index_context=pump_1,
                     compare_context=pump_2,
-                    element_json_path=f"$.pumps[{pump_id}]",
+                    element_json_path=f"$.pumps['{pump_id}']",
                     extra_schema=EXTRA_SCHEMA["Pump"]["Data Elements"],
                     error_msg_list=errors_list,
                     search_key=compare_context_str,
