@@ -97,26 +97,10 @@ def compare_context_pair(
 
     """
     matched = True
-    if "Equals" in search_key:
-        index_context_str = (
-            search_key.split("Equals")[0]
-            .strip()
-            .replace("AppG ", "")
-            .replace("B_RMD", "Baseline")
-            .replace("P_RMD", "Proposed")
-            .replace("U_RMD", "User")
-        )
-        compare_context_str = (
-            search_key.split("Equals")[-1]
-            .strip()
-            .replace("AppG ", "")
-            .replace("B_RMD", "Baseline")
-            .replace("P_RMD", "Proposed")
-            .replace("U_RMD", "User")
-        )
-    else:
-        index_context_str = "Baseline"
-        compare_context_str = "Baseline Rotation"
+    compare_context_str, index_context_str = (
+        part.strip() for part in search_key.split("Equals", 1)
+    )
+
     if (
         isinstance(index_context, dict)
         and isinstance(compare_context, dict)
@@ -175,15 +159,13 @@ def compare_context_pair(
             )
             matched = False
 
-        compare_by_index = "operating_points" in element_json_path.lower()
-
         if any(isinstance(item, dict) for item in index_context):
-            if compare_by_index:
-                # position-based comparison for operating_points
+            if (
+                "operating_points" in element_json_path.lower()
+                or element_json_path.endswith(".ruleset_model_descriptions")
+            ):
+                # position-based comparison for operating_points and ruleset model descriptions
                 limit = min(len(index_context), len(compare_context))
-                extra_schema_directive = extra_schema.get(search_key)
-                if extra_schema_directive is None:
-                    extra_schema_directive = required_equal
                 for i in range(limit):
                     matched = (
                         compare_context_pair(
@@ -191,17 +173,15 @@ def compare_context_pair(
                             compare_context[i],
                             f"{element_json_path}[{i}]",
                             extra_schema,
-                            if_required(extra_schema_directive),
+                            if_required(extra_schema.get(search_key)),
                             search_key,
                             error_msg_list,
                         )
                         and matched
                     )
-            else:
-                # For lists that may mix objects and strings (primary_layers)
-                # Only compare dict items with an "id". Use index_context as the source of truth for which ids to compare.
 
-                # Gather (id, original_index) from index_context (preserves original positions for path reporting)
+            else:
+                # Default behavior for lists of dicts: align by 'id'
                 index_id_list = []
                 index_id_map = {}
                 for idx, item in enumerate(index_context):
@@ -235,28 +215,16 @@ def compare_context_pair(
                                 and matched
                             )
                         elif required_equal:
-                            # compare_context is missing an object that exists in index_context
                             error_msg_list.append(
                                 f"{compare_context_str} model is missing object with id '{obj_id}' at path: {element_json_path}"
                             )
                             matched = False
 
-            sorted_str_index = sorted(
-                [item for item in index_context if isinstance(item, str)]
-            )
-            sorted_str_compare = sorted(
-                [item for item in compare_context if isinstance(item, str)]
-            )
-            for i in range(len(sorted_str_index)):
-                # This should be the leaf, no need further nest
-                if i < len(sorted_str_compare):
-                    matched = sorted_str_index[i] == sorted_str_compare[i] and matched
-
     elif isinstance(extra_schema, str):
         # in this case, it is either string, numerical, references or other simple data type
         index_value = index_context
         compare_value = compare_context
-        if type(index_context) == type(compare_context) and isinstance(
+        if type(index_context) is type(compare_context) and isinstance(
             index_context, Quantity
         ):
             index_value = index_context.magnitude
@@ -271,7 +239,7 @@ def compare_context_pair(
     else:
         # if the two index_context and compare_context are identical at this point, then it pass, otherwise it failed
         if required_equal and (
-            type(index_context) != type(compare_context)
+            type(index_context) is type(compare_context)
             or index_context != compare_context
         ):
             # accomodating to mix reference and object type data - in this case, it is a string referenced.
@@ -284,7 +252,7 @@ proposed_equals_user = partial(
     element_json_path="$",
     extra_schema=EXTRA_SCHEMA["RulesetProjectDescription"]["Data Elements"],
     required_equal=True,
-    search_key="AppG P_RMD Equals U_RMD",
+    search_key="Proposed Equals User",
 )
 
 baseline_equals_proposed = partial(
@@ -292,7 +260,7 @@ baseline_equals_proposed = partial(
     element_json_path="$",
     extra_schema=EXTRA_SCHEMA["RulesetProjectDescription"]["Data Elements"],
     required_equal=True,
-    search_key="AppG B_RMD Equals P_RMD",
+    search_key="Baseline Equals Proposed",
 )
 
 baseline_equals_baseline = partial(
@@ -300,5 +268,5 @@ baseline_equals_baseline = partial(
     element_json_path="$",
     extra_schema=EXTRA_SCHEMA["RulesetProjectDescription"]["Data Elements"],
     required_equal=True,
-    search_key="AppG B_RMDs Same",
+    search_key="Baseline Equals Baseline Rotation",
 )
