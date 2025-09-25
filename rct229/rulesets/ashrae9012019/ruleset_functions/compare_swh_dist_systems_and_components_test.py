@@ -43,16 +43,6 @@ TEST_RMD = {
             ],
         }
     ],
-    "service_water_heating_uses": [
-        {
-            "id": "SWH Use 1",
-            "served_by_distribution_system": "SWH Distribution 1",
-        },
-        {
-            "id": "SWH Use 2",
-            "served_by_distribution_system": "SWH Distribution 1",
-        },
-    ],
     "service_water_heating_distribution_systems": [
         {
             "id": "SWH Distribution 1",
@@ -244,11 +234,8 @@ def test__compare_swh_dist_systems_and_components__pump_not_matched():
     assert compare_swh_dist_systems_and_components(
         TEST_RMD, TEST_RMD_COPIED, "AppG Used By TCDs", "SWH Distribution 2"
     ) == [
-        "path: $.service_water_heating_distribution_systems[SWH Distribution 2].service_water_piping: data object SWH Piping 2 in index context does not match the one SWH Piping a in compare context",
-        "path: $.service_water_heating_distribution_systems[SWH Distribution 2].service_water_piping.child[0]: data object SWH Piping Child 2 in index context does not match the one SWH Piping Child a in compare context",
-        "path: $.service_water_heating_equipment[SWH Equipment 2].solar_thermal_systems[0]: data object Solar Thermal System 3 in index context does not match the one Solar Thermal System 4 in compare context",
-        "path: $.service_water_heating_equipment[SWH Equipment 2].solar_thermal_systems[1]: data object Solar Thermal System 4 in index context does not match the one Solar Thermal System a in compare context",
-        "path: $.pumps[Pump 2].loop_or_piping: index context data: SWH Piping 2 does not equal to compare context data: SWH Piping a",
+        "Value mismatch (Baseline: [SWH Piping 2] vs. Baseline Rotation: [SWH Piping "
+        "a]). path: $.pumps[Pump 2].loop_or_piping",
     ]  # The change was because we added index to match the id - if id failed matching, the object will be reported in the mismatch report.
 
 
