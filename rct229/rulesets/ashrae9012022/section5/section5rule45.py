@@ -11,25 +11,25 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
-from rct229.utils.assertions import getattr_
 from rct229.rulesets.ashrae9012022 import BASELINE_0
-
+from rct229.utils.assertions import getattr_
+from rct229.utils.std_comparisons import std_equal
 
 REQ_ABS_THERMAL_EXT = 0.9
 
 
-class PRM9012022Rule13d92(RuleDefinitionListIndexedBase):
-    """Rule 44 of ASHRAE 90.1-2022 Appendix G Section 5 (Envelope)"""
+class PRM9012022Rule22f12(RuleDefinitionListIndexedBase):
+    """Rule 45 of ASHRAE 90.1-2022 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(PRM9012022Rule13d92, self).__init__(
+        super(PRM9012022Rule22f12, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=PRM9012022Rule13d92.BuildingRule(),
+            each_rule=PRM9012022Rule22f12.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="5-44",
-            description="The baseline above-grade wall surfaces shall be modeled with a solar reflectance of 0.25.",
+            id="5-45",
+            description="The baseline above-grade wall surfaces shall be modeled with a thermal emittance of 0.90.",
             ruleset_section_title="Envelope",
             standard_section="Table G3.1 Section 5(j) Baseline",
             is_primary_rule=True,
@@ -43,17 +43,15 @@ class PRM9012022Rule13d92(RuleDefinitionListIndexedBase):
         ]
         constructions_b = rmd_b["ruleset_model_descriptions"][0].get("constructions")
 
-        #
-
         return {"climate_zone_b": climate_zone_b, "constructions_b": constructions_b}
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(PRM9012022Rule13d92.BuildingRule, self).__init__(
+            super(PRM9012022Rule22f12.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=PRM9012022Rule13d92.BuildingRule.SurfaceRule(),
+                each_rule=PRM9012022Rule22f12.BuildingRule.SurfaceRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -71,29 +69,48 @@ class PRM9012022Rule13d92(RuleDefinitionListIndexedBase):
 
         class SurfaceRule(RuleDefinitionBase):
             def __init__(self):
-                super(PRM9012022Rule13d92.BuildingRule.SurfaceRule, self).__init__(
+                super(PRM9012022Rule22f12.BuildingRule.SurfaceRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
-                        USER=False, BASELINE_0=False, PROPOSED=True
+                        USER=False, BASELINE_0=True, PROPOSED=False
                     ),
+                    precision={
+                        "absorptance_thermal_exterior_b": {
+                            "precision": 0.01,
+                            "unit": "",
+                        },
+                    },
                 )
 
             def get_calc_vals(self, context, data=None):
                 surface_b = context.BASELINE_0
-                surface_id_b = surface_b["id"]
                 scc_dict_b = data["scc_dict_b"]
 
+                absorptance_thermal_exterior_b = 0.0
                 if (
-                    get_opaque_surface_type(surface_id_b)
+                    get_opaque_surface_type(surface_b)
                     == OpaqueSurfaceType.ABOVE_GRADE_WALL
-                    and scc_dict_b[surface_id_b] != SCC.UNREGULATED
+                    and scc_dict_b[surface_b["id"]] != SCC.UNREGULATED
                 ):
-                    surface_optical_properties_b = getattr_(
-                        surface_b, "surfaces", "surface_optical_properties"
+                    absorptance_thermal_exterior_b = getattr_(
+                        surface_b, "surfaces", "absorptance_thermal_exterior"
                     )
 
-                return {"surface_optical_properties_b": surface_optical_properties_b}
+                return {
+                    "absorptance_thermal_exterior_b": absorptance_thermal_exterior_b
+                }
 
             def rule_check(self, context, calc_vals=None, data=None):
-                surface_optical_properties_b = calc_vals["surface_optical_properties_b"]
+                absorptance_thermal_exterior_b = calc_vals[
+                    "absorptance_thermal_exterior_b"
+                ]
 
-                return surface_optical_properties_b == REQ_ABS_THERMAL_EXT
+                return self.precision_comparison["absorptance_thermal_exterior_b"](
+                    absorptance_thermal_exterior_b, REQ_ABS_THERMAL_EXT
+                )
+
+            def is_tolerance_fail(self, context, calc_vals=None, data=None):
+                absorptance_thermal_exterior_b = calc_vals[
+                    "absorptance_thermal_exterior_b"
+                ]
+
+                return std_equal(absorptance_thermal_exterior_b, REQ_ABS_THERMAL_EXT)
