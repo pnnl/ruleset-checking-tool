@@ -34,7 +34,7 @@
   - If space not found then mismatch is TRUE: `if not space_b:`  
     - mismatch = True: `mismatch = True`  
     - No match found: `continue`  
-  - Index baseline lighting by ID or name for quick lookup: `baseline_lighting = {obj.id: obj for obj in space_b.interior_lighting}`  
+  - Index baseline lighting by ID: `baseline_lighting = {obj.id: obj for obj in space_b.interior_lighting}`  
   - For each interior lighting object associated with space_p, compare each to baseline lighting object: `for lighting_p in space_p.interior_lighting:`  
     - Get analogous baseline lighting object: `lighting_b = baseline_lighting.get(lighting_p.id)`  
     - If lighting_b not found then mismatch is TRUE: `if not lighting_b:`  
@@ -52,7 +52,7 @@
             )
         ):`  
       - Mismatch equals true: `mismatch = True`  
-  - Index baseline misc by ID or name for quick lookup: `baseline_misc = {obj.id: obj for obj in space_b.miscellaneous_equipment}`  
+  - Index baseline misc by ID: `baseline_misc = {obj.id: obj for obj in space_b.miscellaneous_equipment}`  
   - For each misc equipment object associated with space_p, compare each to baseline misc object: `for misc_p in space_p.miscellaneous_equipment:`  
     - Get analogous baseline misc object: `misc_b = baseline_misc.get(misc_p.id)`  
     - If misc_b not found then mismatch is TRUE: `if not misc_b:`  
