@@ -19,8 +19,7 @@
 **Function Call:**
 
 1. compare_schedules()
-2. normalize_space_schedules()
-3. match_data_element()
+2. match_data_element()
 
 ## Rule Logic:  
 
