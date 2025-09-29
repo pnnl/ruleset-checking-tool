@@ -42,6 +42,7 @@
       - mismatch = True: `mismatch = True`  
       - No match found: `continue` 
     - Compare attributes: `        if (
+            lighting_b.purpose_type != lighting_p.purpose_type or
             lighting_b.power_per_area != lighting_p.power_per_area or
             lighting_b.occupancy_control_type != lighting_p.occupancy_control_type or
             lighting_b.daylighting_control_type != lighting_p.daylighting_control_type or
