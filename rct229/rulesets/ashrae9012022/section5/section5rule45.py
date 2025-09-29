@@ -67,6 +67,15 @@ class PRM9012022Rule22f12(RuleDefinitionListIndexedBase):
 
             return {"scc_dict_b": scc_dict_b}
 
+        def list_filter(self, context_item, data):
+            surface_b = context_item.BASELINE_0
+            scc_dict_b = data["scc_dict_b"]
+
+            return (
+                get_opaque_surface_type(surface_b) == OpaqueSurfaceType.ABOVE_GRADE_WALL
+                and scc_dict_b[surface_b["id"]] != SCC.UNREGULATED
+            )
+
         class SurfaceRule(RuleDefinitionBase):
             def __init__(self):
                 super(PRM9012022Rule22f12.BuildingRule.SurfaceRule, self).__init__(
@@ -83,17 +92,10 @@ class PRM9012022Rule22f12(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 surface_b = context.BASELINE_0
-                scc_dict_b = data["scc_dict_b"]
 
-                absorptance_thermal_exterior_b = 0.0
-                if (
-                    get_opaque_surface_type(surface_b)
-                    == OpaqueSurfaceType.ABOVE_GRADE_WALL
-                    and scc_dict_b[surface_b["id"]] != SCC.UNREGULATED
-                ):
-                    absorptance_thermal_exterior_b = getattr_(
-                        surface_b, "surfaces", "absorptance_thermal_exterior"
-                    )
+                absorptance_thermal_exterior_b = getattr_(
+                    surface_b, "surfaces", "absorptance_thermal_exterior"
+                )
 
                 return {
                     "absorptance_thermal_exterior_b": absorptance_thermal_exterior_b
