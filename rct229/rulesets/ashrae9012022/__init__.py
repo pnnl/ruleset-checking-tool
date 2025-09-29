@@ -19,7 +19,7 @@ section_list = [
 ]
 
 section_dict = {
-    "5": "Evelope",
+    "5": "Envelope",
     "6": "Lighting",
 }
 
