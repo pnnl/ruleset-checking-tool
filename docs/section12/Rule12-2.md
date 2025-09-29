@@ -7,7 +7,8 @@
 **Data Lookup:** None  
 **Evaluation Context:** Each miscellaneous equipment load
 
-**Applicability Checks:** None
+**Applicability Checks:** 
+1. Space is not a crawl space, plenum or interstitial space.  
 
 **Function Call**
 find_exactly_one_schedule, find_all, compare_schedules
@@ -16,6 +17,8 @@ find_exactly_one_schedule, find_all, compare_schedules
 ## Rule Logic:  
 - Create a list of the lighting space types that correspond to space types that may have receptacle control requirements in Section 8.4.1: `EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES = ["OFFICE_ENCLOSED", "CONFERENCE_MEETING_MULTIPURPOSE_ROOM", "COPY_PRINT_ROOM", "LOUNGE_BREAKROOM_HEALTH_CARE_FACILITY", "LOUNGE_BREAKROOM_ALL_OTHERS", "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_PENITENTIARY", "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_SCHOOL", "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER", "OFFICE_OPEN_PLAN"]`  
 - For each space in the baseline RMD: `for space_b in B_RMD.spaces:`  
+  - **Applicability Check 1:** Check if the space is a crawl space, plenum or interstitial space: `if space_b.function in [PLENUM, CRAWL_SPACE, INTERSTITIAL_SPACE]:`  
+    - Space is not applicable because space function is crawl space, plenum or interstitial space, rule outcome is NOT_APPLICABLE for the space_b: `continue` 
   - Get the lighting space type: `space_type_b = space_b.lighting_space_type`
   - For each miscellaneous equipment load in the space: `for misc_equip_b in space_b.miscellaneous_equipment:`
     - Get the corresponding miscellaneous equipment load from the proposed RMD: `misc_equip_p = match_data_element(P_RMD, MiscellaneousEquipment, misc_equip_b.id)`
@@ -36,5 +39,8 @@ find_exactly_one_schedule, find_all, compare_schedules
       Case 7: The proposed automatic receptacle control was not specified: UNDETERMINED and raise message`elif auto_receptacle_control_p == Null: UNDETERMINED and raise_message = "The proposed miscellaneous equipment schedule has reduced equivalent full load hours compared the baseline but it could not be determined if automatic receptacle controls are present in the proposed design to justify the credit."`
       Case 8: Else: FAIL `else: FAIL`  
 
+**Notes:**  
+1Updated to exclude crawl space, plenum or interstitial space on 9/29/2025.  
+1Updated to exclude crawl space, plenum or interstitial space on 9/29/2025.  
 
 **[Back](../_toc.md)**

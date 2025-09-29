@@ -9,6 +9,7 @@
 **Applicability:** All required data elements exist for B_RMR and P_RMR  
 **Applicability Checks:**
 1. Receptacle controls are installed in spaces where not required by Standard 90.1 2019, Section 8.4.2  
+2. Space is not a crawl space, plenum or interstitial space.  
 
 **Manual Check:** None  
 **Evaluation Context:** Each Miscellaneous Equipment object in the proposed model    
@@ -31,6 +32,8 @@
 
 ## Rule Logic:  
 - Iterate through the spaces in the proposed model: `for space_p in P_RMD...spaces`  
+  - **Applicability Check 2:** Check if the space is a crawl space, plenum or interstitial space: `if space_p.function in [PLENUM, CRAWL_SPACE, INTERSTITIAL_SPACE]:`  
+    - Space is not applicable because space function is crawl space, plenum or interstitial space, rule outcome is NOT_APPLICABLE for the space_p: `continue` 
   - Get the lighting space type: `space_type_p = space_p.lighting_space_type` 
   - Iterate through the miscellaneous equipment loads in the space: `for misc_equip_p in space_p.miscellaneous_equipment:`  
     - Get the proposed automatic receptacle control: `auto_receptacle_control_p = misc_equip_p.automatic_controlled_percentage > 0.0 `  
@@ -52,6 +55,7 @@
 
 
 **Notes:**  
-1. The rule depends on a new data element being added to the schema: `automatic_controlled_percentage` for the Miscellaneous Equipment object.
+1. The rule depends on a new data element being added to the schema: `automatic_controlled_percentage` for the Miscellaneous Equipment object.  
+2. Updated to exclude crawl space, plenum or interstitial space on 9/29/2025.
 
 - **[Back](../_toc.md)**
