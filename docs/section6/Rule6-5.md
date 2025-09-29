@@ -10,6 +10,7 @@
 **Applicability Checks:**  
 
   1. Building total area is more than 5,000sq.ft.  
+  2. Space is not a crawl space, plenum or interstitial space.
 
 **Manual Check:** Yes  
 
@@ -30,6 +31,8 @@
   - **Applicability Check 1:**`if building_total_area_b > 5000:`  
 
   - For each space in building_b: `space_b in building_b...spaces:`  
+     - **Applicability Check 2:** Check if the space is a crawl space, plenum or interstitial space: `if space_b.function in [PLENUM, CRAWL_SPACE, INTERSTITIAL_SPACE]:`  
+       - Rule is not applicable because space function is crawl space, plenum or interstitial space: RULE_NOT_APPLICABLE: `continue`  
 
     - Get normalized space lighting schedule: `normalized_schedule_b = normalize_interior_lighting_schedules(space_b.interior_lighting, false)`  
 
@@ -48,6 +51,7 @@
 
 **Notes:**
   1. Updated the Rule ID from 6-9 to 6-6 on 6/3/2022
-  2. Updated the Rule ID from 6-6 to 6-5 on 6/8/2022
+  2. Updated the Rule ID from 6-6 to 6-5 on 6/8/2022  
+  3. Updated to exclude crawl space, plenum or interstitial space on 9/29/2025.
 
 **[Back](../_toc.md)**
