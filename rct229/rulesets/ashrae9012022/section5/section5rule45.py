@@ -94,7 +94,10 @@ class PRM9012022Rule22f12(RuleDefinitionListIndexedBase):
                 surface_b = context.BASELINE_0
 
                 absorptance_thermal_exterior_b = getattr_(
-                    surface_b, "surfaces", "absorptance_thermal_exterior"
+                    surface_b,
+                    "surfaces",
+                    "optical_properties",
+                    "absorptance_thermal_exterior",
                 )
 
                 return {

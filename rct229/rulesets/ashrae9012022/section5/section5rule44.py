@@ -83,7 +83,7 @@ class PRM9012022Rule13d92(RuleDefinitionListIndexedBase):
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                     precision={
-                        "surface_optical_properties_b": {
+                        "absorptance_solar_exterior_b": {
                             "precision": 0.01,
                             "unit": "",
                         },
@@ -93,20 +93,23 @@ class PRM9012022Rule13d92(RuleDefinitionListIndexedBase):
             def get_calc_vals(self, context, data=None):
                 surface_b = context.BASELINE_0
 
-                surface_optical_properties_b = getattr_(
-                    surface_b, "surfaces", "surface_optical_properties"
+                absorptance_solar_exterior_b = getattr_(
+                    surface_b,
+                    "surfaces",
+                    "optical_properties",
+                    "absorptance_solar_exterior",
                 )
 
-                return {"surface_optical_properties_b": surface_optical_properties_b}
+                return {"absorptance_solar_exterior_b": absorptance_solar_exterior_b}
 
             def rule_check(self, context, calc_vals=None, data=None):
-                surface_optical_properties_b = calc_vals["surface_optical_properties_b"]
+                absorptance_solar_exterior_b = calc_vals["absorptance_solar_exterior_b"]
 
-                return self.precision_comparison["surface_optical_properties_b"](
-                    surface_optical_properties_b, REQ_ABS_SOLAR_EXT
+                return self.precision_comparison["absorptance_solar_exterior_b"](
+                    absorptance_solar_exterior_b, REQ_ABS_SOLAR_EXT
                 )
 
             def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                surface_optical_properties_b = calc_vals["surface_optical_properties_b"]
+                absorptance_solar_exterior_b = calc_vals["absorptance_solar_exterior_b"]
 
-                return std_equal(surface_optical_properties_b, REQ_ABS_SOLAR_EXT)
+                return std_equal(absorptance_solar_exterior_b, REQ_ABS_SOLAR_EXT)
