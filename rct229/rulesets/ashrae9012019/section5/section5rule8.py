@@ -118,8 +118,12 @@ class PRM9012019Rule48v87(RuleDefinitionListIndexedBase):
                 )
 
                 target_u_factor = None
-                target_u_factor_res = None
-                target_u_factor_nonres = None
+                target_u_factor_res = table_G34_lookup(
+                    climate_zone, SCC.EXTERIOR_RESIDENTIAL, OST.ABOVE_GRADE_WALL
+                )["u_value"]
+                target_u_factor_nonres = table_G34_lookup(
+                    climate_zone, SCC.EXTERIOR_NON_RESIDENTIAL, OST.ABOVE_GRADE_WALL
+                )["u_value"]
 
                 if scc in [
                     SCC.EXTERIOR_RESIDENTIAL,
@@ -130,12 +134,6 @@ class PRM9012019Rule48v87(RuleDefinitionListIndexedBase):
                         climate_zone, scc, OST.ABOVE_GRADE_WALL
                     )["u_value"]
                 elif scc == SCC.EXTERIOR_MIXED:
-                    target_u_factor_res = table_G34_lookup(
-                        climate_zone, SCC.EXTERIOR_RESIDENTIAL, OST.ABOVE_GRADE_WALL
-                    )["u_value"]
-                    target_u_factor_nonres = table_G34_lookup(
-                        climate_zone, SCC.EXTERIOR_NON_RESIDENTIAL, OST.ABOVE_GRADE_WALL
-                    )["u_value"]
                     if target_u_factor_res == target_u_factor_nonres:
                         target_u_factor = target_u_factor_res
 
@@ -153,10 +151,7 @@ class PRM9012019Rule48v87(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                target_u_factor_res = calc_vals["target_u_factor_res"]
-                target_u_factor_nonres = calc_vals["target_u_factor_nonres"]
-
-                return target_u_factor_res != target_u_factor_nonres
+                return calc_vals["target_u_factor"] is None
 
             def rule_check(self, context, calc_vals=None, data=None):
                 return self.precision_comparison["ag_wall_u_factor_b"](

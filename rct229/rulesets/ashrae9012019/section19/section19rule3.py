@@ -53,6 +53,9 @@ class PRM9012019Rule16j07(PartialRuleDefinition):
             ),
         }
 
+    def manual_check_required(self, context, calc_vals=None, data=None):
+        return any(calc_vals[key] is None for key in calc_vals)
+
     def rule_check(self, context, calc_vals=None, data={}):
         cooling_design_day_type_b = calc_vals["cooling_design_day_type_b"]
         heating_design_day_type_b = calc_vals["heating_design_day_type_b"]
