@@ -64,6 +64,7 @@
             misc_b.sensible_fraction != misc_p.sensible_fraction or misc_b.latent_fraction != misc_p.latent_fraction or
             misc_b.remaining_fraction_to_loop != misc_p.remaining_fraction_to_loop or
             misc_b.energy_from_loop != misc_p.energy_from_loop or
+            misc_b.type != misc_p.type or
             misc_b.automatic_controlled_percentage != misc_p.automatic_controlled_percentage or
             not compare_schedules(
                 misc_p.multiplier_schedule,
