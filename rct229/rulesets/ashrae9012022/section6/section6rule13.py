@@ -13,7 +13,7 @@ BUILDING_AREA_LIMIT = 5000 * ureg("ft2")
 
 
 class PRM9012022Rule86d29(RuleDefinitionListIndexedBase):
-    """Rule 12 of ASHRAE 90.1-2022 Appendix G Section 6 (Lighting)"""
+    """Rule 13 of ASHRAE 90.1-2022 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
         super(PRM9012022Rule86d29, self).__init__(
@@ -22,7 +22,7 @@ class PRM9012022Rule86d29(RuleDefinitionListIndexedBase):
             ),
             each_rule=PRM9012022Rule86d29.BuildingRule(),
             index_rmd=BASELINE_0,
-            id="6-12",
+            id="6-13",
             description="In buildings >5000 ft2 lighting shall be modeled having occupancy sensors in employee lunch and break rooms, conference/meeting rooms, and classrooms (not including shop classrooms, laboratory classrooms, and preschool through 12th grade classrooms). These controls shall be reflected in the baseline building design lighting schedules.",
             ruleset_section_title="Lighting",
             standard_section="Table G3.1 #6 Baseline column",
