@@ -2,8 +2,8 @@
 import importlib
 
 __all__ = [
-    "section6rule10",
-    "section6rule11",
+    "section6rule11.py",
+    "section6rule12.py",
 ]
 
 
