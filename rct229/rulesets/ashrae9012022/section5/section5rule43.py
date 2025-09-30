@@ -58,7 +58,6 @@ class PRM9012022Rule86r63(RuleDefinitionListIndexedBase):
                 )
                 if surface_b.get("adjacent_to") == SURFACE_ADJACENCY.EXTERIOR
                 for subsurface_b in surface_b.get("subsurfaces", [])
-                if subsurface_b.get("has_automatic_shades")
             ]
 
             automatic_shades_modeled_list_b = any(
