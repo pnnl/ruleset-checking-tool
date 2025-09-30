@@ -6,6 +6,7 @@ While the foundational structure remains consistent with the 2019 ruleset, this 
 This approach ensures that changes in the standards are effectively integrated without requiring a complete re-documentation, enabling developers to adapt the relevant updates within the broader technical framework.
 
 ## Section 5 - Envelope
+  * [5-43](section5/Rule5-43.md): Automatic fenestration shading devices shall not be modeled in the Baseline.
   * [5-44](section5/Rule5-44.md): The baseline above-grade wall surfaces shall be modeled with a solar reflectance of 0.25.
   * [5-45](section5/Rule5-45.md): The baseline above-grade wall surfaces shall be modeled with a thermal emittance of 0.90.
 
