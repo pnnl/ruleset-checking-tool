@@ -48,7 +48,9 @@ class PRM9012022Rule86r63(RuleDefinitionListIndexedBase):
 
             automatic_shades_modeled_data_b = [
                 {
-                    "has_automatic_shades": subsurface_b["has_automatic_shades"],
+                    "has_automatic_shades": subsurface_b.get(
+                        "has_automatic_shades", False
+                    ),
                     "id": subsurface_b["id"],
                 }
                 for surface_b in find_all(
