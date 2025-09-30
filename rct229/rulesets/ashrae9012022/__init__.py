@@ -9,15 +9,18 @@ __all__ = ["section6"]
 
 rules_dict = {
     "PRM9012022Rule12d80": "section6rule11",
+    "PRM9012022Rule93e12": "section21rule19",
 }
 
 section_list = [
     "Env",
     "LTG",
+    "HVAC-HotWaterSide",
 ]
 
 section_dict = {
     "6": "Lighting",
+    "21": "HVAC-HotWaterSide",
 }
 
 # Update this field if 2022 uses different term.
