@@ -81,7 +81,7 @@ class PRM9012019Rule04f07(RuleDefinitionListIndexedBase):
         }
 
         hvac_has_non_mech_cooling_list_p = [
-            getattr_(hvac_p, "HVAC", "cooling_system", "type")
+            hvac_p.get("cooling_system", {}).get("type")
             == COOLING_SYSTEM.NON_MECHANICAL
             for hvac_p in find_all(
                 "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
