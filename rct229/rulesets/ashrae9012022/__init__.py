@@ -9,6 +9,8 @@ __all__ = ["section5", "section6", "section22"]
 
 rules_dict = {
     "PRM9012022Rule86r63": "section5rule43",
+    "PRM9012022Rule13d92": "section5rule44",
+    "PRM9012022Rule22f12": "section5rule45",
     "PRM9012022Rule12d80": "section6rule11",
     "PRM9012022Rule34d03": "section22rule42",
 }

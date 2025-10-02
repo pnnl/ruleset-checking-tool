@@ -5,6 +5,9 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_primarily_serving_comp_room import (
     get_hvac_systems_primarily_serving_comp_room,
 )
+from rct229.utils.assertions import getattr_
+from rct229.utils.utility_functions import find_exactly_one_schedule
+from rct229.utils.jsonpath_utils import find_all
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.pint_utils import ZERO
 
@@ -36,9 +39,19 @@ class PRM9012019Rule31y73(RuleDefinitionListIndexedBase):
         hvac_systems_primarily_serving_comp_room_b = (
             get_hvac_systems_primarily_serving_comp_room(rmd_b)
         )
+        fan_operating_schedules_b = {
+            sch_id: getattr_(
+                find_exactly_one_schedule(rmd_b, sch_id), "Schedule", "hourly_values"
+            )
+            for sch_id in find_all(
+                "buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].fan_system.operating_schedule",
+                rmd_b,
+            )
+        }
 
         return {
-            "hvac_systems_primarily_serving_comp_room_b": hvac_systems_primarily_serving_comp_room_b
+            "hvac_systems_primarily_serving_comp_room_b": hvac_systems_primarily_serving_comp_room_b,
+            "fan_operating_schedules_b": fan_operating_schedules_b,
         }
 
     class HVACRule(RuleDefinitionBase):
@@ -47,6 +60,12 @@ class PRM9012019Rule31y73(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
+                required_fields={
+                    "$": ["fan_system"],
+                    "fan_system": [
+                        "minimum_outdoor_airflow",
+                    ],
+                },
             )
 
         def is_applicable(self, context, data=None):
@@ -55,15 +74,30 @@ class PRM9012019Rule31y73(RuleDefinitionListIndexedBase):
             hvac_systems_primarily_serving_comp_room_b = data[
                 "hvac_systems_primarily_serving_comp_room_b"
             ]
+            fan_operating_schedules_b = data["fan_operating_schedules_b"]
 
-            return hvac_id_b in hvac_systems_primarily_serving_comp_room_b
+            fan_operating_schedule_id_b = hvac_b["fan_system"].get("operating_schedule")
+            if fan_operating_schedule_id_b is not None:
+                fan_operating_schedule_vals_b = fan_operating_schedules_b[
+                    fan_operating_schedule_id_b
+                ]
+                always_on = sum(fan_operating_schedule_vals_b) == len(
+                    fan_operating_schedule_vals_b
+                )
+            else:
+                always_on = True  # If no schedule is defined, assume always on
+
+            return (
+                hvac_id_b in hvac_systems_primarily_serving_comp_room_b
+                and not always_on
+            )
 
         def get_calc_vals(self, context, data=None):
             hvac_b = context.BASELINE_0
 
-            operation_during_unoccupied_b = hvac_b["fan_system"][
-                "operation_during_unoccupied"
-            ]
+            operation_during_unoccupied_b = getattr_(
+                hvac_b["fan_system"], "FanSystem", "operation_during_unoccupied"
+            )
             minimum_outdoor_airflow_b = hvac_b["fan_system"]["minimum_outdoor_airflow"]
 
             return {
