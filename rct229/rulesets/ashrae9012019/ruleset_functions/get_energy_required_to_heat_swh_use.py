@@ -1,6 +1,6 @@
+import numpy as np
 from pint import Quantity
 
-from rct229.rule_engine.rulesets import LeapYear
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_spaces_served_by_swh_use import (
     get_spaces_served_by_swh_use,
 )
@@ -39,7 +39,7 @@ def get_energy_required_to_heat_swh_use(
     swh_use_id: str, rmd: dict, building_segment_id: str
 ) -> dict[str, Quantity | None]:
     """
-    This function calculates the total energy required to heat the SWH use over the course of a year.  Note - this function does not work for service water heating uses with use_units == "OTHER".  In this case, it will return 0 Btu.
+    This function calculates the total energy required to heat the SWH use over the course of a year.  Note - this function does not work for service water heating uses with use_units == "OTHER".  In this case, it will return None.
 
     Parameters
     ----------
@@ -137,100 +137,187 @@ def get_energy_required_to_heat_swh_use(
     )
     equivalent_load_hours = sum(hourly_multiplier_values) * ureg("hr")
 
-    swh_use_value = swh_use.get("use", 0.0)
-    energy_required_by_space = {}
-    for space in spaces:
-        volume = ZERO.VOLUME
-        space_id = space["id"]
+    is_power_mode = use_units in {
+        SERVICE_WATER_HEATING_USE_UNIT.POWER_PER_PERSON,
+        SERVICE_WATER_HEATING_USE_UNIT.POWER_PER_AREA,
+        SERVICE_WATER_HEATING_USE_UNIT.POWER,
+    }
+    is_volume_mode = use_units in {
+        SERVICE_WATER_HEATING_USE_UNIT.VOLUME_PER_PERSON,
+        SERVICE_WATER_HEATING_USE_UNIT.VOLUME_PER_AREA,
+        SERVICE_WATER_HEATING_USE_UNIT.VOLUME,
+    }
+
+    # Common scalars
+    swh_use_value_num = float(swh_use.get("use", 0.0))
+    eq_hours_q = (
+        equivalent_load_hours
+        if hasattr(equivalent_load_hours, "to")
+        else float(equivalent_load_hours) * ureg.hour
+    )
+
+    # Space vectors
+    space_ids = [s["id"] for s in spaces]
+    occupants = np.asarray(
+        [s.get("number_of_occupants", 0) for s in spaces], dtype=float
+    )
+    areas_m2 = np.asarray(
+        [
+            (
+                fa.to("m^2").magnitude
+                if hasattr(fa := s.get("floor_area", ZERO.AREA), "to")
+                else float(fa)
+            )
+            for s in spaces
+        ],
+        dtype=float,
+    )
+
+    energies_j = np.full(len(spaces), np.nan, dtype=float)
+
+    # ---------------- POWER MODES (no ΔT) ----------------
+    if is_power_mode:
         if use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER_PER_PERSON:
-            energy_required_by_space[space_id] = (
-                swh_use_value
-                * ureg("W")
-                * space.get("number_of_occupants", 0)
-                * equivalent_load_hours
+            power_w = swh_use_value_num * ureg.watt
+            energies_q = (
+                (power_w * occupants)
+                * eq_hours_q
                 * (1 - drain_heat_recovery_efficiency)
             )
+            energies_j = energies_q.to("J").magnitude
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER_PER_AREA:
-            energy_required_by_space[space_id] = (
-                swh_use_value
-                * ureg("W/m2")
-                * space.get("floor_area", ZERO.AREA)
-                * equivalent_load_hours
-                * (1 - drain_heat_recovery_efficiency)
+            pden_wm2 = swh_use_value_num * ureg("W/m^2")
+            area_q = areas_m2 * ureg("m^2")
+            energies_q = (
+                (pden_wm2 * area_q) * eq_hours_q * (1 - drain_heat_recovery_efficiency)
             )
+            energies_j = energies_q.to("J").magnitude
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER:
-            energy_required_by_space[space_id] = (
-                (swh_use_value * ureg("W"))
-                * equivalent_load_hours
-                * (1 - drain_heat_recovery_efficiency)
+            power_w = swh_use_value_num * ureg.watt
+            energy_each = (
+                (power_w * eq_hours_q * (1 - drain_heat_recovery_efficiency))
+                .to("J")
+                .magnitude
+            )
+            energies_j = np.full(len(spaces), energy_each, dtype=float)
+
+    # ---------------- VOLUME MODES (ΔT needed) ----------------
+    elif is_volume_mode:
+        if (supply_temperature is not None) and (
+            inlet_temperature_hourly_values is not None
+        ):
+            k = (
+                (1 - drain_heat_recovery_efficiency)
+                * WATER_DENSITY
+                * WATER_SPECIFIC_HEAT
+            ).to("J/(m^3*K)")
+            k_mag = k.magnitude
+
+            supply_c = (
+                supply_temperature.to("degC").magnitude
+                if hasattr(supply_temperature, "to")
+                else float(supply_temperature)
             )
 
-        elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME_PER_PERSON:
-            volume = swh_use_value * ureg("L/hr") * space.get("number_of_occupants", 0)
-
-        elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME_PER_AREA:
-            volume = (
-                swh_use_value * ureg("L/hr/m2") * space.get("floor_area", ZERO.AREA)
-            )
-
-        elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME:
-            volume = swh_use_value * ureg("L/h")
-
-        else:
-            energy_required_by_space[space_id] = None
-
-        # If unit is volume based
-        if space_id not in energy_required_by_space:
-            energy_required_by_space[space_id] = sum(
+            inlet_c = np.asarray(
                 [
-                    (
-                        volume
-                        * hourly_value
-                        * ureg("hr")
-                        * (1 - drain_heat_recovery_efficiency)
-                    )
-                    * WATER_DENSITY
-                    * WATER_SPECIFIC_HEAT
-                    * (
-                        supply_temperature
-                        - inlet_temperature_hourly_values[index] * ureg("degC")
-                    )
-                    for index, hourly_value in enumerate(hourly_multiplier_values)
+                    (t.to("degC").magnitude if hasattr(t, "to") else float(t))
+                    for t in inlet_temperature_hourly_values
                 ],
-                ZERO.ENERGY,
+                dtype=float,
             )
+
+            hourly = np.asarray(hourly_multiplier_values, dtype=float)
+            sum_hourly_delta_t = float(np.dot(hourly, (supply_c - inlet_c)))  # K·hr
+
+            if use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME_PER_PERSON:
+                flow_m3_per_hr_per_person = (
+                    (swh_use_value_num * ureg("L/hr")).to("m^3/hr").magnitude
+                )
+                volrate_m3_per_hr = flow_m3_per_hr_per_person * occupants
+                energies_j = volrate_m3_per_hr * sum_hourly_delta_t * k_mag
+
+            elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME_PER_AREA:
+                flow_m3_per_hr_per_m2 = (
+                    (swh_use_value_num * ureg("L/hr/m^2")).to("m^3/hr/m^2").magnitude
+                )
+                volrate_m3_per_hr = flow_m3_per_hr_per_m2 * areas_m2
+                energies_j = volrate_m3_per_hr * sum_hourly_delta_t * k_mag
+
+            elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME:
+                volrate_m3_per_hr = (
+                    (swh_use_value_num * ureg("L/hr")).to("m^3/hr").magnitude
+                )
+                energies_j = np.full(
+                    len(spaces),
+                    volrate_m3_per_hr * sum_hourly_delta_t * k_mag,
+                    dtype=float,
+                )
+
+    energy_required_by_space = {}
+    for space_id, energy_j in zip(space_ids, energies_j):
+        energy_required_by_space[space_id] = (
+            (energy_j * ureg.joule) if np.isfinite(energy_j) else None
+        )
 
     if not spaces:  # Empty list: falsey
+
+        energy_required_by_space["no_spaces_assigned"] = None
+
         if use_units == SERVICE_WATER_HEATING_USE_UNIT.OTHER:
-            energy_required_by_space["no_spaces_assigned"] = None
+            pass
+
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.POWER:
+            power = swh_use.get("use", 0.0) * ureg.watt
             energy_required_by_space["no_spaces_assigned"] = (
-                (swh_use_value * ureg("W"))
-                * equivalent_load_hours
-                * (1 - drain_heat_recovery_efficiency)
+                power * equivalent_load_hours * (1 - drain_heat_recovery_efficiency)
             )
 
         elif use_units == SERVICE_WATER_HEATING_USE_UNIT.VOLUME:
-            energy_required_by_space["no_spaces_assigned"] = sum(
-                [
+            if (supply_temperature is not None) and (
+                inlet_temperature_hourly_values is not None
+            ):
+                k_mag = (
                     (
-                        swh_use_value
-                        * ureg("L")
-                        * hourly_value
-                        * ureg("hr")
-                        * (1 - drain_heat_recovery_efficiency)
+                        (1 - drain_heat_recovery_efficiency)
+                        * WATER_DENSITY
+                        * WATER_SPECIFIC_HEAT
                     )
-                    * WATER_DENSITY
-                    * WATER_SPECIFIC_HEAT
-                    * (
-                        supply_temperature
-                        - inlet_temperature_hourly_values[index] * ureg("degC")
+                    .to("J/(m^3*K)")
+                    .magnitude
+                )
+
+                supply_c = (
+                    supply_temperature.to("degC").magnitude
+                    if hasattr(supply_temperature, "to")
+                    else float(supply_temperature)
+                )
+
+                inlet_c = np.asarray(
+                    [
+                        (t.to("degC").magnitude if hasattr(t, "to") else float(t))
+                        for t in inlet_temperature_hourly_values
+                    ],
+                    dtype=float,
+                )
+
+                hourly = np.asarray(hourly_multiplier_values, dtype=float)
+                if hourly.shape != inlet_c.shape:
+                    raise ValueError(
+                        "hourly_multiplier_values and inlet_temperature_hourly_values must have same length"
                     )
-                    for index, hourly_value in enumerate(hourly_multiplier_values)
-                ],
-                ZERO.ENERGY,
-            )
+
+                # sum(hourly * ΔT)  (K·hr)
+                sum_hourly_delta_t = float(np.dot(hourly, (supply_c - inlet_c)))
+
+                # Volume mode uses a flow rate (L/hr)
+                volrate_m3_per_hr = (
+                    (swh_use.get("use", 0.0) * ureg("L/hr")).to("m^3/hr").magnitude
+                )
+
+                energy_j = volrate_m3_per_hr * sum_hourly_delta_t * k_mag
+                energy_required_by_space["no_spaces_assigned"] = energy_j * ureg.joule
 
     return energy_required_by_space
