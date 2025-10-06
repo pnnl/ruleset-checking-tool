@@ -1,24 +1,24 @@
 {
-    "rule-6-12-a": {
+    "rule-6-13-a": {
         "Section": 6,
-        "Rule": 12,
+        "Rule": 13,
         "Test": "a",
         "standard": {
             "ruleset": "ashrae9012022",
-            "rule_id": "6-12",
+            "rule_id": "6-13",
             "ruleset_reference": "(Previously 6-14, Then 6-10) Table G3.1(6) Proposed Building Performance (i)",
-            "rule_description": "Where retail display lighting is included in the proposed building design the display lighting additional power shall be less than or equal to the limits established by Section 9.5.2.2(b)",
-            "applicable_rmr": "Proposed Design",
+            "rule_description": "In buildings >5000 ft2 lighting shall be modeled having occupancy sensors in employee lunch and break rooms, conference/meeting rooms, and classrooms (not including shop classrooms, laboratory classrooms, and preschool through 12th grade classrooms). These controls shall be reflected in the baseline building design lighting schedules.",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Yes",
             "schema_version": "0.1.7"
         },
-        "test_description": "This test uses a simple building model with 1,000 ft2 of gross floor area containing a single zone and sales area space. The space has 650 watts of interior display lighting power, which falls below the ASHRAE 90.1 minimum allowance of 750 watts",
+        "test_description": "This test uses a simple building model with 7,500 ft2 of gross floor area containing a single classroom zone and space. The interior lighting is managed by automatic occupancy sensors.",
         "expected_rule_outcome": "pass",
         "rmd_transformations": {
-            "proposed": {
+            "baseline": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
@@ -35,13 +35,13 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "lighting_space_type": "SALES_AREA",
-                                                        "floor_area": 92.90303999999999,
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                                                        "floor_area": 696.7728,
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
-                                                                "power_per_area": 6.99654177086132,
-                                                                "purpose_type": "RETAIL_DISPLAY"
+                                                                "occupancy_control_type": "FULL_AUTO_ON",
+                                                                "are_schedules_used_for_modeling_occupancy_control": true
                                                             }
                                                         ]
                                                     }
@@ -52,32 +52,32 @@
                                 ]
                             }
                         ],
-                        "type": "PROPOSED"
+                        "type": "BASELINE_0"
                     }
                 ]
             }
         }
     },
-    "rule-6-12-b": {
+    "rule-6-13-b": {
         "Section": 6,
-        "Rule": 12,
+        "Rule": 13,
         "Test": "b",
         "standard": {
             "ruleset": "ashrae9012022",
-            "rule_id": "6-12",
+            "rule_id": "6-13",
             "ruleset_reference": "(Previously 6-14, Then 6-10) Table G3.1(6) Proposed Building Performance (i)",
-            "rule_description": "Where retail display lighting is included in the proposed building design the display lighting additional power shall be less than or equal to the limits established by Section 9.5.2.2(b)",
-            "applicable_rmr": "Proposed Design",
+            "rule_description": "In buildings >5000 ft2 lighting shall be modeled having occupancy sensors in employee lunch and break rooms, conference/meeting rooms, and classrooms (not including shop classrooms, laboratory classrooms, and preschool through 12th grade classrooms). These controls shall be reflected in the baseline building design lighting schedules.",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Yes",
             "schema_version": "0.1.7"
         },
-        "test_description": "This test uses a simple building model with 1,000 ft2 of gross floor area containing a single zone and sales area space. The space has 2,000 watts of interior display lighting power, which exceeds the ASHRAE 90.1 maximum allowance of 1,750 watts for this space.",
-        "expected_rule_outcome": "fail",
+        "test_description": "This test uses a simple building model with 7,500 ft2 of gross floor area containing a single classroom zone and space. The interior lighting has no occupancy controls.",
+        "expected_rule_outcome": "undetermined",
         "rmd_transformations": {
-            "proposed": {
+            "baseline": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
@@ -94,13 +94,12 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "lighting_space_type": "SALES_AREA",
-                                                        "floor_area": 92.90303999999999,
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                                                        "floor_area": 696.7728,
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
-                                                                "power_per_area": 21.527820833419447,
-                                                                "purpose_type": "RETAIL_DISPLAY"
+                                                                "occupancy_control_type": "NONE"
                                                             }
                                                         ]
                                                     }
@@ -111,33 +110,32 @@
                                 ]
                             }
                         ],
-                        "type": "PROPOSED"
+                        "type": "BASELINE_0"
                     }
                 ]
             }
         }
     },
-    "rule-6-12-c": {
+    "rule-6-13-c": {
         "Section": 6,
-        "Rule": 12,
+        "Rule": 13,
         "Test": "c",
         "standard": {
             "ruleset": "ashrae9012022",
-            "rule_id": "6-12",
+            "rule_id": "6-13",
             "ruleset_reference": "(Previously 6-14, Then 6-10) Table G3.1(6) Proposed Building Performance (i)",
-            "rule_description": "Where retail display lighting is included in the proposed building design the display lighting additional power shall be less than or equal to the limits established by Section 9.5.2.2(b)",
-            "applicable_rmr": "Proposed Design",
+            "rule_description": "In buildings >5000 ft2 lighting shall be modeled having occupancy sensors in employee lunch and break rooms, conference/meeting rooms, and classrooms (not including shop classrooms, laboratory classrooms, and preschool through 12th grade classrooms). These controls shall be reflected in the baseline building design lighting schedules.",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Yes",
             "schema_version": "0.1.7"
         },
-        "test_description": "This test uses a simple building model with 1,000 ft2 of gross floor area containing a single zone and sales area space. The space has 1,000 watts of interior display lighting power, which falls between the minimum allowance (750W) and maximum allowance (1,750W).",
+        "test_description": "This test uses a simple building model with 7,500 ft2 of gross floor area containing a single classroom zone and space. The interior lighting has manual occupancy controls without any occupancy sensor schedules.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "It could not be determined whether the proposed retail display lighting power is less than or equal to the allowance calculated according to the formulas in ASHRAE 90.1 Section 9.5.2.2",
         "rmd_transformations": {
-            "proposed": {
+            "baseline": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
@@ -154,13 +152,12 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "lighting_space_type": "SALES_AREA",
-                                                        "floor_area": 92.90303999999999,
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                                                        "floor_area": 696.7728,
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
-                                                                "power_per_area": 10.763910416709724,
-                                                                "purpose_type": "RETAIL_DISPLAY"
+                                                                "occupancy_control_type": "MANUAL_ON"
                                                             }
                                                         ]
                                                     }
@@ -171,32 +168,32 @@
                                 ]
                             }
                         ],
-                        "type": "PROPOSED"
+                        "type": "BASELINE_0"
                     }
                 ]
             }
         }
     },
-    "rule-6-12-d": {
+    "rule-6-13-d": {
         "Section": 6,
-        "Rule": 12,
+        "Rule": 13,
         "Test": "d",
         "standard": {
             "ruleset": "ashrae9012022",
-            "rule_id": "6-12",
+            "rule_id": "6-13",
             "ruleset_reference": "(Previously 6-14, Then 6-10) Table G3.1(6) Proposed Building Performance (i)",
-            "rule_description": "Where retail display lighting is included in the proposed building design the display lighting additional power shall be less than or equal to the limits established by Section 9.5.2.2(b)",
-            "applicable_rmr": "Proposed Design",
+            "rule_description": "In buildings >5000 ft2 lighting shall be modeled having occupancy sensors in employee lunch and break rooms, conference/meeting rooms, and classrooms (not including shop classrooms, laboratory classrooms, and preschool through 12th grade classrooms). These controls shall be reflected in the baseline building design lighting schedules.",
+            "applicable_rmr": "Baseline Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Yes",
             "schema_version": "0.1.7"
         },
-        "test_description": "This test uses a simple building model with 1,000 ft2 of gross floor area containing a single zone and mall concourse space. There is no SALES_AREA space.",
-        "expected_rule_outcome": "not_applicable",
+        "test_description": "This test uses a simple building model with 7,500 ft2 of gross floor area containing a single classroom zone and space. The interior lighting has manual occupancy controls and is managed via occupancy sensor schedules.",
+        "expected_rule_outcome": "fail",
         "rmd_transformations": {
-            "proposed": {
+            "baseline": {
                 "id": "ASHRAE229 1",
                 "ruleset_model_descriptions": [
                     {
@@ -213,13 +210,13 @@
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "lighting_space_type": "RETAIL_FACILITIES_MALL_CONCOURSE",
-                                                        "floor_area": 92.90303999999999,
+                                                        "lighting_space_type": "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                                                        "floor_area": 696.7728,
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
-                                                                "power_per_area": 10.763910416709724,
-                                                                "purpose_type": "RETAIL_DISPLAY"
+                                                                "occupancy_control_type": "MANUAL_ON",
+                                                                "are_schedules_used_for_modeling_occupancy_control": true
                                                             }
                                                         ]
                                                     }
@@ -230,7 +227,7 @@
                                 ]
                             }
                         ],
-                        "type": "PROPOSED"
+                        "type": "BASELINE_0"
                     }
                 ]
             }
