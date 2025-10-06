@@ -9,7 +9,7 @@ __all__ = ["section6"]
 
 rules_dict = {
     "PRM9012022Rule12d80": "section6rule11",
-    "PRM9012022Rule86d29": "section6rule12",
+    "PRM9012022Rule86d29": "section6rule13",
 }
 
 section_list = [
