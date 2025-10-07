@@ -35,14 +35,14 @@ class PRM9012022rule12d80(RuleDefinitionListIndexedBase):
         ltg_schedule_b = {
             int_ltg_sch_id_b: find_exactly_one_schedule(rmd_b, int_ltg_sch_id_b)
             for int_ltg_sch_id_b in find_all(
-                "$.buildings[*].building_segments[*].zones[*].spaces[*].interior_lighting[*].ltg_multiplier_schedule",
+                "$.buildings[*].building_segments[*].zones[*].spaces[*].interior_lighting[*].lighting_multiplier_schedule",
                 rmd_b,
             )
         }
         ltg_schedule_p = {
-            int_ltg_sch_id_p: find_exactly_one_schedule(rmd_b, int_ltg_sch_id_p)
+            int_ltg_sch_id_p: find_exactly_one_schedule(rmd_p, int_ltg_sch_id_p)
             for int_ltg_sch_id_p in find_all(
-                "$.buildings[*].building_segments[*].zones[*].spaces[*].interior_lighting[*].ltg_multiplier_schedule",
+                "$.buildings[*].building_segments[*].zones[*].spaces[*].interior_lighting[*].lighting_multiplier_schedule",
                 rmd_p,
             )
         }
@@ -55,7 +55,7 @@ class PRM9012022rule12d80(RuleDefinitionListIndexedBase):
             )
         }
         equip_schedule_p = {
-            equip_ltg_sch_id_p: find_exactly_one_schedule(rmd_b, equip_ltg_sch_id_p)
+            equip_ltg_sch_id_p: find_exactly_one_schedule(rmd_p, equip_ltg_sch_id_p)
             for equip_ltg_sch_id_p in find_all(
                 "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*].multiplier_schedule",
                 rmd_p,
@@ -76,14 +76,32 @@ class PRM9012022rule12d80(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 required_fields={
-                    "$": ["function"],
+                    "$": ["function", "interior_lighting", "miscellaneous_equipment"],
+                    "$.interior_lighting[*]": [
+                        "purpose_type",
+                        "occupancy_control_type",
+                        "daylighting_control_type",
+                        "lighting_multiplier_schedule",
+                        "power_per_area",
+                    ],
+                    "$.miscellaneous_equipment[*]": [
+                        "energy_type",
+                        "power",
+                        "sensible_fraction",
+                        "latent_fraction",
+                        "remaining_fraction_to_loop",
+                        "energy_from_loop",
+                        "type",
+                        "automatic_controlled_percentage",
+                        "multiplier_schedule",
+                    ],
                 },
             )
 
         def is_applicable(self, context, data=None):
             space_p = context.PROPOSED
 
-            return space_p["function"] not in (
+            return space_p["function"] in (
                 SPACE_FUNCTION.PLENUM,
                 SPACE_FUNCTION.CRAWL_SPACE,
                 SPACE_FUNCTION.INTERSTITIAL_SPACE,
@@ -98,68 +116,232 @@ class PRM9012022rule12d80(RuleDefinitionListIndexedBase):
             equip_schedule_b = data["equip_schedule_b"]
             equip_schedule_p = data["equip_schedule_p"]
 
-            int_ltg_mismatch = False
-            ltg_purpose_type_match = False
-            ltg_power_per_area_match = False
-            for int_ltg_p in space_p.get("interior_lighting", []):
+            ltg_purpose_type_match = True
+            ltg_power_per_area_match = True
+            ltg_occupancy_control_type_match = True
+            ltg_daylighting_control_type_match = True
+            ltg_ltg_multiplier_schedule_match = True
+            for int_ltg_p in space_p["interior_lighting"]:
                 int_ltg_b = find_exactly_one_with_field_value(
                     "$.interior_lighting[*]", "id", int_ltg_p["id"], space_b
                 )
-                if (
-                    int_ltg_b.get("purpose_type") != int_ltg_b.get("purpose_type")
-                    or int_ltg_b.get("power_per_area")
-                    != int_ltg_p.get("power_per_area")
-                    or int_ltg_b.get("occupancy_control_type")
-                    != int_ltg_p.get("occupancy_control_type")
-                    or int_ltg_b.get("dayltg_control_type")
-                    != int_ltg_p.get("dayltg_control_type")
-                    or ltg_schedule_b[int_ltg_b.get("ltg_multiplier_schedule")]
-                    != ltg_schedule_p[int_ltg_p.get("ltg_multiplier_schedule")]
-                ):
-                    int_ltg_mismatch = True
 
-            mis_equip_mismatch = False
-            for mis_equip_p in space_p.get("miscellaneous_equipment", []):
+                # Start checking whether the lighting keys are the same
+                if ltg_purpose_type_match:
+                    ltg_purpose_type_match = (
+                        int_ltg_b["purpose_type"] == int_ltg_b["purpose_type"]
+                    )
+                if ltg_power_per_area_match:
+                    ltg_power_per_area_match = (
+                        int_ltg_b["power_per_area"] == int_ltg_p["power_per_area"]
+                    )
+                if ltg_occupancy_control_type_match:
+                    ltg_occupancy_control_type_match = (
+                        int_ltg_b["occupancy_control_type"]
+                        == int_ltg_p["occupancy_control_type"]
+                    )
+                if ltg_daylighting_control_type_match:
+                    ltg_daylighting_control_type_match = (
+                        int_ltg_b["daylighting_control_type"]
+                        == int_ltg_p["daylighting_control_type"]
+                    )
+                if ltg_ltg_multiplier_schedule_match:
+                    ltg_ltg_multiplier_schedule_match = (
+                        ltg_schedule_b[int_ltg_b["lighting_multiplier_schedule"]]
+                        == ltg_schedule_p[int_ltg_p["lighting_multiplier_schedule"]]
+                    )
+
+            mis_equip_energy_type_match = True
+            mis_equip_power_match = True
+            mis_equip_sensible_fraction_match = True
+            mis_equip_latent_fraction_match = True
+            mis_equip_remaining_fraction_to_loop_match = True
+            mis_equip_energy_from_loop_match = True
+            mis_equip_type_match = True
+            mis_equip_automatic_controlled_percentage_match = True
+            mis_equip_multiplier_schedule_match = True
+            for mis_equip_p in space_p["miscellaneous_equipment"]:
                 mis_equip_b = find_exactly_one_with_field_value(
                     "$.miscellaneous_equipment[*]", "id", mis_equip_p["id"], space_b
                 )
-                if (
-                    mis_equip_b.get("energy_type") != mis_equip_p.get("energy_type")
-                    or mis_equip_b.get("power") != mis_equip_p.get("power")
-                    or mis_equip_b.get("sensible_fraction")
-                    != mis_equip_p.get("sensible_fraction")
-                    or mis_equip_b.get("latent_fraction")
-                    != mis_equip_p.get("latent_fraction")
-                    or mis_equip_b.get("remaining_fraction_to_loop")
-                    != mis_equip_p.get("remaining_fraction_to_loop")
-                    or mis_equip_b.get("energy_from_loop")
-                    != mis_equip_p.get("energy_from_loop")
-                    or mis_equip_b.get("type") != mis_equip_p.get("type")
-                    or mis_equip_b.get("automatic_controlled_percentage")
-                    != mis_equip_p.get("automatic_controlled_percentage")
-                    or equip_schedule_b[mis_equip_b.get("multiplier_schedule")]
-                    != equip_schedule_p[mis_equip_p.get("multiplier_schedule")]
-                ):
-                    mis_equip_mismatch = True
+
+                # Start checking whether the equipment keys are the same
+                if mis_equip_energy_type_match:
+                    mis_equip_energy_type_match = (
+                        mis_equip_b["energy_type"] == mis_equip_p["energy_type"]
+                    )
+                if mis_equip_power_match:
+                    mis_equip_power_match = mis_equip_b["power"] == mis_equip_p["power"]
+                if mis_equip_sensible_fraction_match:
+                    mis_equip_sensible_fraction_match = (
+                        mis_equip_b["sensible_fraction"]
+                        == mis_equip_p["sensible_fraction"]
+                    )
+                if mis_equip_latent_fraction_match:
+                    mis_equip_latent_fraction_match = (
+                        mis_equip_b["latent_fraction"] == mis_equip_p["latent_fraction"]
+                    )
+                if mis_equip_remaining_fraction_to_loop_match:
+                    mis_equip_remaining_fraction_to_loop_match = (
+                        mis_equip_b["remaining_fraction_to_loop"]
+                        == mis_equip_p["remaining_fraction_to_loop"]
+                    )
+                if mis_equip_energy_from_loop_match:
+                    mis_equip_energy_from_loop_match = (
+                        mis_equip_b["energy_from_loop"]
+                        == mis_equip_p["energy_from_loop"]
+                    )
+                if mis_equip_type_match:
+                    mis_equip_type_match = mis_equip_b["type"] == mis_equip_p["type"]
+                if mis_equip_automatic_controlled_percentage_match:
+                    mis_equip_automatic_controlled_percentage_match = (
+                        mis_equip_b["automatic_controlled_percentage"]
+                        == mis_equip_p["automatic_controlled_percentage"]
+                    )
+                if mis_equip_multiplier_schedule_match:
+                    mis_equip_multiplier_schedule_match = (
+                        equip_schedule_b[mis_equip_b["multiplier_schedule"]]
+                        == equip_schedule_p[mis_equip_p["multiplier_schedule"]]
+                    )
 
             return {
-                "int_ltg_mismatch": int_ltg_mismatch,
-                "mis_equip_mismatch": mis_equip_mismatch,
+                "ltg_purpose_type_match": ltg_purpose_type_match,
+                "ltg_power_per_area_match": ltg_power_per_area_match,
+                "ltg_occupancy_control_type_match": ltg_occupancy_control_type_match,
+                "ltg_daylighting_control_type_match": ltg_daylighting_control_type_match,
+                "ltg_ltg_multiplier_schedule_match": ltg_ltg_multiplier_schedule_match,
+                "mis_equip_energy_type_match": mis_equip_energy_type_match,
+                "mis_equip_power_match": mis_equip_power_match,
+                "mis_equip_sensible_fraction_match": mis_equip_sensible_fraction_match,
+                "mis_equip_latent_fraction_match": mis_equip_latent_fraction_match,
+                "mis_equip_remaining_fraction_to_loop_match": mis_equip_remaining_fraction_to_loop_match,
+                "mis_equip_energy_from_loop_match": mis_equip_energy_from_loop_match,
+                "mis_equip_type_match": mis_equip_type_match,
+                "mis_equip_automatic_controlled_percentage_match": mis_equip_automatic_controlled_percentage_match,
+                "mis_equip_multiplier_schedule_match": mis_equip_multiplier_schedule_match,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            int_ltg_mismatch = calc_vals["int_ltg_mismatch"]
-            mis_equip_mismatch = calc_vals["mis_equip_mismatch"]
+            ltg_purpose_type_match = calc_vals["ltg_purpose_type_match"]
+            ltg_power_per_area_match = calc_vals["ltg_power_per_area_match"]
 
-            return not (int_ltg_mismatch and mis_equip_mismatch)
+            ltg_occupancy_control_type_match = calc_vals[
+                "ltg_occupancy_control_type_match"
+            ]
+            ltg_daylighting_control_type_match = calc_vals[
+                "ltg_daylighting_control_type_match"
+            ]
+            ltg_ltg_multiplier_schedule_match = calc_vals[
+                "ltg_ltg_multiplier_schedule_match"
+            ]
+            mis_equip_energy_type_match = calc_vals["mis_equip_energy_type_match"]
 
-        def fail_validation(self, context, calc_vals=None, data=None):
-            space_b = context.BASELINE_0
+            mis_equip_power_match = calc_vals["mis_equip_power_match"]
+            mis_equip_sensible_fraction_match = calc_vals[
+                "mis_equip_sensible_fraction_match"
+            ]
+            mis_equip_latent_fraction_match = calc_vals[
+                "mis_equip_latent_fraction_match"
+            ]
+            mis_equip_remaining_fraction_to_loop_match = calc_vals[
+                "mis_equip_remaining_fraction_to_loop_match"
+            ]
+            mis_equip_energy_from_loop_match = calc_vals[
+                "mis_equip_energy_from_loop_match"
+            ]
+            mis_equip_type_match = calc_vals["mis_equip_type_match"]
+            mis_equip_automatic_controlled_percentage_match = calc_vals[
+                "mis_equip_automatic_controlled_percentage_match"
+            ]
+            mis_equip_multiplier_schedule_match = calc_vals[
+                "mis_equip_multiplier_schedule_match"
+            ]
+
+            return (
+                ltg_purpose_type_match
+                and ltg_power_per_area_match
+                and ltg_occupancy_control_type_match
+                and ltg_daylighting_control_type_match
+                and ltg_ltg_multiplier_schedule_match
+                and mis_equip_energy_type_match
+                and mis_equip_power_match
+                and mis_equip_sensible_fraction_match
+                and mis_equip_latent_fraction_match
+                and mis_equip_remaining_fraction_to_loop_match
+                and mis_equip_energy_from_loop_match
+                and mis_equip_type_match
+                and mis_equip_automatic_controlled_percentage_match
+                and mis_equip_multiplier_schedule_match
+            )
+
+        def get_fail_msg(self, context, calc_vals=None, data=None):
             space_p = context.PROPOSED
+            space_id_p = space_p["id"]
+
+            ltg_purpose_type_match = calc_vals["ltg_purpose_type_match"]
+            ltg_power_per_area_match = calc_vals["ltg_power_per_area_match"]
+
+            ltg_occupancy_control_type_match = calc_vals[
+                "ltg_occupancy_control_type_match"
+            ]
+            ltg_daylighting_control_type_match = calc_vals[
+                "ltg_daylighting_control_type_match"
+            ]
+            ltg_ltg_multiplier_schedule_match = calc_vals[
+                "ltg_ltg_multiplier_schedule_match"
+            ]
+            mis_equip_energy_type_match = calc_vals["mis_equip_energy_type_match"]
+            mis_equip_power_match = calc_vals["mis_equip_power_match"]
+            mis_equip_sensible_fraction_match = calc_vals[
+                "mis_equip_sensible_fraction_match"
+            ]
+            mis_equip_latent_fraction_match = calc_vals[
+                "mis_equip_latent_fraction_match"
+            ]
+            mis_equip_remaining_fraction_to_loop_match = calc_vals[
+                "mis_equip_remaining_fraction_to_loop_match"
+            ]
+            mis_equip_energy_from_loop_match = calc_vals[
+                "mis_equip_energy_from_loop_match"
+            ]
+            mis_equip_type_match = calc_vals["mis_equip_type_match"]
+            mis_equip_automatic_controlled_percentage_match = calc_vals[
+                "mis_equip_automatic_controlled_percentage_match"
+            ]
+            mis_equip_multiplier_schedule_match = calc_vals[
+                "mis_equip_multiplier_schedule_match"
+            ]
+
+            mismatch = " ".join(
+                criteria
+                for criteria, match in [
+                    ("purpose_type", ltg_purpose_type_match),
+                    ("power_per_area", ltg_power_per_area_match),
+                    ("occupancy_control_type", ltg_occupancy_control_type_match),
+                    ("daylighting_control_type", ltg_daylighting_control_type_match),
+                    ("lighting_multiplier_schedule", ltg_ltg_multiplier_schedule_match),
+                    ("energy_type", mis_equip_energy_type_match),
+                    ("mis_equip_power_match", mis_equip_power_match),
+                    ("sensible_fraction", mis_equip_sensible_fraction_match),
+                    ("latent_fraction", mis_equip_latent_fraction_match),
+                    (
+                        "remaining_fraction_to_loop",
+                        mis_equip_remaining_fraction_to_loop_match,
+                    ),
+                    ("energy_from_loop", mis_equip_energy_from_loop_match),
+                    ("type", mis_equip_type_match),
+                    (
+                        "automatic_controlled_percentage",
+                        mis_equip_automatic_controlled_percentage_match,
+                    ),
+                    ("multiplier_schedule", mis_equip_multiplier_schedule_match),
+                ]
+                if not match
+            )
 
             fail_msg = (
                 f"It is expected that lighting and miscelleneous equipment would be modeled identically "
-                f"across the baseline and proposed for plenums, crawl spaces, and interstitial spaces. A mismatch was observed for {space_p}"
+                f"across the baseline and proposed for plenums, crawl spaces, and interstitial spaces. A mismatch was observed for {space_id_p} and {mismatch}"
             )
 
             return fail_msg
