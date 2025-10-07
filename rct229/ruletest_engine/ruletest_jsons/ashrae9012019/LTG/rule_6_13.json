@@ -1,7 +1,7 @@
 {
-    "rule-6-12-a": {
+    "rule-6-13-a": {
         "Section": 6,
-        "Rule": 12,
+        "Rule": 13,
         "Test": "a",
         "test_description": "This test uses a simple building model with 7,500 ft2 of gross floor area containing a single classroom zone and space. The interior lighting is managed by automatic occupancy sensors.",
         "expected_rule_outcome": "pass",
@@ -57,9 +57,9 @@
             }
         }
     },
-    "rule-6-12-b": {
+    "rule-6-13-b": {
         "Section": 6,
-        "Rule": 12,
+        "Rule": 13,
         "Test": "b",
         "test_description": "This test uses a simple building model with 7,500 ft2 of gross floor area containing a single classroom zone and space. The interior lighting has no occupancy controls.",
         "expected_rule_outcome": "undetermined",
@@ -114,9 +114,9 @@
             }
         }
     },
-    "rule-6-12-c": {
+    "rule-6-13-c": {
         "Section": 6,
-        "Rule": 12,
+        "Rule": 13,
         "Test": "c",
         "test_description": "This test uses a simple building model with 7,500 ft2 of gross floor area containing a single classroom zone and space. The interior lighting has manual occupancy controls without any occupancy sensor schedules.",
         "expected_rule_outcome": "undetermined",
@@ -171,9 +171,9 @@
             }
         }
     },
-    "rule-6-12-d": {
+    "rule-6-13-d": {
         "Section": 6,
-        "Rule": 12,
+        "Rule": 13,
         "Test": "d",
         "test_description": "This test uses a simple building model with 7,500 ft2 of gross floor area containing a single classroom zone and space. The interior lighting has manual occupancy controls and is managed via occupancy sensor schedules.",
         "expected_rule_outcome": "fail",

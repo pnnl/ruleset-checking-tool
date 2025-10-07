@@ -309,8 +309,8 @@ def run_test_one_ASHRAE9012022_jsontest(test_json):
 # run_service_water_heater_tests()
 
 
-# run_test_one_ASHRAE9012019_jsontest("ashrae9012019/section23/rule_23_8.json")
-run_test_one_ASHRAE9012022_jsontest("ashrae9012022/ENV/rule_5_43.json")
+run_test_one_ASHRAE9012019_jsontest("ashrae9012019/LTG/rule_6_13.json")
+# run_test_one_ASHRAE9012022_jsontest("ashrae9012022/ENV/rule_5_43.json")
 # run_ashrae9012019_tests()
 # output_dir = os.path.dirname(__file__)
 # generate_ashrae9012019_software_test_report(['tester'])
