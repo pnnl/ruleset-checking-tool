@@ -18,15 +18,15 @@ from rct229.utils.std_comparisons import std_equal
 REQ_ABS_SOLAR_EXT = 0.75
 
 
-class PRM9012022Rule13d92(RuleDefinitionListIndexedBase):
+class PRM9012022rule13d92(RuleDefinitionListIndexedBase):
     """Rule 44 of ASHRAE 90.1-2022 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(PRM9012022Rule13d92, self).__init__(
+        super(PRM9012022rule13d92, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=PRM9012022Rule13d92.BuildingRule(),
+            each_rule=PRM9012022rule13d92.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-44",
             description="The baseline above-grade wall surfaces shall be modeled with a solar reflectance of 0.25.",
@@ -47,11 +47,11 @@ class PRM9012022Rule13d92(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(PRM9012022Rule13d92.BuildingRule, self).__init__(
+            super(PRM9012022rule13d92.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=PRM9012022Rule13d92.BuildingRule.SurfaceRule(),
+                each_rule=PRM9012022rule13d92.BuildingRule.SurfaceRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -78,7 +78,7 @@ class PRM9012022Rule13d92(RuleDefinitionListIndexedBase):
 
         class SurfaceRule(RuleDefinitionBase):
             def __init__(self):
-                super(PRM9012022Rule13d92.BuildingRule.SurfaceRule, self).__init__(
+                super(PRM9012022rule13d92.BuildingRule.SurfaceRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),

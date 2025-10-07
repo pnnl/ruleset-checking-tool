@@ -8,10 +8,11 @@ from rct229.schema.schema_store import SchemaStore
 __all__ = ["section5", "section6"]
 
 rules_dict = {
-    "PRM9012022Rule86r63": "section5rule43",
-    "PRM9012022Rule13d92": "section5rule44",
-    "PRM9012022Rule22f12": "section5rule45",
-    "PRM9012022Rule12d80": "section6rule11",
+    "PRM9012022rule86r63": "section5rule43",
+    "PRM9012022rule13d92": "section5rule44",
+    "PRM9012022rule22f12": "section5rule45",
+    "PRM9012022rule39f02": "section6rule10",
+    "PRM9012022rule12d80": "section6rule11",
 }
 
 section_list = [

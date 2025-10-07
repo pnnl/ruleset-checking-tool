@@ -8,15 +8,15 @@ from rct229.utils.jsonpath_utils import find_all
 SURFACE_ADJACENCY = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"]
 
 
-class PRM9012022Rule86r63(RuleDefinitionListIndexedBase):
+class PRM9012022rule86r63(RuleDefinitionListIndexedBase):
     """Rule 43 of ASHRAE 90.1-2022 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(PRM9012022Rule86r63, self).__init__(
+        super(PRM9012022rule86r63, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=PRM9012022Rule86r63.BuildingRule(),
+            each_rule=PRM9012022rule86r63.BuildingRule(),
             index_rmd=BASELINE_0,
             id="5-43",
             description="Automatic fenestration shading devices shall not be modeled in the Baseline.",
@@ -37,7 +37,7 @@ class PRM9012022Rule86r63(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
-            super(PRM9012022Rule86r63.BuildingRule, self).__init__(
+            super(PRM9012022rule86r63.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

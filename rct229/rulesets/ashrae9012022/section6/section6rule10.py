@@ -16,15 +16,15 @@ MANUAL_CHECK_REQUIRED_MSG = (
 )
 
 
-class PRM9012022rule39f02(RuleDefinitionListIndexedBase):
+class PRM9012022Rule12d80(RuleDefinitionListIndexedBase):
     """Rule 11 of ASHRAE 90.1-2022 Appendix G Section 6 (Lighting)"""
 
     def __init__(self):
-        super(PRM9012022rule39f02, self).__init__(
+        super(PRM9012022Rule12d80, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=PRM9012022rule39f02.SpaceRule(),
+            each_rule=PRM9012022Rule12d80.SpaceRule(),
             index_rmd=PROPOSED,
             id="6-11",
             description="Where retail display lighting is included in the proposed building design the display lighting"
@@ -50,7 +50,7 @@ class PRM9012022rule39f02(RuleDefinitionListIndexedBase):
 
     class SpaceRule(RuleDefinitionBase):
         def __init__(self):
-            super(PRM9012022rule39f02.SpaceRule, self).__init__(
+            super(PRM9012022Rule12d80.SpaceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
