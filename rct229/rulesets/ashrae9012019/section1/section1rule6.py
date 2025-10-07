@@ -80,5 +80,5 @@ class PRM9012019Rule10d53(RuleDefinitionListIndexedBase):
         }
 
     def rule_check(self, context, calc_vals=None, data=None):
-        result = calc_vals["has_renewable"]
-        return result
+        has_renewable = calc_vals["has_renewable"]
+        return not has_renewable

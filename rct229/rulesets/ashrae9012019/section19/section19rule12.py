@@ -6,6 +6,7 @@ from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.std_comparisons import std_equal
+from rct229.utils.pint_utils import CalcQ
 
 AIR_ECONOMIZER = SchemaEnums.schema_enums["AirEconomizerOptions"]
 CLIMATE_ZONE_70F = ["CZ5A", "CZ6A"]
@@ -103,8 +104,8 @@ class PRM9012019Rule98o22(RuleDefinitionListIndexedBase):
                 req_high_limit_temp = 75 * ureg("degF")
 
             return {
-                "high_limit_temp_b": high_limit_temp_b,
-                "req_high_limit_temp": req_high_limit_temp,
+                "high_limit_temp_b": CalcQ("temperature", high_limit_temp_b),
+                "req_high_limit_temp": CalcQ("temperature", req_high_limit_temp),
                 "air_economizer_type_b": air_economizer_type_b,
             }
 
