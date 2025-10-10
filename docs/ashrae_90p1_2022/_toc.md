@@ -14,4 +14,7 @@ This approach ensures that changes in the standards are effectively integrated w
   * [6-1](section6/Rule6-1.md): Proposed building interior lighting power shall not exceel total interior lighting power allowance determined using either G3.7 or G3.8
   * [6-11](section6/Rule6-11.md): Where retail display lighting is included in the proposed building design the display lighting additional power shall be less than or equal to the limits established by Section 9.5.2.2(b) 
 
+## Section 21 - Central Heating Hot Water Systems
+  * [21-19]: Hot-water pumps shall only be enabled when a load exists on the associated hot-water loop.
+
 **[Back](../_toc.md)**
