@@ -40,4 +40,3 @@ def get_schedule_year_length(rmd):
         if isinstance(hourly_values, list) and len(hourly_values) > 0:
             return len(hourly_values)
     return 8760
-

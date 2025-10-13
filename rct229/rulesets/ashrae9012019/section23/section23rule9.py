@@ -14,11 +14,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
-from rct229.utils.utility_functions import (
-    find_exactly_one_hvac_system,
-    find_exactly_one_zone,
-    find_exactly_one_schedule,
-)
 from rct229.utils.schedule_utils import get_schedule_year_length
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
@@ -68,6 +63,8 @@ class PRM9012019Rule46w18(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
+        rmd_p = context.PROPOSED
+
         baseline_system_types_dict = get_baseline_system_types(rmd_b)
         applicable_hvac_sys_ids = [
             hvac_id
@@ -79,10 +76,21 @@ class PRM9012019Rule46w18(RuleDefinitionListIndexedBase):
         dict_of_zones_and_terminal_units_served_by_hvac_sys = (
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
         )
+        zones_p = find_all("$.buildings[*].building_segments[*].zones[*]", rmd_p)
+        hvacs_p = find_all(
+            "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+            rmd_p,
+        )
+        schedules_p = find_all("$.schedules[*]", rmd_p)
+        annual_hours = get_schedule_year_length(context.BASELINE_0)
 
         return {
             "applicable_hvac_sys_ids": applicable_hvac_sys_ids,
             "dict_of_zones_and_terminal_units_served_by_hvac_sys": dict_of_zones_and_terminal_units_served_by_hvac_sys,
+            "schedules_p": schedules_p,
+            "zones_p": zones_p,
+            "hvacs_p": hvacs_p,
+            "annual_hours": annual_hours,
         }
 
     def list_filter(self, context_item, data):
@@ -135,22 +143,33 @@ class PRM9012019Rule46w18(RuleDefinitionListIndexedBase):
                     for supply_fan in find_all("$.supply_fans[*]", fan_system_b)
                 ]
             )
+            annual_hours = data["annual_hours"]
             zones_and_terminals_dict = data[
                 "dict_of_zones_and_terminal_units_served_by_hvac_sys"
             ][hvac_b["id"]]
-            zone_p = find_exactly_one_zone(
-                context.PROPOSED, zones_and_terminals_dict["zone_list"][0]
+            zone_p = next(
+                zone
+                for zone in data["zones_p"]
+                if zone["id"] == zones_and_terminals_dict["zone_list"][0]
             )
-            annual_hours = get_schedule_year_length(context.PROPOSED)
             min_volume_list_p = [0.0] * annual_hours
             for terminal_p in zone_p.get("terminals", []):
-                hvac_p = find_exactly_one_hvac_system(
-                    context.PROPOSED,
-                    terminal_p["served_by_heating_ventilating_air_conditioning_system"],
+                hvac_p = next(
+                    hvac
+                    for hvac in data["hvacs_p"]
+                    if hvac["id"]
+                    == getattr_(
+                        terminal_p,
+                        "Terminal",
+                        "served_by_heating_ventilating_air_conditioning_system",
+                    )
                 )
                 fan_system_p = hvac_p.get("fan_system", {})
-                operation_schedule_hourly_values_p = find_exactly_one_schedule(
-                    context.PROPOSED, fan_system_p.get("operating_schedule")
+                operation_schedule_hourly_values_p = next(
+                    schedule_p
+                    for schedule_p in data["schedules_p"]
+                    if schedule_p["id"]
+                    == getattr_(fan_system_p, "FanSystem", "operating_schedule")
                 ).get("hourly_values", [1.0] * annual_hours)
                 min_volume_p = getattr_(terminal_p, "Terminal", "minimum_airflow")
 
