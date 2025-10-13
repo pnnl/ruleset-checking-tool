@@ -1,0 +1,205 @@
+{
+    "rule-5-43-a": {
+        "Section": 5,
+        "Rule": 43,
+        "Test": "a",
+        "standard": {
+            "ruleset": "ashrae9012022",
+            "rule_id": "5-43",
+            "ruleset_reference": "Section G3.1-5(f) Building Envelope Modeling Requirements for the Baseline building",
+            "rule_description": "Automatic fenestration shading devices shall not be modeled in the Baseline.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "test_description": "Project has one building segment with one space that includes a window subsurface. The baseline building's window does not have automated shades",
+        "expected_rule_outcome": "pass",
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 23.225759999999998,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 3.7161215999999997,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "has_automatic_shades": false
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-43-b": {
+        "Section": 5,
+        "Rule": 43,
+        "Test": "b",
+        "standard": {
+            "ruleset": "ashrae9012022",
+            "rule_id": "5-43",
+            "ruleset_reference": "Section G3.1-5(f) Building Envelope Modeling Requirements for the Baseline building",
+            "rule_description": "Automatic fenestration shading devices shall not be modeled in the Baseline.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "test_description": "Project has one building segment with one space that includes a window subsurface. The baseline building's window has automated shades",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Baseline model incorrectly includes automatic fenestration shading devices. Address this issue for the following subsurfaces",
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 23.225759999999998,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "SubSurface 1",
+                                                                "classification": "WINDOW",
+                                                                "glazed_area": 3.7161215999999997,
+                                                                "opaque_area": 1.8580607999999998,
+                                                                "has_automatic_shades": true
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-43-c": {
+        "Section": 5,
+        "Rule": 43,
+        "Test": "c",
+        "standard": {
+            "ruleset": "ashrae9012022",
+            "rule_id": "5-43",
+            "ruleset_reference": "Section G3.1-5(f) Building Envelope Modeling Requirements for the Baseline building",
+            "rule_description": "Automatic fenestration shading devices shall not be modeled in the Baseline.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "test_description": "Project has one building segment with one space that without any window subsurfaces.",
+        "expected_rule_outcome": "not_applicable",
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}
