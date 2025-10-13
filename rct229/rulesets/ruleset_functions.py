@@ -1,9 +1,14 @@
 import subprocess
 import ast
 import astor
+import re
+import csv
+import inspect
+import importlib
 from pathlib import Path
 
 import rct229.rulesets as rulesets
+from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
@@ -133,5 +138,77 @@ def update_class_id_attributes(class_node, correct_id):
     return modified
 
 
+def write_rule_info_to_file(ruleset_doc):
+    SchemaStore.set_ruleset(ruleset_doc)
+    SchemaEnums.update_schema_enum()
+    available_rule_definitions = rulesets.__getrules__()
+    rule_map = rulesets.__getrulemap__()
+
+    if not rule_map:
+        raise ValueError(
+            f"Rule map not found. Please define 'rules_dict' mapping in rulesets/{SchemaStore.SELECTED_RULESET}/__init__.py"
+        )
+
+    output_file = Path(__file__).parent / f"{ruleset_doc}_rule_evaluation_types.csv"
+
+    with output_file.open("w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["Section", "Rule #", "Rule Name", "Evaluation Type"])
+
+        for rule_id, rule_class in available_rule_definitions:
+            rule_unique_id_string = str(rule_id)
+            rule_name = rule_map.get(rule_unique_id_string)
+
+            # fallback for case mismatch
+            if not rule_name:
+                for k, v in rule_map.items():
+                    if k.lower() == rule_unique_id_string.lower():
+                        rule_name = v
+                        break
+
+            if not rule_name:
+                print(f"Skipping unknown rule ID: {rule_unique_id_string}")
+                continue
+
+            # Parse section and rule number from rule_name
+            match = re.match(r"section(\d+)rule(\d+)", rule_name, re.IGNORECASE)
+            if not match:
+                print(
+                    f"Could not parse section/rule number from rule name: {rule_name}"
+                )
+                section = rule_number = ""
+            else:
+                section, rule_number = match.groups()
+
+            module_name = rule_class.__module__
+
+            try:
+                module = importlib.import_module(module_name)
+            except Exception as e:
+                print(f"Could not import module {module_name}: {e}")
+                continue
+
+            # Collect all classes in the module (including nested)
+            all_classes = []
+            for _, obj in inspect.getmembers(module, inspect.isclass):
+                all_classes.append(obj)
+
+            # Determine if *any* class in the module inherits from PartialRuleDefinition
+            evaluation_type = "Full"
+            for cls in all_classes:
+                try:
+                    if issubclass(cls, PartialRuleDefinition):
+                        evaluation_type = "Applicability"
+                        break
+                except TypeError:
+                    continue
+
+            writer.writerow([section, rule_number, rule_name, evaluation_type])
+
+    print(f"Rule evaluation types written to {output_file}")
+
+
 if __name__ == "__main__":
-    renumber_rules(rulesets.RuleSet.ASHRAE9012019_RULESET)
+    # write_rule_info_to_file(rulesets.RuleSet.ASHRAE9012019_RULESET)
+    # renumber_rules(rulesets.RuleSet.ASHRAE9012019_RULESET)
+    pass
