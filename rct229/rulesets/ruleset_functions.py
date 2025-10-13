@@ -139,6 +139,9 @@ def update_class_id_attributes(class_node, correct_id):
 
 
 def write_rule_info_to_file(ruleset_doc):
+    """
+    Writes a CSV file with the rule evaluation types for each rule in the specified ruleset along with the section and rule number.
+    """
     SchemaStore.set_ruleset(ruleset_doc)
     SchemaEnums.update_schema_enum()
     available_rule_definitions = rulesets.__getrules__()
