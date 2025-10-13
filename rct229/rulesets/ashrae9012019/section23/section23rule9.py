@@ -152,7 +152,7 @@ class PRM9012019Rule46w18(RuleDefinitionListIndexedBase):
                 operation_schedule_hourly_values_p = find_exactly_one_schedule(
                     context.PROPOSED, fan_system_p.get("operating_schedule")
                 ).get("hourly_values", [1.0] * annual_hours)
-                min_volume_p = terminal_p["minimum_airflow"]
+                min_volume_p = getattr_(terminal_p, "Terminal", "minimum_airflow")
 
                 for hour in range(len(operation_schedule_hourly_values_p)):
                     min_volume_list_p[hour] += (
