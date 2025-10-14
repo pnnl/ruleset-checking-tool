@@ -7,15 +7,26 @@ from rct229.utils.std_comparisons import std_equal_with_precision
 ENERGY_SOURCE = SchemaEnums.schema_enums["EnergySourceOptions"]
 CHILLER_COMPRESSOR = SchemaEnums.schema_enums["ChillerCompressorOptions"]
 
-EXPECTED_VALIDATION_PLR = [0.25, 0.5, 0.75, 1]
-EXPECTED_CHWT_TEMPS = [39, 45, 50, 55]
-EXPECTED_ECWT_TEMPS = [60, 104, 85, 72.5, 97.5]
+EXPECTED_VALIDATION_PLR = [0.25, 0.50, 0.75, 1.00]
+EXPECTED_CHILLED_WATER_TEMPS = [39, 45, 50, 55]
+EXPECTED_ENTERING_CONDENSER_WATER_TEMPS = [60, 104, 85, 72.5, 97.5]
 
 
 def is_chiller_performance_app_j(chiller: dict) -> bool:
     """
     Evaluates whether the chiller performance curves align with the sets of performance curves specified in Appendix J of ASHRAE 90.1-2022 Appendix G.
-    :param chiller:
+
+    Parameters
+    ----------
+    chiller: dict
+         The chiller object containing all relevant data for the chiller to be validated against the performance curves in Appendix J of ASHRAE 90.1-2022.
+         This includes the rated capacity, full load efficiency (COP), compressor type, and the lists of capacity and power validation points.
+
+    Returns
+    -------
+    bool
+        boolean value indicating whether the chiller performance validation passed or failed.
+
     """
 
     compressor_type = getattr_(chiller, "chillers", "compressor_type")
@@ -44,7 +55,7 @@ def is_chiller_performance_app_j(chiller: dict) -> bool:
     if curve_set is not None:
         rated_power = (
             rated_capacity / chiller["full_load_efficiency"]
-            if chiller.get("full_load_efficiency")
+            if getattr_(chiller, "chillers", "full_load_efficiency") > 0.0
             else 0.0
         )
 
@@ -63,7 +74,7 @@ def is_chiller_performance_app_j(chiller: dict) -> bool:
 
             dict_key = f"{int(round(chilled_water_supply_temp.m, 1))}, {int(round(condenser_temp.m, 1))}"
             capacity_validation_pts_dict[dict_key] = capacity_validation_point.get(
-                "capacity"
+                "capacity", 0.0 * ureg("W")
             )
 
         power_validation_pts_dict = {}
@@ -82,8 +93,8 @@ def is_chiller_performance_app_j(chiller: dict) -> bool:
         given_capacities = {}
         missing_capacity_validation_points = []
         non_matching_capacity_validation_points = []
-        for chwt in EXPECTED_CHWT_TEMPS:
-            for ecwt in EXPECTED_ECWT_TEMPS:
+        for chwt in EXPECTED_CHILLED_WATER_TEMPS:
+            for ecwt in EXPECTED_ENTERING_CONDENSER_WATER_TEMPS:
                 dict_key = f"{chwt}, {ecwt}"
                 if capacity_validation_pts_dict.get(dict_key):
                     expected_capacity = (
@@ -104,7 +115,6 @@ def is_chiller_performance_app_j(chiller: dict) -> bool:
                         non_matching_capacity_validation_points.append(
                             {"CHWT": chwt, "ECWT": ecwt}
                         )
-
                 else:
                     missing_capacity_validation_points.append(
                         {"CHWT": chwt, "ECWT": ecwt}
@@ -112,17 +122,28 @@ def is_chiller_performance_app_j(chiller: dict) -> bool:
 
         non_matching_power_validation_points = []
         missing_power_validation_points = []
-        for chwt in EXPECTED_CHWT_TEMPS:
-            for ecwt in EXPECTED_ECWT_TEMPS:
+        for chwt in EXPECTED_CHILLED_WATER_TEMPS:
+            for ecwt in EXPECTED_ENTERING_CONDENSER_WATER_TEMPS:
                 dict_key = f"{chwt}, {ecwt}"
                 if power_validation_pts_dict.get(dict_key):
                     given_plrs = []
                     for power_validation_point in power_validation_pts_dict[dict_key]:
                         load = power_validation_point.get("load", 0.0 * ureg("W"))
-                        given_power = power_validation_point.get("result")
-                        plr = load / given_capacities[dict_key]
+                        given_power = power_validation_point.get(
+                            "result", 0.0 * ureg("W")
+                        )
+                        plr = (
+                            load / given_capacities[dict_key]
+                            if given_capacities[dict_key] > 0.0 * ureg("W")
+                            else 0.0
+                        )
 
-                        if plr in EXPECTED_VALIDATION_PLR:
+                        if any(
+                            [
+                                std_equal_with_precision(plr, expected_plr, 2)
+                                for expected_plr in EXPECTED_VALIDATION_PLR
+                            ]
+                        ):
                             given_plrs.append(plr)
                             eir_plr = (
                                 plr_coefficients[0]
@@ -137,23 +158,28 @@ def is_chiller_performance_app_j(chiller: dict) -> bool:
                                 + eir_f_t_coefficients[4] * ecwt**2
                                 + eir_f_t_coefficients[5] * chwt * ecwt
                             )
-
                             expected_power = (
-                                given_capacity[dict_key]
+                                given_capacities[dict_key]
                                 * eir_ft
                                 * eir_plr
                                 * rated_power
                                 / rated_capacity
                             )
 
-                            if expected_power == given_power:
-                                missing_power_validation_points.append(
+                            if not std_equal_with_precision(
+                                given_power, expected_power, 1 * ureg("W")
+                            ):
+                                non_matching_power_validation_points.append(
                                     {"CHWT": chwt, "ECWT": ecwt, "PLR": "ALL"}
                                 )
-                            else:
-                                missing_power_validation_points.append(
-                                    {"CHWT": chwt, "ECWT": ecwt, "PLR": plr}
-                                )
+                        else:
+                            missing_power_validation_points.append(
+                                {"CHWT": chwt, "ECWT": ecwt, "PLR": plr}
+                            )
+                else:
+                    missing_power_validation_points.append(
+                        {"CHWT": chwt, "ECWT": ecwt, "PLR": plr}
+                    )
 
     return (
         len(non_matching_capacity_validation_points)
