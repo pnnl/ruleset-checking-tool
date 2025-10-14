@@ -147,7 +147,11 @@ class PRM9012022Rule23o29(RuleDefinitionListIndexedBase):
 
                 return (
                     (proposed_interior_display_w > minimum_retail_display_w)
-                    or (baseline_interior_display_w != proposed_interior_display_w)
+                    or (
+                        not std_equal(
+                            baseline_interior_display_w, proposed_interior_display_w
+                        )
+                    )
                 ) and (
                     baseline_interior_display_w
                     < min(proposed_interior_display_w, maximum_retail_display_w)
@@ -164,6 +168,9 @@ class PRM9012022Rule23o29(RuleDefinitionListIndexedBase):
 
                 return (
                     proposed_interior_display_w < minimum_retail_display_w
+                    or self.precision_comparison["minimum_retail_display_w"](
+                        minimum_retail_display_w, proposed_interior_display_w
+                    )
                 ) and self.precision_comparison["baseline_interior_display_w"](
                     proposed_interior_display_w, baseline_interior_display_w
                 )
