@@ -14,11 +14,10 @@
 
 ## Applicability Check:  
 - look at each building segment: `for building_segment in P_RMD.building_segments:`
-    - get the building segment lighting type: `building_segment_lighting_type = building_segment.lighting_building_area_type`
-        - look at each space: `for space in building_segment...spaces:`
-            - if the space has any retail display lighting then the rule applies: `if len(space["interior_lighting"]) > 0 and any(interior_lighting["purpose_type"] == "RETAIL_DISPLAY" for interior_lighting in space["interior_lighting"]):`
-                - return True: `return True`
-            - else return False: `return False`
+    - look at each space: `for space in building_segment...spaces:`
+        - if the space has any retail display lighting then the rule applies: `if len(space["interior_lighting"]) > 0 and any(interior_lighting["purpose_type"] == "RETAIL_DISPLAY" for interior_lighting in space["interior_lighting"]):`
+            - return True: `return True`
+        - else return False: `return False`
 
 ## Rule Logic:  
 - 9.5.2.2(b) gives a formula (750 W + (Retail Area 1 × 0.40 W/ft2) + (Retail Area 2 × 0.40 W/ft2) + (Retail Area 3 × 0.70 W/ft2) + (Retail Area 4 × 1.00 W/ft2)) for retail display lighting that is based on four area categories.  We don't have access to these four area categories in the schema, so we will calculate the maximum and minimum values possible based on this function.  
