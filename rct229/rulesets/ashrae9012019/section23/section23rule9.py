@@ -174,8 +174,7 @@ class PRM9012019Rule46w18(RuleDefinitionListIndexedBase):
                 operation_schedule_hourly_values_p = next(
                     schedule_p
                     for schedule_p in data["schedules_p"]
-                    if schedule_p["id"]
-                    == fan_system_p.get("operating_schedule")
+                    if schedule_p["id"] == fan_system_p.get("operating_schedule")
                 ).get("hourly_values", [1.0] * annual_hours)
                 min_volume_p = getattr_(terminal_p, "Terminal", "minimum_airflow")
 
