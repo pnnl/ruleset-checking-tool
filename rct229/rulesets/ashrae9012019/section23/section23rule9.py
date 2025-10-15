@@ -14,11 +14,13 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.schedule_utils import get_schedule_year_length
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 
+TERMINAL_TYPE = SchemaEnums.schema_enums["TerminalOptions"]
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_11_1,
     HVAC_SYS.SYS_11_2,
@@ -154,6 +156,10 @@ class PRM9012019Rule46w18(RuleDefinitionListIndexedBase):
             )
             min_volume_list_p = [0.0] * annual_hours
             for terminal_p in zone_p.get("terminals", []):
+
+                if terminal_p.get("type") == TERMINAL_TYPE.BASEBOARD:
+                    continue
+
                 hvac_p = next(
                     hvac
                     for hvac in data["hvacs_p"]
@@ -169,7 +175,7 @@ class PRM9012019Rule46w18(RuleDefinitionListIndexedBase):
                     schedule_p
                     for schedule_p in data["schedules_p"]
                     if schedule_p["id"]
-                    == getattr_(fan_system_p, "FanSystem", "operating_schedule")
+                    == fan_system_p.get("operating_schedule")
                 ).get("hourly_values", [1.0] * annual_hours)
                 min_volume_p = getattr_(terminal_p, "Terminal", "minimum_airflow")
 
