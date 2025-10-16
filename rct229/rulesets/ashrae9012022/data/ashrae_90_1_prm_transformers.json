@@ -1,0 +1,124 @@
+{
+    "transformers": [
+      {
+        "capacity": 15.0,
+        "efficiency": 0.9770,
+        "phase": "Single-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 25.0,
+        "efficiency": 0.9800,
+        "phase": "Single-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 37.5,
+        "efficiency": 0.9820,
+        "phase": "Single-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 50.0,
+        "efficiency": 0.9830,
+        "phase": "Single-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 75.0,
+        "efficiency": 0.9850,
+        "phase": "Single-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 100.0,
+        "efficiency": 0.9860,
+        "phase": "Single-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 167.0,
+        "efficiency": 0.9870,
+        "phase": "Single-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 250.0,
+        "efficiency": 0.9880,
+        "phase": "Single-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 333.0,
+        "efficiency": 0.9890,
+        "phase": "Single-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 15.0,
+        "efficiency": 0.9789,
+        "phase": "Three-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 30.0,
+        "efficiency": 0.9823,
+        "phase": "Three-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 45.0,
+        "efficiency": 0.9840,
+        "phase": "Three-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 75.0,
+        "efficiency": 0.9860,
+        "phase": "Three-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 112.5,
+        "efficiency": 0.9874,
+        "phase": "Three-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 150.0,
+        "efficiency": 0.9883,
+        "phase": "Three-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 225.0,
+        "efficiency": 0.9894,
+        "phase": "Three-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 300.0,
+        "efficiency": 0.9902,
+        "phase": "Three-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 500.0,
+        "efficiency": 0.9914,
+        "phase": "Three-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 750.0,
+        "efficiency": 0.9923,
+        "phase": "Three-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      },
+      {
+        "capacity": 1000.0,
+        "efficiency": 0.9928,
+        "phase": "Three-Phase",
+        "notes": "From 90.1-2019 Table 8.4.4"
+      }
+    ]
+}

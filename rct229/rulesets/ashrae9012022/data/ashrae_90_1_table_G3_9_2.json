@@ -1,0 +1,14 @@
+{
+    "performance_rating_method_baseline_elevator_motor": [
+        {
+            "number_of_stories": "less than or equal to 4",
+            "motor_type": "Hydraulic",
+            "mechanical_efficiency": 0.58
+        },
+        {
+            "number_of_stories": "greater than 4",
+            "motor_type": "Traction",
+            "mechanical_efficiency": 0.64
+        }
+    ]
+}

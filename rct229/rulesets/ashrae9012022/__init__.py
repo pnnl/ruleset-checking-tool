@@ -5,7 +5,7 @@ from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 
 # Add all available rule modules in __all__
-__all__ = ["section5", "section6", "section21"]
+__all__ = ["section5", "section6", "section21", "BASELINE_0", "BASELINE_90", "BASELINE_180", "BASELINE_270", "USER", "PROPOSED"]
 
 
 rules_dict = {
