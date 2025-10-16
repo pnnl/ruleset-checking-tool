@@ -91,6 +91,15 @@ def _meet_exception_modules(inspection_results):
     return any(f[0] in MODULE_EXCEPTION_LIST for f in inspection_results)
 
 
+def __getsectiondict__():
+    ruleset_list = inspect.getmembers(rulesets, inspect.ismodule)
+    for ruleset in ruleset_list:
+        if ruleset[0] == SchemaStore.SELECTED_RULESET:
+            section_dict = getattr(ruleset[1], "section_dict", None)
+            return section_dict
+    return None
+
+
 def __getrulemap__():
     ruleset_list = inspect.getmembers(rulesets, inspect.ismodule)
     for ruleset in ruleset_list:

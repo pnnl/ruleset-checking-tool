@@ -273,14 +273,9 @@ section_dict = {
     "23": "HVAC-AirSide",
 }
 
-if SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901"):
-    RMD = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")
-    COMMON_RMD = SchemaEnums.schema_enums.get("CommonRulesetModelOptions")
 
-else:
-    SchemaEnums.update_schema_enum()
-    RMD = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")
-    COMMON_RMD = SchemaEnums.schema_enums.get("CommonRulesetModelOptions")
+RMD = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")
+COMMON_RMD = SchemaEnums.schema_enums.get("CommonRulesetModelOptions")
 
 BASELINE_0 = RMD.BASELINE_0
 BASELINE_90 = RMD.BASELINE_90

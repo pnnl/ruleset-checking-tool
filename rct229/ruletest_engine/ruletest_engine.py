@@ -15,9 +15,6 @@ from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
 from rct229.rulesets import rulesets
-from rct229.rulesets.ashrae9012019 import rules_dict as rules_hash_dict
-from rct229.rulesets.ashrae9012019 import section_dict
-from rct229.ruletest_engine.ruletest_rmd_factory import get_ruletest_rmd_models
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.schema.validate import validate_rpd
@@ -202,7 +199,7 @@ def process_test_result(test_result, raised_message, test_dict, test_id):
 
 
 def run_section_tests(
-    test_json_name: str, ruleset_doc: RuleSet, test_json_path: Optional[str] = None
+    test_json_name: str, ruleset_doc: str, test_json_path: Optional[str] = None
 ):
     """Runs all tests found in a given test JSON and prints results to console. Returns true/false describing whether
     or not all tests in the JSON result in the expected outcome.
@@ -228,6 +225,7 @@ def run_section_tests(
 
         Boolean describing if all tests in the JSON result in the expected outcome.
     """
+    from rct229.ruletest_engine.ruletest_rmd_factory import get_ruletest_rmd_models
 
     # Create path to test JSON (e.g. 'transformer_tests.json')
     if test_json_path is None:
@@ -440,7 +438,10 @@ def generate_rct_outcomes_list_from_section_list(section_list):
         ashrae901_2019_software_test_report
 
     """
+    from rct229.ruletest_engine.ruletest_rmd_factory import get_ruletest_rmd_models
 
+    rules_hash_dict = rulesets.__getrulemap__()
+    section_dict = rulesets.__getsectiondict__()
     # Master list of RCT engine outcomes and invalid RMD messages used to populate starting point for an RCTReport.
     # Initialize them here
     rct_outcomes_list = []
