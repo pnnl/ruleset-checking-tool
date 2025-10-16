@@ -4,7 +4,9 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_surface_condit
 )
 
 
-def get_baseline_surface_conditioning_category_dict(climate_zone, building_b, constructions_b, building_p, constructions_p):
+def get_baseline_surface_conditioning_category_dict(
+    climate_zone, building_b, constructions_b, building_p, constructions_p
+):
     """Determines the surface conditioning category for every surface in the baseline building based on the requirement
     below.
 
@@ -27,14 +29,29 @@ def get_baseline_surface_conditioning_category_dict(climate_zone, building_b, co
         SEMI_EXTERIOR, UNREGULATED
     """
 
-    building_surface_conditioning_category_dict_b = get_building_surface_conditioning_category_dict(
-        climate_zone, building_b, constructions_b)
-    building_surface_conditioning_category_dict_p = get_building_surface_conditioning_category_dict(
-        climate_zone, building_p, constructions_p)
+    building_surface_conditioning_category_dict_b = (
+        get_building_surface_conditioning_category_dict(
+            climate_zone, building_b, constructions_b
+        )
+    )
+    building_surface_conditioning_category_dict_p = (
+        get_building_surface_conditioning_category_dict(
+            climate_zone, building_p, constructions_p
+        )
+    )
 
     baseline_surface_conditioning_category_dict = {}
     for surface_id in building_surface_conditioning_category_dict_b:
-        if building_surface_conditioning_category_dict_p[surface_id] == SurfaceConditioningCategory.SEMI_EXTERIOR:
-            baseline_surface_conditioning_category_dict[surface_id] = SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL
+        if (
+            building_surface_conditioning_category_dict_p[surface_id]
+            == SurfaceConditioningCategory.SEMI_EXTERIOR
+        ):
+            baseline_surface_conditioning_category_dict[
+                surface_id
+            ] = SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL
         else:
-            baseline_surface_conditioning_category_dict[surface_id] = building_surface_conditioning_category_dict_b[surface_id]
+            baseline_surface_conditioning_category_dict[
+                surface_id
+            ] = building_surface_conditioning_category_dict_b[surface_id]
+
+    return baseline_surface_conditioning_category_dict

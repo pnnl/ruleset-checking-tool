@@ -47,12 +47,8 @@ class PRM9012022Rule96n40(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         rmd_b = context.BASELINE_0
-        climate_zone = rmd_b["ruleset_model_descriptions"][0]["weather"][
-            "climate_zone"
-        ]
-        constructions_b = rmd_b["ruleset_model_descriptions"][0].get(
-            "constructions"
-        )
+        climate_zone = rmd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        constructions_b = rmd_b["ruleset_model_descriptions"][0].get("constructions")
 
         # TODO It is determined that later we will modify this function to RMD level -
         # This implementation is temporary
@@ -202,7 +198,11 @@ class PRM9012022Rule96n40(RuleDefinitionListIndexedBase):
             return {
                 # TODO this function will likely need to be revised to RMD level later.
                 "scc_dict_b": get_baseline_surface_conditioning_category_dict(
-                    climate_zone, building_b, constructions_b, building_p, constructions_p
+                    climate_zone,
+                    building_b,
+                    constructions_b,
+                    building_p,
+                    constructions_p,
                 ),
                 "manual_check_required_flag": manual_check_required_flag,
                 "target_shgc_mix": target_shgc_mix,

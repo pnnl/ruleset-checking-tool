@@ -2,10 +2,10 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type imp
     OpaqueSurfaceType as OST,
     get_opaque_surface_type,
 )
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
     ZoneConditioningDataDict,
-    get_surface_conditioning_category_dict,
+    get_building_surface_conditioning_category_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields
@@ -50,7 +50,7 @@ def get_building_scc_window_wall_ratios_dict(
     )
 
     # Get the conditioning category for all the surfaces in the building
-    scc_dict = get_surface_conditioning_category_dict(
+    scc_dict = get_building_surface_conditioning_category_dict(
         climate_zone, building, constructions
     )
 

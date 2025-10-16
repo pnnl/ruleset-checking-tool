@@ -48,9 +48,7 @@ class PRM9012022Rule57c26(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rmd_b = context.BASELINE_0
         rmd_p = context.PROPOSED
-        climate_zone = rmd_b["ruleset_model_descriptions"][0]["weather"][
-            "climate_zone"
-        ]
+        climate_zone = rmd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
         constructions_b = rmd_b["ruleset_model_descriptions"][0].get(
             "constructions", []
         )
@@ -209,7 +207,11 @@ class PRM9012022Rule57c26(RuleDefinitionListIndexedBase):
             return {
                 # TODO this function will likely need to be revised to RMD level later.
                 "scc_dict_b": get_baseline_surface_conditioning_category_dict(
-                    climate_zone, building_b, constructions_b, building_p, constructions_p
+                    climate_zone,
+                    building_b,
+                    constructions_b,
+                    building_p,
+                    constructions_p,
                 ),
                 "manual_check_required_flag": manual_check_required_flag,
                 "target_u_factor_mix": target_u_factor_mix,

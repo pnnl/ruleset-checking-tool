@@ -14,7 +14,7 @@ from rct229.utils.std_comparisons import std_equal
 DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 
 SUBSURFACE_SUBCLASSIFICATION_OPTIONS = SchemaEnums.schema_enums[
-    "SubsurfaceSubclassificationOptions2022ASHRAE901"
+    "SubsurfaceSubclassificationOptions2019ASHRAE901"
 ]
 
 SPANDREL_GLASS = SUBSURFACE_SUBCLASSIFICATION_OPTIONS.SPANDREL_GLASS
@@ -51,12 +51,16 @@ class PRM9012022Rule50m61(RuleDefinitionListIndexedBase):
         rpd_b = context.BASELINE_0
         rpd_p = context.PROPOSED
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        constructions_b = rpd_b["ruleset_model_descriptions"][0].get("constructions", [])
-        constructions_p = rpd_p["ruleset_model_descriptions"][0].get("constructions", [])
+        constructions_b = rpd_b["ruleset_model_descriptions"][0].get(
+            "constructions", []
+        )
+        constructions_p = rpd_p["ruleset_model_descriptions"][0].get(
+            "constructions", []
+        )
         return {
             "climate_zone": climate_zone,
             "constructions_b": constructions_b,
-            "constructions_p": constructions_p
+            "constructions_p": constructions_p,
         }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
@@ -75,7 +79,11 @@ class PRM9012022Rule50m61(RuleDefinitionListIndexedBase):
             building_p = context.PROPOSED
             return {
                 "scc_dict_b": get_baseline_surface_conditioning_category_dict(
-                    data["climate_zone"], building_b, data["constructions_b"], building_p, data["constructions_p"]
+                    data["climate_zone"],
+                    building_b,
+                    data["constructions_b"],
+                    building_p,
+                    data["constructions_p"],
                 ),
             }
 

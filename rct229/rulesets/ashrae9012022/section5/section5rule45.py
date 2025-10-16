@@ -40,8 +40,12 @@ class PRM9012022Rule22f12(RuleDefinitionListIndexedBase):
         climate_zone_b = rmd_b["ruleset_model_descriptions"][0]["weather"][
             "climate_zone"
         ]
-        constructions_b = rmd_b["ruleset_model_descriptions"][0].get("constructions", [])
-        constructions_p = rmd_p["ruleset_model_descriptions"][0].get("constructions", [])
+        constructions_b = rmd_b["ruleset_model_descriptions"][0].get(
+            "constructions", []
+        )
+        constructions_p = rmd_p["ruleset_model_descriptions"][0].get(
+            "constructions", []
+        )
 
         return {
             "climate_zone_b": climate_zone_b,

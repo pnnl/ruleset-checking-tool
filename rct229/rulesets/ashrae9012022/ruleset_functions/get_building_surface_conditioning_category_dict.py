@@ -118,7 +118,9 @@ GET_SURFACE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
 }
 
 
-def get_building_surface_conditioning_category_dict(climate_zone, building, constructions):
+def get_building_surface_conditioning_category_dict(
+    climate_zone, building, constructions
+):
     """Determines the surface conditioning category for every surface in a building
 
     Parameters

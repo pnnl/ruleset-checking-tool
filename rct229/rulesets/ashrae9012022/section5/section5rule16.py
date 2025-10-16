@@ -49,12 +49,16 @@ class PRM9012022Rule80o45(RuleDefinitionListIndexedBase):
         rpd_b = context.BASELINE_0
         rpd_p = context.PROPOSED
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        constructions_b = rpd_b["ruleset_model_descriptions"][0].get("constructions", [])
-        constructions_p = rpd_p["ruleset_model_descriptions"][0].get("constructions", [])
+        constructions_b = rpd_b["ruleset_model_descriptions"][0].get(
+            "constructions", []
+        )
+        constructions_p = rpd_p["ruleset_model_descriptions"][0].get(
+            "constructions", []
+        )
         return {
             "climate_zone": climate_zone,
             "constructions_b": constructions_b,
-            "constructions_p": constructions_p
+            "constructions_p": constructions_p,
         }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
@@ -95,7 +99,11 @@ class PRM9012022Rule80o45(RuleDefinitionListIndexedBase):
                     ZERO.AREA,
                 ),
                 "surface_conditioning_category_dict_b": get_baseline_surface_conditioning_category_dict(
-                    data["climate_zone"], building_b, constructions_b, building_p, constructions_p
+                    data["climate_zone"],
+                    building_b,
+                    constructions_b,
+                    building_p,
+                    constructions_p,
                 ),
             }
 

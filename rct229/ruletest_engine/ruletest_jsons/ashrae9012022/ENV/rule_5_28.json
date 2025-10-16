@@ -1,28 +1,28 @@
 {
-    "rule-5-45-a": {
+    "rule-5-28-a": {
         "Section": 5,
-        "Rule": 45,
+        "Rule": 28,
         "Test": "a",
+        "test_description": "Project located in climate zone 6A has one building segment with 1 zones containing 2 spaces and a roof surface with a skylight. The zone has mixed residential and nonresidential space types. Rule cannot be evaluated because the baseline requirements for residential and nonresidential differ.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "MANUAL REVIEW IS REQUESTED TO VERIFY SKYLIGHT MEETS SHGC REQUIREMENT AS PER TABLE G3.4.",
         "standard": {
-            "ruleset": "ashrae9012022",
-            "rule_id": "5-45",
-            "ruleset_reference": "Table G3.1 Section 5(j) Baseline",
-            "rule_description": "The baseline above-grade wall surfaces shall be modeled with a thermal emittance of 0.90.",
+            "rule_id": "5-28",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
+            "rule_description": "Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.1.7"
         },
-        "test_description": "A project with one building segment has one space with an above grade, conditioned wall. The wall's thermal absorptance is equal to 0.9, in agreement with Table G3.1. Section 5(j).",
-        "expected_rule_outcome": "pass",
         "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "ruleset_model_descriptions": [
                     {
                         "weather": {
-                            "climate_zone": "CZ4A",
+                            "climate_zone": "CZ6A",
                             "data_source_type": "OTHER"
                         },
                         "id": "RMD 1",
@@ -35,10 +35,16 @@
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
+                                                "volume": 42.47526988799999,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
+                                                        "floor_area": 23.225759999999998
+                                                    },
+                                                    {
+                                                        "id": "Space 2",
+                                                        "lighting_space_type": "DWELLING_UNIT",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -52,13 +58,18 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 9.290303999999999,
-                                                        "optical_properties": {
-                                                            "id": "Optical Properties 1",
-                                                            "absorptance_thermal_exterior": 0.9
-                                                        },
-                                                        "construction": "Construction 1"
+                                                        "tilt": 30,
+                                                        "area": 929.0303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 23.225759999999998,
+                                                                "opaque_area": 4.6451519999999995,
+                                                                "u_factor": 6.927482243853377,
+                                                                "solar_heat_gain_coefficient": 0.49
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -68,125 +79,47 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 42204.0
+                                                    "design_sensible_cool_capacity": 35170.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 10257.488888888889
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
                                     }
                                 ]
-                            }
-                        ],
-                        "constructions": [
-                            {
-                                "id": "Construction 1"
                             }
                         ],
                         "type": "BASELINE_0"
-                    }
-                ]
-            },
-            "proposed": {
-                "id": "RPD 1",
-                "ruleset_model_descriptions": [
-                    {
-                        "weather": {
-                            "climate_zone": "CZ4A",
-                            "data_source_type": "OTHER"
-                        },
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Zone 1",
-                                                "spaces": [
-                                                    {
-                                                        "id": "Space 1",
-                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
-                                                        "floor_area": 23.225759999999998
-                                                    }
-                                                ],
-                                                "terminals": [
-                                                    {
-                                                        "id": "Terminal 1",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
-                                                    }
-                                                ],
-                                                "surfaces": [
-                                                    {
-                                                        "id": "Surface 1",
-                                                        "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 9.290303999999999,
-                                                        "optical_properties": {
-                                                            "id": "Optical Properties 1",
-                                                            "absorptance_thermal_exterior": 0.9
-                                                        },
-                                                        "construction": "Construction 1"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "HVAC 1",
-                                                "cooling_system": {
-                                                    "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 42204.0
-                                                },
-                                                "heating_system": {
-                                                    "id": "Heating System 1",
-                                                    "design_capacity": 10257.488888888889
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "constructions": [
-                            {
-                                "id": "Construction 1"
-                            }
-                        ],
-                        "type": "PROPOSED"
                     }
                 ]
             }
         }
     },
-    "rule-5-45-b": {
+    "rule-5-28-b": {
         "Section": 5,
-        "Rule": 45,
+        "Rule": 28,
         "Test": "b",
+        "test_description": "Project located in climate zone 6A has one building segment and includes a space with a roof surface and a skylight. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight SHGC-factor is established correctly.",
+        "expected_rule_outcome": "pass",
         "standard": {
-            "ruleset": "ashrae9012022",
-            "rule_id": "5-45",
-            "ruleset_reference": "Table G3.1 Section 5(j) Baseline",
-            "rule_description": "The baseline above-grade wall surfaces shall be modeled with a thermal emittance of 0.90.",
+            "rule_id": "5-28",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
+            "rule_description": "Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
             "applicable_rmr": "Baseline Model",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "primary_rule": "Full",
             "schema_version": "0.1.7"
         },
-        "test_description": "A project with one building segment has one space with an above grade, conditioned wall. The wall's thermal absorptance is equal to 0.7, in disagreement with Table G3.1. Section 5(j).",
-        "expected_rule_outcome": "fail",
         "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
                 "ruleset_model_descriptions": [
                     {
                         "weather": {
-                            "climate_zone": "CZ4A",
+                            "climate_zone": "CZ6A",
                             "data_source_type": "OTHER"
                         },
                         "id": "RMD 1",
@@ -199,10 +132,11 @@
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
+                                                "volume": 21.237634943999996,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -216,13 +150,18 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 9.290303999999999,
-                                                        "optical_properties": {
-                                                            "id": "Optical Properties 1",
-                                                            "absorptance_thermal_exterior": 0.7
-                                                        },
-                                                        "construction": "Construction 1"
+                                                        "tilt": 30,
+                                                        "area": 929.0303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 23.225759999999998,
+                                                                "opaque_area": 4.6451519999999995,
+                                                                "u_factor": 6.927482243853377,
+                                                                "solar_heat_gain_coefficient": 0.49
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -232,33 +171,47 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 42204.0
+                                                    "design_sensible_cool_capacity": 35170.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 10257.488888888889
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
                                     }
                                 ]
-                            }
-                        ],
-                        "constructions": [
-                            {
-                                "id": "Construction 1"
                             }
                         ],
                         "type": "BASELINE_0"
                     }
                 ]
-            },
-            "proposed": {
+            }
+        }
+    },
+    "rule-5-28-c": {
+        "Section": 5,
+        "Rule": 28,
+        "Test": "c",
+        "test_description": "Project located in climate zone 6A has one building segment and includes a space with a roof surface and a skylight. The space has non-residential occupancy type and is conditioned based on heating and cooling capacity of the HVAC system that serves it. Skylight area in the building is greater than 2.0%. The baseline skylight SHGC-factor is not established correctly.",
+        "expected_rule_outcome": "fail",
+        "standard": {
+            "rule_id": "5-28",
+            "ruleset_reference": "Table G3.1(5) Baseline Building Performance (e)",
+            "rule_description": "Skylight SHGC properties shall match the appropriate requirements in Tables G3.4-1 through G3.4-8 using the value and the applicable skylight percentage.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "rmd_transformations": {
+            "baseline": {
                 "id": "RPD 1",
                 "ruleset_model_descriptions": [
                     {
                         "weather": {
-                            "climate_zone": "CZ4A",
+                            "climate_zone": "CZ6A",
                             "data_source_type": "OTHER"
                         },
                         "id": "RMD 1",
@@ -271,10 +224,11 @@
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
+                                                "volume": 21.237634943999996,
                                                 "spaces": [
                                                     {
                                                         "id": "Space 1",
-                                                        "lighting_space_type": "PARKING_AREA_INTERIOR",
+                                                        "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 23.225759999999998
                                                     }
                                                 ],
@@ -288,13 +242,18 @@
                                                     {
                                                         "id": "Surface 1",
                                                         "adjacent_to": "EXTERIOR",
-                                                        "tilt": 90,
-                                                        "area": 9.290303999999999,
-                                                        "optical_properties": {
-                                                            "id": "Optical Properties 1",
-                                                            "absorptance_thermal_exterior": 0.7
-                                                        },
-                                                        "construction": "Construction 1"
+                                                        "tilt": 30,
+                                                        "area": 929.0303999999999,
+                                                        "subsurfaces": [
+                                                            {
+                                                                "id": "Subsurface 1",
+                                                                "classification": "SKYLIGHT",
+                                                                "glazed_area": 23.225759999999998,
+                                                                "opaque_area": 4.6451519999999995,
+                                                                "u_factor": 6.927482243853377,
+                                                                "solar_heat_gain_coefficient": 0.39
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             }
@@ -304,11 +263,11 @@
                                                 "id": "HVAC 1",
                                                 "cooling_system": {
                                                     "id": "Cooling System 1",
-                                                    "design_sensible_cool_capacity": 42204.0
+                                                    "design_sensible_cool_capacity": 35170.0
                                                 },
                                                 "heating_system": {
                                                     "id": "Heating System 1",
-                                                    "design_capacity": 10257.488888888889
+                                                    "design_capacity": 9378.275555555556
                                                 }
                                             }
                                         ]
@@ -316,12 +275,7 @@
                                 ]
                             }
                         ],
-                        "constructions": [
-                            {
-                                "id": "Construction 1"
-                            }
-                        ],
-                        "type": "PROPOSED"
+                        "type": "BASELINE_0"
                     }
                 ]
             }

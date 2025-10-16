@@ -5,9 +5,9 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type imp
     OpaqueSurfaceType as OST,
     get_opaque_surface_type,
 )
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
-    get_surface_conditioning_category_dict,
+    get_building_surface_conditioning_category_dict,
 )
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
@@ -55,7 +55,7 @@ def get_building_segment_skylight_roof_areas_dict(
     zcc_dict = get_zone_conditioning_category_dict(
         climate_zone, building, constructions
     )
-    scc_dict = get_surface_conditioning_category_dict(
+    scc_dict = get_building_surface_conditioning_category_dict(
         climate_zone, building, constructions
     )
     building_segment_roof_areas_dict = {}
