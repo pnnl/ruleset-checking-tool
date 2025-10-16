@@ -31,6 +31,31 @@ def run_ashrae9012019_tests(section=None):
     ]
 
 
+def run_ashrae9012022_tests(section=None):
+    """
+    Run ruleset by section or all
+    If section is None, then this function runs all the rule sections
+
+    Parameters
+    ----------
+    section: str - it should be the same string in the ASHRAE9012022_TEST_PATH_LIST
+
+    Returns
+    -------
+
+    """
+    return [
+        run_test_helper(
+            _helper_get_all_test_file_by_section(
+                RuleSet.ASHRAE9012022_RULESET, test_section
+            ),
+            RuleSet.ASHRAE9012022_RULESET,
+        )
+        for test_section in RuleSetTest.ASHRAE9012022_TEST_LIST
+        if section is None or test_section == section
+    ]
+
+
 def generate_ashrae9012019_software_test_report(
     section_list=None, output_dir=os.path.dirname(__file__)
 ):
@@ -310,8 +335,9 @@ def run_test_one_ASHRAE9012022_jsontest(test_json):
 
 
 # run_test_one_ASHRAE9012019_jsontest("ashrae9012019/section23/rule_23_8.json")
-run_test_one_ASHRAE9012022_jsontest("ashrae9012022/ENV/rule_5_43.json")
+# run_test_one_ASHRAE9012022_jsontest("ashrae9012022/ENV/rule_5_43.json")
 # run_ashrae9012019_tests()
+run_ashrae9012022_tests()
 # output_dir = os.path.dirname(__file__)
 # generate_ashrae9012019_software_test_report(['tester'])
 # generate_ashrae9012019_software_test_report(None, output_dir)

@@ -1,8 +1,6 @@
 import importlib
 
-from rct229.rule_engine.rulesets import RuleSet
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.schema.schema_store import SchemaStore
 
 # Add all available rule modules in __all__
 __all__ = [
@@ -21,7 +19,15 @@ __all__ = [
     "section23",
     "section_list",
     "section_dict",
+    "BASELINE_0",
+    "BASELINE_90",
+    "BASELINE_180",
+    "BASELINE_270",
+    "USER",
+    "PROPOSED",
 ]
+
+SHORT_NAME = "prm9012019"
 
 rules_dict = {
     "prm9012019rule73j65": "section1rule1",
@@ -272,7 +278,6 @@ if SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901"):
     COMMON_RMD = SchemaEnums.schema_enums.get("CommonRulesetModelOptions")
 
 else:
-    SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
     SchemaEnums.update_schema_enum()
     RMD = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")
     COMMON_RMD = SchemaEnums.schema_enums.get("CommonRulesetModelOptions")

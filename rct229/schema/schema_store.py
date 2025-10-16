@@ -31,8 +31,8 @@ class SchemaStore:
                 return SchemaStore.SCHEMA_9012022_OUTPUT_KEY
 
     @staticmethod
-    def set_ruleset(ruleset: RuleSet):
-        # prevent overriding the ruleset if multi-processing.
+    def set_ruleset(ruleset: str):
+        # prevent overriding the ruleset if multiprocessing.
         if SchemaStore.SELECTED_RULESET in (
             RuleSet.ASHRAE9012019_RULESET,
             RuleSet.ASHRAE9012022_RULESET,

@@ -1,19 +1,19 @@
 import importlib
 import inspect
+import sys
 
 import rct229.rule_engine.partial_rule_definition as base_partial_rule_classes
 import rct229.rule_engine.rule_base as base_classes
 import rct229.rule_engine.rule_list_base as base_list_classes
 import rct229.rule_engine.rule_list_indexed_base as base_list_indexed_classes
-import rct229.rulesets as rulesets
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rulesets import RuleSet
+from rct229.schema.schema_store import SchemaStore
+
+rulesets = sys.modules[__name__]
 
 # All list for registering a ruleset.
 __all__ = [RuleSet.ASHRAE9012019_RULESET, RuleSet.ASHRAE9012022_RULESET]
-
-# Added to remove the sub-module that are not rules.
-from rct229.schema.schema_store import SchemaStore
 
 MODULE_EXCEPTION_LIST = ["math", "itertools"]
 
@@ -23,6 +23,7 @@ def __getruleset__():
     for ruleset in ruleset_list:
         if ruleset[0] == SchemaStore.SELECTED_RULESET:
             return ruleset[1]
+    return None
 
 
 def __getrules__():
@@ -96,6 +97,7 @@ def __getrulemap__():
         if ruleset[0] == SchemaStore.SELECTED_RULESET:
             rules_dict = getattr(ruleset[1], "rules_dict", None)
             return rules_dict
+    return None
 
 
 def __getattr__(name):
