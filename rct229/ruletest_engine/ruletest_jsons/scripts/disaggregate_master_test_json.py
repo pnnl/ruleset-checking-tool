@@ -1,11 +1,22 @@
+from rct229.schema.schema_store import SchemaStore
+from rct229.rule_engine.rulesets import RuleSet
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
     disaggregate_master_rmd_json,
     disaggregate_master_ruletest_json,
 )
 
-# Name of master spreadsheet in rct229.ruletest_engine.ruletest_jsons
-json_name = "section12_receptacle_tcd_renumb.json"
+# --- SELECT A RULESET ---
+# ruleset = RuleSet.ASHRAE9012019_RULESET
+ruleset = RuleSet.ASHRAE9012022_RULESET
+
+# --- SET THE MASTER JSON FILENAME TO DISAGGREGATE ---
+json_name = "section5_envelope_tcd_2022.json"
+
+
+SchemaStore.set_ruleset(ruleset)
+disaggregate_master_ruletest_json(json_name, ruleset)
+
+# --- SET THE OUTPUT DIRECTORY ---
 # output_dir = "system_types"
-ruleset_doc = "ashrae9012022"
-disaggregate_master_ruletest_json(json_name, ruleset_doc)
+
 # disaggregate_master_rmd_json(json_name, output_dir, ruleset_doc)
