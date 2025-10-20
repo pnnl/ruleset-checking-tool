@@ -45,7 +45,7 @@ class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        constructions = rpd_b["ruleset_model_descriptions"][0]["constructions"]
+        constructions = rpd_b["ruleset_model_descriptions"][0].get("constructions", [])
         return {
             "climate_zone": climate_zone,
             "constructions": constructions,
