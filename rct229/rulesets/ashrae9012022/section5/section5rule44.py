@@ -32,6 +32,9 @@ class PRM9012022Rule13d92(RuleDefinitionListIndexedBase):
             standard_section="Table G3.1 Section 5(j) Baseline",
             is_primary_rule=True,
             list_path="$.ruleset_model_descriptions[*].buildings[*]",
+            required_fields={
+                "$.ruleset_model_descriptions[*]": ["constructions"],
+            },
         )
 
     def create_data(self, context, data=None):
@@ -40,12 +43,8 @@ class PRM9012022Rule13d92(RuleDefinitionListIndexedBase):
         climate_zone_b = rmd_b["ruleset_model_descriptions"][0]["weather"][
             "climate_zone"
         ]
-        constructions_b = rmd_b["ruleset_model_descriptions"][0].get(
-            "constructions", []
-        )
-        constructions_p = rmd_p["ruleset_model_descriptions"][0].get(
-            "constructions", []
-        )
+        constructions_b = rmd_b["ruleset_model_descriptions"][0]["constructions"]
+        constructions_p = rmd_p["ruleset_model_descriptions"][0]["constructions"]
 
         return {
             "climate_zone_b": climate_zone_b,

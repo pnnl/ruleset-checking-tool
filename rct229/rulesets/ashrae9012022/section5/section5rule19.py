@@ -32,7 +32,7 @@ class PRM9012022Rule57c26(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
-                "$.ruleset_model_descriptions[*]": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather", "constructions"],
                 "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
             },
             each_rule=PRM9012022Rule57c26.BuildingRule(),
@@ -49,12 +49,8 @@ class PRM9012022Rule57c26(RuleDefinitionListIndexedBase):
         rmd_b = context.BASELINE_0
         rmd_p = context.PROPOSED
         climate_zone = rmd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        constructions_b = rmd_b["ruleset_model_descriptions"][0].get(
-            "constructions", []
-        )
-        constructions_p = rmd_p["ruleset_model_descriptions"][0].get(
-            "constructions", []
-        )
+        constructions_b = rmd_b["ruleset_model_descriptions"][0]["constructions"]
+        constructions_p = rmd_p["ruleset_model_descriptions"][0]["constructions"]
 
         # TODO It is determined later we will modify this function to RMD level -
         # The implementation is temporary
