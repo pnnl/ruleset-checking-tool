@@ -33,7 +33,7 @@ class PRM9012019Rule67j71(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
-                "$.ruleset_model_descriptions[*]": ["weather"],
+                "$.ruleset_model_descriptions[*]": ["weather", "constructions"],
                 "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
             },
             each_rule=PRM9012019Rule67j71.BuildingRule(),
@@ -49,7 +49,7 @@ class PRM9012019Rule67j71(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        constructions = rpd_b["ruleset_model_descriptions"][0].get("constructions")
+        constructions = rpd_b["ruleset_model_descriptions"][0]["constructions"]
         return {
             "climate_zone": climate_zone,
             "constructions": constructions,
