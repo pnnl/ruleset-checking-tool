@@ -26,4 +26,4 @@ def test__table_J_6_Y_CAP_f_T():
 
 
 def test__table_J_6_AA_EIR_f_PLR():
-    assert table_J_6_lookup("AA", "EIR-f_PLR") == [0.339494, 0.04909, 0.611582]
+    assert table_J_6_lookup("AA", "EIR-f-PLR") == [0.339494, 0.04909, 0.611582]
