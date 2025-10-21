@@ -2,10 +2,16 @@
 name = "ruleset-checking-tool"
 version = "0.4.1"
 description = "PNNL ruleset checking tool"
-authors = ["Weili Xu <weili.xu@pnnl.gov>", "Charlie Holly <charlie.holly@pnnl.gov>", "Juan Gonzalez <juan.gonzalez@pnnl.gov>", "Yun Joon Jung <yunjoon.jung@pnnl.gov>", "Jiarong Xie <jiarong.xie@pnnl.gov>", "Jackson Jarbose <jackson@karpmanconsulting.net>", "Karen Walkerman <kwalkerman@gard.com>"]
+authors = ["Weili Xu <weili.xu@pnnl.gov>", "Charlie Holly <charlie.holly@pnnl.gov>", "Juan Gonzalez <juan.gonzalez@pnnl.gov>", "Yun Joon Jung <yunjoon.jung@pnnl.gov>", "Jiarong Xie <jiarong.xie@pnnl.gov>", "Jackson Jarboe <jackson@karpmanconsulting.net>", "Karen Walkerman <kwalkerman@gard.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "rct229"}]
+packages = [
+    { include = "rct229", from = ".", exclude = ["rct229/rulesets/ashrae9012022"] }
+]
+include = [
+    { path = "rct229/rulesets/ashrae9012019", format = "sdist" },
+    { path = "rct229/rulesets/ashrae9012022", format = "sdist" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -40,6 +46,13 @@ astor = "^0.8.1"
 [tool.poetry.scripts]
 rct229 = 'rct229.cli:cli'
 minify-jsons = 'rct229.utils.minify_jsons:main'
+
+[tool.poetry.extras]
+ashrae9012022 = ["rct229.rulesets.ashrae9012022"]
+
+[tool.poetry.plugins."rct229.rulesets"]
+"ashrae9012019" = "rct229.rulesets.ashrae9012019"
+"ashrae9012022" = "rct229.rulesets.ashrae9012022"
 
 [build-system]
 requires = ["poetry-core"]
