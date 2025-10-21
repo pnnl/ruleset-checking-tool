@@ -112,15 +112,14 @@ class PRM9012019rule86d29(RuleDefinitionListIndexedBase):
 
             def rule_check(self, context, calc_vals=None, data=None):
                 occupancy_sensor_controls_b = calc_vals["occupancy_sensor_controls_b"]
+                occupancy_sensor_schedules_b = calc_vals["occupancy_sensor_schedules_b"]
 
-                return all(
-                    [
-                        val
-                        in [
-                            LIGHTING_OCCUPANCY_CONTROL.NONE,
-                            LIGHTING_OCCUPANCY_CONTROL.MANUAL_ON,
-                            None,
-                        ]
-                        for val in occupancy_sensor_controls_b
+                return not any(
+                    val
+                    in [
+                        LIGHTING_OCCUPANCY_CONTROL.NONE,
+                        LIGHTING_OCCUPANCY_CONTROL.MANUAL_ON,
+                        None,
                     ]
-                )
+                    for val in occupancy_sensor_controls_b
+                ) and all(occupancy_sensor_schedules_b)
