@@ -57,7 +57,7 @@ class PRM9012022Rule23o29(RuleDefinitionListIndexedBase):
                 )
             ) > 0 and any(
                 [
-                    getattr_(interior_lighting, "interior_lighting", "purpose_type")
+                    interior_lighting.get("purpose_type")
                     == LIGHTING_PURPOSE.RETAIL_DISPLAY
                     for interior_lighting in find_all(
                         "$.building_segments[*].zones[*].spaces[*].interior_lighting[*]",
@@ -66,13 +66,17 @@ class PRM9012022Rule23o29(RuleDefinitionListIndexedBase):
                 ]
             )
 
+        def list_filter(self, context_item, data):
+            space_p = context_item.PROPOSED
+
+            return space_p.get("interior_lighting")
+
         class SpaceRule(RuleDefinitionBase):
             def __init__(self):
                 super(PRM9012022Rule23o29.BuildingRule.SpaceRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
-                    required_fields={"$": ["interior_lighting"]},
                     precision={
                         "minimum_retail_display_w": {
                             "precision": 1,
@@ -155,10 +159,6 @@ class PRM9012022Rule23o29(RuleDefinitionListIndexedBase):
                 ) and (
                     baseline_interior_display_w
                     < min(proposed_interior_display_w, maximum_retail_display_w)
-                    or self.precision_comparison["baseline_interior_display_w"](
-                        baseline_interior_display_w,
-                        min(proposed_interior_display_w, maximum_retail_display_w),
-                    )
                 )
 
             def rule_check(self, context, calc_vals=None, data=None):
