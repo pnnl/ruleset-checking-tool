@@ -6,8 +6,10 @@ authors = ["Weili Xu <weili.xu@pnnl.gov>", "Charlie Holly <charlie.holly@pnnl.go
 license = "MIT"
 readme = "README.md"
 packages = [
-    { include = "rct229", from = ".", exclude = ["rct229/rulesets/ashrae9012022"] }
+    { include = "rct229" }
 ]
+
+exclude = ["rct229/rulesets/ashrae9012022"]
 include = [
     { path = "rct229/rulesets/ashrae9012019", format = "sdist" },
     { path = "rct229/rulesets/ashrae9012022", format = "sdist" },
