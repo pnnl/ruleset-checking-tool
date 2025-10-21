@@ -1,9 +1,13 @@
+import copy
+
+import pytest
 from rct229.rulesets.ashrae9012022.ruleset_functions.is_chiller_performance_app_j import (
     is_chiller_performance_app_j,
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rpd
+from rct229.utils.assertions import RCTFailureException
 
 TEST_RMD = {
     "id": "RMD 1",
@@ -75,7 +79,6 @@ TEST_RMD = {
             "cooling_loop": "Chiller Loop 1",
             "compressor_type": "CENTRIFUGAL",
             "rated_capacity": 527550.0,
-            "full_load_efficiency": 3.2,
             "condensing_loop": "Condenser Loop 1",
             "efficiency_metric_values": [5.5],
             "efficiency_metric_types": ["FULL_LOAD_EFFICIENCY_RATED"],
@@ -106,14 +109,14 @@ TEST_RMD = {
                     .to("degC")
                     .m,
                     "condenser_temperature": (72.5 * ureg("degF")).to("degC").m,
-                    "capacity": 522221.2,
+                    "capacity": 502507.3,
                 },
                 {
                     "chilled_water_supply_temperature": (39 * ureg("degF"))
                     .to("degC")
                     .m,
                     "condenser_temperature": (97.5 * ureg("degF")).to("degC").m,
-                    "capacity": 565443.4,
+                    "capacity": 438845.2,
                 },
                 {
                     "chilled_water_supply_temperature": (45 * ureg("degF"))
@@ -141,14 +144,14 @@ TEST_RMD = {
                     .to("degC")
                     .m,
                     "condenser_temperature": (72.5 * ureg("degF")).to("degC").m,
-                    "capacity": 522221.2,
+                    "capacity": 553642.8,
                 },
                 {
                     "chilled_water_supply_temperature": (45 * ureg("degF"))
                     .to("degC")
                     .m,
                     "condenser_temperature": (97.5 * ureg("degF")).to("degC").m,
-                    "capacity": 522221.2,
+                    "capacity": 505807.2,
                 },
                 {
                     "chilled_water_supply_temperature": (50 * ureg("degF"))
@@ -169,28 +172,28 @@ TEST_RMD = {
                     .to("degC")
                     .m,
                     "condenser_temperature": (85 * ureg("degF")).to("degC").m,
-                    "capacity": 530449.9,
+                    "capacity": 566113.4,
                 },
                 {
                     "chilled_water_supply_temperature": (50 * ureg("degF"))
                     .to("degC")
                     .m,
                     "condenser_temperature": (72.5 * ureg("degF")).to("degC").m,
-                    "capacity": 522221.2,
+                    "capacity": 579397.7,
                 },
                 {
                     "chilled_water_supply_temperature": (50 * ureg("degF"))
                     .to("degC")
                     .m,
                     "condenser_temperature": (97.5 * ureg("degF")).to("degC").m,
-                    "capacity": 566113.4,
+                    "capacity": 544750.9,
                 },
                 {
                     "chilled_water_supply_temperature": (55 * ureg("degF"))
                     .to("degC")
                     .m,
                     "condenser_temperature": (60 * ureg("degF")).to("degC").m,
-                    "capacity": 566113.4,
+                    "capacity": 588439.3,
                 },
                 {
                     "chilled_water_supply_temperature": (55 * ureg("degF"))
@@ -211,14 +214,14 @@ TEST_RMD = {
                     .to("degC")
                     .m,
                     "condenser_temperature": (72.5 * ureg("degF")).to("degC").m,
-                    "capacity": 522221.2,
+                    "capacity": 589827.4,
                 },
                 {
                     "chilled_water_supply_temperature": (55 * ureg("degF"))
                     .to("degC")
                     .m,
                     "condenser_temperature": (97.5 * ureg("degF")).to("degC").m,
-                    "capacity": 583137.4,
+                    "capacity": 568369.3,
                 },
             ],
             "power_operating_points": [
@@ -228,7 +231,159 @@ TEST_RMD = {
                     .m,
                     "condenser_temperature": (60 * ureg("degF")).to("degC").m,
                     "load": 522221.2,
-                    "power": 55019,
+                    "power": 79979.2,
+                },
+                {
+                    "chilled_water_supply_temperature": (39 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (72.5 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 93409.8,
+                },
+                {
+                    "chilled_water_supply_temperature": (39 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (85.0 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 102356.5,
+                },
+                {
+                    "chilled_water_supply_temperature": (39 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (97.5 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 107134.4,
+                },
+                {
+                    "chilled_water_supply_temperature": (39 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (104 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 108084.6,
+                },
+                {
+                    "chilled_water_supply_temperature": (45 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (60 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 71797.9,
+                },
+                {
+                    "chilled_water_supply_temperature": (45 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (72.5 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 84935.4,
+                },
+                {
+                    "chilled_water_supply_temperature": (45 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (85.0 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 93202.5,
+                },
+                {
+                    "chilled_water_supply_temperature": (45 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (97.5 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 96760.4,
+                },
+                {
+                    "chilled_water_supply_temperature": (45 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (104 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 96800.8,
+                },
+                {
+                    "chilled_water_supply_temperature": (50 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (60 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 66960.6,
+                },
+                {
+                    "chilled_water_supply_temperature": (50 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (72.5 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 80260.3,
+                },
+                {
+                    "chilled_water_supply_temperature": (50 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (85.0 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 88538.4,
+                },
+                {
+                    "chilled_water_supply_temperature": (50 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (97.5 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 91899.9,
+                },
+                {
+                    "chilled_water_supply_temperature": (50 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (104 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 91737.6,
+                },
+                {
+                    "chilled_water_supply_temperature": (55 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (60 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 63538.7,
+                },
+                {
+                    "chilled_water_supply_temperature": (55 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (72.5 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 77160.5,
+                },
+                {
+                    "chilled_water_supply_temperature": (55 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (85.0 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 85681.6,
+                },
+                {
+                    "chilled_water_supply_temperature": (55 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (97.5 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 89177.3,
+                },
+                {
+                    "chilled_water_supply_temperature": (55 * ureg("degF"))
+                    .to("degC")
+                    .m,
+                    "condenser_temperature": (104 * ureg("degF")).to("degC").m,
+                    "load": 522221.2,
+                    "power": 89031.4,
                 },
             ],
         }
@@ -286,5 +441,29 @@ def test__TEST_RPD__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test__get_hvac_zone_list_w_area_dict():
-    assert is_chiller_performance_app_j(TEST_CHILLER) is True
+def test__is_chiller_performance_app_j__pass():
+    assert is_chiller_performance_app_j(TEST_CHILLER)
+
+
+def test__is_chiller_performance_app_j__pass():
+    assert is_chiller_performance_app_j(TEST_CHILLER)
+
+
+def test__is_chiller_performance_app_j__zero_full_load_efficiency_rated():
+    with pytest.raises(
+        RCTFailureException,
+        match="The `full_load_efficiency_rated` value must be greater than 0.",
+    ):
+        TEST_CHILLER_ZERO_EFFI = copy.deepcopy(TEST_CHILLER)
+        TEST_CHILLER_ZERO_EFFI["efficiency_metric_values"][0] = 0.0
+        is_chiller_performance_app_j(TEST_CHILLER_ZERO_EFFI)
+
+
+def test__is_chiller_performance_app_j__zero_capacity():
+    with pytest.raises(
+        RCTFailureException,
+        match="The 'capacity' value must be greater than 0 W.",
+    ):
+        TEST_CHILLER_ZERO_EFFI = copy.deepcopy(TEST_CHILLER)
+        TEST_CHILLER_ZERO_EFFI["capacity_operating_points"][0]["capacity"] = 0.0
+        is_chiller_performance_app_j(TEST_CHILLER_ZERO_EFFI)

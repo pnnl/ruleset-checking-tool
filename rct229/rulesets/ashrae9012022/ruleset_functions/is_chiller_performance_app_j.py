@@ -1,15 +1,17 @@
 from rct229.rulesets.ashrae9012022.data_fns.table_J_6_fns import table_J_6_lookup
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.assertions import getattr_
+from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.std_comparisons import std_equal_with_precision
 
 ENERGY_SOURCE = SchemaEnums.schema_enums["EnergySourceOptions"]
 CHILLER_COMPRESSOR = SchemaEnums.schema_enums["ChillerCompressorOptions"]
+CHILLER_EFFICIENCY_METRIC = SchemaEnums.schema_enums["ChillerEfficiencyMetricOptions"]
+
 
 EXPECTED_VALIDATION_PLR = [0.25, 0.50, 0.75, 1.00]
-EXPECTED_CHILLED_WATER_TEMPS = [39, 45, 50, 55]
-EXPECTED_ENTERING_CONDENSER_WATER_TEMPS = [60, 104, 85, 72.5, 97.5]
+EXPECTED_CHILLED_WATER_TEMPS = [39.0, 45.0, 50.0, 55.0]
+EXPECTED_ENTERING_CONDENSER_WATER_TEMPS = [60.0, 72.5, 85.0, 97.5, 104.0]
 
 
 def is_chiller_performance_app_j(chiller: dict) -> bool:
@@ -53,39 +55,67 @@ def is_chiller_performance_app_j(chiller: dict) -> bool:
         curve_set = None
 
     if curve_set is not None:
-        rated_power = (
-            rated_capacity / chiller["full_load_efficiency"]
-            if getattr_(chiller, "chillers", "full_load_efficiency") > 0.0
-            else 0.0
+        # The first element is "FULL_LOAD_EFFICIENCY_RATED"
+        full_load_efficiency_rated = getattr_(
+            chiller, "chillers", "efficiency_metric_values"
+        )[0]
+        assert_(
+            full_load_efficiency_rated > 0,
+            "The `full_load_efficiency_rated` value must be greater than 0.",
         )
+
+        rated_power = rated_capacity / full_load_efficiency_rated
 
         eir_f_t_coefficients = table_J_6_lookup(curve_set, "EIR-f-T")
         cap_f_t_coefficients = table_J_6_lookup(curve_set, "CAP-f-T")
         plr_coefficients = table_J_6_lookup(curve_set, "EIR-f-PLR")
 
         capacity_validation_pts_dict = {}
-        for capacity_validation_point in chiller.get("capacity_operating_points", []):
-            chilled_water_supply_temp = capacity_validation_point.get(
-                "chilled_water_supply_temperature", 0.0 * ureg("degC")
+        capacity_operating_points = getattr_(
+            chiller, "chillers", "capacity_operating_points"
+        )
+        for capacity_validation_point in capacity_operating_points:
+            chilled_water_supply_temp = getattr_(
+                capacity_validation_point,
+                "capacity_operating_points",
+                "chilled_water_supply_temperature",
             ).to("degF")
-            condenser_temp = capacity_validation_point.get(
-                "condenser_temperature", 0.0 * ureg("degC")
+            condenser_temp = getattr_(
+                capacity_validation_point,
+                "capacity_operating_points",
+                "condenser_temperature",
             ).to("degF")
 
-            dict_key = f"{int(round(chilled_water_supply_temp.m, 1))}, {int(round(condenser_temp.m, 1))}"
-            capacity_validation_pts_dict[dict_key] = capacity_validation_point.get(
-                "capacity", 0.0 * ureg("W")
+            dict_key = (
+                f"{round(chilled_water_supply_temp.m, 1)}, {round(condenser_temp.m, 1)}"
+            )
+            capacity_validation_pts_dict[dict_key] = getattr_(
+                capacity_validation_point,
+                "capacity_operating_points",
+                "capacity",
+            )
+            assert_(
+                capacity_validation_pts_dict[dict_key] > 0,
+                "The 'capacity' value must be greater than 0 W.",
             )
 
         power_validation_pts_dict = {}
-        for power_validation_point in chiller.get("power_operating_points", []):
-            chilled_water_supply_temp = power_validation_point.get(
-                "chilled_water_supply_temperature", 0.0 * ureg("degC")
+        power_operating_points = getattr_(chiller, "chillers", "power_operating_points")
+        for power_validation_point in power_operating_points:
+            chilled_water_supply_temp = getattr_(
+                power_validation_point,
+                "power_operating_points",
+                "chilled_water_supply_temperature",
             ).to("degF")
-            condenser_temp = power_validation_point.get(
-                "condenser_temperature", 0.0 * ureg("degC")
+            condenser_temp = getattr_(
+                power_validation_point,
+                "power_operating_points",
+                "condenser_temperature",
             ).to("degF")
-            dict_key = f"{int(round(chilled_water_supply_temp.m, 1))}, {int(round(condenser_temp.m, 1))}"
+
+            dict_key = (
+                f"{round(chilled_water_supply_temp.m, 1)}, {round(condenser_temp.m, 1)}"
+            )
 
             power_validation_pts_dict.setdefault(dict_key, [])
             power_validation_pts_dict[dict_key].append(power_validation_point)
@@ -126,25 +156,25 @@ def is_chiller_performance_app_j(chiller: dict) -> bool:
             for ecwt in EXPECTED_ENTERING_CONDENSER_WATER_TEMPS:
                 dict_key = f"{chwt}, {ecwt}"
                 if power_validation_pts_dict.get(dict_key):
-                    given_plrs = []
                     for power_validation_point in power_validation_pts_dict[dict_key]:
-                        load = power_validation_point.get("load", 0.0 * ureg("W"))
-                        given_power = power_validation_point.get(
-                            "result", 0.0 * ureg("W")
+                        load = getattr_(
+                            power_validation_point, "power_operating_points", "load"
                         )
-                        plr = (
-                            load / given_capacities[dict_key]
-                            if given_capacities[dict_key] > 0.0 * ureg("W")
-                            else 0.0
+                        given_power = getattr_(
+                            power_validation_point, "power_operating_points", "power"
                         )
 
+                        plr = (
+                            load / given_capacities[dict_key]
+                        )  # no need to check `given_capacities[dict_key]` = 0.0 (checked in line 95)
+
+                        # plr.m because plr is a "dimensionless" unit
                         if any(
                             [
-                                std_equal_with_precision(plr, expected_plr, 2)
+                                std_equal_with_precision(plr.m, expected_plr, 2)
                                 for expected_plr in EXPECTED_VALIDATION_PLR
                             ]
                         ):
-                            given_plrs.append(plr)
                             eir_plr = (
                                 plr_coefficients[0]
                                 + plr_coefficients[1] * plr
