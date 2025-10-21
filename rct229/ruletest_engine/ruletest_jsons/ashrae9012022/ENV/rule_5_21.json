@@ -3,9 +3,8 @@
         "Section": 5,
         "Rule": 21,
         "Test": "a",
-        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is correctly modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
-        "expected_rule_outcome": "pass",
         "standard": {
+            "ruleset": "ashrae9012022",
             "rule_id": "5-21",
             "ruleset_reference": "Table G3.1(1), Baseline Building Performance",
             "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
@@ -15,6 +14,8 @@
             "primary_rule": "Full",
             "schema_version": "0.1.7"
         },
+        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is correctly modeled with the same area, U-factor and SHGC in the baseline as in the proposed design",
+        "expected_rule_outcome": "pass",
         "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
@@ -180,10 +181,8 @@
         "Section": 5,
         "Rule": 21,
         "Test": "b",
-        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is incorrectly modeled with a different area in the baseline than in the proposed design",
-        "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design.",
         "standard": {
+            "ruleset": "ashrae9012022",
             "rule_id": "5-21",
             "ruleset_reference": "Table G3.1(1), Baseline Building Performance",
             "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
@@ -193,6 +192,9 @@
             "primary_rule": "Full",
             "schema_version": "0.1.7"
         },
+        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is incorrectly modeled with a different area in the baseline than in the proposed design",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design.",
         "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
@@ -358,10 +360,8 @@
         "Section": 5,
         "Rule": 21,
         "Test": "c",
-        "test_description": "Project has one building segment and includes a space with an unregulated  above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled with a different u-factor in the baseline than in the proposed design",
-        "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design.",
         "standard": {
+            "ruleset": "ashrae9012022",
             "rule_id": "5-21",
             "ruleset_reference": "Table G3.1(1), Baseline Building Performance",
             "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
@@ -371,6 +371,9 @@
             "primary_rule": "Full",
             "schema_version": "0.1.7"
         },
+        "test_description": "Project has one building segment and includes a space with an unregulated  above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled with a different u-factor in the baseline than in the proposed design",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design.",
         "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
@@ -536,10 +539,8 @@
         "Section": 5,
         "Rule": 21,
         "Test": "d",
-        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled with a different SHGC in the baseline than in the proposed design",
-        "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design.",
         "standard": {
+            "ruleset": "ashrae9012022",
             "rule_id": "5-21",
             "ruleset_reference": "Table G3.1(1), Baseline Building Performance",
             "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
@@ -549,6 +550,9 @@
             "primary_rule": "Full",
             "schema_version": "0.1.7"
         },
+        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface and window. The space is unconditioned based on the heating and cooling capacity of the HVAC system that serves the parent zone. Fenestration is modeled with a different SHGC in the baseline than in the proposed design",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Subsurface that is not regulated (Not part of building envelope) is not modeled with the same area, U-factor and SHGC in the baseline as in the propsoed design.",
         "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",
@@ -714,9 +718,8 @@
         "Section": 5,
         "Rule": 21,
         "Test": "e",
-        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface but no windows or other subsurfaces. ",
-        "expected_rule_outcome": "not_applicable",
         "standard": {
+            "ruleset": "ashrae9012022",
             "rule_id": "5-21",
             "ruleset_reference": "Table G3.1(1), Baseline Building Performance",
             "rule_description": "Fenestration that is not regulated (not part of building envelope) must be modeled with the same area, U-factor and SHGC in the baseline as in the proposed design.",
@@ -726,6 +729,8 @@
             "primary_rule": "Full",
             "schema_version": "0.1.7"
         },
+        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface but no windows or other subsurfaces. ",
+        "expected_rule_outcome": "not_applicable",
         "rmd_transformations": {
             "proposed": {
                 "id": "RPD 1",

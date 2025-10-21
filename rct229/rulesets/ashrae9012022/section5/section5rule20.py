@@ -47,8 +47,10 @@ class PRM9012022Rule96n40(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         rmd_b = context.BASELINE_0
+        rmd_p = context.PROPOSED
         climate_zone = rmd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
         constructions_b = rmd_b["ruleset_model_descriptions"][0].get("constructions")
+        constructions_p = rmd_p["ruleset_model_descriptions"][0].get("constructions")
 
         # TODO It is determined that later we will modify this function to RMD level -
         # This implementation is temporary
@@ -62,6 +64,7 @@ class PRM9012022Rule96n40(RuleDefinitionListIndexedBase):
         return {
             "climate_zone": climate_zone,
             "constructions_b": constructions_b,
+            "constructions_p": constructions_p,
             "bldg_scc_wwr_ratio_dict": bldg_scc_wwr_ratio_dict,
         }
 

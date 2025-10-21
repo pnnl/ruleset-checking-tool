@@ -53,7 +53,7 @@ class PRM9012022Rule48w84(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(PRM9012022Rule48w84.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=False, BASELINE_0=True, PROPOSED=False
+                    USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=PRM9012022Rule48w84.BuildingRule.RoofRule(),
                 index_rmd=BASELINE_0,
