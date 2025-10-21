@@ -1,3 +1,4 @@
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.rule_engine.rulesets import RuleSet
 from rct229.ruletest_engine.ruletest_jsons.scripts.json_generation_utilities import (
@@ -14,6 +15,7 @@ json_name = "section5_envelope_tcd_2022.json"
 
 
 SchemaStore.set_ruleset(ruleset)
+SchemaEnums.update_schema_enum()
 disaggregate_master_ruletest_json(json_name, ruleset)
 
 # --- SET THE OUTPUT DIRECTORY ---
