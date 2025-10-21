@@ -614,7 +614,8 @@
                                                     "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating System 1"
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 0.0
                                                 }
                                             }
                                         ]
@@ -682,7 +683,8 @@
                                                     "design_sensible_cool_capacity": 0.0
                                                 },
                                                 "heating_system": {
-                                                    "id": "Heating System 1"
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 0.0
                                                 }
                                             }
                                         ]
