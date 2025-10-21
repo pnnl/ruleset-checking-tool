@@ -4,6 +4,7 @@ from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_descr
 from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
@@ -53,6 +54,11 @@ class PRM9012019rule86d29(RuleDefinitionListIndexedBase):
 
             return building_area_b > BUILDING_AREA_LIMIT
 
+        def list_filter(self, context_item, data):
+            space_b = context_item.BASELINE_0
+
+            return space_b.get("interior_lighting")
+
         class SpaceRule(RuleDefinitionBase):
             def __init__(self):
                 super(PRM9012019rule86d29.BuildingRule.SpaceRule, self).__init__(
@@ -83,12 +89,18 @@ class PRM9012019rule86d29(RuleDefinitionListIndexedBase):
                 space_b = context.BASELINE_0
 
                 occupancy_sensor_controls_b = [
-                    interior_lighting_b.get("occupancy_control_type")
+                    getattr_(
+                        interior_lighting_b,
+                        "interior_lighting",
+                        "occupancy_control_type",
+                    )
                     for interior_lighting_b in space_b["interior_lighting"]
                 ]
                 occupancy_sensor_schedules_b = [
-                    interior_lighting_b.get(
-                        "are_schedules_used_for_modeling_occupancy_control"
+                    getattr_(
+                        interior_lighting_b,
+                        "interior_lighting",
+                        "are_schedules_used_for_modeling_occupancy_control",
                     )
                     for interior_lighting_b in space_b["interior_lighting"]
                 ]
@@ -98,23 +110,17 @@ class PRM9012019rule86d29(RuleDefinitionListIndexedBase):
                     "occupancy_sensor_schedules_b": occupancy_sensor_schedules_b,
                 }
 
-            def manual_check_required(self, context, calc_vals=None, data=None):
-                occupancy_sensor_controls_b = calc_vals["occupancy_sensor_controls_b"]
-                occupancy_sensor_schedules_b = calc_vals["occupancy_sensor_schedules_b"]
-
-                return any(val is None for val in occupancy_sensor_controls_b) or any(
-                    val is None for val in occupancy_sensor_schedules_b
-                )
-
             def rule_check(self, context, calc_vals=None, data=None):
                 occupancy_sensor_controls_b = calc_vals["occupancy_sensor_controls_b"]
 
-                return not any(
-                    val
-                    in [
-                        LIGHTING_OCCUPANCY_CONTROL.NONE,
-                        LIGHTING_OCCUPANCY_CONTROL.MANUAL_ON,
-                        None,
+                return all(
+                    [
+                        val
+                        in [
+                            LIGHTING_OCCUPANCY_CONTROL.NONE,
+                            LIGHTING_OCCUPANCY_CONTROL.MANUAL_ON,
+                            None,
+                        ]
+                        for val in occupancy_sensor_controls_b
                     ]
-                    for val in occupancy_sensor_controls_b
                 )
