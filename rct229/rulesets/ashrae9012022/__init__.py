@@ -54,7 +54,6 @@ rules_dict = {
     "prm9012022rule22f12": "section5rule45",
     "prm9012022rule12d80": "section6rule11",
     "prm9012022rule93e12": "section21rule19",
-
 }
 
 section_list = [
