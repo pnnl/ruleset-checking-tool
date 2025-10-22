@@ -13,7 +13,8 @@ from rct229.reports.ashrae9012019.ashrae901_2019_software_test_report import (
 )
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
-from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
+from rct229.rule_engine.rulesets import RuleSet
+from rct229.ruletest_engine.ruletest_jsons import get_ruleset_test_sections
 from rct229.rulesets import rulesets
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
@@ -107,7 +108,7 @@ def evaluate_outcome_enumeration_str(outcome_enumeration_str):
 
 
 def process_test_result(test_result, raised_message, test_dict, test_id):
-    """Returns a string describing whether or not a test resulted in its expected outcome
+    """Returns a string describing whether a test resulted in its expected outcome
 
     Parameters
     ----------
@@ -132,7 +133,7 @@ def process_test_result(test_result, raised_message, test_dict, test_id):
 
     outcome_text: str
 
-        String describing whether or not a test resulted in its expected outcome
+        String describing whether a test resulted in its expected outcome
 
     received_expected_outcome: bool
 
@@ -159,7 +160,7 @@ def process_test_result(test_result, raised_message, test_dict, test_id):
 
     # Success and failure tied to
     overall_outcome = messages_matched and received_expected_outcome
-
+    outcome_text = ""
     # Check if the test results agree with the expected outcome. Write an appropriate response based on their agreement
     if received_expected_outcome:
         if test_result == "pass":
@@ -202,7 +203,7 @@ def run_section_tests(
     test_json_name: str, ruleset_doc: str, test_json_path: Optional[str] = None
 ):
     """Runs all tests found in a given test JSON and prints results to console. Returns true/false describing whether
-    or not all tests in the JSON result in the expected outcome.
+    all tests in the JSON result in the expected outcome.
 
     Parameters
     ----------
@@ -236,8 +237,9 @@ def run_section_tests(
         test_json_path = os.path.join(test_json_path, test_json_name)
 
     # hash for capturing test results. Keys include: "results, log"
-    test_result_dict = {}
-    test_result_dict["results"] = []
+    test_result_dict = {
+        "results": [],
+    }
 
     # Flag checking if all tests succeed. Ensures a message gets printed if so.
     all_tests_pass = True
@@ -319,7 +321,7 @@ def run_section_tests(
 
             # Update test_results_dict "log" and f"{test_id}" keys.
             # -The "log" element contains a list string describing errors, if any.
-            # -The f"{test_id} element contains a list of booleans describing whether or not each testable element in
+            # -The f"{test_id} element contains a list of booleans describing whether each testable element in
             #  outcome structure met the expected outcome for this test_id
             evaluate_outcome_object(
                 outcome_structure, test_result_dict, test_dict, test_id
@@ -371,7 +373,7 @@ def run_section_tests(
 
 
 def generate_software_test_report(ruleset, section_list, output_json_path):
-    """Runs list of rule test JSONs and aggregates them into a ashrae901_2019_detail_report
+    """Runs list of rule test JSONs and aggregates them into an ashrae901_2019_detail_report
 
     Parameters
     ----------
@@ -398,19 +400,12 @@ def generate_software_test_report(ruleset, section_list, output_json_path):
         report_dict.initialize_ruleset_report()
     elif ruleset == RuleSet.ASHRAE9012022_RULESET:
         # TODO - add software test report logic here
-        return
+        return None
     else:
         raise Exception(f"Ruleset '{ruleset}' has no default software test report.")
 
     if section_list is None:
-        if ruleset == RuleSet.ASHRAE9012019_RULESET:
-            section_list = RuleSetTest.ASHRAE9012019_TEST_LIST
-        elif ruleset == RuleSet.ASHRAE9012022_RULESET:
-            section_list = RuleSetTest.ASHRAE9012022_TEST_LIST
-        else:
-            raise Exception(
-                f"Ruleset '{ruleset}' has no default list of section tests."
-            )
+        section_list = get_ruleset_test_sections(ruleset)
 
     # Master list of RCT engine outcomes, used to populate report.
     rct_outcomes = generate_rct_outcomes_list_from_section_list(section_list)
@@ -611,9 +606,13 @@ def validate_test_json_schema(test_json_path):
         user_rmd, baseline_rmd, proposed_rmd = generate_test_rmds(test_dict)
 
         # Evaluate RMDs against the schema
-        user_result = validate_rpd(user_rmd) if user_rmd != None else None
-        baseline_result = validate_rpd(baseline_rmd) if baseline_rmd != None else None
-        proposed_result = validate_rpd(proposed_rmd) if proposed_rmd != None else None
+        user_result = validate_rpd(user_rmd) if user_rmd is not None else None
+        baseline_result = (
+            validate_rpd(baseline_rmd) if baseline_rmd is not None else None
+        )
+        proposed_result = (
+            validate_rpd(proposed_rmd) if proposed_rmd is not None else None
+        )
 
         results_list = [user_result, baseline_result, proposed_result]
         rmd_type_list = ["User", "Baseline", "Proposed"]
@@ -658,7 +657,7 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
 
         Dictionary used to log errors and aggregate the test results for a given outcome_dict. Updating this dictionary
         is the chief purpose of this function. Most notably the test_result_dict[f"{test_id}"] element is populated with
-        a list of booleans describing whether or not the elements of the outcome_dict meet the expected outcome described
+        a list of booleans describing whether the elements of the outcome_dict meet the expected outcome described
         in test_dict.
 
     test_dict: dict
@@ -733,6 +732,7 @@ def evaluate_outcome_object(outcome_dict, test_result_dict, test_dict, test_id):
         test_result_dict[f"{test_id}"].append(received_expected_outcome)
 
 
+# noinspection PyDefaultArgument
 def flatten_outcome_object(outcome_object, flattened_outcome_list=[]):
     """Checks every element in an RCT outcome dictionary and unravels the nested structure to produce a list of outcome
     results to be read in by rule_unit_test_evaluation as part of the software testing report
@@ -744,7 +744,11 @@ def flatten_outcome_object(outcome_object, flattened_outcome_list=[]):
        The evaluate_rule function returns a dictionary with an "outcome" key. This is an instance of the object
        contained in that dictionary.
 
-    Returns:
+    flattened_outcome_list: list
+
+        The flattened list of ruletest evaluations being built recursively
+
+    Returns
     --------
     flattened_outcome_list: list
 
@@ -758,7 +762,7 @@ def flatten_outcome_object(outcome_object, flattened_outcome_list=[]):
         if calc_value_item is None:
             return
 
-        # If list, recursively check each element and correct when appropriate
+        # If it is a list, recursively check each element and correct when appropriate
         if isinstance(calc_value_item, list):
             for i in range(len(calc_value_item)):
                 item = calc_value_item[i]

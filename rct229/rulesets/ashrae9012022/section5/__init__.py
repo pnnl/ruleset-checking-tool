@@ -7,6 +7,8 @@ __all__ = [
     "section5rule45",
 ]
 
+SHORT_NAME = "ENV"
+
 
 def __getattr__(name):
     if name in __all__:

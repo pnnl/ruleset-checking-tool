@@ -2,7 +2,8 @@ import click
 
 from rct229.reports import reports as rct_report
 from rct229.rule_engine.engine import evaluate_all_rules
-from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
+from rct229.ruletest_engine.ruletest_jsons import get_ruleset_test_sections
+from rct229.rule_engine.rulesets import RuleSet
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import RCTException
@@ -49,6 +50,8 @@ def run_test(ruleset, section=None):
     )
     if ruleset == RuleSet.ASHRAE9012019_RULESET:
         initialize_ruleset(ruleset)
+        # Dynamically get all available test sections for this ruleset
+        test_sections = get_ruleset_test_sections(ruleset)
 
         from rct229.ruletest_engine.run_ruletests import (
             run_ashrae9012019_tests,
@@ -57,14 +60,15 @@ def run_test(ruleset, section=None):
         outcome_list = run_ashrae9012019_tests(section)
         if section is None:
             for idx, outcome in enumerate(outcome_list):
-                assert (
-                    outcome
-                ), f"{RuleSetTest.ASHRAE9012019_TEST_LIST[idx]} failed in the test"
+                assert outcome, f"{test_sections[idx]} failed in the test"
         else:
             assert all(outcome_list), f"{section} failed in the test"
 
     elif ruleset == RuleSet.ASHRAE9012022_RULESET:
         initialize_ruleset(ruleset)
+        # Dynamically get all available test sections for this ruleset
+        test_sections = get_ruleset_test_sections(ruleset)
+
         from rct229.ruletest_engine.run_ruletests import (
             run_ashrae9012022_tests,
         )
@@ -72,9 +76,7 @@ def run_test(ruleset, section=None):
         outcome_list = run_ashrae9012022_tests(section)
         if section is None:
             for idx, outcome in enumerate(outcome_list):
-                assert (
-                    outcome
-                ), f"{RuleSetTest.ASHRAE9012022_TEST_LIST[idx]} failed in the test"
+                assert outcome, f"{test_sections[idx]} failed in the test"
         else:
             assert all(outcome_list), f"{section} failed in the test"
     else:
