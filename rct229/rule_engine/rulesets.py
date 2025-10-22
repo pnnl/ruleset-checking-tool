@@ -22,21 +22,21 @@ class RuleSet:
 
 class RuleSetTest:
     ASHRAE9012019_TEST_LIST = [
-        PERFORMANCE_CALC_DIR,     # Section 1
-        ELEVATOR_DIR,             # Section 16
-        ENVELOPE_DIR,             # Section 5
-        HVAC_AIRSIDE_DIR,         # Section 23
-        HVAC_CHILLED_WATER_DIR,   # Section 22
-        HVAC_GENERAL_DIR,         # Section 10 & 19
-        HVAC_HOT_WATER_DIR,       # Section 21
-        HVAC_BASELINE_DIR,        # Section 18
-        LIGHTING_DIR,             # Section 6
-        RECEPTACLE_DIR,           # Section 12
-        SCHEDULE_DIR,             # Section 4
-        SERVICE_HOT_WATER_DIR,    # Section 11
+        PERFORMANCE_CALC_DIR,  # Section 1
+        ELEVATOR_DIR,  # Section 16
+        ENVELOPE_DIR,  # Section 5
+        HVAC_AIRSIDE_DIR,  # Section 23
+        HVAC_CHILLED_WATER_DIR,  # Section 22
+        HVAC_GENERAL_DIR,  # Section 10 & 19
+        HVAC_HOT_WATER_DIR,  # Section 21
+        HVAC_BASELINE_DIR,  # Section 18
+        LIGHTING_DIR,  # Section 6
+        RECEPTACLE_DIR,  # Section 12
+        SCHEDULE_DIR,  # Section 4
+        SERVICE_HOT_WATER_DIR,  # Section 11
     ]
     ASHRAE9012022_TEST_LIST = [
-        ENVELOPE_DIR,             # Section 5
+        ENVELOPE_DIR,  # Section 5
     ]
 
 
