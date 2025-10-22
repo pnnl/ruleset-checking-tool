@@ -1,6 +1,7 @@
 import glob
 import json
 import importlib
+
 # from jsonpointer import JsonPointer
 import os
 from copy import deepcopy
@@ -14,6 +15,7 @@ from rct229.reports.ashrae9012019.ashrae901_2019_software_test_report import (
 from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.rulesets import RuleSet
+import rct229.rulesets as rulesets
 from rct229.ruletest_engine.ruletest_jsons import get_ruleset_test_sections
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
@@ -258,8 +260,7 @@ def run_section_tests(
     # get all rules in the ruleset.
     SchemaStore.set_ruleset(ruleset_doc)
     SchemaEnums.update_schema_enum()
-    ruleset_module = get_active_ruleset_module()
-    available_rule_definitions = ruleset_module.__getrules__()
+    available_rule_definitions = rulesets.__getrules__()
     available_rule_definitions_dict = {
         rule_class[1].__module__.split(".")[-1]: rule_class[1]
         for rule_class in available_rule_definitions
