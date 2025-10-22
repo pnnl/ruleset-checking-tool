@@ -1,6 +1,6 @@
 import glob
 import json
-
+import importlib
 # from jsonpointer import JsonPointer
 import os
 from copy import deepcopy
@@ -15,10 +15,17 @@ from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.rulesets import RuleSet
 from rct229.ruletest_engine.ruletest_jsons import get_ruleset_test_sections
-from rct229.rulesets import rulesets
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.schema.validate import validate_rpd
+
+
+def get_active_ruleset_module():
+    """Return the active ruleset module based on SchemaStore.SELECTED_RULESET."""
+    ruleset_name = SchemaStore.SELECTED_RULESET
+    if not ruleset_name:
+        raise RuntimeError("No ruleset is currently selected in SchemaStore.")
+    return importlib.import_module(f"rct229.rulesets.{ruleset_name}")
 
 
 # Generates the RMD triplet dictionaries from a test_dictionary's "rmd_transformation" element.
@@ -251,7 +258,8 @@ def run_section_tests(
     # get all rules in the ruleset.
     SchemaStore.set_ruleset(ruleset_doc)
     SchemaEnums.update_schema_enum()
-    available_rule_definitions = rulesets.__getrules__()
+    ruleset_module = get_active_ruleset_module()
+    available_rule_definitions = ruleset_module.__getrules__()
     available_rule_definitions_dict = {
         rule_class[1].__module__.split(".")[-1]: rule_class[1]
         for rule_class in available_rule_definitions
@@ -435,8 +443,10 @@ def generate_rct_outcomes_list_from_section_list(section_list):
     """
     from rct229.ruletest_engine.ruletest_rmd_factory import get_ruletest_rmd_models
 
-    rules_hash_dict = rulesets.__getrulemap__()
-    section_dict = rulesets.__getsectiondict__()
+    ruleset_module = get_active_ruleset_module()
+    available_rule_definitions = ruleset_module.__getrules__()
+    rules_hash_dict = ruleset_module.__getrulemap__()
+    section_dict = ruleset_module.__getsectiondict__()
     # Master list of RCT engine outcomes and invalid RMD messages used to populate starting point for an RCTReport.
     # Initialize them here
     rct_outcomes_list = []
@@ -451,8 +461,6 @@ def generate_rct_outcomes_list_from_section_list(section_list):
         "manual_check": RCTOutcomeLabel.NOT_APPLICABLE,
     }
 
-    # get all rules in the ruleset.
-    available_rule_definitions = rulesets.__getrules__()
     available_rule_definitions_dict = {
         rule_class[0]: rule_class[1] for rule_class in available_rule_definitions
     }
