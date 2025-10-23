@@ -16,6 +16,7 @@ from rct229.rule_engine.engine import evaluate_rule
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 from rct229.rule_engine.rulesets import RuleSet
 from rct229.ruletest_engine.ruletest_jsons import get_ruleset_test_sections
+from rct229.ruletest_engine.ruletest_rmd_factory import get_ruletest_rmd_models
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.schema.validate import validate_rpd
@@ -235,7 +236,6 @@ def run_section_tests(
         Boolean describing if all tests in the JSON result in the expected outcome.
     """
     import rct229.rulesets as rulesets
-    from rct229.ruletest_engine.ruletest_rmd_factory import get_ruletest_rmd_models
 
     # Create path to test JSON (e.g. 'transformer_tests.json')
     if test_json_path is None:
