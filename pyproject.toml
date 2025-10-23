@@ -41,7 +41,7 @@ astor = "^0.8.1"
 rct229 = 'rct229.cli:cli'
 minify-jsons = 'rct229.utils.minify_jsons:main'
 
-[project.entry-points."rct229.rulesets"]
+[tool.poetry.plugins."rct229.rulesets"]
 ashrae9012019 = "rct229.rulesets.ashrae9012019"
 ashrae9012022 = "rct229.rulesets.ashrae9012022"
 
