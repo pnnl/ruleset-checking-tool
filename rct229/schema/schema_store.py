@@ -34,15 +34,15 @@ class SchemaStore:
     def get_enum_schema_by_ruleset(ruleset: str):
         from rct229.rulesets import register_rulesets, discover_ruleset_plugins
 
-        if not hasattr(RuleSet, "ASHRAE9012019_RULESET"):
+        if not any(a.endswith("_RULESET") for a in vars(RuleSet)):
             discover_ruleset_plugins()
             register_rulesets()
 
         match ruleset:
             case RuleSet.ASHRAE9012019_RULESET:
-                return "ASHRAE9012019_enum.schema.json"
+                return "Enumerations2019ASHRAE901.schema.json"
             case RuleSet.ASHRAE9012022_RULESET:
-                return "ASHRAE9012022_enum.schema.json"
+                return "Enumerations2019ASHRAE901.schema.json"
             case _:
                 raise ValueError(f"Unknown ruleset: {ruleset}")
 
