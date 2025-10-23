@@ -4,7 +4,6 @@ from rct229.reports import reports as rct_report
 from rct229.rule_engine.engine import evaluate_all_rules
 from rct229.ruletest_engine.ruletest_jsons import get_ruleset_test_sections
 from rct229.rule_engine.rulesets import RuleSet
-import rct229.rulesets as rulesets
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import RCTException
@@ -18,7 +17,6 @@ def print_version():
 
 def initialize_ruleset(ruleset_name: str):
     """Initialize schema and enums for the requested ruleset."""
-    rulesets.register_rulesets()
     SchemaStore.set_ruleset(ruleset_name)
     SchemaEnums.update_schema_enum()
 

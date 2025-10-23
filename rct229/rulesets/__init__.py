@@ -16,7 +16,7 @@ MODULE_EXCEPTION_LIST = ["math", "itertools"]
 
 
 # Dynamically load all registered rulesets via entry points
-def _discover_ruleset_plugins():
+def discover_ruleset_plugins():
     eps = entry_points(group="rct229.rulesets")
     loaded = {}
     for ep in eps:
@@ -29,16 +29,16 @@ def _discover_ruleset_plugins():
     return loaded
 
 
-# Dynamically discover all ruleset modules
-_DISCOVERED_RULESETS = _discover_ruleset_plugins()
-
-# Update __all__ to reflect discovered rule names
-__all__ = sorted(_DISCOVERED_RULESETS.keys())
-
-
 def register_rulesets():
     for name in __all__:
         setattr(RuleSet, name.upper().replace("-", "_") + "_RULESET", name)
+
+
+# Dynamically discover all ruleset modules
+_DISCOVERED_RULESETS = discover_ruleset_plugins()
+
+# Update __all__ to reflect discovered rule names
+__all__ = sorted(_DISCOVERED_RULESETS.keys())
 
 
 def __getruleset__():
