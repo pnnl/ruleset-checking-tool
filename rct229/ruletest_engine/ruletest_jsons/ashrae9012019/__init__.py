@@ -8,6 +8,6 @@ ROOT_DIR = Path(__file__).parent
 RULETEST_SECTION_LIST = [
     p.name
     for p in ROOT_DIR.iterdir()
-    if p.is_dir() and not p.name == "ruletest_spreadsheets"
+    if p.is_dir() and p.name not in ["ruletest_spreadsheets", "__pycache__"]
 ]
 RULETEST_SECTION_LIST.sort()

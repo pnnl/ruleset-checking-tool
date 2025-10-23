@@ -1,7 +1,6 @@
 import copy
 import inspect
 
-import rct229.rulesets as rulesets
 from rct229.rule_engine.ruleset_model_factory import RuleSetModels, get_rmd_instance
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import validate_rpd
@@ -12,6 +11,8 @@ from rct229.utils.pint_utils import UNIT_SYSTEM, calcq_to_str
 
 
 def get_available_rules():
+    import rct229.rulesets as rulesets
+
     modules = [
         f
         for f in inspect.getmembers(rulesets, inspect.ismodule)
@@ -28,6 +29,8 @@ def get_available_rules():
 
 
 def evaluate_all_rules_rpd(ruleset_project_descriptions, session_id=""):
+    import rct229.rulesets as rulesets
+
     # Get reference to rule functions in rules model
     available_rule_definitions = rulesets.__getrules__()
     ruleset_models = get_rmd_instance()
@@ -69,6 +72,8 @@ def evaluate_all_rules(ruleset_model_path_list):
     -------
 
     """
+    import rct229.rulesets as rulesets
+
     if not ruleset_model_path_list:
         raise RCTException("Missing ruleset project description files")
     # Get reference to rule functions in rules model
@@ -194,7 +199,7 @@ def evaluate_rules(
         f"Required RPDs provided are invalid. See error messages: {invalid_rmds}",
     )
 
-    ## Now check the optional RMDs
+    # Now check the optional RMDs
     invalid_rmds = {}
     for ruleset_model in rmds.get_ruleset_model_types():
         # used is None but rmds contain this ruleset model

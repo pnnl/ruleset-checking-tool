@@ -12,7 +12,7 @@ class SchemaStore:
     SELECTED_RULESET = ""
 
     @staticmethod
-    def get_enum_schema_by_ruleset():
+    def get_active_enum_schema():
 
         match SchemaStore.SELECTED_RULESET:
 
@@ -22,9 +22,27 @@ class SchemaStore:
                 return SchemaStore.SCHEMA_9012022_ENUM_KEY
 
     @staticmethod
-    def get_output_schema_by_ruleset():
+    def get_active_output_schema():
 
         match SchemaStore.SELECTED_RULESET:
+            case RuleSet.ASHRAE9012019_RULESET:
+                return SchemaStore.SCHEMA_9012019_OUTPUT_KEY
+            case RuleSet.ASHRAE9012022_RULESET:
+                return SchemaStore.SCHEMA_9012022_OUTPUT_KEY
+
+    @staticmethod
+    def get_enum_schema_by_ruleset(ruleset: str):
+
+        match ruleset:
+            case RuleSet.ASHRAE9012019_RULESET:
+                return SchemaStore.SCHEMA_9012019_ENUM_KEY
+            case RuleSet.ASHRAE9012022_RULESET:
+                return SchemaStore.SCHEMA_9012022_ENUM_KEY
+
+    @staticmethod
+    def get_output_schema_by_ruleset(ruleset: str):
+
+        match ruleset:
             case RuleSet.ASHRAE9012019_RULESET:
                 return SchemaStore.SCHEMA_9012019_OUTPUT_KEY
             case RuleSet.ASHRAE9012022_RULESET:

@@ -36,6 +36,11 @@ _DISCOVERED_RULESETS = _discover_ruleset_plugins()
 __all__ = sorted(_DISCOVERED_RULESETS.keys())
 
 
+def register_rulesets():
+    for name in __all__:
+        setattr(RuleSet, name.upper().replace("-", "_") + "_RULESET", name)
+
+
 def __getruleset__():
     selected = SchemaStore.SELECTED_RULESET
     return _DISCOVERED_RULESETS.get(selected)
@@ -124,7 +129,3 @@ def __getattr__(name):
 
 def __dir__():
     return sorted(__all__)
-
-
-for name in __all__:
-    setattr(RuleSet, name.upper().replace("-", "_") + "_RULESET", name)

@@ -43,6 +43,7 @@ section_dict = {
 }
 
 # Update this field if 2022 uses different term.
+SchemaEnums.update_schema_enum_by_ruleset("ashrae9012022")
 RMD = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")
 COMMON_RMD = SchemaEnums.schema_enums.get("CommonRulesetModelOptions")
 
