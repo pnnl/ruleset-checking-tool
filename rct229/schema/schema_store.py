@@ -1,4 +1,3 @@
-from rct229.rulesets import register_rulesets, discover_ruleset_plugins
 from rct229.rule_engine.rulesets import RuleSet
 
 
@@ -33,6 +32,7 @@ class SchemaStore:
 
     @staticmethod
     def get_enum_schema_by_ruleset(ruleset: str):
+        from rct229.rulesets import register_rulesets, discover_ruleset_plugins
 
         if not hasattr(RuleSet, "ASHRAE9012019_RULESET"):
             discover_ruleset_plugins()
@@ -48,6 +48,7 @@ class SchemaStore:
 
     @staticmethod
     def get_output_schema_by_ruleset(ruleset: str):
+        from rct229.rulesets import register_rulesets, discover_ruleset_plugins
 
         if not any(attr.endswith("_RULESET") for attr in vars(RuleSet)):
             discover_ruleset_plugins()
