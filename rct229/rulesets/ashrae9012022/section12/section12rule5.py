@@ -129,13 +129,17 @@ class PRM9012022rule23z21(RuleDefinitionListIndexedBase):
 
             def get_fail_msg(self, context, calc_vals=None, data=None):
                 misc_equip_p = context.PROPOSED
-                has_annual_energy_use_p = calc_vals["has_annual_energy_use_p"]
                 loads_included_p = calc_vals["loads_included_p"]
+                has_annual_energy_use_p = calc_vals["has_annual_energy_use_p"]
                 schedule_eflh_p = data["schedule_eflh_p"]
 
-                FAIL_MSG = (
-                    f"No miscellaneous equipment loads are included. [power: {misc_equip_p['power']}, sensible_fraction: {misc_equip_p['sensible_fraction']}, "
-                    f"latent_fraction: {misc_equip_p['latent_fraction']}, schedule_eflh: {schedule_eflh_p}] {'No annual end use energy is reported for the relevant equipment types. {has_annual_energy_use_p_msg}'}"
-                )  # Need to double-check the message
+                FAIL_MSG = ""
+                if not loads_included_p:
+                    FAIL_MSG = (
+                        f"No miscellaneous equipment loads are included. [power: {misc_equip_p['power']}, sensible_fraction: {misc_equip_p['sensible_fraction']}, "
+                        f"latent_fraction: {misc_equip_p['latent_fraction']}, schedule_eflh: {schedule_eflh_p}] {'No annual end use energy is reported for the relevant equipment types. {has_annual_energy_use_p_msg}'}"
+                    )
+                if not has_annual_energy_use_p:
+                    FAIL_MSG += " No annual end use energy is reported for the relevant equipment types."
 
                 return FAIL_MSG
