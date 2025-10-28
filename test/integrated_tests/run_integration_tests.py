@@ -1,10 +1,10 @@
 from pathlib import Path
 import zipfile
+import json
 
 from rct229.rule_engine.rulesets import RuleSet
 from rct229.schema.schema_store import SchemaStore
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.assertions import RCTException
 from rct229.rule_engine.engine import evaluate_all_rules
 from rct229.reports import reports as rct_report
 
@@ -34,7 +34,7 @@ def extract_rpd_from_zip(zip_path: Path) -> Path:
     # Find the first .json file in the extracted directory
     json_files = list(extract_dir.rglob("*.rpd"))
     if not json_files:
-        raise RCTException(f"No RPD file found in archive: {zip_path}")
+        raise FileNotFoundError(f"No RPD file found in archive: {zip_path}")
     return json_files[0]
 
 
@@ -50,7 +50,7 @@ def evaluate(rpds, ruleset, reports, reports_directory: Path):
 
     for report_type in reports:
         if report_type not in available_report_dict:
-            raise RCTException(
+            raise ValueError(
                 f"Cannot find matching report type for {report_type}. "
                 f"Available ones are {available_report_str}."
             )
@@ -126,11 +126,111 @@ def verify_report_alignment():
                 )
                 continue
 
+            with report_file.open(
+                "r", encoding="utf-8"
+            ) as rf, expected_outcome_file.open("r", encoding="utf-8") as ef:
+                report_data = json.load(rf)
+                expected_data = json.load(ef)
+
+            for rule in report_data.get("rules", []):
+                rule_id = rule.get("rule_id")
+                if rule_id not in expected_data:
+                    raise ValueError(
+                        f"Rule ID {rule_id} found in report but not in expected outcomes for {sample_dir.name}."
+                    )
+
+                expected_rule_evals = expected_data[rule_id]
+
+                for evaluation in rule.get("evaluations", []):
+                    data_group_id = evaluation.get("data_group_id")
+                    if data_group_id not in expected_rule_evals:
+                        raise ValueError(
+                            f"Data Group ID {data_group_id} (Rule ID {rule_id} found "
+                            f"in report but not in expected outcomes for {sample_dir.name})."
+                        )
+
+                    expected_eval = expected_rule_evals[data_group_id]
+
+                    # Compare outcome
+                    if evaluation.get("outcome") != expected_eval.get("outcome"):
+                        print(
+                            f"Outcome mismatch in {sample_dir.name} (Rule ID: {rule_id}, "
+                            f"Data Group ID: {data_group_id})."
+                        )
+
+                    # Compare calculated values
+                    reported_calc_vals = evaluation.get("calculated_values", "")
+                    expected_calc_vals = expected_eval.get("calculated_values", "")
+
+                    # Case: Both empty → OK
+                    if (reported_calc_vals == "" or reported_calc_vals == []) and (
+                        expected_calc_vals == "" or expected_calc_vals == []
+                    ):
+                        pass
+
+                    # Case: One empty but not the other → mismatch
+                    elif (reported_calc_vals == "" and expected_calc_vals != "") or (
+                        expected_calc_vals == "" and reported_calc_vals != ""
+                    ):
+                        print(
+                            f"Calculated values presence mismatch in {sample_dir.name} "
+                            f"(Rule ID: {rule_id}, Data Group ID: {data_group_id}). "
+                            f"Expected: {expected_calc_vals} | Got: {reported_calc_vals}"
+                        )
+
+                    else:
+                        # Both should be lists of dicts
+                        if not isinstance(reported_calc_vals, list) or not isinstance(
+                            expected_calc_vals, list
+                        ):
+                            print(
+                                f"Invalid calculated_values format in {sample_dir.name} "
+                                f"(Rule ID: {rule_id}, Data Group ID: {data_group_id})."
+                            )
+                            continue
+
+                        # Convert lists to dicts keyed by "variable"
+                        reported_dict = {
+                            cv["variable"]: cv["value"]
+                            for cv in reported_calc_vals
+                            if "variable" in cv
+                        }
+                        expected_dict = {
+                            cv["variable"]: cv["value"]
+                            for cv in expected_calc_vals
+                            if "variable" in cv
+                        }
+
+                        # Compare only expected variables
+                        for variable, expected_value in expected_dict.items():
+
+                            if variable not in reported_dict:
+                                print(
+                                    f"Missing calculated variable '{variable}' in {sample_dir.name} "
+                                    f"(Rule ID: {rule_id}, Data Group ID: {data_group_id}) ."
+                                )
+                                continue
+
+                            reported_value = reported_dict[variable]
+                            if reported_value != expected_value:
+                                print(
+                                    f"Calculated value mismatch in {sample_dir.name} "
+                                    f"(Rule {rule_id}, Data Group {data_group_id}, Variable '{variable}') "
+                                    f"Expected: {expected_value} | Got: {reported_value}"
+                                )
+
+                    # Compare messages
+                    if evaluation.get("messages") != expected_eval.get("messages"):
+                        print(
+                            f"Messages mismatch in {sample_dir.name} for Rule ID: {rule_id}, "
+                            f"Data Group ID: {data_group_id}."
+                        )
+
 
 if __name__ == "__main__":
     # Example usage:
-    run_sample_number_evaluation(1, RuleSet.ASHRAE9012019_RULESET)
+    # run_sample_number_evaluation(1, RuleSet.ASHRAE9012019_RULESET)
 
     # run_all_sample_evaluations()
 
-    # verify_report_alignment()
+    verify_report_alignment()
