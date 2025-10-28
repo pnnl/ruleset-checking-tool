@@ -176,7 +176,19 @@ class RuleDefinitionBase:
         context_or_string = self.get_context(rmds, data)
         if isinstance(context_or_string, RuleSetModels):
             context = context_or_string
+            for ruleset_model in context.get_ruleset_model_types():
+                model_context = context[ruleset_model]
 
+                if isinstance(model_context, dict):
+                    if model_context.get("id"):
+                        outcome["data_group_id"] = model_context["id"]
+                        break
+
+                elif isinstance(model_context, list):
+                    for item in model_context:
+                        if isinstance(item, dict) and item.get("id"):
+                            outcome["data_group_id"] = item["id"]
+                            break
             # Check the context for general validity
             context_validity_dict = self.check_context_validity(context, data)
             # If the context is valid, context_validity_dict will be the falsey {}
@@ -184,12 +196,9 @@ class RuleDefinitionBase:
                 try:
                     # Check if rule is applicable
                     if self.is_applicable(context, data):
-                        # Get calculated values; these can be used by
-                        # manual_check_required() or rule_check() and will
-                        # be included in the output
+                        # Get calculated values; these can be used by manual_check_required() or rule_check() and will be included in the output
                         raw_calc_vals = self.get_calc_vals(context, data)
-                        # Convert all CalcQ values to its q value for use in the
-                        # remaining methods
+                        # Convert all CalcQ values to its q value for use in the remaining methods
                         calc_vals = calcq_to_q(raw_calc_vals)
                         if calc_vals is not None:
                             outcome["calc_vals"] = raw_calc_vals

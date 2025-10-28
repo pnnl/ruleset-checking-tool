@@ -28,7 +28,7 @@ def extract_rpd_from_zip(zip_path: Path) -> Path:
     extract_dir = zip_path.parent
     extract_dir.mkdir(exist_ok=True)
 
-    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+    with zipfile.ZipFile(zip_path, "r") as zip_ref:
         zip_ref.extractall(extract_dir)
 
     # Find the first .json file in the extracted directory
@@ -84,8 +84,10 @@ def run_all_sample_evaluations():
     Run sample integration tests on predefined RPD files and rulesets.
     """
     sample_tests = [
-        {"rpd_file_path": INTEGRATED_TEST_DIR / f"Sample {i}" / f"Sample {i}.zip",
-         "ruleset": RuleSet.ASHRAE9012019_RULESET}
+        {
+            "rpd_file_path": INTEGRATED_TEST_DIR / f"Sample {i}" / f"Sample {i}.zip",
+            "ruleset": RuleSet.ASHRAE9012019_RULESET,
+        }
         for i in range(1, 6)
     ]
 
@@ -97,7 +99,9 @@ def run_sample_number_evaluation(sample_number: int, ruleset: str):
     """
     Evaluate a specific sample RPD file (ZIP) by its sample number.
     """
-    rpd_file_path = INTEGRATED_TEST_DIR / f"Sample {sample_number}" / f"Sample {sample_number}.zip"
+    rpd_file_path = (
+        INTEGRATED_TEST_DIR / f"Sample {sample_number}" / f"Sample {sample_number}.zip"
+    )
     run_sample_evaluation(rpd_file_path, ruleset)
 
 
@@ -112,10 +116,14 @@ def verify_report_alignment():
             expected_outcome_file = sample_dir / "expected_outcomes.json"
 
             if not report_file.exists():
-                print(f"Report file not found for {sample_dir.name}, skipping alignment check.")
+                print(
+                    f"Report file not found for {sample_dir.name}, skipping alignment check."
+                )
                 continue
             if not expected_outcome_file.exists():
-                print(f"Expected outcomes file not found for {sample_dir.name}, skipping alignment check.")
+                print(
+                    f"Expected outcomes file not found for {sample_dir.name}, skipping alignment check."
+                )
                 continue
 
 
