@@ -1,41 +1,41 @@
 {
   "1-1": {
-    "Sample 1 Automated Review": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "At least one `output_bpf_set` value must exist."
     }
   },
   "1-2": {
-    "1-2": {
+    "Sample 1": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "At least one `performance_cost_index` value must exist."
     }
   },
   "1-3": {
-    "1-3": {
+    "Sample 1": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "At least one `performance_cost_index_target` value must exist."
     }
   },
   "1-4": {
-    "1-4": {
+    "Sample 1": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "At least one `pci_target_set` value must exist."
     }
   },
   "1-5": {
-    "1-5": {
+    "Sample 1": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Ruleset expects exactly one PBP value to be used in the project."
     }
   },
   "1-6": {
-    "1-6": {
+    "Sample 1": {
       "outcome": "PASS",
       "calculated_values": [
         {
@@ -47,7 +47,7 @@
     }
   },
   "1-7": {
-    "1-7": {
+    "Sample 1": {
       "outcome": "FAILED",
       "calculated_values": [
         {
@@ -63,7 +63,7 @@
     }
   },
   "1-8": {
-    "1-8": {
+    "Sample 1": {
       "outcome": "FAILED",
       "calculated_values": [
         {
@@ -81,7 +81,7 @@
     }
   },
   "1-9": {
-    "1-9": {
+    "Sample 1": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": ""
@@ -2512,7 +2512,7 @@
     }
   },
   "4-14": {
-    "4-14": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
@@ -12133,7 +12133,7 @@
     }
   },
   "5-38": {
-    "5-38": {
+    "Sample 1": {
       "outcome": "UNDETERMINED",
       "calculated_values": [
         {
@@ -15901,7 +15901,7 @@
     }
   },
   "11-1": {
-    "Sample 1 Automated Review": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "PASS",
       "calculated_values": [
         {
@@ -16100,7 +16100,7 @@
     }
   },
   "11-11": {
-    "Sample 1 Automated Review": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
@@ -16398,7 +16398,7 @@
     }
   },
   "12-1": {
-    "Sample 1 Automated Review": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": [
         {
@@ -17474,7 +17474,7 @@
     }
   },
   "12-3": {
-    "Sample 1 Automated Review": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
@@ -17488,14 +17488,14 @@
     }
   },
   "16-1": {
-    "16-1": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "16-2": {
-    "Sample 1 Automated Review": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
@@ -17516,21 +17516,21 @@
     }
   },
   "16-5": {
-    "Sample 1 Automated Review": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "16-6": {
-    "16-6": {
+    "Sample 1": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "16-7": {
-    "16-7": {
+    "Sample 1": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
@@ -19649,7 +19649,7 @@
     }
   },
   "18-3": {
-    "Sample 1 Automated Review": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": [
         {
@@ -20549,7 +20549,7 @@
     }
   },
   "19-3": {
-    "19-3": {
+    "Sample 1": {
       "outcome": "UNDETERMINED",
       "calculated_values": [
         {
@@ -20738,7 +20738,7 @@
     }
   },
   "19-5": {
-    "19-5": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "PASS",
       "calculated_values": [
         {
@@ -20760,7 +20760,7 @@
     }
   },
   "19-6": {
-    "19-6": {
+    "Sample 1 Automated Review": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": {
@@ -20769,7 +20769,7 @@
     }
   },
   "19-7": {
-    "19-7": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "zones:MF1 - Multifamily Zn 1 is missing air_distribution_effectiveness"
@@ -21710,7 +21710,7 @@
     }
   },
   "19-10": {
-    "Sample 1 Automated Review": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
@@ -22186,7 +22186,7 @@
     }
   },
   "19-13": {
-    "19-13": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "zones:MF1 - Multifamily Stair Zn 1 is missing design_thermostat_cooling_setpoint"
@@ -24938,7 +24938,7 @@
     }
   },
   "19-18": {
-    "19-18": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
@@ -32533,7 +32533,7 @@
     }
   },
   "19-37": {
-    "19-37": {
+    "Sample 1": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": [
         {
@@ -32843,7 +32843,7 @@
     }
   },
   "21-16": {
-    "21-16": {
+    "Sample 1 Automated Review": {
       "outcome": "PASS",
       "calculated_values": [
         {
@@ -32925,238 +32925,238 @@
     }
   },
   "22-1": {
-    "22-1": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-2": {
-    "22-2": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-3": {
-    "22-3": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-4": {
-    "22-4": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-5": {
-    "22-5": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-6": {
-    "22-6": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-7": {
-    "22-7": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": ""
     }
   },
   "22-8": {
-    "22-8": {
+    "Sample 1": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-9": {
-    "22-9": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-10": {
-    "22-10": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-11": {
-    "22-11": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-12": {
-    "22-12": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": ""
     }
   },
   "22-13": {
-    "22-13": {
+    "Sample 1 Automated Review": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "List path $.heat_rejections[*] in rule 22-13 is either incorrect or has no data."
     }
   },
   "22-14": {
-    "22-14": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-15": {
-    "22-15": {
+    "Sample 1 Automated Review": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "List path $.heat_rejections[*] in rule 22-15 is either incorrect or has no data."
     }
   },
   "22-16": {
-    "22-16": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-17": {
-    "22-17": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-18": {
-    "22-18": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-19": {
-    "22-19": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-20": {
-    "22-20": {
+    "Sample 1": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-21": {
-    "22-21": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-22": {
-    "22-22": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-23": {
-    "22-23": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": ""
     }
   },
   "22-24": {
-    "22-24": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-25": {
-    "22-25": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-26": {
-    "22-26": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-27": {
-    "22-27": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-28": {
-    "22-28": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-29": {
-    "22-29": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-30": {
-    "22-30": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-31": {
-    "22-31": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": ""
     }
   },
   "22-32": {
-    "22-32": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-33": {
-    "22-33": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": ""
     }
   },
   "22-34": {
-    "22-34": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
@@ -33170,7 +33170,7 @@
     }
   },
   "22-36": {
-    "22-36": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
@@ -33198,42 +33198,42 @@
     }
   },
   "22-40": {
-    "22-40": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": ""
     }
   },
   "22-41": {
-    "22-41": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": ""
     }
   },
   "23-1": {
-    "23-1": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "23-2": {
-    "23-2": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "23-3": {
-    "23-3": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "23-4": {
-    "Sample 1 Automated Review": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": [
         {
@@ -33406,84 +33406,84 @@
     }
   },
   "23-6": {
-    "23-6": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "23-7": {
-    "23-7": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "23-8": {
-    "23-8": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "23-9": {
-    "23-9": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "23-10": {
-    "23-10": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "23-11": {
-    "23-11": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "23-12": {
-    "23-12": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": ""
     }
   },
   "23-13": {
-    "23-13": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "23-14": {
-    "23-14": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "23-15": {
-    "23-15": {
+    "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "23-16": {
-    "23-16": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "23-17": {
-    "23-17": {
+    "Sample 1 Automated Review": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"

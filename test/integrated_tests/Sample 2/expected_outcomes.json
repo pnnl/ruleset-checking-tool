@@ -1,41 +1,41 @@
 {
   "1-1": {
-    "Sample 2 - 3": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "At least one `output_bpf_set` value must exist."
     }
   },
   "1-2": {
-    "1-2": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "At least one `performance_cost_index` value must exist."
     }
   },
   "1-3": {
-    "1-3": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "At least one `performance_cost_index_target` value must exist."
     }
   },
   "1-4": {
-    "1-4": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "At least one `pci_target_set` value must exist."
     }
   },
   "1-5": {
-    "1-5": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Ruleset expects exactly one PBP value to be used in the project."
     }
   },
   "1-6": {
-    "1-6": {
+    "Sample 2": {
       "outcome": "PASS",
       "calculated_values": [
         {
@@ -47,7 +47,7 @@
     }
   },
   "1-7": {
-    "1-7": {
+    "Sample 2": {
       "outcome": "FAILED",
       "calculated_values": [
         {
@@ -63,7 +63,7 @@
     }
   },
   "1-8": {
-    "1-8": {
+    "Sample 2": {
       "outcome": "FAILED",
       "calculated_values": [
         {
@@ -81,7 +81,7 @@
     }
   },
   "1-9": {
-    "1-9": {
+    "Sample 2": {
       "outcome": "FAILED",
       "calculated_values": [
         {
@@ -789,14 +789,14 @@
     }
   },
   "4-11": {
-    "Sample 2": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "No fan operating schedules found for zone 'CRAWL ZN', and no fallback assumed."
     }
   },
   "4-14": {
-    "4-14": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
@@ -6388,7 +6388,7 @@
     }
   },
   "5-38": {
-    "5-38": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": [
         {
@@ -7451,35 +7451,35 @@
     }
   },
   "10-1": {
-    "10-1": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "There must be only one HVAC system serving each zone in the baseline RMD."
     }
   },
   "10-7": {
-    "10-7": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "10-14": {
-    "10-14": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "10-15": {
-    "10-15": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "There must be one system serving each zone in the baseline RMD."
     }
   },
   "11-1": {
-    "Sample 2": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "FAILED",
       "calculated_values": [
         {
@@ -7654,7 +7654,7 @@
     }
   },
   "11-14": {
-    "Sample 2": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
@@ -7773,7 +7773,7 @@
     }
   },
   "12-1": {
-    "Sample 2": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": [
         {
@@ -8271,7 +8271,7 @@
     }
   },
   "12-3": {
-    "Sample 2": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "spaces:CRAWL SP is missing lighting_space_type"
@@ -8285,14 +8285,14 @@
     }
   },
   "16-1": {
-    "16-1": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "16-2": {
-    "Sample 2": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
@@ -8313,42 +8313,42 @@
     }
   },
   "16-5": {
-    "Sample 2": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "16-6": {
-    "16-6": {
+    "Sample 2": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "16-7": {
-    "16-7": {
+    "Sample 2": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "18-1": {
-    "Sample 2": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "18-2": {
-    "Sample 2": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "18-3": {
-    "Sample 2": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": [
         {
@@ -8736,14 +8736,14 @@
     }
   },
   "19-2": {
-    "19-2": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "List path $.fluid_loops[*] in rule 19-2 is either incorrect or has no data."
     }
   },
   "19-3": {
-    "19-3": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": [
         {
@@ -8847,7 +8847,7 @@
     }
   },
   "19-5": {
-    "19-5": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "PASS",
       "calculated_values": [
         {
@@ -8869,7 +8869,7 @@
     }
   },
   "19-6": {
-    "19-6": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": {
@@ -8878,7 +8878,7 @@
     }
   },
   "19-7": {
-    "19-7": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "zones:1 - Vestibule zn is missing air_distribution_effectiveness"
@@ -9147,21 +9147,21 @@
     }
   },
   "19-9": {
-    "19-9": {
-      "outcome": "UNDETERMINED",
-      "calculated_values": "",
-      "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
-    }
-  },
-  "19-10": {
     "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
+  "19-10": {
+    "Sample 2 - 19 - Proposed": {
+      "outcome": "UNDETERMINED",
+      "calculated_values": "",
+      "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
+    }
+  },
   "19-11": {
-    "19-11": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
@@ -9400,49 +9400,49 @@
     }
   },
   "19-13": {
-    "19-13": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "19-14": {
-    "19-14": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "19-15": {
-    "19-15": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "19-16": {
-    "19-16": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "19-17": {
-    "19-17": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "19-18": {
-    "19-18": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "19-19": {
-    "19-19": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
@@ -10049,7 +10049,7 @@
     }
   },
   "19-21": {
-    "Sample 2": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
@@ -10712,7 +10712,7 @@
     }
   },
   "19-30": {
-    "19-30": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
@@ -11041,7 +11041,7 @@
     }
   },
   "19-37": {
-    "19-37": {
+    "Sample 2": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": [
         {
@@ -11087,14 +11087,14 @@
     }
   },
   "21-3": {
-    "21-3": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "21-4": {
-    "21-4": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
@@ -11108,56 +11108,56 @@
     }
   },
   "21-6": {
-    "21-6": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "21-7": {
-    "21-7": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "21-8": {
-    "21-8": {
+    "Sample 2": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "21-9": {
-    "21-9": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "21-10": {
-    "21-10": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "21-11": {
-    "21-11": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "21-12": {
-    "21-12": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "21-13": {
-    "21-13": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
@@ -11178,259 +11178,259 @@
     }
   },
   "21-16": {
-    "21-16": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "21-17": {
-    "21-17": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "21-18": {
-    "21-18": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-1": {
-    "22-1": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-2": {
-    "22-2": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-3": {
-    "22-3": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-4": {
-    "22-4": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-5": {
-    "22-5": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-6": {
-    "22-6": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-7": {
-    "22-7": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-8": {
-    "22-8": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-9": {
-    "22-9": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-10": {
-    "22-10": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-11": {
-    "22-11": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-12": {
-    "22-12": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-13": {
-    "22-13": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-14": {
-    "22-14": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-15": {
-    "22-15": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-16": {
-    "22-16": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-17": {
-    "22-17": {
+    "Sample 2": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-18": {
-    "22-18": {
+    "Sample 2": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-19": {
-    "22-19": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-20": {
-    "22-20": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-21": {
-    "22-21": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-22": {
-    "22-22": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-23": {
-    "22-23": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-24": {
-    "22-24": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-25": {
-    "22-25": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-26": {
-    "22-26": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-27": {
-    "22-27": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-28": {
-    "22-28": {
+    "Sample 2": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": "Not Applicable"
     }
   },
   "22-29": {
-    "22-29": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-30": {
-    "22-30": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-31": {
-    "22-31": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-32": {
-    "22-32": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-33": {
-    "22-33": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "22-34": {
-    "22-34": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
@@ -11444,7 +11444,7 @@
     }
   },
   "22-36": {
-    "22-36": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
@@ -11472,133 +11472,133 @@
     }
   },
   "22-40": {
-    "22-40": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": ""
     }
   },
   "22-41": {
-    "22-41": {
+    "Sample 2": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
       "messages": ""
     }
   },
   "23-1": {
-    "23-1": {
-      "outcome": "UNDETERMINED",
-      "calculated_values": "",
-      "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
-    }
-  },
-  "23-2": {
-    "23-2": {
-      "outcome": "UNDETERMINED",
-      "calculated_values": "",
-      "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
-    }
-  },
-  "23-3": {
-    "23-3": {
-      "outcome": "UNDETERMINED",
-      "calculated_values": "",
-      "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
-    }
-  },
-  "23-4": {
     "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
+  "23-2": {
+    "Sample 2": {
+      "outcome": "UNDETERMINED",
+      "calculated_values": "",
+      "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
+    }
+  },
+  "23-3": {
+    "Sample 2 - 19 - Proposed": {
+      "outcome": "UNDETERMINED",
+      "calculated_values": "",
+      "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
+    }
+  },
+  "23-4": {
+    "Sample 2 - 19 - Proposed": {
+      "outcome": "UNDETERMINED",
+      "calculated_values": "",
+      "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
+    }
+  },
   "23-5": {
-    "23-5": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "23-6": {
-    "23-6": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "23-7": {
-    "23-7": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "23-8": {
-    "23-8": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "23-9": {
-    "23-9": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "23-10": {
-    "23-10": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "23-11": {
-    "23-11": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "23-12": {
-    "23-12": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "23-13": {
-    "23-13": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "23-14": {
-    "23-14": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "23-15": {
-    "23-15": {
+    "Sample 2 - 19 - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "23-16": {
-    "23-16": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
     }
   },
   "23-17": {
-    "23-17": {
+    "Sample 2": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
       "messages": "Error: HVAC RTU - 1 does not match any baseline system type."
