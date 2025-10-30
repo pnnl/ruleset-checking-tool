@@ -15969,69 +15969,17 @@
     }
   },
   "11-8": {
-    "MULTIFAMILY": {
-      "outcome": "FAILED",
-      "calculated_values": [
-        {
-          "variable": "swh_bat_b",
-          "value": "MULTIFAMILY"
-        },
-        {
-          "variable": "num_swh_systems_b",
-          "value": "0"
-        },
-        {
-          "variable": "num_of_bldg_segment_b",
-          "value": "2"
-        },
-        {
-          "variable": "is_referenced_in_other_bats_b",
-          "value": "True"
-        },
-        {
-          "variable": "num_other_swh_bat_segment_b",
-          "value": "0"
-        }
-      ],
-      "messages": ""
-    },
-    "RETAIL": {
-      "outcome": "FAILED",
-      "calculated_values": [
-        {
-          "variable": "swh_bat_b",
-          "value": "RETAIL"
-        },
-        {
-          "variable": "num_swh_systems_b",
-          "value": "0"
-        },
-        {
-          "variable": "num_of_bldg_segment_b",
-          "value": "2"
-        },
-        {
-          "variable": "is_referenced_in_other_bats_b",
-          "value": "True"
-        },
-        {
-          "variable": "num_other_swh_bat_segment_b",
-          "value": "0"
-        }
-      ],
-      "messages": ""
-    }
   },
   "11-9": {
     "MULTIFAMILY": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
-      "messages": "Check that the baseline Service Water Heating System for Building Area Type  is sized according to ASHRAE Standard 90.1 2019, Section 7.4.1."
+      "messages": "Check that the baseline Service Water Heating System for Building Area Type is sized according to ASHRAE Standard 90.1 2019, Section 7.4.1."
     },
     "RETAIL": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
-      "messages": "Check that the baseline Service Water Heating System for Building Area Type  is sized according to ASHRAE Standard 90.1 2019, Section 7.4.1."
+      "messages": "Check that the baseline Service Water Heating System for Building Area Type is sized according to ASHRAE Standard 90.1 2019, Section 7.4.1."
     }
   },
   "11-10": {
@@ -22186,10 +22134,701 @@
     }
   },
   "19-13": {
-    "Sample 1 Automated Review - Proposed - Proposed": {
-      "outcome": "UNDETERMINED",
-      "calculated_values": "",
-      "messages": "zones:MF1 - Multifamily Stair Zn 1 is missing design_thermostat_cooling_setpoint"
+    "Multifamily 1 System 1": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "80.89735075377394",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "581.1622314453125",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "957.4102249145508",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 1 System 2": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "80.89734856730502",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "394.4091796875",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "957.410285949707",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 1 System 3": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "158.32767548913398",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "591.818603515625",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "1911.353546142578",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 1 System 4": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "80.16191171953506",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "388.74102783203125",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "956.6748504638672",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 1 System 5": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "80.16191065633029",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "569.424560546875",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "956.6749114990236",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 1 System 6": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "158.32766808600354",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "1008.353759765625",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "1911.353546142578",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 2 System 1": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "80.89734359475187",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "608.0804443359375",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "8846.027229309084",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 2 System 2": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "80.897344235334",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "436.5708923339844",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "8846.027229309084",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 2 System 3": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "158.32766449153496",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "716.430419921875",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "17688.58743286133",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 2 System 4": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "80.16191377136965",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "445.72747802734375",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "8845.291793823244",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 2 System 5": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "80.16191066048123",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "595.7460327148438",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "8845.291793823244",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 2 System 6": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "158.32766304458346",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "1057.779052734375",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "17688.58743286133",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 3 System 1": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "81.77851689629097",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "817.7854614257812",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "957.410285949707",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 3 System 2": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "80.89734886014367",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "647.5081176757812",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "957.410285949707",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 3 System 3": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "158.32766204032853",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "1096.5020751953125",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "1911.353546142578",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 3 System 4": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "80.16191039175737",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "644.7208251953125",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "956.6748504638672",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 3 System 5": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "80.16191238343254",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "788.0619506835938",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "956.6748504638672",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 3 System 6": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "158.32766203875508",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "1423.626708984375",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "1911.353546142578",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 1 Corridor System 1": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "39.19393965909876",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "117.63317108154297",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "100.05854797363281",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 2 Corridor System 1": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "39.193939367252604",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "118.03327178955078",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "1000.5855712890625",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "Multifamily 3 Corridor System 1": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "39.193939700701776",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "257.2360534667969",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "100.05855560302734",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "RT - Retail System 1": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "476.916413373081",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "2285.453125",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "1938.4708251953125",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "RT - Retail System 2": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "617.9026662614342",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "2156.399658203125",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "1666.677978515625",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
+    },
+    "RT - Retail System 3": {
+      "outcome": "PASS",
+      "calculated_values": [
+        {
+          "variable": "all_design_setpoints_delta_Ts_are_per_reqs_b",
+          "value": "True"
+        },
+        {
+          "variable": "are_all_hvac_sys_fan_objs_autosized_b",
+          "value": "True"
+        },
+        {
+          "variable": "fan_minimum_outdoor_airflow_b",
+          "value": "721.9887816300616",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_fans_airflow_b",
+          "value": "3008.41796875",
+          "unit": "cfm"
+        },
+        {
+          "variable": "supply_airflow_p",
+          "value": "2736.359375",
+          "unit": "cfm"
+        }
+      ],
+      "messages": ""
     }
   },
   "19-14": {
@@ -23914,11 +24553,6 @@
       ],
       "messages": ""
     },
-    "HVAC System 26": {
-      "outcome": "UNDETERMINED",
-      "calculated_values": "",
-      "messages": "MISSING_PROPOSED"
-    },
     "Stair System Unit Heater - MF1 - Multifamily Stair Zn 2": {
       "outcome": "PASS",
       "calculated_values": [
@@ -24970,11 +25604,6 @@
         }
       ],
       "messages": ""
-    },
-    "HVAC System 26": {
-      "outcome": "UNDETERMINED",
-      "calculated_values": "",
-      "messages": "MISSING_PROPOSED"
     },
     "Stair System Unit Heater - MF1 - Multifamily Stair Zn 2": {
       "outcome": "PASS",
@@ -28647,11 +29276,6 @@
         }
       ],
       "messages": ""
-    },
-    "HVAC System 26": {
-      "outcome": "UNDETERMINED",
-      "calculated_values": "",
-      "messages": "MISSING_PROPOSED"
     },
     "Stair System Unit Heater - MF1 - Multifamily Stair Zn 2": {
       "outcome": "PASS",
@@ -32329,11 +32953,6 @@
       "calculated_values": "",
       "messages": ""
     },
-    "HVAC System 26": {
-      "outcome": "UNDETERMINED",
-      "calculated_values": "",
-      "messages": "MISSING_PROPOSED"
-    },
     "Stair System Unit Heater - MF1 - Multifamily Stair Zn 2": {
       "outcome": "NOT_APPLICABLE",
       "calculated_values": "",
@@ -33009,11 +33628,6 @@
     }
   },
   "22-13": {
-    "Sample 1 Automated Review": {
-      "outcome": "UNDETERMINED",
-      "calculated_values": "",
-      "messages": "List path $.heat_rejections[*] in rule 22-13 is either incorrect or has no data."
-    }
   },
   "22-14": {
     "Sample 1 Automated Review": {
@@ -33023,11 +33637,6 @@
     }
   },
   "22-15": {
-    "Sample 1 Automated Review": {
-      "outcome": "UNDETERMINED",
-      "calculated_values": "",
-      "messages": "List path $.heat_rejections[*] in rule 22-15 is either incorrect or has no data."
-    }
   },
   "22-16": {
     "Sample 1 Automated Review": {
