@@ -3,7 +3,7 @@
     "Sample 1 Automated Review - Proposed - Proposed": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
-      "messages": "At least one `output_bpf_set` value must exist."
+      "messages": "At least one `total_area_weighted_building_performance_factor` value must exist."
     }
   },
   "1-2": {
@@ -24,14 +24,14 @@
     "Sample 1": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
-      "messages": "At least one `pci_target_set` value must exist."
+      "messages": "At least one `performance_cost_index_target` value must exist."
     }
   },
   "1-5": {
     "Sample 1": {
       "outcome": "UNDETERMINED",
       "calculated_values": "",
-      "messages": "Ruleset expects exactly one PBP value to be used in the project."
+      "messages": "Ruleset expects exactly one 'total_proposed_building_energy_cost_including_renewable_energy' value to be used in the project."
     }
   },
   "1-6": {
