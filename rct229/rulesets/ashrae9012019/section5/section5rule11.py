@@ -14,6 +14,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
+from rct229.utils.jsonpath_utils import find_all
 
 
 class PRM9012019Rule46p73(RuleDefinitionListIndexedBase):
@@ -47,50 +48,31 @@ class PRM9012019Rule46p73(RuleDefinitionListIndexedBase):
             "constructions": constructions,
         }
 
-    class BuildingRule(RuleDefinitionListIndexedBase):
+    class BuildingRule(PartialRuleDefinition):
         def __init__(self):
             super(PRM9012019Rule46p73.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                each_rule=PRM9012019Rule46p73.BuildingRule.SurfaceRule(),
-                index_rmd=BASELINE_0,
-                list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
 
-        def create_data(self, context, data=None):
+        def get_calc_vals(self, context, data=None):
             building_b = context.BASELINE_0
-            return {
-                "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building_b, data["constructions"]
-                ),
-            }
-
-        def list_filter(self, context_item, data):
-            surface_b = context_item.BASELINE_0
-            return get_opaque_surface_type(surface_b) in [
-                OST.HEATED_SOG,
-                OST.UNHEATED_SOG,
-            ]
-
-        class SurfaceRule(PartialRuleDefinition):
-            def __init__(self):
-                super(PRM9012019Rule46p73.BuildingRule.SurfaceRule, self).__init__(
-                    rmds_used=produce_ruleset_model_description(
-                        USER=False, BASELINE_0=True, PROPOSED=False
-                    ),
+            surface_conditioning_category_dict = get_surface_conditioning_category_dict(
+                data["climate_zone"], building_b, data["constructions"]
+            )
+            applicable_surface_ids = [
+                surface_b["id"]
+                for surface_b in find_all(
+                    "$.building_segments[*].zones[*].surfaces[*]", building_b
                 )
-
-            def get_calc_vals(self, context, data=None):
-                surface_b = context.BASELINE_0
-                surface_conditioning_category_dict = data[
-                    "surface_conditioning_category_dict"
-                ]
-                surface_category = surface_conditioning_category_dict[surface_b["id"]]
-                return {
-                    "surface_category": surface_category,
-                }
-
-            def applicability_check(self, context, calc_vals, data):
-                surface_category = calc_vals["surface_category"]
-                return surface_category != SCC.UNREGULATED
+                if (
+                    get_opaque_surface_type(surface_b)
+                    in [OST.HEATED_SOG, OST.UNHEATED_SOG]
+                    and surface_conditioning_category_dict[surface_b["id"]]
+                    != SCC.UNREGULATED
+                )
+            ]
+            return {
+                "applicable_surface_ids": applicable_surface_ids,
+            }
