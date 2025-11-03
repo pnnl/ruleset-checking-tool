@@ -25,7 +25,7 @@
 - initialize a dict to store the chilled water supply temperatures, condenser temperatures in a string as keys, and capacity operating point results as the values: `capacity_operating_pts_dict = {}`
 - iterate through the capacity operating points: `for capacity_operating_point in chiller["capacity_operating_points"]:`
     - create the key string: `dict_key = f"{capacity_operating_point.chilled_water_supply_temperature}, {capacity_operating_point.condenser_temperature}"`
-    - add the item to the dict: `capacity_operating_pts_dict[dict_key] = capacity_operating_point.result`
+    - add the item to the dict: `capacity_operating_pts_dict[dict_key] = capacity_operating_point.capacity`
 
 - initialize a dict to store the chilled water supply temperatures, condenser temperatures in a string as keys, and lists of power operating points as the values: `power_operating_pts_dict = {}`
 - look at each value in chiller power operating points: `for power_operating_point in chiller["power_operating_points"]:`
@@ -57,7 +57,7 @@
             - we are expecting to see multiple operating points aligning with the expected validation PLR.  Create a list of part load ratios that are given.  Later we'll compare this with the expected list to make sure that all points are given: `given_plrs = []`
             - look at each power operating point in the list: `for power_operating_point in power_operating_pts_dict[dict_key]:`
                 - get the load: `load = power_operating_point.load`
-                - get the given power: `given_power = power_operating_point.result`
+                - get the given power: `given_power = power_operating_point.power`
                 - calculate the PLR by dividing the load by the given capacity at these operating conditions: `plr = load / given_capacities[dict_key]`
                 - check whether the plr is one of the plrs that we need to check - note to dev team, please accept a match that is with 0.01 of the expected: `if plr in expected_validation_plr:`
                     - add the plr to the list of plrs provided: `given_plrs.append(plr)`
