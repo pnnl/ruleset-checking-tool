@@ -19,7 +19,7 @@ class PRM9012022Rule23f92(RuleDefinitionListIndexedBase):
             index_rmd=PROPOSED,
             id="11-5",
             description="Piping losses shall not be modeled.",
-            ruleset_section_title="Service Hot Water",
+            ruleset_section_title="Service Hot Heating",
             standard_section="Table G3.1 #11, proposed column, f",
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
