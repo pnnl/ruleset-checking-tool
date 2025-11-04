@@ -157,12 +157,12 @@ def _module_has_non_primary_rule(module_name: str) -> bool:
     except Exception:
         return False
 
-    # Names that identify rule base classes by simple name (as in your other AST code)
+    # Names that identify rule base classes by simple name
     RULE_BASE_NAMES = {
         "RuleDefinitionBase",
         "RuleDefinitionListBase",
         "RuleDefinitionListIndexedBase",
-        "PartialRuleDefinition",  # still a rule class; we just won't *use* it for detection
+        "PartialRuleDefinition",
     }
 
     def _is_rule_class(class_node: ast.ClassDef) -> bool:
@@ -170,7 +170,11 @@ def _module_has_non_primary_rule(module_name: str) -> bool:
             # Handles simple "BaseName" and qualified "pkg.BaseName"
             if isinstance(base, ast.Name) and base.id in RULE_BASE_NAMES:
                 return True
-            if isinstance(base, ast.Attribute) and isinstance(base.attr, str) and base.attr in RULE_BASE_NAMES:
+            if (
+                isinstance(base, ast.Attribute)
+                and isinstance(base.attr, str)
+                and base.attr in RULE_BASE_NAMES
+            ):
                 return True
         return False
 
@@ -183,18 +187,22 @@ def _module_has_non_primary_rule(module_name: str) -> bool:
         return None
 
     # Look through rule classes and their __init__ bodies for super().__init__(..., is_primary_rule=...)
-    for class_node in (n for n in ast.walk(tree) if isinstance(n, ast.ClassDef) and _is_rule_class(n)):
+    for class_node in (
+        n for n in ast.walk(tree) if isinstance(n, ast.ClassDef) and _is_rule_class(n)
+    ):
         # find __init__
-        init_funcs = [b for b in class_node.body if isinstance(b, ast.FunctionDef) and b.name == "__init__"]
+        init_funcs = [
+            b
+            for b in class_node.body
+            if isinstance(b, ast.FunctionDef) and b.name == "__init__"
+        ]
         for init in init_funcs:
             for call in ast.walk(init):
                 if isinstance(call, ast.Call):
-                    # We don't strictly require it's 'super().__init__', because your 'id' updater
-                    # also just checks keyword args on any call in __init__. This mirrors that logic.
                     for kw in call.keywords:
                         if kw.arg == "is_primary_rule":
                             val = _const_bool(kw.value)
-                            if val is False:
+                            if not val:
                                 return True  # found a non-primary rule
     return False
 
@@ -226,7 +234,7 @@ def write_rule_info_to_file(ruleset_doc):
             rule_unique_id_string = str(rule_id)
             rule_name = rule_map.get(rule_unique_id_string)
 
-            # case-insensitive fallback
+            # fallback for case mismatch
             if not rule_name:
                 for k, v in rule_map.items():
                     if k.lower() == rule_unique_id_string.lower():
@@ -240,7 +248,9 @@ def write_rule_info_to_file(ruleset_doc):
             # Parse section and rule number from rule_name
             match = re.match(r"section(\d+)rule(\d+)", rule_name, re.IGNORECASE)
             if not match:
-                print(f"Could not parse section/rule number from rule name: {rule_name}")
+                print(
+                    f"Could not parse section/rule number from rule name: {rule_name}"
+                )
                 section = rule_number = ""
             else:
                 section, rule_number = match.groups()
