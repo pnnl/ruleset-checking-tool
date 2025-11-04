@@ -16,10 +16,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
-from rct229.utils.utility_functions import (
-    find_exactly_one_hvac_system,
-    find_exactly_one_terminal_unit,
-)
 
 
 def FanPowerInfo(TypedDict):
@@ -56,11 +52,30 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
     return fan power kW, exhaust fan power kW, relief fan power kW, terminal fan power]}. Values will be equal to
     zero where not defined for a fan system. Zonal exhaust and non-mechanical cooling is not included.
     """
+
+    zones = find_all("$.buildings[*].building_segments[*].zones[*]", rmd)
+    hvacs = find_all(
+        "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
+        rmd,
+    )
+    terminals = find_all(
+        "$.buildings[*].building_segments[*].zones[*].terminals[*]", rmd
+    )
+
+    hvac_by_id = {h["id"]: h for h in hvacs}
+    terminal_by_id = {t["id"]: t for t in terminals}
+    # Cache zone → terminal IDs
+    zone_terminal_ids = {
+        z["id"]: [t["id"] for t in find_all("$.terminals[*]", z)] for z in zones
+    }
+
     zone_supply_return_exhaust_relief_terminal_fan_power_dict = {}
     dict_of_zones_and_terminal_units_served_by_hvac_sys = (
         get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd)
     )
-    for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmd):
+
+    for zone in zones:
+        zone_id = zone["id"]
         # Initialize parameters in a zone
         zone_total_supply_fan_power = ZERO.POWER
         zone_total_return_fan_power = ZERO.POWER
@@ -73,50 +88,53 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
         zone_total_terminal_fan_power = ZERO.POWER
 
         hvac_sys_list_serving_zone = get_list_hvac_systems_associated_with_zone(
-            rmd, zone["id"]
+            rmd, zone_id
         )
-        for hvac_id in hvac_sys_list_serving_zone:
-            hvac = find_exactly_one_hvac_system(rmd, hvac_id)
-            hvac_system_zone_ids_list = (
-                dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id][
-                    "zone_list"
-                ]
-            )
-            hvac_system_terminal_id_list = (
-                dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id][
-                    "terminal_unit_list"
-                ]
-            )
+        zone_terminal_set = set(zone_terminal_ids[zone_id])
 
-            # Make sure the HVAC system has more than one zone
+        for hvac_id in hvac_sys_list_serving_zone:
+            # These asserts ensure identical behavior (no silent skips)
+            assert_(
+                hvac_id in hvac_by_id,
+                f"HVAC system {hvac_id} referenced in zone {zone_id} not found in RMD.",
+            )
+            hvac = hvac_by_id[hvac_id]
+
+            assert_(
+                hvac_id in dict_of_zones_and_terminal_units_served_by_hvac_sys,
+                f"HVAC system {hvac_id} missing from zones/terminals dictionary. Check inputs!",
+            )
+            hvac_info = dict_of_zones_and_terminal_units_served_by_hvac_sys[hvac_id]
+
+            hvac_system_zone_ids_list = hvac_info["zone_list"]
+            hvac_system_terminal_id_list = hvac_info["terminal_unit_list"]
+
             assert_(
                 hvac_system_zone_ids_list,
                 f"No zone associated with the HVAC {hvac_id}. Check inputs!",
             )
-            # Make sure the HVAC system has more than one terminal
             assert_(
                 hvac_system_terminal_id_list,
                 f"No terminal associated with the HVAC {hvac_id}. Check inputs!",
             )
 
-            # Find terminals in the zone that matches to the HVAC terminal list, and calculate the terminal fan power
-            zone_hvac_terminal_intersection_list = list(
-                set(hvac_system_terminal_id_list).intersection(
-                    set(find_all("$.terminals[*].id", zone))
-                )
+            # Find terminals in the zone that match the HVAC terminal list
+            zone_hvac_terminal_intersection_list = zone_terminal_set.intersection(
+                hvac_system_terminal_id_list
             )
-            # Convert terminal id list to terminal data list
             zone_hvac_intersection_terminals = [
-                find_exactly_one_terminal_unit(rmd, zone_terminal_id)
-                for zone_terminal_id in zone_hvac_terminal_intersection_list
+                terminal_by_id[terminal_id]
+                for terminal_id in zone_hvac_terminal_intersection_list
+                if terminal_id in terminal_by_id
             ]
-            # calculate the total terminal fan power from an intersection list of zone
+
+            # Calculate the total terminal fan power
             zone_hvac_total_terminal_fan_power = sum(
-                [
+                (
                     get_fan_object_electric_power(terminal["fan"])
                     for terminal in zone_hvac_intersection_terminals
                     if terminal.get("fan")
-                ],
+                ),
                 ZERO.POWER,
             )
             zone_total_terminal_fan_power += zone_hvac_total_terminal_fan_power
@@ -124,27 +142,28 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
             # if hvac has fan system, calculate the central fan power portion for the zone
             if hvac.get("fan_system"):
                 hvac_system_terminal_list = [
-                    find_exactly_one_terminal_unit(rmd, terminal_id)
+                    terminal_by_id[terminal_id]
                     for terminal_id in hvac_system_terminal_id_list
+                    if terminal_id in terminal_by_id
                 ]
                 hvac_total_terminal_air_flow = sum(
-                    [
+                    (
                         terminal.get("primary_airflow", ZERO.FLOW)
                         for terminal in hvac_system_terminal_list
-                    ],
+                    ),
                     ZERO.FLOW,
                 )
                 # Make sure hvac_total_terminal_air_flow is greater than 0.0 to avoid 0 division error
                 assert_(
                     hvac_total_terminal_air_flow > ZERO.FLOW,
-                    f"Terminals connected with HVAC {hvac['id']} have 0.0 total air flow. Check inputs!",
+                    f"Terminals connected with HVAC {hvac_id} have 0.0 total air flow. Check inputs!",
                 )
 
                 zone_primary_air_flow = sum(
-                    [
-                        terminal.get("primary_airflow", ZERO.FLOW)
-                        for terminal in zone_hvac_intersection_terminals
-                    ],
+                    (
+                        t.get("primary_airflow", ZERO.FLOW)
+                        for t in zone_hvac_intersection_terminals
+                    ),
                     ZERO.FLOW,
                 )
 
@@ -176,7 +195,7 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
             else:
                 zone_total_supply_fan_power += zone_hvac_total_terminal_fan_power
 
-        zone_supply_return_exhaust_relief_terminal_fan_power_dict[zone["id"]] = {
+        zone_supply_return_exhaust_relief_terminal_fan_power_dict[zone_id] = {
             "supply_fans_power": zone_total_supply_fan_power,
             "return_fans_power": zone_total_return_fan_power,
             "exhaust_fans_power": zone_total_exhaust_fan_power,
