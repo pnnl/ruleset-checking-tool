@@ -1,15 +1,13 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType,
     get_opaque_surface_type,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
-    get_surface_conditioning_category_dict,
+    get_baseline_surface_conditioning_category_dict,
 )
 from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.utils.assertions import getattr_
@@ -24,7 +22,7 @@ class PRM9012022Rule13d92(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(PRM9012022Rule13d92, self).__init__(
             rmds_used=produce_ruleset_model_description(
-                USER=False, BASELINE_0=True, PROPOSED=False
+                USER=False, BASELINE_0=True, PROPOSED=True
             ),
             each_rule=PRM9012022Rule13d92.BuildingRule(),
             index_rmd=BASELINE_0,
@@ -38,18 +36,24 @@ class PRM9012022Rule13d92(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         rmd_b = context.BASELINE_0
+        rmd_p = context.PROPOSED
         climate_zone_b = rmd_b["ruleset_model_descriptions"][0]["weather"][
             "climate_zone"
         ]
         constructions_b = rmd_b["ruleset_model_descriptions"][0].get("constructions")
+        constructions_p = rmd_p["ruleset_model_descriptions"][0].get("constructions")
 
-        return {"climate_zone_b": climate_zone_b, "constructions_b": constructions_b}
+        return {
+            "climate_zone_b": climate_zone_b,
+            "constructions_b": constructions_b,
+            "constructions_p": constructions_p,
+        }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(PRM9012022Rule13d92.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=False, BASELINE_0=True, PROPOSED=False
+                    USER=False, BASELINE_0=True, PROPOSED=True
                 ),
                 each_rule=PRM9012022Rule13d92.BuildingRule.SurfaceRule(),
                 index_rmd=BASELINE_0,
@@ -58,11 +62,13 @@ class PRM9012022Rule13d92(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data=None):
             building_b = context.BASELINE_0
+            building_p = context.PROPOSED
             climate_zone_b = data["climate_zone_b"]
             constructions_b = data["constructions_b"]
+            constructions_p = data["constructions_p"]
 
-            scc_dict_b = get_surface_conditioning_category_dict(
-                climate_zone_b, building_b, constructions_b
+            scc_dict_b = get_baseline_surface_conditioning_category_dict(
+                climate_zone_b, building_b, constructions_b, building_p, constructions_p
             )
 
             return {"scc_dict_b": scc_dict_b}
