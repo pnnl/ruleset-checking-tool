@@ -4,7 +4,7 @@
         "Rule": 5,
         "Test": "a",
         "standard": {
-            "ruleset": "ashrae9012022",
+            "ruleset": "ashrae9012019",
             "rule_id": "11-5",
             "ruleset_reference": "Table G3.1 #11, proposed column, f",
             "rule_description": "Piping losses shall not be modeled.",
@@ -73,7 +73,7 @@
         "Rule": 5,
         "Test": "b",
         "standard": {
-            "ruleset": "ashrae9012022",
+            "ruleset": "ashrae9012019",
             "rule_id": "11-5",
             "ruleset_reference": "Table G3.1 #11, proposed column, f",
             "rule_description": "Piping losses shall not be modeled.",
