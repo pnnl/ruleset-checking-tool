@@ -428,7 +428,7 @@
         "Test": "d",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production and the proposed building performance is not specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "Ruleset expects exactly one PBP value to be used in the project.",
+        "expected_raised_message_includes": "Ruleset expects exactly one 'total_proposed_building_energy_cost_including_renewable_energy' value to be used in the project.",
         "standard": {
             "rule_id": "1-5",
             "ruleset_reference": "4.2.1.2",
