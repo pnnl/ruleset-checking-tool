@@ -62,8 +62,8 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
         "$.buildings[*].building_segments[*].zones[*].terminals[*]", rmd
     )
 
-    hvac_by_id = {h["id"]: h for h in hvacs}
-    terminal_by_id = {t["id"]: t for t in terminals}
+    hvac_by_id = {hvac["id"]: hvac for hvac in hvacs}
+    terminal_by_id = {terminal["id"]: terminal for terminal in terminals}
     # Cache zone → terminal IDs
     zone_terminal_ids = {
         zone["id"]: [terminal["id"] for terminal in find_all("$.terminals[*]", zone)]
