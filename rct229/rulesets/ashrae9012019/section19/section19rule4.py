@@ -41,6 +41,7 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
             find_all("$..hourly_cooling_design_day", rmd_b),
             "No schedules in the baseline model contain the 'hourly_cooling_design_day' data",
         )
+        return {}
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):

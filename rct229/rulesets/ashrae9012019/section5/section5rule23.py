@@ -52,6 +52,7 @@ class PRM9012019Rule11q41(RuleDefinitionListIndexedBase):
                 )
 
             assert_(not models_missing_data, "\n".join(models_missing_data))
+            return {}
 
         class SubsurfaceRule(RuleDefinitionBase):
             def __init__(self):

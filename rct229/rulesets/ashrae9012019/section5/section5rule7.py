@@ -79,4 +79,4 @@ class PRM9012019Rule20r05(RuleDefinitionListIndexedBase):
         def applicability_check(self, context, calc_vals, data):
 
             applicable_surface_ids = calc_vals["applicable_surface_ids"]
-            return applicable_surface_ids
+            return bool(applicable_surface_ids)

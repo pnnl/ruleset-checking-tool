@@ -36,6 +36,8 @@ class PRM9012019Rule82y74(RuleDefinitionListIndexedBase):
             "No subsurfaces in the proposed model contain the 'dynamic_glazing_type' data. ",
         )
 
+        return {}
+
     class SubsurfaceRule(PartialRuleDefinition):
         def __init__(self):
             super(PRM9012019Rule82y74.SubsurfaceRule, self).__init__(

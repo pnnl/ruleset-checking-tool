@@ -65,6 +65,7 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
             )
 
         assert_(not missing_data, "\n".join(missing_data))
+        return {}
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):

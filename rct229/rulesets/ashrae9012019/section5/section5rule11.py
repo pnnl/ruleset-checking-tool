@@ -76,3 +76,8 @@ class PRM9012019Rule46p73(RuleDefinitionListIndexedBase):
             return {
                 "applicable_surface_ids": applicable_surface_ids,
             }
+
+        def applicability_check(self, context, calc_vals, data):
+
+            applicable_surface_ids = calc_vals["applicable_surface_ids"]
+            return bool(applicable_surface_ids)
