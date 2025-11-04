@@ -428,7 +428,7 @@
         "Test": "d",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production and the proposed building performance is not specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "Ruleset expects exactly one PBP value to be used in the project.",
+        "expected_raised_message_includes": "Ruleset expects exactly one 'total_proposed_building_energy_cost_including_renewable_energy' value to be used in the project.",
         "standard": {
             "rule_id": "1-5",
             "ruleset_reference": "4.2.1.2",
@@ -568,7 +568,7 @@
         "Test": "e",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production and baseline building performance is not specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "Ruleset expects exactly one BBP value to be used in the project.",
+        "expected_raised_message_includes": "Ruleset expects exactly one 'baseline_building_performance_energy_cost' value to be used in the project.",
         "standard": {
             "rule_id": "1-5",
             "ruleset_reference": "4.2.1.2",
@@ -708,7 +708,7 @@
         "Test": "f",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production and performance cost index is not specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "Ruleset expects exactly one PCI value to be used in the project.",
+        "expected_raised_message_includes": "Ruleset expects exactly one 'performance_cost_index' value to be used in the project.",
         "standard": {
             "rule_id": "1-5",
             "ruleset_reference": "4.2.1.2",
@@ -848,7 +848,7 @@
         "Test": "g",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production and performance cost index target is not specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "Ruleset expects exactly one PCI Target value to be used in the project.",
+        "expected_raised_message_includes": "Ruleset expects exactly one 'performance_cost_index_target' value to be used in the project.",
         "standard": {
             "rule_id": "1-5",
             "ruleset_reference": "4.2.1.2",

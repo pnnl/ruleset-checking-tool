@@ -77,7 +77,6 @@ class PRM9012019Rule72v93(RuleDefinitionListIndexedBase):
                         compare_context_str="AppG 11-1 Proposed Equals User",
                         swh_distribution_id=swh_dist_sys_id_u,
                     )
-
                 else:
                     # no loads
                     proposed_baseline_comparison = (

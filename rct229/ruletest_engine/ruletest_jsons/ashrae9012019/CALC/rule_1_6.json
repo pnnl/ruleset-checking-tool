@@ -4,7 +4,7 @@
         "Rule": 6,
         "Test": "a",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production. An end use result has an energy source with \"ON_SITE_RENEWABLES\" and has annual set energy use greater than 0",
-        "expected_rule_outcome": "pass",
+        "expected_rule_outcome": "fail",
         "standard": {
             "rule_id": "1-6",
             "ruleset_reference": "G3.11 18 Baseline",
@@ -81,7 +81,7 @@
         "Rule": 6,
         "Test": "b",
         "test_description": "A one building segment, single zone building has proposed on site renewable energy production. An end use result has an energy source with \"ON_SITE_RENEWABLES\" and but has annual site energy set to 0.",
-        "expected_rule_outcome": "fail",
+        "expected_rule_outcome": "pass",
         "standard": {
             "rule_id": "1-6",
             "ruleset_reference": "G3.11 18 Baseline",
