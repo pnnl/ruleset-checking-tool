@@ -109,10 +109,13 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
             hvac_system_zone_ids_list = hvac_info["zone_list"]
             hvac_system_terminal_id_list = hvac_info["terminal_unit_list"]
 
+            # Make sure the HVAC system has more than one zone
             assert_(
                 hvac_system_zone_ids_list,
                 f"No zone associated with the HVAC {hvac_id}. Check inputs!",
             )
+
+            # Make sure the HVAC system has more than one terminal
             assert_(
                 hvac_system_terminal_id_list,
                 f"No terminal associated with the HVAC {hvac_id}. Check inputs!",
@@ -161,8 +164,8 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
 
                 zone_primary_air_flow = sum(
                     (
-                        t.get("primary_airflow", ZERO.FLOW)
-                        for t in zone_hvac_intersection_terminals
+                        terminal.get("primary_airflow", ZERO.FLOW)
+                        for terminal in zone_hvac_intersection_terminals
                     ),
                     ZERO.FLOW,
                 )
