@@ -267,6 +267,6 @@ def write_rule_info_to_file(ruleset_doc):
 
 
 if __name__ == "__main__":
-    write_rule_info_to_file(rulesets.RuleSet.ASHRAE9012019_RULESET)
+    # write_rule_info_to_file(rulesets.RuleSet.ASHRAE9012019_RULESET)
     # renumber_rules(rulesets.RuleSet.ASHRAE9012019_RULESET)
     pass
