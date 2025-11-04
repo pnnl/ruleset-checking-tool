@@ -66,7 +66,8 @@ def get_zone_supply_return_exhaust_relief_terminal_fan_power_dict(
     terminal_by_id = {t["id"]: t for t in terminals}
     # Cache zone → terminal IDs
     zone_terminal_ids = {
-        z["id"]: [t["id"] for t in find_all("$.terminals[*]", z)] for z in zones
+        zone["id"]: [terminal["id"] for terminal in find_all("$.terminals[*]", zone)]
+        for zone in zones
     }
 
     zone_supply_return_exhaust_relief_terminal_fan_power_dict = {}
