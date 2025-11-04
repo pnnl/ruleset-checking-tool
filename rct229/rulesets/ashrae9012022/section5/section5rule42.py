@@ -50,7 +50,7 @@ class PRM9012019Rule82e93(RuleDefinitionListIndexedBase):
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={},
-                each_rule=PRM9012019Rule82e93.BuildingRule.SubsurfaceRule(),
+                each_rule=PRM9012019Rule82e93.BuildingRule.SurfaceRule(),
                 index_rmd=PROPOSED,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -77,10 +77,10 @@ class PRM9012019Rule82e93(RuleDefinitionListIndexedBase):
 
             return {"scc_dictionary_p": scc_dictionary_p}
 
-        class SubsurfaceRule(PartialRuleDefinition):
+        class SurfaceRule(PartialRuleDefinition):
             def __init__(self):
                 super(
-                    PRM9012019Rule82e93.BuildingRule.SubsurfaceRule,
+                    PRM9012019Rule82e93.BuildingRule.SurfaceRule,
                     self,
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
