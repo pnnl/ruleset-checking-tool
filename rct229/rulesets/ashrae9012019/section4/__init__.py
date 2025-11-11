@@ -8,6 +8,8 @@ __all__ = [
     "section4rule14",
 ]
 
+SHORT_NAME = "SCH"
+
 
 def __getattr__(name):
     if name in __all__:
