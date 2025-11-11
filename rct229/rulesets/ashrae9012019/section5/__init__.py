@@ -45,6 +45,8 @@ __all__ = [
     "section5rule40",
 ]
 
+SHORT_NAME = "ENV"
+
 
 def __getattr__(name):
     if name in __all__:

@@ -1,41 +1,25 @@
-from rct229.ruletest_engine.ruletest_jsons.ashrae9012019 import (
-    ELEVATOR_DIR,
-    ENVELOPE_DIR,
-    HVAC_AIRSIDE_DIR,
-    HVAC_BASELINE_DIR,
-    HVAC_CHILLED_WATER_DIR,
-    HVAC_GENERAL_DIR,
-    HVAC_HOT_WATER_DIR,
-    LIGHTING_DIR,
-    PERFORMANCE_CALC_DIR,
-    RECEPTACLE_DIR,
-    SCHEDULE_DIR,
-    SERVICE_HOT_WATER_DIR,
-)
+from importlib.metadata import entry_points
 
 
 # Ruleset enumerator
 class RuleSet:
-    ASHRAE9012019_RULESET = "ashrae9012019"
-    ASHRAE9012022_RULESET = "ashrae9012022"
+    """Dynamic registry for available rulesets."""
+
+    # Optional static declarations (for IDE awareness)
+    ASHRAE9012019_RULESET: str
+    ASHRAE9012022_RULESET: str
+
+    @classmethod
+    def discover(cls):
+        """Discover and register all available rulesets dynamically."""
+        eps = entry_points(group="rct229.rulesets")
+        for ep in eps:
+            attr_name = ep.name.upper().replace("-", "_") + "_RULESET"
+            setattr(cls, attr_name, ep.name)
+        return cls
 
 
-class RuleSetTest:
-    ASHRAE9012019_TEST_LIST = [
-        PERFORMANCE_CALC_DIR,
-        ELEVATOR_DIR,
-        ENVELOPE_DIR,
-        HVAC_AIRSIDE_DIR,
-        HVAC_CHILLED_WATER_DIR,
-        HVAC_GENERAL_DIR,
-        HVAC_HOT_WATER_DIR,
-        HVAC_BASELINE_DIR,
-        LIGHTING_DIR,
-        RECEPTACLE_DIR,
-        SCHEDULE_DIR,
-        SERVICE_HOT_WATER_DIR,
-    ]
-    ASHRAE9012022_TEST_LIST = [ENVELOPE_DIR, LIGHTING_DIR]
+RuleSet.discover()
 
 
 class LeapYear:
