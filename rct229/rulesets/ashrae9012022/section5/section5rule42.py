@@ -35,7 +35,9 @@ class PRM9012019Rule82e93(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         rpd_p = context.PROPOSED
-        climate_zone_p = rpd_p["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
+        climate_zone_p = rpd_p["ruleset_model_descriptions"][0]["weather"][
+            "climate_zone"
+        ]
         constructions_p = rpd_p["ruleset_model_descriptions"][0]["constructions"]
 
         return {
