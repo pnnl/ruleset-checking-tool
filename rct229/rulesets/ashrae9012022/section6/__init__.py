@@ -3,6 +3,7 @@ import importlib
 
 __all__ = [
     "section6rule11",
+    "section6rule12",
     "section6rule13",
 ]
 
