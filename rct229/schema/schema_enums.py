@@ -36,14 +36,14 @@ class SchemaEnums:
     def update_schema_enum():
         # Load the enumeration schema file
         _enum_schema_path = join(
-            dirname(__file__), "..", "schema", SchemaStore.get_enum_schema_by_ruleset()
+            dirname(__file__), "..", "schema", SchemaStore.get_active_enum_schema()
         )
         with open(_enum_schema_path) as json_file:
             _enum_schema_obj = json.load(json_file)
 
         # Load the output schema file
         _output_schema_path = join(
-            dirname(__file__), "..", "schema", "Output2019ASHRAE901.schema.json"
+            dirname(__file__), "..", "schema", SchemaStore.get_active_output_schema()
         )
         with open(_output_schema_path) as json_file:
             _output_schema_obj = json.load(json_file)
@@ -78,6 +78,56 @@ class SchemaEnums:
             enum_jsonpath.split('"')[-2]: value["enum"]
             for (enum_jsonpath, value) in enum_jsonpath_value_dict.items()
         }
+        SchemaEnums.schema_enums = {
+            key: _ListEnum(enum_list) for key, enum_list in _enums_dict.items()
+        }
+
+    @staticmethod
+    def update_schema_enum_by_ruleset(ruleset: str):
+        """Update enums for a specific ruleset, without changing the selected ruleset"""
+        _enum_schema_path = join(
+            dirname(__file__),
+            "..",
+            "schema",
+            SchemaStore.get_enum_schema_by_ruleset(ruleset),
+        )
+        with open(_enum_schema_path) as json_file:
+            _enum_schema_obj = json.load(json_file)
+
+        _output_schema_path = join(
+            dirname(__file__),
+            "..",
+            "schema",
+            SchemaStore.get_output_schema_by_ruleset(ruleset),
+        )
+        with open(_output_schema_path) as json_file:
+            _output_schema_obj = json.load(json_file)
+
+        _schema_path = join(dirname(__file__), "..", "schema", "ASHRAE229.schema.json")
+        with open(_schema_path) as json_file:
+            _schema_obj = json.load(json_file)
+
+        _enum_schema_enum_jsonpath_value_dict = create_jsonpath_value_dict(
+            "$..*[?(@.enum)]", _enum_schema_obj
+        )
+        _schema_enum_jsonpath_value_dict = create_jsonpath_value_dict(
+            "$..*[?(@.enum)]", _schema_obj
+        )
+        _output_schema_enum_jsonpath_value_dict = create_jsonpath_value_dict(
+            "$..*[?(@.enum)]", _output_schema_obj
+        )
+
+        enum_jsonpath_value_dict = {
+            **_enum_schema_enum_jsonpath_value_dict,
+            **_schema_enum_jsonpath_value_dict,
+            **_output_schema_enum_jsonpath_value_dict,
+        }
+
+        _enums_dict = {
+            enum_jsonpath.split('"')[-2]: value["enum"]
+            for (enum_jsonpath, value) in enum_jsonpath_value_dict.items()
+        }
+
         SchemaEnums.schema_enums = {
             key: _ListEnum(enum_list) for key, enum_list in _enums_dict.items()
         }
