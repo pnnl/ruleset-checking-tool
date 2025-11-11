@@ -66,8 +66,9 @@ rules_dict = {
     "prm9012022rule86r63": "section5rule43",
     "prm9012022rule13d92": "section5rule44",
     "prm9012022rule22f12": "section5rule45",
-    "prm9012022rule12d80": "section6rule11",
+    "prm9012022rule23o29": "section6rule11",
     "prm9012022rule12d80": "section6rule12",
+    "prm9012022rule86d29": "section6rule13",
     "prm9012022rule93e12": "section21rule19",
 }
 
