@@ -6,6 +6,8 @@ __all__ = [
     "section6rule12",
 ]
 
+SHORT_NAME = "LTG"
+
 
 def __getattr__(name):
     if name in __all__:
