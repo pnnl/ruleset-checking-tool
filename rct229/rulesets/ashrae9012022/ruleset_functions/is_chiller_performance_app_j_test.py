@@ -441,22 +441,18 @@ def test__TEST_RPD__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test__is_chiller_performance_app_j__pass():
-    assert is_chiller_performance_app_j(TEST_CHILLER)
-
-
-def test__is_chiller_performance_app_j__pass():
-    assert is_chiller_performance_app_j(TEST_CHILLER)
+def test__is_chiller_performance_app_j6__pass():
+    assert is_chiller_performance_app_j(TEST_CHILLER, "AA")
 
 
 def test__is_chiller_performance_app_j__zero_full_load_efficiency_rated():
     with pytest.raises(
         RCTFailureException,
-        match="The `full_load_efficiency_rated` value must be greater than 0.",
+        match="The `efficiency_metric_values` must be greater than 0.",
     ):
         TEST_CHILLER_ZERO_EFFI = copy.deepcopy(TEST_CHILLER)
         TEST_CHILLER_ZERO_EFFI["efficiency_metric_values"][0] = 0.0
-        is_chiller_performance_app_j(TEST_CHILLER_ZERO_EFFI)
+        is_chiller_performance_app_j(TEST_CHILLER_ZERO_EFFI, "AA")
 
 
 def test__is_chiller_performance_app_j__zero_capacity():
@@ -466,4 +462,4 @@ def test__is_chiller_performance_app_j__zero_capacity():
     ):
         TEST_CHILLER_ZERO_EFFI = copy.deepcopy(TEST_CHILLER)
         TEST_CHILLER_ZERO_EFFI["capacity_operating_points"][0]["capacity"] = 0.0
-        is_chiller_performance_app_j(TEST_CHILLER_ZERO_EFFI)
+        is_chiller_performance_app_j(TEST_CHILLER_ZERO_EFFI, "AA")
