@@ -8,6 +8,8 @@ __all__ = [
     "section10rule15",
 ]
 
+SHORT_NAME = "HVAC-GEN"
+
 
 def __getattr__(name):
     if name in __all__:

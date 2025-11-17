@@ -66,7 +66,7 @@ def find_schema_unit_for_json_path(key_list):
 
     root_key = "RulesetProjectDescription"
 
-    secondary_schema_files = [SchemaStore.get_output_schema_by_ruleset()]
+    secondary_schema_files = [SchemaStore.get_active_output_schema()]
     schema_dict = config.schema_dict
 
     # Initialize first reference to top level key
