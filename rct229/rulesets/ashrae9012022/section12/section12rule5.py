@@ -19,15 +19,15 @@ ACCEPTABLE_RESULT_TYPE = [
 ]
 
 
-class PRM9012022rule23z21(RuleDefinitionListIndexedBase):
+class PRM9012022Rule23z21(RuleDefinitionListIndexedBase):
     """Rule 5 of ASHRAE 90.1-2022 Appendix G Section 12 (Receptacle)"""
 
     def __init__(self):
-        super(PRM9012022rule23z21, self).__init__(
+        super(PRM9012022Rule23z21, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
-            each_rule=PRM9012022rule23z21.RMDRule(),
+            each_rule=PRM9012022Rule23z21.RMDRule(),
             index_rmd=PROPOSED,
             id="12-5",
             description="hese loads shall always be included in simulations of the building. These loads shall be included when calculating the proposed building performance "
@@ -40,11 +40,11 @@ class PRM9012022rule23z21(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(PRM9012022rule23z21.RMDRule, self).__init__(
+            super(PRM9012022Rule23z21.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
-                each_rule=PRM9012022rule23z21.RMDRule.MiscellaneousEquipmentRule(),
+                each_rule=PRM9012022Rule23z21.RMDRule.MiscellaneousEquipmentRule(),
                 index_rmd=PROPOSED,
                 list_path="buildings[*].building_segments[*].zones[*].spaces[*]",
             )
@@ -93,7 +93,7 @@ class PRM9012022rule23z21(RuleDefinitionListIndexedBase):
         class MiscellaneousEquipmentRule(RuleDefinitionBase):
             def __init__(self):
                 super(
-                    PRM9012022rule23z21.RMDRule.MiscellaneousEquipmentRule,
+                    PRM9012022Rule23z21.RMDRule.MiscellaneousEquipmentRule,
                     self,
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
