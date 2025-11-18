@@ -37,7 +37,7 @@
 
     - Get matching space in P_RMD: `space_p = match_data_element(P_RMD, Spaces, space_b.id)`  
 
-     - Get normalized space lighting schedule in P_RMD: `normalized_schedule_p = normalize_interior_lighting_schedules(space_p.interior_lighting, false)`
+    - Get normalized space lighting schedule in P_RMD: `normalized_schedule_p = normalize_interior_lighting_schedules(space_p.interior_lighting, false)`
 
     - Check if automatic shutoff control is modeled in space during building closed hours (i.e. if lighting schedule hourly value in B_RMD is equal to P_RMD during building closed hours): `schedule_comparison_result = compare_schedules(normalized_schedule_b, normalized_schedule_p, inverse(building_open_schedule_b))`  
 
