@@ -15,7 +15,7 @@
             "schema_version": "0.1.7"
         },
         "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface.",
-        "expected_rule_outcome": "undetermined",
+        "expected_rule_outcome": "not_applicable",
         "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
@@ -104,7 +104,7 @@
             "schema_version": "0.1.7"
         },
         "test_description": "Project has one building segment with one zone and a single surface. The surface is a regulated exterior roof for which this rule does not apply",
-        "expected_rule_outcome": "not_applicable",
+        "expected_rule_outcome": "undetermined",
         "rmd_transformations": {
             "baseline": {
                 "id": "RPD 1",
