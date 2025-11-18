@@ -30,6 +30,8 @@
 
         - For each interior lighting in space, add lighting power to building segment total: `building_segment_design_lighting_wattage += sum(interior_lighting.power_per_area for interior_lighting in space_p.interior_lighting) * space_p.floor_area`  
 
+        - If the space is a crawl space, interstitial space, or plenum then don't increase the allowances for a conservative approach: `if space_p.function in [CRAWL_SPACE, INTERSTITIAL_SPACE, PLENUM]: continue`
+        
         - If building segment specifies lighting building area type , add space floor area to the total building segment floor area: `if allowable_LPD_BAM: total_building_segment_area_p += space_p.floor_area`  
 
         - Check if any space does not specify lighting space type, flag for Building Area Method: `if NOT space_p.lighting_space_type: check_BAM_flag = TRUE`  
