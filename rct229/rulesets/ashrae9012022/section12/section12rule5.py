@@ -1,3 +1,4 @@
+from pydash import flatten
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
@@ -53,20 +54,22 @@ class PRM9012022Rule23z21(RuleDefinitionListIndexedBase):
             rmd_p = context.PROPOSED
 
             schedule_eflh_p = sum(
-                [
-                    get_schedule_multiplier_hourly_value_or_default(
-                        rmd_p,
-                        getattr_(
-                            misc_equip_p,
-                            "miscellaneous_equipment",
-                            "multiplier_schedule",
-                        ),
-                    )
-                    for misc_equip_p in find_all(
-                        "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]",
-                        rmd_p,
-                    )
-                ][0],
+                flatten(
+                    [
+                        get_schedule_multiplier_hourly_value_or_default(
+                            rmd_p,
+                            getattr_(
+                                misc_equip_p,
+                                "miscellaneous_equipment",
+                                "multiplier_schedule",
+                            ),
+                        )
+                        for misc_equip_p in find_all(
+                            "$.buildings[*].building_segments[*].zones[*].spaces[*].miscellaneous_equipment[*]",
+                            rmd_p,
+                        )
+                    ]
+                ),
                 0,
             )
 
@@ -111,8 +114,10 @@ class PRM9012022Rule23z21(RuleDefinitionListIndexedBase):
 
                 loads_included_p = (
                     misc_equip_p["power"] > 0 * ureg("W")
-                    and misc_equip_p["sensible_fraction"] > 0
-                    and misc_equip_p["latent_fraction"] > 0
+                    and (
+                        misc_equip_p["sensible_fraction"] > 0
+                        or misc_equip_p["latent_fraction"] > 0
+                    )
                     and schedule_eflh_p > 0
                 )
 
