@@ -50,15 +50,15 @@
             **Rule Assertion:**
             - Case 1: If space has lighting power and is crawl space, interstitial space, or plenum: UNDETERMINED `if ( total_space_LPD_b > 0 ) AND ( space_function_b in [CRAWL_SPACE, INTERSTITIAL_SPACE, PLENUM] ): UNDETERMINED and raise_warning f"Space function is {space_function_b} and has lighting power modeled. Unable to determine whether this space should be included in the check."`
 
-            - Case 1: If space lighting status type is as-designed or as-existing, and lighting space type is not specified: FAIL `if ( space_lighting_status_type == "AS-DESIGNED OR AS-EXISTING" ) AND ( NOT space_b.lighting_space_type ): FAIL and raise_warning "The proposed lighting status is 'AS-DESIGNED OR AS-EXISTING' but the baseline lighting space type was not specified."`
+            - Case 2: Else if space lighting status type is as-designed or as-existing, and lighting space type is not specified: UNDETERMINED ` else if ( space_lighting_status_type == "AS-DESIGNED OR AS-EXISTING" ) AND ( NOT space_b.lighting_space_type ): UNDETERMINED and raise_warning "The proposed lighting status is 'AS-DESIGNED OR AS-EXISTING' but the baseline lighting space type was not specified."`
 
-            - Case 2: Else if space lighting status type is as-designed or as-existing, and space total interior lighting power density in B_RMD matches Table G3.7: PASS `else if ( space_lighting_status_type == "AS-DESIGNED OR AS-EXISTING" ) AND ( total_space_LPD_b == LPD_allowance_b ): PASS`  
+            - Case 3: Else if space lighting status type is as-designed or as-existing, and space total interior lighting power density in B_RMD matches Table G3.7: PASS `else if ( space_lighting_status_type == "AS-DESIGNED OR AS-EXISTING" ) AND ( total_space_LPD_b == LPD_allowance_b ): PASS`  
 
-            - Case 3: Else if space lighting status type is as-designed or as-existing, and space total interior lighting power density in B_RMD does not match Table G3.7: FAIL `else if ( space_lighting_status_type == "AS-DESIGNED OR AS-EXISTING" ) AND ( total_space_LPD_b != LPD_allowance_b ): FAIL`
+            - Case 4: Else if space lighting status type is as-designed or as-existing, and space total interior lighting power density in B_RMD does not match Table G3.7: FAIL `else if ( space_lighting_status_type == "AS-DESIGNED OR AS-EXISTING" ) AND ( total_space_LPD_b != LPD_allowance_b ): FAIL`
 
-            - Case 4: Else if space lighting status type is not-yet designed or matches Table_9_5_1, and space total interior lighting power density in B_RMD matches Table G3.7: PASS `else if ( space_lighting_status_type == "NOT-YET DESIGNED OR MATCH TABLE_9_5_1" ) AND ( total_space_LPD_b == LPD_allowance_b ): PASS`
+            - Case 5: Else if space lighting status type is not-yet designed or matches Table_9_5_1, and space total interior lighting power density in B_RMD matches Table G3.7: PASS `else if ( space_lighting_status_type == "NOT-YET DESIGNED OR MATCH TABLE_9_5_1" ) AND ( total_space_LPD_b == LPD_allowance_b ): PASS`
 
-            - Case 5: Else, space lighting status type is not-yet designed or matches Table_9_5_1, and space total interior lighting power density in B_RMD does not match Table G3.7: FAIL `else if ( space_lighting_status_type == "NOT-YET DESIGNED OR MATCH TABLE_9_5_1" ) AND ( total_space_LPD_b != LPD_allowance_b ): FAIL`
+            - Case 6: Else, space lighting status type is not-yet designed or matches Table_9_5_1, and space total interior lighting power density in B_RMD does not match Table G3.7: FAIL `else if ( space_lighting_status_type == "NOT-YET DESIGNED OR MATCH TABLE_9_5_1" ) AND ( total_space_LPD_b != LPD_allowance_b ): FAIL`
 
 **Notes:**
   1. Requirements from addendum AF to 90.1-2019 have not been incorporated into this RDS.
