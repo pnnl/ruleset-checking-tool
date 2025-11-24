@@ -445,6 +445,16 @@ def test__is_chiller_performance_app_j6__pass():
     assert is_chiller_performance_app_j(TEST_CHILLER, "AA")
 
 
+def test__is_chiller_performance_app_j__full_load_efficiency_rated_not_exist():
+    with pytest.raises(
+        RCTFailureException,
+        match="The `FULL_LOAD_EFFICIENCY_RATED` must exist in the `efficiency_metric_types`.",
+    ):
+        TEST_CHILLER_ZERO_EFFI = copy.deepcopy(TEST_CHILLER)
+        TEST_CHILLER_ZERO_EFFI["efficiency_metric_types"] = []
+        is_chiller_performance_app_j(TEST_CHILLER_ZERO_EFFI, "AA")
+
+
 def test__is_chiller_performance_app_j__zero_full_load_efficiency_rated():
     with pytest.raises(
         RCTFailureException,

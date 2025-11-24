@@ -14,30 +14,71 @@ EXPECTED_VALIDATION_PLR = [0.25, 0.50, 0.75, 1.00]
 EXPECTED_CHILLED_WATER_TEMPS = [39.0, 45.0, 50.0, 55.0]
 EXPECTED_ENTERING_CONDENSER_WATER_TEMPS = [60.0, 72.5, 85.0, 97.5, 104.0]
 
+
+class J4_CURVE:
+    A = "A"
+    B = "B"
+    C = "C"
+    D = "D"
+    E = "E"
+    F = "F"
+    G = "G"
+    H = "H"
+    I = "I"
+    J = "J"
+    K = "K"
+    L = "L"
+    M = "M"
+    N = "N"
+    O = "O"
+    P = "P"
+    Q = "Q"
+    R = "R"
+    S = "S"
+    T = "T"
+    U = "U"
+
+
+class J6_CURVE:
+    V = "V"
+    X = "X"
+    Y = "Y"
+    Z = "Z"
+    AA = "AA"
+    AB = "AB"
+
+
 J4_CURVE_SET = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
+    J4_CURVE.A,
+    J4_CURVE.B,
+    J4_CURVE.C,
+    J4_CURVE.D,
+    J4_CURVE.E,
+    J4_CURVE.F,
+    J4_CURVE.G,
+    J4_CURVE.H,
+    J4_CURVE.I,
+    J4_CURVE.J,
+    J4_CURVE.K,
+    J4_CURVE.L,
+    J4_CURVE.M,
+    J4_CURVE.N,
+    J4_CURVE.O,
+    J4_CURVE.P,
+    J4_CURVE.Q,
+    J4_CURVE.R,
+    J4_CURVE.S,
+    J4_CURVE.T,
+    J4_CURVE.U,
 ]
-J6_CURVE_SET = ["V", "X", "Y", "Z", "AA", "AB"]
+J6_CURVE_SET = [
+    J6_CURVE.V,
+    J6_CURVE.X,
+    J6_CURVE.Y,
+    J6_CURVE.Z,
+    J6_CURVE.AA,
+    J6_CURVE.AB,
+]
 
 
 def is_chiller_performance_app_j(chiller: dict, curve_set: str) -> bool:
@@ -69,11 +110,19 @@ def is_chiller_performance_app_j(chiller: dict, curve_set: str) -> bool:
         )
 
     rated_capacity = getattr_(chiller, "chillers", "rated_capacity")
+    efficiency_metric_type = getattr_(chiller, "chillers", "efficiency_metric_types")
+    assert_(
+        "FULL_LOAD_EFFICIENCY_RATED" in efficiency_metric_type,
+        "The `FULL_LOAD_EFFICIENCY_RATED` must exist in the `efficiency_metric_types`.",
+    )
+    # find where the "FULL_LOAD_EFFICIENCY_RATED" is located
+    full_load_efficiency_rated_position = efficiency_metric_type.index(
+        "FULL_LOAD_EFFICIENCY_RATED"
+    )
+
     full_load_efficiency_rated = getattr_(
         chiller, "chillers", "efficiency_metric_values"
-    )[
-        0
-    ]  # First item is `FULL_LOAD_EFFICIENCY_RATED`, specified under the `efficiency_metric_types` key
+    )[full_load_efficiency_rated_position]
 
     assert_(
         rated_capacity > 0 * ureg("W"), "The `capacity` value must be greater than 0 W."
