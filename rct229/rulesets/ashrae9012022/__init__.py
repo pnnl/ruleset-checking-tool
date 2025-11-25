@@ -9,8 +9,8 @@ from rct229.schema.schema_enums import SchemaEnums
 __all__ = [
     "section5",
     "section6",
+    "section12",
     "section21",
-    "SHORT_NAME",
     "BASELINE_0",
     "BASELINE_90",
     "BASELINE_180",
@@ -77,12 +77,14 @@ section_list = [
     "All",
     "Envelope",
     "Lighting",
+    "Receptacles",
     "HVAC-HotWaterSide",
 ]
 
 section_dict = {
     "5": "Envelope",
     "6": "Lighting",
+    "12": "Receptacles",
     "21": "HVAC-HotWaterSide",
 }
 
