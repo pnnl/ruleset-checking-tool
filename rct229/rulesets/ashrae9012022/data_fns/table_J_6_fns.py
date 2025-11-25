@@ -10,7 +10,7 @@ def table_J_6_lookup(Set: str, output_variable: str) -> list[float]:
     Set : str
         One of the set specified in Table J-6 ("V", "X", "Y", "Z", "AA", "AB")
     output_variable: str
-        One of the performance curve types ("EIR-f-T", "CAP-f-T", "EIR-f_PLR")
+        One of the performance curve types ("EIR-f-T", "CAP-f-T", "EIR-f-PLR")
 
     Returns
     -------

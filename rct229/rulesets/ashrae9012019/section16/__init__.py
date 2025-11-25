@@ -11,6 +11,8 @@ __all__ = [
     "section16rule7",
 ]
 
+SHORT_NAME = "ELV"
+
 
 def __getattr__(name):
     if name in __all__:
