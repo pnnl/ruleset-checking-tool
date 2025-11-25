@@ -10,7 +10,14 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_primary_secondary_loops_dict import (
     get_primary_secondary_loops_dict,
 )
-from rct229.rulesets.ashrae9012022 import PROPOSED
+from rct229.rulesets.ashrae9012022 import BASELINE_0
+from rct229.rulesets.ashrae9012022.ruleset_functions.does_chiller_performance_match_curve import (
+    does_chiller_performance_match_curve,
+)
+from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.assertions import getattr_
+from rct229.utils.jsonpath_utils import find_all
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,
@@ -25,6 +32,9 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_12B,
 ]
 
+CHILLER_COMPRESSOR = SchemaEnums.schema_enums["ChillerCompressorOptions"]
+
+
 REQ_MIN_LOAD_RATIO = 0.25
 REQ_MIN_UNLOAD_RATIO = 0.25
 
@@ -38,14 +48,14 @@ class PRM9012022Rule93e20(RuleDefinitionListIndexedBase):
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=PRM9012022Rule93e20.ChillerRule(),
-            index_rmd=PROPOSED,
+            index_rmd=BASELINE_0,
             id="22-43",
             description="hen using performance curves from Normative Appendix J, chiller minimum part-load ratio (ratio of load to available capacity at a given simulation time step) "
             "and minimum compressor unloading ratio (part-load ratio below which the chiller capacity cannot be reduced by unloading and chiller is false loaded) shall be equal to 0.25.",
             ruleset_section_title="HVAC - Chiller",
             standard_section="Section G3.2.2.1 Equipment Efficiencies",
             is_primary_rule=True,
-            list_path="$.buildings[*].building_segments[*].chillers[*]",
+            list_path="$.chillers[*]",
             rmd_context="ruleset_model_descriptions/0",
         )
 
@@ -67,11 +77,55 @@ class PRM9012022Rule93e20(RuleDefinitionListIndexedBase):
             ]
         )
 
+    def manual_check_required(self, context, calc_vals=None, data=None):
+        rmd_b = context.BASELINE_0
+
+        return any(
+            getattr_(chiller_b, "chillers", "compressor_type")
+            not in {
+                CHILLER_COMPRESSOR.CENTRIFUGAL,
+                CHILLER_COMPRESSOR.RECIPROCATING,
+                CHILLER_COMPRESSOR.SCROLL,
+                CHILLER_COMPRESSOR.SCREW,
+            }
+            for chiller_b in find_all("$.chillers[*]", rmd_b)
+        )
+
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
         primary_secondary_loop_dict_b = get_primary_secondary_loops_dict(rmd_b)
 
-        return {"primary_secondary_loop_dict_b": primary_secondary_loop_dict_b}
+        chiller_curve_set_dict_b = {}
+        for chiller_b in find_all("$.chillers[*]", rmd_b):
+            chiller_id_b = chiller_b["id"]
+            rated_capacity_b = getattr_(chiller_b, "chillers", "rated_capacity")
+            compressor_type_b = getattr_(chiller_b, "chillers", "compressor_type")
+
+            if compressor_type_b == CHILLER_COMPRESSOR.CENTRIFUGAL:
+                if rated_capacity_b < 150 * ureg("ton"):
+                    chiller_curve_set_dict_b[chiller_id_b] = "Z"
+                elif 150 * ureg("ton") <= rated_capacity_b < 300 * ureg("ton"):
+                    chiller_curve_set_dict_b[chiller_id_b] = "AA"
+                else:
+                    chiller_curve_set_dict_b[chiller_id_b] = "AB"
+            elif compressor_type_b in (
+                CHILLER_COMPRESSOR.POSITIVE_DISPLACEMENT,
+                CHILLER_COMPRESSOR.SCROLL,
+                CHILLER_COMPRESSOR.SCREW,
+            ):
+                if rated_capacity_b < 150 * ureg("ton"):
+                    chiller_curve_set_dict_b[chiller_id_b] = "V"
+                elif rated_capacity_b >= 300 * ureg("ton"):
+                    chiller_curve_set_dict_b[chiller_id_b] = "Y"
+                else:
+                    chiller_curve_set_dict_b[chiller_id_b] = "X"
+            else:
+                chiller_curve_set_dict_b[chiller_id_b] = None
+
+        return {
+            "primary_secondary_loop_dict_b": primary_secondary_loop_dict_b,
+            "chiller_curve_set_dict_b": chiller_curve_set_dict_b,
+        }
 
     class ChillerRule(RuleDefinitionBase):
         def __init__(self):
@@ -85,15 +139,18 @@ class PRM9012022Rule93e20(RuleDefinitionListIndexedBase):
             )
 
         def is_applicable(self, context, data=None):
-            chiller_b = context.PROPOSED
+            chiller_b = context.BASELINE_0
             primary_secondary_loop_dict_b = data["primary_secondary_loop_dict_b"]
+            chiller_curve_set_dict_b = data["chiller_curve_set_dict_b"]
 
-            return (
-                chiller_b["cooling_loop"] in primary_secondary_loop_dict_b
-            )  # add is_chiller_performance_app_j
+            return chiller_b[
+                "cooling_loop"
+            ] in primary_secondary_loop_dict_b and does_chiller_performance_match_curve(
+                chiller_b, chiller_curve_set_dict_b[chiller_b["id"]]
+            )
 
         def get_calc_vals(self, context, data=None):
-            chiller_b = context.PROPOSED
+            chiller_b = context.BASELINE_0
 
             minimum_load_ratio_b = chiller_b.get("minimum_load_ratio")
             minimum_unload_ratio_b = chiller_b.get("minimum_unload_ratio")
