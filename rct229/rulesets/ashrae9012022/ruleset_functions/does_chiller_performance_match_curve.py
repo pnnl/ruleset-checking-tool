@@ -81,7 +81,7 @@ J6_CURVE_SET = [
 ]
 
 
-def is_chiller_performance_app_j(chiller: dict, curve_set: str) -> bool:
+def does_chiller_performance_match_curve(chiller: dict, curve_set: str) -> bool:
     """
     Evaluates whether the chiller performance curves align with the sets of performance curves specified in Appendix J of ASHRAE 90.1-2022 Appendix G.
 

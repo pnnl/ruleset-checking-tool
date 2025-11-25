@@ -1,8 +1,8 @@
 import copy
 
 import pytest
-from rct229.rulesets.ashrae9012022.ruleset_functions.is_chiller_performance_app_j import (
-    is_chiller_performance_app_j,
+from rct229.rulesets.ashrae9012022.ruleset_functions.does_chiller_performance_match_curve import (
+    does_chiller_performance_match_curve,
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
@@ -441,35 +441,35 @@ def test__TEST_RPD__is_valid():
     ], f"Schema error: {schema_validation_result['error']}"
 
 
-def test__is_chiller_performance_app_j6__pass():
-    assert is_chiller_performance_app_j(TEST_CHILLER, "AA")
+def test__does_chiller_performance_match_curve6__pass():
+    assert does_chiller_performance_match_curve(TEST_CHILLER, "AA")
 
 
-def test__is_chiller_performance_app_j__full_load_efficiency_rated_not_exist():
+def test__does_chiller_performance_match_curve__full_load_efficiency_rated_not_exist():
     with pytest.raises(
         RCTFailureException,
         match="The `FULL_LOAD_EFFICIENCY_RATED` must exist in the `efficiency_metric_types`.",
     ):
         TEST_CHILLER_ZERO_EFFI = copy.deepcopy(TEST_CHILLER)
         TEST_CHILLER_ZERO_EFFI["efficiency_metric_types"] = []
-        is_chiller_performance_app_j(TEST_CHILLER_ZERO_EFFI, "AA")
+        does_chiller_performance_match_curve(TEST_CHILLER_ZERO_EFFI, "AA")
 
 
-def test__is_chiller_performance_app_j__zero_full_load_efficiency_rated():
+def test__does_chiller_performance_match_curve__zero_full_load_efficiency_rated():
     with pytest.raises(
         RCTFailureException,
         match="The `efficiency_metric_values` must be greater than 0.",
     ):
         TEST_CHILLER_ZERO_EFFI = copy.deepcopy(TEST_CHILLER)
         TEST_CHILLER_ZERO_EFFI["efficiency_metric_values"][0] = 0.0
-        is_chiller_performance_app_j(TEST_CHILLER_ZERO_EFFI, "AA")
+        does_chiller_performance_match_curve(TEST_CHILLER_ZERO_EFFI, "AA")
 
 
-def test__is_chiller_performance_app_j__zero_capacity():
+def test__does_chiller_performance_match_curve__zero_capacity():
     with pytest.raises(
         RCTFailureException,
         match="The 'capacity' value must be greater than 0 W.",
     ):
         TEST_CHILLER_ZERO_EFFI = copy.deepcopy(TEST_CHILLER)
         TEST_CHILLER_ZERO_EFFI["capacity_operating_points"][0]["capacity"] = 0.0
-        is_chiller_performance_app_j(TEST_CHILLER_ZERO_EFFI, "AA")
+        does_chiller_performance_match_curve(TEST_CHILLER_ZERO_EFFI, "AA")
