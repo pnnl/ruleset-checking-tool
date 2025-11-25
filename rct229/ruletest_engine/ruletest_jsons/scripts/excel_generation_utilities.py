@@ -2,17 +2,16 @@ import glob
 import json
 import os
 import re
-
+import importlib
 import pandas as pd
 from openpyxl import utils
 from openpyxl.styles import Alignment, Font, PatternFill
-from rct229.ruletest_engine.ruletest_jsons.ashrae9012019 import section_rule_to_rule_id
+
+from rct229.schema.schema_store import SchemaStore
 from rct229.utils.natural_sort import natural_keys
 
 
-def create_rule_test_documentation_spreadsheet(
-    ruleset_standard, test_json_branch="master"
-):
+def create_rule_test_documentation_spreadsheet(test_json_branch="master"):
     """Generates an Excel documentation file for all ruletest JSONS found for a particular ruleset standard in:
     ruleset_checking_tool/rct229/ruletest_engine/ruletest_jsons/RULESET_STANDARD.
 
@@ -20,12 +19,6 @@ def create_rule_test_documentation_spreadsheet(
 
     Parameters
     ----------
-
-    ruleset_standard : str
-
-        A string representing a ruleset standard directory as specified under:
-            ruleset_checking_tool/rct229/ruletest_engine/ruletest_jsons/RULESET_STANDARD
-        Example: "ashrae902019"
 
     test_json_branch : str
 
@@ -35,7 +28,7 @@ def create_rule_test_documentation_spreadsheet(
         Example: "RT/JG/schema_update_016_017"
 
     """
-
+    ruleset_standard = SchemaStore.SELECTED_RULESET
     ruletest_directory = f"../{ruleset_standard}"
     excel_path = f"{ruletest_directory}/{ruleset_standard}_rules.xlsx"
 
@@ -52,7 +45,7 @@ def create_rule_test_documentation_spreadsheet(
 
 def natural_sort_key(rule_unit_test):
     """Split the Rule_Unit_Test into numeric parts for natural ordering."""
-    parts = re.split(r"[-]", rule_unit_test)  # Split by '-'
+    parts = re.split(r"-", rule_unit_test)  # Split by '-'
     return [
         int(parts[0]),
         int(parts[1]),
@@ -87,6 +80,7 @@ def generate_rule_test_dictionary(ruleset_standard, test_json_branch="master"):
             EX: master_rule_data_dict["section23"] = {"Rule": ["23-1", "23-1", ...],
                                                       "Rule_Unit_Test": ["23-1-a", "23-1-b", ...]
                                                        etc.
+                                                      }
 
     """
 
@@ -207,6 +201,20 @@ def write_rule_test_excel_from_dictionary(master_ruletest_dict, excel_path):
         Ex: 'C:/rct_repo/rct229/ruletest_engine/ruletest_jsons/ashrae9012019/ashrae9012019_rules.xlsx'
 
     """
+    ruleset_standard = SchemaStore.SELECTED_RULESET
+    if not ruleset_standard:
+        raise ValueError("No ruleset is currently selected in SchemaStore.")
+
+    # Dynamically import the ruleset package (e.g. rct229.rulesets.ashrae9012019)
+    ruleset_module = importlib.import_module(f"rct229.rulesets.{ruleset_standard}")
+
+    # Retrieve the section_rule_to_rule_id mapping from that ruleset’s __init__.py
+    section_rule_to_rule_id = getattr(ruleset_module, "section_rule_to_rule_id", None)
+    if section_rule_to_rule_id is None:
+        raise AttributeError(
+            f"Ruleset package '{ruleset_standard}' has no section_rule_to_rule_id mapping. "
+            "Ensure it is built by build_section_rule_to_rule_id() in its __init__.py."
+        )
 
     # Set column widths
     column_widths = [8, 13, 70, 21, 19]
