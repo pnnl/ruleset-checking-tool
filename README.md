@@ -112,6 +112,12 @@ The following provides some useful commands as you get started developing the RC
 
 This package is developed using Poetry to manage packages during the build process.  First, follow the instruction from [poetry](https://python-poetry.org/docs/) to install the package.
 Any new dependencies that are added to the package must be included in the pyproject.toml. The package is currently being developed for Python 3.10. This version of Python must be installed on your machine for Poetry to work properly.
+By default, the RCT package includes the ASHRAE 90.1-2019 PRM ruleset. 
+To install additional rulesets, you can install them as optional dependencies. For example, to install the ASHRAE 90.1-2022 ruleset, you can run:
+`poetry install --extras ashrae9012022`
+
+You can also install all available rulesets by running:
+`poetry install --all-extras`
 
 Now tests can be run by first installing dependencies and then running pytest.
 1. `poetry install`
