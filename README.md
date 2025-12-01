@@ -28,9 +28,14 @@ Ruleset Checking Tool for ANSI/ASHRAE/IES Standard 90.1-2019 Appendix G
 This package provides a reference implementation of a Ruleset Checking Tool (RCT) in support of ASHRAE Standard 229P.  The RCT is not intended to be a normative part of the proposed standard, so use with Std 229P is optional.  This RCT implementation is specific to ANSI/ASHRAE/IES Standard 90.1-2019 Appendix G and does not support any other rulesets.  Final release of this package is dependent upon acceptance and publication of ASHRAE Standard 229P.
 
 ## Install it from PyPI
-
+By default, the package includes the ASHRAE 90.1-2019 PRM ruleset.
 ```bash
 pip install ruleset-checking-tool
+```
+
+To install additional rulesets, you can install them as optional dependencies. For example, to install the ASHRAE 90.1-2022 ruleset, you can run:
+```bash
+pip install ruleset-checking-tool[ashrae9012022]
 ```
 
 ## Usage
@@ -173,7 +178,7 @@ Before committing changes you should run the following commands from the `rulese
   2. Add a new item to the `rules_dict` in the rulset's `rct229/rulesets/<RULESET>/__init__.py` file with the unique rule ID and desired rule section and number.
   3. Create the new rule module in the ruleset directory following the typical procedure, but using the unique rule ID as the rule's class name.
   ```python
-        class PRM9012019Rule86h31(RuleDefinitionBase):
+class PRM9012019Rule86h31(RuleDefinitionBase):
   ```
   
 - For renumbering a rule to remain in the same section:
