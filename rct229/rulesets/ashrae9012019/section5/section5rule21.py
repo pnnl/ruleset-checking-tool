@@ -149,7 +149,9 @@ class PRM9012019Rule44m70(RuleDefinitionListIndexedBase):
                 def rule_check(self, context, calc_vals=None, data=None):
                     return all(
                         calc_vals[f"{key}_b"] == calc_vals[f"{key}_p"]
-                        or self.precision_comparison[f"{key}_b"](calc_vals[f"{key}_b"], calc_vals[f"{key}_p"])
+                        or self.precision_comparison[f"{key}_b"](
+                            calc_vals[f"{key}_b"], calc_vals[f"{key}_p"]
+                        )
                         for key in [
                             "subsurface_u_factor",
                             "subsurface_shgc",
