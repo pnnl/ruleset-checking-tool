@@ -51,32 +51,45 @@
 
 **Rule Assertion:**
 
-- Case 1: For each building segment, if both lighting building area type and lighting space type in all spaces are specified, and the total lighting power in P_RMD is less than or equal to the higher of the Building Area Method and Space-by-Space Method allowances: `if ( allowable_LPD_BAM ) and ( NOT check_BAM_flag ) and ( building_segment_design_lighting_wattage <= max(allowable_LPD_BAM * total_building_segment_area_p, allowable_lighting_wattage_SBS) ): PASS`  
+- Case 1: For each building segment, if both lighting building area type and lighting space type in all spaces are specified, and the total lighting power in P_RMD is less than or equal to the higher of the building area method and space-by-space method allowances:  
+  `if ( allowable_LPD_BAM ) and ( NOT check_BAM_flag ) and ( building_segment_design_lighting_wattage <= max(allowable_LPD_BAM * total_building_segment_area_p, allowable_lighting_wattage_SBS) ): PASS`  
 
-- Case 2: Else if both lighting building area type and lighting space type in all spaces are specified, and the total lighting power in P_RMD is more than the higher of the Building Area Method and Space-by-Space Method allowances: `else if ( allowable_LPD_BAM ) and ( NOT check_BAM_flag ) and ( building_segment_design_lighting_wattage > max(allowable_LPD_BAM * total_building_segment_area_p, allowable_lighting_wattage_SBS) ): FAIL`  
+- Case 2: Else if both lighting building area type and lighting space type in all spaces are specified, and the total lighting power in P_RMD is more than the higher of the building area method and space-by-space method allowances:  
+  `else if ( allowable_LPD_BAM ) and ( NOT check_BAM_flag ) and ( building_segment_design_lighting_wattage > max(allowable_LPD_BAM * total_building_segment_area_p, allowable_lighting_wattage_SBS) ):`  
+    - If `has_crawl_interstitial_plenum_with_lighting`:  
+      `UNDETERMINED and raise_warning "the model included at least one plenum, crawlspace, or interstitial space with lighting power modeled. unable to determine whether these spaces should be included in the check. (list space ids that caused criteria, or include them in calc_vals)"`  
+    - Else:  
+      `FAIL`  
 
-- Case 3: Else if lighting building area type is not specified, and lighting space type in all spaces are specified, and the total lighting power in P_RMD is less than or equal to the Space-by-Space Method allowance: `else if ( NOT allowable_LPD_BAM ) and ( NOT check_BAM_flag ) and ( building_segment_design_lighting_wattage <= allowable_lighting_wattage_SBS ): PASS and raise_warning 'PROJECT PASSES BASED ON SPACE-BY-SPACE METHOD. VERIFY IF PROJECT USES SPACE-BY-SPACE METHOD.'`  
+- Case 3: Else if lighting building area type is not specified, and lighting space type in all spaces are specified, and the total lighting power in P_RMD is less than or equal to the space-by-space method allowance:  
+  `else if ( NOT allowable_LPD_BAM ) and ( NOT check_BAM_flag ) and ( building_segment_design_lighting_wattage <= allowable_lighting_wattage_SBS ): PASS and raise_warning 'project passes based on space-by-space method. verify if project uses space-by-space method.'`  
 
-- Case 4: Else if lighting building area type is not specified, and lighting space type in all spaces are specified, and the total lighting power in P_RMD is more than the Space-by-Space Method allowance: `else if ( NOT allowable_LPD_BAM ) and ( NOT check_BAM_flag ) and ( building_segment_design_lighting_wattage > allowable_lighting_wattage_SBS ): FAIL and raise_warning 'PROJECT FAILS BASED ON SPACE-BY-SPACE METHOD. LIGHTING_BUILDING_AREA_TYPE IS NOT KNOWN TO DETERMINE BUILDING AREA METHOD ALLOWANCE.'`  
+- Case 4: Else if lighting building area type is not specified, and lighting space type in all spaces are specified, and the total lighting power in P_RMD is more than the space-by-space method allowance:  
+  `else if ( NOT allowable_LPD_BAM ) and ( NOT check_BAM_flag ) and ( building_segment_design_lighting_wattage > allowable_lighting_wattage_SBS ):`  
+    - If `has_crawl_interstitial_plenum_with_lighting`:  
+      `UNDETERMINED and raise_warning "the model included at least one plenum, crawlspace, or interstitial space with lighting power modeled. unable to determine whether these spaces should be included in the check. (list space ids that caused criteria, or include them in calc_vals)"`  
+    - Else:  
+      `FAIL and raise_warning 'project fails based on space-by-space method. lighting_building_area_type is not known to determine building area method allowance.'`  
 
-- Case 5: Else if lighting building area type is specified, and lighting space type is not specified in all spaces, and the total lighting power in P_RMD is less than or equal to Building Area Method allowance: `else if ( allowable_LPD_BAM ) and ( check_BAM_flag ) and ( building_segment_design_lighting_wattage <= allowable_LPD_BAM * total_building_segment_area_p ): PASS and raise_warning 'PROJECT PASSES BASED ON BUILDING AREA METHOD. VERIFY IF PROJECT USES BUILDING AREA METHOD.'`  
+- Case 5: Else if lighting building area type is specified, and lighting space type is not specified in all spaces, and the total lighting power in P_RMD is less than or equal to building area method allowance:  
+  `else if ( allowable_LPD_BAM ) and ( check_BAM_flag ) and ( building_segment_design_lighting_wattage <= allowable_LPD_BAM * total_building_segment_area_p ): PASS and raise_warning 'project passes based on building area method. verify if project uses building area method.'`  
 
-- Case 6: Else if lighting building area type is specified, and lighting space type is not specified in all spaces, and the total lighting power in P_RMD is more than Building Area Method allowance: `else if ( allowable_LPD_BAM ) and ( check_BAM_flag ) and ( building_segment_design_lighting_wattage > allowable_LPD_BAM * total_building_segment_area_p ): FAIL and raise_warning 'PROJECT FAILS BASED ON BUILDING AREA METHOD. LIGHTING_SPACE_TYPE IS NOT KNOWN IN ALL SPACES TO DETERMINE SPACE-BY-SPACE METHOD ALLOWANCE.'`  
+- Case 6: Else if lighting building area type is specified, and lighting space type is not specified in all spaces, and the total lighting power in P_RMD is more than building area method allowance:  
+  `else if ( allowable_LPD_BAM ) and ( check_BAM_flag ) and ( building_segment_design_lighting_wattage > allowable_LPD_BAM * total_building_segment_area_p ):`  
+    - If `has_crawl_interstitial_plenum_with_lighting`:  
+      `UNDETERMINED and raise_warning "the model included at least one plenum, crawlspace, or interstitial space with lighting power modeled. unable to determine whether these spaces should be included in the check. (list space ids that caused criteria, or include them in calc_vals)"`  
+    - Else:  
+      `FAIL and raise_warning 'project fails based on building area method. lighting_space_type is not known in all spaces to determine space-by-space method allowance.'`  
 
-- Case 7: Else, lighting building area type is not specified, and lighting space type is not specified in all spaces: `Else: FAIL and raise_warning 'LIGHTING_BUILDING_AREA_TYPE IS NOT KNOWN AND LIGHTING_SPACE_TYPE IS NOT KNOWN IN ALL SPACES TO DETERMINE ALLOWANCE.'`  
+- Case 7: Else, lighting building area type is not specified, and lighting space type is not specified in all spaces:  
+  `Else:`  
+    - If `has_crawl_interstitial_plenum_with_lighting`:  
+      `UNDETERMINED and raise_warning "the model included at least one plenum, crawlspace, or interstitial space with lighting power modeled. unable to determine whether these spaces should be included in the check. (list space ids that caused criteria, or include them in calc_vals)"`  
+    - Else:  
+      `FAIL and raise_warning 'lighting_building_area_type is not known and lighting_space_type is not known in all spaces to determine allowance.'`  
 
-**Notes Before Update for Reference Only:**
+
+**Notes:**
 Updated the Rule ID from 6-2 to 6-1 on 6/8/2022
-
-The RDS needs to be updated in the future based on the following:
-- If lighting_building_area_type and lighting_space_type are know known, then calculate allowance based on both, pass if less than max  
-
-- If lighting_building_area_type is not specified, lighting_space_type for all spaces in the building segment is included: then determine allowance based on lighting space type.  
-    - If PASS- Output should say that project passed based on space by space method. Reviewer should verify if the project uses space by space method.  
-    - If FAIL- then CAUTION and say that it fails space by space method and lighting_building_area_type is not known to determine allowance based on BAT.  
-
-- If lighting_building_area_type provided but lighting_space_type not included:   
-    - If PASS - Output should say that project passed based on building area method. Reviewer should verify if the project uses building area method.
-    - If FAIL- then CAUTION and say that it fails building area method and lighting_space_type is not known to determine allowance based on space by sspace method.    
 
 **[Back](../_toc.md)**
