@@ -81,10 +81,7 @@ class PRM9012019Rule82e93(RuleDefinitionListIndexedBase):
 
         class SurfaceRule(PartialRuleDefinition):
             def __init__(self):
-                super(
-                    PRM9012019Rule82e93.BuildingRule.SurfaceRule,
-                    self,
-                ).__init__(
+                super(PRM9012019Rule82e93.BuildingRule.SurfaceRule, self,).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=False, PROPOSED=True
                     ),
