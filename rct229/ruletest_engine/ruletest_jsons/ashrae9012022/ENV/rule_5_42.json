@@ -1,0 +1,177 @@
+{
+    "rule-5-42-a": {
+        "Section": 5,
+        "Rule": 42,
+        "Test": "a",
+        "standard": {
+            "ruleset": "ashrae9012022",
+            "rule_id": "5-42",
+            "ruleset_reference": "Section G3.1-5 Building Envelope Modeling Requirements for the Proposed building",
+            "rule_description": " Each linear thermal bridge and point thermal bridge as identified in Section 5.5.5 shall be modeled using either of the following techniques:\n\na. A separate model of the assembly within the energy simulation model.\nb. Adjustment of the clear-field U-factor in accordance with Section A10.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": 0,
+            "schema_version": "0.1.7"
+        },
+        "test_description": "Project has one building segment and includes a space with an unregulated above-grade wall surface.",
+        "expected_rule_outcome": "not_applicable",
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A",
+                            "data_source_type": "OTHER"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "volume": 21.237634943999996,
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 90,
+                                                        "area": 92.90303999999999,
+                                                        "construction": "Construction 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 0.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 0.0
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1",
+                                "u_factor": 3.2366105565544463
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-5-42-b": {
+        "Section": 5,
+        "Rule": 42,
+        "Test": "b",
+        "standard": {
+            "ruleset": "ashrae9012022",
+            "rule_id": "5-42",
+            "ruleset_reference": "Section G3.1-5 Building Envelope Modeling Requirements for the Proposed building",
+            "rule_description": " Each linear thermal bridge and point thermal bridge as identified in Section 5.5.5 shall be modeled using either of the following techniques:\n\na. A separate model of the assembly within the energy simulation model.\nb. Adjustment of the clear-field U-factor in accordance with Section A10.2.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": 0,
+            "schema_version": "0.1.7"
+        },
+        "test_description": "Project has one building segment with one zone and a single surface. The surface is a regulated exterior roof for which this rule does not apply",
+        "expected_rule_outcome": "undetermined",
+        "rmd_transformations": {
+            "baseline": {
+                "id": "RPD 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "weather": {
+                            "climate_zone": "CZ4A"
+                        },
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Zone 1",
+                                                "spaces": [
+                                                    {
+                                                        "id": "Space 1",
+                                                        "lighting_space_type": "DWELLING_UNIT",
+                                                        "floor_area": 23.225759999999998
+                                                    }
+                                                ],
+                                                "terminals": [
+                                                    {
+                                                        "id": "Terminal 1",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "HVAC 1"
+                                                    }
+                                                ],
+                                                "surfaces": [
+                                                    {
+                                                        "id": "Surface 1",
+                                                        "adjacent_to": "EXTERIOR",
+                                                        "tilt": 0,
+                                                        "construction": "Construction 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "HVAC 1",
+                                                "cooling_system": {
+                                                    "id": "Cooling System 1",
+                                                    "design_sensible_cool_capacity": 10551.0
+                                                },
+                                                "heating_system": {
+                                                    "id": "Heating System 1",
+                                                    "design_capacity": 9378.275555555556
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "constructions": [
+                            {
+                                "id": "Construction 1"
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    }
+}
