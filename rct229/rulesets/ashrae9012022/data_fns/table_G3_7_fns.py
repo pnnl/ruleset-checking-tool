@@ -210,9 +210,7 @@ def table_G3_7_lookup(lighting_space_type, space_height, space_area):
         { lpd: Quantity - The lighting power density given by Table G3.7 }
 
     """
-    lpd_space_type = lighting_space_enumeration_to_prm_lpd_map[
-        lighting_space_type
-    ]
+    lpd_space_type = lighting_space_enumeration_to_prm_lpd_map[lighting_space_type]
 
     osstd_entry = find_osstd_table_entry(
         [("lpd_space_type", lpd_space_type)],
