@@ -12,6 +12,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_primary_secondary_loops
     get_primary_secondary_loops_dict,
 )
 from rct229.rulesets.ashrae9012022.ruleset_functions.does_chiller_performance_match_curve import (
+    J4_CURVE,
+    J6_CURVE,
     does_chiller_performance_match_curve,
 )
 from rct229.schema.config import ureg
@@ -86,12 +88,6 @@ class PRM9012022Rule34d03(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
-                required_fields={"$": ["rated_capacity", "compressor_type"]},
-                precision={
-                    "chiller_part_load_efficiency": {
-                        "precision": 0.001,
-                    },
-                },
             )
 
         def is_applicable(self, context, data=None):
@@ -109,27 +105,27 @@ class PRM9012022Rule34d03(RuleDefinitionListIndexedBase):
             # When 'curve_set_b' is None, there is a ValueError from the `does_chiller_performance_match_curve` function
             if compressor_type_b == CHILLER_COMPRESSOR.CENTRIFUGAL:
                 if rated_capacity_b < 150 * ureg("ton"):
-                    curve_set_b = "Z"
+                    curve_set_b = J6_CURVE.Z
                 elif 150 * ureg("ton") <= rated_capacity_b < 300 * ureg("ton"):
-                    curve_set_b = "AA"
+                    curve_set_b = J6_CURVE.AA
                 else:
-                    curve_set_b = "AB"
+                    curve_set_b = J6_CURVE.AB
             elif compressor_type_b in (
                 CHILLER_COMPRESSOR.POSITIVE_DISPLACEMENT,
                 CHILLER_COMPRESSOR.SCROLL,
                 CHILLER_COMPRESSOR.SCREW,
             ):
                 if rated_capacity_b < 150 * ureg("ton"):
-                    curve_set_b = "V"
+                    curve_set_b = J4_CURVE.V
                 elif rated_capacity_b >= 300 * ureg("ton"):
-                    curve_set_b = "Y"
+                    curve_set_b = J6_CURVE.Y
                 else:
-                    curve_set_b = "X"
+                    curve_set_b = J6_CURVE.X
 
             return {"curve_set_b": curve_set_b}
 
         def rule_check(self, context, calc_vals=None, data=None):
             chiller_b = context.BASELINE_0
-            curve_set_b = data["curve_set_b"]
+            curve_set_b = calc_vals["curve_set_b"]
 
             return does_chiller_performance_match_curve(chiller_b, curve_set_b)
