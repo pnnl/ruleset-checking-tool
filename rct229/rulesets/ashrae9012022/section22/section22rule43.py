@@ -12,6 +12,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_primary_secondary_loops
 )
 from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.rulesets.ashrae9012022.ruleset_functions.does_chiller_performance_match_curve import (
+    J4_CURVE,
+    J6_CURVE,
     does_chiller_performance_match_curve,
 )
 from rct229.schema.config import ureg
@@ -103,22 +105,22 @@ class PRM9012022Rule93e20(RuleDefinitionListIndexedBase):
 
             if compressor_type_b == CHILLER_COMPRESSOR.CENTRIFUGAL:
                 if rated_capacity_b < 150 * ureg("ton"):
-                    chiller_curve_set_dict_b[chiller_id_b] = "Z"
+                    chiller_curve_set_dict_b[chiller_id_b] = J6_CURVE.Z
                 elif 150 * ureg("ton") <= rated_capacity_b < 300 * ureg("ton"):
-                    chiller_curve_set_dict_b[chiller_id_b] = "AA"
+                    chiller_curve_set_dict_b[chiller_id_b] = J6_CURVE.AA
                 else:
-                    chiller_curve_set_dict_b[chiller_id_b] = "AB"
+                    chiller_curve_set_dict_b[chiller_id_b] = J6_CURVE.AB
             elif compressor_type_b in (
                 CHILLER_COMPRESSOR.POSITIVE_DISPLACEMENT,
                 CHILLER_COMPRESSOR.SCROLL,
                 CHILLER_COMPRESSOR.SCREW,
             ):
                 if rated_capacity_b < 150 * ureg("ton"):
-                    chiller_curve_set_dict_b[chiller_id_b] = "V"
+                    chiller_curve_set_dict_b[chiller_id_b] = J6_CURVE.V
                 elif rated_capacity_b >= 300 * ureg("ton"):
-                    chiller_curve_set_dict_b[chiller_id_b] = "Y"
+                    chiller_curve_set_dict_b[chiller_id_b] = J6_CURVE.Y
                 else:
-                    chiller_curve_set_dict_b[chiller_id_b] = "X"
+                    chiller_curve_set_dict_b[chiller_id_b] = J6_CURVE.X
             else:
                 chiller_curve_set_dict_b[chiller_id_b] = None
 
