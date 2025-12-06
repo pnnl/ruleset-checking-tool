@@ -9,6 +9,7 @@ This approach ensures that changes in the standards are effectively integrated w
   * [get_surface_conditioning_category_for_single_rmd](ruleset_functions/get_surface_conditioning_category_for_single_RMD.md): This function cycles through each surface in  a zone and categorize it as exterior res, exterior non res, exterior mixed, semi-exterior or unregulated. - new for ASHRAE 90.1-2022, this is the same as get_surface_conditioning_category in ASHRAE 90.1-2019.
 
 ## Section 5 - Envelope
+  * [5-42](section5/Rule5-42.md): Each linear thermal bridge and point thermal bridge as identified in Section 5.5.5 shall be modeled using either of the following techniques.
   * [5-43](section5/Rule5-43.md): Automatic fenestration shading devices shall not be modeled in the Baseline.
   * [5-44](section5/Rule5-44.md): The baseline above-grade wall surfaces shall be modeled with a solar reflectance of 0.25.
   * [5-45](section5/Rule5-45.md): The baseline above-grade wall surfaces shall be modeled with a thermal emittance of 0.90.

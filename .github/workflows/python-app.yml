@@ -37,8 +37,10 @@ jobs:
           filters: |
             ashrae9012019:
               - 'rct229/rulesets/ashrae9012019/**'
+              - 'rct229/ruletest_engine/ruletest_jsons/ashrae9012019/**'
             ashrae9012022:
               - 'rct229/rulesets/ashrae9012022/**'
+              - 'rct229/ruletest_engine/ruletest_jsons/ashrae9012022/**'
 
   run-unit-tests:
     name: Run unit tests
