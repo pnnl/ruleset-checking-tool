@@ -5,7 +5,7 @@ __all__ = [
     "section22rule44",
 ]
 
-SHORT_NAME = "HVAC-HW"
+SHORT_NAME = "HVAC-CHW"
 
 
 def __getattr__(name):

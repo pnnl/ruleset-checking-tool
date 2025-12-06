@@ -3,12 +3,14 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012022 import PROPOSED
 from rct229.rulesets.ashrae9012022.ruleset_functions.does_chiller_performance_match_curve import (
+    J4_CURVE,
     does_chiller_performance_match_curve,
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 CHILLER_COMPRESSOR = SchemaEnums.schema_enums["ChillerCompressorOptions"]
@@ -64,7 +66,8 @@ class PRM9012022Rule43f22(RuleDefinitionListIndexedBase):
             chiller_p = context.PROPOSED
             non_process_chw_coil_loop_list_p = data["non_process_chw_coil_loop_list_p"]
 
-            return chiller_p["cooling_loop"] in non_process_chw_coil_loop_list_p
+            # return chiller_p["cooling_loop"] in non_process_chw_coil_loop_list_p
+            return True
 
         def get_calc_vals(self, context, data=None):
             chiller_p = context.PROPOSED
@@ -74,50 +77,54 @@ class PRM9012022Rule43f22(RuleDefinitionListIndexedBase):
 
             if chiller_p.get("condensing_loop") is None:
                 if rated_capacity_p < 150 * ureg("ton"):
-                    curve_set_list_p = ["A", "K"]
+                    curve_set_list_p = [J4_CURVE.A, J4_CURVE.K]
                 else:
-                    curve_set_list_p = ["B", "L"]
+                    curve_set_list_p = [J4_CURVE.B, J4_CURVE.L]
             if compressor_type_p in (
                 CHILLER_COMPRESSOR.POSITIVE_DISPLACEMENT,
                 CHILLER_COMPRESSOR.SCROLL,
                 CHILLER_COMPRESSOR.SCREW,
             ):
                 if rated_capacity_p < 75 * ureg("ton"):
-                    curve_set_list_p = ["C", "M"]
+                    curve_set_list_p = [J4_CURVE.C, J4_CURVE.M]
                 elif rated_capacity_p < 150 * ureg("ton"):
-                    curve_set_list_p = ["D", "N"]
+                    curve_set_list_p = [J4_CURVE.D, J4_CURVE.N]
                 elif rated_capacity_p < 300 * ureg("ton"):
-                    curve_set_list_p = ["E", "O"]
+                    curve_set_list_p = [J4_CURVE.E, J4_CURVE.O]
                 elif rated_capacity_p < 600 * ureg("ton"):
-                    curve_set_list_p = ["F", "P"]
+                    curve_set_list_p = [J4_CURVE.F, J4_CURVE.P]
                 else:
-                    curve_set_list_p = ["G", "Q"]
+                    curve_set_list_p = [J4_CURVE.G, J4_CURVE.Q]
 
             if compressor_type_p == CHILLER_COMPRESSOR.CENTRIFUGAL:
                 if rated_capacity_p < 150 * ureg("ton"):
-                    curve_set_list_p = ["H", "R"]
+                    curve_set_list_p = [J4_CURVE.H, J4_CURVE.R]
                 elif rated_capacity_p < 300 * ureg("ton"):
-                    curve_set_list_p = ["H", "S"]
+                    curve_set_list_p = [J4_CURVE.H, J4_CURVE.S]
                 elif rated_capacity_p < 400 * ureg("ton"):
-                    curve_set_list_p = ["I", "T"]
+                    curve_set_list_p = [J4_CURVE.I, J4_CURVE.T]
                 else:
-                    curve_set_list_p = ["J", "U"]
+                    curve_set_list_p = [J4_CURVE.J, J4_CURVE.U]
 
-            design_leaving_condenser_temperature_p = chiller_p[
-                "design_leaving_condenser_temperature"
-            ]
-            design_entering_condenser_temperature_p = chiller_p[
-                "design_entering_condenser_temperature"
-            ]
+            design_leaving_condenser_temperature_p = getattr_(
+                chiller_p, "chillers", "design_leaving_condenser_temperature"
+            )
+            design_entering_condenser_temperature_p = getattr_(
+                chiller_p, "chillers", "design_entering_condenser_temperature"
+            )
 
             return {
                 "curve_set_list_p": curve_set_list_p,
-                "design_leaving_condenser_temperature_p": design_leaving_condenser_temperature_p,
-                "design_entering_condenser_temperature_p": design_entering_condenser_temperature_p,
+                "design_leaving_condenser_temperature_p": CalcQ(
+                    "temperature", design_leaving_condenser_temperature_p
+                ),
+                "design_entering_condenser_temperature_p": CalcQ(
+                    "temperature", design_entering_condenser_temperature_p
+                ),
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
-            chiller_p = context.BASELINE_0
+            chiller_p = context.PROPOSED
             curve_set_list_p = calc_vals["curve_set_list_p"]
 
             return not all(
@@ -126,7 +133,7 @@ class PRM9012022Rule43f22(RuleDefinitionListIndexedBase):
             )
 
         def rule_check(self, context, calc_vals=None, data=None):
-            chiller_p = context.BASELINE_0
+            chiller_p = context.PROPOSED
             curve_set_list_p = calc_vals["curve_set_list_p"]
             design_leaving_condenser_temperature_p = calc_vals[
                 "design_leaving_condenser_temperature_p"
