@@ -66,8 +66,7 @@ class PRM9012022Rule43f22(RuleDefinitionListIndexedBase):
             chiller_p = context.PROPOSED
             non_process_chw_coil_loop_list_p = data["non_process_chw_coil_loop_list_p"]
 
-            # return chiller_p["cooling_loop"] in non_process_chw_coil_loop_list_p
-            return True
+            return chiller_p["cooling_loop"] in non_process_chw_coil_loop_list_p
 
         def get_calc_vals(self, context, data=None):
             chiller_p = context.PROPOSED
