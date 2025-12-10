@@ -14,6 +14,912 @@
             "primary_rule": "Full",
             "schema_version": "0.1.7"
         },
+        "test_description": "The project has one building segment with two zones served by a water cooled baseline system type 7 with a chilled water system. The chilled water system consists of a  100-ton, 0.61 kW/ton water cooled centrifugal chiller, with performance curves that agree with Table J-2, curve set Z.",
+        "expected_rule_outcome": "pass",
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1",
+                                "compressor_type": "CENTRIFUGAL",
+                                "rated_capacity": 351700.0,
+                                "condensing_loop": "Condenser Loop 1",
+                                "efficiency_metric_values": [
+                                    5.76557185245901
+                                ],
+                                "efficiency_metric_types": [
+                                    "FULL_LOAD_EFFICIENCY_RATED"
+                                ],
+                                "capacity_operating_points": [
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "capacity": 351712
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "capacity": 335993
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "capacity": 320824
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "capacity": 306204
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "capacity": 298819
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "capacity": 382518
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "capacity": 369464
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "capacity": 356959
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "capacity": 345003
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "capacity": 339003
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "capacity": 397552
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "capacity": 386717
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "capacity": 376432
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "capacity": 366697
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "capacity": 361851
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "capacity": 402913
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "capacity": 394299
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "capacity": 386234
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "capacity": 378719
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "capacity": 375028
+                                    }
+                                ],
+                                "power_operating_points": [
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 87925.0,
+                                        "power": 19576
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 175850.0,
+                                        "power": 27486
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 263775.0,
+                                        "power": 38856
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 351700.0,
+                                        "power": 53686
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 83985.95999999999,
+                                        "power": 20848
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 168007.09,
+                                        "power": 29273
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 251993.05000000002,
+                                        "power": 41382
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 335979.01,
+                                        "power": 57175
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 80222.76999999999,
+                                        "power": 21272
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 160410.37,
+                                        "power": 29868
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 240633.14,
+                                        "power": 42224
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 320820.74,
+                                        "power": 58339
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 76565.09,
+                                        "power": 20953
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 153095.01,
+                                        "power": 29420
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 229660.09999999998,
+                                        "power": 41590
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 306190.02,
+                                        "power": 57462
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 74701.08,
+                                        "power": 20525
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 149402.16,
+                                        "power": 28819
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 224103.24,
+                                        "power": 40741
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 3.888888888888914,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 298804.32,
+                                        "power": 56290
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 95627.23000000001,
+                                        "power": 19881
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 191254.46000000002,
+                                        "power": 27915
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 286881.69,
+                                        "power": 39462
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 382508.92000000004,
+                                        "power": 54523
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 92356.42,
+                                        "power": 21565
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 184748.01,
+                                        "power": 30280
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 277104.43,
+                                        "power": 42805
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 369460.85,
+                                        "power": 59142
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 89226.29000000001,
+                                        "power": 22356
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 178487.75,
+                                        "power": 31391
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 267714.04000000004,
+                                        "power": 44376
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 356975.5,
+                                        "power": 61312
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 86236.84,
+                                        "power": 22341
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 172508.84999999998,
+                                        "power": 31370
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 258745.68999999997,
+                                        "power": 44346
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 345017.69999999995,
+                                        "power": 61271
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 84759.70000000001,
+                                        "power": 22042
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 169484.22999999998,
+                                        "power": 30949
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 254243.93000000002,
+                                        "power": 43752
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 7.222222222222285,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 339003.63,
+                                        "power": 60449
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 99390.42,
+                                        "power": 19875
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 198780.84,
+                                        "power": 27907
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 298171.26,
+                                        "power": 39452
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 397561.68,
+                                        "power": 54508
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 96682.33,
+                                        "power": 21808
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 193364.66,
+                                        "power": 30622
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 290046.99,
+                                        "power": 43289
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 386729.32,
+                                        "power": 59810
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 94114.92,
+                                        "power": 22834
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 188229.84,
+                                        "power": 32061
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 282309.58999999997,
+                                        "power": 45324
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 376424.51,
+                                        "power": 62622
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 91688.19,
+                                        "power": 23025
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 183341.21000000002,
+                                        "power": 32329
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 275029.4,
+                                        "power": 45703
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 366682.42000000004,
+                                        "power": 63145
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 90457.23999999999,
+                                        "power": 22816
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 180914.47999999998,
+                                        "power": 32037
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 271371.72,
+                                        "power": 45289
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 10.000000000000057,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 361864.13,
+                                        "power": 62574
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 100726.88,
+                                        "power": 19746
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 201453.76,
+                                        "power": 27726
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 302180.64,
+                                        "power": 39195
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 15.5555555555556,
+                                        "load": 402907.52,
+                                        "power": 54154
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 98581.51000000001,
+                                        "power": 21849
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 197163.02000000002,
+                                        "power": 30678
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 295709.36,
+                                        "power": 43369
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 22.500000000000057,
+                                        "load": 394290.87,
+                                        "power": 59920
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 96541.65,
+                                        "power": 23051
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 193118.47,
+                                        "power": 32366
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 289660.12,
+                                        "power": 45755
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 29.444444444444457,
+                                        "load": 386236.94,
+                                        "power": 63217
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 94677.64,
+                                        "power": 23411
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 189355.28,
+                                        "power": 32871
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 284032.92000000004,
+                                        "power": 46469
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 36.388888888888914,
+                                        "load": 378710.56,
+                                        "power": 64204
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 93763.22,
+                                        "power": 23283
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 187526.44,
+                                        "power": 32692
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 281254.49,
+                                        "power": 46215
+                                    },
+                                    {
+                                        "chilled_water_supply_temperature": 12.777777777777828,
+                                        "condenser_temperature": 40.00000000000006,
+                                        "load": 375017.70999999996,
+                                        "power": 63853
+                                    }
+                                ]
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ],
+                        "heat_rejections": [
+                            {
+                                "id": "Heat Rejection 1",
+                                "loop": "Condenser Loop 1"
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-42-b": {
+        "Section": 22,
+        "Rule": 42,
+        "Test": "b",
+        "standard": {
+            "ruleset": "ashrae9012022",
+            "rule_id": "22-42",
+            "ruleset_reference": "G3.2.2.1 Baseline",
+            "rule_description": "The sets of performance curves specified in Table J-2 should be used to represent part-load performance of chillers in the baseline building design.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
+        "test_description": "The project has one building segment with two zones served by a water cooled baseline system type 7 with a chilled water system. The chilled water system consists of a  100-ton, 0.61 kW/ton water cooled centrifugal chiller, however it is missing the capacity and power operating validation points required as by Table J-2 for curve set Z.",
+        "expected_rule_outcome": "undetermined",
+        "rmd_transformations": {
+            "baseline": {
+                "id": "ASHRAE229 1",
+                "ruleset_model_descriptions": [
+                    {
+                        "id": "RMD 1",
+                        "buildings": [
+                            {
+                                "id": "Building 1",
+                                "building_segments": [
+                                    {
+                                        "id": "Building Segment 1",
+                                        "zones": [
+                                            {
+                                                "id": "Thermal Zone 1",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 1",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "Thermal Zone 2",
+                                                "terminals": [
+                                                    {
+                                                        "id": "VAV Air Terminal 2",
+                                                        "is_supply_ducted": true,
+                                                        "type": "VARIABLE_AIR_VOLUME",
+                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
+                                                        "heating_source": "HOT_WATER",
+                                                        "heating_from_loop": "Boiler Loop 1"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "heating_ventilating_air_conditioning_systems": [
+                                            {
+                                                "id": "System 7",
+                                                "cooling_system": {
+                                                    "id": "CHW Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "chilled_water_loop": "Secondary CHW Loop 1"
+                                                },
+                                                "preheat_system": {
+                                                    "id": "Preheat Coil 1",
+                                                    "type": "FLUID_LOOP",
+                                                    "hot_water_loop": "Boiler Loop 1"
+                                                },
+                                                "fan_system": {
+                                                    "id": "VAV Fan System 1",
+                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
+                                                    "supply_fans": [
+                                                        {
+                                                            "id": "Supply Fan 1"
+                                                        }
+                                                    ],
+                                                    "return_fans": [
+                                                        {
+                                                            "id": "Return Fan 1"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "boilers": [
+                            {
+                                "id": "Boiler 1",
+                                "loop": "Boiler Loop 1",
+                                "energy_source_type": "NATURAL_GAS"
+                            }
+                        ],
+                        "chillers": [
+                            {
+                                "id": "Chiller 1",
+                                "cooling_loop": "Chiller Loop 1",
+                                "compressor_type": "CENTRIFUGAL",
+                                "rated_capacity": 351700.0,
+                                "condensing_loop": "Condenser Loop 1",
+                                "efficiency_metric_values": [
+                                    5.76557185245901
+                                ],
+                                "efficiency_metric_types": [
+                                    "FULL_LOAD_EFFICIENCY_RATED"
+                                ]
+                            }
+                        ],
+                        "pumps": [
+                            {
+                                "id": "Boiler Pump 1",
+                                "loop_or_piping": "Boiler Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Chiller Pump 1",
+                                "loop_or_piping": "Chiller Loop 1",
+                                "speed_control": "FIXED_SPEED"
+                            },
+                            {
+                                "id": "Secondary CHW Pump",
+                                "loop_or_piping": "Secondary CHW Loop 1",
+                                "speed_control": "VARIABLE_SPEED"
+                            }
+                        ],
+                        "fluid_loops": [
+                            {
+                                "id": "Boiler Loop 1",
+                                "type": "HEATING"
+                            },
+                            {
+                                "id": "Chiller Loop 1",
+                                "type": "COOLING",
+                                "child_loops": [
+                                    {
+                                        "id": "Secondary CHW Loop 1",
+                                        "type": "COOLING"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "Condenser Loop 1",
+                                "type": "CONDENSER"
+                            }
+                        ],
+                        "heat_rejections": [
+                            {
+                                "id": "Heat Rejection 1",
+                                "loop": "Condenser Loop 1"
+                            }
+                        ],
+                        "type": "BASELINE_0"
+                    }
+                ]
+            }
+        }
+    },
+    "rule-22-42-c": {
+        "Section": 22,
+        "Rule": 42,
+        "Test": "c",
+        "standard": {
+            "ruleset": "ashrae9012022",
+            "rule_id": "22-42",
+            "ruleset_reference": "G3.2.2.1 Baseline",
+            "rule_description": "The sets of performance curves specified in Table J-2 should be used to represent part-load performance of chillers in the baseline building design.",
+            "applicable_rmr": "Baseline Model",
+            "rule_assertion": "=",
+            "comparison_value": "Expected Value",
+            "primary_rule": "Full",
+            "schema_version": "0.1.7"
+        },
         "test_description": "The project has one building segment with two zones served by a water cooled baseline system type 7 with a chilled water system. The chilled water system consists of a  150-ton, 5.5 COP water cooled centrifugal chiller, with performance curves that do not agree with Table J-2, curves set AA.",
         "expected_rule_outcome": "fail",
         "rmd_transformations": {
@@ -113,102 +1019,102 @@
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 15.5555555555556,
-                                        "capacity": 370115
+                                        "capacity": 351712
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 22.500000000000057,
-                                        "capacity": 360333
+                                        "capacity": 335993
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 29.444444444444457,
-                                        "capacity": 349216
+                                        "capacity": 320824
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 36.388888888888914,
-                                        "capacity": 336763
+                                        "capacity": 306204
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 40.00000000000006,
-                                        "capacity": 328998
+                                        "capacity": 298819
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 15.5555555555556,
-                                        "capacity": 358539
+                                        "capacity": 382518
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 22.500000000000057,
-                                        "capacity": 348758
+                                        "capacity": 369464
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 29.444444444444457,
-                                        "capacity": 337641
+                                        "capacity": 356959
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 36.388888888888914,
-                                        "capacity": 325188
+                                        "capacity": 345003
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 40.00000000000006,
-                                        "capacity": 317423
+                                        "capacity": 339003
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 15.5555555555556,
-                                        "capacity": 345663
+                                        "capacity": 397552
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 22.500000000000057,
-                                        "capacity": 335882
+                                        "capacity": 386717
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 29.444444444444457,
-                                        "capacity": 324765
+                                        "capacity": 376432
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 36.388888888888914,
-                                        "capacity": 312312
+                                        "capacity": 366697
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 40.00000000000006,
-                                        "capacity": 304547
+                                        "capacity": 361851
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 15.5555555555556,
-                                        "capacity": 331486
+                                        "capacity": 402913
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 22.500000000000057,
-                                        "capacity": 321705
+                                        "capacity": 394299
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 29.444444444444457,
-                                        "capacity": 310588
+                                        "capacity": 386234
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 36.388888888888914,
-                                        "capacity": 298135
+                                        "capacity": 378719
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 40.00000000000006,
-                                        "capacity": 290370
+                                        "capacity": 375028
                                     }
                                 ],
                                 "power_operating_points": [
@@ -216,643 +1122,482 @@
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 15.5555555555556,
                                         "load": 87925.0,
-                                        "power": 55019
+                                        "power": 19576
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 15.5555555555556,
                                         "load": 175850.0,
-                                        "power": 77828
+                                        "power": 27486
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 15.5555555555556,
                                         "load": 263775.0,
-                                        "power": 100637
+                                        "power": 38856
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 15.5555555555556,
                                         "load": 351700.0,
-                                        "power": 123446
+                                        "power": 53686
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 87925.0,
-                                        "power": 81486
+                                        "load": 83985.95999999999,
+                                        "power": 20848
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 175850.0,
-                                        "power": 115280
+                                        "load": 168007.09,
+                                        "power": 29273
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 263775.0,
-                                        "power": 149074
+                                        "load": 251993.05000000002,
+                                        "power": 41382
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 351700.0,
-                                        "power": 182868
+                                        "load": 335979.01,
+                                        "power": 57175
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 87925.0,
-                                        "power": 107867
+                                        "load": 80222.76999999999,
+                                        "power": 21272
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 175850.0,
-                                        "power": 152616
+                                        "load": 160410.37,
+                                        "power": 29868
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 263775.0,
-                                        "power": 197365
+                                        "load": 240633.14,
+                                        "power": 42224
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 351700.0,
-                                        "power": 242114
+                                        "load": 320820.74,
+                                        "power": 58339
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 87925.0,
-                                        "power": 134316
+                                        "load": 76565.09,
+                                        "power": 20953
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 175850.0,
-                                        "power": 190020
+                                        "load": 153095.01,
+                                        "power": 29420
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 263775.0,
-                                        "power": 245724
+                                        "load": 229660.09999999998,
+                                        "power": 41590
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 351700.0,
-                                        "power": 301428
+                                        "load": 306190.02,
+                                        "power": 57462
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 87925.0,
-                                        "power": 151006
+                                        "load": 74701.08,
+                                        "power": 20525
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 175850.0,
-                                        "power": 213695
+                                        "load": 149402.16,
+                                        "power": 28819
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 263775.0,
-                                        "power": 276384
+                                        "load": 224103.24,
+                                        "power": 40741
                                     },
                                     {
                                         "chilled_water_supply_temperature": 3.888888888888914,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 351700.0,
-                                        "power": 339073
+                                        "load": 298804.32,
+                                        "power": 56290
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 15.5555555555556,
-                                        "load": 87925.0,
-                                        "power": 61435
+                                        "load": 95627.23000000001,
+                                        "power": 19881
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 15.5555555555556,
-                                        "load": 175850.0,
-                                        "power": 86959
+                                        "load": 191254.46000000002,
+                                        "power": 27915
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 15.5555555555556,
-                                        "load": 263775.0,
-                                        "power": 112483
+                                        "load": 286881.69,
+                                        "power": 39462
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 15.5555555555556,
-                                        "load": 351700.0,
-                                        "power": 138007
+                                        "load": 382508.92000000004,
+                                        "power": 54523
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 87925.0,
-                                        "power": 82089
+                                        "load": 92356.42,
+                                        "power": 21565
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 175850.0,
-                                        "power": 116199
+                                        "load": 184748.01,
+                                        "power": 30280
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 263775.0,
-                                        "power": 150309
+                                        "load": 277104.43,
+                                        "power": 42805
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 351700.0,
-                                        "power": 184419
+                                        "load": 369460.85,
+                                        "power": 59142
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 87925.0,
-                                        "power": 102780
+                                        "load": 89226.29000000001,
+                                        "power": 22356
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 175850.0,
-                                        "power": 145487
+                                        "load": 178487.75,
+                                        "power": 31391
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 263775.0,
-                                        "power": 188194
+                                        "load": 267714.04000000004,
+                                        "power": 44376
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 351700.0,
-                                        "power": 230901
+                                        "load": 356975.5,
+                                        "power": 61312
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 87925.0,
-                                        "power": 123508
+                                        "load": 86236.84,
+                                        "power": 22341
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 175850.0,
-                                        "power": 174812
+                                        "load": 172508.84999999998,
+                                        "power": 31370
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 263775.0,
-                                        "power": 226116
+                                        "load": 258745.68999999997,
+                                        "power": 44346
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 351700.0,
-                                        "power": 277420
+                                        "load": 345017.69999999995,
+                                        "power": 61271
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 87925.0,
-                                        "power": 136670
+                                        "load": 84759.70000000001,
+                                        "power": 22042
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 175850.0,
-                                        "power": 193502
+                                        "load": 169484.22999999998,
+                                        "power": 30949
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 263775.0,
-                                        "power": 250334
+                                        "load": 254243.93000000002,
+                                        "power": 43752
                                     },
                                     {
                                         "chilled_water_supply_temperature": 7.222222222222285,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 351700.0,
-                                        "power": 307166
+                                        "load": 339003.63,
+                                        "power": 60449
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 15.5555555555556,
-                                        "load": 87925.0,
-                                        "power": 71585
+                                        "load": 99390.42,
+                                        "power": 19875
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 15.5555555555556,
-                                        "load": 175850.0,
-                                        "power": 101313
+                                        "load": 198780.84,
+                                        "power": 27907
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 15.5555555555556,
-                                        "load": 263775.0,
-                                        "power": 131041
+                                        "load": 298171.26,
+                                        "power": 39452
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 15.5555555555556,
-                                        "load": 351700.0,
-                                        "power": 160769
+                                        "load": 397561.68,
+                                        "power": 54508
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 87925.0,
-                                        "power": 89197
+                                        "load": 96682.33,
+                                        "power": 21808
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 175850.0,
-                                        "power": 126234
+                                        "load": 193364.66,
+                                        "power": 30622
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 263775.0,
-                                        "power": 163271
+                                        "load": 290046.99,
+                                        "power": 43289
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 351700.0,
-                                        "power": 200308
+                                        "load": 386729.32,
+                                        "power": 59810
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 87925.0,
-                                        "power": 106846
+                                        "load": 94114.92,
+                                        "power": 22834
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 175850.0,
-                                        "power": 151193
+                                        "load": 188229.84,
+                                        "power": 32061
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 263775.0,
-                                        "power": 195540
+                                        "load": 282309.58999999997,
+                                        "power": 45324
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 351700.0,
-                                        "power": 239887
+                                        "load": 376424.51,
+                                        "power": 62622
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 87925.0,
-                                        "power": 124532
+                                        "load": 91688.19,
+                                        "power": 23025
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 175850.0,
-                                        "power": 176189
+                                        "load": 183341.21000000002,
+                                        "power": 32329
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 263775.0,
-                                        "power": 227846
+                                        "load": 275029.4,
+                                        "power": 45703
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 351700.0,
-                                        "power": 279503
+                                        "load": 366682.42000000004,
+                                        "power": 63145
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 87925.0,
-                                        "power": 135953
+                                        "load": 90457.23999999999,
+                                        "power": 22816
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 175850.0,
-                                        "power": 192407
+                                        "load": 180914.47999999998,
+                                        "power": 32037
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 263775.0,
-                                        "power": 248861
+                                        "load": 271371.72,
+                                        "power": 45289
                                     },
                                     {
                                         "chilled_water_supply_temperature": 10.000000000000057,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 351700.0,
-                                        "power": 305315
+                                        "load": 361864.13,
+                                        "power": 62574
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 15.5555555555556,
-                                        "load": 87925.0,
-                                        "power": 81472
+                                        "load": 100726.88,
+                                        "power": 19746
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 15.5555555555556,
-                                        "load": 175850.0,
-                                        "power": 115332
+                                        "load": 201453.76,
+                                        "power": 27726
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 15.5555555555556,
-                                        "load": 263775.0,
-                                        "power": 149192
+                                        "load": 302180.64,
+                                        "power": 39195
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 15.5555555555556,
-                                        "load": 351700.0,
-                                        "power": 183052
+                                        "load": 402907.52,
+                                        "power": 54154
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 87925.0,
-                                        "power": 96456
+                                        "load": 98581.51000000001,
+                                        "power": 21849
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 175850.0,
-                                        "power": 136508
+                                        "load": 197163.02000000002,
+                                        "power": 30678
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 263775.0,
-                                        "power": 176560
+                                        "load": 295709.36,
+                                        "power": 43369
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 22.500000000000057,
-                                        "load": 351700.0,
-                                        "power": 216612
+                                        "load": 394290.87,
+                                        "power": 59920
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 87925.0,
-                                        "power": 111478
+                                        "load": 96541.65,
+                                        "power": 23051
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 175850.0,
-                                        "power": 157722
+                                        "load": 193118.47,
+                                        "power": 32366
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 263775.0,
-                                        "power": 203966
+                                        "load": 289660.12,
+                                        "power": 45755
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 29.444444444444457,
-                                        "load": 351700.0,
-                                        "power": 250210
+                                        "load": 386236.94,
+                                        "power": 63217
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 87925.0,
-                                        "power": 126537
+                                        "load": 94677.64,
+                                        "power": 23411
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 175850.0,
-                                        "power": 179074
+                                        "load": 189355.28,
+                                        "power": 32871
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 263775.0,
-                                        "power": 231611
+                                        "load": 284032.92000000004,
+                                        "power": 46469
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 36.388888888888914,
-                                        "load": 351700.0,
-                                        "power": 284148
+                                        "load": 378710.56,
+                                        "power": 64204
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 87925.0,
-                                        "power": 136465
+                                        "load": 93763.22,
+                                        "power": 23283
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 175850.0,
-                                        "power": 193186
+                                        "load": 187526.44,
+                                        "power": 32692
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 263775.0,
-                                        "power": 249907
+                                        "load": 281254.49,
+                                        "power": 46215
                                     },
                                     {
                                         "chilled_water_supply_temperature": 12.777777777777828,
                                         "condenser_temperature": 40.00000000000006,
-                                        "load": 351700.0,
-                                        "power": 306628
+                                        "load": 375017.70999999996,
+                                        "power": 63853
                                     }
-                                ]
-                            }
-                        ],
-                        "pumps": [
-                            {
-                                "id": "Boiler Pump 1",
-                                "loop_or_piping": "Boiler Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Chiller Pump 1",
-                                "loop_or_piping": "Chiller Loop 1",
-                                "speed_control": "FIXED_SPEED"
-                            },
-                            {
-                                "id": "Secondary CHW Pump",
-                                "loop_or_piping": "Secondary CHW Loop 1",
-                                "speed_control": "VARIABLE_SPEED"
-                            }
-                        ],
-                        "fluid_loops": [
-                            {
-                                "id": "Boiler Loop 1",
-                                "type": "HEATING"
-                            },
-                            {
-                                "id": "Chiller Loop 1",
-                                "type": "COOLING",
-                                "child_loops": [
-                                    {
-                                        "id": "Secondary CHW Loop 1",
-                                        "type": "COOLING"
-                                    }
-                                ]
-                            },
-                            {
-                                "id": "Condenser Loop 1",
-                                "type": "CONDENSER"
-                            }
-                        ],
-                        "heat_rejections": [
-                            {
-                                "id": "Heat Rejection 1",
-                                "loop": "Condenser Loop 1"
-                            }
-                        ],
-                        "type": "BASELINE_0"
-                    }
-                ]
-            }
-        }
-    },
-    "rule-22-42-b": {
-        "Section": 22,
-        "Rule": 42,
-        "Test": "b",
-        "standard": {
-            "ruleset": "ashrae9012022",
-            "rule_id": "22-42",
-            "ruleset_reference": "G3.2.2.1 Baseline",
-            "rule_description": "The sets of performance curves specified in Table J-2 should be used to represent part-load performance of chillers in the baseline building design.",
-            "applicable_rmr": "Baseline Model",
-            "rule_assertion": "=",
-            "comparison_value": "Expected Value",
-            "primary_rule": "Full",
-            "schema_version": "0.1.7"
-        },
-        "test_description": "The project has one building segment with two zones served by a water cooled baseline system type 7 with a chilled water system. The chilled water system consists of a  100-ton, 5.5 COP water cooled centrifugal chiller, however it is missing the capacity and power operating validation points required as by Table J-2 for curve set Z.",
-        "expected_rule_outcome": "fail",
-        "rmd_transformations": {
-            "baseline": {
-                "id": "ASHRAE229 1",
-                "ruleset_model_descriptions": [
-                    {
-                        "id": "RMD 1",
-                        "buildings": [
-                            {
-                                "id": "Building 1",
-                                "building_segments": [
-                                    {
-                                        "id": "Building Segment 1",
-                                        "zones": [
-                                            {
-                                                "id": "Thermal Zone 1",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 1",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "id": "Thermal Zone 2",
-                                                "terminals": [
-                                                    {
-                                                        "id": "VAV Air Terminal 2",
-                                                        "is_supply_ducted": true,
-                                                        "type": "VARIABLE_AIR_VOLUME",
-                                                        "served_by_heating_ventilating_air_conditioning_system": "System 7",
-                                                        "heating_source": "HOT_WATER",
-                                                        "heating_from_loop": "Boiler Loop 1"
-                                                    }
-                                                ]
-                                            }
-                                        ],
-                                        "heating_ventilating_air_conditioning_systems": [
-                                            {
-                                                "id": "System 7",
-                                                "cooling_system": {
-                                                    "id": "CHW Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "chilled_water_loop": "Secondary CHW Loop 1"
-                                                },
-                                                "preheat_system": {
-                                                    "id": "Preheat Coil 1",
-                                                    "type": "FLUID_LOOP",
-                                                    "hot_water_loop": "Boiler Loop 1"
-                                                },
-                                                "fan_system": {
-                                                    "id": "VAV Fan System 1",
-                                                    "fan_control": "VARIABLE_SPEED_DRIVE",
-                                                    "supply_fans": [
-                                                        {
-                                                            "id": "Supply Fan 1"
-                                                        }
-                                                    ],
-                                                    "return_fans": [
-                                                        {
-                                                            "id": "Return Fan 1"
-                                                        }
-                                                    ]
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "boilers": [
-                            {
-                                "id": "Boiler 1",
-                                "loop": "Boiler Loop 1",
-                                "energy_source_type": "NATURAL_GAS"
-                            }
-                        ],
-                        "chillers": [
-                            {
-                                "id": "Chiller 1",
-                                "cooling_loop": "Chiller Loop 1",
-                                "compressor_type": "CENTRIFUGAL",
-                                "rated_capacity": 351700.0,
-                                "condensing_loop": "Condenser Loop 1",
-                                "efficiency_metric_values": [
-                                    5.5
-                                ],
-                                "efficiency_metric_types": [
-                                    "FULL_LOAD_EFFICIENCY_RATED"
                                 ]
                             }
                         ],
