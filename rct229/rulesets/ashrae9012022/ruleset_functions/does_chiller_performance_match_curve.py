@@ -213,7 +213,7 @@ def does_chiller_performance_match_curve(chiller: dict, curve_set: str) -> bool:
                 given_capacities[dict_key] = given_capacity
 
                 if not std_equal_with_precision(
-                    given_capacity, expected_capacity, 1 * ureg("W")
+                    given_capacity, expected_capacity, 1 * ureg("ton")
                 ):
                     non_matching_capacity_operating_points.append(
                         {"CHWT": chwt, "ECWT": ecwt}
@@ -237,7 +237,7 @@ def does_chiller_performance_match_curve(chiller: dict, curve_set: str) -> bool:
 
                     plr = (
                         load / given_capacities[dict_key]
-                    )  # no need to check `given_capacities[dict_key]` = 0.0 (checked in line 95)
+                    )  # already checked `given_capacities[dict_key]` > 0.0
 
                     # plr.m because plr is a "dimensionless" unit
                     if any(
@@ -268,7 +268,7 @@ def does_chiller_performance_match_curve(chiller: dict, curve_set: str) -> bool:
                         )
 
                         if not std_equal_with_precision(
-                            given_power, expected_power, 1 * ureg("W")
+                            given_power, expected_power, 1 * ureg("ton")
                         ):
                             non_matching_power_operating_points.append(
                                 {"CHWT": chwt, "ECWT": ecwt, "PLR": "ALL"}

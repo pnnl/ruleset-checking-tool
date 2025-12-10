@@ -14,7 +14,7 @@ from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 CHILLER_COMPRESSOR = SchemaEnums.schema_enums["ChillerCompressorOptions"]
-UNDETERMINED_MSG = "FAIL unless manufacturer full- and part-load data is provided to support the modeled curve"
+UNDETERMINED_MSG = "FAIL unless manufacturer full- and part-load data is provided to support the modeled curves."
 
 
 class PRM9012022Rule43f22(RuleDefinitionListIndexedBase):
@@ -126,7 +126,7 @@ class PRM9012022Rule43f22(RuleDefinitionListIndexedBase):
             chiller_p = context.PROPOSED
             curve_set_list_p = calc_vals["curve_set_list_p"]
 
-            return not all(
+            return not any(
                 does_chiller_performance_match_curve(chiller_p, curve_set)
                 for curve_set in curve_set_list_p
             )
@@ -145,7 +145,7 @@ class PRM9012022Rule43f22(RuleDefinitionListIndexedBase):
                 does_chiller_performance_match_curve(chiller_p, curve_set)
                 for curve_set in curve_set_list_p
             ) and std_equal(
-                design_leaving_condenser_temperature_p
-                - design_entering_condenser_temperature_p,
+                design_entering_condenser_temperature_p
+                - design_leaving_condenser_temperature_p,
                 10 * ureg("delta_degF"),
             )
