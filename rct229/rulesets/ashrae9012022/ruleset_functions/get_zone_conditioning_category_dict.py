@@ -23,6 +23,7 @@ class ZoneConditioningCategory:
     CONDITIONED_MIXED: str = "CONDITIONED MIXED"
     CONDITIONED_NON_RESIDENTIAL: str = "CONDITIONED NON-RESIDENTIAL"
     CONDITIONED_RESIDENTIAL: str = "CONDITIONED RESIDENTIAL"
+    CONDITIONED_RESIDENTIAL_ASSOCIATED: str = "CONDITIONED RESIDENTIAL-ASSOCIATED"
     SEMI_HEATED: str = "SEMI-HEATED"
     UNCONDITIONED: str = "UNCONDITIONED"
     UNENCLOSED: str = "UNENCLOSED"
@@ -323,7 +324,7 @@ def get_zone_conditioning_category_dict(
     # Taking stock:
     # To this point, we have determined which zones are directly conditioned,
     # semi-heated, or indirectly conditioned.
-    # Next we determine whether the zone is residential, non-residential, or mixed.
+    # Next we determine whether the zone is residential, residential-associated, non-residential, or mixed.
     for building_segment in find_all("building_segments[*]", building):
         # Set building_segment_is_residential and building_segment_is_nonresidential flags
         building_segment_is_residential = False
@@ -447,6 +448,103 @@ def get_zone_conditioning_category_dict(
                     zone_conditioning_category_dict[
                         zone_id
                     ] = ZoneConditioningCategory.UNCONDITIONED  # zone_1_9
+
+    # Now we must post-process to assign CONDITIONED_RESIDENTIAL_ASSOCIATED after all zones have been categorized
+
+    # Build floor → {residential_area, total_conditioned_area} map
+    floor_area_accounting = {}
+
+    for building_segment in find_all("building_segments[*]", building):
+        segment_is_hospital = (
+            building_segment.get("lighting_building_area_type") == "HOSPITAL"
+        )
+
+        for zone in find_all("zones[*]", building_segment):
+            zone_id = zone["id"]
+            category = zone_conditioning_category_dict.get(zone_id)
+
+            # Only consider directly or indirectly conditioned zones for floor-area ratio
+            if category not in [
+                ZoneConditioningCategory.CONDITIONED_RESIDENTIAL,
+                ZoneConditioningCategory.CONDITIONED_NON_RESIDENTIAL,
+                ZoneConditioningCategory.CONDITIONED_MIXED,
+            ]:
+                continue
+
+            floor = zone.get("floor_name")
+            if floor is None:
+                continue
+
+            zone_area = sum(find_all("spaces[*].floor_area", zone), ZERO.AREA)
+
+            is_res = category == ZoneConditioningCategory.CONDITIONED_RESIDENTIAL
+
+            if floor not in floor_area_accounting:
+                floor_area_accounting[floor] = {
+                    "res_area": ZERO.AREA,
+                    "total_area": ZERO.AREA,
+                }
+
+            floor_area_accounting[floor]["total_area"] += zone_area
+            if is_res:
+                floor_area_accounting[floor]["res_area"] += zone_area
+
+    # Assign CONDITIONED_RESIDENTIAL_ASSOCIATED where applicable
+    residential_support_space_types = {
+        "CORRIDOR_ALL_OTHERS",
+        "FACILITY_FOR_VISUALLY_IMPAIRED_CORRIDOR",
+        "HEALTHCARE_FACILITY_HOSPITAL_CORRIDOR",
+        "LOBBY_ELEVATOR",
+        "STAIRWELL",
+        "RESTROOM_ALL_OTHERS",
+        "FACILITY_FOR_VISUALLY_IMPAIRED_RESTROOM",
+        "NONE",
+    }
+
+    for building_segment in find_all("building_segments[*]", building):
+        segment_is_hospital = (
+            building_segment.get("lighting_building_area_type") == "HOSPITAL"
+        )
+        if segment_is_hospital:
+            continue  # Rule does not apply in hospitals
+
+        for zone in find_all("zones[*]", building_segment):
+            zone_id = zone["id"]
+            if (
+                zone_conditioning_category_dict.get(zone_id)
+                != ZoneConditioningCategory.CONDITIONED_NON_RESIDENTIAL
+            ):
+                continue
+
+            floor = zone.get("floor_name", None)
+            if floor is None or floor not in floor_area_accounting:
+                continue
+
+            tally = floor_area_accounting[floor]
+            if tally["total_area"] == ZERO.AREA:
+                continue
+
+            res_ratio = tally["res_area"] / tally["total_area"]
+            if res_ratio <= 0.75:
+                continue  # floor not predominantly residential
+
+            # Determine if this zone is composed primarily of support spaces
+            zone_space_types = [
+                space.get("lighting_space_type")
+                for space in find_all("spaces[*]", zone)
+            ]
+
+            if not zone_space_types:
+                continue
+
+            # Zone is considered "support" if ALL space types fall into known support categories
+            if all(
+                space_type in residential_support_space_types
+                for space_type in zone_space_types
+            ):
+                zone_conditioning_category_dict[
+                    zone_id
+                ] = ZoneConditioningCategory.CONDITIONED_RESIDENTIAL_ASSOCIATED
 
     return zone_conditioning_category_dict
 
