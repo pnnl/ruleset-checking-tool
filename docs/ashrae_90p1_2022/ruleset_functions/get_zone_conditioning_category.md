@@ -9,7 +9,7 @@ Inputs:
   - **RMD**: The RMD that needs to determine zone conditioning category.  
 
 Returns:  
-- **zone_conditioning_category**: The Zone Conditioning Category [conditioned residential, conditioned non-residential, conditioned mixed, semi-heated, unenclosed, unconditioned].  
+- **zone_conditioning_category**: The Zone Conditioning Category [conditioned residential, residential-associated, conditioned non-residential, conditioned mixed, semi-heated, unenclosed, unconditioned].  
 
 Function Call:
 - get_hvac_zone_list_w_area()
