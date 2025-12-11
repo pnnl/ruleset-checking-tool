@@ -3,10 +3,10 @@
 
 **Schema Version:** 0.0.23
 
-Description: Determine the Zone Conditioning Category for each zone. This function would cycle through each zone in an RMR and categorize it as ‘conditioned’, 'semi-heated’, 'unenclosed' or ‘unconditioned’.  If ‘conditioned’ it will also categorize the space as ‘residential’ or ‘non-residential’.  
+Description: Determine the Zone Conditioning Category for each zone. This function would cycle through each zone in an RMD and categorize it as ‘conditioned’, 'semi-heated’, 'unenclosed' or ‘unconditioned’.  If ‘conditioned’ it will also categorize the space as ‘residential’ or ‘non-residential’.  
 
 Inputs:  
-  - **RMR**: The RMR that needs to determine zone conditioning category.  
+  - **RMD**: The RMD that needs to determine zone conditioning category.  
 
 Returns:  
 - **zone_conditioning_category**: The Zone Conditioning Category [conditioned residential, conditioned non-residential, conditioned mixed, semi-heated, unenclosed, unconditioned].  
@@ -21,7 +21,7 @@ Constants:
 
 Logic:  
 
-- Get dictionary for the list of zones and their total floor area served by each HVAC system in RMR: `hvac_zone_list_w_area_dict = get_hvac_zone_list_w_area(RMR)`
+- Get dictionary for the list of zones and their total floor area served by each HVAC system in RMD: `hvac_zone_list_w_area_dict = get_hvac_zone_list_w_area(RMD)`
 
 - For each HVAC system id in dictionary: `for hvac_sys_id in hvac_zone_list_w_area_dict.keys():` (Note XC, this only gets HVAC systems serving zones. Orphan HVAC systems are not looped)
 
@@ -35,11 +35,11 @@ Logic:
 
   - Calculate and save total central heating output per floor area for HVAC system to dictionary: `hvac_heat_capacity_dict[hvac_sys_id] = total_central_heat_capacity / hvac_zone_list_w_area_dict[hvac_sys_id]["TOTAL_AREA"]`
 
-- Get building climate zone: `climate_zone = RMR.weather.climate_zone`  
+- Get building climate zone: `climate_zone = RMD.weather.climate_zone`  
 
 - Get heated space criteria: `system_min_heating_output = data_lookup(table_3_2,climate_zone)`
 
-- For each zone in RMR: `for zone in RMR...zones:`
+- For each zone in RMD: `for zone in RMD...zones:`
 
   - Get zone total floor area: `zone_area = SUM(space.floor_area for space in zone.spaces)`
 
@@ -59,7 +59,7 @@ Logic:
 
   - Else check if zone meets the criteria for semi-heated zones, save zone as semi-heated temporarily: `else if zone_capacity_dict[zone.id]["HEATING"] >=CAPACITY_THRESHOLD: semiheated_zones.append(zone.id)`
 
-- To determine eligibility for indirectly conditioned zones, for each zone in RMR: `for zone in RMR...zones:`  
+- To determine eligibility for indirectly conditioned zones, for each zone in RMD: `for zone in RMD...zones:`  
 
   - If zone is not directly conditioned (heated or cooled): `if zone not in directly_conditioned_zones:`  
 
@@ -69,7 +69,7 @@ Logic:
 
       - For each surface in zone: `for surface in zone.surfaces:`  
 
-        - Check if surface is interior, get adjacent zone: `if surface.adjacent_to == "INTERIOR": adjacent_zone = match_data_element(RMR, zones, surface.adjacent_zone_id)`  
+        - Check if surface is interior, get adjacent zone: `if surface.adjacent_to == "INTERIOR": adjacent_zone = match_data_element(RMD, zones, surface.adjacent_zone_id)`  
 **[CH: There is no `surface.fenestration_subsurfaces` field. There is a `surface.subsurfaces` field instead. Subsurface has `opaque_area` and `glazed_area`.]**
           - If adjacent zone is directly conditioned (heated or cooled), add the product of the U-factor and surface area to the directly conditioned type: `if adjacent_zone in directly_conditioned_zone: directly_conditioned_product_sum += sum( ( subsurface.glazed_area + subsurface.opaque_area ) * subsurface.u_factor for subsurface in surface.subsurfaces ) + ( surface.area - sum( ( subsurface.glazed_area + subsurface.opaque_area ) for subsurface in surface.subsurfaces ) * surface.construction.u_factor`  
 
@@ -79,7 +79,7 @@ Logic:
 
       - Determine if zone is indirectly conditioned: `if directly_conditioned_product_sum > other_product_sum: indirectly_conditioned_zones.append(zone)`  
 
-- For each building segment in RMR: `for building_segment in RMR...building_segments:`
+- For each building segment in RMD: `for building_segment in RMD...building_segments:`
 
   - Get lighting building area type for building segment: `lighting_building_area_type = building_segment.lighting_building_area_type`
 
@@ -118,25 +118,56 @@ Logic:
 
     - Else, classify zone as unconditioned: `else: zone_conditioning_category_dict[zone.id] = "UNCONDITIONED"`  
 
-- Create a floor summary containing total conditioned floor area and residential-only conditioned floor area for each floor:  
-  `floor_summary[floor] = { total_conditioned_area , residential_conditioned_area }`
+## Additional logic to identify conditioned residential-associated zones
 
-- For each building segment: `for building_segment in RMR...building_segments:`  
+- Initialize a summary structure to track, for each floor, total conditioned floor area and conditioned residential floor area: `floor_summary = {}`
 
-  - Skip zones if the segment is a hospital: `if lighting_building_area_type == "HOSPITAL": continue`
+- For each building segment: `for building_segment in RMD...building_segments:`
 
-  - For each zone in the building segment: `for zone in building_segment.zones:`  
+  - Determine if segment is a hospital: `segment_is_hospital = (building_segment.lighting_building_area_type == "HOSPITAL")`
 
-    - Only evaluate zones initially classified as Conditioned Non-Residential: `if zone_conditioning_category_dict[zone.id] != "CONDITIONED NON-RESIDENTIAL": continue`
+  - For each zone in segment: `for zone in building_segment.zones:`
 
-    - Determine the zone’s floor identifier: `floor = zone.floor_name`
+    - Get zone id: `zone_id = zone.id`  
+  
+    - Get zone conditioning category: `zone_conditining_category = zone_conditioning_category_dict[zone_id]`
 
-    - Determine if the floor is predominantly residential conditioned area: `if floor_summary[floor].residential_conditioned_area / floor_summary[floor].total_conditioned_area <= 0.75: continue`
+    - Only include conditioned zones in floor summary: `if zone_conditioning_category not in ["CONDITIONED RESIDENTIAL","CONDITIONED NON-RESIDENTIAL","CONDITIONED MIXED"]: continue\`
+
+    - Get floor identifier: `floor = zone.floor_name`
+
+    - Compute zone floor area: `zone_area = SUM(space.floor_area for space in zone.spaces)`
+
+    - Initialize floor entry if needed: `if floor not in floor_summary: floor_summary[floor] = {"residential_conditioned_area": 0, "total_conditioned_area": 0`
+
+    - Update totals: `floor_summary[floor]["total_conditioned_area"] += zone_area`
     
-    - Residential-support space types include: `["CORRIDOR_ALL_OTHERS","FACILITY_FOR_VISUALLY_IMPAIRED_CORRIDOR","HEALTHCARE_FACILITY_HOSPITAL_CORRIDOR","LOBBY_ELEVATOR","STAIRWELL","RESTROOM_ALL_OTHERS","FACILITY_FOR_VISUALLY_IMPAIRED_RESTROOM","NONE"]`  
-    
-    - Determine if *all* spaces in the zone are residential-support types:  `if NOT all(space.lighting_space_type in RESIDENTIAL_SUPPORT_TYPES for space in zone.spaces): continue`
+    - If the zone conditioning category is conditioned residential: `if category == "CONDITIONED RESIDENTIAL": floor_summary[floor]["residential_conditioned_area"] += zone_area`
 
-    - If conditions are satisfied, reclassify zone as residential-associated: `zone_conditioning_category_dict[zone.id] = "CONDITIONED RESIDENTIAL-ASSOCIATED"`
+- Reclassify eligible zones as conditioned residential-associated: `for building_segment in RMD...building_segments:`
+
+  - Skip hospital segments: `if building_segment.lighting_building_area_type == "HOSPITAL": continue`
+
+  - For each zone: `for zone in building_segment.zones:`
+
+    - Only consider conditioned non-residential zones: `if zone_conditioning_category_dict[zone.id] != "CONDITIONED NON-RESIDENTIAL": continue`
+
+    - Get floor name: `floor = zone.floor_name\`  
+
+    - Get residential conditioned floor areas: `res_area = floor_summary[floor]["residential_conditioned_area"]`
+    
+    - Get total conditioned floor area: `total_area = floor_summary[floor]["total_conditioned_area"]`
+
+    - Compute ratio: `res_ratio = res_area / total_area`
+
+    - Must exceed 0.75: `if res_ratio <= 0.75: continue`
+
+    - Gather space types in zone: `zone_space_types = [space.lighting_space_type for space in zone.spaces]`
+
+    - Define eligible support types: `RESIDENTIAL_SUPPORT_TYPES = ["CORRIDOR_ALL_OTHERS","FACILITY_FOR_VISUALLY_IMPAIRED_CORRIDOR","HEALTHCARE_FACILITY_HOSPITAL_CORRIDOR","LOBBY_ELEVATOR","STAIRWELL","RESTROOM_ALL_OTHERS","FACILITY_FOR_VISUALLY_IMPAIRED_RESTROOM","NONE"]`
+
+    - Check all spaces match: `if NOT all(type in RESIDENTIAL_SUPPORT_TYPES for type in zone_space_types): continue`
+
+    - Reclassify zone: `zone_conditioning_category_dict[zone.id] = "CONDITIONED RESIDENTIAL-ASSOCIATED"`
 
 **Returns** `return zone_conditioning_category_dict`  
