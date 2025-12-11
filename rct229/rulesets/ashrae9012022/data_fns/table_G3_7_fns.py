@@ -127,6 +127,7 @@ lighting_space_enumeration_to_prm_lpd_map = {
     "HEALTHCARE_FACILITY_CONTROL_ROOM": "health care - control room",
     "HEALTHCARE_FACILITY_EXAM_TREATMENT_ROOM": "health care - exam/treatment",
     "HEALTHCARE_FACILITY_HOSPITAL_CORRIDOR": "health care - corridor",
+    "HEALTHCARE_FACILITY_LOUNGE": "health care - lounge",
     "HEALTHCARE_FACILITY_MEDICAL_SUPPLY_ROOM": "health care - medical supply",
     "HEALTHCARE_FACILITY_NURSERY": "health care - nursery",
     "HEALTHCARE_FACILITY_NURSES_STATION": "health care - nurses station",
