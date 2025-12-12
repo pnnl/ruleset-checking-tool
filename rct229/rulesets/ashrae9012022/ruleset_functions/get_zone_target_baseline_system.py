@@ -66,12 +66,12 @@ class ZoneandSystem(TypedDict):
 
 class SYSTEMORIGIN:
     G311 = "G3_1_1"
-    G3212A = "G3_2_1_2a"
-    G3212B = "G3_2_1_2b"
-    G3212C = "G3_2_1_2c"
-    G3212D = "G3_2_1_2d"
-    G3212E = "G3_2_1_2e"  # mislabeled in the standard as a duplicated G3.1.1.2d. Corrected here.
-    G3212F = "G3_2_1_2f"  # mislabeled in the standard as G3.1.1.2e. Corrected here.
+    G3212A = "G3_2_1_2a"  # exception for zones with different peak internal loads
+    G3212B = "G3_2_1_2b"  # exception for laboratory exhaust
+    G3212C = "G3_2_1_2c"  # exception for heating-only stairwells, vestibules, etc
+    G3212D = "G3_2_1_2d"  # exception for heating-only zones with cooling in proposed design
+    G3212E = "G3_2_1_2e"  # exception for computer rooms. mislabeled in the standard as a duplicated G3.1.1.2d. Corrected here to e.
+    G3212F = "G3_2_1_2f"  # exception for residential-associated zones. Corrected here to f due to mis-labelling above.
 
 
 @memoize

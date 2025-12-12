@@ -45,7 +45,7 @@ def get_lab_zone_hvac_systems(
     building_lab_zones = [
         zone_id_b
         for zone_id_b in target_baseline_systems
-        if target_baseline_systems[zone_id_b]["system_origin"] == SYSTEMORIGIN.G311D
+        if target_baseline_systems[zone_id_b]["system_origin"] == SYSTEMORIGIN.G3212B
     ]
 
     hvac_systems_serving_lab_zones: HVACServeLabZoneDict = {
