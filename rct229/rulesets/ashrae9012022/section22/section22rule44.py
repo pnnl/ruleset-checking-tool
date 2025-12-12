@@ -41,13 +41,13 @@ class PRM9012022Rule43f22(RuleDefinitionListIndexedBase):
         rmd_p = context.PROPOSED
 
         return {
-            "non_process_chw_coil_loop_list_p": [
-                cooling_chw_loop
-                for cooling_chw_loop in find_all(
-                    "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].cooling_system.chilled_water_loop",
-                    rmd_p,
-                )
-            ]
+            "non_process_chw_coil_loop_list_p": find_all(
+                f'$.fluid_loops[*][?(@.type="COOLING")].id', rmd_p
+            )
+            + find_all(
+                f'$.fluid_loops[*][?(@.type="COOLING")].child_loops[*][?(@.type="COOLING")].id',
+                rmd_p,
+            )
         }
 
     class ChillerRule(RuleDefinitionBase):
