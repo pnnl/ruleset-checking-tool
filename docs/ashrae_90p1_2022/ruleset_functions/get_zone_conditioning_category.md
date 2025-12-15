@@ -124,8 +124,6 @@ Logic:
 
 - For each building segment: `for building_segment in RMD...building_segments:`
 
-  - Determine if segment is a hospital: `segment_is_hospital = (building_segment.lighting_building_area_type == "HOSPITAL")`
-
   - For each zone in segment: `for zone in building_segment.zones:`
 
     - Get zone id: `zone_id = zone.id`  
@@ -152,7 +150,7 @@ Logic:
 
     - Only consider conditioned non-residential zones: `if zone_conditioning_category_dict[zone.id] != "CONDITIONED NON-RESIDENTIAL": continue`
 
-    - Get floor name: `floor = zone.floor_name\`  
+    - Get floor name: `floor = zone.floor_name`  
 
     - Get residential conditioned floor areas: `res_area = floor_summary[floor]["residential_conditioned_area"]`
     
