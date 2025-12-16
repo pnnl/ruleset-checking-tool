@@ -41,7 +41,8 @@
                                                         "fan": {
                                                             "id": "Terminal Fan 1",
                                                             "design_airflow": 141.58423295999995,
-                                                            "design_electric_power": 105
+                                                            "design_electric_power": 105,
+                                                            "specification_method": "SIMPLE"
                                                         },
                                                         "fan_configuration": "PARALLEL",
                                                         "primary_airflow": 283.1684659199999
@@ -60,7 +61,8 @@
                                                         "fan": {
                                                             "id": "Terminal Fan 2",
                                                             "design_airflow": 94.38948863999997,
-                                                            "design_electric_power": 70
+                                                            "design_electric_power": 70,
+                                                            "specification_method": "SIMPLE"
                                                         },
                                                         "fan_configuration": "PARALLEL",
                                                         "primary_airflow": 188.77897727999994
@@ -147,7 +149,8 @@
                                                         "fan": {
                                                             "id": "Terminal Fan 1",
                                                             "design_airflow": 141.58423295999995,
-                                                            "design_electric_power": 150
+                                                            "design_electric_power": 150,
+                                                            "specification_method": "SIMPLE"
                                                         },
                                                         "fan_configuration": "PARALLEL",
                                                         "primary_airflow": 212.37634943999993
@@ -166,7 +169,8 @@
                                                         "fan": {
                                                             "id": "Terminal Fan 2",
                                                             "design_airflow": 94.38948863999997,
-                                                            "design_electric_power": 80
+                                                            "design_electric_power": 80,
+                                                            "specification_method": "SIMPLE"
                                                         },
                                                         "fan_configuration": "PARALLEL",
                                                         "primary_airflow": 160.46213068799995
@@ -253,7 +257,8 @@
                                                         "fan": {
                                                             "id": "Terminal Fan 1",
                                                             "design_airflow": 141.58423295999995,
-                                                            "design_electric_power": 105
+                                                            "design_electric_power": 105,
+                                                            "specification_method": "SIMPLE"
                                                         },
                                                         "fan_configuration": "PARALLEL",
                                                         "primary_airflow": 283.1684659199999
@@ -272,7 +277,8 @@
                                                         "fan": {
                                                             "id": "Terminal Fan 2",
                                                             "design_airflow": 94.38948863999997,
-                                                            "design_electric_power": 70
+                                                            "design_electric_power": 70,
+                                                            "specification_method": "SIMPLE"
                                                         },
                                                         "fan_configuration": "PARALLEL",
                                                         "primary_airflow": 188.77897727999994
@@ -390,7 +396,8 @@
                                                         "fan": {
                                                             "id": "Terminal Fan 1",
                                                             "design_airflow": 141.58423295999995,
-                                                            "design_electric_power": 150
+                                                            "design_electric_power": 150,
+                                                            "specification_method": "SIMPLE"
                                                         },
                                                         "fan_configuration": "PARALLEL",
                                                         "primary_airflow": 283.1684659199999
@@ -409,7 +416,8 @@
                                                         "fan": {
                                                             "id": "Terminal Fan 2",
                                                             "design_airflow": 94.38948863999997,
-                                                            "design_electric_power": 100
+                                                            "design_electric_power": 100,
+                                                            "specification_method": "SIMPLE"
                                                         },
                                                         "fan_configuration": "PARALLEL",
                                                         "primary_airflow": 188.77897727999994

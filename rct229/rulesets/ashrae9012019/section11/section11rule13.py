@@ -12,6 +12,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
     get_swh_uses_associated_with_each_building_segment,
 )
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import CalcQ
 
 APPLICABILITY_MSG = "This building has service water heating loads. Confirm that service water heating energy consumption is calculated explicitly based upon the volume of service water heating required and the entering makeup water and leaving service water heating temperatures.  Entering water temperatures shall be estimated based upon the location. Leaving temperatures shall be based upon the end-use requirements."
 
@@ -147,9 +148,10 @@ class PRM9012019Rule51s51(RuleDefinitionListIndexedBase):
 
                 return {
                     "is_applicable": is_applicable,
-                    "service_water_heating_btu_per_sf_per_year": service_water_heating_info[
-                        "btu_per_sf_per_year"
-                    ],
+                    "service_water_heating_btu_per_sf_per_year": CalcQ(
+                        "energy_density",
+                        service_water_heating_info["btu_per_sf_per_year"],
+                    ),
                 }
 
             def applicability_check(self, context, calc_vals, data):

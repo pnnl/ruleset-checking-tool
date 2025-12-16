@@ -70,15 +70,15 @@ class PRM9012019Rule86h31(RuleDefinitionBase):
 
         assert_(
             len(pbp_set) >= 1,
-            "Ruleset expects exactly one PBP value to be used in the project.",
+            "Ruleset expects exactly one 'total_proposed_building_energy_cost_including_renewable_energy' value to be used in the project.",
         )
         assert_(
             len(bbp_set) >= 1,
-            "Ruleset expects exactly one BBP value to be used in the project.",
+            "Ruleset expects exactly one 'baseline_building_performance_energy_cost' value to be used in the project.",
         )
         assert_(
             len(pbp_nre_set) >= 1,
-            "Ruleset expects exactly one PBP_nre value to be used in the project.",
+            "Ruleset expects exactly one 'total_proposed_building_energy_cost_excluding_renewable_energy' value to be used in the project.",
         )
         assert_(
             bbp_set[0] > 0,
@@ -141,11 +141,11 @@ class PRM9012019Rule86h31(RuleDefinitionBase):
 
         assert_(
             len(pci_set) >= 1,
-            "Ruleset expects exactly one PCI value to be used in the project.",
+            "Ruleset expects exactly one 'performance_cost_index' value to be used in the project.",
         )
         assert_(
             len(pci_target_set) >= 1,
-            "Ruleset expects exactly one PCI Target value to be used in the project.",
+            "Ruleset expects exactly one 'performance_cost_index_target' value to be used in the project.",
         )
 
         return {

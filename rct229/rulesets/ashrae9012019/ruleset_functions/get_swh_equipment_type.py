@@ -101,6 +101,8 @@ def get_swh_equipment_type(rmd: dict, service_water_heating_equipment_id: str) -
                 type = GetSWHEquipmentType.PROPANE_INSTANTANEOUS
             elif fuel_type == ENERGY_SOURCE.FUEL_OIL:
                 type = GetSWHEquipmentType.OIL_INSTANTANEOUS
+            else:
+                type = GetSWHEquipmentType.OTHER
 
         elif swh_tank_type in STORAGE_TYPE:
             if fuel_type == ENERGY_SOURCE.ELECTRICITY:
@@ -111,6 +113,11 @@ def get_swh_equipment_type(rmd: dict, service_water_heating_equipment_id: str) -
                 type = GetSWHEquipmentType.PROPANE_STORAGE
             elif fuel_type == ENERGY_SOURCE.FUEL_OIL:
                 type = GetSWHEquipmentType.OIL_STORAGE
+            else:
+                type = GetSWHEquipmentType.OTHER
+
+        else:
+            type = GetSWHEquipmentType.OTHER
     else:
         type = GetSWHEquipmentType.OTHER
 
