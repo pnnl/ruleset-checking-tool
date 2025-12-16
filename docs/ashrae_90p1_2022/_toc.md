@@ -21,4 +21,7 @@ This approach ensures that changes in the standards are effectively integrated w
 ## Section 21 - Central Heating Hot Water Systems
   * [21-19](section21/Rule21-19.md): Hot-water pumps shall only be enabled when a load exists on the associated hot-water loop.
 
+## Section 22 - Central Chilled Water Systems
+   *[22-42](section22/Rule22-42.md): The sets of performance curves specified in Table J-2 should be used to represent part-load performance of chillers in the baseline building design.
+
 **[Back](../_toc.md)**
