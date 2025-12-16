@@ -11,6 +11,8 @@ __all__ = [
     "section6",
     "section12",
     "section21",
+    "section22",
+    "SHORT_NAME",
     "BASELINE_0",
     "BASELINE_90",
     "BASELINE_180",
@@ -71,6 +73,7 @@ rules_dict = {
     "prm9012022rule86d29": "section6rule13",
     "prm9012022rule23z21": "section12rule5",
     "prm9012022rule93e12": "section21rule19",
+    "prm9012022rule93e20": "section22rule43",
 }
 
 section_list = [
@@ -79,6 +82,7 @@ section_list = [
     "Lighting",
     "Receptacles",
     "HVAC-HotWaterSide",
+    "HVAC-ChilledWaterSide",
 ]
 
 section_dict = {
@@ -86,6 +90,7 @@ section_dict = {
     "6": "Lighting",
     "12": "Receptacles",
     "21": "HVAC-HotWaterSide",
+    "22": "HVAC-ChilledWaterSide",
 }
 
 # Update this field if 2022 uses different term.

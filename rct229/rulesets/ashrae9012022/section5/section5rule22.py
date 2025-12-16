@@ -10,8 +10,11 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_condit
     SurfaceConditioningCategory as SCC,
     get_baseline_surface_conditioning_category_dict,
 )
-from rct229.utils.pint_utils import ZERO
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.assertions import getattr_
+from rct229.utils.pint_utils import ZERO, CalcQ
 
+DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 FAIL_MSG = "Baseline fenestration was modeled with shading projections and/or overhangs, which is incorrect."
 
 
@@ -95,6 +98,12 @@ class PRM9012022Rule50p59(RuleDefinitionListIndexedBase):
                     index_rmd=BASELINE_0,
                 )
 
+            def list_filter(self, context_item, data=None):
+                subsurface_b = context_item.BASELINE_0
+                return subsurface_b["classification"] != DOOR or subsurface_b.get(
+                    "glazed_area", ZERO.AREA
+                ) > subsurface_b.get("opaque_area", ZERO.AREA)
+
             class SubsurfaceRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
@@ -105,16 +114,18 @@ class PRM9012022Rule50p59(RuleDefinitionListIndexedBase):
                             USER=False, BASELINE_0=True, PROPOSED=False
                         ),
                         fail_msg=FAIL_MSG,
-                        required_fields={
-                            "$": ["has_shading_overhang", "has_shading_sidefins"]
-                        },
+                        required_fields={},
                     )
 
                 def get_calc_vals(self, context, data=None):
                     subsurface_b = context.BASELINE_0
                     return {
-                        "has_shading_overhang": subsurface_b["has_shading_overhang"],
-                        "has_shading_sidefins": subsurface_b["has_shading_sidefins"],
+                        "has_shading_overhang": getattr_(
+                            subsurface_b, "Subsurface", "has_shading_overhang"
+                        ),
+                        "has_shading_sidefins": getattr_(
+                            subsurface_b, "Subsurface", "has_shading_sidefins"
+                        ),
                         "depth_of_overhang": subsurface_b.get("depth_of_overhang"),
                     }
 
