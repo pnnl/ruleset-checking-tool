@@ -153,23 +153,17 @@ class PRM9012022Rule44m70(RuleDefinitionListIndexedBase):
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
-                    return (
-                        self.precision_comparison["subsurface_u_factor_b"](
-                            calc_vals["subsurface_u_factor_b"],
-                            calc_vals["subsurface_u_factor_p"],
+                    return all(
+                        calc_vals[f"{key}_b"] == calc_vals[f"{key}_p"]
+                        or self.precision_comparison[f"{key}_b"](
+                            calc_vals[f"{key}_b"], calc_vals[f"{key}_p"]
                         )
-                        and self.precision_comparison["subsurface_shgc_b"](
-                            calc_vals["subsurface_shgc_b"],
-                            calc_vals["subsurface_shgc_p"],
-                        )
-                        and self.precision_comparison["subsurface_glazed_area_b"](
-                            calc_vals["subsurface_glazed_area_b"],
-                            calc_vals["subsurface_glazed_area_p"],
-                        )
-                        and self.precision_comparison["subsurface_opaque_area_b"](
-                            calc_vals["subsurface_opaque_area_b"],
-                            calc_vals["subsurface_opaque_area_p"],
-                        )
+                        for key in [
+                            "subsurface_u_factor",
+                            "subsurface_shgc",
+                            "subsurface_glazed_area",
+                            "subsurface_opaque_area",
+                        ]
                     )
 
                 def is_tolerance_fail(self, context, calc_vals=None, data=None):
