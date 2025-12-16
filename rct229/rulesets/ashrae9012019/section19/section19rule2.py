@@ -101,7 +101,7 @@ class PRM9012019Rule93f21(RuleDefinitionListIndexedBase):
                 CHW_fluid_loop_list.append(chilled_water_loop_b)
 
                 if chilled_water_loop_b in find_all(
-                    f'$.fluid_loops[*][?(@.cooling_loop = "{FLUID_LOOP.COOLING}")]',
+                    f'$.fluid_loops[*][?(@.type = "{FLUID_LOOP.COOLING}")].id',
                     rmd_b,
                 ):
                     chiller_b = find_one_with_field_value(
