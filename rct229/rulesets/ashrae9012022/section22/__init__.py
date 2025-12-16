@@ -2,14 +2,8 @@
 import importlib
 
 __all__ = [
-    "section12rule1",
-    "section12rule2",
-    "section12rule3",
-    "section12rule4",
-    "section12rule5",
+    "section22rule42",
 ]
-
-SHORT_NAME = "REC"
 
 
 def __getattr__(name):

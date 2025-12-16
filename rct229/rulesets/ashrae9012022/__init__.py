@@ -11,6 +11,8 @@ __all__ = [
     "section6",
     "section12",
     "section21",
+    "section22",
+    "SHORT_NAME",
     "BASELINE_0",
     "BASELINE_90",
     "BASELINE_180",
@@ -79,6 +81,7 @@ section_list = [
     "Lighting",
     "Receptacles",
     "HVAC-HotWaterSide",
+    "HVAC-ChilledWaterSide",
 ]
 
 section_dict = {
@@ -86,6 +89,7 @@ section_dict = {
     "6": "Lighting",
     "12": "Receptacles",
     "21": "HVAC-HotWaterSide",
+    "22": "HVAC-ChilledWaterSide",
 }
 
 # Update this field if 2022 uses different term.
