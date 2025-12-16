@@ -15,6 +15,7 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_condit
     get_baseline_surface_conditioning_category_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.std_comparisons import std_equal
@@ -237,7 +238,6 @@ class PRM9012022Rule96n40(RuleDefinitionListIndexedBase):
                     required_fields={
                         "$.subsurfaces[*]": [
                             "classification",
-                            "solar_heat_gain_coefficient",
                         ]
                     },
                     manual_check_required_msg=MANUAL_CHECK_REQUIRED_MSG,
@@ -251,8 +251,8 @@ class PRM9012022Rule96n40(RuleDefinitionListIndexedBase):
             def list_filter(self, context_item, data=None):
                 subsurface_b = context_item.BASELINE_0
                 return subsurface_b["classification"] != DOOR or subsurface_b.get(
-                    ["glazed_area"], ZERO.AREA
-                ) > subsurface_b.get(["opaque_area"], ZERO.AREA)
+                    "glazed_area", ZERO.AREA
+                ) > subsurface_b.get("opaque_area", ZERO.AREA)
 
             class SubsurfaceRule(RuleDefinitionBase):
                 def __init__(self):
@@ -293,7 +293,9 @@ class PRM9012022Rule96n40(RuleDefinitionListIndexedBase):
                     else:
                         assert f"Severe Error: No matching surface category for: {scc}"
                     return {
-                        "subsurface_shgc": subsurface_b["solar_heat_gain_coefficient"],
+                        "subsurface_shgc": getattr_(
+                            subsurface_b, "Subsurface", "solar_heat_gain_coefficient"
+                        ),
                         "target_shgc": target_shgc,
                     }
 
