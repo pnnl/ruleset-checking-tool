@@ -23,5 +23,5 @@ This approach ensures that changes in the standards are effectively integrated w
 
 ## Section 22 - Central Chilled Water Systems
    *[22-42](section22/Rule22-42.md): The sets of performance curves specified in Table J-2 should be used to represent part-load performance of chillers in the baseline building design.
-
+   *[22-43](section22/Rule22-43.md): When using performance curves from Normative Appendix J, chiller minimum part-load ratio (ratio of load to available capacity at a given simulation time step) and minimum compressor unloading ratio (part-load ratio below which the chiller capacity cannot be reduced by unloading and chiller is false loaded) shall be equal to 0.25.
 **[Back](../_toc.md)**
