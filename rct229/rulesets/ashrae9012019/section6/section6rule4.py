@@ -118,6 +118,7 @@ class PRM9012019Rule22l93(RuleDefinitionListIndexedBase):
                     )["lpd"]
 
                     return {
+                        "lighting_space_type_b": space_b.get("lighting_space_type"),
                         "total_space_lpd_b": CalcQ("power_density", total_space_lpd_b),
                         "space_lighting_status_type_p": space_lighting_status_type_p,
                         "lpd_allowance_b": CalcQ("power_density", lpd_allowance_b),
