@@ -41,13 +41,17 @@ class PRM9012022Rule43f22(RuleDefinitionListIndexedBase):
         rmd_p = context.PROPOSED
 
         return {
-            "non_process_chw_coil_loop_list_p": find_all(
-                f'$.fluid_loops[*][?(@.type="COOLING")].id', rmd_p
-            )
-            + find_all(
-                f'$.fluid_loops[*][?(@.type="COOLING")].child_loops[*][?(@.type="COOLING")].id',
-                rmd_p,
-            )
+            "non_process_chw_coil_loop_dict_p": {
+                chw_loop["id"]: [
+                    chw_child_loop_id
+                    for chw_child_loop_id in find_all(
+                        f'$.child_loops[*][?(@.type="COOLING")].id', chw_loop
+                    )
+                ]
+                for chw_loop in find_all(
+                    f'$.fluid_loops[*][?(@.type="COOLING")]', rmd_p
+                )
+            }
         }
 
     class ChillerRule(RuleDefinitionBase):
@@ -64,9 +68,15 @@ class PRM9012022Rule43f22(RuleDefinitionListIndexedBase):
 
         def is_applicable(self, context, data=None):
             chiller_p = context.PROPOSED
-            non_process_chw_coil_loop_list_p = data["non_process_chw_coil_loop_list_p"]
+            cooling_loop_p = chiller_p["cooling_loop"]
+            non_process_chw_coil_loop_dict_p = data["non_process_chw_coil_loop_dict_p"]
 
-            return chiller_p["cooling_loop"] in non_process_chw_coil_loop_list_p
+            return (
+                # Check if chiller primary loop serves hvac systems
+                cooling_loop_p in non_process_chw_coil_loop_dict_p
+                # Check if chiller serves a loop that has child loops and those child loops serve hvac systems
+                or cooling_loop_p in non_process_chw_coil_loop_dict_p[cooling_loop_p]
+            )
 
         def get_calc_vals(self, context, data=None):
             chiller_p = context.PROPOSED
