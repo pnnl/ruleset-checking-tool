@@ -31,6 +31,7 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_13,
 ]
 
+CoolingSystemOptions = SchemaEnums.schema_enums["CoolingSystemOptions"]
 DehumidificationOptions = SchemaEnums.schema_enums["DehumidificationOptions"]
 
 
@@ -89,13 +90,19 @@ class PRM9012019Rule14m33(RuleDefinitionListIndexedBase):
             "hvac_system_zone_with_humidistatic_dict": hvac_system_zone_with_humidistatic_dict,
         }
 
+    def list_filter(self, context_item, data):
+        hvac_p = context_item.PROPOSED
+        return "cooling_system" in hvac_p and hvac_p["cooling_system"].get(
+            "type"
+        ) not in [None, CoolingSystemOptions.NONE]
+
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
             super(PRM9012019Rule14m33.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
-                required_fields={"$": ["cooling_system"]},
+                required_fields={},
             )
 
         def get_calc_vals(self, context, data=None):
