@@ -13,6 +13,7 @@ from rct229.utils.std_comparisons import (
 )
 
 _M2 = ureg("m2")
+_TONS = ureg("tons")
 
 
 def test__std_equal__true_with_units():
@@ -192,6 +193,10 @@ def test__std_equal_with_precision__10_false_with_units():
 
 def test__std_equal_with_precision__10_false_without_units():
     assert not std_equal_with_precision(155, 150, 10)
+
+
+def test__std_equal_with_precision__1_true_with_units():
+    assert std_equal_with_precision(19.47 * _TONS, 19.452 * _TONS, 1 * _TONS)
 
 
 def test__std_conservative_outcome__true_with_units_gt():
