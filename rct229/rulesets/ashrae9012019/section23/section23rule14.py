@@ -92,9 +92,10 @@ class PRM9012019Rule14m33(RuleDefinitionListIndexedBase):
 
     def list_filter(self, context_item, data):
         hvac_p = context_item.PROPOSED
-        return "cooling_system" in hvac_p and hvac_p["cooling_system"].get(
-            "type"
-        ) not in [None, CoolingSystemOptions.NONE]
+        return (
+            "cooling_system" in hvac_p
+            and hvac_p["cooling_system"].get("type") != CoolingSystemOptions.NONE
+        )
 
     class HVACRule(PartialRuleDefinition):
         def __init__(self):
