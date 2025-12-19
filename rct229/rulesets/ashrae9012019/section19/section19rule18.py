@@ -298,7 +298,7 @@ class PRM9012019Rule49c09(RuleDefinitionListIndexedBase):
             black_word = (
                 ""
                 if more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
-                else "energy recovery"
+                else "energy recovery and "
             )
 
             if (
@@ -313,8 +313,8 @@ class PRM9012019Rule49c09(RuleDefinitionListIndexedBase):
                 undetermined_msg = (
                     f"Fan power for {hvac_id_b} is greater than expected per Section and Table G3.1.2.9 assuming no pressure drop adjustments (e.g., sound attenuation, air filtration, fully ducted return "
                     f"when required by code, airflow control devices, carbon and other gas-phase air cleaners, coil runaround loops, evaporative humidifier/coolers in series with another cooling coil, "
-                    f"exhaust systems serving fume hoods, and laboratory and vivarium exhaust systems in high-rise buildings) per Table 6.5.3.1-2 other than {black_word} and "
-                    f"MERV filters defined in the RMD (if modeled). Expected Wattage = {expected_fan_wattage_b.to(ureg.kW)} kW. however not all pressure drop adjustments are able to be captured in the RMD so conduct manual check."
+                    f"exhaust systems serving fume hoods, and laboratory and vivarium exhaust systems in high-rise buildings) per Table 6.5.3.1-2 other than {black_word}"
+                    f"MERV filters defined in the RMD (if modeled). Expected Wattage = {expected_fan_wattage_b.to(ureg.kW)}. however not all pressure drop adjustments are able to be captured in the RMD so conduct manual check."
                 )
 
             return undetermined_msg
