@@ -89,31 +89,33 @@ class PRM9012022Rule43f22(RuleDefinitionListIndexedBase):
                     curve_set_list_p = [J4_CURVE.A, J4_CURVE.K]
                 else:
                     curve_set_list_p = [J4_CURVE.B, J4_CURVE.L]
-            if compressor_type_p in (
-                CHILLER_COMPRESSOR.POSITIVE_DISPLACEMENT,
-                CHILLER_COMPRESSOR.SCROLL,
-                CHILLER_COMPRESSOR.SCREW,
-            ):
-                if rated_capacity_p < 75 * ureg("ton"):
-                    curve_set_list_p = [J4_CURVE.C, J4_CURVE.M]
-                elif rated_capacity_p < 150 * ureg("ton"):
-                    curve_set_list_p = [J4_CURVE.D, J4_CURVE.N]
-                elif rated_capacity_p < 300 * ureg("ton"):
-                    curve_set_list_p = [J4_CURVE.E, J4_CURVE.O]
-                elif rated_capacity_p < 600 * ureg("ton"):
-                    curve_set_list_p = [J4_CURVE.F, J4_CURVE.P]
-                else:
-                    curve_set_list_p = [J4_CURVE.G, J4_CURVE.Q]
 
-            if compressor_type_p == CHILLER_COMPRESSOR.CENTRIFUGAL:
-                if rated_capacity_p < 150 * ureg("ton"):
-                    curve_set_list_p = [J4_CURVE.H, J4_CURVE.R]
-                elif rated_capacity_p < 300 * ureg("ton"):
-                    curve_set_list_p = [J4_CURVE.H, J4_CURVE.S]
-                elif rated_capacity_p < 400 * ureg("ton"):
-                    curve_set_list_p = [J4_CURVE.I, J4_CURVE.T]
-                else:
-                    curve_set_list_p = [J4_CURVE.J, J4_CURVE.U]
+            else:
+                if compressor_type_p in (
+                    CHILLER_COMPRESSOR.POSITIVE_DISPLACEMENT,
+                    CHILLER_COMPRESSOR.SCROLL,
+                    CHILLER_COMPRESSOR.SCREW,
+                ):
+                    if rated_capacity_p < 75 * ureg("ton"):
+                        curve_set_list_p = [J4_CURVE.C, J4_CURVE.M]
+                    elif rated_capacity_p < 150 * ureg("ton"):
+                        curve_set_list_p = [J4_CURVE.D, J4_CURVE.N]
+                    elif rated_capacity_p < 300 * ureg("ton"):
+                        curve_set_list_p = [J4_CURVE.E, J4_CURVE.O]
+                    elif rated_capacity_p < 600 * ureg("ton"):
+                        curve_set_list_p = [J4_CURVE.F, J4_CURVE.P]
+                    else:
+                        curve_set_list_p = [J4_CURVE.G, J4_CURVE.Q]
+
+                if compressor_type_p == CHILLER_COMPRESSOR.CENTRIFUGAL:
+                    if rated_capacity_p < 150 * ureg("ton"):
+                        curve_set_list_p = [J4_CURVE.H, J4_CURVE.R]
+                    elif rated_capacity_p < 300 * ureg("ton"):
+                        curve_set_list_p = [J4_CURVE.H, J4_CURVE.S]
+                    elif rated_capacity_p < 400 * ureg("ton"):
+                        curve_set_list_p = [J4_CURVE.I, J4_CURVE.T]
+                    else:
+                        curve_set_list_p = [J4_CURVE.J, J4_CURVE.U]
 
             design_leaving_condenser_temperature_p = getattr_(
                 chiller_p, "chillers", "design_leaving_condenser_temperature"
