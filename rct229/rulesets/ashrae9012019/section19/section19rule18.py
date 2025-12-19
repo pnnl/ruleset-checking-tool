@@ -25,7 +25,7 @@ from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 ENERGY_RECOVERY = SchemaEnums.schema_enums["EnergyRecoveryOptions"]
@@ -266,9 +266,9 @@ class PRM9012019Rule49c09(RuleDefinitionListIndexedBase):
             return {
                 "exactly_one_supply_fan": exactly_one_supply_fan,
                 "more_than_one_exhaust_fan_and_energy_rec_is_relevant_b": more_than_one_exhaust_fan_and_energy_rec_is_relevant_b,
-                "total_fan_power_b": total_fan_power_b,
-                "expected_fan_wattage_b": expected_fan_wattage_b,
-                "min_fan_wattage_b": min_fan_wattage_b,
+                "total_fan_power_b": CalcQ("capacity", total_fan_power_b),
+                "expected_fan_wattage_b": CalcQ("capacity", expected_fan_wattage_b),
+                "min_fan_wattage_b": CalcQ("capacity", min_fan_wattage_b),
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
@@ -301,7 +301,6 @@ class PRM9012019Rule49c09(RuleDefinitionListIndexedBase):
                 else "energy recovery"
             )
 
-            undetermined_msg = ""
             if (
                 not exactly_one_supply_fan
                 or more_than_one_exhaust_fan_and_energy_rec_is_relevant_b
@@ -339,10 +338,12 @@ class PRM9012019Rule49c09(RuleDefinitionListIndexedBase):
             )
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
+            hvac_b = context.BASELINE_0
+            hvac_id_b = hvac_b["id"]
             total_fan_power_b = calc_vals["total_fan_power_b"]
             min_fan_wattage_b = calc_vals["min_fan_wattage_b"]
 
             return (
-                f"The total fan power for <insert hvac.id> is modeled as {total_fan_power_b.to(ureg.kW)} kW which is less than the expected including pressure drop adjustments "
-                f"for exhaust air energy recovery and MERV filters as applicable which was calculated as {min_fan_wattage_b.to(ureg.kW)} kW ."
+                f"The total fan power for {hvac_id_b} is modeled as {total_fan_power_b.to(ureg.kW)} which is less than the expected including pressure drop adjustments "
+                f"for exhaust air energy recovery and MERV filters as applicable which was calculated as {min_fan_wattage_b.to(ureg.kW)}."
             )
