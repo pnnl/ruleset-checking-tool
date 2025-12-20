@@ -246,11 +246,20 @@ def does_chiller_performance_match_curve(chiller: dict, curve_set: str) -> bool:
                             for expected_plr in EXPECTED_VALIDATION_PLR
                         ]
                     ):
-                        eir_plr = (
-                            plr_coefficients[0]
-                            + plr_coefficients[1] * plr
-                            + plr_coefficients[2] * plr**2
-                        )
+                        if len(plr_coefficients) == 3:
+                            eir_plr = (
+                                plr_coefficients[0]
+                                + plr_coefficients[1] * plr
+                                + plr_coefficients[2] * plr**2
+                            )
+                        elif len(plr_coefficients) == 4:
+                            eir_plr = (
+                                plr_coefficients[0]
+                                + plr_coefficients[1] * plr
+                                + plr_coefficients[2] * plr**2
+                                + plr_coefficients[3] * plr**3
+                            )
+
                         eir_ft = (
                             eir_f_t_coefficients[0]
                             + eir_f_t_coefficients[1] * chwt
