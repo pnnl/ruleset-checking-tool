@@ -3933,6 +3933,12 @@
                     "units": "C",
                     "notes": "The temperature entering the condenser portion of the chiller at design conditions. The design outside air dry-bulb temperature for air cooled chillers or design entering condenser water temperature for water cooled chillers. This should correpond with the design_capacity and the FULL_LOAD_EFFICIENCY_DESIGN and NONSTANDARD_PART_LOAD_VALUE. The element should describe the value during cooling mode operation for chillers even for chillers that operate in multiple modes."
                 },
+                "design_leaving_condenser_temperature": {
+                    "description": "Design leaving condenser temperature",
+                    "type": "number",
+                    "units": "C",
+                    "notes": "The temperature leaving the condenser portion of the chiller at design conditions. The design outside air dry-bulb temperature for air cooled chillers or design entering condenser water temperature for water cooled chillers. This should correpond with the design_capacity and the FULL_LOAD_EFFICIENCY_DESIGN and NONSTANDARD_PART_LOAD_VALUE. The element should describe the value during cooling mode operation for chillers even for chillers that operate in multiple modes."
+                },
                 "design_leaving_evaporator_temperature": {
                     "description": "Design leaving evaporator temperature",
                     "type": "number",
