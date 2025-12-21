@@ -19,6 +19,7 @@ _UNIT_LIST = [
     "W",
     "m3",
     "m2",
+    "m",
     "W/m2",
     "W/(m2*K)",
     "W/(m*K)",
@@ -30,6 +31,7 @@ _UNIT_LIST = [
     "ft3",
     "ft2",
     "W/ft2",
+    "Btu/ft2",
     "Btu/(hr*ft2*R)",
     "Btu/(hr*ft*R)",
     "ton",
@@ -40,6 +42,8 @@ _UNIT_LIST = [
     "W/gpm",
     "W/gpm",
     "cfm",
+    "people/kft2",
+    "hr",
 ]
 
 _UNIT_CONVENTIONS = {
@@ -49,6 +53,7 @@ _UNIT_CONVENTIONS = {
         "volume": "m3",
         "tank_volume": "L",
         "area": "m2",
+        "length": "m",
         "area_occ_density": "people/km2",
         "power_density": "W/m2",
         "thermal_transmittance": "W/(m2*K)",
@@ -64,6 +69,8 @@ _UNIT_CONVENTIONS = {
         "power_per_liquid_flow_rate": "W-s/L",
         "power_per_volume": "W/L3",
         "air_flow_rate": "L/s",
+        "flow_per_area": "L/(s*m2)",
+        "time": "s",
     },
     UNIT_SYSTEM.IP: {
         "transformer_capacity": "V*A",
@@ -71,8 +78,10 @@ _UNIT_CONVENTIONS = {
         "volume": "ft3",
         "tank_volume": "gallon",
         "area": "ft2",
+        "length": "ft",
         "area_occ_density": "people/kft2",
         "power_density": "W/ft2",
+        "energy_density": "Btu/ft2",
         "thermal_transmittance": "Btu/(hr*ft2*R)",
         "linear_thermal_transmittance": "Btu/(hr*ft*R)",
         "cooling_capacity": "ton",
@@ -86,6 +95,8 @@ _UNIT_CONVENTIONS = {
         "power_per_liquid_flow_rate": "W/gpm",
         "power_per_volume": "Btu/h/gallon",
         "air_flow_rate": "cfm",
+        "flow_per_area": "cfm/ft2",
+        "time": "hr",
     },
 }
 

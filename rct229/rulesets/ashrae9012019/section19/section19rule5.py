@@ -2,6 +2,7 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.schema.config import ureg
 from rct229.utils.compare_standard_val import std_le
+from rct229.utils.pint_utils import CalcQ
 
 MAX_COINCIDENT_UNMET_LOAD_HOUR = 300 * ureg("hr")
 MAX_SUM_HEATING_COOLING_UNMET_HOUR = 300 * ureg("hr")
@@ -44,9 +45,11 @@ class PRM9012019Rule75k92(RuleDefinitionBase):
         coincident_unmet_load_hours_p = output_instance_p.get("unmet_load_hours")
 
         return {
-            "unmet_load_hours_heating_p": unmet_load_hours_heating_p,
-            "unmet_load_hours_cooling_p": unmet_load_hours_cooling_p,
-            "coincident_unmet_load_hours_p": coincident_unmet_load_hours_p,
+            "unmet_load_hours_heating_p": CalcQ("time", unmet_load_hours_heating_p),
+            "unmet_load_hours_cooling_p": CalcQ("time", unmet_load_hours_cooling_p),
+            "coincident_unmet_load_hours_p": CalcQ(
+                "time", coincident_unmet_load_hours_p
+            ),
         }
 
     def manual_check_required(self, context, calc_vals, data=None):

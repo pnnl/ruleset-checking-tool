@@ -81,7 +81,7 @@ J6_CURVE_SET = [
 ]
 
 
-def is_chiller_performance_app_j(chiller: dict, curve_set: str) -> bool:
+def does_chiller_performance_match_curve(chiller: dict, curve_set: str) -> bool:
     """
     Evaluates whether the chiller performance curves align with the sets of performance curves specified in Appendix J of ASHRAE 90.1-2022 Appendix G.
 
@@ -213,7 +213,7 @@ def is_chiller_performance_app_j(chiller: dict, curve_set: str) -> bool:
                 given_capacities[dict_key] = given_capacity
 
                 if not std_equal_with_precision(
-                    given_capacity, expected_capacity, 1 * ureg("W")
+                    given_capacity, expected_capacity, 1 * ureg("ton")
                 ):
                     non_matching_capacity_operating_points.append(
                         {"CHWT": chwt, "ECWT": ecwt}
@@ -237,7 +237,7 @@ def is_chiller_performance_app_j(chiller: dict, curve_set: str) -> bool:
 
                     plr = (
                         load / given_capacities[dict_key]
-                    )  # no need to check `given_capacities[dict_key]` = 0.0 (checked in line 95)
+                    )  # already checked `given_capacities[dict_key]` > 0.0
 
                     # plr.m because plr is a "dimensionless" unit
                     if any(
@@ -246,11 +246,20 @@ def is_chiller_performance_app_j(chiller: dict, curve_set: str) -> bool:
                             for expected_plr in EXPECTED_VALIDATION_PLR
                         ]
                     ):
-                        eir_plr = (
-                            plr_coefficients[0]
-                            + plr_coefficients[1] * plr
-                            + plr_coefficients[2] * plr**2
-                        )
+                        if len(plr_coefficients) == 3:
+                            eir_plr = (
+                                plr_coefficients[0]
+                                + plr_coefficients[1] * plr
+                                + plr_coefficients[2] * plr**2
+                            )
+                        elif len(plr_coefficients) == 4:
+                            eir_plr = (
+                                plr_coefficients[0]
+                                + plr_coefficients[1] * plr
+                                + plr_coefficients[2] * plr**2
+                                + plr_coefficients[3] * plr**3
+                            )
+
                         eir_ft = (
                             eir_f_t_coefficients[0]
                             + eir_f_t_coefficients[1] * chwt
@@ -268,7 +277,7 @@ def is_chiller_performance_app_j(chiller: dict, curve_set: str) -> bool:
                         )
 
                         if not std_equal_with_precision(
-                            given_power, expected_power, 1 * ureg("W")
+                            given_power, expected_power, 1 * ureg("ton")
                         ):
                             non_matching_power_operating_points.append(
                                 {"CHWT": chwt, "ECWT": ecwt, "PLR": "ALL"}

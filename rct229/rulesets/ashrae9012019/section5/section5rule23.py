@@ -2,6 +2,8 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.utils.assertions import assert_
+from rct229.utils.jsonpath_utils import find_all
 
 
 class PRM9012019Rule11q41(RuleDefinitionListIndexedBase):
@@ -32,6 +34,25 @@ class PRM9012019Rule11q41(RuleDefinitionListIndexedBase):
                 each_rule=PRM9012019Rule11q41.BuildingRule.SubsurfaceRule(),
                 index_rmd=BASELINE_0,
             )
+
+        def create_data(self, context, data):
+            rmd_b = context.BASELINE_0
+            rmd_p = context.PROPOSED
+
+            models_missing_data = []
+
+            if not find_all("$..has_manual_interior_shades", rmd_b):
+                models_missing_data.append(
+                    "No subsurfaces in the baseline model contain the 'has_manual_interior_shades' data. "
+                )
+
+            if not find_all("$..has_manual_interior_shades", rmd_p):
+                models_missing_data.append(
+                    "No subsurfaces in the proposed model contain the 'has_manual_interior_shades' data. "
+                )
+
+            assert_(not models_missing_data, "\n".join(models_missing_data))
+            return {}
 
         class SubsurfaceRule(RuleDefinitionBase):
             def __init__(self):

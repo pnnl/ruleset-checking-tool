@@ -27,7 +27,7 @@ from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all, find_one
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 from rct229.utils.utility_functions import (
     find_exactly_one_hvac_system,
@@ -248,7 +248,12 @@ class PRM9012019Rule51d17(RuleDefinitionListIndexedBase):
                 "zones_served_by_hvac_has_non_mech_cooling_bool_p": zones_served_by_hvac_has_non_mech_cooling_bool_p,
                 "zone_hvac_has_non_mech_cooling_p": zone_hvac_has_non_mech_cooling_p,
                 "more_than_one_supply_fan_b": more_than_one_supply_fan_b,
-                "fan_power_per_flow_b": fan_power_per_flow_b,
+                "fan_power_per_flow_b": CalcQ(
+                    "power_per_air_flow_rate", fan_power_per_flow_b
+                ),
+                "target_fan_power_per_flow": CalcQ(
+                    "power_per_air_flow_rate", REQ_FAN_POWER_FLOW_RATIO
+                ),
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
@@ -317,8 +322,9 @@ class PRM9012019Rule51d17(RuleDefinitionListIndexedBase):
             return (
                 not zone_hvac_has_non_mech_cooling_p
                 and not zones_served_by_hvac_has_non_mech_cooling_bool_p
+                and fan_power_per_flow_b > REQ_FAN_POWER_FLOW_RATIO
                 and std_equal(REQ_FAN_POWER_FLOW_RATIO, fan_power_per_flow_b)
-            ) or (fan_power_per_flow_b < REQ_FAN_POWER_FLOW_RATIO)
+            )
 
         def get_fail_msg(self, context, calc_vals=None, data=None):
             hvac_b = context.BASELINE_0
@@ -332,6 +338,6 @@ class PRM9012019Rule51d17(RuleDefinitionListIndexedBase):
                 not more_than_one_supply_fan_b
                 and fan_power_per_flow_b < REQ_FAN_POWER_FLOW_RATIO
             ):
-                fail_msg = f"Rule evaluation fails with a conservative outcome. The fan power airflow (W/cfm) for {hvac_id_b} is modeled as {fan_power_per_flow_b.magnitude} W/cfm which is less than the expected W/cfm."
+                fail_msg = f"Rule evaluation fails with a conservative outcome. The fan power airflow (W/cfm) for {hvac_id_b} is modeled as {round(fan_power_per_flow_b.magnitude, 4)} W/cfm which is less than the expected W/cfm."
 
             return fail_msg

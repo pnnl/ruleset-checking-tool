@@ -246,6 +246,7 @@ The structure is designed to provide complete coverage of the ASHRAE 90.1-2019 r
   * [6-7](section6/Rule6-7.md): Proposed building is modeled with daylighting controls
   * [6-8](section6/Rule6-8.md): Proposed building is modeled with additional occupancy sensor controls using occupancy sensor schedule reduction factors specified in Table G3.7.  
   * [6-9](section6/Rule6-9.md): Proposed building is modeled with other programmable lighting controls through a 10% schedule reduction in buildings less than 5,000sq.ft.  
+  * [6-10](section6/Rule6-10.md): Where retail display lighting is included in the proposed building design in accordance with Section 9.5.2.2(b), the baseline building design retail display lighting additional power shall be equal to the limits established by Section 9.5.2.2(b) or same as proposed, whichever is less.  
 
 ## Section 10 - Airside systems
   * [10-1](section10/10-1.md): When the proposed design includes humidification and complies with Section 6.5.2.4, then the baseline building design shall use nonadiabatic humidification. When the proposed design includes humidification and does not comply with Section 6.5.2.4 then the baseline building design shall use adiabatic humidification.

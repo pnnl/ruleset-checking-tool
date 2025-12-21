@@ -1,6 +1,9 @@
 import subprocess
 import ast
 import astor
+import re
+import csv
+import importlib
 from pathlib import Path
 
 import rct229.rulesets as rulesets
@@ -133,5 +136,137 @@ def update_class_id_attributes(class_node, correct_id):
     return modified
 
 
+def _module_has_non_primary_rule(module_name: str) -> bool:
+    """
+    Parse the module's AST and return True if any rule-class __init__ calls
+    super().__init__(..., is_primary_rule=False).
+    """
+    try:
+        module = importlib.import_module(module_name)
+    except Exception:
+        return False
+
+    module_file = getattr(module, "__file__", None)
+    # Only parse source files
+    if not module_file or not module_file.endswith(".py"):
+        return False
+
+    try:
+        with open(module_file, "r", encoding="utf-8") as f:
+            tree = ast.parse(f.read(), filename=module_file)
+    except Exception:
+        return False
+
+    # Names that identify rule base classes by simple name
+    RULE_BASE_NAMES = {
+        "RuleDefinitionBase",
+        "RuleDefinitionListBase",
+        "RuleDefinitionListIndexedBase",
+        "PartialRuleDefinition",
+    }
+
+    def _is_rule_class(class_node: ast.ClassDef) -> bool:
+        for base in class_node.bases:
+            # Handles simple "BaseName" and qualified "pkg.BaseName"
+            if isinstance(base, ast.Name) and base.id in RULE_BASE_NAMES:
+                return True
+            if (
+                isinstance(base, ast.Attribute)
+                and isinstance(base.attr, str)
+                and base.attr in RULE_BASE_NAMES
+            ):
+                return True
+        return False
+
+    def _const_bool(node) -> object:
+        # py3.8+: ast.Constant; older: ast.NameConstant
+        if isinstance(node, ast.Constant):
+            return node.value if isinstance(node.value, bool) else None
+        if hasattr(ast, "NameConstant") and isinstance(node, ast.NameConstant):
+            return node.value if isinstance(node.value, bool) else None
+        return None
+
+    # Look through rule classes and their __init__ bodies for super().__init__(..., is_primary_rule=...)
+    for class_node in (
+        n for n in ast.walk(tree) if isinstance(n, ast.ClassDef) and _is_rule_class(n)
+    ):
+        # find __init__
+        init_funcs = [
+            b
+            for b in class_node.body
+            if isinstance(b, ast.FunctionDef) and b.name == "__init__"
+        ]
+        for init in init_funcs:
+            for call in ast.walk(init):
+                if isinstance(call, ast.Call):
+                    for kw in call.keywords:
+                        if kw.arg == "is_primary_rule":
+                            val = _const_bool(kw.value)
+                            if not val:
+                                return True  # found a non-primary rule
+    return False
+
+
+def write_rule_info_to_file(ruleset_doc):
+    """
+    Writes a CSV file with the rule evaluation types for each rule in the specified ruleset,
+    using the 'is_primary_rule' keyword passed to super().__init__(...) in the rule class __init__.
+      - is_primary_rule=True or omitted  => "Full"
+      - is_primary_rule=False            => "Applicability"
+    """
+    SchemaStore.set_ruleset(ruleset_doc)
+    SchemaEnums.update_schema_enum()
+    available_rule_definitions = rulesets.__getrules__()
+    rule_map = rulesets.__getrulemap__()
+
+    if not rule_map:
+        raise ValueError(
+            f"Rule map not found. Please define 'rules_dict' mapping in rulesets/{SchemaStore.SELECTED_RULESET}/__init__.py"
+        )
+
+    output_file = Path(__file__).parent / f"{ruleset_doc}_rule_evaluation_types.csv"
+
+    with output_file.open("w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["Section", "Rule #", "Rule Name", "Evaluation Type"])
+
+        for rule_id, rule_class in available_rule_definitions:
+            rule_unique_id_string = str(rule_id)
+            rule_name = rule_map.get(rule_unique_id_string)
+
+            # fallback for case mismatch
+            if not rule_name:
+                for k, v in rule_map.items():
+                    if k.lower() == rule_unique_id_string.lower():
+                        rule_name = v
+                        break
+
+            if not rule_name:
+                print(f"Skipping unknown rule ID: {rule_unique_id_string}")
+                continue
+
+            # Parse section and rule number from rule_name
+            match = re.match(r"section(\d+)rule(\d+)", rule_name, re.IGNORECASE)
+            if not match:
+                print(
+                    f"Could not parse section/rule number from rule name: {rule_name}"
+                )
+                section = rule_number = ""
+            else:
+                section, rule_number = match.groups()
+
+            module_name = rule_class.__module__
+
+            # AST-inspect the module for is_primary_rule=False in any rule class
+            has_non_primary = _module_has_non_primary_rule(module_name)
+
+            evaluation_type = "Applicability" if has_non_primary else "Full"
+            writer.writerow([section, rule_number, rule_name, evaluation_type])
+
+    print(f"Rule evaluation types written to {output_file}")
+
+
 if __name__ == "__main__":
-    renumber_rules(rulesets.RuleSet.ASHRAE9012019_RULESET)
+    # write_rule_info_to_file(rulesets.RuleSet.ASHRAE9012019_RULESET)
+    # renumber_rules(rulesets.RuleSet.ASHRAE9012019_RULESET)
+    pass
