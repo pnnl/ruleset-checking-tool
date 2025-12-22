@@ -1,11 +1,6 @@
-# Add all available rule modules in __all__
 import importlib
 
-__all__ = [
-    "section12rule5",
-]
-
-SHORT_NAME = "REC"
+__all__ = ["ashrae901_2019_summary_report", "ashrae901_2019_detail_report"]
 
 
 def __getattr__(name):
