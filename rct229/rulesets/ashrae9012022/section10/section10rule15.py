@@ -1,11 +1,11 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
+from rct229.rulesets.ashrae9012022 import BASELINE_0
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_hvac_zone_list_w_area_dict import (
     get_hvac_zone_list_w_area_by_rmd_dict,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
 )
 from rct229.schema.schema_enums import SchemaEnums
@@ -15,15 +15,15 @@ from rct229.utils.utility_functions import find_exactly_one_hvac_system
 HUMIDIFICATION = SchemaEnums.schema_enums["HumidificationOptions"]
 
 
-class PRM9012019Rule93u32(RuleDefinitionListIndexedBase):
-    """Rule 15 of ASHRAE 90.1-2019 Appendix G Section 10 (HVAC General)"""
+class PRM9012022Rule93u32(RuleDefinitionListIndexedBase):
+    """Rule 15 of ASHRAE 90.1-2022 Appendix G Section 10 (HVAC General)"""
 
     def __init__(self):
-        super(PRM9012019Rule93u32, self).__init__(
+        super(PRM9012022Rule93u32, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=PRM9012019Rule93u32.ZoneRule(),
+            each_rule=PRM9012022Rule93u32.ZoneRule(),
             index_rmd=BASELINE_0,
             id="10-15",
             description="The proposed design includes humidification and the baseline building design has been modeled with humidification.",
@@ -73,7 +73,7 @@ class PRM9012019Rule93u32(RuleDefinitionListIndexedBase):
 
     class ZoneRule(RuleDefinitionBase):
         def __init__(self):
-            super(PRM9012019Rule93u32.ZoneRule, self).__init__(
+            super(PRM9012022Rule93u32.ZoneRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
