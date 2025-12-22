@@ -1,22 +1,22 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_target_baseline_system import (
+from rct229.rulesets.ashrae9012022 import BASELINE_0
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_target_baseline_system import (
     SYSTEMORIGIN,
     get_zone_target_baseline_system,
 )
 
 
-class PRM9012019Rule00u91(RuleDefinitionListIndexedBase):
-    """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 18 (HVAC - System Zone Assignment)"""
+class PRM9012022Rule00u91(RuleDefinitionListIndexedBase):
+    """Rule 3 of ASHRAE 90.1-2022 Appendix G Section 18 (HVAC - System Zone Assignment)"""
 
     def __init__(self):
-        super(PRM9012019Rule00u91, self).__init__(
+        super(PRM9012022Rule00u91, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=PRM9012019Rule00u91.RuleModelDescriptionRule(),
+            each_rule=PRM9012022Rule00u91.RuleModelDescriptionRule(),
             index_rmd=BASELINE_0,
             id="18-3",
             description="The lab exhaust fan shall be modeled as constant horsepower (kilowatts) reflecting constant-volume stack discharge with outdoor air bypass in the baseline",
@@ -28,7 +28,7 @@ class PRM9012019Rule00u91(RuleDefinitionListIndexedBase):
 
     class RuleModelDescriptionRule(PartialRuleDefinition):
         def __init__(self):
-            super(PRM9012019Rule00u91.RuleModelDescriptionRule, self).__init__(
+            super(PRM9012022Rule00u91.RuleModelDescriptionRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
