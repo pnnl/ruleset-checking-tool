@@ -177,6 +177,20 @@ class RuleDefinitionBase:
         if isinstance(context_or_string, RuleSetModels):
             context = context_or_string
 
+            for ruleset_model in context.get_ruleset_model_types():
+                model_context = context[ruleset_model]
+
+                if isinstance(model_context, dict):
+                    if model_context.get("id"):
+                        outcome["data_group_id"] = model_context["id"]
+                        break
+
+                elif isinstance(model_context, list):
+                    for item in model_context:
+                        if isinstance(item, dict) and item.get("id"):
+                            outcome["data_group_id"] = item["id"]
+                            break
+
             # Check the context for general validity
             context_validity_dict = self.check_context_validity(context, data)
             # If the context is valid, context_validity_dict will be the falsey {}

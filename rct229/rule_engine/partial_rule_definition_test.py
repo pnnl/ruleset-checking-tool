@@ -27,6 +27,7 @@ def test__rule_definition_base__evaluate__with_true_secondary_rule_check():
         data={"outcome": True},
     ) == {
         **DERIVED_RULE_outcome_base,
+        "data_group_id": 1,
         "result": "UNDETERMINED",
         "primary_rule": False,
         "message": "Manual check required message",
@@ -39,6 +40,7 @@ def test__rule_definition_base__evaluate__with_false_secondary_rule_check():
         data={"outcome": False},
     ) == {
         **DERIVED_RULE_outcome_base,
+        "data_group_id": 1,
         "result": "NOT_APPLICABLE",
         "primary_rule": False,
         "message": "Not applicable message",
