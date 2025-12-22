@@ -1,6 +1,6 @@
 import importlib
 
-__all__ = ["ashrae901_2019_summary_report", "ashrae901_2019_detail_report"]
+__all__ = ["ashrae901_2022_summary_report", "ashrae901_2022_detail_report"]
 
 
 def __getattr__(name):
