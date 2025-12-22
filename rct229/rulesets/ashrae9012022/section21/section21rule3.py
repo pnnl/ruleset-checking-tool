@@ -22,25 +22,23 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_12,
     HVAC_SYS.SYS_12A,
 ]
-
 FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
-FLUID_LOOP_OPERATION = SchemaEnums.schema_enums["FluidLoopOperationOptions"]
 
 
-class PRM9012022Rule93e12(RuleDefinitionListIndexedBase):
-    """Rule 19 of ASHRAE 90.1-2022 Appendix G Section 21 (Hot water loop)"""
+class PRM9012022Rule86n98(RuleDefinitionListIndexedBase):
+    """Rule 3 of ASHRAE 90.1-2022 Appendix G Section 23 (Hot water loop)"""
 
     def __init__(self):
-        super(PRM9012022Rule93e12, self).__init__(
+        super(PRM9012022Rule86n98, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=PRM9012022Rule93e12.HeatingFluidLoopRule(),
+            each_rule=PRM9012022Rule86n98.HeatingFluidLoopRule(),
             index_rmd=BASELINE_0,
-            id="21-19",
-            description="Hot-water pumps shall only be enabled when a load exists on the associated hot-water loop.",
+            id="21-3",
+            description="Heating hot water plant capacity shall be based on coincident loads.",
             ruleset_section_title="HVAC - Water Side",
-            standard_section="Section G3.2.3.5",
+            standard_section="Section G3.1.2.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
             list_path="$.fluid_loops[*]",
@@ -64,26 +62,26 @@ class PRM9012022Rule93e12(RuleDefinitionListIndexedBase):
 
     def list_filter(self, context_item, data):
         fluid_loop_b = context_item.BASELINE_0
-
         return getattr_(fluid_loop_b, "FluidLoop", "type") == FLUID_LOOP.HEATING
 
     class HeatingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):
-            super(PRM9012022Rule93e12.HeatingFluidLoopRule, self).__init__(
+            super(PRM9012022Rule86n98.HeatingFluidLoopRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
+                required_fields={
+                    "$": ["heating_design_and_control"],
+                    "$.heating_design_and_control": ["is_sized_using_coincident_load"],
+                },
             )
 
         def get_calc_vals(self, context, data=None):
-            hw_looop_b = context.BASELINE_0
-            hw_design_control_operation_b = getattr_(
-                hw_looop_b, "fluid_loops", "heating_design_and_control", "operation"
-            )
-
-            return {"hw_design_control_operation_b": hw_design_control_operation_b}
+            heating_fluid_loop_b = context.BASELINE_0
+            is_sized_using_coincident_load = heating_fluid_loop_b[
+                "heating_design_and_control"
+            ]["is_sized_using_coincident_load"]
+            return {"is_sized_using_coincident_load": is_sized_using_coincident_load}
 
         def rule_check(self, context, calc_vals=None, data=None):
-            hw_design_control_operation_b = calc_vals["hw_design_control_operation_b"]
-
-            return hw_design_control_operation_b == FLUID_LOOP_OPERATION.INTERMITTENT
+            return calc_vals["is_sized_using_coincident_load"]

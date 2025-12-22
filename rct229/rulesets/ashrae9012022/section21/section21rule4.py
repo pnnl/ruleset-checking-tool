@@ -9,7 +9,6 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_system_types i
     get_baseline_system_types,
 )
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.assertions import getattr_
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -22,28 +21,26 @@ APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_12,
     HVAC_SYS.SYS_12A,
 ]
-
-FLUID_LOOP = SchemaEnums.schema_enums["FluidLoopOptions"]
-FLUID_LOOP_OPERATION = SchemaEnums.schema_enums["FluidLoopOperationOptions"]
+BOILER_COMBUSTION_OPTION = SchemaEnums.schema_enums["BoilerCombustionOptions"]
 
 
-class PRM9012022Rule93e12(RuleDefinitionListIndexedBase):
-    """Rule 19 of ASHRAE 90.1-2022 Appendix G Section 21 (Hot water loop)"""
+class PRM9012022Rule63n48(RuleDefinitionListIndexedBase):
+    """Rule 4 of ASHRAE 90.1-2022 Appendix G Section 21 (Hot water loop)"""
 
     def __init__(self):
-        super(PRM9012022Rule93e12, self).__init__(
+        super(PRM9012022Rule63n48, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=PRM9012022Rule93e12.HeatingFluidLoopRule(),
+            each_rule=PRM9012022Rule63n48.BoilerRule(),
             index_rmd=BASELINE_0,
-            id="21-19",
-            description="Hot-water pumps shall only be enabled when a load exists on the associated hot-water loop.",
+            id="21-4",
+            description="When baseline building does not use purchased heat, baseline systems 1,5,7,11,12 shall be modeled with natural draft boilers.",
             ruleset_section_title="HVAC - Water Side",
-            standard_section="Section G3.2.3.5",
+            standard_section="Section G3.1.3.2 Building System-Specific Modeling Requirements for the Baseline model",
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
-            list_path="$.fluid_loops[*]",
+            list_path="boilers[*]",
         )
 
     def is_applicable(self, context, data=None):
@@ -62,28 +59,22 @@ class PRM9012022Rule93e12(RuleDefinitionListIndexedBase):
             ]
         )
 
-    def list_filter(self, context_item, data):
-        fluid_loop_b = context_item.BASELINE_0
-
-        return getattr_(fluid_loop_b, "FluidLoop", "type") == FLUID_LOOP.HEATING
-
-    class HeatingFluidLoopRule(RuleDefinitionBase):
+    class BoilerRule(RuleDefinitionBase):
         def __init__(self):
-            super(PRM9012022Rule93e12.HeatingFluidLoopRule, self).__init__(
+            super(PRM9012022Rule63n48.BoilerRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
+                required_fields={
+                    "$": ["draft_type"],
+                },
             )
 
         def get_calc_vals(self, context, data=None):
-            hw_looop_b = context.BASELINE_0
-            hw_design_control_operation_b = getattr_(
-                hw_looop_b, "fluid_loops", "heating_design_and_control", "operation"
-            )
-
-            return {"hw_design_control_operation_b": hw_design_control_operation_b}
+            boiler_b = context.BASELINE_0
+            boiler_draft_type_b = boiler_b["draft_type"]
+            return {"boiler_draft_type_b": boiler_draft_type_b}
 
         def rule_check(self, context, calc_vals=None, data=None):
-            hw_design_control_operation_b = calc_vals["hw_design_control_operation_b"]
-
-            return hw_design_control_operation_b == FLUID_LOOP_OPERATION.INTERMITTENT
+            boiler_draft_type_b = calc_vals["boiler_draft_type_b"]
+            return boiler_draft_type_b == BOILER_COMBUSTION_OPTION.NATURAL
