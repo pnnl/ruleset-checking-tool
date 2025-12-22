@@ -1,8 +1,8 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
+from rct229.rulesets.ashrae9012022 import BASELINE_0
+from rct229.rulesets.ashrae9012022.ruleset_functions.compare_schedules import (
     compare_schedules,
 )
 from rct229.schema.schema_enums import SchemaEnums
@@ -30,15 +30,15 @@ FAIL_MSG_CASE_2 = "The baseline miscellaneous equipment schedule has automatic r
 FAIL_MSG_CASE_6 = "Rule evaluation fails with a conservative outcome. The proposed schedule equivalent full load hours is greater than the baseline."
 
 
-class PRM9012019Rule66e91(RuleDefinitionListIndexedBase):
-    """Rule 2 of ASHRAE 90.1-2019 Appendix G Section 12 (Receptacle)"""
+class PRM9012022Rule66e91(RuleDefinitionListIndexedBase):
+    """Rule 2 of ASHRAE 90.1-2022 Appendix G Section 12 (Receptacle)"""
 
     def __init__(self):
-        super(PRM9012019Rule66e91, self).__init__(
+        super(PRM9012022Rule66e91, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=PRM9012019Rule66e91.RMDRule(),
+            each_rule=PRM9012022Rule66e91.RMDRule(),
             index_rmd=BASELINE_0,
             id="12-2",
             description=(
@@ -52,11 +52,11 @@ class PRM9012019Rule66e91(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(PRM9012019Rule66e91.RMDRule, self).__init__(
+            super(PRM9012022Rule66e91.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=PRM9012019Rule66e91.RMDRule.SpaceRule(),
+                each_rule=PRM9012022Rule66e91.RMDRule.SpaceRule(),
                 index_rmd=BASELINE_0,
                 list_path="buildings[*].building_segments[*].zones[*].spaces[*]",
             )
@@ -86,11 +86,11 @@ class PRM9012019Rule66e91(RuleDefinitionListIndexedBase):
 
         class SpaceRule(RuleDefinitionListIndexedBase):
             def __init__(self):
-                super(PRM9012019Rule66e91.RMDRule.SpaceRule, self).__init__(
+                super(PRM9012022Rule66e91.RMDRule.SpaceRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
-                    each_rule=PRM9012019Rule66e91.RMDRule.SpaceRule.MiscellaneousEquipmentRule(),
+                    each_rule=PRM9012022Rule66e91.RMDRule.SpaceRule.MiscellaneousEquipmentRule(),
                     index_rmd=BASELINE_0,
                     list_path="$.miscellaneous_equipment[*]",
                 )
@@ -105,7 +105,7 @@ class PRM9012019Rule66e91(RuleDefinitionListIndexedBase):
             class MiscellaneousEquipmentRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
-                        PRM9012019Rule66e91.RMDRule.SpaceRule.MiscellaneousEquipmentRule,
+                        PRM9012022Rule66e91.RMDRule.SpaceRule.MiscellaneousEquipmentRule,
                         self,
                     ).__init__(
                         rmds_used=produce_ruleset_model_description(
