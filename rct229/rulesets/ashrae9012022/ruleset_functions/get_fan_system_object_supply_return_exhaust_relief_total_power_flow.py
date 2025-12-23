@@ -1,7 +1,7 @@
 from typing import TypedDict
 
 from pint import Quantity
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_power import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_fan_object_electric_power import (
     get_fan_object_electric_power,
 )
 from rct229.utils.jsonpath_utils import find_all

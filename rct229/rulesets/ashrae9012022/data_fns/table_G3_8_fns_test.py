@@ -1,9 +1,9 @@
-from rct229.rulesets.ashrae9012019.data import data
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_8_fns import (
+from rct229.rulesets.ashrae9012022.data import data
+from rct229.rulesets.ashrae9012022.data_fns.table_G3_8_fns import (
     lighting_space_enumeration_to_lpd_space_type_map,
     table_G3_8_lookup,
 )
-from rct229.rulesets.ashrae9012019.data_fns.table_utils import (
+from rct229.rulesets.ashrae9012022.data_fns.table_utils import (
     check_enumeration_to_osstd_match_field_value_map,
 )
 from rct229.schema.config import ureg

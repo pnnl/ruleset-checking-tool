@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.is_economizer_modeled_in_proposed import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.is_economizer_modeled_in_proposed import (
     is_economizer_modeled_in_proposed,
 )
 from rct229.schema.schema_utils import quantify_rmd

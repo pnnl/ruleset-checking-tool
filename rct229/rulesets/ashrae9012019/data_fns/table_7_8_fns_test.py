@@ -2,7 +2,6 @@ import pytest
 import re
 from rct229.rulesets.ashrae9012019.data_fns.table_7_8_fns import table_7_8_lookup
 from rct229.schema.config import ureg
-from rct229.utils.assertions import RCTFailureException
 
 
 # Testing table_7_8------------------------------------------

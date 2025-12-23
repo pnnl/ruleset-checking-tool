@@ -1,5 +1,5 @@
 import pytest
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_power import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_fan_object_electric_power import (
     get_fan_object_electric_power,
 )
 from rct229.schema.config import ureg

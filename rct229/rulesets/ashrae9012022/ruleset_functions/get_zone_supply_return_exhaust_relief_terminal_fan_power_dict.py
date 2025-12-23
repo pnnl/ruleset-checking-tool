@@ -1,16 +1,16 @@
 from typing import TypedDict
 
 from pint import Quantity
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_power import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_fan_object_electric_power import (
     get_fan_object_electric_power,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_power_flow import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_power_flow import (
     get_fan_system_object_supply_return_exhaust_relief_total_power_flow,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
 )
 from rct229.utils.assertions import assert_

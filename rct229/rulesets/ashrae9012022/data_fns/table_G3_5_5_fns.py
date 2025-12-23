@@ -1,7 +1,7 @@
 from typing import List, TypedDict
 
-from rct229.rulesets.ashrae9012019.data import data
-from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entries
+from rct229.rulesets.ashrae9012022.data import data
+from rct229.rulesets.ashrae9012022.data_fns.table_utils import find_osstd_table_entries
 
 
 class AppGAirSysEffTableSearchInfo(TypedDict):

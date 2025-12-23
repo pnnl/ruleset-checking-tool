@@ -1,7 +1,7 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_space_a_computer_room import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.g311_sub_functions.is_space_a_computer_room import (
     is_space_a_computer_room,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_hvac_zone_list_w_area_dict import (
     get_hvac_zone_list_w_area_by_rmd_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums

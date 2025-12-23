@@ -1,5 +1,5 @@
 import pytest
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_min_oa_cfm_sch_zone import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_min_oa_cfm_sch_zone import (
     get_min_oa_cfm_sch_zone,
 )
 from rct229.schema.validate import schema_validate_rpd

@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_1_fns import table_g3_5_1_lookup
+from rct229.rulesets.ashrae9012022.data_fns.table_G3_5_1_fns import table_g3_5_1_lookup
 
 
 # Testing table_3_5_1------------------------------------------

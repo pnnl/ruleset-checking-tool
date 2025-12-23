@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_primarily_serving_comp_room import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_hvac_systems_primarily_serving_comp_room import (
     get_hvac_systems_primarily_serving_comp_room,
 )
 from rct229.schema.schema_utils import quantify_rmd

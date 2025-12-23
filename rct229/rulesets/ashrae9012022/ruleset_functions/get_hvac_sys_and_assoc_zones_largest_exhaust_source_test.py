@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_sys_and_assoc_zones_largest_exhaust_source import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_hvac_sys_and_assoc_zones_largest_exhaust_source import (
     get_hvac_sys_and_assoc_zones_largest_exhaust_source,
 )
 from rct229.schema.config import ureg

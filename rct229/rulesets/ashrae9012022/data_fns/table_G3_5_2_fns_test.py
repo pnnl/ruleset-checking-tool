@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.data_fns.table_G3_5_2_fns import (
+from rct229.rulesets.ashrae9012022.data_fns.table_G3_5_2_fns import (
     HeatPumpEquipmentType,
     RatingCondition,
     table_g3_5_2_lookup,

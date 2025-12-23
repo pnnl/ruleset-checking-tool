@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_serving_zone_health_safety_vent_reqs import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_hvac_systems_serving_zone_health_safety_vent_reqs import (
     get_hvac_systems_serving_zone_health_safety_vent_reqs,
 )
 from rct229.schema.schema_utils import quantify_rmd

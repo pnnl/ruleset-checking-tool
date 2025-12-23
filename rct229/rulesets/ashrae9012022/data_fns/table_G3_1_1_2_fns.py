@@ -1,5 +1,5 @@
-from rct229.rulesets.ashrae9012019.data import data
-from rct229.rulesets.ashrae9012019.data_fns.table_utils import find_osstd_table_entry
+from rct229.rulesets.ashrae9012022.data import data
+from rct229.rulesets.ashrae9012022.data_fns.table_utils import find_osstd_table_entry
 
 
 def table_g3_1_2_lookup(building_area_type: str) -> dict[str:str]:

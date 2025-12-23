@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_supply_return_exhaust_relief_terminal_fan_power_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_supply_return_exhaust_relief_terminal_fan_power_dict import (
     get_zone_supply_return_exhaust_relief_terminal_fan_power_dict,
 )
 from rct229.schema.config import ureg

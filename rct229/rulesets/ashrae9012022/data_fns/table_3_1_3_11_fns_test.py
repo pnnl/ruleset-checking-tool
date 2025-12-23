@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.data_fns.table_3_1_3_11_fns import (
+from rct229.rulesets.ashrae9012022.data_fns.table_3_1_3_11_fns import (
     table_3_1_3_11_lookup,
 )
 from rct229.schema.config import ureg

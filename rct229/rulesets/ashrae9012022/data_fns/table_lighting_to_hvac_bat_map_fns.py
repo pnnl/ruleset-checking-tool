@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.data import data
+from rct229.rulesets.ashrae9012022.data import data
 from rct229.utils.assertions import assert_
 
 

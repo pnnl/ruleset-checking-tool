@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_proposed_hvac_modeled_with_virtual_cooling import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_proposed_hvac_modeled_with_virtual_cooling import (
     get_proposed_hvac_modeled_with_virtual_cooling,
 )
 from rct229.schema.schema_utils import quantify_rmd
