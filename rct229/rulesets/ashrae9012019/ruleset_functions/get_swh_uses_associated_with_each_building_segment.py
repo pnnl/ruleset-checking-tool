@@ -1,4 +1,3 @@
-from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.utility_functions import find_exactly_one_service_water_heating_use
 

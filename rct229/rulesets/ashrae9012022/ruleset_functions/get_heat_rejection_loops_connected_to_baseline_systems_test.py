@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_heat_rejection_loops_connected_to_baseline_systems import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_heat_rejection_loops_connected_to_baseline_systems import (
     get_heat_rejection_loops_connected_to_baseline_systems,
 )
 from rct229.schema.schema_utils import quantify_rmd

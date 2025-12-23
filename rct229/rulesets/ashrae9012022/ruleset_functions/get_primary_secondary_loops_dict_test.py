@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_primary_secondary_loops_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_primary_secondary_loops_dict import (
     get_primary_secondary_loops_dict,
 )
 from rct229.schema.schema_utils import quantify_rmd

@@ -166,27 +166,30 @@ def get_zone_target_baseline_system(
         if does_zone_meet_g3_1_1c(rmd_b, zone_id_b, zones_and_systems_b):
             zones_and_systems_b[zone_id_b] = {
                 "system_origin": SYSTEMORIGIN.G311C,
-                "expected_system_type": HVAC_SYS.SYS_4
-                if is_cz_0_to_3a_result_bool
-                else HVAC_SYS.SYS_3,
+                "expected_system_type": (
+                    HVAC_SYS.SYS_4 if is_cz_0_to_3a_result_bool else HVAC_SYS.SYS_3
+                ),
             }
 
         # G3.1.1d
         if does_zone_meet_g3_1_1d(rmd_b, zone_id_b):
             zones_and_systems_b[zone_id_b] = {
                 "system_origin": SYSTEMORIGIN.G311D,
-                "expected_system_type": HVAC_SYS.SYS_5
-                if num_floors_b < REQ_FL_6 and floor_area_b < BUILDING_AREA_150000_ft2
-                else HVAC_SYS.SYS_7,
+                "expected_system_type": (
+                    HVAC_SYS.SYS_5
+                    if num_floors_b < REQ_FL_6
+                    and floor_area_b < BUILDING_AREA_150000_ft2
+                    else HVAC_SYS.SYS_7
+                ),
             }
 
         # G3.1.1e
         if does_zone_meet_g3_1_1e(rmd_b, rmd_p, zone_id_b):
             zones_and_systems_b[zone_id_b] = {
                 "system_origin": SYSTEMORIGIN.G311E,
-                "expected_system_type": HVAC_SYS.SYS_10
-                if is_cz_0_to_3a_result_bool
-                else HVAC_SYS.SYS_9,
+                "expected_system_type": (
+                    HVAC_SYS.SYS_10 if is_cz_0_to_3a_result_bool else HVAC_SYS.SYS_9
+                ),
             }
 
         # G3.1.1f
@@ -232,9 +235,9 @@ def get_zone_target_baseline_system(
                 }
             else:
                 zones_and_systems_b[zone_id_b] = {
-                    "expected_system_type": HVAC_SYS.SYS_4
-                    if is_cz_0_to_3a_result_bool
-                    else HVAC_SYS.SYS_3,
+                    "expected_system_type": (
+                        HVAC_SYS.SYS_4 if is_cz_0_to_3a_result_bool else HVAC_SYS.SYS_3
+                    ),
                     "system_origin": "G3_1_1g_part3",
                 }
 

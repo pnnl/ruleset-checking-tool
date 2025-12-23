@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.check_purchased_chw_hhw_status_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.check_purchased_chw_hhw_status_dict import (
     check_purchased_chw_hhw_status_dict,
 )
 from rct229.schema.validate import schema_validate_rpd

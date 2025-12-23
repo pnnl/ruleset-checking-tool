@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_components_associated_with_each_swh_bat import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_swh_components_associated_with_each_swh_bat import (
     get_swh_components_associated_with_each_swh_bat,
 )
 

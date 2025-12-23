@@ -1,13 +1,12 @@
 from dataclasses import dataclass, field
 from typing import List
 
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_swh_bat import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_segment_swh_bat import (
     get_building_segment_swh_bat,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_energy_required_to_heat_swh_use import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_energy_required_to_heat_swh_use import (
     get_energy_required_to_heat_swh_use,
 )
-from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (

@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_hw_loop_zone_list_w_area_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_hw_loop_zone_list_w_area_dict import (
     get_hw_loop_zone_list_w_area,
 )
 from rct229.schema.config import ureg

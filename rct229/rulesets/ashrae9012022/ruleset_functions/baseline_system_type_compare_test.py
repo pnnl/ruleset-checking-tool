@@ -1,8 +1,8 @@
 import pytest
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
 from rct229.utils.assertions import RCTException

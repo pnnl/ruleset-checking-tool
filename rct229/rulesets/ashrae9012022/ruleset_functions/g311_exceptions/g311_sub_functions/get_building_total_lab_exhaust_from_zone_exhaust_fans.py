@@ -1,5 +1,5 @@
 from pint import Quantity
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_building_lab_zones_list import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.g311_sub_functions.get_building_lab_zones_list import (
     get_building_lab_zones_list,
 )
 from rct229.utils.jsonpath_utils import find_all

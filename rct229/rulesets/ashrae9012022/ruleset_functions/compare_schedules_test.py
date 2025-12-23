@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.compare_schedules import (
     compare_schedules,
 )
 from rct229.utils.assertions import RCTFailureException

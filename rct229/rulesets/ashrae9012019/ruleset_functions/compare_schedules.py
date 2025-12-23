@@ -1,6 +1,5 @@
-from typing import TypedDict, List
+from typing import TypedDict
 
-from rct229.rule_engine.rulesets import LeapYear
 from rct229.utils.assertions import assert_
 
 

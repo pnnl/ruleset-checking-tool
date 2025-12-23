@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_building_total_lab_exhaust_from_zone_exhaust_fans import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.g311_sub_functions.get_building_total_lab_exhaust_from_zone_exhaust_fans import (
     get_building_total_lab_exhaust_from_zone_exhaust_fans,
 )
 from rct229.schema.config import ureg

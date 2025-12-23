@@ -1,8 +1,8 @@
-from rct229.rulesets.ashrae9012019.data_fns.extra_schema_fns import (
+from rct229.rulesets.ashrae9012022.data_fns.extra_schema_fns import (
     EXTRA_SCHEMA,
     compare_context_pair,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_associated_with_each_swh_distriubtion_system import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_swh_equipment_associated_with_each_swh_distriubtion_system import (
     get_swh_equipment_associated_with_each_swh_distribution_system,
 )
 from rct229.utils.utility_functions import (

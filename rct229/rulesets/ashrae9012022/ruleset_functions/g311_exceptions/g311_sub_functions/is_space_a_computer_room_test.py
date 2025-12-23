@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_space_a_computer_room import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.g311_sub_functions.is_space_a_computer_room import (
     is_space_a_computer_room,
 )
 from rct229.schema.schema_utils import quantify_rmd

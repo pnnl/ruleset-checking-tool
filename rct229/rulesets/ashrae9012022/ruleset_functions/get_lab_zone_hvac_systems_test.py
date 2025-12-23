@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_lab_zone_hvac_systems import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_lab_zone_hvac_systems import (
     get_lab_zone_hvac_systems,
 )
 from rct229.schema.schema_utils import quantify_rmd

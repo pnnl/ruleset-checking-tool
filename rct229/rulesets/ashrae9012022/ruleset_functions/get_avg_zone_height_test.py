@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_avg_zone_height import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_avg_zone_height import (
     get_avg_zone_height,
 )
 from rct229.schema.config import ureg

@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.is_zone_likely_a_vestibule import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.g311_sub_functions.is_zone_likely_a_vestibule import (
     is_zone_likely_a_vestibule,
 )
 from rct229.schema.schema_utils import quantify_rmd

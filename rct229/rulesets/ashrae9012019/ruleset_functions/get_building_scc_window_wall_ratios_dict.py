@@ -105,19 +105,24 @@ def get_building_scc_window_wall_ratios_dict(
                 assert scc == SCC.UNREGULATED
 
     return {
-        getattr(SCC, "EXTERIOR_RESIDENTIAL"): total_res_window_area
-        / total_res_wall_area
-        if total_res_wall_area > 0
-        else 0,
-        getattr(SCC, "EXTERIOR_NON_RESIDENTIAL"): total_nonres_window_area
-        / total_nonres_wall_area
-        if total_nonres_wall_area > 0
-        else 0,
-        getattr(SCC, "EXTERIOR_MIXED"): total_mixed_window_area / total_mixed_wall_area
-        if total_mixed_wall_area > 0
-        else 0,
-        getattr(SCC, "SEMI_EXTERIOR"): total_semi_exterior_window_area
-        / total_semi_exterior_wall_area
-        if total_semi_exterior_wall_area > 0
-        else 0,
+        getattr(SCC, "EXTERIOR_RESIDENTIAL"): (
+            total_res_window_area / total_res_wall_area
+            if total_res_wall_area > 0
+            else 0
+        ),
+        getattr(SCC, "EXTERIOR_NON_RESIDENTIAL"): (
+            total_nonres_window_area / total_nonres_wall_area
+            if total_nonres_wall_area > 0
+            else 0
+        ),
+        getattr(SCC, "EXTERIOR_MIXED"): (
+            total_mixed_window_area / total_mixed_wall_area
+            if total_mixed_wall_area > 0
+            else 0
+        ),
+        getattr(SCC, "SEMI_EXTERIOR"): (
+            total_semi_exterior_window_area / total_semi_exterior_wall_area
+            if total_semi_exterior_wall_area > 0
+            else 0
+        ),
     }

@@ -2,49 +2,49 @@ from typing import TypedDict
 
 from pydash import juxtapose
 from rct229.rule_engine.memoize import memoize
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.does_zone_meet_G3_1_1c import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.does_zone_meet_G3_1_1c import (
     does_zone_meet_g3_1_1c,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.does_zone_meet_G3_1_1d import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.does_zone_meet_G3_1_1d import (
     does_zone_meet_g3_1_1d,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.does_zone_meet_G3_1_1e import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.does_zone_meet_G3_1_1e import (
     does_zone_meet_g3_1_1e,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.does_zone_meet_G3_1_1f import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.does_zone_meet_G3_1_1f import (
     does_zone_meet_g_3_1_1f,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.does_zone_meet_G3_1_1g import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.does_zone_meet_G3_1_1g import (
     does_zone_meet_g3_1_1g,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.expected_system_type_from_table_g311a_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.g311_sub_functions.expected_system_type_from_table_g311a_dict import (
     expected_system_type_from_table_g3_1_1_dict,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_computer_zones_peak_cooling_load import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.g311_sub_functions.get_computer_zones_peak_cooling_load import (
     get_computer_zones_peak_cooling_load,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_hvac_building_area_types_and_zones_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.g311_sub_functions.get_hvac_building_area_types_and_zones_dict import (
     get_hvac_building_area_types_and_zones_dict,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_number_of_floors import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.g311_sub_functions.get_number_of_floors import (
     get_number_of_floors,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_predominant_hvac_building_area_type import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.g311_sub_functions.get_predominant_hvac_building_area_type import (
     get_predominant_hvac_building_area_type,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_zone_hvac_bat import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.g311_sub_functions.get_zone_hvac_bat import (
     get_zone_hvac_bat_dict,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_rmd_dict,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.is_cz_0_to_3a_bool import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.is_cz_0_to_3a_bool import (
     is_cz_0_to_3a_bool,
 )
 from rct229.schema.config import ureg
@@ -166,27 +166,30 @@ def get_zone_target_baseline_system(
         if does_zone_meet_g3_1_1c(rmd_b, zone_id_b, zones_and_systems_b):
             zones_and_systems_b[zone_id_b] = {
                 "system_origin": SYSTEMORIGIN.G311C,
-                "expected_system_type": HVAC_SYS.SYS_4
-                if is_cz_0_to_3a_result_bool
-                else HVAC_SYS.SYS_3,
+                "expected_system_type": (
+                    HVAC_SYS.SYS_4 if is_cz_0_to_3a_result_bool else HVAC_SYS.SYS_3
+                ),
             }
 
         # G3.1.1d
         if does_zone_meet_g3_1_1d(rmd_b, zone_id_b):
             zones_and_systems_b[zone_id_b] = {
                 "system_origin": SYSTEMORIGIN.G311D,
-                "expected_system_type": HVAC_SYS.SYS_5
-                if num_floors_b < REQ_FL_6 and floor_area_b < BUILDING_AREA_150000_ft2
-                else HVAC_SYS.SYS_7,
+                "expected_system_type": (
+                    HVAC_SYS.SYS_5
+                    if num_floors_b < REQ_FL_6
+                    and floor_area_b < BUILDING_AREA_150000_ft2
+                    else HVAC_SYS.SYS_7
+                ),
             }
 
         # G3.1.1e
         if does_zone_meet_g3_1_1e(rmd_b, rmd_p, zone_id_b):
             zones_and_systems_b[zone_id_b] = {
                 "system_origin": SYSTEMORIGIN.G311E,
-                "expected_system_type": HVAC_SYS.SYS_10
-                if is_cz_0_to_3a_result_bool
-                else HVAC_SYS.SYS_9,
+                "expected_system_type": (
+                    HVAC_SYS.SYS_10 if is_cz_0_to_3a_result_bool else HVAC_SYS.SYS_9
+                ),
             }
 
         # G3.1.1f
@@ -232,9 +235,9 @@ def get_zone_target_baseline_system(
                 }
             else:
                 zones_and_systems_b[zone_id_b] = {
-                    "expected_system_type": HVAC_SYS.SYS_4
-                    if is_cz_0_to_3a_result_bool
-                    else HVAC_SYS.SYS_3,
+                    "expected_system_type": (
+                        HVAC_SYS.SYS_4 if is_cz_0_to_3a_result_bool else HVAC_SYS.SYS_3
+                    ),
                     "system_origin": "G3_1_1g_part3",
                 }
 

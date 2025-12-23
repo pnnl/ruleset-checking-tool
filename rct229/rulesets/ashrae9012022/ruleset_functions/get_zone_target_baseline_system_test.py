@@ -1,10 +1,10 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     CAPACITY_THRESHOLD as CAPACITY_THRESHOLD_QUANTITY,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_target_baseline_system import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_target_baseline_system import (
     SYSTEMORIGIN,
     get_zone_target_baseline_system,
 )

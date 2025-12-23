@@ -1,6 +1,6 @@
-from typing import Optional, Type
+from typing import Optional
 
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
     HVAC_SYSTEM_TYPE_DICTIONARY,
 )

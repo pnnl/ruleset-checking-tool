@@ -51,12 +51,12 @@ def get_baseline_surface_conditioning_category_dict(
             SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL,
             SurfaceConditioningCategory.EXTERIOR_MIXED,
         ]:
-            baseline_surface_conditioning_category_dict[
-                surface_id
-            ] = SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL
+            baseline_surface_conditioning_category_dict[surface_id] = (
+                SurfaceConditioningCategory.EXTERIOR_NON_RESIDENTIAL
+            )
         else:
-            baseline_surface_conditioning_category_dict[
-                surface_id
-            ] = building_surface_conditioning_category_dict_b[surface_id]
+            baseline_surface_conditioning_category_dict[surface_id] = (
+                building_surface_conditioning_category_dict_b[surface_id]
+            )
 
     return baseline_surface_conditioning_category_dict

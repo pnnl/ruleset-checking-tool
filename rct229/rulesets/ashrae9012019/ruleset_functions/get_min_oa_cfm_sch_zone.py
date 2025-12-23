@@ -1,7 +1,7 @@
 import numpy as np
+from rct229.schema.config import ureg
 from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
-from rct229.schema.config import ureg
 
 LEAP_YEAR_HRS = 8784
 NON_LEAP_YEAR_HRS = 8760

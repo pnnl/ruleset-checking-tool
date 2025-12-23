@@ -1,5 +1,5 @@
 import pytest
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_equipment_type import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_swh_equipment_type import (
     GetSWHEquipmentType,
     get_swh_equipment_type,
 )

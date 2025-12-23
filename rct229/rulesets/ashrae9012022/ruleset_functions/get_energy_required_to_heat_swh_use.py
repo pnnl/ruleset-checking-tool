@@ -1,7 +1,7 @@
 import numpy as np
 from pint import Quantity
 
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_spaces_served_by_swh_use import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_spaces_served_by_swh_use import (
     get_spaces_served_by_swh_use,
 )
 from rct229.schema.config import ureg

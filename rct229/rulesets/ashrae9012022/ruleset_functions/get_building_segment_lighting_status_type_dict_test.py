@@ -1,7 +1,7 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_lighting_status_type_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_segment_lighting_status_type_dict import (
     LightingStatusType as LST,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_lighting_status_type_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_segment_lighting_status_type_dict import (
     get_building_segment_lighting_status_type_dict,
 )
 from rct229.schema.config import ureg

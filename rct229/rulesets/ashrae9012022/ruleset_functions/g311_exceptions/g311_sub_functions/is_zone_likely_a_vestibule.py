@@ -1,5 +1,5 @@
 from pydash import filter_, flat_map
-from rct229.rulesets.ashrae9012019.ruleset_functions.g311_exceptions.g311_sub_functions.get_zones_on_same_floor_list import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.g311_exceptions.g311_sub_functions.get_zones_on_same_floor_list import (
     get_zones_on_same_floor_list,
 )
 from rct229.schema.config import ureg

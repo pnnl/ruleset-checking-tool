@@ -1,46 +1,46 @@
 import inspect
 
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_1 import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.test_is_baseline_system_1 import (
     SYS_1_TEST_RMD,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_2 import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.test_is_baseline_system_2 import (
     SYS_2_TEST_RMD,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_3 import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.test_is_baseline_system_3 import (
     SYS_3_TEST_RMD,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_4 import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.test_is_baseline_system_4 import (
     SYS_4_TEST_RMD,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_5 import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.test_is_baseline_system_5 import (
     SYS_5_TEST_RMD,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_6 import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.test_is_baseline_system_6 import (
     SYS_6_TEST_RMD,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_7 import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.test_is_baseline_system_7 import (
     SYS_7_TEST_RMD,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_8 import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.test_is_baseline_system_8 import (
     SYS_8_TEST_RMD,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_9 import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.test_is_baseline_system_9 import (
     SYS_9_TEST_RMD,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_10 import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.test_is_baseline_system_10 import (
     SYS_10_FIRST_LOGIC_TEST_RMD,
     SYS_10_SECOND_LOGIC_TEST_RMD,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_11_1 import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.test_is_baseline_system_11_1 import (
     SYS_11_1_TEST_RMD,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.test_is_baseline_system_11_2 import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.test_is_baseline_system_11_2 import (
     SYS_11_2_TEST_RMD,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
 

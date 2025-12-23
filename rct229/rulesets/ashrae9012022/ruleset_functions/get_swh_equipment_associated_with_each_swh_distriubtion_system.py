@@ -2,7 +2,7 @@ from collections import deque
 from dataclasses import dataclass, field
 from typing import List
 
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_spaces_served_by_swh_use import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_spaces_served_by_swh_use import (
     get_spaces_served_by_swh_use,
 )
 from rct229.utils.jsonpath_utils import find_all

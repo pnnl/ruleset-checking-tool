@@ -14,7 +14,6 @@ from rct229.utils.utility_functions import (
     find_exactly_one_service_water_heating_distribution_system,
     find_exactly_one_service_water_heating_use,
 )
-from rct229.utils.assertions import getattr_
 
 
 @dataclass

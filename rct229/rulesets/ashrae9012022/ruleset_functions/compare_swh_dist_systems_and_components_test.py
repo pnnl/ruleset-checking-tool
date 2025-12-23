@@ -1,6 +1,6 @@
 import copy
 
-from rct229.rulesets.ashrae9012019.ruleset_functions.compare_swh_dist_systems_and_components import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.compare_swh_dist_systems_and_components import (
     compare_swh_dist_systems_and_components,
 )
 from rct229.schema.schema_utils import quantify_rmd

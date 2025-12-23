@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_bats_and_swh_use import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_swh_bats_and_swh_use import (
     get_swh_bats_and_swh_use,
 )
 from rct229.schema.schema_utils import quantify_rmd

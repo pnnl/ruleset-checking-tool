@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.normalize_interior_lighting_schedules import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.normalize_interior_lighting_schedules import (
     normalize_interior_lighting_schedules,
 )
 from rct229.schema.schema_utils import quantify_rmd

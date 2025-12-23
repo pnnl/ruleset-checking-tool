@@ -374,26 +374,24 @@ def get_zone_conditioning_category_dict(
                         zone_has_nonresidential_spaces = True  # space_3_1_1
 
                 if zone_has_residential_spaces and zone_has_nonresidential_spaces:
-                    zone_conditioning_category_dict[
-                        zone_id
-                    ] = ZoneConditioningCategory.CONDITIONED_MIXED  # zone_1_1
+                    zone_conditioning_category_dict[zone_id] = (
+                        ZoneConditioningCategory.CONDITIONED_MIXED
+                    )  # zone_1_1
                 elif zone_has_residential_spaces:
-                    zone_conditioning_category_dict[
-                        zone_id
-                    ] = ZoneConditioningCategory.CONDITIONED_RESIDENTIAL  # zone_1_4
+                    zone_conditioning_category_dict[zone_id] = (
+                        ZoneConditioningCategory.CONDITIONED_RESIDENTIAL
+                    )  # zone_1_4
                 else:  # using else is fine b/c `zone_has_residential_spaces` and `zone_has_nonresidential_spaces` can't be False at the same time
-                    zone_conditioning_category_dict[
-                        zone_id
-                    ] = (
+                    zone_conditioning_category_dict[zone_id] = (
                         ZoneConditioningCategory.CONDITIONED_NON_RESIDENTIAL
                     )  # zone_1_2, zone_1_3
 
             # To get here, the zone is neither directly nor indirectly conditioned
             # Check for semi-heated
             elif zone_id in semiheated_zone_ids:
-                zone_conditioning_category_dict[
-                    zone_id
-                ] = ZoneConditioningCategory.SEMI_HEATED  # zone_1_5
+                zone_conditioning_category_dict[zone_id] = (
+                    ZoneConditioningCategory.SEMI_HEATED
+                )  # zone_1_5
             # Check for interior parking spaces
             elif any(
                 [
@@ -403,9 +401,9 @@ def get_zone_conditioning_category_dict(
                     )
                 ]
             ):
-                zone_conditioning_category_dict[
-                    zone_id
-                ] = ZoneConditioningCategory.UNENCLOSED  # zone_1_6
+                zone_conditioning_category_dict[zone_id] = (
+                    ZoneConditioningCategory.UNENCLOSED
+                )  # zone_1_6
             # Check for crawlspace
             else:
                 zone_volume = zone.get("volume", ZERO.VOLUME)
@@ -431,9 +429,9 @@ def get_zone_conditioning_category_dict(
                         for surface in zone["surfaces"]
                     ]
                 ):
-                    zone_conditioning_category_dict[
-                        zone_id
-                    ] = ZoneConditioningCategory.UNENCLOSED  # zone_1_7
+                    zone_conditioning_category_dict[zone_id] = (
+                        ZoneConditioningCategory.UNENCLOSED
+                    )  # zone_1_7
                 # Check for attic
                 elif any(
                     [
@@ -442,14 +440,14 @@ def get_zone_conditioning_category_dict(
                         for surface in zone["surfaces"]
                     ]
                 ):
-                    zone_conditioning_category_dict[
-                        zone_id
-                    ] = ZoneConditioningCategory.UNENCLOSED  # zone_1_8
+                    zone_conditioning_category_dict[zone_id] = (
+                        ZoneConditioningCategory.UNENCLOSED
+                    )  # zone_1_8
                 # Anything else
                 else:
-                    zone_conditioning_category_dict[
-                        zone_id
-                    ] = ZoneConditioningCategory.UNCONDITIONED  # zone_1_9
+                    zone_conditioning_category_dict[zone_id] = (
+                        ZoneConditioningCategory.UNCONDITIONED
+                    )  # zone_1_9
 
     return zone_conditioning_category_dict
 

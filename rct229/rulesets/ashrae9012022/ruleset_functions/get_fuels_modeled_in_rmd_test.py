@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_fuels_modeled_in_rmd import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_fuels_modeled_in_rmd import (
     get_fuels_modeled_in_rmd,
 )
 from rct229.schema.schema_utils import quantify_rmd

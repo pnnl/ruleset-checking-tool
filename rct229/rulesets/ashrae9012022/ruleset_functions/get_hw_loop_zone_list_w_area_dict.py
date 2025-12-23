@@ -1,10 +1,10 @@
 from typing import TypedDict
 
 from pint import Quantity
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_heating_type_fluid_loop import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_heating_type_fluid_loop import (
     is_hvac_sys_heating_type_fluid_loop,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_preheating_type_fluid_loop import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.baseline_hvac_sub_functions.is_hvac_sys_preheating_type_fluid_loop import (
     is_hvac_sys_preheating_type_fluid_loop,
 )
 from rct229.schema.schema_enums import SchemaEnums

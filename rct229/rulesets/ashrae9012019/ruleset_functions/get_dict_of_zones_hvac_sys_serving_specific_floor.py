@@ -26,8 +26,8 @@ def get_dict_of_zones_hvac_sys_serving_specific_floor(
         f'$.buildings[*].building_segments[*].zones[*][?(@.floor_name ="{floor_name}")].id',
         rmd,
     ):
-        dict_of_zones_hvac_sys_serving_specific_floor[
-            zone_id
-        ] = get_list_hvac_systems_associated_with_zone(rmd, zone_id)
+        dict_of_zones_hvac_sys_serving_specific_floor[zone_id] = (
+            get_list_hvac_systems_associated_with_zone(rmd, zone_id)
+        )
 
     return dict_of_zones_hvac_sys_serving_specific_floor
