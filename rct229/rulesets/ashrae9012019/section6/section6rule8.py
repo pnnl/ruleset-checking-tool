@@ -11,6 +11,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.normalize_interior_lighting
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.pint_utils import ZERO
+from rct229.schema.schema_enums import SchemaEnums
 
 MANUAL_CHECK_MSG = (
     "Lighting schedule in P-RMD including adjusted lighting occupancy sensor reduction factor is "
@@ -21,6 +22,17 @@ FAIL_MSG = (
     "Schedule adjustment may be correct if space includes daylight control modeled by schedule adjustment or "
     "individual workstation with lighting controlled by occupancy sensors (TABLE G3.7 Footnote c). "
 )
+NA_BASELINE_LIGHTING_MSG = (
+    "Space is a crawl space, plenum or interstitial space with lighting power in the baseline model. "
+    "Verify that occupancy sensor control requirements are followed correctly, if applicable."
+)
+
+SpaceFunctionOptions = SchemaEnums.schema_enums["SpaceFunctionOptions"]
+NA_SPACE_FUNCTIONS = [
+    SpaceFunctionOptions.PLENUM,
+    SpaceFunctionOptions.CRAWL_SPACE,
+    SpaceFunctionOptions.INTERSTITIAL_SPACE,
+]
 
 
 class PRM9012019Rule16x33(RuleDefinitionListIndexedBase):
@@ -88,6 +100,29 @@ class PRM9012019Rule16x33(RuleDefinitionListIndexedBase):
                         "hourly_values",
                     ),
                 }
+
+            def list_filter(self, context_item, data):
+                """
+                exclude plenum/crawl/interstitial spaces that have no lighting power.
+                Also excludes NONE lighting-space-type spaces with zero lighting.
+                """
+                space_b = context_item.BASELINE_0
+
+                total_space_lpd_b = sum(
+                    find_all("$.interior_lighting[*].power_per_area", space_b),
+                    start=ZERO.POWER_PER_AREA,
+                )
+
+                space_function_b = space_b.get("function")
+                lighting_space_type_b = space_b.get("lighting_space_type")
+
+                is_na_or_none = (
+                    space_function_b in NA_SPACE_FUNCTIONS
+                    or lighting_space_type_b == "NONE"
+                )
+
+                # Exclude only NA or NONE spaces with zero baseline lighting
+                return not (is_na_or_none and total_space_lpd_b == ZERO.POWER_PER_AREA)
 
             class ZoneRule(RuleDefinitionListIndexedBase):
                 def __init__(self):
@@ -168,7 +203,51 @@ class PRM9012019Rule16x33(RuleDefinitionListIndexedBase):
 
                     def manual_check_required(self, context, calc_vals=None, data=None):
                         eflh_difference = calc_vals["eflh_difference"]
+                        space_function_b = calc_vals["space_function_b"]
+                        lighting_space_type_b = calc_vals["lighting_space_type_b"]
+                        total_space_lpd_b = calc_vals["total_space_lpd_b"]
+
+                        # Plenum, crawlspace, interstitial space with lighting
+                        if (
+                            space_function_b in NA_SPACE_FUNCTIONS
+                            and total_space_lpd_b > ZERO.POWER_PER_AREA
+                        ):
+                            return True
+
+                        # NONE space type with lighting
+                        if (
+                            lighting_space_type_b == "NONE"
+                            and total_space_lpd_b > ZERO.POWER_PER_AREA
+                        ):
+                            return True
+
+                        # Case 4: Proposed schedule higher than Baseline-adjusted
                         return eflh_difference > 0
+
+                    def get_manual_check_required_msg(
+                        self, context, calc_vals=None, data=None
+                    ):
+                        space_function_b = calc_vals["space_function_b"]
+                        lighting_space_type_b = calc_vals["lighting_space_type_b"]
+                        total_space_lpd_b = calc_vals["total_space_lpd_b"]
+                        eflh_difference = calc_vals["eflh_difference"]
+
+                        if (
+                            space_function_b in NA_SPACE_FUNCTIONS
+                            and total_space_lpd_b > ZERO.POWER_PER_AREA
+                        ):
+                            return NA_BASELINE_LIGHTING_MSG
+
+                        if (
+                            lighting_space_type_b == "NONE"
+                            and total_space_lpd_b > ZERO.POWER_PER_AREA
+                        ):
+                            return NA_BASELINE_LIGHTING_MSG
+
+                        if eflh_difference > 0:
+                            return MANUAL_CHECK_MSG
+
+                        return ""
 
                     def rule_check(self, context, calc_vals=None, data=None):
                         total_hours_compared = calc_vals["total_hours_compared"]
