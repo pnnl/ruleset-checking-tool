@@ -1,12 +1,12 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import BASELINE_0
+from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
-from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
+from rct229.utils.pint_utils import CalcQ
 
 AIR_ECONOMIZER = SchemaEnums.schema_enums["AirEconomizerOptions"]
 CLIMATE_ZONE_70F = ["CZ5A", "CZ6A"]
@@ -24,15 +24,15 @@ CLIMATE_ZONE_75F = [
 ]
 
 
-class PRM9012019Rule98o22(RuleDefinitionListIndexedBase):
-    """Rule 12 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
+class PRM9012022Rule98o22(RuleDefinitionListIndexedBase):
+    """Rule 12 of ASHRAE 90.1-2022 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(PRM9012019Rule98o22, self).__init__(
+        super(PRM9012022Rule98o22, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=False
             ),
-            each_rule=PRM9012019Rule98o22.HVACRule(),
+            each_rule=PRM9012022Rule98o22.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-12",
             description="The baseline system economizer high-limit shutoff shall be a dry-bulb fixed switch with set-point temperatures in accordance with the values in Table G3.1.2.7.",
@@ -53,7 +53,7 @@ class PRM9012019Rule98o22(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(PRM9012019Rule98o22.HVACRule, self).__init__(
+            super(PRM9012022Rule98o22.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

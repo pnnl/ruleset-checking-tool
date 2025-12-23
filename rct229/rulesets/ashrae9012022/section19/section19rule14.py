@@ -1,23 +1,23 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
+from rct229.rulesets.ashrae9012022 import BASELINE_0
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_power_flow import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_fan_system_object_supply_return_exhaust_relief_total_power_flow import (
     get_fan_system_object_supply_return_exhaust_relief_total_power_flow,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_supply_return_exhaust_relief_terminal_fan_power_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_supply_return_exhaust_relief_terminal_fan_power_dict import (
     get_zone_supply_return_exhaust_relief_terminal_fan_power_dict,
 )
 from rct229.utils.assertions import getattr_
@@ -40,15 +40,15 @@ APPLICABLE_SYS_TYPES = [
 ]
 
 
-class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
-    """Rule 14 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
+class PRM9012022Rule60f12(RuleDefinitionListIndexedBase):
+    """Rule 14 of ASHRAE 90.1-2022 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(PRM9012019Rule60f12, self).__init__(
+        super(PRM9012022Rule60f12, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=PRM9012019Rule60f12.HVACRule(),
+            each_rule=PRM9012022Rule60f12.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-14",
             description="For baseline system types 1-8 and 11-13, if return or relief fans are specified in the proposed design, the baseline building design shall also be modeled with fans serving the same functions and sized for the baseline system supply fan air quantity less the minimum outdoor air, or 90% of the supply fan air quantity, whichever is larger.",
@@ -90,10 +90,10 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
             hvac_id_b = hvac_b["id"]
             hvac_info_b[hvac_id_b] = {}
 
-            hvac_info_b[hvac_id_b]["fan_system_info_b"] = (
-                get_fan_system_object_supply_return_exhaust_relief_total_power_flow(
-                    getattr_(hvac_b, "HVAC", "fan_system")
-                )
+            hvac_info_b[hvac_id_b][
+                "fan_system_info_b"
+            ] = get_fan_system_object_supply_return_exhaust_relief_total_power_flow(
+                getattr_(hvac_b, "HVAC", "fan_system")
             )
 
         zone_fan_power_dict_b = {}
@@ -119,7 +119,7 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(PRM9012019Rule60f12.HVACRule, self).__init__(
+            super(PRM9012022Rule60f12.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),

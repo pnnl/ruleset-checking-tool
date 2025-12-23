@@ -1,20 +1,20 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
+from rct229.rulesets.ashrae9012022 import BASELINE_0
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_systems_primarily_serving_comp_room import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_hvac_systems_primarily_serving_comp_room import (
     get_hvac_systems_primarily_serving_comp_room,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.is_economizer_modeled_in_proposed import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.is_economizer_modeled_in_proposed import (
     is_economizer_modeled_in_proposed,
 )
 from rct229.schema.schema_enums import SchemaEnums
@@ -50,18 +50,18 @@ APPLICABLE_SYS_TYPES = [
 SYSTEM_3_4_TYPES = [HVAC_SYS.SYS_3, HVAC_SYS.SYS_4]
 
 
-class PRM9012019Rule76q46(RuleDefinitionListIndexedBase):
-    """Rule 10 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
+class PRM9012022Rule76q46(RuleDefinitionListIndexedBase):
+    """Rule 10 of ASHRAE 90.1-2022 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(PRM9012019Rule76q46, self).__init__(
+        super(PRM9012022Rule76q46, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
             required_fields={
                 "$": ["ruleset_model_descriptions"],
             },
-            each_rule=PRM9012019Rule76q46.RulesetModelInstanceRule(),
+            each_rule=PRM9012022Rule76q46.RulesetModelInstanceRule(),
             index_rmd=BASELINE_0,
             id="19-10",
             description="Air economizers shall be included in baseline HVAC Systems 3 through 8, and 11, 12, and 13 based on climate as specified in Section G3.1.2.6 with exceptions."
@@ -76,11 +76,11 @@ class PRM9012019Rule76q46(RuleDefinitionListIndexedBase):
 
     class RulesetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(PRM9012019Rule76q46.RulesetModelInstanceRule, self).__init__(
+            super(PRM9012022Rule76q46.RulesetModelInstanceRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=PRM9012019Rule76q46.RulesetModelInstanceRule.HVACRule(),
+                each_rule=PRM9012022Rule76q46.RulesetModelInstanceRule.HVACRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
                 required_fields={
@@ -115,9 +115,9 @@ class PRM9012019Rule76q46(RuleDefinitionListIndexedBase):
                 f"$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
                 rmd_b,
             ):
-                proposed_has_economizer_dict[hvac_id_b] = (
-                    is_economizer_modeled_in_proposed(rmd_b, rmd_p, hvac_id_b)
-                )
+                proposed_has_economizer_dict[
+                    hvac_id_b
+                ] = is_economizer_modeled_in_proposed(rmd_b, rmd_p, hvac_id_b)
 
             hvac_system_exception_2_list_b = []
             if find_all("$.buildings[*].refrigerated_cases", rmd_b):
@@ -142,7 +142,7 @@ class PRM9012019Rule76q46(RuleDefinitionListIndexedBase):
         class HVACRule(RuleDefinitionBase):
             def __init__(self):
                 super(
-                    PRM9012019Rule76q46.RulesetModelInstanceRule.HVACRule, self
+                    PRM9012022Rule76q46.RulesetModelInstanceRule.HVACRule, self
                 ).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True

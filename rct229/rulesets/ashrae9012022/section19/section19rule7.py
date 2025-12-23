@@ -1,14 +1,14 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.ruleset_functions.aggregate_min_OA_schedule_across_zones import (
+from rct229.rulesets.ashrae9012022 import BASELINE_0
+from rct229.rulesets.ashrae9012022.ruleset_functions.aggregate_min_OA_schedule_across_zones import (
     aggregate_min_OA_schedule_across_zones,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_min_oa_cfm_sch_zone import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_min_oa_cfm_sch_zone import (
     get_min_oa_cfm_sch_zone,
 )
 from rct229.schema.schema_enums import SchemaEnums
@@ -26,15 +26,15 @@ DEMAND_CONTROL_VENTILATION_CONTROL = SchemaEnums.schema_enums[
 ]
 
 
-class PRM9012019Rule29n92(RuleDefinitionListIndexedBase):
-    """Rule 7 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
+class PRM9012022Rule29n92(RuleDefinitionListIndexedBase):
+    """Rule 7 of ASHRAE 90.1-2022 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
-        super(PRM9012019Rule29n92, self).__init__(
+        super(PRM9012022Rule29n92, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=PRM9012019Rule29n92.HVACRule(),
+            each_rule=PRM9012022Rule29n92.HVACRule(),
             index_rmd=BASELINE_0,
             id="19-7",
             description="Minimum ventilation system outdoor air intake flow shall be the same for the proposed design and baseline building design except when any of the 4 exceptions defined in Section G3.1.2.5 are met."
@@ -148,15 +148,15 @@ class PRM9012019Rule29n92(RuleDefinitionListIndexedBase):
                     > 1
                 )
 
-            zone_data[hvac_id_b]["aggregated_min_OA_schedule_across_zones_b"] = (
-                aggregate_min_OA_schedule_across_zones(
-                    zone_data[hvac_id_b]["zone_OA_CFM_list_of_schedules_b"]
-                )
+            zone_data[hvac_id_b][
+                "aggregated_min_OA_schedule_across_zones_b"
+            ] = aggregate_min_OA_schedule_across_zones(
+                zone_data[hvac_id_b]["zone_OA_CFM_list_of_schedules_b"]
             )
-            zone_data[hvac_id_b]["aggregated_min_OA_schedule_across_zones_p"] = (
-                aggregate_min_OA_schedule_across_zones(
-                    zone_data[hvac_id_b]["zone_OA_CFM_list_of_schedules_p"]
-                )
+            zone_data[hvac_id_b][
+                "aggregated_min_OA_schedule_across_zones_p"
+            ] = aggregate_min_OA_schedule_across_zones(
+                zone_data[hvac_id_b]["zone_OA_CFM_list_of_schedules_p"]
             )
 
         return {
@@ -168,7 +168,7 @@ class PRM9012019Rule29n92(RuleDefinitionListIndexedBase):
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):
-            super(PRM9012019Rule29n92.HVACRule, self).__init__(
+            super(PRM9012022Rule29n92.HVACRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=False
                 ),
