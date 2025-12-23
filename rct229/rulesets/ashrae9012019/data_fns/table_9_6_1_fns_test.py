@@ -133,5 +133,6 @@ def test__building_type_enumeration_to_lpd_map():
             "TRANSPORTATION_FACILITY_TICKET_COUNTER",
             "WAREHOUSE_STORAGE_AREA_MEDIUM_TO_BULKY_PALLETIZED_ITEMS",
             "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+            "NONE"
         ],
     )
