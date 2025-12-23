@@ -19,7 +19,14 @@ from rct229.utils.std_comparisons import std_equal
 OFFICE_OPEN_PLAN = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ].OFFICE_OPEN_PLAN
-FAIL_MSG = "P_RMD lighting status type is as-designed or as-existing. But lighting space type in B_RMD is not specified."
+CASE1_MSG = "The baseline model included at least one plenum, crawlspace, or interstitial space with lighting power. Unable to determine whether these spaces should be included in the check."
+CASE2_MSG = "Proposed lighting status type is as-designed or as-existing, but the baseline lighting space type is not specified."
+SpaceFunctionOptions = SchemaEnums.schema_enums["SpaceFunctionOptions"]
+NA_SPACE_FUNCTIONS = [
+    SpaceFunctionOptions.PLENUM,
+    SpaceFunctionOptions.CRAWL_SPACE,
+    SpaceFunctionOptions.INTERSTITIAL_SPACE,
+]
 
 
 class PRM9012019Rule22l93(RuleDefinitionListIndexedBase):
@@ -74,15 +81,28 @@ class PRM9012019Rule22l93(RuleDefinitionListIndexedBase):
             def create_data(self, context, data=None):
                 zone_b = context.BASELINE_0
 
-                # We will need this after Weili's update to table_G3_7_lookup()
                 return {"avg_zone_ht_b": get_avg_zone_height(zone_b)}
+
+            def list_filter(self, context_item, data):
+                space_b = context_item.BASELINE_0
+                total_space_lpd_b = sum(
+                    find_all("$.interior_lighting[*].power_per_area", space_b),
+                    start=ZERO.POWER_PER_AREA,
+                )
+
+                is_na_or_none = (
+                    space_b.get("function") in NA_SPACE_FUNCTIONS
+                    or space_b.get("lighting_space_type") == "NONE"
+                )
+
+                # Exclude only NA or NONE spaces with zero lighting
+                return not (is_na_or_none and total_space_lpd_b == ZERO.POWER_PER_AREA)
 
             class SpaceRule(RuleDefinitionBase):
                 def __init__(self):
                     super(
                         PRM9012019Rule22l93.BuildingSegmentRule.ZoneRule.SpaceRule, self
                     ).__init__(
-                        fail_msg=FAIL_MSG,
                         rmds_used=produce_ruleset_model_description(
                             USER=False, BASELINE_0=True, PROPOSED=True
                         ),
@@ -101,34 +121,94 @@ class PRM9012019Rule22l93(RuleDefinitionListIndexedBase):
                         find_all("$.interior_lighting[*].power_per_area", space_b),
                         start=ZERO.POWER_PER_AREA,
                     )
+                    space_function_b = space_b.get("function")
+                    lighting_space_type_b = space_b.get("lighting_space_type")
+
                     space_lighting_status_type_p = data[
                         "building_segment_lighting_status_type_dict_p"
                     ][space_p["id"]]
-                    lpd_allowance_b = (
-                        table_G3_7_lookup(
-                            space_b["lighting_space_type"],
+
+                    # Determine LPD allowance
+                    if lighting_space_type_b is not None:
+                        lpd_allowance_b = table_G3_7_lookup(
+                            lighting_space_type_b,
                             data["avg_zone_ht_b"],
                             getattr_(space_b, "Space", "floor_area"),
-                        )
-                        if "lighting_space_type" in space_b
-                        else table_G3_7_lookup(
+                        )["lpd"]
+                    else:
+                        lpd_allowance_b = table_G3_7_lookup(
                             OFFICE_OPEN_PLAN,
                             data["avg_zone_ht_b"],
                             getattr_(space_b, "Space", "floor_area"),
-                        )
-                    )["lpd"]
+                        )["lpd"]
 
                     return {
-                        "lighting_space_type_b": space_b.get("lighting_space_type"),
+                        "space_function_b": space_function_b,
+                        "lighting_space_type_b": lighting_space_type_b,
                         "total_space_lpd_b": CalcQ("power_density", total_space_lpd_b),
                         "space_lighting_status_type_p": space_lighting_status_type_p,
-                        "lpd_allowance_b": CalcQ("power_density", lpd_allowance_b),
+                        "lpd_allowance_b": (
+                            CalcQ("power_density", lpd_allowance_b)
+                            if lpd_allowance_b is not None
+                            else None
+                        ),
                     }
 
-                def rule_check(self, context, calc_vals=None, data=None):
-                    space_b = context.BASELINE_0
-                    lighting_space_type_b = space_b.get("lighting_space_type")
+                def manual_check_required(self, context, calc_vals=None, data=None):
+                    space_function_b = calc_vals["space_function_b"]
+                    lighting_space_type_b = calc_vals["lighting_space_type_b"]
+                    space_lighting_status_type_p = calc_vals[
+                        "space_lighting_status_type_p"
+                    ]
+                    total_space_lpd_b = calc_vals["total_space_lpd_b"]
 
+                    # Case 1: NA space with lighting
+                    if (
+                        space_function_b in NA_SPACE_FUNCTIONS
+                        and total_space_lpd_b > ZERO.POWER_PER_AREA
+                    ):
+                        return True
+
+                    # Case 2: as-designed / as-existing but lighting space type missing
+                    if (
+                        space_lighting_status_type_p
+                        == LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
+                        and lighting_space_type_b is None
+                    ):
+                        return True
+
+                    return False
+
+                def get_manual_check_required_msg(
+                    self, context, calc_vals=None, data=None
+                ):
+                    space_function_b = calc_vals["space_function_b"]
+                    lighting_space_type_b = calc_vals["lighting_space_type_b"]
+                    space_lighting_status_type_p = calc_vals[
+                        "space_lighting_status_type_p"
+                    ]
+                    total_space_lpd_b = calc_vals["total_space_lpd_b"]
+
+                    # Case 1: NA space with lighting
+                    if (
+                        space_function_b in NA_SPACE_FUNCTIONS
+                        and total_space_lpd_b > ZERO.POWER_PER_AREA
+                    ):
+                        return CASE1_MSG
+
+                    # Case 2: as-designed/as-existing but baseline lighting space type missing
+                    if (
+                        space_lighting_status_type_p
+                        == LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
+                        and lighting_space_type_b is None
+                    ):
+                        return CASE2_MSG
+
+                    return ""
+
+                def rule_check(self, context, calc_vals=None, data=None):
+                    space_function_b = calc_vals["space_function_b"]
+                    lighting_space_type_b = calc_vals["lighting_space_type_b"]
                     space_lighting_status_type_p = calc_vals[
                         "space_lighting_status_type_p"
                     ]
@@ -136,7 +216,7 @@ class PRM9012019Rule22l93(RuleDefinitionListIndexedBase):
                     lpd_allowance_b = calc_vals["lpd_allowance_b"]
 
                     return (
-                        # Not Case 1
+                        # Not Case 2
                         not (
                             space_lighting_status_type_p
                             == LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
@@ -156,45 +236,27 @@ class PRM9012019Rule22l93(RuleDefinitionListIndexedBase):
                     )
 
                 def is_tolerance_fail(self, context, calc_vals=None, data=None):
-                    space_b = context.BASELINE_0
-                    lighting_space_type_b = space_b.get("lighting_space_type")
-
+                    space_function_b = calc_vals["space_function_b"]
+                    lighting_space_type_b = calc_vals["lighting_space_type_b"]
                     space_lighting_status_type_p = calc_vals[
                         "space_lighting_status_type_p"
                     ]
                     total_space_lpd_b = calc_vals["total_space_lpd_b"]
                     lpd_allowance_b = calc_vals["lpd_allowance_b"]
 
-                    return (
-                        # Not Case 1
-                        not (
-                            space_lighting_status_type_p
-                            == LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
-                            and not lighting_space_type_b
-                        )
-                        # Passes for both values of space_lighting_status_type_p
-                        and (
-                            space_lighting_status_type_p
-                            in [
-                                LightingStatusType.AS_DESIGNED_OR_AS_EXISTING,
-                                LightingStatusType.NOT_YET_DESIGNED_OR_MATCH_TABLE_9_5_1,
-                            ]
-                            and std_equal(lpd_allowance_b, total_space_lpd_b)
-                        )
-                    )
+                    if (
+                        space_function_b in NA_SPACE_FUNCTIONS
+                        and total_space_lpd_b > ZERO.POWER_PER_AREA
+                    ):
+                        return False
 
-                def get_fail_msg(self, context, calc_vals=None, data=None):
-                    space_b = context.BASELINE_0
-                    lighting_space_type_b = space_b.get("lighting_space_type")
+                    if lighting_space_type_b == "NONE":
+                        return False
 
-                    space_lighting_status_type_p = calc_vals[
-                        "space_lighting_status_type_p"
-                    ]
+                    if space_lighting_status_type_p in [
+                        LightingStatusType.AS_DESIGNED_OR_AS_EXISTING,
+                        LightingStatusType.NOT_YET_DESIGNED_OR_MATCH_TABLE_9_5_1,
+                    ]:
+                        return std_equal(lpd_allowance_b, total_space_lpd_b)
 
-                    return (
-                        "P_RMD lighting status type is as-designed or as-existing. But lighting space type in B_RMD is not specified."
-                        if space_lighting_status_type_p
-                        == LightingStatusType.AS_DESIGNED_OR_AS_EXISTING
-                        and not lighting_space_type_b
-                        else ""
-                    )
+                    return False
