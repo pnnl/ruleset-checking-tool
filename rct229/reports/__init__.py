@@ -5,6 +5,7 @@ import rct229.reports as reports
 
 __all__ = [
     "ashrae9012019",
+    "ashrae9012022",
     "general",
 ]
 
