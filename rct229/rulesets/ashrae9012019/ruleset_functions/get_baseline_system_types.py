@@ -54,7 +54,7 @@ from rct229.utils.jsonpath_utils import find_all
 
 
 @memoize
-def get_baseline_system_types(rmd_b: dict) -> dict[HVAC_SYS, list[str]]:
+def get_baseline_system_types(rmd_b: dict) -> dict[str, list[str]]:
     """
     Identify all the baseline system types modeled in a B-RMD.
 
