@@ -1,11 +1,11 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.data_fns.table_4_2_1_1_fns import (
+from rct229.rulesets.ashrae9012022 import BASELINE_0
+from rct229.rulesets.ashrae9012022.data_fns.table_4_2_1_1_fns import (
     table_4_2_1_1_lookup,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_BPF_building_area_types_and_zones import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_BPF_building_area_types_and_zones import (
     get_BPF_building_area_types_and_zones,
 )
 from rct229.utils.assertions import assert_
@@ -21,11 +21,11 @@ MANUAL_CHECK_REQUIRED_MSG = (
 FAIL_MSG = "More than one BPF value was used in the project."
 
 
-class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
-    """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculations)"""
+class PRM9012022Rule73j65(RuleDefinitionListIndexedBase):
+    """Rule 1 of ASHRAE 90.1-2022 Appendix G Section 1 (Performance Calculations)"""
 
     def __init__(self):
-        super(PRM9012019Rule73j65, self).__init__(
+        super(PRM9012022Rule73j65, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=True,
                 BASELINE_0=True,
@@ -40,9 +40,9 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
                 BASELINE_270=True,
             ),
             index_rmd=BASELINE_0,
-            each_rule=PRM9012019Rule73j65.RMDRule(),
+            each_rule=PRM9012022Rule73j65.RMDRule(),
             id="1-1",
-            description="Building performance factors shall be from Standard 90.1-2019, Table 4.2.1.1, based on the "
+            description="Building performance factors shall be from Standard 90.1-2022, Table 4.2.1.1, based on the "
             "building area type and climate zone. For building area types not listed in Table 4.2.1.1 "
             "“All others.” shall be used to determine the BPF.",
             ruleset_section_title="Performance Calculations",
@@ -62,7 +62,7 @@ class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionBase):
         def __init__(self):
-            super(PRM9012019Rule73j65.RMDRule, self).__init__(
+            super(PRM9012022Rule73j65.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=True,
                     BASELINE_0=True,
