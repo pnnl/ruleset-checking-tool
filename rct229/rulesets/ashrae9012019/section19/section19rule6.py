@@ -22,14 +22,7 @@ class PRM9012019Rule97a53(RuleDefinitionBase):
             standard_section="Section G3.1.2.3",
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
-            required_fields={
-                "$": ["model_output"],
-                "model_output": [
-                    "unmet_load_hours_heating",
-                    "unmet_load_hours_cooling",
-                    "unmet_load_hours",
-                ],
-            },
+            required_fields={"$": ["model_output"]},
             manual_check_required_msg=UNDETERMINED_MSG,
             precision={
                 "coincident_unmet_load_hours_b": {"precision": 1, "unit": "hour"},
@@ -44,9 +37,9 @@ class PRM9012019Rule97a53(RuleDefinitionBase):
         rmd_b = context.BASELINE_0
         output_instance_b = rmd_b["model_output"]
 
-        unmet_load_hours_heating_b = output_instance_b["unmet_load_hours_heating"]
-        unmet_load_hours_cooling_b = output_instance_b["unmet_load_hours_cooling"]
-        coincident_unmet_load_hours_b = output_instance_b["unmet_load_hours"]
+        unmet_load_hours_heating_b = output_instance_b.get("unmet_load_hours_heating")
+        unmet_load_hours_cooling_b = output_instance_b.get("unmet_load_hours_cooling")
+        coincident_unmet_load_hours_b = output_instance_b.get("unmet_load_hours")
 
         return {
             "unmet_load_hours_heating_b": unmet_load_hours_heating_b,

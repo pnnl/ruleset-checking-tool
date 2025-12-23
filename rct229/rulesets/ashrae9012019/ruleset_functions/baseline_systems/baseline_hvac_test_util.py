@@ -15,8 +15,10 @@ SYSTEM_TYPE_TEST_FILE_PATH = os.path.join(
     Path(os.path.dirname(__file__)).parent.parent.parent.parent,
     "ruletest_engine",
     "ruletest_jsons",
-    "ashrae9012019",
+    "scripts",
+    "resources",
     "system_types",
+    "90.1_system_types",
 )
 
 

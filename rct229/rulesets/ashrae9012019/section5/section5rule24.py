@@ -5,7 +5,7 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_skylight_roof_areas_dict import (
     get_building_segment_skylight_roof_areas_dict,
 )
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 SKYLIGHT_THRESHOLD = 0.03
@@ -108,10 +108,10 @@ class PRM9012019Rule78j13(RuleDefinitionListIndexedBase):
             skylight_roof_ratio_p = total_skylight_area_p / total_roof_area_p
 
             return {
-                "total_skylight_area_b": total_skylight_area_b,
-                "total_roof_area_b": total_roof_area_b,
-                "total_skylight_area_p": total_skylight_area_p,
-                "total_roof_area_p": total_roof_area_p,
+                "total_skylight_area_b": CalcQ("area", total_skylight_area_b),
+                "total_roof_area_b": CalcQ("area", total_roof_area_b),
+                "total_skylight_area_p": CalcQ("area", total_skylight_area_p),
+                "total_roof_area_p": CalcQ("area", total_roof_area_p),
                 "skylight_roof_ratio_b": skylight_roof_ratio_b,
                 "skylight_roof_ratio_p": skylight_roof_ratio_p,
             }

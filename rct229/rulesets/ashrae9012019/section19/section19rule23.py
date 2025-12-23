@@ -45,6 +45,28 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
             list_path="ruleset_model_descriptions[0]",
         )
 
+    def create_data(self, context, data):
+        rmd_b = context.BASELINE_0
+
+        missing_data = []
+
+        if not find_all("$..hourly_heating_design_year", rmd_b) and not find_all(
+            "$..hourly_heating_design_day", rmd_b
+        ):
+            missing_data.append(
+                "No schedules in the baseline model contain hourly heating design data. "
+            )
+
+        if not find_all("$..hourly_cooling_design_year", rmd_b) and not find_all(
+            "$..hourly_cooling_design_day", rmd_b
+        ):
+            missing_data.append(
+                "No schedules in the baseline model contain hourly cooling design data. "
+            )
+
+        assert_(not missing_data, "\n".join(missing_data))
+        return {}
+
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(PRM9012019Rule60o81.RMDRule, self).__init__(
