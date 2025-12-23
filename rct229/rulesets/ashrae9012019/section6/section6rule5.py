@@ -16,8 +16,21 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.masks import invert_mask
 from rct229.utils.pint_utils import ZERO
+from rct229.schema.schema_enums import SchemaEnums
 
+SpaceFunctionOptions = SchemaEnums.schema_enums["SpaceFunctionOptions"]
+
+NA_SPACE_FUNCTIONS = [
+    SpaceFunctionOptions.PLENUM,
+    SpaceFunctionOptions.CRAWL_SPACE,
+    SpaceFunctionOptions.INTERSTITIAL_SPACE,
+]
 BUILDING_AREA_CUTTOFF = ureg("5000 ft2")
+NA_SPACE_MSG = (
+    "Space is a crawl space, plenum, interstitial space, or an unoccupiable "
+    "space type with lighting power modeled. Unable to determine whether this "
+    "space should be included in the check."
+)
 
 
 class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
@@ -110,6 +123,27 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
                         "avg_zone_height_p": get_avg_zone_height(zone_p),
                     }
 
+                def list_filter(self, context_item, data):
+                    space_b = context_item.BASELINE_0
+
+                    total_space_lpd_b = sum(
+                        find_all("$.interior_lighting[*].power_per_area", space_b),
+                        ZERO.POWER_PER_AREA,
+                    )
+
+                    space_function_b = space_b.get("function")
+                    lighting_space_type_b = space_b.get("lighting_space_type")
+
+                    is_na_or_none = (
+                        space_function_b in NA_SPACE_FUNCTIONS
+                        or lighting_space_type_b == "NONE"
+                    )
+
+                    # Exclude ONLY NA or NONE spaces with zero lighting
+                    return not (
+                        is_na_or_none and total_space_lpd_b == ZERO.POWER_PER_AREA
+                    )
+
                 class SpaceRule(RuleDefinitionBase):
                     def __init__(self):
                         super(
@@ -119,6 +153,7 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
                             rmds_used=produce_ruleset_model_description(
                                 USER=False, BASELINE_0=True, PROPOSED=True
                             ),
+                            manual_check_required_msg=NA_SPACE_MSG,
                         )
 
                     def is_applicable(self, context, data=None):
@@ -175,6 +210,23 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
                         return {
                             "schedule_comparison_result": schedule_comparison_result
                         }
+
+                    def manual_check_required(self, context, calc_vals=None, data=None):
+                        space_b = context.BASELINE_0
+
+                        total_space_lpd_b = sum(
+                            find_all("$.interior_lighting[*].power_per_area", space_b),
+                            ZERO.POWER_PER_AREA,
+                        )
+
+                        space_function_b = space_b.get("function")
+                        lighting_space_type_b = space_b.get("lighting_space_type")
+
+                        # NA or NONE space WITH lighting
+                        return (
+                            space_function_b in NA_SPACE_FUNCTIONS
+                            or lighting_space_type_b == "NONE"
+                        ) and total_space_lpd_b > ZERO.POWER_PER_AREA
 
                     def rule_check(self, context, calc_vals=None, data=None):
                         schedule_comparison_result = calc_vals[
