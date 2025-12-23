@@ -1,5 +1,5 @@
 import pandas as pd
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_list_hvac_systems_associated_with_zone import (
     get_list_hvac_systems_associated_with_zone,
 )
 from rct229.utils.assertions import assert_, getattr_

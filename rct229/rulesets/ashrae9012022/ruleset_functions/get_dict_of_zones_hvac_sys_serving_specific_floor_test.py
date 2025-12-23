@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_hvac_sys_serving_specific_floor import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_dict_of_zones_hvac_sys_serving_specific_floor import (
     get_dict_of_zones_hvac_sys_serving_specific_floor,
 )
 from rct229.schema.validate import schema_validate_rpd
