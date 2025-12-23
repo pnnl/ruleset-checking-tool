@@ -21,7 +21,7 @@ ACCEPTABLE_RESULT_TYPE = [
 
 
 class PRM9012022Rule73v23(RuleDefinitionListIndexedBase):
-    """Rule 5 of ASHRAE 90.1-2019 Appendix G Section 12 (Receptacle)"""
+    """Rule 5 of ASHRAE 90.1-2022 Appendix G Section 12 (Receptacle)"""
 
     def __init__(self):
         super(PRM9012022Rule73v23, self).__init__(

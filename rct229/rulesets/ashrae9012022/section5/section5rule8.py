@@ -3,17 +3,21 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.rulesets.ashrae9012022.data_fns.table_G3_4_fns import table_G34_lookup
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
-    OpaqueSurfaceType as OST,
-    get_opaque_surface_type,
-)
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
     get_baseline_surface_conditioning_category_dict,
 )
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
+    OpaqueSurfaceType as OST,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
+    get_opaque_surface_type,
+)
+from rct229.utils.assertions import assert_
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
-from rct229.utils.assertions import assert_
 
 
 class PRM9012022Rule48v87(RuleDefinitionListIndexedBase):

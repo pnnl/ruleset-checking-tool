@@ -4,6 +4,8 @@ from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_descr
 from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
     get_baseline_surface_conditioning_category_dict,
 )
 from rct229.utils.pint_utils import CalcQ

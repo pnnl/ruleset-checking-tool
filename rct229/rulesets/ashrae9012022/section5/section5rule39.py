@@ -5,6 +5,8 @@ from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.rulesets.ashrae9012022.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
     get_baseline_surface_conditioning_category_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums
