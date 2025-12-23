@@ -312,7 +312,9 @@ class PRM9012019Rule76q85(RuleDefinitionListIndexedBase):
                     "swh_tank_storage_volume_b": CalcQ(
                         "tank_volume", swh_tank_storage_volume_b
                     ),
-                    "swh_setpoint_temperature_b": swh_setpoint_temperature_b,
+                    "swh_setpoint_temperature_b": CalcQ(
+                        "temperature", swh_setpoint_temperature_b
+                    ),
                     "modeled_efficiency_b": modeled_efficiency_b,
                     "modeled_standby_loss_b": modeled_standby_loss_b,
                     "swh_input_power_per_volume_b": CalcQ(
