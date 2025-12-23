@@ -61,9 +61,9 @@ def get_building_segment_skylight_roof_areas_dict(
     building_segment_roof_areas_dict = {}
 
     for building_segment in find_all("$.building_segments[*]", building):
-        building_segment_roof_areas_dict[building_segment["id"]] = (
-            building_segment_roof_areas
-        ) = {
+        building_segment_roof_areas_dict[
+            building_segment["id"]
+        ] = building_segment_roof_areas = {
             "total_envelope_roof_area": ZERO.AREA,
             "total_skylight_area": ZERO.AREA,
         }

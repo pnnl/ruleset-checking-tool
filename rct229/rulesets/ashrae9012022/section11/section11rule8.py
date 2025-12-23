@@ -120,9 +120,9 @@ class PRM9012022Rule40i48(RuleDefinitionListIndexedBase):
 
                 building_area_type_and_uses_p[bat_type] = {}
                 building_area_type_and_uses_p[bat_type]["id"] = bat_type
-                building_area_type_and_uses_p[bat_type]["swh_bats_and_uses_p"] = (
-                    swh_bats_and_uses_p[bat_type]
-                )
+                building_area_type_and_uses_p[bat_type][
+                    "swh_bats_and_uses_p"
+                ] = swh_bats_and_uses_p[bat_type]
 
             return {
                 "num_of_bldg_segment_b": num_of_bldg_segment_b,

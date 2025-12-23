@@ -115,9 +115,9 @@ class PRM9012019Rule76q46(RuleDefinitionListIndexedBase):
                 f"$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*].id",
                 rmd_b,
             ):
-                proposed_has_economizer_dict[hvac_id_b] = (
-                    is_economizer_modeled_in_proposed(rmd_b, rmd_p, hvac_id_b)
-                )
+                proposed_has_economizer_dict[
+                    hvac_id_b
+                ] = is_economizer_modeled_in_proposed(rmd_b, rmd_p, hvac_id_b)
 
             hvac_system_exception_2_list_b = []
             if find_all("$.buildings[*].refrigerated_cases", rmd_b):

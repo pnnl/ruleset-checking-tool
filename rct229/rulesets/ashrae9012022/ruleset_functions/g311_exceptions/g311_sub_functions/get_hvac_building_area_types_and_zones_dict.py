@@ -93,11 +93,12 @@ def get_hvac_building_area_types_and_zones_dict(
             for space in find_all("$.zones[*].spaces[*]", building_segment):
                 space_hvac_bat = space.get("lighting_space_type")
                 if space_hvac_bat:
-                    building_segment_space_types_areas_dict[space_hvac_bat] = (
-                        building_segment_space_types_areas_dict.get(
-                            space_hvac_bat, ZERO.AREA
-                        )
-                        + space.get("floor_area", ZERO.AREA)
+                    building_segment_space_types_areas_dict[
+                        space_hvac_bat
+                    ] = building_segment_space_types_areas_dict.get(
+                        space_hvac_bat, ZERO.AREA
+                    ) + space.get(
+                        "floor_area", ZERO.AREA
                     )
 
             # Raise assertion if no space type matched from data (empty dictionary)
@@ -189,9 +190,9 @@ def get_hvac_building_area_types_and_zones_dict(
             )
         else:
             # case to merge other undetermined to predominate hvac bat
-            building_area_types_with_total_area_and_zones_dict[predominate_hvac_bat] = (
-                assign_bat_val_flow(predominate_hvac_bat)
-            )
+            building_area_types_with_total_area_and_zones_dict[
+                predominate_hvac_bat
+            ] = assign_bat_val_flow(predominate_hvac_bat)
 
     assert_(
         building_area_types_with_total_area_and_zones_dict,

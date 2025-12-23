@@ -61,9 +61,9 @@ class PRM9012022Rule51s51(RuleDefinitionListIndexedBase):
                         building_segment["id"]
                     ]
                 )
-                service_water_heating_use_dict[building_segment["id"]] = (
-                    service_water_heating_use_list
-                )
+                service_water_heating_use_dict[
+                    building_segment["id"]
+                ] = service_water_heating_use_list
                 for swh_use in service_water_heating_use_list:
                     # If no swh use specified or swh use is 0, skip
                     if swh_use.get("use", 0) == 0:
@@ -117,12 +117,12 @@ class PRM9012022Rule51s51(RuleDefinitionListIndexedBase):
                                 ]
                             )
                             if None in energy_required_by_space.values():
-                                service_water_heating_info["btu_per_year"] = (
-                                    "UNDETERMINED"
-                                )
-                                service_water_heating_info["btu_per_sf_per_year"] = (
-                                    "UNDETERMINED"
-                                )
+                                service_water_heating_info[
+                                    "btu_per_year"
+                                ] = "UNDETERMINED"
+                                service_water_heating_info[
+                                    "btu_per_sf_per_year"
+                                ] = "UNDETERMINED"
                             else:
                                 service_water_heating_info["btu_per_year"] += sum(
                                     energy_required_by_space.values()

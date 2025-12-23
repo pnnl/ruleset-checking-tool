@@ -100,9 +100,9 @@ class PRM9012022Rule62z26(RuleDefinitionListIndexedBase):
                             in swh_comps_dict_b[swh_dist_sys_b["id"]].piping
                         ):
                             piping_info_b[current_piping_id] = {}
-                            piping_info_b[current_piping_id]["IS_RECIRC"] = (
-                                current_piping.get("is_recirculation_loop")
-                            )
+                            piping_info_b[current_piping_id][
+                                "IS_RECIRC"
+                            ] = current_piping.get("is_recirculation_loop")
 
                         piping_info_b[current_piping_id].setdefault(
                             "PUMP_POWER", ZERO.POWER

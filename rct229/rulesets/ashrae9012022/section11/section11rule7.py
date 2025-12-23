@@ -99,9 +99,9 @@ class PRM9012022Rule49y39(RuleDefinitionListIndexedBase):
 
                 building_area_type_and_uses[bat_type] = {}
                 building_area_type_and_uses[bat_type]["id"] = bat_type
-                building_area_type_and_uses[bat_type]["swh_bats_and_uses_p"] = (
-                    swh_bats_and_uses_p[bat_type]
-                )
+                building_area_type_and_uses[bat_type][
+                    "swh_bats_and_uses_p"
+                ] = swh_bats_and_uses_p[bat_type]
 
             return [
                 produce_ruleset_model_description(

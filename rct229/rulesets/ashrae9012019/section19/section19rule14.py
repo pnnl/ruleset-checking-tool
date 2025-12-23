@@ -90,10 +90,10 @@ class PRM9012019Rule60f12(RuleDefinitionListIndexedBase):
             hvac_id_b = hvac_b["id"]
             hvac_info_b[hvac_id_b] = {}
 
-            hvac_info_b[hvac_id_b]["fan_system_info_b"] = (
-                get_fan_system_object_supply_return_exhaust_relief_total_power_flow(
-                    getattr_(hvac_b, "HVAC", "fan_system")
-                )
+            hvac_info_b[hvac_id_b][
+                "fan_system_info_b"
+            ] = get_fan_system_object_supply_return_exhaust_relief_total_power_flow(
+                getattr_(hvac_b, "HVAC", "fan_system")
             )
 
         zone_fan_power_dict_b = {}

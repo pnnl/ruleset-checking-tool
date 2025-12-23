@@ -148,15 +148,15 @@ class PRM9012019Rule29n92(RuleDefinitionListIndexedBase):
                     > 1
                 )
 
-            zone_data[hvac_id_b]["aggregated_min_OA_schedule_across_zones_b"] = (
-                aggregate_min_OA_schedule_across_zones(
-                    zone_data[hvac_id_b]["zone_OA_CFM_list_of_schedules_b"]
-                )
+            zone_data[hvac_id_b][
+                "aggregated_min_OA_schedule_across_zones_b"
+            ] = aggregate_min_OA_schedule_across_zones(
+                zone_data[hvac_id_b]["zone_OA_CFM_list_of_schedules_b"]
             )
-            zone_data[hvac_id_b]["aggregated_min_OA_schedule_across_zones_p"] = (
-                aggregate_min_OA_schedule_across_zones(
-                    zone_data[hvac_id_b]["zone_OA_CFM_list_of_schedules_p"]
-                )
+            zone_data[hvac_id_b][
+                "aggregated_min_OA_schedule_across_zones_p"
+            ] = aggregate_min_OA_schedule_across_zones(
+                zone_data[hvac_id_b]["zone_OA_CFM_list_of_schedules_p"]
             )
 
         return {

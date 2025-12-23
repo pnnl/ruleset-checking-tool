@@ -165,9 +165,9 @@ def get_building_surface_conditioning_category_dict(
             )
 
             if adjacency in [SurfaceAdjacency.IDENTICAL, SurfaceAdjacency.UNDEFINED]:
-                surface_conditioning_category_dict[surface["id"]] = (
-                    SurfaceConditioningCategory.UNREGULATED
-                )
+                surface_conditioning_category_dict[
+                    surface["id"]
+                ] = SurfaceConditioningCategory.UNREGULATED
 
             elif zcc in SCC_DATA_FRAME.index and adjacency in SCC_DATA_FRAME.columns:
                 surface_conditioning_category_dict[surface["id"]] = SCC_DATA_FRAME.at[
