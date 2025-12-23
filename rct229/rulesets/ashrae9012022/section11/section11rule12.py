@@ -1,8 +1,8 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import BASELINE_0
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_with_each_building_segment import (
+from rct229.rulesets.ashrae9012022 import BASELINE_0
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_swh_uses_associated_with_each_building_segment import (
     get_swh_uses_associated_with_each_building_segment,
 )
 from rct229.utils.assertions import getattr_
@@ -15,15 +15,15 @@ APPLICABILITY_MSG = (
 )
 
 
-class PRM9012019Rule52y79(RuleDefinitionListIndexedBase):
-    """Rule 12 of ASHRAE 90.1-2019 Appendix G Section 11 (Service Water Heating)"""
+class PRM9012022Rule52y79(RuleDefinitionListIndexedBase):
+    """Rule 12 of ASHRAE 90.1-2022 Appendix G Section 11 (Service Water Heating)"""
 
     def __init__(self):
-        super(PRM9012019Rule52y79, self).__init__(
+        super(PRM9012022Rule52y79, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=True, PROPOSED=True
             ),
-            each_rule=PRM9012019Rule52y79.RMDRule(),
+            each_rule=PRM9012022Rule52y79.RMDRule(),
             index_rmd=BASELINE_0,
             id="11-12",
             description="For large, 24-hour-per-day facilities that meet the prescriptive criteria for use of condenser heat recovery systems described in Section 6.5.6.2, a system meeting the requirements of that section shall be included in the baseline building design regardless of the exceptions to Section 6.5.6.2.",
@@ -35,11 +35,11 @@ class PRM9012019Rule52y79(RuleDefinitionListIndexedBase):
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(PRM9012019Rule52y79.RMDRule, self).__init__(
+            super(PRM9012022Rule52y79.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=True, PROPOSED=True
                 ),
-                each_rule=PRM9012019Rule52y79.RMDRule.BuildingRule(),
+                each_rule=PRM9012022Rule52y79.RMDRule.BuildingRule(),
                 index_rmd=BASELINE_0,
                 list_path="$.buildings[*]",
             )
@@ -68,7 +68,7 @@ class PRM9012019Rule52y79(RuleDefinitionListIndexedBase):
 
         class BuildingRule(PartialRuleDefinition):
             def __init__(self):
-                super(PRM9012019Rule52y79.RMDRule.BuildingRule, self).__init__(
+                super(PRM9012022Rule52y79.RMDRule.BuildingRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=True
                     ),
