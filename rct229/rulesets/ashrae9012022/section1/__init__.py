@@ -1,15 +1,19 @@
-# Add all available rule modules in __all__
 import importlib
 
+# Add all available rule modules in __all__
 __all__ = [
-    "section12rule1",
-    "section12rule2",
-    "section12rule3",
-    "section12rule4",
-    "section12rule5",
+    "section1rule1",
+    "section1rule2",
+    "section1rule3",
+    "section1rule4",
+    "section1rule5",
+    "section1rule6",
+    "section1rule7",
+    "section1rule8",
+    "section1rule9",
 ]
 
-SHORT_NAME = "REC"
+SHORT_NAME = "CALC"
 
 
 def __getattr__(name):
