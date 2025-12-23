@@ -35,7 +35,7 @@ class RuleDefinitionBase:
         fail_msg: str = "",
         pass_msg: str = "",
         not_applicable_msg: str = "",
-        precision: Mapping[str, RCTPrecision] = None,
+        precision: Mapping[str, dict[str, float]] = None,
     ):
         """Base class for all Rule definitions
 
