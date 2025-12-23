@@ -112,7 +112,7 @@ lighting_space_enumeration_to_lpd_space_type_map = {
     "TRANSPORTATION_FACILITY_TICKET_COUNTER": "transportation ticket counter",
     "WAREHOUSE_STORAGE_AREA_MEDIUM_TO_BULKY_PALLETIZED_ITEMS": "warehouse - bulk storage",
     "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS": "warehouse - fine storage",
-    "NONE": "none"
+    "NONE": "none",
 }
 
 FULL_AUTO_ON = SchemaEnums.schema_enums["LightingOccupancyControlOptions"].FULL_AUTO_ON
