@@ -5,7 +5,7 @@
         "Test": "a",
         "test_description": "A one story, one zone building includes a baseline system 3. Both the baseline and proposed version of the building utilize adiabatic humidification.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "This zone is modeled with humidification in the baseline and proposed. Check that the baseline system serving this zone is modeled with adiabatic humidification if the specified humidification system complies with 90.1 - 2019 Section 6.5.2.4",
+        "expected_raised_message_includes": "This zone is modeled with humidification in the baseline and proposed. Check that the baseline system serving this zone is modeled with adiabatic humidification if the specified humidification system complies with 90.1 - 2022 Section 6.5.2.4",
         "standard": {
             "rule_id": "10-1",
             "ruleset_reference": "G3.1-10",
