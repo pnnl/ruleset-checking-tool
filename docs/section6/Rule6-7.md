@@ -12,7 +12,7 @@
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 ## Rule Logic: 
-- List lighting space types that have no daylighting control requirements: `not_applicable_space_types = ["DORMITORY_LIVING_QUARTERS", "FIRE_STATION_SLEEPING_QUARTERS", "HEALTHCARE_FACILITY_OPERATING_ROOM", "OUTPATIENT_HEALTH_CARE_FACILITIES_CLASS_1_IMAGING_ROOMS", "DWELLING_UNIT", "GUEST_ROOM", "STORAGE_ROOM_SMALL", "PARKING_AREA_INTERIOR"]`
+- List lighting space types that have no daylighting control requirements: `not_applicable_space_types = ["DORMITORY_LIVING_QUARTERS", "FIRE_STATION_SLEEPING_QUARTERS", "HEALTHCARE_FACILITY_OPERATING_ROOM", "OUTPATIENT_HEALTH_CARE_FACILITIES_CLASS_1_IMAGING_ROOMS", "DWELLING_UNIT", "GUEST_ROOM", "STORAGE_ROOM_SMALL", "PARKING_AREA_INTERIOR", "NONE"]`
 
 - Check if each zone has window or skylight in the building segment in the Proposed model: `For zone_p in P_RMD...zones:`
 

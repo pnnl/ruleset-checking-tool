@@ -257,7 +257,8 @@
                 "TRANSPORTATION_FACILITY_AIRPORT_CONCOURSE",
                 "TRANSPORTATION_FACILITY_TICKET_COUNTER",
                 "WAREHOUSE_STORAGE_AREA_MEDIUM_TO_BULKY_PALLETIZED_ITEMS",
-                "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS"
+                "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
+                "NONE"
             ],
             "descriptions": [
                 "Atrium - Low/Medium",
@@ -362,7 +363,8 @@
                 "Transportation Facility - Airport concourse",
                 "Transportation Facility - Ticket counter",
                 "Warehouse \u00e2\u20ac\u201d Storage Area - Medium to bulky, palletized items",
-                "Warehouse \u00e2\u20ac\u201d Storage Area - Smaller, hand-carried items"
+                "Warehouse \u00e2\u20ac\u201d Storage Area - Smaller, hand-carried items",
+                "None"
             ],
             "notes": [
                 null,
@@ -467,7 +469,7 @@
                 null,
                 null,
                 null,
-                null
+                "Indicates that the space will have no occupancy, such as an elevator shaft."
             ]
         },
         "LightingPurposeOptions2019ASHRAE901": {
