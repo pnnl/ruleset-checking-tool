@@ -130,7 +130,7 @@ def get_zone_conditioning_category_dict(
                 ]
                 if assert_(
                     hvac_systems_dict.get(hvac_sys_id),
-                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAirConditioningSystems data group.",
                 )
                 and find_one(
                     "$.cooling_system.design_sensible_cool_capacity",
@@ -151,7 +151,7 @@ def get_zone_conditioning_category_dict(
                 hvac_systems_dict[hvac_sys_id]["heating_system"]["design_capacity"]
                 if assert_(
                     hvac_systems_dict.get(hvac_sys_id),
-                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAirConditioningSystems data group.",
                 )
                 and find_one(
                     "$.heating_system.design_capacity", hvac_systems_dict[hvac_sys_id]
@@ -163,7 +163,7 @@ def get_zone_conditioning_category_dict(
                 hvac_systems_dict[hvac_sys_id]["preheat_system"]["design_capacity"]
                 if assert_(
                     hvac_systems_dict.get(hvac_sys_id),
-                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAirConditioningSystems data group.",
                 )
                 and find_one(
                     "$.preheat_system.design_capacity", hvac_systems_dict[hvac_sys_id]
@@ -363,7 +363,10 @@ def get_zone_conditioning_category_dict(
                         zone_has_residential_spaces = True  # space_1_1_1
                     elif space_lighting_space_type is not None:
                         zone_has_nonresidential_spaces = True  # space_1_1_2
-                    elif building_segment_is_residential:
+                    elif (
+                        building_segment_is_residential
+                        and space_lighting_space_type is None
+                    ):
                         zone_has_residential_spaces = True  # space_1_1_3
                     elif building_segment_is_nonresidential:
                         zone_has_nonresidential_spaces = True  # space_2_1_1

@@ -194,7 +194,7 @@ def evaluate_rules(
         f"Required RPDs provided are invalid. See error messages: {invalid_rmds}",
     )
 
-    ## Now check the optional RMDs
+    # Now check the optional RMDs
     invalid_rmds = {}
     for ruleset_model in rmds.get_ruleset_model_types():
         # used is None but rmds contain this ruleset model

@@ -96,6 +96,14 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
         rmd_b = context.BASELINE_0
         rmd_p = context.PROPOSED
 
+        baseline_system_types_dict_b = get_baseline_system_types(rmd_b)
+        applicable_hvac_sys_ids = [
+            hvac_id
+            for sys_type in baseline_system_types_dict_b
+            for target_sys_type in APPLICABLE_SYS_TYPES
+            if baseline_system_type_compare(sys_type, target_sys_type, False)
+            for hvac_id in baseline_system_types_dict_b[sys_type]
+        ]
         dict_of_zones_and_terminal_units_served_by_hvac_sys_b = (
             get_dict_of_zones_and_terminal_units_served_by_hvac_sys(rmd_b)
         )
@@ -104,6 +112,8 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
         design_thermostat_cooling_setpoint = []
         design_thermostat_heating_setpoint = []
         for hvac_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b:
+            if hvac_id_b not in applicable_hvac_sys_ids:
+                continue
             zone_info[hvac_id_b] = {
                 "are_all_hvac_sys_fan_objs_autosized": are_all_hvac_sys_fan_objs_autosized(
                     rmd_b, hvac_id_b
@@ -217,7 +227,13 @@ class PRM9012019Rule77j17(RuleDefinitionListIndexedBase):
 
         return {
             "zone_info": zone_info,
+            "applicable_hvac_sys_ids": applicable_hvac_sys_ids,
         }
+
+    def list_filter(self, context_item, data):
+        applicable_hvac_sys_ids = data["applicable_hvac_sys_ids"]
+
+        return context_item.BASELINE_0["id"] in applicable_hvac_sys_ids
 
     class HVACRule(RuleDefinitionBase):
         def __init__(self):

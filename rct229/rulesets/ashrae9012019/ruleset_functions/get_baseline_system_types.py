@@ -104,7 +104,7 @@ def get_baseline_system_types(rmd_b: dict) -> dict[HVAC_SYS, list[str]]:
         hvac_b_id = hvac_b["id"]
         assert_(
             dict_of_zones_and_terminal_units_served_by_hvac_sys.get(hvac_b_id),
-            f"HVAC system {hvac_b_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+            f"HVAC system {hvac_b_id} is missing in the HeatingVentilatingAirConditioningSystems data group.",
         )
 
         terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[

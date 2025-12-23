@@ -5,6 +5,9 @@ from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_fan_object_electric_power import (
+    get_fan_object_electric_power,
+)
 from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
@@ -108,7 +111,7 @@ class PRM9012019Rule98g04(RuleDefinitionListIndexedBase):
             terminal_b = context.BASELINE_0
             design_airflow_b = terminal_b["fan"]["design_airflow"]
             primary_airflow_b = terminal_b["primary_airflow"]
-            design_electric_power_b = terminal_b["fan"]["design_electric_power"]
+            design_electric_power_b = get_fan_object_electric_power(terminal_b["fan"])
 
             return {
                 "design_airflow_b": CalcQ("air_flow_rate", design_airflow_b),
