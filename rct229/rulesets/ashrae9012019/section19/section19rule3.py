@@ -1,4 +1,4 @@
-from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
+from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.schema.schema_enums import SchemaEnums
 
@@ -6,7 +6,7 @@ HEATING_DESIGN_DAY = SchemaEnums.schema_enums["HeatingDesignDayOptions"]
 COOLING_DESIGN_DAY = SchemaEnums.schema_enums["CoolingDesignDayOptions"]
 
 
-class PRM9012019Rule16j07(PartialRuleDefinition):
+class PRM9012019Rule16j07(RuleDefinitionBase):
     """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 19 (HVAC - General)"""
 
     def __init__(self):
@@ -52,6 +52,9 @@ class PRM9012019Rule16j07(PartialRuleDefinition):
                 "evaporation_wet_bulb_design_day_type"
             ),
         }
+
+    def manual_check_required(self, context, calc_vals=None, data=None):
+        return any(calc_vals[key] is None for key in calc_vals)
 
     def rule_check(self, context, calc_vals=None, data={}):
         cooling_design_day_type_b = calc_vals["cooling_design_day_type_b"]

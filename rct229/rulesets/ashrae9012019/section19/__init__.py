@@ -41,6 +41,8 @@ __all__ = [
     "section19rule37",
 ]
 
+SHORT_NAME = "HVAC-GEN"
+
 
 def __getattr__(name):
     if name in __all__:

@@ -24,7 +24,7 @@ class PRM9012019Rule44m70(RuleDefinitionListIndexedBase):
             ),
             required_fields={
                 "$.ruleset_model_descriptions[*]": ["weather", "constructions"],
-                "weather": ["climate_zone"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
             },
             each_rule=PRM9012019Rule44m70.BuildingRule(),
             index_rmd=BASELINE_0,
@@ -147,23 +147,17 @@ class PRM9012019Rule44m70(RuleDefinitionListIndexedBase):
                     }
 
                 def rule_check(self, context, calc_vals=None, data=None):
-                    return (
-                        self.precision_comparison["subsurface_u_factor_b"](
-                            calc_vals["subsurface_u_factor_b"],
-                            calc_vals["subsurface_u_factor_p"],
+                    return all(
+                        calc_vals[f"{key}_b"] == calc_vals[f"{key}_p"]
+                        or self.precision_comparison[f"{key}_b"](
+                            calc_vals[f"{key}_b"], calc_vals[f"{key}_p"]
                         )
-                        and self.precision_comparison["subsurface_shgc_b"](
-                            calc_vals["subsurface_shgc_b"],
-                            calc_vals["subsurface_shgc_p"],
-                        )
-                        and self.precision_comparison["subsurface_glazed_area_b"](
-                            calc_vals["subsurface_glazed_area_b"],
-                            calc_vals["subsurface_glazed_area_p"],
-                        )
-                        and self.precision_comparison["subsurface_opaque_area_b"](
-                            calc_vals["subsurface_opaque_area_b"],
-                            calc_vals["subsurface_opaque_area_p"],
-                        )
+                        for key in [
+                            "subsurface_u_factor",
+                            "subsurface_shgc",
+                            "subsurface_glazed_area",
+                            "subsurface_opaque_area",
+                        ]
                     )
 
                 def is_tolerance_fail(self, context, calc_vals=None, data=None):

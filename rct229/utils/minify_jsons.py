@@ -14,7 +14,7 @@ def minify_json_file(file_path):
 
     """
     # Step 1. If the json file name ends with _master, remove it
-    if file_path.endsWith("_master.json"):
+    if file_path.endswith("_master.json"):
         try:
             os.remove(file_path)
         except Exception as e:

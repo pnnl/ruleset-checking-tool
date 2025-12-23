@@ -1,1 +1,3 @@
-__version__ = "0.3.0"
+import rct229.rulesets
+
+__version__ = "0.4.1"

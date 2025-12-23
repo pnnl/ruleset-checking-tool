@@ -4,7 +4,7 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.assertions import getattr_
+from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one
 
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
@@ -44,6 +44,28 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
         )
+
+    def create_data(self, context, data):
+        rmd_b = context.BASELINE_0
+
+        missing_data = []
+
+        if not find_all("$..hourly_heating_design_year", rmd_b) and not find_all(
+            "$..hourly_heating_design_day", rmd_b
+        ):
+            missing_data.append(
+                "No schedules in the baseline model contain hourly heating design data. "
+            )
+
+        if not find_all("$..hourly_cooling_design_year", rmd_b) and not find_all(
+            "$..hourly_cooling_design_day", rmd_b
+        ):
+            missing_data.append(
+                "No schedules in the baseline model contain hourly cooling design data. "
+            )
+
+        assert_(not missing_data, "\n".join(missing_data))
+        return {}
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
@@ -130,6 +152,11 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                             "hourly_values"
                         )
 
+                        assert_(
+                            multiplier_sch_hourly_value_b,
+                            "Hourly multiplier infiltration schedule must exist.",
+                        )
+
                         if (
                             multiplier_sch_inf_b("hourly_heating_design_year")
                             is not None
@@ -141,6 +168,10 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                             design_heating_multiplier_sch_b = multiplier_sch_inf_b(
                                 "hourly_heating_design_day"
                             )
+                        assert_(
+                            design_heating_multiplier_sch_b,
+                            "Hourly heating design day infiltration schedule must exist.",
+                        )
 
                         if (
                             multiplier_sch_inf_b("hourly_cooling_design_year")
@@ -153,6 +184,10 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                             design_cooling_multiplier_sch_b = multiplier_sch_inf_b(
                                 "hourly_cooling_design_day"
                             )
+                        assert_(
+                            design_cooling_multiplier_sch_b,
+                            "Hourly cooling design day infiltration schedule must exist.",
+                        )
 
                         max_inf_multiplier_b = max(multiplier_sch_hourly_value_b)
                         inf_pass_cooling_b = every(
@@ -213,6 +248,11 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                 "hourly_values"
                             )
 
+                            assert_(
+                                multiplier_sch_occ_hourly_value_b,
+                                "Hourly multiplier occupant schedule must exist.",
+                            )
+
                             if (
                                 multiplier_sch_occ_b("hourly_heating_design_year")
                                 is not None
@@ -224,6 +264,10 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                 multiplier_sch_design_heating_occ_b = (
                                     multiplier_sch_occ_b("hourly_heating_design_day")
                                 )
+                            assert_(
+                                multiplier_sch_design_heating_occ_b,
+                                "Hourly heating design day occupant schedule must exist.",
+                            )
 
                             if (
                                 multiplier_sch_occ_b("hourly_cooling_design_year")
@@ -236,6 +280,10 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                 multiplier_sch_design_cooling_occ_b = (
                                     multiplier_sch_occ_b("hourly_cooling_design_day")
                                 )
+                            assert_(
+                                multiplier_sch_design_cooling_occ_b,
+                                "Hourly cooling design day occupant schedule must exist.",
+                            )
 
                             max_multiplier_occ = max(multiplier_sch_occ_hourly_value_b)
                             min_multiplier_occ = min(multiplier_sch_occ_hourly_value_b)
@@ -270,6 +318,11 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                     multiplier_sch_light_b("hourly_values")
                                 )
 
+                                assert_(
+                                    multiplier_sch_light_hourly_value_b,
+                                    "Hourly multiplier lighting schedule must exist.",
+                                )
+
                                 if (
                                     multiplier_sch_light_b("hourly_heating_design_year")
                                     is not None
@@ -285,6 +338,10 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                             "hourly_heating_design_day"
                                         )
                                     )
+                                assert_(
+                                    multiplier_sch_design_heating_light_b,
+                                    "Hourly heating design day lighting schedule must exist.",
+                                )
 
                                 if (
                                     multiplier_sch_light_b("hourly_cooling_design_year")
@@ -302,6 +359,10 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                             "hourly_cooling_design_day"
                                         )
                                     )
+                                assert_(
+                                    multiplier_sch_design_cooling_light_b,
+                                    "Hourly cooling design day lighting schedule must exist.",
+                                )
 
                                 max_multiplier_light = max(
                                     multiplier_sch_light_hourly_value_b
@@ -346,6 +407,11 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                     multiplier_sch_misc_b("hourly_values")
                                 )
 
+                                assert_(
+                                    multiplier_sch_misc_hourly_value_b,
+                                    "Hourly multiplier miscellaneous schedule must exist.",
+                                )
+
                                 if (
                                     multiplier_sch_light_b("hourly_heating_design_year")
                                     is not None
@@ -361,6 +427,10 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                             "hourly_heating_design_day"
                                         )
                                     )
+                                assert_(
+                                    multiplier_sch_design_heating_misc_b,
+                                    "Hourly heating design day miscellaneous schedule must exist.",
+                                )
 
                                 if (
                                     multiplier_sch_light_b("hourly_cooling_design_year")
@@ -377,6 +447,10 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
                                             "hourly_cooling_design_day"
                                         )
                                     )
+                                assert_(
+                                    multiplier_sch_design_cooling_misc_b,
+                                    "Hourly cooling design day miscellaneous schedule must exist.",
+                                )
 
                                 max_multiplier_misc = max(
                                     multiplier_sch_misc_hourly_value_b

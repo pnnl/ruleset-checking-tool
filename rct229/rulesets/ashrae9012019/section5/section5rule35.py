@@ -34,7 +34,7 @@ class PRM9012019Rule39k65(RuleDefinitionListIndexedBase):
             ),
             required_fields={
                 "$.ruleset_model_descriptions[*]": ["weather"],
-                "weather": ["climate_zone"],
+                "$.ruleset_model_descriptions[*].weather": ["climate_zone"],
             },
             each_rule=PRM9012019Rule39k65.BuildingRule(),
             index_rmd=BASELINE_0,
@@ -111,6 +111,16 @@ class PRM9012019Rule39k65(RuleDefinitionListIndexedBase):
             return {
                 "building_total_air_leakage_rate": CalcQ(
                     "air_flow_rate", building_total_air_leakage_rate
+                ),
+                "target_building_total_air_leakage_rate": CalcQ(
+                    "air_flow_rate",
+                    TOTAL_AIR_LEAKAGE_FACTOR * target_air_leakage_rate_75pa_b,
+                ),
+                "building_total_envelope_area": CalcQ(
+                    "area", building_total_envelope_area
+                ),
+                "target_air_leakage_coefficient": CalcQ(
+                    "flow_per_area", TARGET_AIR_LEAKAGE_COEFF
                 ),
                 "target_air_leakage_rate_75pa_b": CalcQ(
                     "air_flow_rate", target_air_leakage_rate_75pa_b

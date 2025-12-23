@@ -6,7 +6,10 @@ __all__ = [
     "section12rule2",
     "section12rule3",
     "section12rule4",
+    "section12rule5",
 ]
+
+SHORT_NAME = "REC"
 
 
 def __getattr__(name):

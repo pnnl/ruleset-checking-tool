@@ -51,14 +51,22 @@ class PRM9012019Rule92n36(RuleDefinitionListIndexedBase):
             rmd_p = context.PROPOSED
 
             cab_ventilation_schedule_p = {
-                sch_id: find_exactly_one_schedule(rmd_p, sch_id)["hourly_values"]
+                sch_id: getattr_(
+                    find_exactly_one_schedule(rmd_p, sch_id),
+                    "Schedule",
+                    "hourly_values",
+                )
                 for sch_id in find_all(
                     "buildings[*].elevators[*].cab_ventilation_fan_multiplier_schedule",
                     rmd_p,
                 )
             }
             motor_use_schedule_p = {
-                sch_id: find_exactly_one_schedule(rmd_p, sch_id)["hourly_values"]
+                sch_id: getattr_(
+                    find_exactly_one_schedule(rmd_p, sch_id),
+                    "Schedule",
+                    "hourly_values",
+                )
                 for sch_id in find_all(
                     "buildings[*].elevators[*].cab_motor_multiplier_schedule",
                     rmd_p,

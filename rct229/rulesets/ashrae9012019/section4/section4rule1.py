@@ -1,7 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rule_engine.rulesets import LeapYear
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
@@ -124,12 +123,8 @@ class PRM9012019Rule96q77(RuleDefinitionListIndexedBase):
                 )
 
                 if cooling_vals_b is None:
-                    cooling_val_b = getattr_(
-                        zone_b, "zones", "design_thermostat_cooling_setpoint"
-                    ).magnitude
-                    cooling_val_p = getattr_(
-                        zone_p, "design_thermostat_cooling_setpoint"
-                    ).magnitude
+                    cooling_val_b = zone_b.get("design_thermostat_cooling_setpoint")
+                    cooling_val_p = zone_p.get("design_thermostat_cooling_setpoint")
                     cooling_schedule_matched = cooling_val_b == cooling_val_p
                 else:
                     cooling_schedule_matched = cooling_vals_b == cooling_vals_p
@@ -161,12 +156,8 @@ class PRM9012019Rule96q77(RuleDefinitionListIndexedBase):
                 )
 
                 if heating_vals_b is None:
-                    heating_val_b = getattr_(
-                        zone_b, "zones", "design_thermostat_heating_setpoint"
-                    ).magnitude
-                    heating_val_p = getattr_(
-                        zone_p, "design_thermostat_heating_setpoint"
-                    ).magnitude
+                    heating_val_b = zone_b.get("design_thermostat_heating_setpoint")
+                    heating_val_p = zone_p.get("design_thermostat_heating_setpoint")
                     heating_schedule_matched = heating_val_b == heating_val_p
                 else:
                     heating_schedule_matched = heating_vals_b == heating_vals_p

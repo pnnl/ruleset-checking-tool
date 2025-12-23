@@ -1,6 +1,7 @@
 import numpy as np
 from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
+from rct229.schema.config import ureg
 
 LEAP_YEAR_HRS = 8784
 NON_LEAP_YEAR_HRS = 8760
@@ -76,6 +77,6 @@ def get_min_oa_cfm_sch_zone(rmd: dict, zone_id: str) -> list[float | int]:
 
         min_OA_CFM_schedule_for_zones = min_OA_CFM_schedule_for_zones_array.tolist()
     else:
-        min_OA_CFM_schedule_for_zones = [0] * (year_hrs or 8760)
+        min_OA_CFM_schedule_for_zones = [0 * ureg("cfm")] * (year_hrs or 8760)
 
     return min_OA_CFM_schedule_for_zones

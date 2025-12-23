@@ -255,7 +255,7 @@ class PRM9012019Rule34l50(RuleDefinitionListIndexedBase):
                 "is_zone_agg_factor_undefined_and_needed": is_zone_agg_factor_undefined_and_needed,
                 "expected_baseline_eff_b": expected_eff_b,
                 "most_conservative_eff_b": most_conservative_eff_b,
-                "modeled_efficiency_b": modeled_efficiency_b,
+                "modeled_efficiency_b": modeled_efficiency_b.magnitude,
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):

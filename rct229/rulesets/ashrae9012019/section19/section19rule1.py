@@ -116,95 +116,49 @@ class PRM9012019Rule73r44(RuleDefinitionListIndexedBase):
         def rule_check(self, context, calc_vals=None, data=None):
             heating_not_applicable = calc_vals["heating_not_applicable"]
             cooling_not_applicable = calc_vals["cooling_not_applicable"]
-            heating_oversizing_factor = None
-            cooling_oversizing_factor = None
-            heating_is_calculated_size = None
-            cooling_is_calculated_size = None
-            if not heating_not_applicable:
-                heating_oversizing_factor = calc_vals["heating_oversizing_factor"]
-                heating_is_calculated_size = calc_vals["heating_is_calculated_size"]
 
-            if not cooling_not_applicable:
-                cooling_oversizing_factor = calc_vals["cooling_oversizing_factor"]
-                cooling_is_calculated_size = calc_vals["cooling_is_calculated_size"]
+            heating_oversizing_factor = calc_vals.get("heating_oversizing_factor")
+            cooling_oversizing_factor = calc_vals.get("cooling_oversizing_factor")
+            heating_is_calculated_size = calc_vals.get("heating_is_calculated_size")
+            cooling_is_calculated_size = calc_vals.get("cooling_is_calculated_size")
 
-            return (
-                (
-                    heating_not_applicable
-                    or self.precision_comparison["heating_oversizing_factor"](
-                        heating_oversizing_factor,
-                        REQ_HEATING_OVERSIZING_FACTOR,
-                    )
-                    and (
-                        cooling_not_applicable
-                        or self.precision_comparison["cooling_oversizing_factor"](
-                            cooling_oversizing_factor,
-                            REQ_COOLING_OVERSIZING_FACTOR,
-                        )
-                    )
-                    and (heating_not_applicable or heating_is_calculated_size)
-                    and (cooling_not_applicable or cooling_is_calculated_size)
+            heating_pass = heating_not_applicable or (
+                self.precision_comparison["heating_oversizing_factor"](
+                    heating_oversizing_factor, REQ_HEATING_OVERSIZING_FACTOR
                 )
-                or (
-                    self.precision_comparison["heating_oversizing_factor"](
-                        heating_oversizing_factor,
-                        REQ_HEATING_OVERSIZING_FACTOR,
-                    )
-                    and heating_is_calculated_size
-                )
-                or (
-                    self.precision_comparison["cooling_oversizing_factor"](
-                        cooling_oversizing_factor,
-                        REQ_COOLING_OVERSIZING_FACTOR,
-                    )
-                    and cooling_is_calculated_size
-                )
+                and bool(heating_is_calculated_size)
             )
+
+            cooling_pass = cooling_not_applicable or (
+                self.precision_comparison["cooling_oversizing_factor"](
+                    cooling_oversizing_factor, REQ_COOLING_OVERSIZING_FACTOR
+                )
+                and bool(cooling_is_calculated_size)
+            )
+
+            return heating_pass and cooling_pass
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
             heating_not_applicable = calc_vals["heating_not_applicable"]
             cooling_not_applicable = calc_vals["cooling_not_applicable"]
-            heating_oversizing_factor = None
-            cooling_oversizing_factor = None
-            heating_is_calculated_size = None
-            cooling_is_calculated_size = None
-            if not heating_not_applicable:
-                heating_oversizing_factor = calc_vals["heating_oversizing_factor"]
-                heating_is_calculated_size = calc_vals["heating_is_calculated_size"]
 
-            if not cooling_not_applicable:
-                cooling_oversizing_factor = calc_vals["cooling_oversizing_factor"]
-                cooling_is_calculated_size = calc_vals["cooling_is_calculated_size"]
+            heating_oversizing_factor = calc_vals.get("heating_oversizing_factor")
+            cooling_oversizing_factor = calc_vals.get("cooling_oversizing_factor")
+            heating_is_calculated_size = calc_vals.get("heating_is_calculated_size")
+            cooling_is_calculated_size = calc_vals.get("cooling_is_calculated_size")
 
-            return (
-                (
-                    heating_not_applicable
-                    or std_equal(
-                        val=heating_oversizing_factor,
-                        std_val=REQ_HEATING_OVERSIZING_FACTOR,
-                    )
-                    and (
-                        cooling_not_applicable
-                        or std_equal(
-                            val=cooling_oversizing_factor,
-                            std_val=REQ_COOLING_OVERSIZING_FACTOR,
-                        )
-                    )
-                    and (heating_not_applicable or heating_is_calculated_size)
-                    and (cooling_not_applicable or cooling_is_calculated_size)
+            heating_pass = heating_not_applicable or (
+                std_equal(
+                    val=heating_oversizing_factor, std_val=REQ_HEATING_OVERSIZING_FACTOR
                 )
-                or (
-                    std_equal(
-                        val=heating_oversizing_factor,
-                        std_val=REQ_HEATING_OVERSIZING_FACTOR,
-                    )
-                    and heating_is_calculated_size
-                )
-                or (
-                    std_equal(
-                        val=cooling_oversizing_factor,
-                        std_val=REQ_COOLING_OVERSIZING_FACTOR,
-                    )
-                    and cooling_is_calculated_size
-                )
+                and bool(heating_is_calculated_size)
             )
+
+            cooling_pass = cooling_not_applicable or (
+                std_equal(
+                    val=cooling_oversizing_factor, std_val=REQ_COOLING_OVERSIZING_FACTOR
+                )
+                and bool(cooling_is_calculated_size)
+            )
+
+            return heating_pass and cooling_pass
