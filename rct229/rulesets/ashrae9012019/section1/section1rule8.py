@@ -30,8 +30,8 @@ class PRM9012019Rule71o26(RuleDefinitionBase):
         error_msg_list = []
 
         comparison_result = proposed_equals_user(
-            index_context=proposed,
-            compare_context=user,
+            index_context=user,
+            compare_context=proposed,
             error_msg_list=error_msg_list,
         )
 

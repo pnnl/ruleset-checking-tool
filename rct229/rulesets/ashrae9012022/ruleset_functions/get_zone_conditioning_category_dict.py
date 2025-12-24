@@ -364,7 +364,10 @@ def get_zone_conditioning_category_dict(
                         zone_has_residential_spaces = True  # space_1_1_1
                     elif space_lighting_space_type is not None:
                         zone_has_nonresidential_spaces = True  # space_1_1_2
-                    elif building_segment_is_residential:
+                    elif (
+                        building_segment_is_residential
+                        and space_lighting_space_type is None
+                    ):
                         zone_has_residential_spaces = True  # space_1_1_3
                     elif building_segment_is_nonresidential:
                         zone_has_nonresidential_spaces = True  # space_2_1_1

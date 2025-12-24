@@ -105,18 +105,20 @@ class PRM9012019Rule71o81(RuleDefinitionListIndexedBase):
                 "leaving_water_setpoint_temperature"
             ]
             return {
-                "tower_leaving_temperature_b": CalcQ(
+                "expected_leaving_water_setpoint_temperature_b": CalcQ(
                     "temperature", tower_leaving_temperature_b
                 ),
-                "leaving_water_setpoint_temperature_b": CalcQ(
+                "modeled_leaving_water_setpoint_temperature_b": CalcQ(
                     "temperature", leaving_water_setpoint_temperature_b
                 ),
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            tower_leaving_temperature_b = calc_vals["tower_leaving_temperature_b"]
+            tower_leaving_temperature_b = calc_vals[
+                "expected_leaving_water_setpoint_temperature_b"
+            ]
             leaving_water_setpoint_temperature_b = calc_vals[
-                "leaving_water_setpoint_temperature_b"
+                "modeled_leaving_water_setpoint_temperature_b"
             ]
 
             return self.precision_comparison["tower_leaving_temperature_b"](
@@ -125,9 +127,11 @@ class PRM9012019Rule71o81(RuleDefinitionListIndexedBase):
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
-            tower_leaving_temperature_b = calc_vals["tower_leaving_temperature_b"]
+            tower_leaving_temperature_b = calc_vals[
+                "expected_leaving_water_setpoint_temperature_b"
+            ]
             leaving_water_setpoint_temperature_b = calc_vals[
-                "leaving_water_setpoint_temperature_b"
+                "modeled_leaving_water_setpoint_temperature_b"
             ]
 
             return std_equal(

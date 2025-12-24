@@ -56,9 +56,12 @@ class PRM9012019Rule60m79(RuleDefinitionBase):
         pci_set = list(set(filter(lambda x: x is not None, pci_set)))
 
         assert_(
-            len(pci_target_set) >= 1, "At least one `pci_target_set` value must exist."
+            len(pci_target_set) >= 1,
+            "At least one `performance_cost_index_target` value must exist.",
         )
-        assert_(len(pci_set) >= 1, "At least one `pci_set` value must exist.")
+        assert_(
+            len(pci_set) >= 1, "At least one `performance_cost_index` value must exist."
+        )
 
         return {
             "pci_target_set": pci_target_set,
@@ -88,10 +91,8 @@ class PRM9012019Rule60m79(RuleDefinitionBase):
 
         FAIL_MSG = ""
         if len(pci_target_set) != 1:
-            FAIL_MSG = "Ruleset expects exactly one PCI Target value to be used in the project."
+            FAIL_MSG = "Ruleset expects exactly one `performance_cost_index_target` value to be used in the project."
         elif len(pci_set) != 1:
-            FAIL_MSG = (
-                "Ruleset expects exactly one PCI value to be used in the project."
-            )
+            FAIL_MSG = "Ruleset expects exactly one `performance_cost_index` value to be used in the project."
 
         return FAIL_MSG

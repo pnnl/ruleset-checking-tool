@@ -27,10 +27,9 @@
         -    `queue.extend(children_piping)`  
         -    `piping_losses_modeled_b.append(current_piping.get("are_thermal_losses_modeled"))`  
 
-
-- **Rule Assertion - Zone:**  
-- Case1: piping losses are not modeled, PASS: `if not any(piping_losses_modeled_b): PASS`
-- Case2: piping losses are modeled, FAIL: `else: FAIL`
+    **Rule Assertion:**  
+    - Case 1: piping losses are not modeled, PASS: `if not any(piping_losses_modeled_b): PASS`
+    - Case 2: piping losses are modeled, FAIL: `else: FAIL`
 
 
 **Notes:**
