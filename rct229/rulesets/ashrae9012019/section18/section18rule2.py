@@ -136,19 +136,41 @@ class PRM9012019Rule51v53(RuleDefinitionListIndexedBase):
                     HVAC_SYS.UNMATCHED,
                 )
 
-                if sys_type == HVAC_SYS.UNMATCHED:
-                    hvac_data_b[hvac_id_b] = {
-                        "sys_type": HVAC_SYS.UNMATCHED,
-                        "is_sys_single_zone_sys_b": False,
-                        "does_sys_only_serve_lab_b": False,
-                        "does_sys_part_of_serve_lab_b": False,
-                        "does_sys_serve_lab_and_other_b": False,
-                        "does_two_sys_exist_on_same_fl_b": "undetermined",
-                        "hvac_sys2_id_b": None,
-                        "does_sys_serve_one_floor": False,
-                        "do_multi_zone_evaluation": False,
-                    }
-                    continue
+                zones_served_by_system = zones_and_terminal_unit_list_dict_b.get(
+                    hvac_id_b, {}
+                ).get("zone_list", [])
+
+                zones_on_floor = (
+                    get_zones_on_same_floor_list(rmd_b, zones_served_by_system[0])
+                    if zones_served_by_system
+                    else []
+                )
+
+                hvac_lab_zones_only_b = lab_zone_hvac_systems["lab_zones_only"]
+
+                hvac_data_b[hvac_id_b] = {
+                    "sys_type": sys_type,
+                    "is_sys_single_zone_sys_b": (
+                        len(zones_served_by_system) == 1
+                        if zones_served_by_system
+                        else False
+                    ),
+                    "does_two_sys_exist_on_same_fl_b": "undetermined",
+                    "does_sys_only_serve_lab_b": hvac_id_b in hvac_lab_zones_only_b,
+                    "does_sys_part_of_serve_lab_b": (
+                        hvac_id_b in hvac_lab_zones_only_b
+                        and len(hvac_lab_zones_only_b) > 1
+                    ),
+                    "does_sys_serve_lab_and_other_b": (
+                        hvac_id_b in lab_zone_hvac_systems["lab_and_other"]
+                    ),
+                    "hvac_sys2_id_b": None,
+                    "does_sys_serve_one_floor": (
+                        bool(zones_served_by_system)
+                        and set(zones_served_by_system).issubset(set(zones_on_floor))
+                    ),
+                    "do_multi_zone_evaluation": bool(len(zones_served_by_system) > 1),
+                }
 
                 if hvac_id_b in applicable_hvac_sys_ids_b:
                     hvac_lab_zones_only_b = lab_zone_hvac_systems["lab_zones_only"]
