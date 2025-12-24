@@ -1,7 +1,6 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rule_engine.rulesets import LeapYear
 from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
     compare_schedules,
@@ -89,7 +88,7 @@ class PRM9012019Rule79w60(RuleDefinitionListIndexedBase):
             rmd_b = context.BASELINE_0
             rmd_p = context.PROPOSED
 
-            schedule_b = {
+            mult_schedules_b = {
                 mult_sch_b: find_exactly_one_schedule(rmd_b, mult_sch_b)[
                     "hourly_values"
                 ]
@@ -98,7 +97,7 @@ class PRM9012019Rule79w60(RuleDefinitionListIndexedBase):
                     rmd_b,
                 )
             }
-            schedule_p = {
+            mult_schedules_p = {
                 mult_sch_p: find_exactly_one_schedule(rmd_p, mult_sch_p)[
                     "hourly_values"
                 ]
@@ -109,8 +108,8 @@ class PRM9012019Rule79w60(RuleDefinitionListIndexedBase):
             }
 
             return {
-                "schedule_b": schedule_b,
-                "schedule_p": schedule_p,
+                "mult_schedules_b": mult_schedules_b,
+                "mult_schedules_p": mult_schedules_p,
             }
 
         def list_filter(self, context_item, data):
@@ -173,9 +172,8 @@ class PRM9012019Rule79w60(RuleDefinitionListIndexedBase):
                     misc_equip_b = context.BASELINE_0
                     misc_equip_p = context.PROPOSED
 
-                    space_type_p = data["space_type_p"]
-                    schedule_b = data["schedule_b"]
-                    schedule_p = data["schedule_p"]
+                    mult_schedules_b = data["mult_schedules_b"]
+                    mult_schedules_p = data["mult_schedules_p"]
 
                     expected_receptacle_power_credit = 0.1 * getattr_(
                         misc_equip_p,
@@ -188,19 +186,21 @@ class PRM9012019Rule79w60(RuleDefinitionListIndexedBase):
 
                     expected_hourly_values = [
                         hour_value * (1 - expected_receptacle_power_credit)
-                        for hour_value in schedule_b[hourly_multiplier_schedule_b]
+                        for hour_value in mult_schedules_b[hourly_multiplier_schedule_b]
                     ]
 
-                    mask_schedule = [1] * len(schedule_b["Plug Load Schedule"])
+                    mask_schedule = [1] * len(
+                        mult_schedules_b[hourly_multiplier_schedule_b]
+                    )
                     credit_comparison_data = compare_schedules(
                         expected_hourly_values,
-                        schedule_p[hourly_multiplier_schedule_p],
+                        mult_schedules_p[hourly_multiplier_schedule_p],
                         mask_schedule,
                     )["total_hours_matched"]
 
                     no_credit_comparison_data = compare_schedules(
-                        schedule_b[hourly_multiplier_schedule_b],
-                        schedule_p[hourly_multiplier_schedule_p],
+                        mult_schedules_b[hourly_multiplier_schedule_b],
+                        mult_schedules_p[hourly_multiplier_schedule_p],
                         mask_schedule,
                     )["total_hours_matched"]
 
@@ -209,10 +209,10 @@ class PRM9012019Rule79w60(RuleDefinitionListIndexedBase):
                         "credit_comparison_total_hours_matched": credit_comparison_data,
                         "no_credit_comparison_total_hours_matched": no_credit_comparison_data,
                         "hourly_multiplier_schedule_len_b": len(
-                            schedule_b[hourly_multiplier_schedule_b]
+                            mult_schedules_b[hourly_multiplier_schedule_b]
                         ),
                         "hourly_multiplier_schedule_len_p": len(
-                            schedule_p[hourly_multiplier_schedule_p]
+                            mult_schedules_p[hourly_multiplier_schedule_p]
                         ),
                     }
 

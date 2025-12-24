@@ -1,54 +1,61 @@
 import importlib
 import inspect
+import sys
+from importlib.metadata import entry_points
 
 import rct229.rule_engine.partial_rule_definition as base_partial_rule_classes
 import rct229.rule_engine.rule_base as base_classes
 import rct229.rule_engine.rule_list_base as base_list_classes
 import rct229.rule_engine.rule_list_indexed_base as base_list_indexed_classes
-import rct229.rulesets as rulesets
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rulesets import RuleSet
-
-# All list for registering a ruleset.
-__all__ = [RuleSet.ASHRAE9012019_RULESET]
-
-# Added to remove the sub-module that are not rules.
 from rct229.schema.schema_store import SchemaStore
+
 
 MODULE_EXCEPTION_LIST = ["math", "itertools"]
 
 
+# Dynamically load all registered rulesets via entry points
+def discover_ruleset_plugins():
+    eps = entry_points(group="rct229.rulesets")
+    loaded = {}
+    for ep in eps:
+        try:
+            mod = ep.load()
+            loaded[ep.name] = mod
+            setattr(sys.modules[__name__], ep.name, mod)
+        except Exception as e:
+            print(f"Warning: failed to load ruleset plugin '{ep.name}': {e}")
+    return loaded
+
+
+def register_rulesets():
+    for name in __all__:
+        setattr(RuleSet, name.upper().replace("-", "_") + "_RULESET", name)
+
+
+# Dynamically discover all ruleset modules
+_DISCOVERED_RULESETS = discover_ruleset_plugins()
+
+# Update __all__ to reflect discovered rule names
+__all__ = sorted(_DISCOVERED_RULESETS.keys())
+
+
 def __getruleset__():
-    ruleset_list = inspect.getmembers(rulesets, inspect.ismodule)
-    for ruleset in ruleset_list:
-        if ruleset[0] == SchemaStore.SELECTED_RULESET:
-            return ruleset[1]
+    selected = SchemaStore.SELECTED_RULESET
+    return _DISCOVERED_RULESETS.get(selected)
 
 
 def __getrules__():
+    selected_ruleset = __getruleset__()
+    if not selected_ruleset:
+        return []
+
     modules = []
-    ruleset_list = inspect.getmembers(rulesets, inspect.ismodule)
-    for ruleset in ruleset_list:
-        if ruleset[0] == SchemaStore.SELECTED_RULESET:
-            __getrules_module__helper(ruleset[1], modules)
-    # Adding the module names that should be excluded from the available rules. Such as RuleDefinitionBase
-    base_class_names = [f[0] for f in inspect.getmembers(base_classes, inspect.isclass)]
-    base_class_names = base_class_names + [
-        f[0] for f in inspect.getmembers(base_list_classes, inspect.isclass)
-    ]
-    base_class_names = base_class_names + [
-        f[0] for f in inspect.getmembers(base_partial_rule_classes, inspect.isclass)
-    ]
-    base_class_names = list(
-        set(
-            base_class_names
-            + [
-                f[0]
-                for f in inspect.getmembers(base_list_indexed_classes, inspect.isclass)
-            ]
-        )
-    )
-    # --- End adding base class names
+    __getrules_module__helper(selected_ruleset, modules)
+
+    base_class_names = _get_base_class_names()
+
     available_rules = []
     for module in modules:
         available_rules += [
@@ -58,7 +65,7 @@ def __getrules__():
                 lambda obj: inspect.isclass(obj)
                 and issubclass(obj, RuleDefinitionBase),
             )
-            if (not f[0].startswith("_")) and (not f[0] in base_class_names)
+            if not f[0].startswith("_") and f[0] not in base_class_names
         ]
 
     return available_rules
@@ -90,12 +97,28 @@ def _meet_exception_modules(inspection_results):
     return any(f[0] in MODULE_EXCEPTION_LIST for f in inspection_results)
 
 
+def _get_base_class_names():
+    base_class_names = [f[0] for f in inspect.getmembers(base_classes, inspect.isclass)]
+    base_class_names += [
+        f[0] for f in inspect.getmembers(base_list_classes, inspect.isclass)
+    ]
+    base_class_names += [
+        f[0] for f in inspect.getmembers(base_partial_rule_classes, inspect.isclass)
+    ]
+    base_class_names += [
+        f[0] for f in inspect.getmembers(base_list_indexed_classes, inspect.isclass)
+    ]
+    return list(set(base_class_names))
+
+
+def __getsectiondict__():
+    selected_ruleset = __getruleset__()
+    return getattr(selected_ruleset, "section_dict", None) if selected_ruleset else None
+
+
 def __getrulemap__():
-    ruleset_list = inspect.getmembers(rulesets, inspect.ismodule)
-    for ruleset in ruleset_list:
-        if ruleset[0] == SchemaStore.SELECTED_RULESET:
-            rules_dict = getattr(ruleset[1], "rules_dict", None)
-            return rules_dict
+    selected_ruleset = __getruleset__()
+    return getattr(selected_ruleset, "rules_dict", None) if selected_ruleset else None
 
 
 def __getattr__(name):

@@ -13,6 +13,8 @@ __all__ = [
     "section1rule9",
 ]
 
+SHORT_NAME = "CALC"
+
 
 def __getattr__(name):
     if name in __all__:

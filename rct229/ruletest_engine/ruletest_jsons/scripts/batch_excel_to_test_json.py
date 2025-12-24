@@ -49,7 +49,7 @@ for (
     test_json_name = f"{section_ruletest_spreadsheet}.json"
 
     # Create test JSON
-    create_test_json_from_excel(spreadsheet_name, sheet_name, test_json_name)
+    create_test_json_from_excel(spreadsheet_name, sheet_name, test_json_name, rule_set)
 
     # Update unit conventions
     update_unit_convention_record(spreadsheet_name, sheet_name)

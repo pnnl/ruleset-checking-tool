@@ -3,15 +3,14 @@ import os
 import rct229.rulesets as rulesets
 import rct229.rulesets as rs
 from rct229.reports import reports as rct_report
-from rct229.rule_engine.engine import evaluate_all_rules, evaluate_all_rules_rpd
-from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
+from rct229.rule_engine.engine import evaluate_all_rules_rpd
+from rct229.rule_engine.rulesets import RuleSet
 from rct229.ruletest_engine.ruletest_jsons.scripts.excel_to_test_json_utilities import (
     generate_rule_test_dictionary,
 )
 from rct229.ruletest_engine.run_ruletests import (
     generate_ashrae9012019_software_test_report,
 )
-from rct229.rulesets.ashrae9012019 import rules_dict
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import assert_
@@ -43,6 +42,7 @@ def count_number_of_secondary_rules(ruleset_standard):
     # Collect rule modules as a list of tuples
     available_rule_definitions = rulesets.__getrules__()
     ruleset = rulesets.__getruleset__()
+    rules_dict = rulesets.__getrulemap__()
     # Dictionary with rule counts
     count_dict = {}
 
@@ -94,6 +94,7 @@ def count_number_of_primary_rules(ruleset_standard):
     # Collect rule modules as a list of tuples
     available_rule_definitions = rulesets.__getrules__()
     ruleset = rulesets.__getruleset__()
+    rules_dict = rulesets.__getrulemap__()
     # Dictionary with rule counts
     count_dict = {}
 
@@ -139,12 +140,13 @@ def count_number_of_rules(ruleset_standard):
     if not _setup_workflow(ruleset_standard):
         assert_(
             False,
-            f"Provided ruleset, {ruleset_standard}, does not match the available ones in the RCT. Available: ashrae9012019 ",
+            f"Provided ruleset, {ruleset_standard}, does not match the available ones in the RCT. Available: ashrae9012019, ashrae9012022",
         )
 
     # Collect rule modules as a list of tuples
     available_rule_definitions = rulesets.__getrules__()
     ruleset = rulesets.__getruleset__()
+    rules_dict = rulesets.__getrulemap__()
     # Dictionary with rule counts
     count_dict = {}
 
@@ -332,6 +334,10 @@ def _setup_workflow(ruleset: str):
     setup_flag = False
     if ruleset == RuleSet.ASHRAE9012019_RULESET:
         SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+        SchemaEnums.update_schema_enum()
+        setup_flag = True
+    elif ruleset == RuleSet.ASHRAE9012022_RULESET:
+        SchemaStore.set_ruleset(RuleSet.ASHRAE9012022_RULESET)
         SchemaEnums.update_schema_enum()
         setup_flag = True
     return setup_flag

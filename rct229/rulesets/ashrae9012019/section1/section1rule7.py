@@ -27,8 +27,8 @@ class PRM9012019Rule37e66(RuleDefinitionBase):
         error_msg_list = []
 
         comparison_result = baseline_equals_proposed(
-            index_context=baseline,
-            compare_context=proposed,
+            index_context=proposed,
+            compare_context=baseline,
             error_msg_list=error_msg_list,
         )
 

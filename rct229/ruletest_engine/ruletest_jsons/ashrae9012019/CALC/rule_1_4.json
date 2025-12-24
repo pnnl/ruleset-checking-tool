@@ -425,7 +425,7 @@
         "Test": "d",
         "test_description": "A one building segment, single zone building has a performance cost index that is less than the performance cost index target, but the performance cost index is not specified uniformly in any/all ruleset model descriptions.",
         "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "Ruleset expects exactly one PCI value to be used in the project.",
+        "expected_raised_message_includes": "Ruleset expects exactly one `performance_cost_index` value to be used in the project.",
         "standard": {
             "rule_id": "1-4",
             "ruleset_reference": "4.2.1.1",
@@ -566,7 +566,7 @@
         "Test": "e",
         "test_description": "A one building segment, single zone building does not have performance cost index specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "At least one `pci_set` value must exist.",
+        "expected_raised_message_includes": "At least one `performance_cost_index` value must exist.",
         "standard": {
             "rule_id": "1-4",
             "ruleset_reference": "4.2.1.1",
@@ -704,7 +704,7 @@
         "Test": "f",
         "test_description": "A one building segment, single zone building does not have performance cost index target specified in any ruleset model descriptions.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "At least one `pci_target_set` value must exist.",
+        "expected_raised_message_includes": "At least one `performance_cost_index_target` value must exist.",
         "standard": {
             "rule_id": "1-4",
             "ruleset_reference": "4.2.1.1",

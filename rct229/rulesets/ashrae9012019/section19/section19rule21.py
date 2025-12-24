@@ -196,15 +196,19 @@ class PRM9012019Rule07w16(RuleDefinitionListIndexedBase):
                     ]
                 )
 
-                thermostat_heating_setpoint_schedule_list = map_(
-                    dict_of_zones_and_terminal_units_served_by_hvac_sys_b[hvac_id_b][
-                        "zone_list"
-                    ],
-                    lambda zone_id: find_one(
-                        f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id}")].thermostat_heating_setpoint_schedule',
-                        rmd_p,
-                    ),
-                )
+                thermostat_heating_setpoint_schedule_list = [
+                    sched_id
+                    for sched_id in map_(
+                        dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
+                            hvac_id_b
+                        ]["zone_list"],
+                        lambda zone_id: find_one(
+                            f'$.buildings[*].building_segments[*].zones[*][?(@.id = "{zone_id}")].thermostat_heating_setpoint_schedule',
+                            rmd_p,
+                        ),
+                    )
+                    if sched_id is not None
+                ]
 
                 assert_(
                     thermostat_heating_setpoint_schedule_list,
