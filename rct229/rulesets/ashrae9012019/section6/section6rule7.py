@@ -10,6 +10,9 @@ MSG_WARN_DAYLIGHT_NO_SCHEDULE = "Some of the spaces in zone are modeled with win
 MSG_WARN_DAYLIGHT = "Some of the spaces in zone are modeled with window(s) and/or skylight(s) and have daylighting controls modeled via schedule adjustment. Verify that the mandatory lighting control requirements are met, and that the supporting documentation is provided for the schedule adjustment."
 MSG_WARN_NO_DAYLIGHT = "Some of the spaces in zone are modeled with fenestration but no daylighting controls. The design must include mandatory daylighting controls unless any of the exceptions to 90.1 section 9.4.1.1 apply."
 
+VentilationSpaceOptions = SchemaEnums.schema_enums[
+    "VentilationSpaceOptions2019ASHRAE901"
+]
 LightingSpaceOptions = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 EXTERIOR = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"].EXTERIOR
@@ -41,7 +44,7 @@ class PRM9012019Rule66m62(RuleDefinitionListIndexedBase):
             LightingSpaceOptions.DORMITORY_LIVING_QUARTERS,
             LightingSpaceOptions.FIRE_STATION_SLEEPING_QUARTERS,
             LightingSpaceOptions.HEALTHCARE_FACILITY_OPERATING_ROOM,
-            LightingSpaceOptions.OUTPATIENT_HEALTH_CARE_FACILITIES_CLASS_1_IMAGING_ROOMS,
+            VentilationSpaceOptions.OUTPATIENT_HEALTH_CARE_FACILITIES_CLASS_1_IMAGING_ROOMS,
             LightingSpaceOptions.DWELLING_UNIT,
             LightingSpaceOptions.GUEST_ROOM,
             LightingSpaceOptions.STORAGE_ROOM_SMALL,
@@ -52,7 +55,10 @@ class PRM9012019Rule66m62(RuleDefinitionListIndexedBase):
         spaces = zone_p.get("spaces", [])
 
         na_space_with_lighting_power = any(
-            space.get("lighting_space_type") in not_applicable_space_types
+            (
+                space.get("lighting_space_type") in not_applicable_space_types
+                or space.get("ventilation_space_type") in not_applicable_space_types
+            )
             and sum(
                 il.get("power_per_area", 0) for il in space.get("interior_lighting", [])
             )
@@ -85,7 +91,7 @@ class PRM9012019Rule66m62(RuleDefinitionListIndexedBase):
                 LightingSpaceOptions.DORMITORY_LIVING_QUARTERS,
                 LightingSpaceOptions.FIRE_STATION_SLEEPING_QUARTERS,
                 LightingSpaceOptions.HEALTHCARE_FACILITY_OPERATING_ROOM,
-                LightingSpaceOptions.OUTPATIENT_HEALTH_CARE_FACILITIES_CLASS_1_IMAGING_ROOMS,
+                VentilationSpaceOptions.OUTPATIENT_HEALTH_CARE_FACILITIES_CLASS_1_IMAGING_ROOMS,
                 LightingSpaceOptions.DWELLING_UNIT,
                 LightingSpaceOptions.GUEST_ROOM,
                 LightingSpaceOptions.STORAGE_ROOM_SMALL,
@@ -94,7 +100,10 @@ class PRM9012019Rule66m62(RuleDefinitionListIndexedBase):
             }
 
             has_na_space_with_lighting_power = any(
-                space.get("lighting_space_type") in not_applicable_space_types
+                (
+                    space.get("lighting_space_type") in not_applicable_space_types
+                    or space.get("ventilation_space_type") in not_applicable_space_types
+                )
                 and sum(
                     il.get("power_per_area", 0)
                     for il in space.get("interior_lighting", [])
