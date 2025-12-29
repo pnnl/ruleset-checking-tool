@@ -3,7 +3,7 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.utility_functions import (
     find_exactly_one_fluid_loop,
-    find_exactly_one_terminal_unit,
+    find_exactly_one_terminal,
 )
 
 EXTERNAL_FLUID_SOURCE = SchemaEnums.schema_enums["ExternalFluidSourceOptions"]
@@ -32,7 +32,7 @@ def are_all_terminal_chw_loops_purchased_cooling(rmd_b, terminal_unit_id_list):
     )
 
     for terminal_b_id in terminal_unit_id_list:
-        terminal_b = find_exactly_one_terminal_unit(rmd_b, terminal_b_id)
+        terminal_b = find_exactly_one_terminal(rmd_b, terminal_b_id)
         cooling_from_loop_id = terminal_b.get("cooling_from_loop")
         if cooling_from_loop_id:
             fluid_loop = find_exactly_one_fluid_loop(rmd_b, cooling_from_loop_id)
