@@ -1,11 +1,10 @@
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_area_type_window_wall_area_dict import (
     get_area_type_window_wall_area_dict,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     CAPACITY_THRESHOLD as CAPACITY_THRESHOLD_QUANTITY,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     CRAWLSPACE_HEIGHT_THRESHOLD as CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY,
 )
 from rct229.schema.config import ureg
@@ -512,20 +511,6 @@ TEST_rmd = {
             ],
         }
     ],
-    "constructions": [
-        {
-            "id": "const_1_5_1",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "interior_wall_3_1_1",
-            "u_factor": 0.222,  # W/(m2 * K)
-        },
-        {
-            "id": "interior_wall_3_2_1",
-            "u_factor": 0.222,  # W/(m2 * K)
-        },
-    ],
     "type": "BASELINE_0",
 }
 
@@ -559,7 +544,7 @@ def test__TEST_RPD__is_valid():
 
 def test__get_area_type_window_wall_area():
     assert get_area_type_window_wall_area_dict(
-        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING, BASELINE_0
     ) == {
         "HOTEL_MOTEL_SMALL": {
             "total_wall_area": 40 * ureg("m2"),

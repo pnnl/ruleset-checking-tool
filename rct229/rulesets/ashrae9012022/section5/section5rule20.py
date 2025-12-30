@@ -57,7 +57,7 @@ class PRM9012022Rule96n40(RuleDefinitionListIndexedBase):
         # This implementation is temporary
         bldg_scc_wwr_ratio_dict = {
             building_b["id"]: get_building_scc_window_wall_ratios_dict(
-                climate_zone, constructions_b, building_b
+                climate_zone, constructions_b, building_b, BASELINE_0
             )
             for building_b in find_all(self.list_path, rmd_b)
         }

@@ -76,7 +76,7 @@ class PRM9012019Rule78r30(RuleDefinitionListIndexedBase):
             building_p = context.PROPOSED
             return {
                 "scc_dict_p": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building_p, data["constructions"]
+                    data["climate_zone"], building_p, data["constructions"], PROPOSED
                 ),
             }
 

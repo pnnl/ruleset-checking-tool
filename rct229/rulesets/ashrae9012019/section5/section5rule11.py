@@ -59,7 +59,7 @@ class PRM9012019Rule46p73(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             building_b = context.BASELINE_0
             surface_conditioning_category_dict = get_surface_conditioning_category_dict(
-                data["climate_zone"], building_b, data["constructions"]
+                data["climate_zone"], building_b, data["constructions"], BASELINE_0
             )
             applicable_surface_ids = [
                 surface_b["id"]

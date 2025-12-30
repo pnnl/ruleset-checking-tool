@@ -80,7 +80,7 @@ class PRM9012022Rule39k65(RuleDefinitionListIndexedBase):
                 data["constructions_p"],
             )
             zcc_dict_b = get_zone_conditioning_category_dict(
-                data["climate_zone"], building_b, data["constructions_b"]
+                data["climate_zone"], building_b, data["constructions_b"], BASELINE_0
             )
 
             building_total_air_leakage_rate = ZERO.FLOW

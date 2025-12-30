@@ -66,7 +66,7 @@ class PRM9012019Rule29j06(RuleDefinitionListIndexedBase):
             building = context.BASELINE_0
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building, data["constructions"]
+                    data["climate_zone"], building, data["constructions"], BASELINE_0
                 ),
             }
 

@@ -63,7 +63,7 @@ class PRM9012019Rule82e93(RuleDefinitionListIndexedBase):
             constructions_p = data["constructions_p"]
 
             scc_dictionary_p = get_surface_conditioning_category_dict(
-                climate_zone_p, building_p, constructions_p
+                climate_zone_p, building_p, constructions_p, PROPOSED
             )
 
             return scc_dictionary_p
@@ -74,7 +74,7 @@ class PRM9012019Rule82e93(RuleDefinitionListIndexedBase):
             constructions_p = data["constructions_p"]
 
             scc_dictionary_p = get_surface_conditioning_category_dict(
-                climate_zone_p, building_p, constructions_p
+                climate_zone_p, building_p, constructions_p, PROPOSED
             )
 
             return {"scc_dictionary_p": scc_dictionary_p}

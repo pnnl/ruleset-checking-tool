@@ -78,6 +78,7 @@ TEST_RMD = {
                                 {
                                     "id": "space 3",
                                     "floor_area": 500,
+                                    "occupant_multiplier_schedule": "occupant_schedule_1",
                                     "interior_lighting": [
                                         {
                                             "id": "interior_lighting_1",

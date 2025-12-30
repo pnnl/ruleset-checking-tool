@@ -4,8 +4,6 @@ from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_descr
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
 from rct229.utils.pint_utils import CalcQ
@@ -58,7 +56,7 @@ class PRM9012019Rule23m90(RuleDefinitionListIndexedBase):
             building_b = context.BASELINE_0
             return {
                 "zcc_dict_b": get_zone_conditioning_category_dict(
-                    data["climate_zone"], building_b, data["constructions"]
+                    data["climate_zone"], building_b, data["constructions"], BASELINE_0
                 ),
             }
 

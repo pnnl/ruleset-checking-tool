@@ -4,8 +4,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     CRAWLSPACE_HEIGHT_THRESHOLD as CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
 from rct229.schema.config import ureg
@@ -756,6 +754,7 @@ def test__get_zone_conditioning_category_dict():
         CLIMATE_ZONE,
         TEST_BUILDING,
         constructions=find_all("$.constructions[*]", TEST_RMD),
+        rmd_type="ZCC TEST",
     ) == {
         "zone_1_1": "CONDITIONED MIXED",
         "zone_1_2": "CONDITIONED NON-RESIDENTIAL",

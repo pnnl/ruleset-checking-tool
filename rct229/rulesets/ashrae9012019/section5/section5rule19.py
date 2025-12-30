@@ -65,7 +65,7 @@ class PRM9012019Rule57c26(RuleDefinitionListIndexedBase):
             bldg_scc_wwr_ratio_dict[
                 building_b["id"]
             ] = get_building_scc_window_wall_ratios_dict(
-                climate_zone, constructions, building_b
+                climate_zone, constructions, building_b, BASELINE_0
             )
 
         return {
@@ -206,7 +206,7 @@ class PRM9012019Rule57c26(RuleDefinitionListIndexedBase):
             return {
                 # TODO this function will likely need to be revised to RMD level later.
                 "scc_dict_b": get_surface_conditioning_category_dict(
-                    climate_zone, building_b, constructions
+                    climate_zone, building_b, constructions, BASELINE_0
                 ),
                 "manual_check_required_flag": manual_check_required_flag,
                 "target_u_factor_mix": target_u_factor_mix,

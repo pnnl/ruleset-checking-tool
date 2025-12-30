@@ -73,15 +73,10 @@ class PRM9012019Rule42c42(RuleDefinitionListIndexedBase):
             building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
             constructions = data["constructions"]
-            scc_skylight_roof_ratios_dict_b = (
-                get_building_scc_skylight_roof_ratios_dict(
-                    climate_zone, constructions, building_b
-                )
-            )
 
             building_scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(
-                    climate_zone, constructions, building_b
+                    climate_zone, constructions, building_b, BASELINE_0
                 )
             )
 
@@ -130,17 +125,23 @@ class PRM9012019Rule42c42(RuleDefinitionListIndexedBase):
                 ]
             )
 
-            if scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_RESIDENTIAL] > 0.02:
+            if (
+                building_scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_RESIDENTIAL]
+                > 0.02
+            ):
                 target_shgc_res = target_shgc_above2_residential
             else:
                 target_shgc_res = target_shgc_2per_residential
 
-            if scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_NON_RESIDENTIAL] > 0.02:
+            if (
+                building_scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_NON_RESIDENTIAL]
+                > 0.02
+            ):
                 target_shgc_nonres = target_shgc_above2_nonresidential
             else:
                 target_shgc_nonres = target_shgc_2per_nonresidential
 
-            if scc_skylight_roof_ratios_dict_b[SCC.SEMI_EXTERIOR]:
+            if building_scc_skylight_roof_ratios_dict_b[SCC.SEMI_EXTERIOR]:
                 target_shgc_semiheated = table_G34_lookup(
                     climate_zone,
                     "SEMI-EXTERIOR",
@@ -157,7 +158,7 @@ class PRM9012019Rule42c42(RuleDefinitionListIndexedBase):
 
             return {
                 "scc_dict_b": get_surface_conditioning_category_dict(
-                    climate_zone, building_b, constructions
+                    climate_zone, building_b, constructions, BASELINE_0
                 ),
                 "manual_check_required_flag": manual_check_required_flag,
                 "target_shgc_res": target_shgc_res,

@@ -47,7 +47,7 @@ class PRM9012019Rule52x31(RuleDefinitionListIndexedBase):
             standard_section="Section G3.1.3.12 Supply Air Temperature Reset (Systems 5 through 8 and 11)",
             is_primary_rule=True,
             rmd_context="ruleset_model_descriptions/0",
-            list_path="$..heating_ventilating_air_conditioning_systems[*]",
+            list_path="$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
         )
 
     def is_applicable(self, context, data=None):

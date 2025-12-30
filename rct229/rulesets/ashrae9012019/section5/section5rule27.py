@@ -81,7 +81,7 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
             constructions = data["constructions"]
             building_scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(
-                    climate_zone, constructions, building_b
+                    climate_zone, constructions, building_b, BASELINE_0
                 )
             )
             target_exterior_2per_residential = table_G34_lookup(
@@ -125,7 +125,7 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
             constructions = data["constructions"]
             building_scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(
-                    climate_zone, constructions, building_b
+                    climate_zone, constructions, building_b, BASELINE_0
                 )
             )
 
@@ -187,7 +187,7 @@ class PRM9012019Rule69v04(RuleDefinitionListIndexedBase):
 
             return {
                 "surface_conditioning_category_dict_b": get_surface_conditioning_category_dict(
-                    climate_zone, building_b, constructions
+                    climate_zone, building_b, constructions, BASELINE_0
                 ),
                 # at this point, target_u_factor_mixed should be same regardless of
                 # residential <2% or >2%, skylight.

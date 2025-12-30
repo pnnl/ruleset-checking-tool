@@ -28,16 +28,6 @@ class PRM9012019Rule82y74(RuleDefinitionListIndexedBase):
             list_path="ruleset_model_descriptions[0].buildings[*].building_segments[*].zones[*].surfaces[*].subsurfaces[*]",
         )
 
-    def create_data(self, context, data):
-        rmd_p = context.PROPOSED
-
-        assert_(
-            find_all("$..dynamic_glazing_type", rmd_p),
-            "No subsurfaces in the proposed model contain the 'dynamic_glazing_type' data. ",
-        )
-
-        return {}
-
     class SubsurfaceRule(PartialRuleDefinition):
         def __init__(self):
             super(PRM9012019Rule82y74.SubsurfaceRule, self).__init__(

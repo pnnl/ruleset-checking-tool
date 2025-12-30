@@ -1,4 +1,4 @@
-from rct229.utils.utility_functions import find_exactly_one_terminal_unit
+from rct229.utils.utility_functions import find_exactly_one_terminal
 
 
 def are_all_terminal_supplies_ducted(rmd_b, terminal_unit_id_list):
@@ -21,7 +21,7 @@ def are_all_terminal_supplies_ducted(rmd_b, terminal_unit_id_list):
     """
     are_all_terminal_supplies_ducted_flag = True
     for terminal_b_id in terminal_unit_id_list:
-        terminal_b = find_exactly_one_terminal_unit(rmd_b, terminal_b_id)
+        terminal_b = find_exactly_one_terminal(rmd_b, terminal_b_id)
         # Set flag to False if is_suppy_ducted is False or is missing
         if not terminal_b.get("is_supply_ducted"):
             are_all_terminal_supplies_ducted_flag = False
