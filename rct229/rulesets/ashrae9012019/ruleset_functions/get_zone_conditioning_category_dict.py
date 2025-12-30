@@ -1,3 +1,4 @@
+import os
 from typing import List, Dict
 
 from rct229.rulesets.ashrae9012019.data_fns.table_3_2_fns import table_3_2_lookup
@@ -11,6 +12,8 @@ from rct229.schema.config import ureg
 from rct229.utils.assertions import assert_, get_first_attr_, getattr_, RCTException
 from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields, find_one
 from rct229.utils.pint_utils import ZERO
+
+_DISABLE_ZONE_COND_CACHE = os.getenv("RCT_DISABLE_CACHE") == "1"
 
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
@@ -460,6 +463,13 @@ def get_zone_conditioning_category_dict(
 
     if constructions is None:
         constructions = []
+
+    if _DISABLE_ZONE_COND_CACHE:
+        return _get_zone_conditioning_category_dict_uncached(
+            climate_zone,
+            building,
+            constructions,
+        )
 
     cache_key = (rmd_type, climate_zone)
     building_id = building["id"]
