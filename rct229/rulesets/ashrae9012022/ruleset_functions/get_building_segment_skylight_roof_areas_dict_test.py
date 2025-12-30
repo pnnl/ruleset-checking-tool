@@ -145,12 +145,6 @@ TEST_RMD = {
             ],
         }
     ],
-    "constructions": [
-        {
-            "id": "construction_1",
-            "u_factor": 3.2366105565544463,
-        }
-    ],
     "type": "BASELINE_0",
 }
 
@@ -184,7 +178,7 @@ def test__TEST_RPD__is_valid():
 
 def test__get_building_segment_skylight_roof_areas_dict():
     assert get_building_segment_skylight_roof_areas_dict(
-        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING, "SRR_TEST"
     ) == {
         "bldg_seg_1": {
             "total_envelope_roof_area": 10 * ureg("m2"),

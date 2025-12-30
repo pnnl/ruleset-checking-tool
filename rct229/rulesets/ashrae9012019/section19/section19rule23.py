@@ -4,7 +4,6 @@ from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_descr
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_, getattr_
-from rct229.utils.jsonpath_utils import find_all
 
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 VENTILATION_SPACE = SchemaEnums.schema_enums["VentilationSpaceOptions2019ASHRAE901"]
@@ -30,6 +29,7 @@ def build_schedule_lookup(schedules):
 
 
 def schedule_all_equal_or_flagged(values, target):
+    assert_(values is not None, "Hourly cooling design schedule must exist.")
     for v in values:
         if v != target and v != -999:
             return False
@@ -51,21 +51,6 @@ class PRM9012019Rule60o81(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
         )
-
-    def create_data(self, context, data):
-        rmd_b = context.BASELINE_0
-
-        assert_(
-            find_all("$..hourly_heating_design_year", rmd_b)
-            or find_all("$..hourly_heating_design_day", rmd_b),
-            "No schedules contain heating design data.",
-        )
-        assert_(
-            find_all("$..hourly_cooling_design_year", rmd_b)
-            or find_all("$..hourly_cooling_design_day", rmd_b),
-            "No schedules contain cooling design data.",
-        )
-        return {}
 
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):

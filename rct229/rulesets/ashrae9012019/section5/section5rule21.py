@@ -60,7 +60,7 @@ class PRM9012019Rule44m70(RuleDefinitionListIndexedBase):
             building = context.BASELINE_0
             return {
                 "scc_dict_b": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building, data["constructions"]
+                    data["climate_zone"], building, data["constructions"], BASELINE_0
                 ),
             }
 

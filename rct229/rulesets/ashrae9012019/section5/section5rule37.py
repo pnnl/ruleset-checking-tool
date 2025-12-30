@@ -10,8 +10,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
 from rct229.schema.config import ureg
@@ -77,10 +75,10 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
             building_p = context.PROPOSED
 
             scc_dict_p = get_surface_conditioning_category_dict(
-                data["climate_zone"], building_p, data["constructions"]
+                data["climate_zone"], building_p, data["constructions"], PROPOSED
             )
             zcc_dict_p = get_zone_conditioning_category_dict(
-                data["climate_zone"], building_p, data["constructions"]
+                data["climate_zone"], building_p, data["constructions"], PROPOSED
             )
 
             building_total_air_leakage_rate = ZERO.FLOW

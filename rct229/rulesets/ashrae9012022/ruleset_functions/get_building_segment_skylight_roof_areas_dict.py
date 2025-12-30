@@ -27,7 +27,7 @@ class BuildingSegmentRoofAreas(TypedDict):
 
 
 def get_building_segment_skylight_roof_areas_dict(
-    climate_zone: str, constructions: list, building: dict
+    climate_zone: str, constructions: list, building: dict, rmd_type: str
 ) -> dict[str, BuildingSegmentRoofAreas]:
     """Gets a dictionary mapping building segment id to a dictionary of (total area of
     skylights) and (total area of envelope roofs) for the building_segment
@@ -53,10 +53,10 @@ def get_building_segment_skylight_roof_areas_dict(
         }
     """
     zcc_dict = get_zone_conditioning_category_dict(
-        climate_zone, building, constructions
+        climate_zone, building, constructions, rmd_type
     )
     scc_dict = get_building_surface_conditioning_category_dict(
-        climate_zone, building, constructions
+        climate_zone, building, constructions, rmd_type
     )
     building_segment_roof_areas_dict = {}
 

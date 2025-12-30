@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012022 import BASELINE_0
+from rct229.rulesets.ashrae9012022 import BASELINE_0, PROPOSED
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_area_type_window_wall_area_dict import (
     get_area_type_window_wall_area_dict,
 )
@@ -79,10 +79,10 @@ class PRM9012022Rule80o45(RuleDefinitionListIndexedBase):
             constructions_p = data["constructions_p"]
 
             window_wall_areas_dictionary_b = get_area_type_window_wall_area_dict(
-                climate_zone, constructions_b, building_b
+                climate_zone, constructions_b, building_b, BASELINE_0
             )
             window_wall_areas_dictionary_p = get_area_type_window_wall_area_dict(
-                climate_zone, constructions_b, building_p
+                climate_zone, constructions_b, building_p, PROPOSED
             )
 
             return {

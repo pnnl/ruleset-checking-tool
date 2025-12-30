@@ -17,7 +17,7 @@ DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
 
 
 def get_building_scc_skylight_roof_ratios_dict(
-    climate_zone: str, constructions: list, building: dict
+    climate_zone: str, constructions: list, building: dict, rmd_type: str
 ) -> ZoneConditioningDataDict:
     """Gets a dictionary mapping skylight and envelope roof ratios for a building for residential, non-residential,
     mixed and semi-heated surface conditioning categories
@@ -41,7 +41,7 @@ def get_building_scc_skylight_roof_ratios_dict(
     """
     # required fields for this function are coming from the nested functions
     scc_dictionary = get_building_surface_conditioning_category_dict(
-        climate_zone, building, constructions
+        climate_zone, building, constructions, rmd_type
     )
     total_res_roof_area = ZERO.AREA
     total_res_skylight_area = ZERO.AREA

@@ -59,7 +59,7 @@ class PRM9012022Rule57c26(RuleDefinitionListIndexedBase):
             bldg_scc_wwr_ratio_dict[
                 building_b["id"]
             ] = get_building_scc_window_wall_ratios_dict(
-                climate_zone, constructions_b, building_b
+                climate_zone, constructions_b, building_b, BASELINE_0
             )
 
         return {

@@ -119,7 +119,7 @@ GET_SURFACE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
 
 
 def get_building_surface_conditioning_category_dict(
-    climate_zone, building, constructions
+    climate_zone, building, constructions, rmd_type
 ):
     """Determines the surface conditioning category for every surface in a building
 
@@ -147,7 +147,7 @@ def get_building_surface_conditioning_category_dict(
 
     # Get the conditioning category for all the zones in the building
     zcc_dict = get_zone_conditioning_category_dict(
-        climate_zone, building, constructions
+        climate_zone, building, constructions, rmd_type
     )
 
     # Loop through all the zones in the building

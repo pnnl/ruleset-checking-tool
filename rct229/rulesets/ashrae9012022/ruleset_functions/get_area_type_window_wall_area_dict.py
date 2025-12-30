@@ -25,7 +25,11 @@ class AreaTypeWindowWallAreaDict:
 
 
 def get_area_type_window_wall_area_dict(
-    climate_zone: str, constructions: list, building: dict
+    climate_zone: str,
+    constructions: list,
+    building: dict,
+    rmd_type: str,
+    surface_conditioning_category_dict=None,
 ) -> dict[str | Any, dict[str, Any]]:
     """Gets a dictionary mapping building area type to a dictionary of (total area of
     above grade vertical surfaces) and (total area of fenestration)
@@ -54,7 +58,7 @@ def get_area_type_window_wall_area_dict(
     """
     # required fields for this function are coming from the nested functions.
     scc_dictionary = get_building_surface_conditioning_category_dict(
-        climate_zone, building, constructions
+        climate_zone, building, constructions, rmd_type
     )
     window_wall_areas_dictionary = {}
     for building_segment in find_all("building_segments[*]", building):

@@ -68,7 +68,7 @@ class PRM9012019Rule43n21(RuleDefinitionListIndexedBase):
 
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building, data["constructions"]
+                    data["climate_zone"], building, data["constructions"], BASELINE_0
                 ),
             }
 

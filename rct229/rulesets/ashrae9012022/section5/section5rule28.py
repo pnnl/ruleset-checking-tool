@@ -76,13 +76,13 @@ class PRM9012022Rule42c42(RuleDefinitionListIndexedBase):
             constructions_p = data["constructions_p"]
             scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(
-                    climate_zone, constructions_b, building_b
+                    climate_zone, constructions_b, building_b, BASELINE_0
                 )
             )
 
             building_scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(
-                    climate_zone, constructions_b, building_b
+                    climate_zone, constructions_b, building_b, BASELINE_0
                 )
             )
 

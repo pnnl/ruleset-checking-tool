@@ -13,8 +13,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_hw_loop_zone_list_w_are
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
 from rct229.schema.config import ureg
@@ -104,12 +102,12 @@ class PRM9012019Rule34r52(RuleDefinitionListIndexedBase):
 
             # get zone conditions from buildings
             zone_conditioning_category_dict = {}
-            constructions = find_all("$.constructions[*]", rmd_b)
-            for bldg in find_all("$.buildings[*]", rmd_b):
+            constructions_b = rmd_b.get("constructions", [])
+            for bldg_b in rmd_b.get("buildings", []):
                 zone_conditioning_category_dict = {
                     **zone_conditioning_category_dict,
                     **get_zone_conditioning_category_dict(
-                        climate_zone, bldg, constructions
+                        climate_zone, bldg_b, constructions_b, BASELINE_0
                     ),
                 }
 
@@ -162,10 +160,10 @@ class PRM9012019Rule34r52(RuleDefinitionListIndexedBase):
                         ZERO.AREA,
                     )
 
-            num_boilers = len(find_all("$.boilers[*]", rmd_b))
+            num_boilers = len(rmd_b.get("boilers", []))
             boiler_capacity_list = [
                 CalcQ("capacity", getattr_(boiler, "boiler", "rated_capacity"))
-                for boiler in find_all("$.boilers[*]", rmd_b)
+                for boiler in rmd_b.get("boilers", [])
             ]
 
             return {

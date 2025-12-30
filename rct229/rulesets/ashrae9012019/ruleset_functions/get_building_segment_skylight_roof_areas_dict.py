@@ -15,8 +15,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
-)
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
 from rct229.utils.assertions import getattr_
@@ -33,7 +31,7 @@ class BuildingSegmentRoofAreas(TypedDict):
 
 
 def get_building_segment_skylight_roof_areas_dict(
-    climate_zone: str, constructions: list, building: dict
+    climate_zone: str, constructions: list, building: dict, rmd_type: str
 ) -> dict[str, BuildingSegmentRoofAreas]:
     """Gets a dictionary mapping building segment id to a dictionary of (total area of
     skylights) and (total area of envelope roofs) for the building_segment
@@ -46,6 +44,8 @@ def get_building_segment_skylight_roof_areas_dict(
         A list of construction dictionaries as defined by the ASHRAE229 schema
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
+    rmd_type : str
+        One of the RMD_TYPE_OPTIONS enumerated values
 
     Returns
     -------
@@ -59,10 +59,10 @@ def get_building_segment_skylight_roof_areas_dict(
         }
     """
     zcc_dict = get_zone_conditioning_category_dict(
-        climate_zone, building, constructions
+        climate_zone, building, constructions, rmd_type
     )
     scc_dict = get_surface_conditioning_category_dict(
-        climate_zone, building, constructions
+        climate_zone, building, constructions, rmd_type
     )
     building_segment_roof_areas_dict = {}
 

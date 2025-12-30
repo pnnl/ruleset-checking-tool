@@ -15,6 +15,9 @@ from rct229.utils.pint_utils import ZERO
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
 
+# (rmd_type, climate_zone) → { building_id → zone_dict }
+_ZONE_COND_CACHE: dict[tuple[str, str], dict[str, dict]] = {}
+
 
 # Intended for export and internal use
 class ZoneConditioningCategory:
@@ -50,38 +53,12 @@ GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
 }
 
 
-def get_zone_conditioning_category_rmd_dict(
-    climate_zone: str, rmd: dict
+def _get_zone_conditioning_category_dict_uncached(
+    climate_zone: str,
+    building: dict,
+    constructions: list,
 ) -> dict[str, ZoneConditioningCategory]:
-    """
-    Determines the zone conditioning category for every zone in an RMD.
 
-    Parameters
-    ----------
-    climate_zone: str
-        One of the ClimateZoneOptions2019ASHRAE901 enumerated values
-    rmd: dict
-        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
-    Returns
-    -------
-    dict
-        A dictionary that maps zones to one of the conditioning categories:
-        CONDITIONED_MIXED, CONDITIONED_NON_RESIDENTIAL, CONDITIONED_RESIDENTIAL,
-        SEMI_HEATED, UNCONDITIONED, UNENCOLOSED
-    """
-    zone_conditioning_category_rmd_dict = {}
-    constructions = rmd.get("constructions", [])
-    for building in find_all("$.buildings[*]", rmd):
-        zone_conditioning_category_dict = get_zone_conditioning_category_dict(
-            climate_zone, building, constructions
-        )
-        zone_conditioning_category_rmd_dict.update(zone_conditioning_category_dict)
-    return zone_conditioning_category_rmd_dict
-
-
-def get_zone_conditioning_category_dict(
-    climate_zone: str, building: dict, constructions: list
-) -> dict[str, ZoneConditioningCategory]:
     """Determines the zone conditioning category for every zone in a building
 
     Parameters
@@ -452,6 +429,52 @@ def get_zone_conditioning_category_dict(
                     ] = ZoneConditioningCategory.UNCONDITIONED  # zone_1_9
 
     return zone_conditioning_category_dict
+
+
+def get_zone_conditioning_category_rmd_dict(
+    climate_zone: str, rmd: dict
+) -> dict[str, ZoneConditioningCategory]:
+
+    zone_conditioning_category_rmd_dict = {}
+    constructions = rmd.get("constructions", [])
+    rmd_type = rmd.get("type")
+
+    for building in rmd.get("buildings", []):
+        zone_dict = get_zone_conditioning_category_dict(
+            climate_zone,
+            building,
+            constructions,
+            rmd_type,
+        )
+        zone_conditioning_category_rmd_dict.update(zone_dict)
+
+    return zone_conditioning_category_rmd_dict
+
+
+def get_zone_conditioning_category_dict(
+    climate_zone: str,
+    building: dict,
+    constructions: list,
+    rmd_type: str,
+) -> dict[str, ZoneConditioningCategory]:
+
+    if constructions is None:
+        constructions = []
+
+    cache_key = (rmd_type, climate_zone)
+    building_id = building["id"]
+
+    rmd_cache = _ZONE_COND_CACHE.setdefault(cache_key, {})
+
+    if building_id in rmd_cache:
+        return rmd_cache[building_id]
+
+    result = _get_zone_conditioning_category_dict_uncached(
+        climate_zone, building, constructions
+    )
+
+    rmd_cache[building_id] = result
+    return result
 
 
 def find_construction_by_surface(surface: dict, constructions: List[Dict]) -> dict:

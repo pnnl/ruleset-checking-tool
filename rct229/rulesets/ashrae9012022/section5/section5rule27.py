@@ -81,7 +81,7 @@ class PRM9012022Rule69v04(RuleDefinitionListIndexedBase):
             constructions_b = data["constructions_b"]
             building_scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(
-                    climate_zone, constructions_b, building_b
+                    climate_zone, constructions_b, building_b, BASELINE_0
                 )
             )
             target_exterior_2per_residential = table_G34_lookup(
@@ -127,7 +127,7 @@ class PRM9012022Rule69v04(RuleDefinitionListIndexedBase):
             constructions_p = data["constructions_p"]
             building_scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(
-                    climate_zone, constructions_b, building_b
+                    climate_zone, constructions_b, building_b, BASELINE_0
                 )
             )
 
