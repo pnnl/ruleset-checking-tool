@@ -78,5 +78,5 @@ class PRM9012019Rule31d63(RuleDefinitionBase):
         return {"primary_hhw_loop_count": hhw_loop_count}
 
     def rule_check(self, context, calc_vals=None, data=None):
-        hhw_loop_count = calc_vals["hhw_loop_count"]
+        hhw_loop_count = calc_vals["primary_hhw_loop_count"]
         return hhw_loop_count == 1
