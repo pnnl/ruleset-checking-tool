@@ -71,7 +71,10 @@ class PRM9012019Rule36t85(RuleDefinitionListIndexedBase):
         fluid_loops_b = context_item.BASELINE_0
         primary_secondary_loop_dict = data["primary_secondary_loop_dict"]
 
-        return fluid_loops_b["id"] in primary_secondary_loop_dict
+        return (
+            fluid_loops_b["id"] in primary_secondary_loop_dict
+            and len(primary_secondary_loop_dict[fluid_loops_b["id"]]) > 0
+        )
 
     class CoolingFluidLoopRule(RuleDefinitionBase):
         def __init__(self):

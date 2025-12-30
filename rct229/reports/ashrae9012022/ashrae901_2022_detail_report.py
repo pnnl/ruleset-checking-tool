@@ -6,12 +6,12 @@ from rct229.reports.utils import calc_vals_converter
 from rct229.rule_engine.rct_outcome_label import RCTOutcomeLabel
 
 
-class ASHRAE9012019DetailReport(RCTReport):
+class ASHRAE9012022DetailReport(RCTReport):
     def __init__(self):
-        super(ASHRAE9012019DetailReport, self).__init__()
+        super(ASHRAE9012022DetailReport, self).__init__()
         self.title = "ASHRAE STD 229P RULESET CHECKING TOOL"
         self.purpose = "Project Testing Report"
-        self.ruleset = "ASHRAE 90.1-2019 Performance Rating Method (Appendix G)"
+        self.ruleset = "ASHRAE 90.1-2022 Performance Rating Method (Appendix G)"
         self.ruleset_report_file = f"{self.__class__.__name__}.json"
 
     def initialize_ruleset_report(self, rule_outcome=None):
