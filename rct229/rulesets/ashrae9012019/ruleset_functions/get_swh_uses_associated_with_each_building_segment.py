@@ -1,11 +1,10 @@
-from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.utility_functions import find_exactly_one_service_water_heating_use
 
 
 def get_swh_uses_associated_with_each_building_segment(
     rmd: dict,
-) -> dict[str : list[dict]]:
+) -> dict[str, list[dict]]:
     """
     Description: This function gets all the SWH uses connected to a building segment. This function is primarily to encapsulate getting service water heating uses in one function so that if a change is made in the schema as to how service water heating use is specified, the RCT only needs to change in one place.
 
