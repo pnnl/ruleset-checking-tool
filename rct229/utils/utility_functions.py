@@ -1,9 +1,12 @@
+import os
+
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
 
 HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 COOLING_SYSTEM = SchemaEnums.schema_enums["CoolingSystemOptions"]
 
+_DISABLE_RMD_INDEX_CACHE = os.getenv("RCT_DISABLE_CACHE") == "1"
 _RMD_INDEX_CACHE: dict[int, dict] = {}
 
 
@@ -73,6 +76,9 @@ def _build_rmd_indexes(rmd: dict) -> dict:
 
 
 def _get_indexes(rmd: dict) -> dict:
+    if _DISABLE_RMD_INDEX_CACHE:
+        return _build_rmd_indexes(rmd)
+
     key = id(rmd)
     if key not in _RMD_INDEX_CACHE:
         _RMD_INDEX_CACHE[key] = _build_rmd_indexes(rmd)
