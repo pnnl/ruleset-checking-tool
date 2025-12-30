@@ -120,10 +120,10 @@ class PRM9012019Rule06a67(RuleDefinitionListIndexedBase):
             return {
                 "total_area": total_area,
                 "pump_speed_control_type": getattr_(pump_b, "Pump", "speed_control"),
-                "expected_speed_control_type": target_pump_type,
+                "target_pump_type": target_pump_type,
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
             pump_speed_control_type = calc_vals["pump_speed_control_type"]
-            target_speed_control_type = calc_vals["expected_speed_control_type"]
-            return pump_speed_control_type == target_speed_control_type
+            target_pump_type = calc_vals["target_pump_type"]
+            return pump_speed_control_type == target_pump_type
