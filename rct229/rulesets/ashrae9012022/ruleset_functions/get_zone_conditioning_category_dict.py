@@ -356,7 +356,7 @@ def _get_zone_conditioning_category_dict_uncached(
         elif building_segment_lighting_building_area_type is not None:
             building_segment_is_nonresidential = True  # bldg_seg_2
 
-        for zone in zones:
+        for zone in building_segment.get("zones", []):
             zone_id = zone["id"]
             if (
                 zone_id in directly_conditioned_zone_ids
