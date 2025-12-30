@@ -185,13 +185,23 @@ def _get_zone_conditioning_category_dict_uncached(
     system_min_heating_output = table_3_2_lookup(climate_zone)[
         "system_min_heating_output"
     ]
-
+    zones = [
+        zone
+        for building_segment in building.get("building_segments", [])
+        for zone in building_segment.get("zones", [])
+    ]
     # Produce a dict that maps each zone id to a {"sensible_cooling", "heating"} dict
     # representing zone capacities
     zone_capacity_dict = {}
-    for zone in find_all("$..zones[*]", building):
+    for zone in zones:
         zone_id = zone["id"]
-        zone_area = sum(find_all("$..floor_area", zone), ZERO.AREA)
+        zone_area = sum(
+            [
+                space.get("floor_area", ZERO.AREA)
+                for space in find_all("spaces[*]", zone)
+            ],
+            ZERO.AREA,
+        )
         assert_(zone_area > ZERO.AREA, f"zone:{zone_id} has no floor area")
 
         zone_capacity_dict[zone_id] = zone_capacity = {
@@ -199,7 +209,7 @@ def _get_zone_conditioning_category_dict_uncached(
             "heating": ZERO.THERMAL_CAPACITY,
         }
         # Note: Allow for there being no terminals field
-        for terminal in find_all("terminals[*]", zone):
+        for terminal in zone.get("terminals", []):
             # Note: there is only one hvac system even though the field name is plural
             # This will change to singular in schema version 0.0.8
             hvac_sys_id = terminal.get(
@@ -219,7 +229,7 @@ def _get_zone_conditioning_category_dict_uncached(
     # semi-heated zones
     directly_conditioned_zone_ids = []
     semiheated_zone_ids = []
-    for zone in find_all("$..zones[*]", building):
+    for zone in zones:
         zone_id = zone["id"]
 
         if (zone_capacity_dict[zone_id]["sensible_cooling"] > CAPACITY_THRESHOLD) or (
@@ -231,7 +241,7 @@ def _get_zone_conditioning_category_dict_uncached(
 
     # Determine eligibility for indirectly conditioned zones
     indirectly_conditioned_zone_ids = []
-    for zone in find_all("$..zones[*]", building):
+    for zone in zones:
         zone_id = zone["id"]
 
         if zone_id not in directly_conditioned_zone_ids:
@@ -254,7 +264,7 @@ def _get_zone_conditioning_category_dict_uncached(
                     find_all("surfaces[*]", zone), f"zone:{zone_id} has no surfaces"
                 )
                 for surface in zone["surfaces"]:
-                    subsurfaces = find_all("$.subsurfaces[*]", surface)
+                    subsurfaces = surface.get("subsurfaces", [])
                     # Calculate the total area of all subsurfaces
                     subsurfaces_area = sum(
                         [
@@ -329,7 +339,7 @@ def _get_zone_conditioning_category_dict_uncached(
     # To this point, we have determined which zones are directly conditioned,
     # semi-heated, or indirectly conditioned.
     # Next we determine whether the zone is residential, non-residential, or mixed.
-    for building_segment in find_all("building_segments[*]", building):
+    for building_segment in building.get("building_segments", []):
         # Set building_segment_is_residential and building_segment_is_nonresidential flags
         building_segment_is_residential = False
         building_segment_is_nonresidential = False
@@ -346,7 +356,7 @@ def _get_zone_conditioning_category_dict_uncached(
         elif building_segment_lighting_building_area_type is not None:
             building_segment_is_nonresidential = True  # bldg_seg_2
 
-        for zone in find_all("zones[*]", building_segment):
+        for zone in zones:
             zone_id = zone["id"]
             if (
                 zone_id in directly_conditioned_zone_ids
@@ -355,7 +365,7 @@ def _get_zone_conditioning_category_dict_uncached(
                 # Determine zone_has_residential_spaces and zone_has_nonresidential_spaces flags
                 zone_has_residential_spaces = False
                 zone_has_nonresidential_spaces = False
-                for space in find_all("spaces[*]", zone):
+                for space in zone.get("spaces", []):
                     space_lighting_space_type = space.get("lighting_space_type")
                     if space_lighting_space_type in [
                         "DORMITORY_LIVING_QUARTERS",
@@ -418,7 +428,13 @@ def _get_zone_conditioning_category_dict_uncached(
                     zone_volume > ZERO.VOLUME,
                     f"zone:{zone_id} has no volume",
                 )
-                zone_floor_area = sum(find_all("spaces[*].floor_area", zone), ZERO.AREA)
+                zone_floor_area = sum(
+                    [
+                        space.get("floor_area", ZERO.AREA)
+                        for space in find_all("spaces[*]", zone)
+                    ],
+                    ZERO.AREA,
+                )
                 assert_(
                     zone_floor_area > ZERO.AREA,
                     f"zone:{zone_id} has no floor area",

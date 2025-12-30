@@ -59,7 +59,7 @@ class PRM9012022Rule67a77(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
-                required_fields={"$..zones[*]": ["surfaces"]},
+                required_fields={"$.building_segments[*].zones[*]": ["surfaces"]},
                 precision={
                     "building_total_air_leakage_rate_b": {
                         "precision": 1,
@@ -82,17 +82,26 @@ class PRM9012022Rule67a77(RuleDefinitionListIndexedBase):
             building_total_air_leakage_rate = ZERO.FLOW
             building_total_measured_air_leakage_rate = ZERO.FLOW
             empty_measured_air_leakage_rate_flow_flag = False
-
+            surfaces_p = [
+                surface
+                for building_segment in building_p.get("building_segments", [])
+                for zone in building_segment.get("zones", [])
+                for surface in zone.get("surfaces", [])
+            ]
             building_total_envelope_area = sum(
                 [
                     getattr_(surface, "surface", "area")
-                    for surface in find_all("$..surfaces[*]", building_p)
+                    for surface in surfaces_p
                     if scc_dict_p[surface["id"]] != SCC.UNREGULATED
                 ],
                 ZERO.AREA,
             )
-
-            for zone in find_all("$..zones[*]", building_p):
+            zones_p = [
+                zone
+                for building_segment in building_p.get("building_segments", [])
+                for zone in building_segment.get("zones", [])
+            ]
+            for zone in zones_p:
                 if zcc_dict_p[zone["id"]] in [
                     ZCC.CONDITIONED_RESIDENTIAL,
                     ZCC.CONDITIONED_NON_RESIDENTIAL,
