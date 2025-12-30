@@ -1,11 +1,11 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import PROPOSED
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022 import PROPOSED
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 
