@@ -14,7 +14,7 @@ from rct229.utils.jsonpath_utils import find_exactly_required_fields
 # TODO: These should directly from the enumerations
 SurfaceAdjacency = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"]
 
-_DISABLE_ZONE_COND_CACHE = os.getenv("RCT_DISABLE_CACHE") == "1"
+_DISABLE_SURFACE_COND_CACHE = os.getenv("RCT_DISABLE_CACHE") == "1"
 # (rmd_type, climate_zone) → { building_id → surface_dict }
 _SURFACE_COND_CACHE: dict[tuple[str, str], dict[str, dict]] = {}
 
@@ -205,7 +205,7 @@ def get_surface_conditioning_category_dict(
     if constructions is None:
         constructions = []
 
-    if _DISABLE_ZONE_COND_CACHE:
+    if _DISABLE_SURFACE_COND_CACHE:
         return _get_surface_conditioning_category_dict_uncached(
             climate_zone, building, constructions, rmd_type
         )

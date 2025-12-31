@@ -29,6 +29,9 @@ def get_building_scc_skylight_roof_ratios_dict(
                 A list of construction dictionaries as defined by the ASHRAE229 schema
             building : dict
                 A dictionary representing a building as defined by the ASHRAE229 schema
+            rmd_type: str
+                One of the RMD_TYPE_OPTIONS enumerated values
+
             Returns
             -------
             dict
@@ -92,7 +95,7 @@ def get_building_scc_skylight_roof_ratios_dict(
 
 def _helper_calculate_skylight_area(surface: dict) -> Quantity:
     total_glazed_area = ZERO.AREA
-    for subsurface in find_all("$.subsurfaces[*]", surface):
+    for subsurface in surface.get("subsurfaces", []):
         glazed_area = getattr_(subsurface, "subsurface", "glazed_area")
         opaque_area = getattr_(subsurface, "subsurface", "opaque_area")
         if getattr_(subsurface, "subsurface", "classification") == DOOR:

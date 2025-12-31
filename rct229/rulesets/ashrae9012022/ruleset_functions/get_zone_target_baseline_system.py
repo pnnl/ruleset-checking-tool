@@ -1,6 +1,5 @@
 from typing import TypedDict
 
-from pydash import juxtapose
 from rct229.rule_engine.memoize import memoize
 from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
@@ -49,7 +48,6 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.is_cz_0_to_3a_bool import (
     is_cz_0_to_3a_bool,
 )
 from rct229.schema.config import ureg
-from rct229.utils.jsonpath_utils import find_all
 
 BUILDING_AREA_20000_ft2 = 20000 * ureg("ft2")
 BUILDING_AREA_40000_ft2 = 40000 * ureg("ft2")
@@ -73,196 +71,150 @@ class SYSTEMORIGIN:
         "G3_2_1_2d"  # exception for heating-only zones with cooling in proposed design
     )
     G3212E = "G3_2_1_2e"  # exception for computer rooms. mislabeled in the standard as a duplicated G3.1.1.2d. Corrected here to e.
-    G3212F = "G3_2_1_2f"  # exception for residential-associated zones. Corrected here to f due to mis-labelling above.
+    G3212F = "G3_2_1_2f"  # exception for residential-associated zones. Corrected here to f due to mislabeling above.
 
 
 @memoize
 def get_zone_target_baseline_system(
     rmd_b: dict, rmd_p: dict, climate_zone_b: str
 ) -> dict[str, ZoneandSystem]:
-    """
-    Following G3.1.1, determines the baseline system type for each zone in a building
-
-    Parameters
-    ----------
-    rmd_b: json
-        RMD at RuleSetModelDescription level
-    rmd_p: json
-        RMD at RuleSetModelDescription level
-    climate_zone_b: str
-        baseline climate zone
-
-
-    Returns
-    -------
-    zones_and_systems: a dictionary with zone / list pairs where the first value in the list is the expected system type (ex SYS_3) and the second value is the rule used to choose the system, (eg "G3_1_1e"): zones_and_systems[zone]["EXPECTED_SYSTEM_TYPE"] = SYS_3; zones_and_systems[zone]["SYSTEM_ORIGIN"] = "G3_1_1e"
-
-    """
 
     zone_conditioning_category_dict = get_zone_conditioning_category_rmd_dict(
         climate_zone_b, rmd_b
     )
 
-    (
-        list_building_area_types_and_zones_b,
-        predominant_building_area_type_b,
-        num_floors_b,
-    ) = juxtapose(
-        lambda cz, rmd: get_hvac_building_area_types_and_zones_dict(cz, rmd),
-        lambda cz, rmd: get_predominant_hvac_building_area_type(cz, rmd),
-        lambda cz, rmd: get_number_of_floors(cz, rmd),
-    )(
-        climate_zone_b, rmd_b
+    bat_dict = get_hvac_building_area_types_and_zones_dict(climate_zone_b, rmd_b)
+    predominant_bat = get_predominant_hvac_building_area_type(climate_zone_b, rmd_b)
+    num_floors = get_number_of_floors(climate_zone_b, rmd_b)
+
+    floor_area = sum(bat["floor_area"] for bat in bat_dict.values())
+
+    baseline_sys = expected_system_type_from_table_g3_1_1_dict(
+        predominant_bat,
+        climate_zone_b,
+        num_floors,
+        floor_area,
     )
 
-    floor_area_b = sum(
-        [
-            list_building_area_types_and_zones_b[bat]["floor_area"]
-            for bat in list_building_area_types_and_zones_b
-        ]
-    )
-    expected_system_type_dict_b = expected_system_type_from_table_g3_1_1_dict(
-        predominant_building_area_type_b, climate_zone_b, num_floors_b, floor_area_b
-    )
+    is_cz_0_to_3a = is_cz_0_to_3a_bool(climate_zone_b)
 
-    is_cz_0_to_3a_result_bool = is_cz_0_to_3a_bool(climate_zone_b)
+    zones_and_systems: dict[str, ZoneandSystem] = {}
 
-    zones_and_systems_b = {
-        zone_b["id"]: expected_system_type_dict_b
-        for zone_b in find_all("$.buildings[*].building_segments[*].zones[*]", rmd_b)
-        if zone_conditioning_category_dict[zone_b["id"]]
-        in (
-            ZCC.CONDITIONED_RESIDENTIAL,
-            ZCC.CONDITIONED_NON_RESIDENTIAL,
-            ZCC.CONDITIONED_MIXED,
-        )
-    }
+    for building in rmd_b.get("buildings", []):
+        for segment in building.get("building_segments", []):
+            for zone in segment.get("zones", []):
+                zid = zone["id"]
+                if zone_conditioning_category_dict.get(zid) in (
+                    ZCC.CONDITIONED_RESIDENTIAL,
+                    ZCC.CONDITIONED_NON_RESIDENTIAL,
+                    ZCC.CONDITIONED_MIXED,
+                ):
+                    zones_and_systems[zid] = baseline_sys.copy()
 
-    total_computer_zones_peak_cooling_load_b = (
-        get_total_computer_zones_peak_cooling_load(rmd_b)
-    )
-
-    # go through each exception to Table G3.1.1 in order
-    # G3.1.1b
-    if floor_area_b > BUILDING_AREA_40000_ft2:
-        for building_area_type in list_building_area_types_and_zones_b:
-            if building_area_type != predominant_building_area_type_b and (
-                list_building_area_types_and_zones_b[building_area_type]["floor_area"]
-                >= BUILDING_AREA_20000_ft2
+    if floor_area > BUILDING_AREA_40000_ft2:
+        for bat, bat_data in bat_dict.items():
+            if (
+                bat != predominant_bat
+                and bat_data["floor_area"] >= BUILDING_AREA_20000_ft2
             ):
-                secondary_system_type_b = expected_system_type_from_table_g3_1_1_dict(
-                    building_area_type,
+                secondary_sys = expected_system_type_from_table_g3_1_1_dict(
+                    bat,
                     climate_zone_b,
-                    num_floors_b,
-                    floor_area_b,
-                )
-                for zone_id_b in zones_and_systems_b:
-                    if (
-                        zone_id_b
-                        in list_building_area_types_and_zones_b[building_area_type][
-                            "zone_ids"
-                        ]
-                    ):
-                        zones_and_systems_b[zone_id_b] = {
-                            "expected_system_type": secondary_system_type_b[
-                                "expected_system_type"
-                            ],
+                    num_floors,
+                    floor_area,
+                )["expected_system_type"]
+
+                for zid in bat_data["zone_ids"]:
+                    if zid in zones_and_systems:
+                        zones_and_systems[zid] = {
+                            "expected_system_type": secondary_sys,
                             "system_origin": SYSTEMORIGIN.G311,
                         }
 
-    for zone_id_b in zones_and_systems_b:
-        # G3.2.1.2.a
-        if does_zone_meet_g3_2_1_2_a(rmd_b, zone_id_b, zones_and_systems_b):
-            zones_and_systems_b[zone_id_b] = {
+    total_computer_peak = get_total_computer_zones_peak_cooling_load(rmd_b)
+    computer_room_zones = get_zone_computer_rooms(rmd_b)
+
+    for zid, zone_sys in list(zones_and_systems.items()):
+        current_sys = zone_sys["expected_system_type"]
+
+        if does_zone_meet_g3_2_1_2_a(rmd_b, zid, zones_and_systems):
+            zones_and_systems[zid] = {
                 "system_origin": SYSTEMORIGIN.G3212A,
                 "expected_system_type": HVAC_SYS.SYS_4
-                if is_cz_0_to_3a_result_bool
+                if is_cz_0_to_3a
                 else HVAC_SYS.SYS_3,
             }
+            current_sys = zones_and_systems[zid]["expected_system_type"]
 
-        # G3.2.1.2.b
-        if does_zone_meet_g3_2_1_2_b(rmd_b, zone_id_b):
-            zones_and_systems_b[zone_id_b] = {
+        if does_zone_meet_g3_2_1_2_b(rmd_b, zid):
+            zones_and_systems[zid] = {
                 "system_origin": SYSTEMORIGIN.G3212B,
                 "expected_system_type": HVAC_SYS.SYS_5
-                if num_floors_b < REQ_FL_6 and floor_area_b < BUILDING_AREA_150000_ft2
+                if num_floors < REQ_FL_6 and floor_area < BUILDING_AREA_150000_ft2
                 else HVAC_SYS.SYS_7,
             }
+            current_sys = zones_and_systems[zid]["expected_system_type"]
 
-        # G3.2.1.2.c
-        if does_zone_meet_g3_2_1_2_c(rmd_b, rmd_p, zone_id_b):
-            zones_and_systems_b[zone_id_b] = {
+        if does_zone_meet_g3_2_1_2_c(rmd_b, rmd_p, zid):
+            zones_and_systems[zid] = {
                 "system_origin": SYSTEMORIGIN.G3212C,
                 "expected_system_type": HVAC_SYS.SYS_10
-                if is_cz_0_to_3a_result_bool
+                if is_cz_0_to_3a
                 else HVAC_SYS.SYS_9,
             }
+            current_sys = zones_and_systems[zid]["expected_system_type"]
 
-        # G3.2.1.2d HVAC zones designed with heating-only systems in the proposed design serving storage rooms,
-        # stairwells, vestibules, electrical/mechanical rooms, and restrooms not exhausting or transferring air from
-        # mechanically cooled thermal zones in the proposed design
-        if is_zone_mechanically_cooled(rmd_b, zone_id_b) and zones_and_systems_b[
-            zone_id_b
-        ]["expected_system_type"] in (
+        if current_sys in (
             HVAC_SYS.SYS_9,
             HVAC_SYS.SYS_10,
-        ):
-            zone_hvac_bat_dict_b = get_zone_hvac_bat_dict(rmd_b, zone_id_b)
+        ) and is_zone_mechanically_cooled(rmd_b, zid):
+            bat_map = get_zone_hvac_bat_dict(rmd_b, zid)
+            dominant_bat = max(bat_map, key=bat_map.get)
 
-            zones_and_systems_b[zone_id_b] = {
+            zones_and_systems[zid] = {
                 "system_origin": SYSTEMORIGIN.G3212D,
                 "expected_system_type": expected_system_type_from_table_g3_1_1_dict(
-                    max(zone_hvac_bat_dict_b, key=zone_hvac_bat_dict_b.get),
+                    dominant_bat,
                     climate_zone_b,
-                    num_floors_b,
-                    floor_area_b,
+                    num_floors,
+                    floor_area,
                 )["expected_system_type"],
             }
+            current_sys = zones_and_systems[zid]["expected_system_type"]
 
-        computer_room_zones_dict_b = get_zone_computer_rooms(rmd_b)
-        # G3.2.1.2e The baseline HVAC system serving HVAC zones that include computer rooms
-        if zone_id_b in computer_room_zones_dict_b:
-            if (
-                total_computer_zones_peak_cooling_load_b
-                > COMPUTER_ROOM_PEAK_COOLING_LOAD_3000000_BTUH
-            ):
-                zones_and_systems_b[zone_id_b] = {
+        if zid in computer_room_zones:
+            if total_computer_peak > COMPUTER_ROOM_PEAK_COOLING_LOAD_3000000_BTUH:
+                zones_and_systems[zid] = {
                     "expected_system_type": HVAC_SYS.SYS_11_1,
                     "system_origin": SYSTEMORIGIN.G3212E,
                 }
-
-            elif get_zone_peak_internal_load_floor_area_dict(rmd_b, zone_id_b)[
-                "peak"
-            ] > COMPUTER_ROOM_PEAK_COOLING_LOAD_600000_BTUH and (
-                zones_and_systems_b[zone_id_b]["expected_system_type"]
-                in (
-                    HVAC_SYS.SYS_7,
-                    HVAC_SYS.SYS_8,
-                )
-            ):
-                zones_and_systems_b[zone_id_b] = {
-                    "expected_system_type": HVAC_SYS.SYS_11_1,
-                    "system_origin": SYSTEMORIGIN.G3212E,
-                }
-
             else:
-                zones_and_systems_b[zone_id_b] = {
-                    "expected_system_type": HVAC_SYS.SYS_4
-                    if is_cz_0_to_3a_result_bool
-                    else HVAC_SYS.SYS_3,
-                    "system_origin": SYSTEMORIGIN.G3212E,
-                }
+                peak = get_zone_peak_internal_load_floor_area_dict(rmd_b, zid)["peak"]
+                if (
+                    peak > COMPUTER_ROOM_PEAK_COOLING_LOAD_600000_BTUH
+                    and current_sys in (HVAC_SYS.SYS_7, HVAC_SYS.SYS_8)
+                ):
+                    zones_and_systems[zid] = {
+                        "expected_system_type": HVAC_SYS.SYS_11_1,
+                        "system_origin": SYSTEMORIGIN.G3212E,
+                    }
+                else:
+                    zones_and_systems[zid] = {
+                        "expected_system_type": HVAC_SYS.SYS_4
+                        if is_cz_0_to_3a
+                        else HVAC_SYS.SYS_3,
+                        "system_origin": SYSTEMORIGIN.G3212E,
+                    }
 
-        # G3.2.1.2f
         if (
-            zone_conditioning_category_dict[zone_id_b]
+            zone_conditioning_category_dict[zid]
             == ZCC.CONDITIONED_RESIDENTIAL_ASSOCIATED
         ):
-            zones_and_systems_b[zone_id_b] = {
+            zones_and_systems[zid] = {
                 "expected_system_type": HVAC_SYS.SYS_4
-                if is_cz_0_to_3a_result_bool
+                if is_cz_0_to_3a
                 else HVAC_SYS.SYS_3,
                 "system_origin": SYSTEMORIGIN.G3212F,
             }
 
-    return zones_and_systems_b
+    return zones_and_systems

@@ -1,10 +1,10 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_system_util import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     CAPACITY_THRESHOLD as CAPACITY_THRESHOLD_QUANTITY,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_target_baseline_system import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_target_baseline_system import (
     SYSTEMORIGIN,
     get_zone_target_baseline_system,
 )
@@ -15,7 +15,7 @@ from rct229.schema.validate import schema_validate_rpd
 POWER_DELTA = 1
 POWER_THRESHOLD_100 = (CAPACITY_THRESHOLD_QUANTITY * 100 * ureg("m2")).to("W").magnitude
 
-TEST_RMD_B_G311B = {
+TEST_RMD_B_G3212 = {
     "id": "test_rmd",
     "constructions": [
         {
@@ -128,7 +128,7 @@ TEST_RMD_B_G311B = {
     "type": "BASELINE_0",
 }
 
-TEST_RMD_B_G311C = {
+TEST_RMD_B_G3212A = {
     "id": "RMD 1",
     "constructions": [
         {
@@ -318,6 +318,35 @@ TEST_RMD_B_G311C = {
     "type": "BASELINE_0",
 }
 
+TEST_RMD_B_G3212F = {
+    "id": "test_rmd",
+    "buildings": [
+        {
+            "id": "Building 1",
+            "building_segments": [
+                {
+                    "id": "Building Segment 1",
+                    "lighting_building_area_type": "MULTIFAMILY",
+                    "zones": [
+                        {
+                            "id": "Thermal Zone 1",
+                            "volume": 1000,
+                            "spaces": [
+                                {
+                                    "id": "Space 1",
+                                    "floor_area": 500,
+                                    "lighting_space_type": "CORRIDOR_APARTMENT",
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ],
+        }
+    ],
+    "type": "BASELINE_0",
+}
+
 TEST_RMD_P = {
     "id": "ASHRAE229 1",
     "ruleset_model_descriptions": [
@@ -399,7 +428,7 @@ TEST_RMD_P = {
     },
 }
 
-TEST_RMD_B_G311D = {
+TEST_RMD_B_G3212B = {
     "id": "test_rmd",
     "buildings": [
         {
@@ -507,7 +536,7 @@ TEST_RMD_B_G311D = {
     "type": "BASELINE_0",
 }
 
-TEST_RMD_B_G311E = {
+TEST_RMD_B_G3212C = {
     "id": "test_rmd",
     "schedules": [{"id": "schedule_1", "hourly_values": [1.2] * 8670}],
     "buildings": [
@@ -574,7 +603,7 @@ TEST_RMD_B_G311E = {
     "type": "BASELINE_0",
 }
 
-TEST_RMD_B_G311F = {
+TEST_RMD_B_G3212D = {
     "id": "test_rmd",
     "schedules": [{"id": "schedule_1", "hourly_values": [1.2] * 8670}],
     "buildings": [
@@ -641,7 +670,7 @@ TEST_RMD_B_G311F = {
     "type": "BASELINE_0",
 }
 
-TEST_RMD_B_G311G = {
+TEST_RMD_B_G3212E = {
     "id": "test_rmd",
     "constructions": [
         {
@@ -740,96 +769,86 @@ TEST_RMD_B_G311G = {
     "type": "BASELINE_0",
 }
 
-
-TEST_RMD_B_FULL_G311B = {
+TEST_RPD_G3212 = {
     "id": "229",
-    "ruleset_model_descriptions": [TEST_RMD_B_G311B],
+    "ruleset_model_descriptions": [TEST_RMD_B_G3212],
 }
-TEST_RMD_B_UNIT_G311B = quantify_rmd(TEST_RMD_B_FULL_G311B)[
-    "ruleset_model_descriptions"
-][0]
+TEST_RMD_G3212 = quantify_rmd(TEST_RPD_G3212)["ruleset_model_descriptions"][0]
 
-TEST_RMD_B_FULL_G311C = {
+TEST_RPD_G3212A = {
     "id": "229",
-    "ruleset_model_descriptions": [TEST_RMD_B_G311C],
+    "ruleset_model_descriptions": [TEST_RMD_B_G3212A],
 }
-TEST_RMD_B_UNIT_G311C = quantify_rmd(TEST_RMD_B_FULL_G311C)[
-    "ruleset_model_descriptions"
-][0]
+TEST_RMD_B_UNIT_G3212A = quantify_rmd(TEST_RPD_G3212A)["ruleset_model_descriptions"][0]
 
-TEST_RMD_B_FULL_G311D = {
+TEST_RPD_G3212B = {
     "id": "229",
-    "ruleset_model_descriptions": [TEST_RMD_B_G311D],
+    "ruleset_model_descriptions": [TEST_RMD_B_G3212B],
 }
-TEST_RMD_B_UNIT_G311D = quantify_rmd(TEST_RMD_B_FULL_G311D)[
-    "ruleset_model_descriptions"
-][0]
+TEST_RMD_B_UNIT_G3212B = quantify_rmd(TEST_RPD_G3212B)["ruleset_model_descriptions"][0]
 
-TEST_RMD_B_FULL_G311E = {
+TEST_RPD_G3212C = {
     "id": "229",
-    "ruleset_model_descriptions": [TEST_RMD_B_G311E],
+    "ruleset_model_descriptions": [TEST_RMD_B_G3212C],
 }
-TEST_RMD_B_UNIT_G311E = quantify_rmd(TEST_RMD_B_FULL_G311E)[
-    "ruleset_model_descriptions"
-][0]
+TEST_RMD_B_UNIT_G3212C = quantify_rmd(TEST_RPD_G3212C)["ruleset_model_descriptions"][0]
 
-TEST_RMD_B_FULL_G311F = {
+TEST_RPD_G3212D = {
     "id": "229",
-    "ruleset_model_descriptions": [TEST_RMD_B_G311F],
+    "ruleset_model_descriptions": [TEST_RMD_B_G3212D],
 }
-TEST_RMD_B_UNIT_G311F = quantify_rmd(TEST_RMD_B_FULL_G311F)[
-    "ruleset_model_descriptions"
-][0]
+TEST_RMD_B_UNIT_G3212D = quantify_rmd(TEST_RPD_G3212D)["ruleset_model_descriptions"][0]
 
-TEST_RMD_B_FULL_G311G = {
+TEST_RPD_G3212E = {
     "id": "229",
-    "ruleset_model_descriptions": [TEST_RMD_B_G311G],
+    "ruleset_model_descriptions": [TEST_RMD_B_G3212E],
 }
-TEST_RMD_B_UNIT_G311G = quantify_rmd(TEST_RMD_B_FULL_G311G)[
-    "ruleset_model_descriptions"
-][0]
+TEST_RMD_B_UNIT_G3212E = quantify_rmd(TEST_RPD_G3212E)["ruleset_model_descriptions"][0]
 
-
+TEST_RPD_P = {
+    "id": "229",
+    "ruleset_model_descriptions": [TEST_RMD_P],
+}
 TEST_RMD_UNIT_P = quantify_rmd(TEST_RMD_P)["ruleset_model_descriptions"][0]
 
 
-def test__TEST_RMD_G311B_is_valid():
-    schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311B)
+def test__TEST_RMD_G3212_is_valid():
+    schema_validation_result = schema_validate_rpd(TEST_RPD_G3212)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['errors']}"
 
 
-def test__TEST_RMD_G311C_is_valid():
-    schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311C)
+def test__TEST_RMD_G3212A_is_valid():
+    schema_validation_result = schema_validate_rpd(TEST_RPD_G3212A)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['errors']}"
 
 
-def test__TEST_RMD_G311D_is_valid():
-    schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311D)
+def test__TEST_RMD_G3212B_is_valid():
+    schema_validation_result = schema_validate_rpd(TEST_RPD_G3212B)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['errors']}"
 
 
-def test__TEST_RMD_G311E_is_valid():
-    schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311E)
+def test__TEST_RMD_G3212C_is_valid():
+    schema_validation_result = schema_validate_rpd(TEST_RPD_G3212C)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['errors']}"
 
 
-def test__TEST_RMD_G311F_is_valid():
-    schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311F)
+def test__TEST_RMD_G3212D_is_valid():
+    schema_validation_result = schema_validate_rpd(TEST_RPD_G3212D)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['errors']}"
 
 
-def test__TEST_RMD_G311G_is_valid():
-    schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311G)
+def test__TEST_RMD_G3212E_is_valid():
+    schema_validation_result = schema_validate_rpd(TEST_RPD_G3212E)
     assert schema_validation_result[
         "passed"
     ], f"Schema error: {schema_validation_result['errors']}"
@@ -842,13 +861,11 @@ def test__TEST_RMD_P_is_valid():
     ], f"Schema error: {schema_validation_result['errors']}"
 
 
-def test__get_zone_target_baseline_system_G3_1_1_b__true():
-    assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311B, TEST_RMD_UNIT_P, "CZ4A"
-    ) == {
+def test__get_zone_target_baseline_system_G3_2_1_2_baseline_split__true():
+    assert get_zone_target_baseline_system(TEST_RMD_G3212, TEST_RMD_UNIT_P, "CZ4A") == {
         "Thermal Zone 1": {
             "expected_system_type": HVAC_SYS.SYS_5,
-            "system_origin": SYSTEMORIGIN.G311B,
+            "system_origin": SYSTEMORIGIN.G311,
         },
         "Thermal Zone 2": {
             "expected_system_type": HVAC_SYS.SYS_1,
@@ -857,9 +874,9 @@ def test__get_zone_target_baseline_system_G3_1_1_b__true():
     }
 
 
-def test__get_zone_target_baseline_system_G3_1_1_c__true():
+def test__get_zone_target_baseline_system_G3_2_1_2_a__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311C, TEST_RMD_UNIT_P, "CZ5A"
+        TEST_RMD_B_UNIT_G3212A, TEST_RMD_UNIT_P, "CZ5A"
     ) == {
         "Thermal Zone 1": {
             "expected_system_type": HVAC_SYS.SYS_7,
@@ -868,45 +885,45 @@ def test__get_zone_target_baseline_system_G3_1_1_c__true():
     }
 
 
-def test__get_zone_target_baseline_system_G3_1_1_d__true():
+def test__get_zone_target_baseline_system_G3_2_1_2_b__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311D, TEST_RMD_UNIT_P, "CZ4A"
+        TEST_RMD_B_UNIT_G3212B, TEST_RMD_UNIT_P, "CZ4A"
     ) == {
         "Thermal Zone 1": {
             "expected_system_type": HVAC_SYS.SYS_5,
-            "system_origin": SYSTEMORIGIN.G311D,
+            "system_origin": SYSTEMORIGIN.G3212B,
         }
     }
 
 
-def test__get_zone_target_baseline_system_G3_1_1_e__true():
+def test__get_zone_target_baseline_system_G3_2_1_2_c__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311E, TEST_RMD_UNIT_P, "CZ3A"
+        TEST_RMD_B_UNIT_G3212C, TEST_RMD_UNIT_P, "CZ3A"
     ) == {
         "Thermal Zone 2": {
             "expected_system_type": HVAC_SYS.SYS_10,
-            "system_origin": SYSTEMORIGIN.G311E,
+            "system_origin": SYSTEMORIGIN.G3212C,
         }
     }
 
 
-def test__get_zone_target_baseline_system_G3_1_1_f__true():
+def test__get_zone_target_baseline_system_G3_2_1_2_d__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311F, TEST_RMD_UNIT_P, "CZ4A"
+        TEST_RMD_B_UNIT_G3212D, TEST_RMD_UNIT_P, "CZ4A"
     ) == {
         "Thermal Zone 2": {
             "expected_system_type": HVAC_SYS.SYS_5,
-            "system_origin": SYSTEMORIGIN.G311F,
+            "system_origin": SYSTEMORIGIN.G3212D,
         }
     }
 
 
-def test__get_zone_target_baseline_system_G3_1_1_g__true():
+def test__get_zone_target_baseline_system_G3_2_1_2_e__true():
     assert get_zone_target_baseline_system(
-        TEST_RMD_B_UNIT_G311G, TEST_RMD_UNIT_P, "CZ4A"
+        TEST_RMD_B_UNIT_G3212E, TEST_RMD_UNIT_P, "CZ4A"
     ) == {
         "Thermal Zone 1": {
             "expected_system_type": HVAC_SYS.SYS_11_1,
-            "system_origin": "G3_1_1g_part2",
+            "system_origin": SYSTEMORIGIN.G3212E,
         }
     }

@@ -36,10 +36,10 @@ def get_zone_peak_internal_load_floor_area_dict(
     zone_area = ZERO.AREA
     zone_load = ZERO.POWER
 
-    for space in find_all("$.spaces[*]", zone):
+    for space in zone.get("spaces", []):
         space_area = space.get("floor_area", ZERO.AREA)
         zone_area += space_area
-        for light in find_all("$.interior_lighting[*]", space):
+        for light in space.get("interior_lighting", []):
             lighting_design_schedule = find_exactly_one_schedule(
                 rmd,
                 getattr_(light, "interior_lighting", "lighting_multiplier_schedule"),
@@ -57,7 +57,7 @@ def get_zone_peak_internal_load_floor_area_dict(
                 * lighting_max_schedule_fraction
             )
 
-        for equipment in find_all("$.miscellaneous_equipment[*]", space):
+        for equipment in space.get("miscellaneous_equipment", []):
             equipment_design_schedule = find_exactly_one_schedule(
                 rmd,
                 getattr_(equipment, "miscellaneous_equipment", "multiplier_schedule"),
