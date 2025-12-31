@@ -1,9 +1,9 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Enumerations from ASHRAE 90.1-2019",
-    "description": "Schema addition for ASHRAE 229 related to enumerations found in ASHRAE Standard 90.1-2019",
+    "title": "Enumerations from ASHRAE 90.1-2022",
+    "description": "Schema addition for ASHRAE 229 related to enumerations found in ASHRAE Standard 90.1-2022",
     "definitions": {
-        "RulesetModelOptions2019ASHRAE901": {
+        "RulesetModelOptions2022ASHRAE901": {
             "type": "string",
             "enum": [
                 "BASELINE_0",
@@ -18,7 +18,7 @@
                 "The building model that corresponds with the Baseline Buildings Performance column of Appendix G Table G3.1 with 270 degree rotation"
             ]
         },
-        "CompliancePathOptions2019ASHRAE901": {
+        "CompliancePathOptions2022ASHRAE901": {
             "type": "string",
             "enum": [
                 "CODE_COMPLIANT",
@@ -29,7 +29,7 @@
                 "Beyond Code"
             ]
         },
-        "EnvelopeSpaceOptions2019ASHRAE901": {
+        "EnvelopeSpaceOptions2022ASHRAE901": {
             "type": "string",
             "enum": [
                 "NONRESIDENTIAL_CONDITIONED",
@@ -44,7 +44,7 @@
                 "Unconditioned"
             ]
         },
-        "LightingBuildingAreaOptions2019ASHRAE901T951TG38": {
+        "LightingBuildingAreaOptions2022ASHRAE901T951TG38": {
             "type": "string",
             "enum": [
                 "AUTOMOTIVE_FACILITY",
@@ -152,82 +152,90 @@
                 "Indicates that building area method is not used and instead the space-by-space method is used."
             ]
         },
-        "LightingSpaceOptions2019ASHRAE901TG37": {
+        "LightingSpaceOptions2022ASHRAE901TG37": {
             "type": "string",
             "enum": [
-                "ATRIUM_LOW_MEDIUM",
+                "ATRIUM_LOW",
+                "ATRIUM_MEDIUM",
                 "ATRIUM_HIGH",
                 "AUDIENCE_SEATING_AREA_AUDITORIUM",
                 "AUDIENCE_SEATING_AREA_CONVENTION_CENTER",
-                "AUDIENCE_SEATING_AREA_EXERCISE_CENTER",
                 "AUDIENCE_SEATING_AREA_GYMNASIUM",
                 "AUDIENCE_SEATING_AREA_MOTION_PICTURE_THEATER",
-                "AUDIENCE_SEATING_AREA_PENITENTIARY",
                 "AUDIENCE_SEATING_AREA_PERFORMING_ARTS_THEATER",
-                "AUDIENCE_SEATING_AREA_RELIGIOUS_FACILITY",
                 "AUDIENCE_SEATING_AREA_SPORTS_ARENA",
-                "AUDIENCE_SEATING_AREA_TRANSPORTATION_FACILITY",
                 "AUDIENCE_SEATING_AREA_ALL_OTHER",
                 "BANKING_ACTIVITY_AREA",
-                "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_PENITENTIARY",
                 "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_SCHOOL",
                 "CLASSROOM_LECTURE_HALL_TRAINING_ROOM_ALL_OTHER",
+                "COMPUTER_ROOM",
                 "CONFERENCE_MEETING_MULTIPURPOSE_ROOM",
-                "CONFINEMENT_CELLS",
                 "COPY_PRINT_ROOM",
-                "CORRIDOR_FACILITY_FOR_THE_VISUALLY_IMPAIRED",
-                "CORRIDOR_HOSPITAL",
-                "CORRIDOR_MANUFACTURING_FACILITY",
                 "CORRIDOR_ALL_OTHERS",
                 "COURT_ROOM",
-                "COMPUTER_ROOM",
-                "DINING_AREA_PENITENTIARY",
-                "DINING_AREA_FACILITY_FOR_THE_VISUALLY_IMPAIRED",
                 "DINING_AREA_BAR_LOUNGE_OR_LEISURE_DINING",
                 "DINING_AREA_CAFETERIA_OR_FAST_FOOD_DINING",
                 "DINING_AREA_FAMILY_DINING",
                 "DINING_AREA_ALL_OTHERS",
                 "ELECTRICAL_MECHANICAL_ROOM",
                 "EMERGENCY_VEHICLE_GARAGE",
+                "EQUIPMENT_ROOM",
                 "FOOD_PREPARATION_AREA",
                 "GUEST_ROOM",
-                "JUDGES_CHAMBERS",
                 "DWELLING_UNIT",
+                "LABORATORY_SCHOOL",
                 "LABORATORY_EXCEPT_IN_OR_AS_A_CLASSROOM",
                 "LAUNDRY_WASHING_AREA",
                 "LOADING_DOCK_INTERIOR",
-                "LOBBY_FACILITY_FOR_THE_VISUALLY_IMPAIRED",
                 "LOBBY_ELEVATOR",
                 "LOBBY_HOTEL",
                 "LOBBY_MOTION_PICTURE_THEATER",
                 "LOBBY_PERFORMING_ARTS_THEATER",
                 "LOBBY_ALL_OTHERS",
                 "LOCKER_ROOM",
-                "LOUNGE_BREAKROOM_HEALTH_CARE_FACILITY",
+                "LOUNGE_BREAKROOM_MOTHERS_WELLNESS",
                 "LOUNGE_BREAKROOM_ALL_OTHERS",
-                "OFFICE_ENCLOSED",
+                "OFFICE_ENCLOSED_SMALL",
+                "OFFICE_ENCLOSED_LARGE",
                 "OFFICE_OPEN_PLAN",
-                "PARKING_AREA_INTERIOR",
+                "PARKING_AREA_INTERIOR_DAYLIGHT_TRANSITION",
+                "PARKING_AREA_INTERIOR_ALL_OTHERS",
                 "PHARMACY_AREA",
-                "RESTROOM_FACILITY_FOR_THE_VISUALLY_IMPAIRED",
                 "RESTROOM_ALL_OTHERS",
                 "SALES_AREA",
                 "SEATING_AREA_GENERAL",
+                "SECURITY_SCREENING_TRANSPORTATION_SCREENING",
+                "SECURITY_SCREENING_TRANSPORTATION_QUEUE",
+                "SECURITY_SCREENING_GENERAL",
                 "STAIRWELL",
-                "STORAGE_ROOM_HOSPITAL",
-                "STORAGE_ROOM_SMALL",
                 "STORAGE_ROOM_LARGE",
+                "STORAGE_ROOM_SMALL",
                 "VEHICULAR_MAINTENANCE_AREA",
-                "WORKSHOP",
-                "ASSISTED_LIVING_FACILITY_CHAPEL",
-                "ASSISTED_LIVING_FACILITY_RECREATION_ROOM_COMMON_LIVING_ROOM",
+                "WORKSHOP_SCHOOL",
+                "WORKSHOP_ALL_OTHERS",
+                "CASINO_BETTING_AREA",
+                "CASINO_HIGH_LIMIT_AREA",
+                "CASINO_SLOT_MACHINE_AREA",
+                "CASINO_TABLE_GAMES_AREA",
                 "CONVENTION_CENTER_EXHIBIT_SPACE",
+                "CORRECTIONAL_FACILITY_AUDIENCE_SEATING_AREA",
+                "CORRECTIONAL_FACILITY_CLASSROOM",
+                "CORRECTIONAL_FACILITY_CONFINEMENT_CELLS",
+                "CORRECTIONAL_FACILITY_DINING_AREA",
                 "DORMITORY_LIVING_QUARTERS",
+                "FACILITY_FOR_VISUALLY_IMPAIRED_CHAPEL",
+                "FACILITY_FOR_VISUALLY_IMPAIRED_CORRIDOR",
+                "FACILITY_FOR_VISUALLY_IMPAIRED_DINING",
+                "FACILITY_FOR_VISUALLY_IMPAIRED_LOBBY",
+                "FACILITY_FOR_VISUALLY_IMPAIRED_RECREATION_ROOM",
+                "FACILITY_FOR_VISUALLY_IMPAIRED_RESTROOM",
                 "FIRE_STATION_SLEEPING_QUARTERS",
                 "GYMNASIUM_FITNESS_CENTER_EXERCISE_AREA",
                 "GYMNASIUM_FITNESS_CENTER_PLAYING_AREA",
-                "HEALTHCARE_FACILITY_EMERGENCY_ROOM",
+                "HEALTHCARE_FACILITY_CONTROL_ROOM",
                 "HEALTHCARE_FACILITY_EXAM_TREATMENT_ROOM",
+                "HEALTHCARE_FACILITY_HOSPITAL_CORRIDOR",
+                "HEALTHCARE_FACILITY_LOUNGE",
                 "HEALTHCARE_FACILITY_MEDICAL_SUPPLY_ROOM",
                 "HEALTHCARE_FACILITY_NURSERY",
                 "HEALTHCARE_FACILITY_NURSES_STATION",
@@ -235,142 +243,168 @@
                 "HEALTHCARE_FACILITY_PATIENT_ROOM",
                 "HEALTHCARE_FACILITY_PHYSICAL_THERAPY_ROOM",
                 "HEALTHCARE_FACILITY_RECOVERY_ROOM",
+                "HEALTHCARE_FACILITY_TELEMEDICINE",
                 "LIBRARY_READING_AREA",
                 "LIBRARY_STACKS",
                 "MANUFACTURING_FACILITY_DETAILED_MANUFACTURING_AREA",
-                "MANUFACTURING_FACILITY_EQUIPMENTROOM",
-                "MANUFACTURING_FACILITY_EXTRA_HIGH_BAY_AREA",
-                "MANUFACTURING_FACILITY_HIGH_BAY_AREA",
                 "MANUFACTURING_FACILITY_LOW_BAY_AREA",
+                "MANUFACTURING_FACILITY_HIGH_BAY_AREA",
+                "MANUFACTURING_FACILITY_EXTRA_HIGH_BAY_AREA",
                 "MUSEUM_GENERAL_EXHIBITION_AREA",
                 "MUSEUM_RESTORATION_ROOM",
+                "PERFORMING_ARTS_THEATER_DRESSING_ROOM",
                 "POST_OFFICE_SORTING_AREA",
+                "RELIGIOUS_FACILITY_AUDIENCE_SEATING_AREA",
                 "RELIGIOUS_FACILITY_FELLOWSHIP_HALL",
                 "RELIGIOUS_FACILITY_WORSHIP_PULPIT_CHOIR_AREA",
                 "RETAIL_FACILITIES_DRESSING_FITTING_ROOM",
+                "RETAIL_FACILITIES_HAIR_CARE",
+                "RETAIL_FACILITIES_MANICURE_PEDICURE",
                 "RETAIL_FACILITIES_MALL_CONCOURSE",
+                "RETAIL_FACILITIES_MASSAGE",
                 "SPORTS_ARENA_PLAYING_AREA_CLASS_I_FACILITY",
                 "SPORTS_ARENA_PLAYING_AREA_CLASS_II_FACILITY",
                 "SPORTS_ARENA_PLAYING_AREA_CLASS_III_FACILITY",
                 "SPORTS_ARENA_PLAYING_AREA_CLASS_IV_FACILITY",
+                "NATATORIUM_CLASS_I_FACILITY",
+                "NATATORIUM_CLASS_II_FACILITY",
+                "NATATORIUM_CLASS_III_FACILITY",
+                "NATATORIUM_CLASS_IV_FACILITY",
+                "TRANSPORTATION_FACILITY_AIRPORT_HANGER",
                 "TRANSPORTATION_FACILITY_BAGGAGE_CAROUSEL_AREA",
                 "TRANSPORTATION_FACILITY_AIRPORT_CONCOURSE",
+                "TRANSPORTATION_FACILITY_PASSENGER_LOADING_AREA",
                 "TRANSPORTATION_FACILITY_TICKET_COUNTER",
                 "WAREHOUSE_STORAGE_AREA_MEDIUM_TO_BULKY_PALLETIZED_ITEMS",
                 "WAREHOUSE_STORAGE_AREA_SMALLER_HAND_CARRIED_ITEMS",
                 "NONE"
             ],
             "descriptions": [
-                "Atrium - Low/Medium",
+                "Atrium - Low",
+                "Atrium - Medium",
                 "Atrium - High",
                 "Audience Seating Area - Auditorium",
                 "Audience Seating Area - Convention center",
-                "Audience Seating Area - Excercise center",
                 "Audience Seating Area - Gymnasium",
                 "Audience Seating Area - Motion picture theater",
-                "Audience Seating Area - Penitentiary",
                 "Audience Seating Area - Performing arts theater",
-                "Audience Seating Area - Religious facility",
                 "Audience Seating Area - Sports arena",
-                "Audience Seating Area - Transportation facility",
                 "Audience Seating Area - All other",
                 "Banking Activity Area",
-                "Classroom/Lecture Hall/Training Room - Penitentiary",
                 "Classroom/Lecture Hall/Training Room - School",
                 "Classroom/Lecture Hall/Training Room - All other",
+                "Computer Room",
                 "Conference/Meeting/Multipurpose Room",
-                "Confinement Cells",
                 "Copy/Print Room",
-                "Corridor - Facility for the visually impaired (and not used primarily by the staff)",
-                "Corridor - Hospital",
-                "Corridor - Manufacturing facility",
                 "Corridor - All others",
                 "Court room",
-                "Computer Room",
-                "Dining Area - Penitentiary",
-                "Dining Area - Facility for the visually impaired (and not used primarily by the staff)",
                 "Dining Area - Bar/lounge or leisure dining",
                 "Dining Area - Cafeteria or fast food dining",
                 "Dining Area - Family dining",
                 "Dining Area - All others",
                 "Electrical/Mechanical Room",
                 "Emergency Vehicle Garage",
+                "Equipment Room",
                 "Food Preparation Area",
                 "Guest Room",
-                "Judges Chambers",
                 "Dwelling Unit",
+                "Laboratory - Preschool through 12th grade, laboratory, and shop classrooms",
                 "Laboratory - Except in or as a classroom",
                 "Laundry/Washing Area",
                 "Loading Dock, Interior",
-                "Lobby - Facility for the visually impaired (and not used primarily by the staff)",
                 "Lobby - Elevator",
                 "Lobby - Hotel",
                 "Lobby - Motion picture theater",
                 "Lobby - Performing arts theater",
                 "Lobby - All others",
                 "Locker Room",
-                "Lounge/Breakroom - Health care facility",
+                "Lounge/Breakroom - Mothers wellness room",
                 "Lounge/Breakroom - All others",
-                "Office - Enclosed",
+                "Office - Enclosed and <= 250 ft2",
+                "Office - Enclosed and > 250 ft2",
                 "Office - Open plan",
-                "Parking Area, Interior",
+                "Parking Area, Interior - Daylight transition zone",
+                "Parking Area, Interior - All other parking areas and drive areas",
                 "Pharmacy Area",
-                "Restroom - Facility for the visually impaired (and not used primarily by the staff)",
                 "Restroom - All others",
                 "Sales Area",
                 "Seating Area, General",
+                "Airport/bus/ship/train/transportation screening",
+                "Airport/bus/ship/train/transportation screening queue",
+                "General security screening",
                 "Stairwell",
-                "Storage Room - Hospital",
-                "Storage Room - Small",
-                "Storage Room - Large",
+                "Storage Room >= 50 ft2",
+                "Storage Room < 50 ft2",
                 "Vehicular Maintenance Area",
-                "Workshop",
-                "Assisted Living Facility - Chapel (used primarily by residents)",
-                "Assisted Living Facility - Recreation room/common living room (and not used primarily by staff)",
-                "Convention Center \u00e2\u20ac\u201d Exhibit Space",
-                "Dormitory \u00e2\u20ac\u201d Living Quarters",
-                "Fire Station \u00e2\u20ac\u201d Sleeping Quarters",
+                "Workshop - Preschool through 12th grade, laboratory, and shop classrooms",
+                "Workshop - All others",
+                "Casino - Betting/sportsbook/keno/bingo area",
+                "Casino - High-limit game area",
+                "Casino - Slot machine/digital gaming area",
+                "Casino - Table games area",
+                "Convention Center - Exhibit Space",
+                "Correctional Facility - Audience Seating Area",
+                "Correctional Facility - Classroom",
+                "Correctional Facility - Confinement Cells",
+                "Correctional Facility - Dining Area",
+                "Dormitory - Living Quarters",
+                "Facility for the Visually Impaired - Chapel",
+                "Facility for the Visually Impaired - Corridor",
+                "Facility for the Visually Impaired - Dining",
+                "Facility for the Visually Impaired - Lobby",
+                "Facility for the Visually Impaired - Recreation Room",
+                "Facility for the Visually Impaired - Restroom",
+                "Fire Station - Sleeping Quarters",
                 "Gymnasium/Fitness Center - Exercise area",
                 "Gymnasium/Fitness Center - Playing area",
-                "Healthcare Facility - Emergency Room",
+                "Healthcare Facility - Control room",
                 "Healthcare Facility - Exam/treatment room",
+                "Healthcare Facility - Hospital corridor",
+                "Healthcare Facility - Lounge",
                 "Healthcare Facility - Medical supply room",
                 "Healthcare Facility - Nursery",
-                "Healthcare Facility - Nurse\u00e2\u20ac\u2122s station",
+                "Healthcare Facility - Nurses station",
                 "Healthcare Facility - Operating room",
                 "Healthcare Facility - Patient room",
                 "Healthcare Facility - Physical therapy room",
                 "Healthcare Facility - Recovery room",
+                "Healthcare Facility - Telemedicine",
                 "Library - Reading area",
                 "Library - Stacks",
                 "Manufacturing Facility - Detailed manufacturing area",
-                "Manufacturing Facility - Equipment room",
-                "Manufacturing Facility - Extra high bay area",
-                "Manufacturing Facility - High bay area",
                 "Manufacturing Facility - Low bay area",
+                "Manufacturing Facility - High bay area",
+                "Manufacturing Facility - Extra high bay area",
                 "Museum - General exhibition area",
                 "Museum - Restoration room",
-                "Post Office \u00e2\u20ac\u201d Sorting Area",
+                "Performing Arts Theater - Dressing room",
+                "Post Office - Sorting Area",
+                "Religious Facility - Audience seating area",
                 "Religious Facility - Fellowship hall",
                 "Religious Facility - Worship/pulpit/choir area",
                 "Retail Facilities - Dressing/fitting room",
+                "Retail Facilities - Hair care",
+                "Retail Facilities - Manicure/pedicure",
                 "Retail Facilities - Mall concourse",
-                "Sports Arena \u00e2\u20ac\u201d Playing Area - Class I facility",
-                "Sports Arena \u00e2\u20ac\u201d Playing Area - Class II facility",
-                "Sports Arena \u00e2\u20ac\u201d Playing Area - Class III facility",
-                "Sports Arena \u00e2\u20ac\u201d Playing Area - Class IV facility",
+                "Retail Facilities - Massage",
+                "Sports Arena - Playing Area - Class I facility",
+                "Sports Arena - Playing Area - Class II facility",
+                "Sports Arena - Playing Area - Class III facility",
+                "Sports Arena - Playing Area - Class IV facility",
+                "Natatorium - Class I facility",
+                "Natatorium - Class II facility",
+                "Natatorium - Class III facility",
+                "Natatorium - Class IV facility",
+                "Transportation Facility - Airport hanger",
                 "Transportation Facility - Baggage/carousel area",
                 "Transportation Facility - Airport concourse",
+                "Transportation Facility - Passenger loading area",
                 "Transportation Facility - Ticket counter",
-                "Warehouse \u00e2\u20ac\u201d Storage Area - Medium to bulky, palletized items",
-                "Warehouse \u00e2\u20ac\u201d Storage Area - Smaller, hand-carried items",
+                "Warehouse - Storage Area - Medium to bulky, palletized items",
+                "Warehouse - Storage Area - Smaller, hand-carried items",
                 "None"
             ],
             "notes": [
-                null,
-                null,
-                null,
-                null,
                 null,
                 null,
                 null,
@@ -470,10 +504,33 @@
                 null,
                 null,
                 null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
                 "Indicates that the space will have no occupancy, such as an elevator shaft."
             ]
         },
-        "LightingPurposeOptions2019ASHRAE901": {
+        "LightingPurposeOptions2022ASHRAE901": {
             "type": "string",
             "enum": [
                 "GENERAL",
@@ -490,7 +547,7 @@
                 "Unregulated"
             ]
         },
-        "ExteriorLightingAreaOptions2019ASHRAE901TableG36": {
+        "ExteriorLightingAreaOptions2022ASHRAE901TableG36": {
             "type": "string",
             "enum": [
                 "UNCOVERED_PARKING_LOTS_AND_DRIVES",
@@ -559,7 +616,7 @@
                 "This option would most often be used by software that does not support entire schema and doesn't know if exterior lighting is in a specific type but does know if it is non-tradable"
             ]
         },
-        "ExteriorLightingZoneOptions2019ASHRAE901": {
+        "ExteriorLightingZoneOptions2022ASHRAE901": {
             "type": "string",
             "enum": [
                 "ZONE_0_UNDEVELOPED",
@@ -583,7 +640,7 @@
                 "High-activity commercial districts in major metropolitan areas as designated by the local jurisdiction"
             ]
         },
-        "VentilationSpaceOptions2019ASHRAE901": {
+        "VentilationSpaceOptions2022ASHRAE901": {
             "type": "string",
             "enum": [
                 "ANIMAL_FACILITIES_ANIMAL_EXAM_ROOM_VETERINARY_OFFICE",
@@ -808,7 +865,7 @@
                 "Transient Residential - Dwelling unit"
             ]
         },
-        "ServiceWaterHeatingAreaOptions2019ASHRAE901": {
+        "ServiceWaterHeatingAreaOptions2022ASHRAE901": {
             "type": "string",
             "enum": [
                 "AUTOMOTIVE_FACILITY",
@@ -887,7 +944,7 @@
                 "All others"
             ]
         },
-        "ClimateZoneOptions2019ASHRAE901": {
+        "ClimateZoneOptions2022ASHRAE901": {
             "type": "string",
             "enum": [
                 "CZ0A",
@@ -932,7 +989,7 @@
                 "Subarctic/arctic"
             ]
         },
-        "VerticalFenestrationBuildingAreaOptions2019ASHRAE901": {
+        "VerticalFenestrationBuildingAreaOptions2022ASHRAE901": {
             "type": "string",
             "enum": [
                 "GROCERY_STORE",
@@ -971,7 +1028,7 @@
                 "Other"
             ]
         },
-        "SubsurfaceFrameOptions2019ASHRAE901": {
+        "SubsurfaceFrameOptions2022ASHRAE901": {
             "type": "string",
             "enum": [
                 "ALUMINUM_WITHOUT_BREAK",
@@ -1000,16 +1057,16 @@
                 "Other"
             ]
         },
-        "PrescribedScheduleOptions2019ASHRAE901": {
+        "PrescribedScheduleOptions2022ASHRAE901": {
             "type": "string",
             "enum": [
                 "NOT_APPLICABLE"
             ],
             "descriptions": [
-                "No prescribed schedules for Appendix G of ASHRAE Standard 90.1-2019. This field may be relavent for other rulesets."
+                "No prescribed schedules for Appendix G of ASHRAE Standard 90.1-2022. This field may be relavent for other rulesets."
             ]
         },
-        "ConstructionClassificationOptions2019ASHRAE901": {
+        "ConstructionClassificationOptions2022ASHRAE901": {
             "type": "string",
             "enum": [
                 "STEEL_FRAMED"
@@ -1018,7 +1075,7 @@
                 "Steel-framed"
             ]
         },
-        "SubsurfaceSubclassificationOptions2019ASHRAE901": {
+        "SubsurfaceSubclassificationOptions2022ASHRAE901": {
             "type": "string",
             "enum": [
                 "METAL_COILING_DOOR",
@@ -1039,7 +1096,7 @@
                 "other subclassifications"
             ]
         },
-        "HeatingVentilatingAirConditioningBuildingAreaOptions2019ASHRAE901": {
+        "HeatingVentilatingAirConditioningBuildingAreaOptions2022ASHRAE901": {
             "type": "string",
             "enum": [
                 "RESIDENTIAL",
@@ -1058,13 +1115,13 @@
                 "Other non-residential"
             ]
         },
-        "OutputSchemaOptions2019ASHRAE901": {
+        "OutputSchemaOptions2022ASHRAE901": {
             "type": "string",
             "enum": [
-                "OUTPUT_SCHEMA_ASHRAE901_2019"
+                "OUTPUT_SCHEMA_ASHRAE901_2022"
             ],
             "descriptions": [
-                "Output schema for ASHRAE 90.1 2019"
+                "Output schema for ASHRAE 90.1 2022"
             ]
         }
     },
