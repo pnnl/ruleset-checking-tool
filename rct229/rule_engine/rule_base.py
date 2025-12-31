@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from functools import partial
 from typing import TypedDict, Mapping
 
@@ -12,6 +13,7 @@ from rct229.utils.pint_utils import calcq_to_q
 from rct229.utils.std_comparisons import std_equal_with_precision, std_equal
 
 
+@dataclass
 class RCTPrecision(TypedDict):
     precision: float
     unit: str | None
