@@ -17,6 +17,27 @@ LIGHTING_SPACE_OPTION = SchemaEnums.schema_enums[
 COMPUTER_ROOM_REQ = 0.5
 
 
+def get_cooling_design_schedule_values(schedule: dict) -> list:
+    has_day = "hourly_cooling_design_day" in schedule
+    has_year = "hourly_cooling_design_year" in schedule
+
+    assert_(
+        has_day or has_year,
+        "Schedule must contain either 'hourly_cooling_design_day' or 'hourly_cooling_design_year'",
+    )
+
+    assert_(
+        not (has_day and has_year),
+        "Schedule must not contain both 'hourly_cooling_design_day' and 'hourly_cooling_design_year'",
+    )
+
+    return (
+        schedule["hourly_cooling_design_day"]
+        if has_day
+        else schedule["hourly_cooling_design_year"]
+    )
+
+
 def get_hvac_systems_primarily_serving_comp_room(rmd: dict) -> list[str]:
     """
     Returns a list of HVAC systems in which the computer room space loads are the dominant loads for an HVAC system
@@ -71,56 +92,60 @@ def get_hvac_systems_primarily_serving_comp_room(rmd: dict) -> list[str]:
                     total_wattage_space = ZERO.POWER
 
                     # occupancy max wattage calculation
+                    occ_schedule = find_exactly_one_schedule(
+                        rmd, getattr_(space, "spaces", "occupant_multiplier_schedule")
+                    )
+                    occ_values = get_cooling_design_schedule_values(occ_schedule)
                     peak_occ_heat_gain = (
-                        max(
-                            find_exactly_one_schedule(
-                                rmd,
-                                getattr_(
-                                    space, "spaces", "occupant_multiplier_schedule"
-                                ),
-                            ).get("hourly_cooling_design_day", 0.0)
-                        )
-                        * space.get("number_of_occupants", 0)
-                        * space.get("occupant_sensible_heat_gain", ZERO.POWER)
+                            max(occ_values, default=0.0)
+                            * space.get("number_of_occupants", 0)
+                            * space.get("occupant_sensible_heat_gain", ZERO.POWER)
                     )
 
                     # lighting max wattage calculation
                     lgt_wattage = sum(
-                        [
-                            max(
-                                find_exactly_one_schedule(
-                                    rmd,
-                                    getattr_(
-                                        int_lgt,
-                                        "interior_lighting",
-                                        "lighting_multiplier_schedule",
+                        (
+                                max(
+                                    get_cooling_design_schedule_values(
+                                        find_exactly_one_schedule(
+                                            rmd,
+                                            getattr_(
+                                                int_lgt,
+                                                "interior_lighting",
+                                                "lighting_multiplier_schedule",
+                                            ),
+                                        )
                                     ),
-                                ).get("hourly_cooling_design_day", 0.0)
-                            )
-                            * int_lgt.get("power_per_area", ZERO.POWER_PER_AREA)
-                            * space.get("floor_area", ZERO.AREA)
-                            for int_lgt in space.get("interior_lighting", [])
-                        ]
+                                    default=0.0,
+                                )
+                                * int_lgt.get("power_per_area", ZERO.POWER_PER_AREA)
+                                * space.get("floor_area", ZERO.AREA)
+                        )
+                        for int_lgt in space.get("interior_lighting", [])
                     )
 
                     # miscellaneous max wattage calculation
                     misc_wattage = sum(
-                        [
-                            max(
-                                find_exactly_one_schedule(
-                                    rmd,
-                                    getattr_(
-                                        misc_obj,
-                                        "miscellaneous_equipment",
-                                        "multiplier_schedule",
+                        (
+                                max(
+                                    get_cooling_design_schedule_values(
+                                        find_exactly_one_schedule(
+                                            rmd,
+                                            getattr_(
+                                                misc_obj,
+                                                "miscellaneous_equipment",
+                                                "multiplier_schedule",
+                                            ),
+                                        )
                                     ),
-                                ).get("hourly_cooling_design_day", 0.0)
-                            )
-                            * misc_obj.get("power", ZERO.POWER)
-                            * misc_obj.get("sensible_fraction", 0.0)
-                            for misc_obj in space.get("miscellaneous_equipment", [])
-                        ]
+                                    default=0.0,
+                                )
+                                * misc_obj.get("power", ZERO.POWER)
+                                * misc_obj.get("sensible_fraction", 0.0)
+                        )
+                        for misc_obj in space.get("miscellaneous_equipment", [])
                     )
+
                     tempo_wattage = peak_occ_heat_gain + lgt_wattage + misc_wattage
                     total_wattage_space += tempo_wattage
                     total_wattage_zone += tempo_wattage
