@@ -75,7 +75,10 @@ class ASHRAE9012019DetailReport(RCTReport):
                     output_outcome_dict[RCTOutcomeLabel.UNDETERMINED] += 1
                 if outcome_label == RCTOutcomeLabel.NOT_APPLICABLE:
                     output_outcome_dict[RCTOutcomeLabel.NOT_APPLICABLE] += 1
-                evaluation_outcome["data_group_id"] = output_result["id"]
+                if "data_group_id" in output_result:
+                    evaluation_outcome["data_group_id"] = output_result["data_group_id"]
+                else:
+                    evaluation_outcome["data_group_id"] = output_result["id"]
                 evaluation_outcome["outcome"] = outcome_label
                 evaluation_outcome["messages"] = (
                     output_result["message"]
