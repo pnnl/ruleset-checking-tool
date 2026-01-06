@@ -1,7 +1,4 @@
-import functools
-import operator
 from dataclasses import dataclass
-
 from pint import Quantity
 
 from rct229.schema.config import ureg
@@ -189,6 +186,8 @@ def calcq_to_str(unit_system, obj) -> str:
     """
     if isinstance(obj, CalcQ):
         retval = None if obj.q is None else obj.to_str(unit_system)
+    elif isinstance(obj, Quantity):
+        retval = str(obj)
     elif isinstance(obj, list):
         retval = [calcq_to_str(unit_system, item) for item in obj]
     elif isinstance(obj, dict):

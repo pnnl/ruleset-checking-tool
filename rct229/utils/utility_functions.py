@@ -1,284 +1,183 @@
+import os
+
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
+from rct229.utils.assertions import assert_
 
 HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 COOLING_SYSTEM = SchemaEnums.schema_enums["CoolingSystemOptions"]
 
+_DISABLE_RMD_INDEX_CACHE = os.getenv("RCT_DISABLE_CACHE") == "1"
+_RMD_INDEX_CACHE: dict[int, dict] = {}
+
+
+def _build_rmd_indexes(rmd: dict) -> dict:
+    indexes = {
+        "hvac": {},
+        "terminal": {},
+        "building_segment": {},
+        "zone": {},
+        "space": {},
+        "schedule": {},
+        "fluid_loop": {},
+        "child_loop": {},
+        "pump": {},
+        "construction": {},
+        "swh_distribution": {},
+        "swh_use": {},
+        "swh_equipment": {},
+    }
+
+    for building in rmd.get("buildings", []):
+        for segment in building.get("building_segments", []):
+            indexes["building_segment"][segment["id"]] = segment
+
+            for zone in segment.get("zones", []):
+                indexes["zone"][zone["id"]] = zone
+
+                for space in zone.get("spaces", []):
+                    indexes["space"][space["id"]] = space
+
+                for terminal in zone.get("terminals", []):
+                    indexes["terminal"][terminal["id"]] = terminal
+
+            for hvac in segment.get("heating_ventilating_air_conditioning_systems", []):
+                indexes["hvac"][hvac["id"]] = hvac
+
+            # service water heating uses may appear here
+            for swh_use in segment.get("service_water_heating_uses", []):
+                if isinstance(swh_use, dict):
+                    indexes["swh_use"][swh_use["id"]] = swh_use
+
+    for schedule in rmd.get("schedules", []):
+        indexes["schedule"][schedule["id"]] = schedule
+
+    for loop in rmd.get("fluid_loops", []):
+        indexes["fluid_loop"][loop["id"]] = loop
+        for child in loop.get("child_loops", []):
+            indexes["child_loop"][child["id"]] = child
+
+    for pump in rmd.get("pumps", []):
+        indexes["pump"][pump["id"]] = pump
+
+    for construction in rmd.get("constructions", []):
+        indexes["construction"][construction["id"]] = construction
+
+    for distribution in rmd.get("service_water_heating_distribution_systems", []):
+        indexes["swh_distribution"][distribution["id"]] = distribution
+
+    for swh_use in rmd.get("service_water_heating_uses", []):
+        if isinstance(swh_use, dict):
+            indexes["swh_use"][swh_use["id"]] = swh_use
+
+    for swh_equipment in rmd.get("service_water_heating_equipment", []):
+        indexes["swh_equipment"][swh_equipment["id"]] = swh_equipment
+
+    return indexes
+
+
+def _get_indexes(rmd: dict) -> dict:
+    if _DISABLE_RMD_INDEX_CACHE:
+        return _build_rmd_indexes(rmd)
+
+    key = id(rmd)
+    if key not in _RMD_INDEX_CACHE:
+        _RMD_INDEX_CACHE[key] = _build_rmd_indexes(rmd)
+    return _RMD_INDEX_CACHE[key]
+
 
 def find_exactly_one_hvac_system(rmd: dict, hvac_id: str) -> dict:
-    """
-    Search for the HVAC data group in a ruleset model description by matching hvac_id
-    Raise exception if no matching HVAC
-
-    Parameters
-    ----------
-    rmd: dict
-    hvac_id: str
-
-    Returns dict
-    -------
-
-    """
-    return find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].heating_ventilating_air_conditioning_systems[*]",
-        "id",
-        hvac_id,
-        rmd,
-    )
+    hvac = _get_indexes(rmd)["hvac"].get(hvac_id)
+    assert_(hvac is not None, f"HVAC system '{hvac_id}' not found")
+    return hvac
 
 
-def find_exactly_one_terminal_unit(rmd: dict, terminal_unit_id: str) -> dict:
-    """
-    Search for the terminal unit data group in a ruleset model description by matching terminal_unit_id
-    Raise exception if no matching terminal unit
-    Parameters
-    ----------
-    rmd: json
-    terminal_unit_id: str
-
-    Returns json
-    -------
-
-    """
-    return find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].zones[*].terminals[*]",
-        "id",
-        terminal_unit_id,
-        rmd,
-    )
+def find_exactly_one_terminal(rmd: dict, terminal_id: str) -> dict:
+    terminal = _get_indexes(rmd)["terminal"].get(terminal_id)
+    assert_(terminal is not None, f"Terminal '{terminal_id}' not found")
+    return terminal
 
 
 def find_exactly_one_building_segment(rmd: dict, bldg_seg_id: str) -> dict:
-    """
-    Search for the building segment data group in a ruleset model description by matching bldg_seg_id
-    Raise exception if no matching building segment
-
-    Parameters
-    ----------
-    rmd: json
-    bldg_seg_id: str
-
-    Returns: json
-    -------
-
-    """
-    return find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*]", "id", bldg_seg_id, rmd
-    )
+    segment = _get_indexes(rmd)["building_segment"].get(bldg_seg_id)
+    assert_(segment is not None, f"Building segment '{bldg_seg_id}' not found")
+    return segment
 
 
 def find_exactly_one_zone(rmd: dict, zone_id: str) -> dict:
-    """
-    Search for the zone data group in a ruleset model description by matching zone_id
-    Raise exception if no matching zone
-
-    Parameters
-    ----------
-    rmd: json
-    zone_id: str
-
-    Returns: json
-    -------
-
-    """
-    return find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].zones[*]", "id", zone_id, rmd
-    )
+    zone = _get_indexes(rmd)["zone"].get(zone_id)
+    assert_(zone is not None, f"Zone '{zone_id}' not found")
+    return zone
 
 
 def find_exactly_one_space(rmd: dict, space_id: str) -> dict:
-    """
-    Search for the zone data group in a ruleset model description by matching zone_id
-    Raise exception if no matching zone
-
-    Parameters
-    ----------
-    rmd: json
-    space_id: str
-
-    Returns: json
-    -------
-
-    """
-    return find_exactly_one_with_field_value(
-        "$.buildings[*].building_segments[*].zones[*].spaces[*]",
-        "id",
-        space_id,
-        rmd,
-    )
+    space = _get_indexes(rmd)["space"].get(space_id)
+    assert_(space is not None, f"Space '{space_id}' not found")
+    return space
 
 
 def find_exactly_one_schedule(rmd: dict, schedule_id: str) -> dict:
-    """
-    Search for the schedule data group in a ruleset model description by matching schedule_id
-    Raise exception if no matching schedule
-
-    Parameters
-    ----------
-    rmd: json
-    schedule_id: str
-
-    Returns: json
-    -------
-
-    """
-    return find_exactly_one_with_field_value("$.schedules[*]", "id", schedule_id, rmd)
+    schedule = _get_indexes(rmd)["schedule"].get(schedule_id)
+    assert_(schedule is not None, f"Schedule '{schedule_id}' not found")
+    return schedule
 
 
-def find_exactly_one_child_loop(rmd, child_loop_id):
-    """
-    Search for a child loop data group (secondary loop) in a ruleset model description by matching child_loop_id
-    Raise exception if no matching zone
-    Parameters
-    ----------
-    rmd: json
-    child_loop_id: str
-
-    Returns: json
-    -------
-
-    """
-    return find_exactly_one_with_field_value(
-        "$.fluid_loops[*].child_loops[*]",
-        "id",
-        child_loop_id,
-        rmd,
-    )
+def find_exactly_one_child_loop(rmd: dict, child_loop_id: str) -> dict:
+    child = _get_indexes(rmd)["child_loop"].get(child_loop_id)
+    assert_(child is not None, f"Child loop '{child_loop_id}' not found")
+    return child
 
 
 def find_exactly_one_fluid_loop(rmd: dict, loop_id: str) -> dict:
-    """
-    Search for the loop data group in a ruleset model description by matching loop_id
-    Raise exception if no matching zone
-    Parameters
-    ----------
-    rmd: dict
-    loop_id: str
-
-    Returns: json
-    -------
-
-    """
-    return find_exactly_one_with_field_value(
-        "$.fluid_loops[*]",
-        "id",
-        loop_id,
-        rmd,
-    )
+    loop = _get_indexes(rmd)["fluid_loop"].get(loop_id)
+    assert_(loop is not None, f"Fluid loop '{loop_id}' not found")
+    return loop
 
 
 def find_exactly_one_service_water_heating_distribution_system(
     rmd: dict, swh_distribution_system_id: str
 ) -> dict:
-    """
-    Search for the swh distribution system data group in a ruleset model description by matching swh_distribution_system_id:
-    Raise exception if no matching distribution system
-    Parameters
-    ----------
-    rmd: dict
-    swh_distribution_system_id: str
-
-    Returns: json
-    -------
-
-    """
-    return find_exactly_one_with_field_value(
-        "$.service_water_heating_distribution_systems[*]",
-        "id",
-        swh_distribution_system_id,
-        rmd,
+    dist = _get_indexes(rmd)["swh_distribution"].get(swh_distribution_system_id)
+    assert_(
+        dist is not None,
+        f"Service water heating distribution system "
+        f"'{swh_distribution_system_id}' not found",
     )
+    return dist
 
 
 def find_exactly_one_construction(rmd: dict, construction_id: str) -> dict:
-    """
-    Search for the construction data group in a ruleset model description by matching construction_id:
-    Raise exception if no matching construction
-
-    Parameters
-    ----------
-    rmd
-    construction_id
-
-    Returns
-    -------
-
-    """
-    return find_exactly_one_with_field_value(
-        # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
-        "$.constructions[*]",
-        "id",
-        construction_id,
-        rmd,
+    construction = _get_indexes(rmd)["construction"].get(construction_id)
+    assert_(
+        construction is not None,
+        f"Construction '{construction_id}' not found",
     )
+    return construction
 
 
 def find_exactly_one_service_water_heating_use(rmd: dict, swh_use_id: str) -> dict:
-    """
-    Search for the service water heating use data group in a ruleset model description by matching swh_id:
-    Raise exception if no matching distribution system
-    Parameters
-    ----------
-    rmd: dict
-    swh_use_id: str
-
-    Returns: json
-    -------
-
-    """
-    return find_exactly_one_with_field_value(
-        # TODO: Moving the `service_water_heating_uses` key to the `building_segments` level is being discussed. If the `service_water_heating_uses` key is moved, this function needs to be revisited.
-        "$.service_water_heating_uses[*]",
-        "id",
-        swh_use_id,
-        rmd,
+    swh_use = _get_indexes(rmd)["swh_use"].get(swh_use_id)
+    assert_(
+        swh_use is not None,
+        f"Service water heating use '{swh_use_id}' not found",
     )
+    return swh_use
 
 
 def find_exactly_one_service_water_heating_equipment(
     rmd: dict, swh_equipment_id: str
 ) -> dict:
-    """
-    Search for the service water heating equipment data group in a ruleset model description by matching swh_equipment_id:
-    Raise exception if no matching swh equipment system
-
-    Parameters
-    ----------
-    rmd: dict
-    swh_equipment_id: str
-
-    Returns: json
-    -------
-
-    """
-    return find_exactly_one_with_field_value(
-        "$.service_water_heating_equipment[*]",
-        "id",
-        swh_equipment_id,
-        rmd,
+    equipment = _get_indexes(rmd)["swh_equipment"].get(swh_equipment_id)
+    assert_(
+        equipment is not None,
+        f"Service water heating equipment '{swh_equipment_id}' not found",
     )
+    return equipment
 
 
 def find_exactly_one_pump(rmd: dict, pump_id: str) -> dict:
-    """
-    Search for the pump data group in a ruleset model description by matching pump_id:
-    Raise exception if no matching pump
-
-    Parameters
-    ----------
-    rmd: dict
-    pump_id: str
-
-    Returns: json
-    -------
-
-    """
-    return find_exactly_one_with_field_value(
-        "$.pumps[*]",
-        "id",
-        pump_id,
-        rmd,
-    )
+    pump = _get_indexes(rmd)["pump"].get(pump_id)
+    assert_(pump is not None, f"Pump '{pump_id}' not found")
+    return pump
 
 
 def has_heating_system(rmd: dict, hvac_id: str) -> bool:
@@ -297,13 +196,8 @@ def has_heating_system(rmd: dict, hvac_id: str) -> bool:
     -------
     If heating system exists, it returns true. Otherwise, it returns false.
     """
-    heating_system = find_exactly_one_hvac_system(rmd, hvac_id).get("heating_system")
-
-    return (
-        heating_system is not None
-        and heating_system.get("type") is not None
-        and heating_system["type"] != HEATING_SYSTEM.NONE
-    )
+    system = find_exactly_one_hvac_system(rmd, hvac_id).get("heating_system")
+    return system is not None and system.get("type") not in (None, HEATING_SYSTEM.NONE)
 
 
 def has_cooling_system(rmd: dict, hvac_id: str) -> bool:
@@ -322,13 +216,8 @@ def has_cooling_system(rmd: dict, hvac_id: str) -> bool:
     -------
     If cooling system exists, it returns true. Otherwise, it returns false.
     """
-    cooling_system = find_exactly_one_hvac_system(rmd, hvac_id).get("cooling_system")
-
-    return (
-        cooling_system is not None
-        and cooling_system.get("type") is not None
-        and cooling_system["type"] != COOLING_SYSTEM.NONE
-    )
+    system = find_exactly_one_hvac_system(rmd, hvac_id).get("cooling_system")
+    return system is not None and system.get("type") not in (None, COOLING_SYSTEM.NONE)
 
 
 def has_preheat_system(rmd: dict, hvac_id: str) -> bool:
@@ -347,13 +236,8 @@ def has_preheat_system(rmd: dict, hvac_id: str) -> bool:
     -------
     If preheat system exists, it returns true. Otherwise, it returns false.
     """
-    preheat_system = find_exactly_one_hvac_system(rmd, hvac_id).get("preheat_system")
-
-    return (
-        preheat_system is not None
-        and preheat_system.get("type") is not None
-        and preheat_system["type"] != HEATING_SYSTEM.NONE
-    )
+    system = find_exactly_one_hvac_system(rmd, hvac_id).get("preheat_system")
+    return system is not None and system.get("type") not in (None, HEATING_SYSTEM.NONE)
 
 
 def has_fan_system(rmd: dict, hvac_id: str) -> bool:
@@ -372,5 +256,5 @@ def has_fan_system(rmd: dict, hvac_id: str) -> bool:
     -------
     If fan system exists, it returns true. Otherwise, it returns false.
     """
-
-    return find_exactly_one_hvac_system(rmd, hvac_id).get("fan_system") is not None
+    system = find_exactly_one_hvac_system(rmd, hvac_id).get("fan_system")
+    return system is not None

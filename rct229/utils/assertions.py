@@ -59,7 +59,10 @@ def getattr_(obj: dict, obj_name: str, first_key: str, *remaining_keys: str) -> 
     )
 
     if first_key not in obj:
-        raise MissingKeyException(obj_name, obj["id"], first_key)
+        if "id" in obj:
+            raise MissingKeyException(obj_name, obj["id"], first_key)
+        else:
+            raise MissingKeyException(obj_name, "", first_key)
     val = obj[first_key]
 
     return (

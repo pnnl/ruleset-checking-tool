@@ -1832,6 +1832,19 @@
       "occup_sensor_auto_on_svgs": 0.1,
       "occup_sensor_savings": 0.125,
       "notes": null
+    },
+    {
+      "template": "90.1-PRM-2019",
+      "lpd_space_type": "none",
+      "primary_space_type": "none",
+      "secondary_space_type": "none",
+      "w/ft^2": 0,
+      "w/ft": null,
+      "isresidential": 0,
+      "manon_or_partauto": 0,
+      "occup_sensor_auto_on_svgs": 0,
+      "occup_sensor_savings": 0,
+      "notes": null
     }
   ]
 }

@@ -1,7 +1,7 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012022 import BASELINE_0
+from rct229.rulesets.ashrae9012022 import BASELINE_0, PROPOSED
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_segment_skylight_roof_areas_dict import (
     get_building_segment_skylight_roof_areas_dict,
 )
@@ -75,10 +75,13 @@ class PRM9012022Rule34b75(RuleDefinitionListIndexedBase):
                     data["constructions_p"],
                 ),
                 "skylight_roof_areas_dictionary_b": get_building_segment_skylight_roof_areas_dict(
-                    data["climate_zone"], data["constructions_b"], building_b
+                    data["climate_zone"],
+                    data["constructions_b"],
+                    building_b,
+                    BASELINE_0,
                 ),
                 "skylight_roof_areas_dictionary_p": get_building_segment_skylight_roof_areas_dict(
-                    data["climate_zone"], data["constructions_p"], building_p
+                    data["climate_zone"], data["constructions_p"], building_p, PROPOSED
                 ),
             }
 

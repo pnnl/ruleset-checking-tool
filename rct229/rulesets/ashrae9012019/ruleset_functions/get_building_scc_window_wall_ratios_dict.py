@@ -29,7 +29,7 @@ GET_BUILDING_SCC_WINDOW_WALL_RATIO_DICT__REQUIRED_FIELDS = {
 
 
 def get_building_scc_window_wall_ratios_dict(
-    climate_zone: str, constructions: list, building: dict
+    climate_zone: str, constructions: list, building: dict, rmd_type: str
 ) -> ZoneConditioningDataDict:
     """Determines the window to wall ratio for each surface conditioning category
     in a building
@@ -42,6 +42,8 @@ def get_building_scc_window_wall_ratios_dict(
         A list of construction dictionaries as defined by the ASHRAE229 schema
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
+    rmd_type : str
+        One of the RMD_TYPE_OPTIONS enumerated values
 
     Returns
     -------
@@ -55,7 +57,7 @@ def get_building_scc_window_wall_ratios_dict(
 
     # Get the conditioning category for all the surfaces in the building
     scc_dict = get_surface_conditioning_category_dict(
-        climate_zone, building, constructions
+        climate_zone, building, constructions, rmd_type
     )
 
     # Initialize total window areas

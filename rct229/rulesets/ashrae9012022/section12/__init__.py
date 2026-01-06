@@ -5,6 +5,8 @@ __all__ = [
     "section12rule5",
 ]
 
+SHORT_NAME = "REC"
+
 
 def __getattr__(name):
     if name in __all__:
