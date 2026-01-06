@@ -42,7 +42,7 @@ HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 
 def is_baseline_system_13(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
-    Get either Sys-13, Sys-13a, or Not_Sys_13 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 13
+    Get either Sys-13, Sys-13a, or Not_Sys_13 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 13
     (Single Zone Constant Volume System with CHW and Electric Resistance) or system 13a (system 13 with purchased CHW).
 
     Parameters
@@ -61,7 +61,7 @@ def is_baseline_system_13(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
 
     Returns
     -------
-        The function returns either Sys-13, Sys-13a, or Not_Sys_13 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 13 (Single Zone Constant Volume System with CHW and Electric Resistance) or system 13a (system 13 with purchased CHW).
+        The function returns either Sys-13, Sys-13a, or Not_Sys_13 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 13 (Single Zone Constant Volume System with CHW and Electric Resistance) or system 13a (system 13 with purchased CHW).
     """
 
     is_baseline_system_13 = HVAC_SYS.UNMATCHED

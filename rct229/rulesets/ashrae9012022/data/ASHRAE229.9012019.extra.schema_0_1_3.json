@@ -5,7 +5,7 @@
     "Description": "Base schema for ASHRAE 229 representations",
     "Version": "0.1.3",
     "References": [
-      "Enumerations2019ASHRAE901",
+      "Enumerations2022ASHRAE901",
       "EnumerationsRESNET",
       "Enumerations2019T24",
       "Output2019ASHRAE901"

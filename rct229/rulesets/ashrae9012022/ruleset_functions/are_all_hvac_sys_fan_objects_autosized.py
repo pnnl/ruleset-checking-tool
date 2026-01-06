@@ -5,7 +5,7 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.utility_functions import (
     find_exactly_one_hvac_system,
-    find_exactly_one_terminal_unit,
+    find_exactly_one_terminal,
 )
 
 
@@ -39,7 +39,7 @@ def are_all_hvac_sys_fan_objs_autosized(rmd: dict, hvac_id: str) -> bool:
         else all(
             [
                 getattr_(
-                    find_exactly_one_terminal_unit(rmd, terminal_id),
+                    find_exactly_one_terminal(rmd, terminal_id),
                     "terminal",
                     "fan",
                     "is_airflow_calculated",

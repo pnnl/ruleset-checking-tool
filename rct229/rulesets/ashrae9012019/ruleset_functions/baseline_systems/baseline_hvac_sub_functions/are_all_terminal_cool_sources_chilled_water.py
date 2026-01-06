@@ -1,5 +1,5 @@
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.utility_functions import find_exactly_one_terminal_unit
+from rct229.utils.utility_functions import find_exactly_one_terminal
 
 COOLING_SOURCE = SchemaEnums.schema_enums["CoolingSourceOptions"]
 
@@ -19,7 +19,7 @@ def are_all_terminal_cool_sources_chilled_water(rmd_b, terminal_unit_id_list):
     """
     # all terminal cool sources should be chilled water, false otherwise
     return all(
-        find_exactly_one_terminal_unit(rmd_b, terminal_b_id).get("cooling_source")
+        find_exactly_one_terminal(rmd_b, terminal_b_id).get("cooling_source")
         == COOLING_SOURCE.CHILLED_WATER
         for terminal_b_id in terminal_unit_id_list
     )

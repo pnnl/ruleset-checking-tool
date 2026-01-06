@@ -52,7 +52,7 @@ HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 def is_baseline_system_1(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
     Get either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates whether the HVAC system is
-    ASHRAE 90.1 2022 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with
+    ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW), system 1b (system 1 with
     purchased heating), system 1c (system 1 with purchased CHW and purchased HW).
 
     Parameters
@@ -65,7 +65,7 @@ def is_baseline_system_1(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
                         function from the master get_baseline_system_types function.
 
     Returns The function returns either Sys-1, Sys-1a, Sys-1b, Sys-1c, or Not_Sys_1 string output which indicates
-    whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW),
+    whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 1 (PTAC), system 1a (system 1 with purchased CHW),
     system 1b (system 1 with purchased heating), system 1c (system 1 with purchased CHW and purchased HW). -------
 
     """

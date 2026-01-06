@@ -3,7 +3,7 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.utility_functions import (
     find_exactly_one_fluid_loop,
-    find_exactly_one_terminal_unit,
+    find_exactly_one_terminal,
 )
 
 FLUID_LOOP_TYPE = SchemaEnums.schema_enums["FluidLoopOptions"]
@@ -32,7 +32,7 @@ def are_all_terminal_heating_loops_attached_to_boiler(rmd_b, terminal_unit_id_li
     ]
 
     for terminal_b_id in terminal_unit_id_list:
-        terminal_b = find_exactly_one_terminal_unit(rmd_b, terminal_b_id)
+        terminal_b = find_exactly_one_terminal(rmd_b, terminal_b_id)
         heating_from_loop_id = terminal_b.get("heating_from_loop")
         # cond 1 allows heating_from_loop_id to be None, cond 2 allows fluid_loop to be None.
         if (

@@ -58,7 +58,7 @@ class PRM9012022Rule23m90(RuleDefinitionListIndexedBase):
             building_b = context.BASELINE_0
             return {
                 "zcc_dict_b": get_zone_conditioning_category_dict(
-                    data["climate_zone"], building_b, data["constructions"]
+                    data["climate_zone"], building_b, data["constructions"], BASELINE_0
                 ),
             }
 

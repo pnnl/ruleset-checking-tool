@@ -3,17 +3,17 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.rulesets.ashrae9012022.data_fns.table_G3_4_fns import table_G34_lookup
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
-    SurfaceConditioningCategory as SCC,
-)
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
-    get_baseline_surface_conditioning_category_dict,
-)
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
 )
 from rct229.utils.assertions import assert_
 from rct229.utils.pint_utils import CalcQ
@@ -26,7 +26,7 @@ class PRM9012022Rule48v87(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(PRM9012022Rule48v87, self).__init__(
             rmds_used=produce_ruleset_model_description(
-                USER=False, BASELINE_0=True, PROPOSED=True
+                USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
                 "$.ruleset_model_descriptions[*]": ["weather", "constructions"],
@@ -44,21 +44,18 @@ class PRM9012022Rule48v87(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
-        rpd_p = context.PROPOSED
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        constructions_b = rpd_b["ruleset_model_descriptions"][0]["constructions"]
-        constructions_p = rpd_p["ruleset_model_descriptions"][0]["constructions"]
+        constructions = rpd_b["ruleset_model_descriptions"][0]["constructions"]
         return {
             "climate_zone": climate_zone,
-            "constructions_b": constructions_b,
-            "constructions_p": constructions_p,
+            "constructions": constructions,
         }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(PRM9012022Rule48v87.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=False, BASELINE_0=True, PROPOSED=True
+                    USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={},
                 each_rule=PRM9012022Rule48v87.BuildingRule.AboveGradeWallRule(),
@@ -67,15 +64,10 @@ class PRM9012022Rule48v87(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-            building_b = context.BASELINE_0
-            building_p = context.PROPOSED
+            building = context.BASELINE_0
             return {
-                "surface_conditioning_category_dict": get_baseline_surface_conditioning_category_dict(
-                    data["climate_zone"],
-                    building_b,
-                    data["constructions_b"],
-                    building_p,
-                    data["constructions_p"],
+                "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
+                    data["climate_zone"], building, data["constructions"], BASELINE_0
                 ),
             }
 
@@ -108,7 +100,7 @@ class PRM9012022Rule48v87(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 climate_zone: str = data["climate_zone"]
-                constructions = data["constructions_b"]
+                constructions = data["constructions"]
                 above_grade_wall = context.BASELINE_0
                 scc: str = data["surface_conditioning_category_dict"][
                     above_grade_wall["id"]
@@ -126,8 +118,12 @@ class PRM9012022Rule48v87(RuleDefinitionListIndexedBase):
                 )
 
                 target_u_factor = None
-                target_u_factor_res = None
-                target_u_factor_nonres = None
+                target_u_factor_res = table_G34_lookup(
+                    climate_zone, SCC.EXTERIOR_RESIDENTIAL, OST.ABOVE_GRADE_WALL
+                )["u_value"]
+                target_u_factor_nonres = table_G34_lookup(
+                    climate_zone, SCC.EXTERIOR_NON_RESIDENTIAL, OST.ABOVE_GRADE_WALL
+                )["u_value"]
 
                 if scc in [
                     SCC.EXTERIOR_RESIDENTIAL,
@@ -138,12 +134,6 @@ class PRM9012022Rule48v87(RuleDefinitionListIndexedBase):
                         climate_zone, scc, OST.ABOVE_GRADE_WALL
                     )["u_value"]
                 elif scc == SCC.EXTERIOR_MIXED:
-                    target_u_factor_res = table_G34_lookup(
-                        climate_zone, SCC.EXTERIOR_RESIDENTIAL, OST.ABOVE_GRADE_WALL
-                    )["u_value"]
-                    target_u_factor_nonres = table_G34_lookup(
-                        climate_zone, SCC.EXTERIOR_NON_RESIDENTIAL, OST.ABOVE_GRADE_WALL
-                    )["u_value"]
                     if target_u_factor_res == target_u_factor_nonres:
                         target_u_factor = target_u_factor_res
 
@@ -161,10 +151,7 @@ class PRM9012022Rule48v87(RuleDefinitionListIndexedBase):
                 }
 
             def manual_check_required(self, context, calc_vals=None, data=None):
-                target_u_factor_res = calc_vals["target_u_factor_res"]
-                target_u_factor_nonres = calc_vals["target_u_factor_nonres"]
-
-                return target_u_factor_res != target_u_factor_nonres
+                return calc_vals["target_u_factor"] is None
 
             def rule_check(self, context, calc_vals=None, data=None):
                 return self.precision_comparison["ag_wall_u_factor_b"](

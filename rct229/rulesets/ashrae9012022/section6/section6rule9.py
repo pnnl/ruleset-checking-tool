@@ -64,7 +64,7 @@ class PRM9012022Rule22c86(RuleDefinitionListIndexedBase):
                     ),
                     each_rule=PRM9012022Rule22c86.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
                     index_rmd=PROPOSED,
-                    list_path="$..zones[*]",
+                    list_path="$.building_segments[*].zones[*]",
                 )
 
             def is_applicable(self, context, data=None):

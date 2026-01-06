@@ -1,19 +1,24 @@
+import os
 from typing import TypedDict
 
 import pandas as pd
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields
+from rct229.utils.jsonpath_utils import find_exactly_required_fields
 
 # Constants
 # TODO: These should directly from the enumerations
 SurfaceAdjacency = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"]
+
+_DISABLE_SURFACE_COND_CACHE = os.getenv("RCT_DISABLE_CACHE") == "1"
+# (rmd_type, climate_zone) → { building_id → surface_dict }
+_SURFACE_COND_CACHE: dict[tuple[str, str], dict[str, dict]] = {}
 
 
 # Intended for export and internal use
@@ -120,7 +125,10 @@ GET_SURFACE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
 }
 
 
-def get_surface_conditioning_category_dict(climate_zone, building, constructions):
+def _get_surface_conditioning_category_dict_uncached(
+    climate_zone, building, constructions, rmd_type
+):
+
     """Determines the surface conditioning category for every surface in a building
 
     Parameters
@@ -147,37 +155,77 @@ def get_surface_conditioning_category_dict(climate_zone, building, constructions
 
     # Get the conditioning category for all the zones in the building
     zcc_dict = get_zone_conditioning_category_dict(
-        climate_zone, building, constructions
+        climate_zone, building, constructions, rmd_type
     )
 
     # Loop through all the zones in the building
-    for zone in find_all("building_segments[*].zones[*]", building):
-        # Zone conditioning category
-        zcc = zcc_dict[zone["id"]]
+    for building_segment in building.get("building_segments", []):
+        for zone in building_segment.get("zones", []):
+            # Zone conditioning category
+            zcc = zcc_dict[zone["id"]]
 
-        # Loop through all the surfaces in the zone
-        for surface in find_all("surfaces[*]", zone):
-            surface_adjacent_to = surface["adjacent_to"]
-            adjacency = (
-                zcc_dict[getattr_(surface, "surface", "adjacent_zone")]
-                if surface_adjacent_to == SurfaceAdjacency.INTERIOR
-                else surface_adjacent_to
-            )
-
-            if adjacency in [SurfaceAdjacency.IDENTICAL, SurfaceAdjacency.UNDEFINED]:
-                surface_conditioning_category_dict[
-                    surface["id"]
-                ] = SurfaceConditioningCategory.UNREGULATED
-
-            elif zcc in SCC_DATA_FRAME.index and adjacency in SCC_DATA_FRAME.columns:
-                surface_conditioning_category_dict[surface["id"]] = SCC_DATA_FRAME.at[
-                    zcc,  # row index
-                    adjacency,  # column index
-                ]
-
-            else:
-                raise ValueError(
-                    f"Combination of zone conditioning category '{zcc}' and surface adjacency '{adjacency}' has no mapping to a surface conditioning category"
+            # Loop through all the surfaces in the zone
+            for surface in zone.get("surfaces", []):
+                surface_adjacent_to = surface["adjacent_to"]
+                adjacency = (
+                    zcc_dict[getattr_(surface, "surface", "adjacent_zone")]
+                    if surface_adjacent_to == SurfaceAdjacency.INTERIOR
+                    else surface_adjacent_to
                 )
 
+                if adjacency in [
+                    SurfaceAdjacency.IDENTICAL,
+                    SurfaceAdjacency.UNDEFINED,
+                ]:
+                    surface_conditioning_category_dict[
+                        surface["id"]
+                    ] = SurfaceConditioningCategory.UNREGULATED
+
+                elif (
+                    zcc in SCC_DATA_FRAME.index and adjacency in SCC_DATA_FRAME.columns
+                ):
+                    surface_conditioning_category_dict[
+                        surface["id"]
+                    ] = SCC_DATA_FRAME.at[
+                        zcc,  # row index
+                        adjacency,  # column index
+                    ]
+
+                else:
+                    raise ValueError(
+                        f"Combination of zone conditioning category '{zcc}' and surface adjacency '{adjacency}' has no mapping to a surface conditioning category"
+                    )
     return surface_conditioning_category_dict
+
+
+def get_surface_conditioning_category_dict(
+    climate_zone,
+    building,
+    constructions,
+    rmd_type,
+):
+    if constructions is None:
+        constructions = []
+
+    if _DISABLE_SURFACE_COND_CACHE:
+        return _get_surface_conditioning_category_dict_uncached(
+            climate_zone, building, constructions, rmd_type
+        )
+
+    assert isinstance(rmd_type, str), type(rmd_type)
+
+    cache_key = (rmd_type, climate_zone)
+    building_id = building["id"]
+
+    rmd_cache = _SURFACE_COND_CACHE.setdefault(cache_key, {})
+
+    if building_id in rmd_cache:
+        return rmd_cache[building_id]
+
+    result = _get_surface_conditioning_category_dict_uncached(
+        climate_zone, building, constructions, rmd_type
+    )
+
+    assert isinstance(result, dict)
+    rmd_cache[building_id] = result
+    return result

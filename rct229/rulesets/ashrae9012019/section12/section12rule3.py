@@ -63,9 +63,7 @@ class PRM9012019Rule79w60(RuleDefinitionListIndexedBase):
                 "$.buildings[*].building_segments[*].zones[*].spaces[*]",
                 rmd_p,
             ):
-                lighting_space_type_p = getattr_(
-                    space_p, "spaces", "lighting_space_type"
-                )
+                lighting_space_type_p = space_p.get("lighting_space_type")
                 if lighting_space_type_p not in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES:
                     for misc_equip_p in find_all(
                         "$.miscellaneous_equipment[*]", space_p
@@ -114,7 +112,7 @@ class PRM9012019Rule79w60(RuleDefinitionListIndexedBase):
 
         def list_filter(self, context_item, data):
             space_p = context_item.PROPOSED
-            lighting_space_type_p = getattr_(space_p, "spaces", "lighting_space_type")
+            lighting_space_type_p = space_p.get("lighting_space_type")
             return lighting_space_type_p not in EXPECTED_RECEPTACLE_CONTROL_SPACE_TYPES
 
         class SpaceRule(RuleDefinitionListIndexedBase):

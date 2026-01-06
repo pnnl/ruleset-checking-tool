@@ -49,7 +49,7 @@ HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 
 def is_baseline_system_10(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
-     Get either Sys-10 or Not_Sys_10 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 10 (Heating and Ventilation with electric heating).
+     Get either Sys-10 or Not_Sys_10 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 10 (Heating and Ventilation with electric heating).
 
      Parameters
      ----------
@@ -64,7 +64,7 @@ def is_baseline_system_10(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
 
     Returns
      -------
-     The function returns either Sys-10 or Not_Sys_10 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 10 (Heating and Ventilation with electric heating).
+     The function returns either Sys-10 or Not_Sys_10 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 10 (Heating and Ventilation with electric heating).
     """
 
     is_baseline_system_10 = HVAC_SYS.UNMATCHED

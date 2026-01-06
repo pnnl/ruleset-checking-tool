@@ -5,8 +5,8 @@ from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
-from rct229.utils.std_comparisons import std_equal
 from rct229.utils.pint_utils import CalcQ
+from rct229.utils.std_comparisons import std_equal
 
 AIR_ECONOMIZER = SchemaEnums.schema_enums["AirEconomizerOptions"]
 CLIMATE_ZONE_70F = ["CZ5A", "CZ6A"]

@@ -15,9 +15,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
+from rct229.utils.assertions import assert_
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
-from rct229.utils.assertions import assert_
 
 
 class PRM9012019Rule70u00(RuleDefinitionListIndexedBase):
@@ -67,7 +67,7 @@ class PRM9012019Rule70u00(RuleDefinitionListIndexedBase):
             building = context.BASELINE_0
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building, data["constructions"]
+                    data["climate_zone"], building, data["constructions"], BASELINE_0
                 ),
             }
 

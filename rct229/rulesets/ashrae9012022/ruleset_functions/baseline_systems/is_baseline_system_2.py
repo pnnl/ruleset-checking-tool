@@ -39,7 +39,7 @@ HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 
 def is_baseline_system_2(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
-    Get either Sys-2 or Not_Sys_2 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 2 (PTHP).
+    Get either Sys-2 or Not_Sys_2 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 2 (PTHP).
 
     Parameters
     ----------
@@ -57,7 +57,7 @@ def is_baseline_system_2(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
 
     Returns
     -------
-    The function returns either Sys-2 or Not_Sys_2 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 2 (PTHP).
+    The function returns either Sys-2 or Not_Sys_2 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 2 (PTHP).
     """
 
     # check if the hvac system has the required sub systems for system type 2

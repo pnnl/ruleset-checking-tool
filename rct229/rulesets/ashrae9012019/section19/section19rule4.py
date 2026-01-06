@@ -6,7 +6,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_most_used_weekday_hourl
     get_most_used_weekday_hourly_schedule,
 )
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.assertions import assert_, getattr_
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
@@ -33,15 +33,6 @@ class PRM9012019Rule74p61(RuleDefinitionListIndexedBase):
             is_primary_rule=True,
             list_path="ruleset_model_descriptions[0]",
         )
-
-    def create_data(self, context, data):
-        rmd_b = context.BASELINE_0
-
-        assert_(
-            find_all("$..hourly_cooling_design_day", rmd_b),
-            "No schedules in the baseline model contain the 'hourly_cooling_design_day' data",
-        )
-        return {}
 
     class RuleSetModelInstanceRule(RuleDefinitionListIndexedBase):
         def __init__(self):

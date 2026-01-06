@@ -48,7 +48,7 @@ HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 
 def is_baseline_system_12(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
-    Get either Sys-12, Sys-12a, Sys-12b, Sys-12c, or Not_Sys_12 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 12 (Single Zone Constant Volume System
+    Get either Sys-12, Sys-12a, Sys-12b, Sys-12c, or Not_Sys_12 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 12 (Single Zone Constant Volume System
     with CHW and HW), system 12a (system 12 with purchased CHW), system 12b (system 12 with purchased heating), system 12c (system 12 with purchased CHW and purchased HW).
 
     Parameters
@@ -67,7 +67,7 @@ def is_baseline_system_12(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list)
 
     Returns
     -------
-    The function returns either Sys-12, Sys-12a, Sys-12b, Sys-12c, or Not_Sys_12 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 12 (Single Zone Constant Volume System
+    The function returns either Sys-12, Sys-12a, Sys-12b, Sys-12c, or Not_Sys_12 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 12 (Single Zone Constant Volume System
     with CHW and HW), system 12a (system 12 with purchased CHW), system 12b (system 12 with purchased heating), system 12c (system 12 with purchased CHW and purchased HW).
     """
 

@@ -16,7 +16,7 @@ from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
     find_exactly_one_hvac_system,
-    find_exactly_one_terminal_unit,
+    find_exactly_one_terminal,
     find_exactly_one_zone,
 )
 
@@ -49,7 +49,7 @@ def does_zone_meet_g3_1_1d(rmd: dict, zone_id: str) -> bool:
         """
         return sum(
             [
-                find_exactly_one_terminal_unit(rmd, terminal_id).get(
+                find_exactly_one_terminal(rmd, terminal_id).get(
                     "primary_airflow", ZERO.FLOW
                 )
                 for terminal_id in terminal_list
@@ -66,7 +66,7 @@ def does_zone_meet_g3_1_1d(rmd: dict, zone_id: str) -> bool:
         """
         return sum(
             [
-                find_exactly_one_terminal_unit(rmd, terminal_id).get(
+                find_exactly_one_terminal(rmd, terminal_id).get(
                     "primary_airflow", ZERO.FLOW
                 )
                 for terminal_id in terminal_list

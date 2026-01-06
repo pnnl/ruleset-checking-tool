@@ -2,11 +2,11 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012022 import BASELINE_0
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
 )
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
-    get_baseline_surface_conditioning_category_dict,
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
 )
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
@@ -38,14 +38,11 @@ class PRM9012022Rule44m70(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
-        rpd_p = context.PROPOSED
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        constructions_b = rpd_b["ruleset_model_descriptions"][0]["constructions"]
-        constructions_p = rpd_p["ruleset_model_descriptions"][0]["constructions"]
+        constructions = rpd_b["ruleset_model_descriptions"][0]["constructions"]
         return {
             "climate_zone": climate_zone,
-            "constructions_b": constructions_b,
-            "constructions_p": constructions_p,
+            "constructions": constructions,
         }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
@@ -60,15 +57,10 @@ class PRM9012022Rule44m70(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-            building_b = context.BASELINE_0
-            building_p = context.PROPOSED
+            building = context.BASELINE_0
             return {
-                "scc_dict_b": get_baseline_surface_conditioning_category_dict(
-                    data["climate_zone"],
-                    building_b,
-                    data["constructions_b"],
-                    building_p,
-                    data["constructions_p"],
+                "scc_dict_b": get_surface_conditioning_category_dict(
+                    data["climate_zone"], building, data["constructions"], BASELINE_0
                 ),
             }
 

@@ -1,6 +1,6 @@
 import datetime
 
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_most_used_weekday_hourly_schedule import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_most_used_weekday_hourly_schedule import (
     get_most_used_weekday_hourly_schedule,
 )
 

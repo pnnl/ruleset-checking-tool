@@ -54,15 +54,12 @@ class PRM9012022Rule18j38(RuleDefinitionListIndexedBase):
         ]
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
 
-        return (
-            any(
-                [
-                    available_type in APPLICABLE_SYS_TYPES
-                    for available_type in available_sys_types
-                ]
-            )
-            and len(primary_secondary_loop_dict) > 0
-        )
+        return any(
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_sys_types
+            ]
+        ) and any(primary_secondary_loop_dict.values())
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
@@ -71,8 +68,11 @@ class PRM9012022Rule18j38(RuleDefinitionListIndexedBase):
 
     def list_filter(self, context_item, data):
         fluid_loop = context_item.BASELINE_0
-        primary_loop_ids = data["primary_secondary_loops_dict"]
-        return fluid_loop["id"] in primary_loop_ids
+        primary_secondary_loops_dict = data["primary_secondary_loops_dict"]
+        return (
+            fluid_loop["id"] in primary_secondary_loops_dict
+            and len(primary_secondary_loops_dict[fluid_loop["id"]]) > 0
+        )
 
     class PrimaryCoolingFluidLoop(RuleDefinitionBase):
         def __init__(self):

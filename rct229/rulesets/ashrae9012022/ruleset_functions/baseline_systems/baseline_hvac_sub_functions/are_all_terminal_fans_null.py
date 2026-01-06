@@ -1,4 +1,4 @@
-from rct229.utils.utility_functions import find_exactly_one_terminal_unit
+from rct229.utils.utility_functions import find_exactly_one_terminal
 
 
 def are_all_terminal_fans_null(rmd_b, terminal_unit_id_list):
@@ -16,7 +16,7 @@ def are_all_terminal_fans_null(rmd_b, terminal_unit_id_list):
     """
     are_all_terminal_fans_null_flag = True
     for terminal_b_id in terminal_unit_id_list:
-        terminal_b = find_exactly_one_terminal_unit(rmd_b, terminal_b_id)
+        terminal_b = find_exactly_one_terminal(rmd_b, terminal_b_id)
         if terminal_b.get("fan") is not None:
             are_all_terminal_fans_null_flag = False
             break

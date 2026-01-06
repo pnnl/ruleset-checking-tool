@@ -5,14 +5,14 @@ from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_system_type_compare import (
     baseline_system_type_compare,
 )
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_fan_object_electric_power import (
-    get_fan_object_electric_power,
-)
 from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_fan_object_electric_power import (
+    get_fan_object_electric_power,
 )
 from rct229.schema.config import ureg
 from rct229.utils.pint_utils import CalcQ

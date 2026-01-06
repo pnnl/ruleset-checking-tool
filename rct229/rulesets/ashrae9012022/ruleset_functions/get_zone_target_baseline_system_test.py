@@ -125,12 +125,6 @@ TEST_RMD_B_G311B = {
             ],
         },
     ],
-    "constructions": [
-        {
-            "id": "construction_1",
-            "u_factor": 1.2,
-        }
-    ],
     "type": "BASELINE_0",
 }
 
@@ -261,16 +255,6 @@ TEST_RMD_B_G311C = {
                 }
             ],
         }
-    ],
-    "constructions": [
-        {
-            "id": "Construction 3",
-            "u_factor": 0.35773064046128095,
-        },
-        {
-            "id": "const_1_4_2",
-            "u_factor": 0.1,
-        },
     ],
     "boilers": [
         {
@@ -753,12 +737,6 @@ TEST_RMD_B_G311G = {
         },
         {"id": "occupant_schedule_1", "hourly_cooling_design_day": [1] * 23 + [2] * 1},
     ],
-    "constructions": [
-        {
-            "id": "construction 1",
-            "u_factor": 0.1,
-        }
-    ],
     "type": "BASELINE_0",
 }
 
@@ -819,49 +797,49 @@ def test__TEST_RMD_G311B_is_valid():
     schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311B)
     assert schema_validation_result[
         "passed"
-    ], f"Schema error: {schema_validation_result['error']}"
+    ], f"Schema error: {schema_validation_result['errors']}"
 
 
 def test__TEST_RMD_G311C_is_valid():
     schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311C)
     assert schema_validation_result[
         "passed"
-    ], f"Schema error: {schema_validation_result['error']}"
+    ], f"Schema error: {schema_validation_result['errors']}"
 
 
 def test__TEST_RMD_G311D_is_valid():
     schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311D)
     assert schema_validation_result[
         "passed"
-    ], f"Schema error: {schema_validation_result['error']}"
+    ], f"Schema error: {schema_validation_result['errors']}"
 
 
 def test__TEST_RMD_G311E_is_valid():
     schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311E)
     assert schema_validation_result[
         "passed"
-    ], f"Schema error: {schema_validation_result['error']}"
+    ], f"Schema error: {schema_validation_result['errors']}"
 
 
 def test__TEST_RMD_G311F_is_valid():
     schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311F)
     assert schema_validation_result[
         "passed"
-    ], f"Schema error: {schema_validation_result['error']}"
+    ], f"Schema error: {schema_validation_result['errors']}"
 
 
 def test__TEST_RMD_G311G_is_valid():
     schema_validation_result = schema_validate_rpd(TEST_RMD_B_FULL_G311G)
     assert schema_validation_result[
         "passed"
-    ], f"Schema error: {schema_validation_result['error']}"
+    ], f"Schema error: {schema_validation_result['errors']}"
 
 
 def test__TEST_RMD_P_is_valid():
     schema_validation_result = schema_validate_rpd(TEST_RMD_P)
     assert schema_validation_result[
         "passed"
-    ], f"Schema error: {schema_validation_result['error']}"
+    ], f"Schema error: {schema_validation_result['errors']}"
 
 
 def test__get_zone_target_baseline_system_G3_1_1_b__true():

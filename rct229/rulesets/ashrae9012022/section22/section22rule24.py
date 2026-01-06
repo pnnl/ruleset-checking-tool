@@ -59,15 +59,12 @@ class PRM9012022Rule47d94(RuleDefinitionListIndexedBase):
         ]
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
 
-        return (
-            any(
-                [
-                    available_type in APPLICABLE_SYS_TYPES
-                    for available_type in available_type_list
-                ]
-            )
-            and primary_secondary_loop_dict
-        )
+        return any(
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_list
+            ]
+        ) and any(primary_secondary_loop_dict.values())
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0
@@ -77,8 +74,11 @@ class PRM9012022Rule47d94(RuleDefinitionListIndexedBase):
     # filter to only keep loops that have secondary loop(s)
     def list_filter(self, context_item, data):
         pump_b = context_item.BASELINE_0
-        primary_loop_ids = data["primary_secondary_loops_dict"]
-        return pump_b["loop_or_piping"] in primary_loop_ids
+        primary_secondary_loops_dict = data["primary_secondary_loops_dict"]
+        return (
+            pump_b["loop_or_piping"] in primary_secondary_loops_dict
+            and len(primary_secondary_loops_dict[pump_b["loop_or_piping"]]) > 0
+        )
 
     class PrimaryPumpRule(RuleDefinitionBase):
         def __init__(self):

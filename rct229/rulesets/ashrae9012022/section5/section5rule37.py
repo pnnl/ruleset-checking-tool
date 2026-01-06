@@ -2,11 +2,8 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012022 import PROPOSED
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
-)
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_surface_conditioning_category_dict import (
-    get_building_surface_conditioning_category_dict,
 )
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
@@ -51,7 +48,7 @@ class PRM9012022Rule67a77(RuleDefinitionListIndexedBase):
     def create_data(self, context, data=None):
         rpd_p = context.PROPOSED
         climate_zone = rpd_p["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        constructions = rpd_p["ruleset_model_descriptions"][0].get("constructions")
+        constructions = rpd_p["ruleset_model_descriptions"][0].get("constructions", {})
         return {
             "climate_zone": climate_zone,
             "constructions": constructions,
@@ -63,7 +60,7 @@ class PRM9012022Rule67a77(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
-                required_fields={"$..zones[*]": ["surfaces"]},
+                required_fields={"$.building_segments[*].zones[*]": ["surfaces"]},
                 precision={
                     "building_total_air_leakage_rate_b": {
                         "precision": 1,
@@ -77,26 +74,35 @@ class PRM9012022Rule67a77(RuleDefinitionListIndexedBase):
             building_p = context.PROPOSED
 
             scc_dict_p = get_building_surface_conditioning_category_dict(
-                data["climate_zone"], building_p, data["constructions"]
+                data["climate_zone"], building_p, data["constructions"], PROPOSED
             )
             zcc_dict_p = get_zone_conditioning_category_dict(
-                data["climate_zone"], building_p, data["constructions"]
+                data["climate_zone"], building_p, data["constructions"], PROPOSED
             )
 
             building_total_air_leakage_rate = ZERO.FLOW
             building_total_measured_air_leakage_rate = ZERO.FLOW
             empty_measured_air_leakage_rate_flow_flag = False
-
+            surfaces_p = [
+                surface
+                for building_segment in building_p.get("building_segments", [])
+                for zone in building_segment.get("zones", [])
+                for surface in zone.get("surfaces", [])
+            ]
             building_total_envelope_area = sum(
                 [
                     getattr_(surface, "surface", "area")
-                    for surface in find_all("$..surfaces[*]", building_p)
+                    for surface in surfaces_p
                     if scc_dict_p[surface["id"]] != SCC.UNREGULATED
                 ],
                 ZERO.AREA,
             )
-
-            for zone in find_all("$..zones[*]", building_p):
+            zones_p = [
+                zone
+                for building_segment in building_p.get("building_segments", [])
+                for zone in building_segment.get("zones", [])
+            ]
+            for zone in zones_p:
                 if zcc_dict_p[zone["id"]] in [
                     ZCC.CONDITIONED_RESIDENTIAL,
                     ZCC.CONDITIONED_NON_RESIDENTIAL,
@@ -125,6 +131,14 @@ class PRM9012022Rule67a77(RuleDefinitionListIndexedBase):
                 "building_total_air_leakage_rate": CalcQ(
                     "air_flow_rate", building_total_air_leakage_rate
                 ),
+                "target_building_total_air_leakage_rate": CalcQ(
+                    "air_flow_rate",
+                    TOTAL_AIR_LEAKAGE_COEFF * target_air_leakage_rate_75pa_p,
+                ),
+                "building_total_envelope_area": CalcQ(
+                    "area", building_total_envelope_area
+                ),
+                "target_air_leakage_coefficient": TARGET_AIR_LEAKAGE_COEFF,
                 "building_total_measured_air_leakage_rate": CalcQ(
                     "air_flow_rate", building_total_measured_air_leakage_rate
                 ),

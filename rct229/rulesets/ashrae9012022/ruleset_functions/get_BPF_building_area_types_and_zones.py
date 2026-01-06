@@ -1,10 +1,10 @@
 from typing import TypedDict
 
 from pint import Quantity
-from rct229.rulesets.ashrae9012019.data_fns.table_lighting_space_type_BPF_area_type_map import (
+from rct229.rulesets.ashrae9012022.data_fns.table_lighting_space_type_BPF_area_type_map import (
     lighting_space_type_to_BPF_area_type,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_BPF_BAT import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_BPF_BAT import (
     get_zone_BPF_BAT,
 )
 from rct229.utils.assertions import assert_

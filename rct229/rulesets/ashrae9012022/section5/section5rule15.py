@@ -73,7 +73,7 @@ class PRM9012022Rule04o58(RuleDefinitionListIndexedBase):
         def is_applicable(self, context, data=None):
             building_b = context.BASELINE_0
             area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
-                data["climate_zone"], data["constructions"], building_b
+                data["climate_zone"], data["constructions"], building_b, BASELINE_0
             )
             return OTHER in area_type_window_wall_area_dict_b
 
@@ -83,10 +83,10 @@ class PRM9012022Rule04o58(RuleDefinitionListIndexedBase):
             manual_check_flag = False
 
             area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
-                data["climate_zone"], data["constructions"], building_b
+                data["climate_zone"], data["constructions"], building_b, BASELINE_0
             )
             area_type_window_wall_area_dict_p = get_area_type_window_wall_area_dict(
-                data["climate_zone"], data["constructions"], building_p
+                data["climate_zone"], data["constructions"], building_p, PROPOSED
             )
 
             wwr_b = (

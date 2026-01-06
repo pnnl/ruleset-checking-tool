@@ -1,13 +1,12 @@
-from rct229.schema.config import ureg
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012022 import BASELINE_0
+from rct229.schema.config import ureg
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
-from rct229.utils.pint_utils import ZERO
-from rct229.utils.pint_utils import CalcQ
 
 REQ_ELEVATOR_CAB_LIGHTING_POWER_DENSITY = 3.14 * ureg("W/ft2")
 

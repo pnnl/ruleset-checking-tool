@@ -3,17 +3,17 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.rulesets.ashrae9012022.data_fns.table_G3_4_fns import table_G34_lookup
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
-    SurfaceConditioningCategory as SCC,
-)
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
-    get_baseline_surface_conditioning_category_dict,
-)
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
 )
 from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.pint_utils import CalcQ
@@ -35,7 +35,7 @@ class PRM9012022Rule40d86(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(PRM9012022Rule40d86, self).__init__(
             rmds_used=produce_ruleset_model_description(
-                USER=False, BASELINE_0=True, PROPOSED=True
+                USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
                 "$.ruleset_model_descriptions[*]": ["weather", "constructions"],
@@ -53,21 +53,18 @@ class PRM9012022Rule40d86(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
-        rpd_p = context.PROPOSED
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        constructions_b = rpd_b["ruleset_model_descriptions"][0]["constructions"]
-        constructions_p = rpd_p["ruleset_model_descriptions"][0]["constructions"]
+        constructions = rpd_b["ruleset_model_descriptions"][0]["constructions"]
         return {
             "climate_zone": climate_zone,
-            "constructions_b": constructions_b,
-            "constructions_p": constructions_p,
+            "constructions": constructions,
         }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(PRM9012022Rule40d86.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=False, BASELINE_0=True, PROPOSED=True
+                    USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={},
                 each_rule=PRM9012022Rule40d86.BuildingRule.SlabOnGradeFloorRule(),
@@ -76,15 +73,10 @@ class PRM9012022Rule40d86(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data=None):
-            building_b = context.BASELINE_0
-            building_p = context.PROPOSED
+            building = context.BASELINE_0
             return {
-                "surface_conditioning_category_dict": get_baseline_surface_conditioning_category_dict(
-                    data["climate_zone"],
-                    building_b,
-                    data["constructions_b"],
-                    building_p,
-                    data["constructions_p"],
+                "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
+                    data["climate_zone"], building, data["constructions"], BASELINE_0
                 ),
             }
 
@@ -94,7 +86,7 @@ class PRM9012022Rule40d86(RuleDefinitionListIndexedBase):
             has_radiant_heat = next(
                 (
                     construction.get("has_radiant_heat", False)
-                    for construction in data["constructions_b"]
+                    for construction in data["constructions"]
                     if construction["id"] == construction_id
                 )
             )
@@ -132,7 +124,7 @@ class PRM9012022Rule40d86(RuleDefinitionListIndexedBase):
                 slab_on_grade_f_factor = next(
                     (
                         construction.get("f_factor")
-                        for construction in data["constructions_b"]
+                        for construction in data["constructions"]
                         if construction["id"] == slab_on_grade["construction"]
                     )
                 )

@@ -5,14 +5,15 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_system_type_compar
 from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
-from rct229.utils.assertions import RCTException
+from rct229.utils.assertions import RCTException, RCTFailureException
 
 
 def test_baseline_system_type_compare_test_exact_match__exception_sys_type():
     with pytest.raises(
-        RCTException, match="SYS123 does not match any baseline HVAC system type"
+        RCTFailureException,
+        match="Not_Sys does not match any primary baseline HVAC system type",
     ):
-        baseline_system_type_compare("SYS123", HVAC_SYS.SYS_1)
+        assert baseline_system_type_compare("SYS123", HVAC_SYS.UNMATCHED)
 
 
 def test_baseline_system_type_compare_test_exact_match__exception_target_sys_type():

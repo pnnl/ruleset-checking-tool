@@ -39,7 +39,7 @@ HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 
 def is_baseline_system_4(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
-     Get either Sys-4 or Not_Sys_4 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 4 (PSZ-HP).
+     Get either Sys-4 or Not_Sys_4 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 4 (PSZ-HP).
 
      Parameters
      ----------
@@ -54,7 +54,7 @@ def is_baseline_system_4(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
 
     Returns
      -------
-     The function returns either Sys-4 or Not_Sys_4 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 4 (PSZ-HP).
+     The function returns either Sys-4 or Not_Sys_4 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 4 (PSZ-HP).
     """
 
     # check if the hvac system has the required sub systems for system type 4

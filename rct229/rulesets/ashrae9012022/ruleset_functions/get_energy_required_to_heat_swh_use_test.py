@@ -4,9 +4,7 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.get_energy_required_to_heat
 from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rpd
-from rct229.utils.jsonpath_utils import (
-    find_exactly_one_with_field_value,
-)
+from rct229.utils.jsonpath_utils import find_exactly_one_with_field_value
 from rct229.utils.std_comparisons import std_equal
 
 TEST_RMD = {

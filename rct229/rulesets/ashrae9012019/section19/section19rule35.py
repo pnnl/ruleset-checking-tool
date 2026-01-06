@@ -13,6 +13,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_min_oa_cfm_sch_zone imp
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all
+from rct229.utils.utility_functions import find_exactly_one_zone
 
 LIGHTING_SPACE = SchemaEnums.schema_enums["LightingSpaceOptions2019ASHRAE901TG37"]
 
@@ -69,18 +70,15 @@ class PRM9012019Rule40n43(RuleDefinitionListIndexedBase):
                 for zone_id_b in dict_of_zones_and_terminal_units_served_by_hvac_sys_b[
                     hvac_id_b
                 ]["zone_list"]:
-                    lighting_space_types_b = find_all(
-                        f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id_b}")].spaces[*].lighting_space_type',
-                        rmd_b,
-                    )
+                    zone = find_exactly_one_zone(rmd_b, zone_id_b)
+                    lighting_space_types_b = [
+                        space["lighting_space_type"]
+                        for space in zone.get("spaces", [])
+                        if "lighting_space_type" in space
+                    ]
 
                     # Count this zone's spaces and the number of light space types
-                    space_count = len(
-                        find_all(
-                            f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id_b}")].spaces[*]',
-                            rmd_b,
-                        )
-                    )
+                    space_count = len(zone.get("spaces", []))
                     lighting_space_type_count = len(lighting_space_types_b)
 
                     # Evaluate is all of this zone's lighting space types are defined (i.e., does each space have

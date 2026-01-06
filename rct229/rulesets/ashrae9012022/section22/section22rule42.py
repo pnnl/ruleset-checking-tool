@@ -5,16 +5,16 @@ from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.baseline_system_util import (
     HVAC_SYS,
 )
+from rct229.rulesets.ashrae9012022.ruleset_functions.does_chiller_performance_match_curve import (
+    J4_CURVE,
+    J6_CURVE,
+    does_chiller_performance_match_curve,
+)
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_primary_secondary_loops_dict import (
     get_primary_secondary_loops_dict,
-)
-from rct229.rulesets.ashrae9012022.ruleset_functions.does_chiller_performance_match_curve import (
-    J4_CURVE,
-    J6_CURVE,
-    does_chiller_performance_match_curve,
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums

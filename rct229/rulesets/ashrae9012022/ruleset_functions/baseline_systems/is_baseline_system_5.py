@@ -50,7 +50,7 @@ COOLING_SYSTEM = SchemaEnums.schema_enums["CoolingSystemOptions"]
 
 def is_baseline_system_5(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
-     Get either Sys-5, Sys-5b, or Not_Sys_5 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 5 (Package VAV with Reheat) or system 5b (system 5 with purchased heating).
+     Get either Sys-5, Sys-5b, or Not_Sys_5 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 5 (Package VAV with Reheat) or system 5b (system 5 with purchased heating).
 
      Parameters
      ----------
@@ -65,7 +65,7 @@ def is_baseline_system_5(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
 
     Returns
      -------
-     The function returns either Sys-5, Sys-5b, or Not_Sys_5 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 5 (Package VAV with Reheat) or system 5b (system 5 with purchased heating).
+     The function returns either Sys-5, Sys-5b, or Not_Sys_5 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 5 (Package VAV with Reheat) or system 5b (system 5 with purchased heating).
     """
 
     is_baseline_system_5 = HVAC_SYS.UNMATCHED

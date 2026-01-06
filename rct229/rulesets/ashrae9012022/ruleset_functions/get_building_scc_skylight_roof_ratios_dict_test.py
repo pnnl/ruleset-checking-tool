@@ -1,12 +1,15 @@
+from rct229.rulesets.ashrae9012022 import BASELINE_0, PROPOSED, USER
 from rct229.rulesets.ashrae9012022.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import (
     get_building_scc_skylight_roof_ratios_dict,
 )
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
 )
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     CAPACITY_THRESHOLD as CAPACITY_THRESHOLD_QUANTITY,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     CRAWLSPACE_HEIGHT_THRESHOLD as CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY,
 )
 from rct229.schema.config import ureg
@@ -30,6 +33,24 @@ CRAWLSPACE_HEIGHT_THRESHOLD = CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY.to("m").magni
 # This single rmd is intended to exercise all the get_building_scc_skylight_roof_ratios_dict function
 TEST_rmd = {
     "id": "test_rmd",
+    "constructions": [
+        {
+            "id": "const_1_5_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_1_6_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_3_5_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+        {
+            "id": "const_3_6_1",
+            "u_factor": 0.1,  # W/(m2 * K)
+        },
+    ],
     "buildings": [
         {
             "id": "bldg_1",
@@ -506,24 +527,6 @@ TEST_rmd = {
             ],
         }
     ],
-    "constructions": [
-        {
-            "id": "const_1_5_1",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_3_6_1",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_3_5_1",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_1_6_1",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-    ],
     "type": "BASELINE_0",
 }
 
@@ -624,6 +627,12 @@ TEST_BUILDING_BRANCH_COVERAGE = quantify_rmd(TEST_RMD_BRANCH_COVERAGE)[
 
 TEST_RMD_BRANCH_COVERAGE2 = {
     "id": "test_rmd_branch_coverage2",
+    "constructions": [
+        {
+            "id": "Construction 1",
+            "u_factor": 0.35773064046128095,
+        }
+    ],
     "buildings": [
         {
             "id": "bldg_1",
@@ -685,12 +694,6 @@ TEST_RMD_BRANCH_COVERAGE2 = {
             ],
         }
     ],
-    "constructions": [
-        {
-            "id": "Construction 1",
-            "u_factor": 0.35773064046128095,
-        }
-    ],
 }
 
 
@@ -721,7 +724,7 @@ def test__TEST_RPD__is_valid():
 
 def test__get_building_scc_skylight_roof_ratios_dict():
     assert get_building_scc_skylight_roof_ratios_dict(
-        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING, USER
     ) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.2,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.2,
@@ -732,7 +735,7 @@ def test__get_building_scc_skylight_roof_ratios_dict():
 
 def test__get_building_scc_skylight_roof_ratios_dict__branch_coverage():
     assert get_building_scc_skylight_roof_ratios_dict(
-        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING_BRANCH_COVERAGE
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING_BRANCH_COVERAGE, BASELINE_0
     ) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.0,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.0,
@@ -743,7 +746,7 @@ def test__get_building_scc_skylight_roof_ratios_dict__branch_coverage():
 
 def test__get_building_scc_skylight_roof_ratios_dict__branch_coverage2():
     assert get_building_scc_skylight_roof_ratios_dict(
-        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING_BRANCH_COVERAGE2
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING_BRANCH_COVERAGE2, PROPOSED
     ) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.0,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.0,

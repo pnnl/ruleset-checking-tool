@@ -56,7 +56,7 @@ HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 def is_baseline_system_7(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
     Get either Sys-7, Sys-7a, Sys-7b, Sys-7c or Not_Sys_7 string output which indicates whether the HVAC system is
-    ASHRAE 90.1 2022 Appendix G system 7 (VAV with Reheat), system 7a (system 7 with purchased CHW), system 7b (
+    ASHRAE 90.1 2019 Appendix G system 7 (VAV with Reheat), system 7a (system 7 with purchased CHW), system 7b (
     system 7 with purchased heating), or system 7c (system 7 with purchased heating and purchased CHW).
 
     Parameters
@@ -69,7 +69,7 @@ def is_baseline_system_7(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
                         function from the master get_baseline_system_types function.
 
     Returns: The function returns either Sys-7, Sys-7a, Sys-7b, Sys-7c or Not_Sys_7 string output which indicates
-    whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 7 (VAV with Reheat), system 7a (system 7 with
+    whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 7 (VAV with Reheat), system 7a (system 7 with
     purchased CHW), system 7b (system 7 with purchased heating), pr system 7c (system 7 with purchased heating and
     purchased CHW). -------
     """

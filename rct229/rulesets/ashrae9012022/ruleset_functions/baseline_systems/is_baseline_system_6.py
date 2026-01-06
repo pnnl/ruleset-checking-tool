@@ -53,7 +53,7 @@ COOLING_SYSTEM = SchemaEnums.schema_enums["CoolingSystemOptions"]
 
 def is_baseline_system_6(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
-    Get either Sys-6, Sys-6b, or Not_Sys_6 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 6 (Package VAV with PFP Boxes) or system 6b (system 6 with purchased heating).
+    Get either Sys-6, Sys-6b, or Not_Sys_6 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 6 (Package VAV with PFP Boxes) or system 6b (system 6 with purchased heating).
 
     Parameters
     ----------
@@ -68,7 +68,7 @@ def is_baseline_system_6(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
 
     Returns
     -------
-    The function returns either Sys-6, Sys-6b, or Not_Sys_6 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 6 (Package VAV with PFP Boxes) or system 6b (system 6 with purchased heating).
+    The function returns either Sys-6, Sys-6b, or Not_Sys_6 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 6 (Package VAV with PFP Boxes) or system 6b (system 6 with purchased heating).
     """
 
     is_baseline_system_6 = HVAC_SYS.UNMATCHED

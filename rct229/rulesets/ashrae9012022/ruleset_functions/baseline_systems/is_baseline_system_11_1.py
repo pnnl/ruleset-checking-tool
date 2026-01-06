@@ -49,7 +49,7 @@ HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 def is_baseline_system_11_1(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
     Get either Sys-11.1, Sys-11.1a, Sys-11b, Sys-11c, or Not_Sys_11.1 string output which indicates whether the HVAC
-    system is ASHRAE 90.1 2022 Appendix G system 11.1 (Single Zone VAV System with Electric Resistance Heating),
+    system is ASHRAE 90.1 2019 Appendix G system 11.1 (Single Zone VAV System with Electric Resistance Heating),
     system 11.1a (system 11.1 with purchased CHW), system 11b (system 11.1 with purchased heating), or system 11c (
     system 11.1 with purchased CHW and purchased heating).
 
@@ -66,7 +66,7 @@ def is_baseline_system_11_1(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_lis
     function from the master get_baseline_system_types function.
 
     Returns ------- The function returns either Sys-11.1, Sys-11.1a, Sys-11b, Sys-11c, or Not_Sys_11.1 string output
-    which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 11.1 (Single Zone VAV System with
+    which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 11.1 (Single Zone VAV System with
     Electric Resistance Heating), system 11.1a (system 11.1 with purchased CHW), system 11b (system 11.1 with
     purchased heating), or system 11c (system 11.1 with purchased CHW and purchased heating).
     """

@@ -1,5 +1,5 @@
 # Testing table_4_2_1_1------------------------------------------
-from rct229.rulesets.ashrae9012019.data_fns.table_4_2_1_1_fns import (
+from rct229.rulesets.ashrae9012022.data_fns.table_4_2_1_1_fns import (
     table_4_2_1_1_lookup,
 )
 

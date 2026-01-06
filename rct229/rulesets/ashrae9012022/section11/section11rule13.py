@@ -2,17 +2,16 @@ from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012022 import BASELINE_0
-from rct229.utils.pint_utils import ZERO
-from rct229.schema.config import ureg
-from rct229.utils.assertions import assert_
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_energy_required_to_heat_swh_use import (
     get_energy_required_to_heat_swh_use,
 )
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_swh_uses_associated_with_each_building_segment import (
     get_swh_uses_associated_with_each_building_segment,
 )
+from rct229.schema.config import ureg
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import CalcQ
+from rct229.utils.pint_utils import ZERO, CalcQ
 
 APPLICABILITY_MSG = "This building has service water heating loads. Confirm that service water heating energy consumption is calculated explicitly based upon the volume of service water heating required and the entering makeup water and leaving service water heating temperatures.  Entering water temperatures shall be estimated based upon the location. Leaving temperatures shall be based upon the end-use requirements."
 

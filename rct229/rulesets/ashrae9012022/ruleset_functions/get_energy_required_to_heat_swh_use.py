@@ -1,6 +1,5 @@
 import numpy as np
 from pint import Quantity
-
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_spaces_served_by_swh_use import (
     get_spaces_served_by_swh_use,
 )
@@ -12,8 +11,8 @@ from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
     find_exactly_one_schedule,
     find_exactly_one_service_water_heating_distribution_system,
-    find_exactly_one_space,
     find_exactly_one_service_water_heating_use,
+    find_exactly_one_space,
 )
 
 SERVICE_WATER_HEATING_USE_UNIT = SchemaEnums.schema_enums[
@@ -80,15 +79,25 @@ def get_energy_required_to_heat_swh_use(
             )
         )
     if use_units in VOLUME_BASED_USE_UNIT:
+        ground_temp_used_as_inlet = distribution_system.get(
+            "is_ground_temperature_used_for_entering_water"
+        )
+        if ground_temp_used_as_inlet:
+            weather = getattr_(rmd, "RulesetModelDescription", "weather")
+            inlet_temperature_schedule_id = getattr_(
+                weather, "Weather", "ground_temperature_schedule"
+            )
+        else:
+            inlet_temperature_schedule_id = getattr_(
+                distribution_system,
+                "service_water_heating_distribution_systems",
+                "entering_water_mains_temperature_schedule",
+            )
+
         supply_temperature = getattr_(
             distribution_system,
             "service_water_heating_distribution_systems",
             "design_supply_temperature",
-        )
-        inlet_temperature_schedule_id = getattr_(
-            distribution_system,
-            "service_water_heating_distribution_systems",
-            "entering_water_mains_temperature_schedule",
         )
         inlet_temperature_schedule = find_exactly_one_schedule(
             rmd, inlet_temperature_schedule_id

@@ -21,9 +21,9 @@ from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.compare_standard_val import std_le
-from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
+from rct229.utils.utility_functions import find_exactly_one_zone
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_1,
@@ -104,12 +104,12 @@ class PRM9012022Rule34r52(RuleDefinitionListIndexedBase):
 
             # get zone conditions from buildings
             zone_conditioning_category_dict = {}
-            constructions = find_all("$.constructions[*]", rmd_b)
-            for bldg in find_all("$.buildings[*]", rmd_b):
+            constructions_b = rmd_b.get("constructions", [])
+            for bldg_b in rmd_b.get("buildings", []):
                 zone_conditioning_category_dict = {
                     **zone_conditioning_category_dict,
                     **get_zone_conditioning_category_dict(
-                        climate_zone, bldg, constructions
+                        climate_zone, bldg_b, constructions_b, BASELINE_0
                     ),
                 }
 
@@ -118,7 +118,7 @@ class PRM9012022Rule34r52(RuleDefinitionListIndexedBase):
             # loop to boiler dict
             boiler_loop_ids = [
                 getattr_(boiler, "boiler", "loop")
-                for boiler in find_all("$.boilers[*]", rmd_b)
+                for boiler in rmd_b.get("boilers", [])
             ]
 
             # Initialize the variables
@@ -127,7 +127,7 @@ class PRM9012022Rule34r52(RuleDefinitionListIndexedBase):
             # The connected zones list, zones in this list can be residential, nonresidential, mixed or semi-heated
             loop_zone_list = []
 
-            for fluid_loop in find_all("$.fluid_loops[*]", rmd_b):
+            for fluid_loop in rmd_b.get("fluid_loops", []):
                 # Make sure heating loop, and its heating is supplied by a boiler(s)
                 if (
                     getattr_(fluid_loop, "fluid_loops", "type") == FLUID_LOOP.HEATING
@@ -152,20 +152,18 @@ class PRM9012022Rule34r52(RuleDefinitionListIndexedBase):
                     ]
                     and zone_id not in loop_zone_list
                 ):
+                    zone = find_exactly_one_zone(rmd_b, zone_id)
                     heating_loop_conditioned_zone_area += sum(
-                        find_all(
-                            "$..floor_area",
-                            find_exactly_one_with_field_value(
-                                "$..zones[*]", "id", zone_id, rmd_b
-                            ),
-                        ),
-                        ZERO.AREA,
+                        [
+                            space.get("floor_area", ZERO.AREA)
+                            for space in zone.get("spaces", [])
+                        ]
                     )
 
-            num_boilers = len(find_all("$.boilers[*]", rmd_b))
+            num_boilers = len(rmd_b.get("boilers", []))
             boiler_capacity_list = [
                 CalcQ("capacity", getattr_(boiler, "boiler", "rated_capacity"))
-                for boiler in find_all("$.boilers[*]", rmd_b)
+                for boiler in rmd_b.get("boilers", [])
             ]
 
             return {

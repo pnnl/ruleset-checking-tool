@@ -59,15 +59,12 @@ class PRM9012022Rule57w94(RuleDefinitionListIndexedBase):
 
         primary_secondary_loop_dict = get_primary_secondary_loops_dict(rmd_b)
 
-        return (
-            any(
-                [
-                    available_type in APPLICABLE_SYS_TYPES
-                    for available_type in available_type_list
-                ]
-            )
-            and primary_secondary_loop_dict
-        )
+        return any(
+            [
+                available_type in APPLICABLE_SYS_TYPES
+                for available_type in available_type_list
+            ]
+        ) and any(primary_secondary_loop_dict.values())
 
     def create_data(self, context, data):
         rmd_b = context.BASELINE_0

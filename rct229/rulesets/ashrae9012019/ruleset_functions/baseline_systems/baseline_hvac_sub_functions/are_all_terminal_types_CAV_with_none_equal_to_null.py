@@ -1,5 +1,5 @@
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.utility_functions import find_exactly_one_terminal_unit
+from rct229.utils.utility_functions import find_exactly_one_terminal
 
 TERMINAL_TYPE = SchemaEnums.schema_enums["TerminalOptions"]
 
@@ -23,7 +23,7 @@ def are_all_terminal_types_cav_with_none_equal_to_null(rmd_b, terminal_unit_id_l
     """
 
     return all(
-        find_exactly_one_terminal_unit(rmd_b, terminal_b_id).get("type")
+        find_exactly_one_terminal(rmd_b, terminal_b_id).get("type")
         == TERMINAL_TYPE.CONSTANT_AIR_VOLUME
         for terminal_b_id in terminal_unit_id_list
     )

@@ -1,10 +1,9 @@
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_swh_components_associated_with_each_swh_bat import (
     get_swh_components_associated_with_each_swh_bat,
 )
-
+from rct229.schema.config import ureg
 from rct229.schema.schema_utils import quantify_rmd
 from rct229.schema.validate import schema_validate_rpd
-from rct229.schema.config import ureg
 from rct229.utils.std_comparisons import std_equal
 
 TEST_RMD = {

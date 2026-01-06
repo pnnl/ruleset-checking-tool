@@ -51,7 +51,7 @@ HEATING_SYSTEM = SchemaEnums.schema_enums["HeatingSystemOptions"]
 
 def is_baseline_system_3(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
     """
-    Get either Sys-3, Sys-3a, Sys-3b, Sys-3c, or Not_Sys_3 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 3 (PSZ), system 3a (system 3 with purchased CHW),
+    Get either Sys-3, Sys-3a, Sys-3b, Sys-3c, or Not_Sys_3 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 3 (PSZ), system 3a (system 3 with purchased CHW),
     system 3b (system 3 with purchased heating), system 3c (system 3 with purchased CHW and purchased HW).
 
     Parameters
@@ -70,7 +70,7 @@ def is_baseline_system_3(rmd_b, hvac_b_id, terminal_unit_id_list, zone_id_list):
 
     Returns
     -------
-    The function returns either Sys-3, Sys-3a, Sys-3b, Sys-3c, or Not_Sys_3 string output which indicates whether the HVAC system is ASHRAE 90.1 2022 Appendix G system 3 (PSZ),
+    The function returns either Sys-3, Sys-3a, Sys-3b, Sys-3c, or Not_Sys_3 string output which indicates whether the HVAC system is ASHRAE 90.1 2019 Appendix G system 3 (PSZ),
     system 3a (system 3 with purchased CHW), system 3b (system 3 with purchased heating), system 3c (system 3 with purchased CHW and purchased HW).
     """
     is_baseline_system_3 = HVAC_SYS.UNMATCHED

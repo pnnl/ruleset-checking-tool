@@ -38,13 +38,10 @@ def get_hw_loop_zone_list_w_area(rmd_b: dict) -> dict[str, HVACZoneListArea]:
     hw_loop_zone_list_w_area_dict = dict()
     for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmd_b):
         zone_area: Quantity = sum(
-            [
-                space.get("floor_area", ZERO.AREA)
-                for space in find_all("$.spaces[*]", zone)
-            ],
+            [space.get("floor_area", ZERO.AREA) for space in zone.get("spaces", [])],
             ZERO.AREA,
         )
-        for terminal in find_all("$.terminals[*]", zone):
+        for terminal in zone.get("terminals", []):
             hhw_loop_id = None
             if terminal.get("heating_source") == HEATING_SOURCE.HOT_WATER:
                 # if terminal has reheat.

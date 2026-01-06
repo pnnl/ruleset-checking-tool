@@ -9,10 +9,10 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
-from rct229.schema.schema_enums import SchemaEnums
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_7,

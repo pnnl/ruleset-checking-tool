@@ -13,7 +13,7 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_segment_lighti
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.pint_utils import CalcQ, ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 OFFICE_OPEN_PLAN = SchemaEnums.schema_enums[

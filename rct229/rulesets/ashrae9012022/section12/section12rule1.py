@@ -92,12 +92,15 @@ class PRM9012022Rule88h78(RuleDefinitionListIndexedBase):
             }
 
         def manual_check_required(self, context, calc_vals=None, data=None):
+            reduced_misc_equipment_power = calc_vals["reduced_misc_equipment_power"]
             unexpected_misc_equipment_power = calc_vals[
                 "unexpected_misc_equipment_power"
             ]
             compliance_path = calc_vals["compliance_path"]
-            return len(unexpected_misc_equipment_power) == 0 and (
-                compliance_path != COMPLIANCE_PATH_TYPE.CODE_COMPLIANT
+            return (
+                len(reduced_misc_equipment_power) > 0
+                and len(unexpected_misc_equipment_power) == 0
+                and compliance_path != COMPLIANCE_PATH_TYPE.CODE_COMPLIANT
             )
 
         def rule_check(self, context, calc_vals=None, data=None):

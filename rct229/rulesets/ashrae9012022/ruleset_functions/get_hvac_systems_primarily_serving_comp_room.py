@@ -8,13 +8,37 @@ from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
-from rct229.utils.utility_functions import find_exactly_one_schedule
+from rct229.utils.utility_functions import (
+    find_exactly_one_schedule,
+    find_exactly_one_zone,
+)
 
 LIGHTING_SPACE_OPTION = SchemaEnums.schema_enums[
     "LightingSpaceOptions2019ASHRAE901TG37"
 ]
 
 COMPUTER_ROOM_REQ = 0.5
+
+
+def get_cooling_design_schedule_values(schedule: dict) -> list:
+    has_day = "hourly_cooling_design_day" in schedule
+    has_year = "hourly_cooling_design_year" in schedule
+
+    assert_(
+        has_day or has_year,
+        "Schedule must contain either 'hourly_cooling_design_day' or 'hourly_cooling_design_year'",
+    )
+
+    assert_(
+        not (has_day and has_year),
+        "Schedule must not contain both 'hourly_cooling_design_day' and 'hourly_cooling_design_year'",
+    )
+
+    return (
+        schedule["hourly_cooling_design_day"]
+        if has_day
+        else schedule["hourly_cooling_design_year"]
+    )
 
 
 def get_hvac_systems_primarily_serving_comp_room(rmd: dict) -> list[str]:
@@ -39,7 +63,7 @@ def get_hvac_systems_primarily_serving_comp_room(rmd: dict) -> list[str]:
         {
             zone["id"]
             for zone in find_all("$.buildings[*].building_segments[*].zones[*]", rmd)
-            for space in find_all("$.spaces[*]", zone)
+            for space in zone.get("spaces", [])
             if space.get("lighting_space_type") == LIGHTING_SPACE_OPTION.COMPUTER_ROOM
         }
     )
@@ -63,64 +87,65 @@ def get_hvac_systems_primarily_serving_comp_room(rmd: dict) -> list[str]:
 
             if zone_id in zone_with_computer_room_list:
                 hvac_system_serves_computer_room_space = True
-
-                for space in find_all(
-                    f'$.buildings[*].building_segments[*].zones[*][?(@.id="{zone_id}")].spaces[*]',
-                    rmd,
-                ):
+                zone = find_exactly_one_zone(rmd, zone_id)
+                for space in zone.get("spaces", []):
                     total_wattage_space = ZERO.POWER
 
                     # occupancy max wattage calculation
+                    occ_schedule = find_exactly_one_schedule(
+                        rmd, getattr_(space, "spaces", "occupant_multiplier_schedule")
+                    )
+                    occ_values = get_cooling_design_schedule_values(occ_schedule)
                     peak_occ_heat_gain = (
-                        max(
-                            find_exactly_one_schedule(
-                                rmd,
-                                getattr_(
-                                    space, "spaces", "occupant_multiplier_schedule"
-                                ),
-                            ).get("hourly_cooling_design_day", 0.0)
-                        )
+                        max(occ_values, default=0.0)
                         * space.get("number_of_occupants", 0)
                         * space.get("occupant_sensible_heat_gain", ZERO.POWER)
                     )
 
                     # lighting max wattage calculation
                     lgt_wattage = sum(
-                        [
+                        (
                             max(
-                                find_exactly_one_schedule(
-                                    rmd,
-                                    getattr_(
-                                        int_lgt,
-                                        "interior_lighting",
-                                        "lighting_multiplier_schedule",
-                                    ),
-                                ).get("hourly_cooling_design_day", 0.0)
+                                get_cooling_design_schedule_values(
+                                    find_exactly_one_schedule(
+                                        rmd,
+                                        getattr_(
+                                            int_lgt,
+                                            "interior_lighting",
+                                            "lighting_multiplier_schedule",
+                                        ),
+                                    )
+                                ),
+                                default=0.0,
                             )
                             * int_lgt.get("power_per_area", ZERO.POWER_PER_AREA)
                             * space.get("floor_area", ZERO.AREA)
-                            for int_lgt in space.get("interior_lighting", [])
-                        ]
+                        )
+                        for int_lgt in space.get("interior_lighting", [])
                     )
 
                     # miscellaneous max wattage calculation
                     misc_wattage = sum(
-                        [
+                        (
                             max(
-                                find_exactly_one_schedule(
-                                    rmd,
-                                    getattr_(
-                                        misc_obj,
-                                        "miscellaneous_equipment",
-                                        "multiplier_schedule",
-                                    ),
-                                ).get("hourly_cooling_design_day", 0.0)
+                                get_cooling_design_schedule_values(
+                                    find_exactly_one_schedule(
+                                        rmd,
+                                        getattr_(
+                                            misc_obj,
+                                            "miscellaneous_equipment",
+                                            "multiplier_schedule",
+                                        ),
+                                    )
+                                ),
+                                default=0.0,
                             )
                             * misc_obj.get("power", ZERO.POWER)
                             * misc_obj.get("sensible_fraction", 0.0)
-                            for misc_obj in space.get("miscellaneous_equipment", [])
-                        ]
+                        )
+                        for misc_obj in space.get("miscellaneous_equipment", [])
                     )
+
                     tempo_wattage = peak_occ_heat_gain + lgt_wattage + misc_wattage
                     total_wattage_space += tempo_wattage
                     total_wattage_zone += tempo_wattage

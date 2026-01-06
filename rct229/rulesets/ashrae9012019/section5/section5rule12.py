@@ -4,16 +4,20 @@ from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_descr
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
-    get_opaque_surface_type,
     OpaqueSurfaceType as OST,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
+    get_opaque_surface_type,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
-    SurfaceConditioningCategory as SCC,
 )
+from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
-from rct229.utils.assertions import getattr_, assert_
 
 MANUAL_CHECK_REQUIRED_MSG = (
     "Zone has both residential and non-residential spaces and the construction requirements "
@@ -72,7 +76,7 @@ class PRM9012019Rule40d86(RuleDefinitionListIndexedBase):
             building = context.BASELINE_0
             return {
                 "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building, data["constructions"]
+                    data["climate_zone"], building, data["constructions"], BASELINE_0
                 ),
             }
 

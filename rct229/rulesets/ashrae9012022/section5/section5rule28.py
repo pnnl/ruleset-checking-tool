@@ -3,12 +3,6 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.rulesets.ashrae9012022.data_fns.table_G3_4_fns import table_G34_lookup
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
-    SurfaceConditioningCategory as SCC,
-)
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
-    get_baseline_surface_conditioning_category_dict,
-)
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import (
     get_building_scc_skylight_roof_ratios_dict,
 )
@@ -17,6 +11,12 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type imp
 )
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.std_comparisons import std_equal
@@ -32,7 +32,7 @@ class PRM9012022Rule42c42(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(PRM9012022Rule42c42, self).__init__(
             rmds_used=produce_ruleset_model_description(
-                USER=False, BASELINE_0=True, PROPOSED=True
+                USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=PRM9012022Rule42c42.BuildingRule(),
             index_rmd=BASELINE_0,
@@ -50,21 +50,18 @@ class PRM9012022Rule42c42(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
-        rpd_p = context.PROPOSED
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        constructions_b = rpd_b["ruleset_model_descriptions"][0].get("constructions")
-        constructions_p = rpd_p["ruleset_model_descriptions"][0].get("constructions")
+        constructions = rpd_b["ruleset_model_descriptions"][0].get("constructions")
         return {
             "climate_zone": climate_zone,
-            "constructions_b": constructions_b,
-            "constructions_p": constructions_p,
+            "constructions": constructions,
         }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(PRM9012022Rule42c42.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=False, BASELINE_0=True, PROPOSED=True
+                    USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
                 each_rule=PRM9012022Rule42c42.BuildingRule.RoofRule(),
@@ -74,19 +71,12 @@ class PRM9012022Rule42c42(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data=None):
             building_b = context.BASELINE_0
-            building_p = context.PROPOSED
             climate_zone = data["climate_zone"]
-            constructions_b = data["constructions_b"]
-            constructions_p = data["constructions_p"]
-            scc_skylight_roof_ratios_dict_b = (
-                get_building_scc_skylight_roof_ratios_dict(
-                    climate_zone, constructions_b, building_b
-                )
-            )
+            constructions = data["constructions"]
 
             building_scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(
-                    climate_zone, constructions_b, building_b
+                    climate_zone, constructions, building_b, BASELINE_0
                 )
             )
 
@@ -135,17 +125,23 @@ class PRM9012022Rule42c42(RuleDefinitionListIndexedBase):
                 ]
             )
 
-            if scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_RESIDENTIAL] > 0.02:
+            if (
+                building_scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_RESIDENTIAL]
+                > 0.02
+            ):
                 target_shgc_res = target_shgc_above2_residential
             else:
                 target_shgc_res = target_shgc_2per_residential
 
-            if scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_NON_RESIDENTIAL] > 0.02:
+            if (
+                building_scc_skylight_roof_ratios_dict_b[SCC.EXTERIOR_NON_RESIDENTIAL]
+                > 0.02
+            ):
                 target_shgc_nonres = target_shgc_above2_nonresidential
             else:
                 target_shgc_nonres = target_shgc_2per_nonresidential
 
-            if scc_skylight_roof_ratios_dict_b[SCC.SEMI_EXTERIOR]:
+            if building_scc_skylight_roof_ratios_dict_b[SCC.SEMI_EXTERIOR]:
                 target_shgc_semiheated = table_G34_lookup(
                     climate_zone,
                     "SEMI-EXTERIOR",
@@ -161,12 +157,8 @@ class PRM9012022Rule42c42(RuleDefinitionListIndexedBase):
                 )["solar_heat_gain_coefficient"]
 
             return {
-                "scc_dict_b": get_baseline_surface_conditioning_category_dict(
-                    climate_zone,
-                    building_b,
-                    constructions_b,
-                    building_p,
-                    constructions_p,
+                "scc_dict_b": get_surface_conditioning_category_dict(
+                    climate_zone, building_b, constructions, BASELINE_0
                 ),
                 "manual_check_required_flag": manual_check_required_flag,
                 "target_shgc_res": target_shgc_res,

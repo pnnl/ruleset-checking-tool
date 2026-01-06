@@ -1,4 +1,4 @@
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_BPF_building_area_types_and_zones import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_BPF_building_area_types_and_zones import (
     get_BPF_building_area_types_and_zones,
 )
 from rct229.schema.config import ureg

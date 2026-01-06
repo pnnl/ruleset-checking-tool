@@ -26,7 +26,7 @@ from rct229.utils.compare_standard_val import std_lt
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
-from rct229.utils.utility_functions import find_exactly_one_terminal_unit
+from rct229.utils.utility_functions import find_exactly_one_terminal
 
 APPLICABLE_SYS_TYPES = [
     HVAC_SYS.SYS_9,
@@ -78,7 +78,7 @@ class PRM9012022Rule03j97(RuleDefinitionListIndexedBase):
                         std_equal(
                             REQ_DESIGN_SUPPLY_AIR_TEMP_SETPOINT.to(ureg.kelvin),
                             getattr_(
-                                find_exactly_one_terminal_unit(rmd_b, terminal_id_b),
+                                find_exactly_one_terminal(rmd_b, terminal_id_b),
                                 "Terminal",
                                 "supply_design_heating_setpoint_temperature",
                             ).to(ureg.kelvin),

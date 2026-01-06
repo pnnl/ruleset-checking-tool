@@ -1,4 +1,4 @@
-from rct229.utils.utility_functions import find_exactly_one_terminal_unit
+from rct229.utils.utility_functions import find_exactly_one_terminal
 
 
 def do_all_terminals_have_one_fan(rmd_b, terminal_unit_id_list):
@@ -19,7 +19,7 @@ def do_all_terminals_have_one_fan(rmd_b, terminal_unit_id_list):
 
     return all(
         [
-            find_exactly_one_terminal_unit(rmd_b, terminal_b_id).get("fan") is not None
+            find_exactly_one_terminal(rmd_b, terminal_b_id).get("fan") is not None
             for terminal_b_id in terminal_unit_id_list
         ]
     )

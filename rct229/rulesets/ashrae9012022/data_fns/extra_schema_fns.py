@@ -7,7 +7,7 @@ from rct229.rulesets.ashrae9012022.data import data
 EXTRA_SCHEMA = data["ASHRAE229.9012019.extra.schema"]
 
 exception_list = [
-    "Enumerations2019ASHRAE901",
+    "Enumerations2022ASHRAE901",
     "EnumerationsRESNET",
     "Enumerations2019T24",
     "Output2019ASHRAE901",

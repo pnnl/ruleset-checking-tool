@@ -22,6 +22,7 @@ __all__ = [
     "section23",
     "section_list",
     "section_dict",
+    "SHORT_NAME",
     "BASELINE_0",
     "BASELINE_90",
     "BASELINE_180",
