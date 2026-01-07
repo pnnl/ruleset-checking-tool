@@ -58,7 +58,7 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionBase):
         def __init__(self):
-            super(PRM9012022Rule67a77.BuildingRule, self).__init__(
+            super(PRM9012019Rule67a77.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
