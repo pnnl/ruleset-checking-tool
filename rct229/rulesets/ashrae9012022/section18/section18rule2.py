@@ -303,7 +303,7 @@ class PRM9012022Rule51v53(RuleDefinitionListIndexedBase):
 
         class HVACRule(RuleDefinitionBase):
             def __init__(self):
-                super(PRM9012019Rule51v53.RMDRule.HVACRule, self).__init__(
+                super(PRM9012022Rule51v53.RMDRule.HVACRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=True, PROPOSED=False
                     ),

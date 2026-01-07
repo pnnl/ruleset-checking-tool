@@ -5,6 +5,9 @@ from rct229.rulesets.ashrae9012022 import PROPOSED
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
 )
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
+)
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
 )
@@ -13,7 +16,6 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_categ
 )
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
@@ -73,7 +75,7 @@ class PRM9012022Rule67a77(RuleDefinitionListIndexedBase):
         def get_calc_vals(self, context, data=None):
             building_p = context.PROPOSED
 
-            scc_dict_p = get_building_surface_conditioning_category_dict(
+            scc_dict_p = get_surface_conditioning_category_dict(
                 data["climate_zone"], building_p, data["constructions"], PROPOSED
             )
             zcc_dict_p = get_zone_conditioning_category_dict(
