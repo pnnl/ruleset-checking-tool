@@ -10,7 +10,7 @@ from rct229.utils.natural_sort import natural_keys
 from rct229.ruletest_engine.ruletest_jsons import get_ruleset_test_sections
 
 TEST_PATH = "ruletest_jsons"
-
+os.environ["RCT_DISABLE_CACHE"] = "1"
 
 # ============================================================
 # =============== GENERIC TEST RUNNERS =======================
