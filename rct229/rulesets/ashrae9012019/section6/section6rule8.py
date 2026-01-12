@@ -8,10 +8,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.compare_schedules import (
 from rct229.rulesets.ashrae9012019.ruleset_functions.normalize_interior_lighting_schedules import (
     normalize_interior_lighting_schedules,
 )
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.pint_utils import ZERO
-from rct229.schema.schema_enums import SchemaEnums
 
 MANUAL_CHECK_MSG = (
     "Lighting schedule in P-RMD including adjusted lighting occupancy sensor reduction factor is "
@@ -199,6 +199,13 @@ class PRM9012019Rule16x33(RuleDefinitionListIndexedBase):
                             "eflh_difference": schedule_comparison_result[
                                 "eflh_difference"
                             ],
+                            "space_function_b": space_b.get("function"),
+                            "lighting_space_type_b": getattr_(
+                                space_b, "space", "lighting_space_type"
+                            ),
+                            "total_space_lpd_b": sum(
+                                find_all("interior_lighting[*].power_per_area", space_b)
+                            ),
                         }
 
                     def manual_check_required(self, context, calc_vals=None, data=None):
