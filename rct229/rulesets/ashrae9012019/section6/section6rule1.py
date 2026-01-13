@@ -162,11 +162,21 @@ class PRM9012019Rule99c05(RuleDefinitionListIndexedBase):
             )
 
             # Case 4: Fail Space-by-Space method and unable to check Building Area method
-            if not allowable_lpd_bam and not check_bam_flag and building_segment_design_lighting_wattage > allowable_lighting_wattage_sbs:
+            if (
+                not allowable_lpd_bam
+                and not check_bam_flag
+                and building_segment_design_lighting_wattage
+                > allowable_lighting_wattage_sbs
+            ):
                 return True
 
             # Case 6: Fail Building Area method and unable to check Space-by-Space method
-            if allowable_lpd_bam and check_bam_flag and building_segment_design_lighting_wattage > allowable_lighting_wattage_bam:
+            if (
+                allowable_lpd_bam
+                and check_bam_flag
+                and building_segment_design_lighting_wattage
+                > allowable_lighting_wattage_bam
+            ):
                 return True
 
             # Case 7: Unable to reliably check either method
