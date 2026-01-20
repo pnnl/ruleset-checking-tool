@@ -1,10 +1,14 @@
 from pint import Quantity
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     ZoneConditioningDataDict,
     get_surface_conditioning_category_dict,
 )

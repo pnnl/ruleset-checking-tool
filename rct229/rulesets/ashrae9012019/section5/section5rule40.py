@@ -4,14 +4,18 @@ from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_descr
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
-from rct229.utils.jsonpath_utils import find_one
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.std_comparisons import std_equal
 
 EXTERIOR = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"].EXTERIOR

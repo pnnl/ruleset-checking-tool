@@ -7,7 +7,6 @@ from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.pint_utils import CalcQ
-from rct229.utils.std_comparisons import std_equal
 
 ENERGY_RECOVERY = SchemaEnums.schema_enums["EnergyRecoveryOptions"]
 REQ_SENSIBLE_EFFECTIVENESS = 0.5

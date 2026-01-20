@@ -10,12 +10,12 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_energy_required_to_heat
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_with_each_building_segment import (
     get_swh_uses_associated_with_each_building_segment,
 )
+from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
     find_exactly_one_service_water_heating_distribution_system,
 )
-from rct229.utils.assertions import getattr_
 
 
 @dataclass

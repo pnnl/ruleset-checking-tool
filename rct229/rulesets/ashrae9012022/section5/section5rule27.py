@@ -2,20 +2,24 @@ from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012022 import BASELINE_0
-from rct229.schema.schema_enums import SchemaEnums
 from rct229.rulesets.ashrae9012022.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import (
     get_building_scc_skylight_roof_ratios_dict,
 )
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
 )
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
-    get_baseline_surface_conditioning_category_dict,
 )
-from rct229.utils.pint_utils import CalcQ
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
+)
+from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
 MANUAL_CHECK_MSG = "Manual review is required to verify skylight meets U-factor requirement as per table G3.4."
@@ -49,22 +53,18 @@ class PRM9012022Rule69v04(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
-        rpd_p = context.PROPOSED
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        constructions_b = rpd_b["ruleset_model_descriptions"][0].get("constructions")
-        constructions_p = rpd_p["ruleset_model_descriptions"][0].get("constructions")
-
+        constructions = rpd_b["ruleset_model_descriptions"][0].get("constructions")
         return {
             "climate_zone": climate_zone,
-            "constructions_b": constructions_b,
-            "constructions_p": constructions_p,
+            "constructions": constructions,
         }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(PRM9012022Rule69v04.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=False, BASELINE_0=True, PROPOSED=True
+                    USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=PRM9012022Rule69v04.BuildingRule.RoofRule(),
                 index_rmd=BASELINE_0,
@@ -78,10 +78,10 @@ class PRM9012022Rule69v04(RuleDefinitionListIndexedBase):
             # then set the manual check required and stop execution.
             building_b = context.BASELINE_0
             climate_zone = data["climate_zone"]
-            constructions_b = data["constructions_b"]
+            constructions = data["constructions"]
             building_scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(
-                    climate_zone, constructions_b, building_b, BASELINE_0
+                    climate_zone, constructions, building_b, BASELINE_0
                 )
             )
             target_exterior_2per_residential = table_G34_lookup(
@@ -121,13 +121,11 @@ class PRM9012022Rule69v04(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data=None):
             building_b = context.BASELINE_0
-            building_p = context.PROPOSED
             climate_zone = data["climate_zone"]
-            constructions_b = data["constructions_b"]
-            constructions_p = data["constructions_p"]
+            constructions = data["constructions"]
             building_scc_skylight_roof_ratios_dict_b = (
                 get_building_scc_skylight_roof_ratios_dict(
-                    climate_zone, constructions_b, building_b, BASELINE_0
+                    climate_zone, constructions, building_b, BASELINE_0
                 )
             )
 
@@ -188,12 +186,8 @@ class PRM9012022Rule69v04(RuleDefinitionListIndexedBase):
             )
 
             return {
-                "surface_conditioning_category_dict_b": get_baseline_surface_conditioning_category_dict(
-                    climate_zone,
-                    building_b,
-                    constructions_b,
-                    building_p,
-                    constructions_p,
+                "surface_conditioning_category_dict_b": get_surface_conditioning_category_dict(
+                    climate_zone, building_b, constructions, BASELINE_0
                 ),
                 # at this point, target_u_factor_mixed should be same regardless of
                 # residential <2% or >2%, skylight.

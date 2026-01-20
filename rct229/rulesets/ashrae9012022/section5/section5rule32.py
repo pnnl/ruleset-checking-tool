@@ -4,11 +4,15 @@ from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_descr
 from rct229.rulesets.ashrae9012022 import PROPOSED
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
 )
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
-    get_building_surface_conditioning_category_dict,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
 )
 from rct229.utils.std_comparisons import std_equal
 
@@ -71,7 +75,7 @@ class PRM9012022Rule78r30(RuleDefinitionListIndexedBase):
         def create_data(self, context, data=None):
             building_p = context.PROPOSED
             return {
-                "scc_dict_p": get_building_surface_conditioning_category_dict(
+                "scc_dict_p": get_surface_conditioning_category_dict(
                     data["climate_zone"], building_p, data["constructions"], PROPOSED
                 ),
             }

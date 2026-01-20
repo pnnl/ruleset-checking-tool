@@ -1,7 +1,7 @@
-from rct229.rulesets.ashrae9012019 import BASELINE_0, PROPOSED
+from rct229.rulesets.ashrae9012022 import BASELINE_0, PROPOSED
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_surface_conditioning_category_dict import (
-    get_building_surface_conditioning_category_dict,
     SurfaceConditioningCategory,
+    get_building_surface_conditioning_category_dict,
 )
 
 

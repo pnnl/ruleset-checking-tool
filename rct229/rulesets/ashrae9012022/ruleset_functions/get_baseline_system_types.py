@@ -54,7 +54,9 @@ from rct229.utils.jsonpath_utils import find_all
 
 
 @memoize
-def get_baseline_system_types(rmd_b: dict) -> dict[HVAC_SYS, list[str]]:
+def get_baseline_system_types(
+    rmd_b: dict, use_assert: bool = False
+) -> dict[HVAC_SYS, list[str]]:
     """
     Identify all the baseline system types modeled in a B-RMD.
 
@@ -89,7 +91,7 @@ def get_baseline_system_types(rmd_b: dict) -> dict[HVAC_SYS, list[str]]:
         i[1]
         for i in inspect.getmembers(HVAC_SYS)
         if type(i[0]) is str and i[0].startswith("SYS")
-    ]
+    ] + [HVAC_SYS.UNMATCHED]
 
     baseline_hvac_system_dict = {sys_type: [] for sys_type in hvac_sys_list}
 
@@ -104,7 +106,7 @@ def get_baseline_system_types(rmd_b: dict) -> dict[HVAC_SYS, list[str]]:
         hvac_b_id = hvac_b["id"]
         assert_(
             dict_of_zones_and_terminal_units_served_by_hvac_sys.get(hvac_b_id),
-            f"HVAC system {hvac_b_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+            f"HVAC system {hvac_b_id} is missing in the HeatingVentilatingAirConditioningSystems data group.",
         )
 
         terminal_unit_id_list = dict_of_zones_and_terminal_units_served_by_hvac_sys[
@@ -123,9 +125,13 @@ def get_baseline_system_types(rmd_b: dict) -> dict[HVAC_SYS, list[str]]:
                 sys_found = True
                 # break # TODO: This line must be uncommented before we ship the software. The reason why we commented this line is because an edge case HVAC system could (potentially) match multiple HVAC basseline systems, which require RCT developers to refine the `is_baseline_system` logic.
 
-        assert_(
-            sys_found,
-            f"Error: HVAC {hvac_b_id} does not match any baseline system type.",
-        )
+        if use_assert:
+            assert_(
+                sys_found,
+                f"Error: HVAC {hvac_b_id} does not match any baseline system type.",
+            )
+        else:
+            if not sys_found:
+                baseline_hvac_system_dict[HVAC_SYS.UNMATCHED].append(hvac_b_id)
 
     return baseline_hvac_system_dict

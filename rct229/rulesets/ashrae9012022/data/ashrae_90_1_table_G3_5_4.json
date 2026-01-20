@@ -1,0 +1,19 @@
+{
+  "prm_ptac_pthp_min_efficiency": [
+    {
+      "equipment_type": "PTAC (cooling mode)",
+      "minimum_efficiency": 3.2,
+      "efficiency_metric": "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
+    },
+    {
+      "equipment_type": "PTHP (cooling mode)",
+      "minimum_efficiency": 3.1,
+      "efficiency_metric": "FULL_LOAD_COEFFICIENT_OF_PERFORMANCE_NO_FAN"
+    },
+    {
+      "equipment_type": "PTHP (heating mode)",
+      "minimum_efficiency": 3.1,
+      "efficiency_metric": "HEAT_PUMP_EFFICIENCY_HIGH_TEMPERATURE_NO_FAN"
+    }
+  ]
+}

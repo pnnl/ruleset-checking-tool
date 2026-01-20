@@ -1,9 +1,10 @@
 from unittest.mock import patch
 
+from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_scc_window_wall_ratios_dict import (
     get_building_scc_window_wall_ratios_dict,
 )
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
 )
 from rct229.schema.schema_utils import quantify_rmd
@@ -164,12 +165,12 @@ def test__TEST_RPD__is_valid():
 
 
 @patch(
-    "rct229.rulesets.ashrae9012022.ruleset_functions.get_building_scc_window_wall_ratios_dict.get_building_surface_conditioning_category_dict",
+    "rct229.rulesets.ashrae9012022.ruleset_functions.get_building_scc_window_wall_ratios_dict.get_surface_conditioning_category_dict",
     return_value=TEST_SCC_DICT,
 )
 def test__get_building_scc_skylight_roof_ratios_dict(mock_get_opaque_surface_type):
     assert get_building_scc_window_wall_ratios_dict(
-        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING, "TEST_TYPE"
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING, BASELINE_0
     ) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.5,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.25,

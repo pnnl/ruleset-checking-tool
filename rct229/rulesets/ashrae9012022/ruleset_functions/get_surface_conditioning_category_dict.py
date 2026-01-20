@@ -4,6 +4,8 @@ from typing import TypedDict
 import pandas as pd
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums
@@ -11,6 +13,7 @@ from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_exactly_required_fields
 
 # Constants
+# TODO: These should directly from the enumerations
 SurfaceAdjacency = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"]
 
 _DISABLE_SURFACE_COND_CACHE = os.getenv("RCT_DISABLE_CACHE") == "1"
@@ -18,7 +21,11 @@ _DISABLE_SURFACE_COND_CACHE = os.getenv("RCT_DISABLE_CACHE") == "1"
 _SURFACE_COND_CACHE: dict[tuple[str, str], dict[str, dict]] = {}
 
 
+# Intended for export and internal use
 class SurfaceConditioningCategory:
+    """Enumeration class for zone conditioning categories"""
+
+    # Surface conditioning categories (export these)
     EXTERIOR_MIXED: str = "EXTERIOR MIXED"
     EXTERIOR_NON_RESIDENTIAL: str = "EXTERIOR NON-RESIDENTIAL"
     EXTERIOR_RESIDENTIAL: str = "EXTERIOR RESIDENTIAL"
@@ -110,6 +117,7 @@ SCC_DATA_FRAME = pd.DataFrame(
     ],
 )
 
+# Intended for internal use
 GET_SURFACE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
     "building": {
         "$..surface[*]": ["adjacent_to"],
@@ -120,20 +128,43 @@ GET_SURFACE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
 def _get_surface_conditioning_category_dict_uncached(
     climate_zone, building, constructions, rmd_type
 ):
+
+    """Determines the surface conditioning category for every surface in a building
+
+    Parameters
+    ----------
+    climate_zone : str
+        One of the ClimateZoneOptions2019ASHRAE901 enumerated values
+    building : dict
+        A dictionary representing a building as defined by the ASHRAE229 schema
+    constructions : list
+        A list of construction dictionaries as defined by the ASHRAE229 schema
+    Returns
+    -------
+    dict
+        A dictionary that maps surfaces to one of the conditioning categories:
+        EXTERIOR_RESIDENTIAL, EXTERIOR_NON_RESIDENTIAL, EXTERIOR_MIXED,
+        SEMI_EXTERIOR, UNREGULATED
+    """
     find_exactly_required_fields(
         GET_SURFACE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS["building"], building
     )
 
+    # The dictionary to be returned
     surface_conditioning_category_dict = {}
 
+    # Get the conditioning category for all the zones in the building
     zcc_dict = get_zone_conditioning_category_dict(
         climate_zone, building, constructions, rmd_type
     )
 
+    # Loop through all the zones in the building
     for building_segment in building.get("building_segments", []):
         for zone in building_segment.get("zones", []):
+            # Zone conditioning category
             zcc = zcc_dict[zone["id"]]
 
+            # Loop through all the surfaces in the zone
             for surface in zone.get("surfaces", []):
                 surface_adjacent_to = surface["adjacent_to"]
                 adjacency = (
@@ -142,10 +173,10 @@ def _get_surface_conditioning_category_dict_uncached(
                     else surface_adjacent_to
                 )
 
-                if adjacency in (
+                if adjacency in [
                     SurfaceAdjacency.IDENTICAL,
                     SurfaceAdjacency.UNDEFINED,
-                ):
+                ]:
                     surface_conditioning_category_dict[
                         surface["id"]
                     ] = SurfaceConditioningCategory.UNREGULATED
@@ -155,15 +186,15 @@ def _get_surface_conditioning_category_dict_uncached(
                 ):
                     surface_conditioning_category_dict[
                         surface["id"]
-                    ] = SCC_DATA_FRAME.at[zcc, adjacency]
+                    ] = SCC_DATA_FRAME.at[
+                        zcc,  # row index
+                        adjacency,  # column index
+                    ]
 
                 else:
                     raise ValueError(
-                        f"Combination of zone conditioning category '{zcc}' "
-                        f"and surface adjacency '{adjacency}' has no mapping "
-                        f"to a surface conditioning category"
+                        f"Combination of zone conditioning category '{zcc}' and surface adjacency '{adjacency}' has no mapping to a surface conditioning category"
                     )
-
     return surface_conditioning_category_dict
 
 
@@ -195,5 +226,6 @@ def get_surface_conditioning_category_dict(
         climate_zone, building, constructions, rmd_type
     )
 
+    assert isinstance(result, dict)
     rmd_cache[building_id] = result
     return result

@@ -15,10 +15,10 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_dict_of_zones_and_termi
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.schedule_utils import get_schedule_year_length
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
+from rct229.utils.schedule_utils import get_schedule_year_length
 
 TERMINAL_TYPE = SchemaEnums.schema_enums["TerminalOptions"]
 APPLICABLE_SYS_TYPES = [

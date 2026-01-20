@@ -11,7 +11,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types i
 )
 from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.assertions import getattr_, assert_
+from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 

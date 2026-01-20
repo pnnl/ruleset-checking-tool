@@ -4,19 +4,23 @@ from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_descr
 from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
-    get_opaque_surface_type,
     OpaqueSurfaceType as OST,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
+    get_opaque_surface_type,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+    SurfaceConditioningCategory as SCC,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
-    SurfaceConditioningCategory as SCC,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     find_construction_by_surface,
 )
+from rct229.utils.assertions import assert_
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
-from rct229.utils.assertions import assert_
 
 
 class PRM9012019Rule29j06(RuleDefinitionListIndexedBase):

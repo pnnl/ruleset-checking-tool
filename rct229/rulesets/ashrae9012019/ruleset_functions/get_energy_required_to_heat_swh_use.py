@@ -1,6 +1,5 @@
 import numpy as np
 from pint import Quantity
-
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_spaces_served_by_swh_use import (
     get_spaces_served_by_swh_use,
 )
@@ -12,8 +11,8 @@ from rct229.utils.pint_utils import ZERO
 from rct229.utils.utility_functions import (
     find_exactly_one_schedule,
     find_exactly_one_service_water_heating_distribution_system,
-    find_exactly_one_space,
     find_exactly_one_service_water_heating_use,
+    find_exactly_one_space,
 )
 
 SERVICE_WATER_HEATING_USE_UNIT = SchemaEnums.schema_enums[

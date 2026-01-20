@@ -5,6 +5,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_area_type_window_wall_a
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     CAPACITY_THRESHOLD as CAPACITY_THRESHOLD_QUANTITY,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     CRAWLSPACE_HEIGHT_THRESHOLD as CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY,
 )
 from rct229.schema.config import ureg

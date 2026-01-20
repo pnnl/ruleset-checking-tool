@@ -3,6 +3,8 @@ from typing import TypedDict
 import pandas as pd
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums

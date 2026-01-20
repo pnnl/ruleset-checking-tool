@@ -1,0 +1,130 @@
+{
+  "service_water_heater_efficiency": [
+    {
+      "Equipment Type": "Electric storage water heater",
+      "Capacity min": {
+        "value": 12,
+        "unit": "kW",
+        "inclusive": true
+      },
+      "Capacity max": {
+        "value": 9999,
+        "unit": "kW",
+        "inclusive": false
+      },
+      "Draw Pattern": "",
+      "Efficiency": {
+        "equation": "0.3 + 27/v",
+        "metric": "STANDBY_LOSS_FRACTION"
+      }
+    },
+    {
+      "Equipment Type": "Gas storage water heater",
+      "Capacity min": {
+        "value": 75000,
+        "unit": "Btu/h",
+        "inclusive": false
+      },
+      "Capacity max": {
+        "value": 105000,
+        "unit": "Btu/h",
+        "inclusive": true
+      },
+      "Draw Pattern": "Very small",
+      "Efficiency": {
+        "equation": "0.2674 - 0.0009*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Gas storage water heater",
+      "Capacity min": {
+        "value": 75000,
+        "unit": "Btu/h",
+        "inclusive": false
+      },
+      "Capacity max": {
+        "value": 105000,
+        "unit": "Btu/h",
+        "inclusive": true
+      },
+      "Draw Pattern": "Low",
+      "Efficiency": {
+        "equation": "0.5362 - 0.0012*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Gas storage water heater",
+      "Capacity min": {
+        "value": 75000,
+        "unit": "Btu/h",
+        "inclusive": false
+      },
+      "Capacity max": {
+        "value": 105000,
+        "unit": "Btu/h",
+        "inclusive": true
+      },
+      "Draw Pattern": "Medium",
+      "Efficiency": {
+        "equation": "0.6002 - 0.0011*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Gas storage water heater",
+      "Capacity min": {
+        "value": 75000,
+        "unit": "Btu/h",
+        "inclusive": false
+      },
+      "Capacity max": {
+        "value": 105000,
+        "unit": "Btu/h",
+        "inclusive": true
+      },
+      "Draw Pattern": "High",
+      "Efficiency": {
+        "equation": "0.6597 - 0.0009*v",
+        "metric": "UNIFORM_ENERGY_FACTOR"
+      }
+    },
+    {
+      "Equipment Type": "Gas storage water heater",
+      "Capacity min": {
+        "value": 105000,
+        "unit": "Btu/h",
+        "inclusive": false
+      },
+      "Capacity max": {
+        "value": 9999999,
+        "unit": "Btu/h",
+        "inclusive": true
+      },
+      "Draw Pattern": "",
+      "Efficiency": {
+        "equation": "0.80",
+        "metric": "THERMAL_EFFICIENCY"
+      }
+    },
+    {
+      "Equipment Type": "Gas storage water heater",
+      "Capacity min": {
+        "value": 105000,
+        "unit": "Btu/h",
+        "inclusive": false
+      },
+      "Capacity max": {
+        "value": 9999999,
+        "unit": "Btu/h",
+        "inclusive": true
+      },
+      "Draw Pattern": "",
+      "Efficiency": {
+        "equation": "q/800 + 110*v**0.5",
+        "metric": "STANDBY_LOSS_ENERGY"
+      }
+    }
+  ]
+}

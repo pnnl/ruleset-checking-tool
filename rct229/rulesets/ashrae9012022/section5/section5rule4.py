@@ -5,24 +5,28 @@ from rct229.rulesets.ashrae9012022 import BASELINE_0
 from rct229.rulesets.ashrae9012022.data_fns.table_G3_4_fns import table_G34_lookup
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
 )
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
-    get_baseline_surface_conditioning_category_dict,
 )
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
+)
+from rct229.utils.assertions import assert_
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
-from rct229.utils.assertions import assert_
 
 
 class PRM9012022Rule43n21(RuleDefinitionListIndexedBase):
-    """Rule 4 of ASHRAE 90.1-2022 Appendix G Section 5 (Envelope)"""
+    """Rule 4 of ASHRAE 90.1-2019 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
         super(PRM9012022Rule43n21, self).__init__(
             rmds_used=produce_ruleset_model_description(
-                USER=False, BASELINE_0=True, PROPOSED=True
+                USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
                 "$.ruleset_model_descriptions[*]": ["weather", "constructions"],
@@ -40,21 +44,18 @@ class PRM9012022Rule43n21(RuleDefinitionListIndexedBase):
 
     def create_data(self, context, data=None):
         rpd_b = context.BASELINE_0
-        rpd_p = context.PROPOSED
         climate_zone = rpd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        constructions_b = rpd_b["ruleset_model_descriptions"][0]["constructions"]
-        constructions_p = rpd_p["ruleset_model_descriptions"][0]["constructions"]
+        constructions = rpd_b["ruleset_model_descriptions"][0]["constructions"]
         return {
             "climate_zone": climate_zone,
-            "constructions_b": constructions_b,
-            "constructions_p": constructions_p,
+            "constructions": constructions,
         }
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(PRM9012022Rule43n21.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=False, BASELINE_0=True, PROPOSED=True
+                    USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 required_fields={},
                 each_rule=PRM9012022Rule43n21.BuildingRule.RoofRule(),
@@ -63,16 +64,11 @@ class PRM9012022Rule43n21(RuleDefinitionListIndexedBase):
             )
 
         def create_data(self, context, data):
-            building_b = context.BASELINE_0
-            building_p = context.PROPOSED
+            building = context.BASELINE_0
 
             return {
-                "surface_conditioning_category_dict": get_baseline_surface_conditioning_category_dict(
-                    data["climate_zone"],
-                    building_b,
-                    data["constructions_b"],
-                    building_p,
-                    data["constructions_p"],
+                "surface_conditioning_category_dict": get_surface_conditioning_category_dict(
+                    data["climate_zone"], building, data["constructions"], BASELINE_0
                 ),
             }
 
@@ -101,13 +97,13 @@ class PRM9012022Rule43n21(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 climate_zone: str = data["climate_zone"]
-                constructions_b = data["constructions_b"]
+                constructions = data["constructions"]
                 roof = context.BASELINE_0
                 scc: str = data["surface_conditioning_category_dict"][roof["id"]]
                 roof_u_factor = next(
                     (
                         construction.get("u_factor")
-                        for construction in constructions_b
+                        for construction in constructions
                         if construction["id"] == roof["construction"]
                     )
                 )

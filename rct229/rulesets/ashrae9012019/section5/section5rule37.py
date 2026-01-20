@@ -10,11 +10,12 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
+)
+from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 

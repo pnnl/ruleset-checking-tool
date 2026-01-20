@@ -1,5 +1,5 @@
 import os
-from typing import List, Dict
+from typing import Dict, List
 
 from rct229.rulesets.ashrae9012019.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_hvac_zone_list_w_area_dict import (

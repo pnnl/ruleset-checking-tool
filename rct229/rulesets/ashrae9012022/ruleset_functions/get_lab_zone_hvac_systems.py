@@ -1,6 +1,6 @@
 from typing import TypedDict
-from pydash import map_
 
+from pydash import map_
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_dict_of_zones_and_terminal_units_served_by_hvac_sys import (
     get_dict_of_zones_and_terminal_units_served_by_hvac_sys,
 )
@@ -45,7 +45,7 @@ def get_lab_zone_hvac_systems(
     building_lab_zones = [
         zone_id_b
         for zone_id_b in target_baseline_systems
-        if target_baseline_systems[zone_id_b]["system_origin"] == SYSTEMORIGIN.G3212B
+        if target_baseline_systems[zone_id_b]["system_origin"] == SYSTEMORIGIN.G311D
     ]
 
     hvac_systems_serving_lab_zones: HVACServeLabZoneDict = {

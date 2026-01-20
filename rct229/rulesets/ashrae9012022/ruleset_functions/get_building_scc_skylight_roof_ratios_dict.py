@@ -1,12 +1,16 @@
 from pint import Quantity
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
 )
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     ZoneConditioningDataDict,
-    get_building_surface_conditioning_category_dict,
+    get_surface_conditioning_category_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
@@ -29,7 +33,7 @@ def get_building_scc_skylight_roof_ratios_dict(
                 A list of construction dictionaries as defined by the ASHRAE229 schema
             building : dict
                 A dictionary representing a building as defined by the ASHRAE229 schema
-            rmd_type: str
+            rmd_type : str
                 One of the RMD_TYPE_OPTIONS enumerated values
 
             Returns
@@ -43,7 +47,7 @@ def get_building_scc_skylight_roof_ratios_dict(
                 }
     """
     # required fields for this function are coming from the nested functions
-    scc_dictionary = get_building_surface_conditioning_category_dict(
+    scc_dictionary = get_surface_conditioning_category_dict(
         climate_zone, building, constructions, rmd_type
     )
     total_res_roof_area = ZERO.AREA
