@@ -1,3 +1,5 @@
+# AGENTS.md
+
 # Contribution Guide for AI Agents
 
 This document describes the expected workflow for contributing to this repository. Follow it for any change that may land in a pull request.
