@@ -90,7 +90,7 @@ class PRM9012019Rule60e48(RuleDefinitionListIndexedBase):
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
 
-            schedule_b = {
+            mult_schedules_b = {
                 mult_sch_b: find_exactly_one_schedule(rmd_b, mult_sch_b)[
                     "hourly_values"
                 ]
@@ -100,10 +100,8 @@ class PRM9012019Rule60e48(RuleDefinitionListIndexedBase):
                 )
             }
 
-            hours_in_a_year = len(schedule_b["Plug Load Schedule"])
             return {
-                "schedule_b": schedule_b,
-                "hours_in_a_year": hours_in_a_year,
+                "mult_schedules_b": mult_schedules_b,
             }
 
         class MiscEquipRule(RuleDefinitionBase):
@@ -123,16 +121,14 @@ class PRM9012019Rule60e48(RuleDefinitionListIndexedBase):
 
             def get_calc_vals(self, context, data=None):
                 misc_equip_b = context.BASELINE_0
+                mult_schedules_b = data["mult_schedules_b"]
+                hourly_multiplier_schedule_b = misc_equip_b["multiplier_schedule"]
+                multiplier_schedule_b = mult_schedules_b[hourly_multiplier_schedule_b]
 
-                schedule_b = data["schedule_b"]
-                hours_in_a_year = data["hours_in_a_year"]
-
+                hours_in_a_year = len(multiplier_schedule_b)
                 if hours_in_a_year == LeapYear.LEAP_YEAR_HOURS:
                     DAYS_IN_MONTH[2] = 29
 
-                hourly_multiplier_schedule_b = misc_equip_b["multiplier_schedule"]
-
-                multiplier_schedule_b = schedule_b[hourly_multiplier_schedule_b]
                 expected_hourly_values = []
                 for month in range(1, 13):
                     expected_hourly_values.extend(

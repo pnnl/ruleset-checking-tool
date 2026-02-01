@@ -2,8 +2,7 @@ import json
 import os
 import re
 from collections import OrderedDict
-
-from rct229.rulesets.ashrae9012019 import rules_dict
+import rct229.rulesets as rulesets
 
 
 def get_nested_dict(dic, keys):
@@ -483,6 +482,10 @@ def disaggregate_master_ruletest_json(
     except Exception as e:
         print(f"An error occurred: {e}")
 
+    # Get the rules dictionary for the selected ruleset
+    rules_dict = rulesets.__getrulemap__()
+    ruleset_short_name = rulesets.__getruleset__().SHORT_NAME
+
     # Initialize dictionary used to break out master dictionary into sections and rules
     rule_dictionary = {}
 
@@ -527,7 +530,7 @@ def disaggregate_master_ruletest_json(
             )
 
         # Map the rule ID to the rule name
-        rule_name = rules_dict.get(f"prm9012019rule{ruletest.split('-')[1]}")
+        rule_name = rules_dict.get(f"{ruleset_short_name}rule{ruletest.split('-')[1]}")
 
         if not rule_name:
             raise ValueError(f"Rule {ruletest.split('-')[1]} not found in rule_map")

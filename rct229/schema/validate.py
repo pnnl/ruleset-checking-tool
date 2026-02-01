@@ -434,6 +434,45 @@ def check_annual_schedule_lengths(rpd: dict) -> list[str]:
     return error_messages
 
 
+def check_one_design_day_method(rpd: dict) -> list[str]:
+    """
+    Verify that schedules do not use multiple design day methods: no design info is valid, design day or design year, but not both.
+
+    Parameters
+    ----------
+    rpd : dict
+        The ruleset model description object.
+
+    Returns
+    -------
+    list[str]
+        A list containing an error message if multiple design day methods are found; otherwise, an empty list.
+    """
+    errors = []
+    schedules = find_all("$.ruleset_model_descriptions[*].schedules[*]", rpd)
+    has_cooling_design_day = any(
+        "hourly_cooling_design_day" in schedule for schedule in schedules
+    )
+    has_cooling_design_year = any(
+        "hourly_cooling_design_year" in schedule for schedule in schedules
+    )
+    has_heating_design_day = any(
+        "hourly_heating_design_day" in schedule for schedule in schedules
+    )
+    has_heating_design_year = any(
+        "hourly_heating_design_year" in schedule for schedule in schedules
+    )
+    if has_cooling_design_day and has_cooling_design_year:
+        errors.append(
+            "Schedules contain both 'hourly_cooling_design_day' and 'hourly_cooling_design_year'. Only one design day method is allowed."
+        )
+    if has_heating_design_day and has_heating_design_year:
+        errors.append(
+            "Schedules contain both 'hourly_heating_design_day' and 'hourly_heating_design_year'. Only one design day method is allowed."
+        )
+    return errors
+
+
 def check_unique_ids_in_ruleset_model_descriptions(rpd):
     """Checks that the ids within each group inside a
     RuleSetModelInstance are unique
@@ -644,6 +683,11 @@ def non_schema_validate_rpd(rmd_obj):
     passed = passed and not mismatch_annual_schedule_length_errors
     if mismatch_annual_schedule_length_errors:
         errors.extend(mismatch_annual_schedule_length_errors)
+
+    mismatch_one_design_day_method_errors = check_one_design_day_method(rmd_obj)
+    passed = passed and not mismatch_one_design_day_method_errors
+    if mismatch_one_design_day_method_errors:
+        errors.extend(mismatch_one_design_day_method_errors)
 
     return {"passed": passed, "errors": errors if errors else None}
 

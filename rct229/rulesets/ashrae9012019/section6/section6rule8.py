@@ -70,7 +70,7 @@ class PRM9012019Rule16x33(RuleDefinitionListIndexedBase):
                     ),
                     each_rule=PRM9012019Rule16x33.RulesetModelInstanceRule.BuildingRule.ZoneRule(),
                     index_rmd=PROPOSED,
-                    list_path="$..zones[*]",
+                    list_path="$.building_segments[*].zones[*]",
                 )
 
             def create_data(self, context, data=None):

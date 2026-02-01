@@ -9,8 +9,9 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.baseline_systems.baseline_s
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_baseline_system_types import (
     get_baseline_system_types,
 )
+from rct229.schema.config import ureg
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.assertions import getattr_, assert_
+from rct229.utils.assertions import assert_, getattr_
 from rct229.utils.pint_utils import CalcQ
 from rct229.utils.std_comparisons import std_equal
 
@@ -76,6 +77,7 @@ class PRM9012019Rule48s83(RuleDefinitionListIndexedBase):
                 precision={
                     "chiller_part_load_efficiency": {
                         "precision": 0.001,
+                        "unit": "kW/ton",
                     },
                 },
             )
@@ -91,14 +93,13 @@ class PRM9012019Rule48s83(RuleDefinitionListIndexedBase):
                 chiller_b, "Chiller", "efficiency_metric_values"
             )
             assert_(
-                len(efficiency_metric_types_b) == len(efficiency_metric_values_b)
-                and 1 <= len(efficiency_metric_types_b) <= 5,
-                "`efficiency_metric_types` and `efficiency_metric_values` must have the same length between 1 to 5",
+                len(efficiency_metric_types_b) == len(efficiency_metric_values_b),
+                "`efficiency_metric_types` and `efficiency_metric_values` must have the same length",
             )
 
             chiller_part_load_efficiency = next(
                 (
-                    value.to("Watt / Watt")
+                    1 / value * ureg("W/W")
                     for metric, value in zip(
                         efficiency_metric_types_b, efficiency_metric_values_b
                     )
@@ -124,34 +125,20 @@ class PRM9012019Rule48s83(RuleDefinitionListIndexedBase):
             }
 
         def rule_check(self, context, calc_vals=None, data=None):
-            chiller_part_load_efficiency_quantity = calc_vals[
-                "chiller_part_load_efficiency"
-            ]
-            # it is possible that the chiller part load efficiency is none
-            chiller_part_load_efficiency = (
-                chiller_part_load_efficiency_quantity.magnitude
-                if chiller_part_load_efficiency_quantity
-                else None
-            )
+            chiller_part_load_efficiency = calc_vals["chiller_part_load_efficiency"]
             target_part_load_efficiency = calc_vals["target_part_load_efficiency"]
-            target_cop_part_load_efficiency = (
-                1.0 / target_part_load_efficiency.to("kilowatt / kilowatt").magnitude
-            )  # .magnitude is because `target_cop_part_load_efficiency` is still a `dimensionless` pint quantity
 
             return chiller_part_load_efficiency and self.precision_comparison[
                 "chiller_part_load_efficiency"
             ](
                 chiller_part_load_efficiency,
-                target_cop_part_load_efficiency,
+                target_part_load_efficiency,
             )
 
         def is_tolerance_fail(self, context, calc_vals=None, data=None):
             chiller_part_load_efficiency = calc_vals["chiller_part_load_efficiency"]
             target_part_load_efficiency = calc_vals["target_part_load_efficiency"]
-            target_cop_part_load_efficiency = 1.0 / target_part_load_efficiency.to(
-                "kilowatt / kilowatt"
-            )
 
             return chiller_part_load_efficiency and (
-                std_equal(chiller_part_load_efficiency, target_cop_part_load_efficiency)
+                std_equal(chiller_part_load_efficiency, target_part_load_efficiency)
             )

@@ -9,7 +9,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
     get_list_hvac_systems_associated_with_zone,
 )
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
@@ -56,18 +55,16 @@ class PRM9012019Rule93u32(RuleDefinitionListIndexedBase):
         for zone_b in find_all("$.buildings[*].building_segments[*].zones[*]", rmd_b):
             zone_id_b = zone_b["id"]
             hvac_list_b = get_list_hvac_systems_associated_with_zone(rmd_b, zone_id_b)
-
-            assert_(
-                len(hvac_list_b) == 1,
-                "There must be one system serving each zone in the baseline RMD.",
-            )
-
-            zone_has_humidification_dict_b[zone_id_b] = find_exactly_one_hvac_system(
-                rmd_b, hvac_list_b[0]
-            ).get("humidification_type") not in (None, HUMIDIFICATION.NONE)
             zone_has_humidification_dict_p[zone_id_b] = (
                 zone_b["id"] in zones_have_humidification_list_p
             )
+
+            if len(hvac_list_b) == 0:
+                zone_has_humidification_dict_b[zone_id_b] = False
+                continue
+            zone_has_humidification_dict_b[zone_id_b] = find_exactly_one_hvac_system(
+                rmd_b, hvac_list_b[0]
+            ).get("humidification_type") not in (None, HUMIDIFICATION.NONE)
 
         return {
             "zone_has_humidification_dict_b": zone_has_humidification_dict_b,

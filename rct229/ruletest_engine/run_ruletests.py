@@ -1,61 +1,96 @@
-from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
-from rct229.ruletest_engine.ruletest_engine import *
-from rct229.ruletest_engine.ruletest_jsons.ashrae9012019 import *
+import os
+
+from rct229.ruletest_engine.ruletest_engine import (
+    run_section_tests,
+    generate_software_test_report,
+)
+from rct229.schema.schema_store import SchemaStore
+from rct229.rule_engine.rulesets import RuleSet
 from rct229.utils.natural_sort import natural_keys
+from rct229.ruletest_engine.ruletest_jsons import get_ruleset_test_sections
 
 TEST_PATH = "ruletest_jsons"
+os.environ["RCT_DISABLE_CACHE"] = "1"
+
+# ============================================================
+# =============== GENERIC TEST RUNNERS =======================
+# ============================================================
 
 
-def run_ashrae9012019_tests(section=None):
+def run_ruleset_tests(ruleset: str, section: str | None = None):
     """
-    Run ruleset by section or all
-    If section is None, then this function runs all the rule sections
+    Run all or selected rule test sections for a given ruleset.
 
     Parameters
     ----------
-    section: str - it should be the same string in the ASHRAE9012019_TEST_PATH_LIST
+    ruleset : str
+        The ruleset name (e.g., "ashrae9012019" or "ashrae9012022").
+    section : str or None
+        If provided, only that section is run.
 
     Returns
     -------
-
+    list[bool]
+        True/False results per section.
     """
+    SchemaStore.set_ruleset(ruleset)
+    all_sections = get_ruleset_test_sections(ruleset)
+
     return [
         run_test_helper(
-            _helper_get_all_test_file_by_section(
-                RuleSet.ASHRAE9012019_RULESET, test_section
-            ),
-            RuleSet.ASHRAE9012019_RULESET,
+            _helper_get_all_test_file_by_section(ruleset, test_section),
+            ruleset,
         )
-        for test_section in RuleSetTest.ASHRAE9012019_TEST_LIST
+        for test_section in all_sections
         if section is None or test_section == section
     ]
+
+
+def generate_software_test_report_for_ruleset(
+    ruleset: str, section_list=None, output_dir=os.path.dirname(__file__)
+):
+    """Generate a software test JSON report for the given ruleset."""
+    if section_list is None:
+        section_list = get_ruleset_test_sections(ruleset)
+    return generate_software_test_report(ruleset, section_list, output_dir)
+
+
+# ============================================================
+# =============== RULESET-SPECIFIC WRAPPERS ==================
+# ============================================================
+
+
+def run_ashrae9012019_tests(section=None):
+    """Run all or specific ASHRAE 90.1-2019 tests."""
+    return run_ruleset_tests("ashrae9012019", section)
+
+
+def run_ashrae9012022_tests(section=None):
+    """Run all or specific ASHRAE 90.1-2022 tests."""
+    return run_ruleset_tests("ashrae9012022", section)
 
 
 def generate_ashrae9012019_software_test_report(
     section_list=None, output_dir=os.path.dirname(__file__)
 ):
-    """
-    Generate a software test JSON for ASHRAE 90.1 RCT for a given set of sections If section is None, then this
-    function runs all the rule sections
+    """Generate ASHRAE 90.1-2019 software test report."""
+    return generate_software_test_report_for_ruleset(
+        "ashrae9012019", section_list, output_dir
+    )
 
-    Parameters
-    ----------
-    section_list: list
 
-        List of strings representing section lists to run. If None, all are ran per those listed in
-        RuleSetTest.ASHRAE9012019_TEST_LIST
+def generate_ashrae9012022_software_test_report(
+    section_list=None, output_dir=os.path.dirname(__file__)
+):
+    """Generate ASHRAE 90.1-2022 software test report."""
+    return generate_software_test_report_for_ruleset(
+        "ashrae9012022", section_list, output_dir
+    )
 
-    output_dir: str
 
-        Directory in which you want the ashrae901_2019_software_testing_report.json to appear
-
-    """
-
-    # If no section list is defined, rune all ASHRAE90.1 sections
-    if section_list is None:
-        section_list = RuleSetTest.ASHRAE9012019_TEST_LIST
-
-    return generate_software_test_report("ashrae9012019", section_list, output_dir)
+# ============================================================
+# ===================== HELPER FUNCTIONS =====================
+# ============================================================
 
 
 def _helper_get_all_test_file_by_section(ruleset: str, path: str):
@@ -84,187 +119,6 @@ def _helper_get_all_test_file_by_section(ruleset: str, path: str):
     ]
 
 
-def run_lighting_tests():
-    """Runs all tests found in the lighting tests JSON.
-    Returns
-    -------
-    None
-    Results of lighting test are spit out to console
-    """
-
-    json_tests = _helper_get_all_test_file_by_section(
-        RuleSet.ASHRAE9012019_RULESET, LIGHTING_DIR
-    )
-    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
-
-
-def run_envelope_tests():
-    """Runs all tests found in the envelope tests JSON.
-    Returns
-    -------
-    None
-    Results of envelope stest are spit out to console
-    """
-
-    json_tests = _helper_get_all_test_file_by_section(
-        RuleSet.ASHRAE9012019_RULESET, ENVELOPE_DIR
-    )
-    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
-
-
-def run_boiler_tests():
-    """Runs all tests found in the boiler tests JSON
-    Returns
-    -------
-    None
-    Results of boiler test are spit out to console
-    """
-    json_tests = _helper_get_all_test_file_by_section(
-        RuleSet.ASHRAE9012019_RULESET, HVAC_HOT_WATER_DIR
-    )
-    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
-
-
-def run_chiller_tests():
-    """Runs all tests found in the chiller tests JSON
-    Returns
-    -------
-    None
-    Results of chiller test are spit out to console
-    """
-    json_tests = _helper_get_all_test_file_by_section(
-        RuleSet.ASHRAE9012019_RULESET, HVAC_CHILLED_WATER_DIR
-    )
-    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
-
-
-def run_airside_tests():
-    """Runs all tests found in the airside tests JSON.
-    Returns
-    -------
-    None
-    Results of lighting test are spit out to console
-    """
-
-    json_tests = _helper_get_all_test_file_by_section(
-        RuleSet.ASHRAE9012019_RULESET, HVAC_AIRSIDE_DIR
-    )
-    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
-
-
-def run_hvac_general_tests():
-    """Runs all tests found in the hvac general tests JSON.
-    Returns
-    -------
-    None
-    Results of lighting test are spit out to console
-    """
-
-    json_tests = _helper_get_all_test_file_by_section(
-        RuleSet.ASHRAE9012019_RULESET, HVAC_GENERAL_DIR
-    )
-    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
-
-
-def run_sys_zone_assignment_tests():
-    """Runs all tests found in the system zone assignment tests JSON.
-    Returns
-    -------
-    None
-    Results of system zone assignments test are spit out to console
-    """
-
-    json_tests = _helper_get_all_test_file_by_section(
-        RuleSet.ASHRAE9012019_RULESET, HVAC_BASELINE_DIR
-    )
-    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
-
-
-def run_elevator_tests():
-    """Runs all tests found in the elevator tests JSON.
-    Returns
-    -------
-    None
-    Results of system zone assignments test are spit out to console
-    """
-
-    json_tests = _helper_get_all_test_file_by_section(
-        RuleSet.ASHRAE9012019_RULESET, ELEVATOR_DIR
-    )
-    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
-
-
-def run_performance_calculation_tests():
-    """Runs all tests found in the performance calculation tests JSON.
-    Returns
-    -------
-    None
-    Results of system zone assignments test are spit out to console
-    """
-
-    json_tests = _helper_get_all_test_file_by_section(
-        RuleSet.ASHRAE9012019_RULESET, PERFORMANCE_CALC_DIR
-    )
-    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
-
-
-def run_service_water_heater_tests():
-    """Runs all tests found in the service water heater calculation tests JSON.
-    Returns
-    -------
-    None
-    Results of system zone assignments test are spit out to console
-    """
-
-    json_tests = _helper_get_all_test_file_by_section(
-        RuleSet.ASHRAE9012019_RULESET, SERVICE_HOT_WATER_DIR
-    )
-    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
-
-
-def run_schedule_tests():
-    """Runs all tests found in the schedule tests JSON.
-    Returns
-    -------
-    None
-    Results of system zone assignments test are spit out to console
-    """
-
-    json_tests = _helper_get_all_test_file_by_section(
-        RuleSet.ASHRAE9012019_RULESET, SCHEDULE_DIR
-    )
-    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
-
-
-# SECTION 10 is now covered by run_hvac_general_tests
-# def run_general_hvac_tests():
-#     """Runs all tests found in section 10 tests JSON.
-#     Returns
-#     -------
-#     None
-#     Results of system zone assignments test are spit out to console
-#     """
-#
-#     json_tests = _helper_get_all_test_file_by_section(
-#         RuleSet.ASHRAE9012019_RULESET, "section10"
-#     )
-#     return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
-
-
-def run_receptacle_tests():
-    """Runs all tests found in the schedule tests JSON.
-    Returns
-    -------
-    None
-    Results of system zone assignments test are spit out to console
-    """
-
-    json_tests = _helper_get_all_test_file_by_section(
-        RuleSet.ASHRAE9012019_RULESET, RECEPTACLE_DIR
-    )
-    return run_test_helper(json_tests, RuleSet.ASHRAE9012019_RULESET)
-
-
 def run_test_helper(test_list, ruleset_doc):
     # sort the list in a human order
     test_list.sort(key=natural_keys)
@@ -275,35 +129,175 @@ def run_test_helper(test_list, ruleset_doc):
     return all(test_results)
 
 
-def run_test_one_jsontest(test_json):
+def _run_tests_by_dir(ruleset, directory):
+    """Internal helper to execute all tests within a category directory."""
+    json_tests = _helper_get_all_test_file_by_section(ruleset, directory)
+    return run_test_helper(json_tests, ruleset)
+
+
+# ============================================================
+# =============== CATEGORY TESTS FOR 2019 ====================
+# ============================================================
+
+
+def run_lighting_tests_2019():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012019_RULESET, "LTG")
+
+
+def run_envelope_tests_2019():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012019_RULESET, "ENV")
+
+
+def run_boiler_tests_2019():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012019_RULESET, "HVAC-HW")
+
+
+def run_chiller_tests_2019():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012019_RULESET, "HVAC-CHW")
+
+
+def run_airside_tests_2019():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012019_RULESET, "HVAC-SPEC")
+
+
+def run_hvac_general_tests_2019():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012019_RULESET, "HVAC-GEN")
+
+
+def run_sys_zone_assignment_tests_2019():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012019_RULESET, "HVAC-SYS")
+
+
+def run_elevator_tests_2019():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012019_RULESET, "ELV")
+
+
+def run_performance_calculation_tests_2019():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012019_RULESET, "CALC")
+
+
+def run_service_water_heater_tests_2019():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012019_RULESET, "SHW")
+
+
+def run_schedule_tests_2019():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012019_RULESET, "SCH")
+
+
+def run_receptacle_tests_2019():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012019_RULESET, "REC")
+
+
+# ============================================================
+# =============== CATEGORY TESTS FOR 2022 ====================
+# ============================================================
+
+
+def run_lighting_tests_2022():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012022_RULESET, "LTG")
+
+
+def run_envelope_tests_2022():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012022_RULESET, "ENV")
+
+
+def run_boiler_tests_2022():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012022_RULESET, "HVAC-HW")
+
+
+def run_chiller_tests_2022():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012022_RULESET, "HVAC-CHW")
+
+
+def run_airside_tests_2022():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012022_RULESET, "HVAC-SPEC")
+
+
+def run_hvac_general_tests_2022():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012022_RULESET, "HVAC-GEN")
+
+
+def run_sys_zone_assignment_tests_2022():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012022_RULESET, "HVAC-SYS")
+
+
+def run_elevator_tests_2022():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012022_RULESET, "ELV")
+
+
+def run_performance_calculation_tests_2022():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012022_RULESET, "CALC")
+
+
+def run_service_water_heater_tests_2022():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012022_RULESET, "SHW")
+
+
+def run_schedule_tests_2022():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012022_RULESET, "SCH")
+
+
+def run_receptacle_tests_2022():
+    return _run_tests_by_dir(RuleSet.ASHRAE9012022_RULESET, "REC")
+
+
+# ============================================================
+# =================== SINGLE TEST RUNNERS ====================
+# ============================================================
+
+
+def run_test_one_jsontest_2019(test_json):
     """
     Test function developed to facilitate running a single rule test json
     """
     return run_section_tests(test_json, RuleSet.ASHRAE9012019_RULESET)
 
 
-# if __name__ == "__main__":
-#     outcome = run_ashrae9012019_tests(section="section5")
-
-# run_transformer_tests()
-
-# run_lighting_tests()
-# run_boiler_tests()
-# run_chiller_tests()
-# run_envelope_tests()
-# run_receptacle_tests()
-# run_airside_tests()
-# run_sys_zone_assignment_tests()
-# run_hvac_general_tests()
-# run_elevator_tests()
-# run_performance_calculation_tests()
-# run_schedule_tests()
-# # run_general_hvac_tests()
-# run_service_water_heater_tests()
+def run_test_one_jsontest_2022(test_json):
+    """
+    Test function developed to facilitate running a single rule test json
+    """
+    return run_section_tests(test_json, RuleSet.ASHRAE9012022_RULESET)
 
 
-# run_test_one_jsontest("ashrae9012019/HVAC-GEN/rule_19_10.json")
-# run_ashrae9012019_tests()
-# output_dir = os.path.dirname(__file__)
-# generate_ashrae9012019_software_test_report(['tester'])
-# generate_ashrae9012019_software_test_report(None, output_dir)
+# ============================================================
+# ====================== ENTRY POINT =========================
+# ============================================================
+
+if __name__ == "__main__":
+    # outcome = run_ashrae9012019_tests(section="section23")
+    #
+    # run_lighting_tests_2019()
+    # run_boiler_tests_2019()
+    # run_chiller_tests_2019()
+    # run_envelope_tests_2019()
+    # run_receptacle_tests_2019()
+    # run_airside_tests_2019()
+    # run_sys_zone_assignment_tests_2019()
+    # run_hvac_general_tests_2019()
+    # run_elevator_tests_2019()
+    # run_performance_calculation_tests_2019()
+    # run_schedule_tests_2019()
+    # run_service_water_heater_tests_2019()
+    #
+    # run_lighting_tests_2022()
+    # run_boiler_tests_2022()
+    # run_chiller_tests_2022()
+    # run_envelope_tests_2022()
+    # run_receptacle_tests_2022()
+    # run_airside_tests_2022()
+    # run_sys_zone_assignment_tests_2022()
+    # run_hvac_general_tests_2022()
+    # run_elevator_tests_2022()
+    # run_performance_calculation_tests_2022()
+    # run_schedule_tests_2022()
+    # run_service_water_heater_tests_2022()
+    #
+    # run_test_one_jsontest_2019("ashrae9012019/ENV/rule_5_43.json")
+    # run_test_one_jsontest_2022("ashrae9012022/ENV/rule_5_43.json")
+    # run_ashrae9012019_tests()
+    # run_ashrae9012022_tests()
+    # output_dir = os.path.dirname(__file__)
+    # generate_ashrae9012019_software_test_report(['tester'])
+    # generate_ashrae9012019_software_test_report(None, output_dir)
+    pass

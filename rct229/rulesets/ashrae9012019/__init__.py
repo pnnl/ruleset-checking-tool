@@ -1,8 +1,9 @@
 import importlib
+import pkgutil
+import re
+from pathlib import Path
 
-from rct229.rule_engine.rulesets import RuleSet
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.schema.schema_store import SchemaStore
 
 # Add all available rule modules in __all__
 __all__ = [
@@ -21,7 +22,16 @@ __all__ = [
     "section23",
     "section_list",
     "section_dict",
+    "SHORT_NAME",
+    "BASELINE_0",
+    "BASELINE_90",
+    "BASELINE_180",
+    "BASELINE_270",
+    "USER",
+    "PROPOSED",
 ]
+
+SHORT_NAME = "prm9012019"
 
 rules_dict = {
     "prm9012019rule73j65": "section1rule1",
@@ -86,12 +96,14 @@ rules_dict = {
     "prm9012019rule66m62": "section6rule7",
     "prm9012019rule16x33": "section6rule8",
     "prm9012019rule22c86": "section6rule9",
+    "prm9012019rule86d29": "section6rule13",
     "prm9012019rule86j27": "section10rule1",
     "prm9012019rule34l50": "section10rule7",
     "prm9012019rule73m45": "section10rule10",
     "prm9012019rule10p28": "section10rule14",
     "prm9012019rule93u32": "section10rule15",
     "prm9012019rule72v93": "section11rule1",
+    "prm9012019rule23f92": "section11rule5",
     "prm9012019rule29n09": "section11rule6",
     "prm9012019rule49y39": "section11rule7",
     "prm9012019rule40i48": "section11rule8",
@@ -108,6 +120,7 @@ rules_dict = {
     "prm9012019rule66e91": "section12rule2",
     "prm9012019rule79w60": "section12rule3",
     "prm9012019rule60e48": "section12rule4",
+    "prm9012019rule73v23": "section12rule5",
     "prm9012019rule98t42": "section16rule1",
     "prm9012019rule66a48": "section16rule2",
     "prm9012019rule92n36": "section16rule3",
@@ -267,15 +280,9 @@ section_dict = {
     "23": "HVAC-AirSide",
 }
 
-if SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901"):
-    RMD = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")
-    COMMON_RMD = SchemaEnums.schema_enums.get("CommonRulesetModelOptions")
-
-else:
-    SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
-    SchemaEnums.update_schema_enum()
-    RMD = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")
-    COMMON_RMD = SchemaEnums.schema_enums.get("CommonRulesetModelOptions")
+SchemaEnums.update_schema_enum_by_ruleset("ashrae9012019")
+RMD = SchemaEnums.schema_enums.get("RulesetModelOptions2019ASHRAE901")
+COMMON_RMD = SchemaEnums.schema_enums.get("CommonRulesetModelOptions")
 
 BASELINE_0 = RMD.BASELINE_0
 BASELINE_90 = RMD.BASELINE_90
@@ -283,6 +290,65 @@ BASELINE_180 = RMD.BASELINE_180
 BASELINE_270 = RMD.BASELINE_270
 USER = COMMON_RMD.USER
 PROPOSED = COMMON_RMD.PROPOSED
+
+
+def build_section_rule_to_rule_id(ruleset_package):
+    """
+    Dynamically generate a mapping of section-rule to rule ID using SHORT_NAME
+    defined in each section's __init__.py.
+
+    Example output:
+    {
+        "1-1": "CALC-1",
+        "1-2": "CALC-2",
+        "5-1": "ENV-1",
+        ...
+    }
+    """
+    section_number_to_name_map = {}
+
+    # Iterate over all submodules/subpackages in the ruleset package (e.g., section1, section5)
+    package_path = Path(ruleset_package.__path__[0])
+
+    for finder, name, ispkg in pkgutil.iter_modules([str(package_path)]):
+        if not name.startswith("section"):
+            continue  # skip non-section directories
+
+        section_module = importlib.import_module(f"{ruleset_package.__name__}.{name}")
+        section_num_match = re.match(r"section(\d+)", name)
+        if not section_num_match:
+            continue
+
+        # Get the SHORT_NAME defined in section's __init__.py
+        short_name = getattr(section_module, "SHORT_NAME", None)
+        if short_name is None:
+            print(
+                f"Warning: {name} missing SHORT_NAME in the __init__.py file. Skipping."
+            )
+            continue
+
+        # Find all rule files (sectionXruleY.py)
+        rule_files = [
+            f
+            for f in (package_path / name).glob("section*rule*.py")
+            if re.match(r"section\d+rule\d+\.py$", f.name)
+        ]
+
+        for rule_file in rule_files:
+            rule_match = re.match(r"section(\d+)rule(\d+)\.py$", rule_file.name)
+            if rule_match:
+                rule_section = rule_match.group(1)
+                rule_num = rule_match.group(2)
+                key = f"{rule_section}-{rule_num}"
+                section_number_to_name_map[key] = f"{short_name}-{rule_num}"
+
+    return section_number_to_name_map
+
+
+# Automatically build the section-rule ID map when the package is imported
+section_rule_to_rule_id = build_section_rule_to_rule_id(
+    importlib.import_module(__name__)
+)
 
 
 def __getattr__(name):

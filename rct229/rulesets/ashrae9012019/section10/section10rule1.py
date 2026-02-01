@@ -11,9 +11,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_list_hvac_systems_assoc
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all
-from rct229.utils.utility_functions import (
-    find_exactly_one_hvac_system,
-)
+from rct229.utils.utility_functions import find_exactly_one_hvac_system
 
 HUMIDIFICATION = SchemaEnums.schema_enums["HumidificationOptions"]
 

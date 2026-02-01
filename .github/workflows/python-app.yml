@@ -19,6 +19,29 @@ jobs:
       - uses: psf/black@stable
         with:
           version: "22.6.0"
+
+  detect-changes:
+    name: Detect changed rulesets
+    runs-on: ubuntu-latest
+    outputs:
+      ashrae9012019: ${{ steps.filter.outputs.ashrae9012019 }}
+      ashrae9012022: ${{ steps.filter.outputs.ashrae9012022 }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Detect file changes
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            ashrae9012019:
+              - 'rct229/rulesets/ashrae9012019/**'
+              - 'rct229/ruletest_engine/ruletest_jsons/ashrae9012019/**'
+            ashrae9012022:
+              - 'rct229/rulesets/ashrae9012022/**'
+              - 'rct229/ruletest_engine/ruletest_jsons/ashrae9012022/**'
+
   run-unit-tests:
     name: Run unit tests
     runs-on: 'ubuntu-latest'
@@ -35,7 +58,56 @@ jobs:
       - name: Install venv
         run: poetry install
       - name: Run pytests
-        # This will halt the action if any of the tests fail
         run: poetry run pytest -v
-      - name: Run rule tests
+
+  run-ruletests-2019:
+    name: Run 2019 rule tests
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.ashrae9012019 == 'true'
+    env:
+      RCT_DISABLE_CACHE: "1"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 - --version 1.8.4
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run rule tests for 90.1-2019
         run: poetry run rct229 test -rs ashrae9012019
+
+  run-ruletests-2022:
+    name: Run 2022 rule tests
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.ashrae9012022 == 'true'
+    env:
+      RCT_DISABLE_CACHE: "1"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 - --version 1.8.4
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run rule tests for 90.1-2022
+        run: poetry run rct229 test -rs ashrae9012022

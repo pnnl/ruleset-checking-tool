@@ -16,7 +16,7 @@ class PartialRuleDefinition(RuleDefinitionBase):
         required_fields=None,
         manual_check_required_msg="",
         not_applicable_msg="",
-        precision: Mapping[str, RCTPrecision] = None,
+        precision: Mapping[str, dict[str, float]] = None,
     ):
         """Base class for all Partial Rule definitions (secondary)
 

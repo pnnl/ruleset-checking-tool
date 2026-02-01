@@ -2,18 +2,23 @@ import click
 
 from rct229.reports import reports as rct_report
 from rct229.rule_engine.engine import evaluate_all_rules
-from rct229.rule_engine.rulesets import RuleSet, RuleSetTest
-from rct229.ruletest_engine.run_ruletests import run_ashrae9012019_tests
+from rct229.ruletest_engine.ruletest_jsons import get_ruleset_test_sections
+from rct229.rule_engine.rulesets import RuleSet
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.schema.schema_store import SchemaStore
 from rct229.utils.assertions import RCTException
-from rct229.web_application import count_number_of_rules, count_number_of_ruletest_cases
 
 CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
 
 def print_version():
     click.echo(f"{__name__}, version {__version__}")
+
+
+def initialize_ruleset(ruleset_name: str):
+    """Initialize schema and enums for the requested ruleset."""
+    SchemaStore.set_ruleset(ruleset_name)
+    SchemaEnums.update_schema_enum()
 
 
 @click.group(context_settings=CONTEXT_SETTINGS)
@@ -38,20 +43,45 @@ test_short_help_text = """
 @click.option("--ruleset", "-rs", multiple=False, default="ashrae9012019")
 @click.argument("section", type=click.STRING, required=False)
 def run_test(ruleset, section=None):
-    print(f"software test workflow for section {section}")
+    print(
+        f"{ruleset.upper()} software test workflow"
+        + (f" for section {section}" if section else "")
+        + "\n"
+    )
     if ruleset == RuleSet.ASHRAE9012019_RULESET:
-        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
+        initialize_ruleset(ruleset)
+        # Dynamically get all available test sections for this ruleset
+        test_sections = get_ruleset_test_sections(ruleset)
+
+        from rct229.ruletest_engine.run_ruletests import (
+            run_ashrae9012019_tests,
+        )
+
         outcome_list = run_ashrae9012019_tests(section)
         if section is None:
             for idx, outcome in enumerate(outcome_list):
-                assert (
-                    outcome
-                ), f"{RuleSetTest.ASHRAE9012019_TEST_LIST[idx]} failed in the test"
+                assert outcome, f"{test_sections[idx]} failed in the test"
+        else:
+            assert all(outcome_list), f"{section} failed in the test"
+
+    elif ruleset == RuleSet.ASHRAE9012022_RULESET:
+        initialize_ruleset(ruleset)
+        # Dynamically get all available test sections for this ruleset
+        test_sections = get_ruleset_test_sections(ruleset)
+
+        from rct229.ruletest_engine.run_ruletests import (
+            run_ashrae9012022_tests,
+        )
+
+        outcome_list = run_ashrae9012022_tests(section)
+        if section is None:
+            for idx, outcome in enumerate(outcome_list):
+                assert outcome, f"{test_sections[idx]} failed in the test"
         else:
             assert all(outcome_list), f"{section} failed in the test"
     else:
         print(
-            f"ruleset document {ruleset} is not currently supported by the RCT. Please select one from the following: ashrae9012019"
+            f"ruleset document {ruleset} is not currently supported by the RCT. Please select one from the following: ashrae9012019, ashrae9012022"
         )
 
 
@@ -75,11 +105,15 @@ help_text = short_help_text
 )
 def evaluate(rpds, ruleset, reports, reports_directory):
     # TODO need to switch this to a if-else for selecting rulesets
-    if ruleset == RuleSet.ASHRAE9012019_RULESET:
-        SchemaStore.set_ruleset(RuleSet.ASHRAE9012019_RULESET)
-        SchemaEnums.update_schema_enum()
-        print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
-        print("")
+    if ruleset not in [RuleSet.ASHRAE9012019_RULESET, RuleSet.ASHRAE9012022_RULESET]:
+        raise RCTException(
+            f"Ruleset {ruleset} not supported. Available: "
+            f"{RuleSet.ASHRAE9012019_RULESET}, {RuleSet.ASHRAE9012022_RULESET}"
+        )
+
+    initialize_ruleset(ruleset)
+    print("Test implementation of rule engine for ASHRAE Std 229 RCT.")
+    print("")
 
     available_report_modules = rct_report.__getreports__()
     available_report_dict = {key: value for key, value in available_report_modules}
@@ -113,6 +147,9 @@ help_text = short_help_text
 @click.option("--ruleset_standard", "-rs", multiple=False, default="ashrae9012019")
 def count_rules(ruleset_standard):
     """Count the number of ruletest cases in a ruleset standard."""
+    initialize_ruleset(ruleset_standard)
+    from rct229.web_application import count_number_of_rules
+
     count_dict = count_number_of_rules(ruleset_standard)
     click.echo(f"Number of rules in '#{ruleset_standard}': {count_dict['total']}")
 
@@ -135,6 +172,9 @@ help_text = short_help_text
 @click.option("--ruleset_standard", "-rs", multiple=False, default="ashrae9012019")
 def count_test_cases(ruleset_standard):
     """Count the number of ruletest cases in a ruleset standard."""
+    initialize_ruleset(ruleset_standard)
+    from rct229.web_application import count_number_of_ruletest_cases
+
     count_dict = count_number_of_ruletest_cases(ruleset_standard)
     click.echo(
         f"Number of rule test cases in '#{ruleset_standard}': {count_dict['total']}"

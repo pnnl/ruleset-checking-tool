@@ -121,6 +121,7 @@ def test__rule_definition_base__evaluate__with_missing_baseline():
 def test__rule_definition_base__evaluate__with_false_is_applicable():
     assert DERIVED_RULE.evaluate(RMDS_WITH_MATCHING_USER_AND_BASELINE, data="NA") == {
         **BASE_RULE_1_OUTCOME_BASE,
+        "data_group_id": 1,
         "result": "NOT_APPLICABLE",
         "message": "Not applicable message",
     }
@@ -131,6 +132,7 @@ def test__rule_definition_base__evaluate__with_true_manual_check_required():
         RMDS_WITH_MATCHING_USER_AND_BASELINE, data="MANUAL_CHECK_REQUIRED"
     ) == {
         **DERIVED_RULE_outcome_base,
+        "data_group_id": 1,
         "result": "UNDETERMINED",
         "message": "Manual check required message",
     }
@@ -139,6 +141,7 @@ def test__rule_definition_base__evaluate__with_true_manual_check_required():
 def test__rule_definition_base__evaluate__with_true_rule_check():
     assert DERIVED_RULE.evaluate(RMDS_WITH_MATCHING_USER_AND_BASELINE, data=True) == {
         **DERIVED_RULE_outcome_base,
+        "data_group_id": 1,
         "result": "PASSED",
     }
 
@@ -146,6 +149,7 @@ def test__rule_definition_base__evaluate__with_true_rule_check():
 def test__rule_definition_base__evaluate__with_true_rule_check():
     assert DERIVED_RULE.evaluate(RMDS_WITH_MATCHING_USER_AND_BASELINE, data=False) == {
         **DERIVED_RULE_outcome_base,
+        "data_group_id": 1,
         "result": "FAILED",
     }
 

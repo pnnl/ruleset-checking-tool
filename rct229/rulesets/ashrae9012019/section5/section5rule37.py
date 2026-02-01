@@ -16,7 +16,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_conditioning_categ
 )
 from rct229.schema.config import ureg
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO, CalcQ
 from rct229.utils.std_comparisons import std_equal
 
@@ -63,7 +62,7 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
-                required_fields={"$..zones[*]": ["surfaces"]},
+                required_fields={"$.building_segments[*].zones[*]": ["surfaces"]},
                 precision={
                     "building_total_air_leakage_rate_b": {
                         "precision": 1,
@@ -77,26 +76,35 @@ class PRM9012019Rule67a77(RuleDefinitionListIndexedBase):
             building_p = context.PROPOSED
 
             scc_dict_p = get_surface_conditioning_category_dict(
-                data["climate_zone"], building_p, data["constructions"]
+                data["climate_zone"], building_p, data["constructions"], PROPOSED
             )
             zcc_dict_p = get_zone_conditioning_category_dict(
-                data["climate_zone"], building_p, data["constructions"]
+                data["climate_zone"], building_p, data["constructions"], PROPOSED
             )
 
             building_total_air_leakage_rate = ZERO.FLOW
             building_total_measured_air_leakage_rate = ZERO.FLOW
             empty_measured_air_leakage_rate_flow_flag = False
-
+            surfaces_p = [
+                surface
+                for building_segment in building_p.get("building_segments", [])
+                for zone in building_segment.get("zones", [])
+                for surface in zone.get("surfaces", [])
+            ]
             building_total_envelope_area = sum(
                 [
                     getattr_(surface, "surface", "area")
-                    for surface in find_all("$..surfaces[*]", building_p)
+                    for surface in surfaces_p
                     if scc_dict_p[surface["id"]] != SCC.UNREGULATED
                 ],
                 ZERO.AREA,
             )
-
-            for zone in find_all("$..zones[*]", building_p):
+            zones_p = [
+                zone
+                for building_segment in building_p.get("building_segments", [])
+                for zone in building_segment.get("zones", [])
+            ]
+            for zone in zones_p:
                 if zcc_dict_p[zone["id"]] in [
                     ZCC.CONDITIONED_RESIDENTIAL,
                     ZCC.CONDITIONED_NON_RESIDENTIAL,
