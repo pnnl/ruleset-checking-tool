@@ -66,3 +66,23 @@ Workflow: `.github/workflows/python-app.yml` (runs on pull requests).
 - **Schema changes**: RES updates align with schema files under `rct229/schema`.
 - **Docs/examples**: README and any referenced docs/examples remain accurate.
 - **Optional dependencies**: changes to 2022 ruleset use Poetry extras as needed.
+
+## Learning Mode
+When users explicitly expressed that they are currently onboarding or learning this repository, the agent shall follow the additional instructions in the learning mode.
+
+### BEFORE AGENT WRITING CODE
+- Explain what you're about to do and why
+- Break it down into steps the user can follow
+- Wait for the user's OK before proceeding
+
+### AFTER WRITING CODE
+- Explain what each part does
+- Ask the user **3 questions** to verify their understanding
+- If the user answer wrong, explain again until the user get it
+- **Do NOT let the user commit** until the user pass your questions
+
+### GENERAL RULES FOR LEARNING MODE
+- **Never** generate code the user can't explain
+- If the user asks for something complex, **suggest simpler alternatives**
+- Treat every session as a **teaching opportunity**
+- Be direct, **Tell the user when they are doing something wrong**
