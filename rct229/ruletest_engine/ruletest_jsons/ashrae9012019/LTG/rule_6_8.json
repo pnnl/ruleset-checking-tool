@@ -3,19 +3,20 @@
         "Section": 6,
         "Rule": 8,
         "Test": "a",
-        "test_description": "The project has one building segment with one zone and one space with interior lighting. The lighting space type is enclosed office and control type is manual. The proposed building lighting schedule has been reduced by the expected ratio relative to the baseline building lighting schedule.",
-        "expected_rule_outcome": "pass",
         "standard": {
+            "ruleset": "ashrae9012019",
             "rule_id": "6-8",
             "ruleset_reference": "(Previously 6-13, then 6-12) Table G3.1(6) Proposed Building Performance (i)",
             "rule_description": "Proposed building is modeled with additional occupancy sensor controls using occupancy sensor schedule reduction factors specified in Table G3.7. Proposed building has been modeled with 1.25 * occupancy sensor reduction factor (from Table G3.7) for spaces with manual-on and partial-on occupancy sensor controls and with with 30% occupancy sensor reduction factor for 'open plan' space with individually controlled workstation lighting.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Yes",
             "schema_version": "0.1.7"
         },
+        "test_description": "The project has one building segment with one zone and one space with interior lighting. The lighting space type is enclosed office and control type is manual. The proposed building lighting schedule has been reduced by the expected ratio relative to the baseline building lighting schedule.",
+        "expected_rule_outcome": "pass",
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
@@ -35173,20 +35174,21 @@
         "Section": 6,
         "Rule": 8,
         "Test": "b",
-        "test_description": "The project has one building segment with one zone and one space with interior lighting. The lighting space type is enclosed office and control type is manual. The proposed building lighting schedule has fewer equivalent full load hours than expected by the reduction ratio relative to the baseline building lighting schedule.",
-        "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "Schedule adjustment may be correct if space includes daylight control modeled by schedule adjustment or individual workstation with lighting controlled by occupancy sensors (TABLE G3.7 Footnote c).",
         "standard": {
+            "ruleset": "ashrae9012019",
             "rule_id": "6-8",
             "ruleset_reference": "(Previously 6-13, then 6-12) Table G3.1(6) Proposed Building Performance (i)",
             "rule_description": "Proposed building is modeled with additional occupancy sensor controls using occupancy sensor schedule reduction factors specified in Table G3.7. Proposed building has been modeled with 1.25 * occupancy sensor reduction factor (from Table G3.7) for spaces with manual-on and partial-on occupancy sensor controls and with with 30% occupancy sensor reduction factor for 'open plan' space with individually controlled workstation lighting.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Yes",
             "schema_version": "0.1.7"
         },
+        "test_description": "The project has one building segment with one zone and one space with interior lighting. The lighting space type is enclosed office and control type is manual. The proposed building lighting schedule has fewer equivalent full load hours than expected by the reduction ratio relative to the baseline building lighting schedule.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Schedule adjustment may be correct if space includes daylight control modeled by schedule adjustment or individual workstation with lighting controlled by occupancy sensors (TABLE G3.7 Footnote c).",
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
@@ -70344,20 +70346,21 @@
         "Section": 6,
         "Rule": 8,
         "Test": "c",
-        "test_description": "The project has one building segment with one zone and one space with interior lighting. The lighting space type is enclosed office and control type is manual. The proposed building lighting schedule has greater equivalent full load hours than expected by the reduction ratio relative to the baseline building lighting schedule.",
-        "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "Lighting schedule in P-RMD including adjusted lighting occupancy sensor reduction factor is higher than that in B-RMD. Verify Additional occupancy sensor control is modeled correctly in P-RMD.",
         "standard": {
+            "ruleset": "ashrae9012019",
             "rule_id": "6-8",
             "ruleset_reference": "(Previously 6-13, then 6-12) Table G3.1(6) Proposed Building Performance (i)",
             "rule_description": "Proposed building is modeled with additional occupancy sensor controls using occupancy sensor schedule reduction factors specified in Table G3.7. Proposed building has been modeled with 1.25 * occupancy sensor reduction factor (from Table G3.7) for spaces with manual-on and partial-on occupancy sensor controls and with with 30% occupancy sensor reduction factor for 'open plan' space with individually controlled workstation lighting.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Yes",
             "schema_version": "0.1.7"
         },
+        "test_description": "The project has one building segment with one zone and one space with interior lighting. The lighting space type is enclosed office and control type is manual. The proposed building lighting schedule has greater equivalent full load hours than expected by the reduction ratio relative to the baseline building lighting schedule.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Lighting schedule in P-RMD including adjusted lighting occupancy sensor reduction factor is higher than that in B-RMD. Verify Additional occupancy sensor control is modeled correctly in P-RMD.",
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
@@ -105515,19 +105518,20 @@
         "Section": 6,
         "Rule": 8,
         "Test": "d",
-        "test_description": "The project has one building segment with one zone and one space with interior lighting. The lighting space type is lobby (all others) and control type is manual. The proposed building lighting schedule has been reduced by the expected ratio relative to the baseline building lighting schedule.",
-        "expected_rule_outcome": "pass",
         "standard": {
+            "ruleset": "ashrae9012019",
             "rule_id": "6-8",
             "ruleset_reference": "(Previously 6-13, then 6-12) Table G3.1(6) Proposed Building Performance (i)",
             "rule_description": "Proposed building is modeled with additional occupancy sensor controls using occupancy sensor schedule reduction factors specified in Table G3.7. Proposed building has been modeled with 1.25 * occupancy sensor reduction factor (from Table G3.7) for spaces with manual-on and partial-on occupancy sensor controls and with with 30% occupancy sensor reduction factor for 'open plan' space with individually controlled workstation lighting.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Yes",
             "schema_version": "0.1.7"
         },
+        "test_description": "The project has one building segment with one zone and one space with interior lighting. The lighting space type is lobby (all others) and control type is manual. The proposed building lighting schedule has been reduced by the expected ratio relative to the baseline building lighting schedule.",
+        "expected_rule_outcome": "pass",
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
@@ -140685,20 +140689,21 @@
         "Section": 6,
         "Rule": 8,
         "Test": "e",
-        "test_description": "The project has one building segment with one zone and one space with interior lighting. The lighting space type is lobby (all others) and control type is manual. The proposed building lighting schedule has fewer equivalent full load hours than expected by the reduction ratio relative to the baseline building lighting schedule.",
-        "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "Schedule adjustment may be correct if space includes daylight control modeled by schedule adjustment or individual workstation with lighting controlled by occupancy sensors (TABLE G3.7 Footnote c).",
         "standard": {
+            "ruleset": "ashrae9012019",
             "rule_id": "6-8",
             "ruleset_reference": "(Previously 6-13, then 6-12) Table G3.1(6) Proposed Building Performance (i)",
             "rule_description": "Proposed building is modeled with additional occupancy sensor controls using occupancy sensor schedule reduction factors specified in Table G3.7. Proposed building has been modeled with 1.25 * occupancy sensor reduction factor (from Table G3.7) for spaces with manual-on and partial-on occupancy sensor controls and with with 30% occupancy sensor reduction factor for 'open plan' space with individually controlled workstation lighting.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Yes",
             "schema_version": "0.1.7"
         },
+        "test_description": "The project has one building segment with one zone and one space with interior lighting. The lighting space type is lobby (all others) and control type is manual. The proposed building lighting schedule has fewer equivalent full load hours than expected by the reduction ratio relative to the baseline building lighting schedule.",
+        "expected_rule_outcome": "fail",
+        "expected_raised_message_includes": "Schedule adjustment may be correct if space includes daylight control modeled by schedule adjustment or individual workstation with lighting controlled by occupancy sensors (TABLE G3.7 Footnote c).",
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
@@ -175856,19 +175861,20 @@
         "Section": 6,
         "Rule": 8,
         "Test": "f",
-        "test_description": "The project has one building segment with one zone and one space with interior lighting. The lighting space type is enclosed office and control type is fully automatic. The proposed building lighting schedule has been reduced by the expected ratio relative to the baseline building lighting schedule.",
-        "expected_rule_outcome": "pass",
         "standard": {
+            "ruleset": "ashrae9012019",
             "rule_id": "6-8",
             "ruleset_reference": "(Previously 6-13, then 6-12) Table G3.1(6) Proposed Building Performance (i)",
             "rule_description": "Proposed building is modeled with additional occupancy sensor controls using occupancy sensor schedule reduction factors specified in Table G3.7. Proposed building has been modeled with 1.25 * occupancy sensor reduction factor (from Table G3.7) for spaces with manual-on and partial-on occupancy sensor controls and with with 30% occupancy sensor reduction factor for 'open plan' space with individually controlled workstation lighting.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Yes",
             "schema_version": "0.1.7"
         },
+        "test_description": "The project has one building segment with one zone and one space with interior lighting. The lighting space type is enclosed office and control type is fully automatic. The proposed building lighting schedule has been reduced by the expected ratio relative to the baseline building lighting schedule.",
+        "expected_rule_outcome": "pass",
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
@@ -211026,20 +211032,21 @@
         "Section": 6,
         "Rule": 8,
         "Test": "g",
-        "test_description": "The project has one building segment with one zone and one space with interior lighting. The lighting space type is enclosed office and control type is fully automatic. The proposed building lighting schedule has fewer equivalent full load hours than expected by the reduction ratio relative to the baseline building lighting schedule.",
-        "expected_rule_outcome": "fail",
-        "expected_raised_message_includes": "Schedule adjustment may be correct if space includes daylight control modeled by schedule adjustment or individual workstation with lighting controlled by occupancy sensors (TABLE G3.7 Footnote c).",
         "standard": {
+            "ruleset": "ashrae9012019",
             "rule_id": "6-8",
             "ruleset_reference": "(Previously 6-13, then 6-12) Table G3.1(6) Proposed Building Performance (i)",
             "rule_description": "Proposed building is modeled with additional occupancy sensor controls using occupancy sensor schedule reduction factors specified in Table G3.7. Proposed building has been modeled with 1.25 * occupancy sensor reduction factor (from Table G3.7) for spaces with manual-on and partial-on occupancy sensor controls and with with 30% occupancy sensor reduction factor for 'open plan' space with individually controlled workstation lighting.",
-            "applicable_rmr": "Proposed RMR",
+            "applicable_rmr": "Proposed Design",
             "rule_assertion": "=",
             "comparison_value": "Expected Value",
             "rule_dependency": "-",
             "mandatory_rule": "Yes",
             "schema_version": "0.1.7"
         },
+        "test_description": "The project has one building segment with one zone and one space with interior lighting. The lighting space type is enclosed office and control type is fully automatic. The proposed building lighting schedule has fewer equivalent full load hours than expected by the reduction ratio relative to the baseline building lighting schedule.",
+        "expected_rule_outcome": "undetermined",
+        "expected_raised_message_includes": "Space is a crawl space, plenum or interstitial space with lighting power in the baseline model",
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
@@ -211063,6 +211070,7 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 92.90303999999999,
+                                                        "function": "PLENUM",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
@@ -228638,6 +228646,7 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 92.90303999999999,
+                                                        "function": "PLENUM",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
