@@ -189,7 +189,7 @@
                                                                 "id": "Lighting 1",
                                                                 "power_per_area": 10.763910416709724,
                                                                 "daylighting_control_type": "STEPPED",
-                                                                "are_schedules_used_for_modeling_daylighting_control": 1
+                                                                "are_schedules_used_for_modeling_daylighting_control": true
                                                             }
                                                         ]
                                                     }
