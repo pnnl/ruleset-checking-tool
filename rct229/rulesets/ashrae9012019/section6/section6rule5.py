@@ -205,7 +205,9 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
                             and space_function_b in ACCEPTABLE_SPACE_FUNCTION
                         )
 
-                    def get_manual_check_required_msg(self, context, calc_vals=None, data=None):
+                    def get_manual_check_required_msg(
+                        self, context, calc_vals=None, data=None
+                    ):
                         space_function_b = calc_vals["space_function_b"]
 
                         return f"Space function is {space_function_b} and has lighting power modeled. Unable to determine whether this space should be included in the check."
