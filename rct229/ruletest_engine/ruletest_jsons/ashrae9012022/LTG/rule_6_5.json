@@ -41,6 +41,7 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 213.67699199999998,
+                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
@@ -53,6 +54,7 @@
                                                         "id": "Space 2",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 269.418816,
+                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
@@ -17627,6 +17629,7 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 213.67699199999998,
+                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
@@ -17639,6 +17642,7 @@
                                                         "id": "Space 2",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 269.418816,
+                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
@@ -35234,6 +35238,7 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 213.67699199999998,
+                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
@@ -35246,6 +35251,7 @@
                                                         "id": "Space 2",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 269.418816,
+                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
@@ -52820,6 +52826,7 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 213.67699199999998,
+                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
@@ -52832,6 +52839,7 @@
                                                         "id": "Space 2",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 269.418816,
+                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
@@ -70427,6 +70435,7 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 213.67699199999998,
+                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
@@ -70439,6 +70448,7 @@
                                                         "id": "Space 2",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 195.09638399999997,
+                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
@@ -88013,6 +88023,7 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 213.67699199999998,
+                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 1 Lighting 1",
@@ -88025,6 +88036,7 @@
                                                         "id": "Space 2",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 195.09638399999997,
+                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Space 2 Lighting 1",
