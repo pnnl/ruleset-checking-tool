@@ -181,10 +181,12 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
                         )
 
                         total_space_LPD_b = sum(
-                            int_ltg.get("power_per_area", 0 * ureg("W"))
-                            for int_ltg in getattr_(
-                                space_b, "spaces", "interior_lighting"
-                            )
+                            [
+                                int_ltg.get("power_per_area", 0 * ureg("W/m2"))
+                                for int_ltg in find_all(
+                                    "$.interior_lighting[*]", space_b
+                                )
+                            ]
                         )
                         space_function_b = getattr_(space_b, "spaces", "function")
 
