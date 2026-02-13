@@ -8,19 +8,32 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.compare_schedules import (
 from rct229.rulesets.ashrae9012022.ruleset_functions.normalize_interior_lighting_schedules import (
     normalize_interior_lighting_schedules,
 )
+from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.pint_utils import ZERO
 
-MANUAL_CHECK_MSG = (
-    "Lighting schedule in P-RMD including adjusted lighting occupancy sensor reduction factor is "
-    "higher than that in B-RMD. Verify Additional occupancy sensor control is modeled correctly in "
-    "P-RMD. "
+UNDETERMINED_MSG_SPACE_FUNC = (
+    "Space is a crawl space, plenum or interstitial space with lighting power in the baseline model. "
+    "Verify that occupancy sensor control requirements are followed correctly, if applicable."
+)
+UNDETERMINED_MSG_LTG_SCH = (
+    "Lighting schedule in the proposed model, including adjusted lighting occupancy sensor reduction, is higher than that in the baseline model. "
+    "Verify additional occupancy sensor control is modeled correctly in the proposed model."
 )
 FAIL_MSG = (
     "Schedule adjustment may be correct if space includes daylight control modeled by schedule adjustment or "
     "individual workstation with lighting controlled by occupancy sensors (TABLE G3.7 Footnote c). "
 )
+
+SPACE_FUNCTION = SchemaEnums.schema_enums["SpaceFunctionOptions"]
+
+ACCEPTABLE_SPACE_FUNCTION = [
+    SPACE_FUNCTION.CRAWL_SPACE,
+    SPACE_FUNCTION.INTERSTITIAL_SPACE,
+    SPACE_FUNCTION.PLENUM,
+]
 
 
 class PRM9012022Rule16x33(RuleDefinitionListIndexedBase):
@@ -120,7 +133,6 @@ class PRM9012022Rule16x33(RuleDefinitionListIndexedBase):
                             rmds_used=produce_ruleset_model_description(
                                 USER=False, BASELINE_0=True, PROPOSED=True
                             ),
-                            manual_check_required_msg=MANUAL_CHECK_MSG,
                             fail_msg=FAIL_MSG,
                         )
 
@@ -154,6 +166,17 @@ class PRM9012022Rule16x33(RuleDefinitionListIndexedBase):
                             building_open_schedule_p,
                         )
 
+                        total_space_LPD_b = sum(
+                            [
+                                int_ltg_b.get("power_per_area", 0 * ureg("W/m2"))
+                                for int_ltg_b in find_all(
+                                    "$.interior_lighting[*]", space_b
+                                )
+                            ]
+                        )
+
+                        space_function_b = getattr_(space_b, "spaces", "function")
+
                         return {
                             "total_hours_compared": schedule_comparison_result[
                                 "total_hours_compared"
@@ -164,11 +187,35 @@ class PRM9012022Rule16x33(RuleDefinitionListIndexedBase):
                             "eflh_difference": schedule_comparison_result[
                                 "eflh_difference"
                             ],
+                            "total_space_LPD_b": total_space_LPD_b,
+                            "space_function_b": space_function_b,
                         }
 
                     def manual_check_required(self, context, calc_vals=None, data=None):
+                        space_function_b = calc_vals["space_function_b"]
+                        total_space_LPD_b = calc_vals["total_space_LPD_b"]
                         eflh_difference = calc_vals["eflh_difference"]
-                        return eflh_difference > 0
+
+                        return (
+                            space_function_b in ACCEPTABLE_SPACE_FUNCTION
+                            and total_space_LPD_b > 0 * ureg("W/m2")
+                        ) or eflh_difference > 0
+
+                    def get_manual_check_required_msg(
+                        self, context, calc_vals=None, data=None
+                    ):
+                        space_function_b = calc_vals["space_function_b"]
+                        total_space_LPD_b = calc_vals["total_space_LPD_b"]
+
+                        if (
+                            space_function_b in ACCEPTABLE_SPACE_FUNCTION
+                            and total_space_LPD_b > 0 * ureg("W/m2")
+                        ):
+                            UNDETERMINED_MSG = UNDETERMINED_MSG_SPACE_FUNC
+                        else:
+                            UNDETERMINED_MSG = UNDETERMINED_MSG_LTG_SCH
+
+                        return UNDETERMINED_MSG
 
                     def rule_check(self, context, calc_vals=None, data=None):
                         total_hours_compared = calc_vals["total_hours_compared"]
