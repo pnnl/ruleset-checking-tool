@@ -40,7 +40,6 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 92.90303999999999,
-                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
@@ -17616,7 +17615,6 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 92.90303999999999,
-                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
@@ -35214,7 +35212,6 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 92.90303999999999,
-                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
@@ -52790,7 +52787,6 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 92.90303999999999,
-                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
@@ -70364,7 +70360,7 @@
         },
         "test_description": "The project has one building segment with one zone and one space with interior lighting. The lighting space type is enclosed office and control type is manual. The proposed building lighting schedule has greater equivalent full load hours than expected by the reduction ratio relative to the baseline building lighting schedule.",
         "expected_rule_outcome": "undetermined",
-        "expected_raised_message_includes": "Lighting schedule in the proposed model, including adjusted lighting occupancy sensor reduction, is higher than that in the baseline model. Verify additional occupancy sensor control is modeled correctly in the proposed model.",
+        "expected_raised_message_includes": "Lighting schedule in P-RMD including adjusted lighting occupancy sensor reduction factor is higher than that in B-RMD. Verify Additional occupancy sensor control is modeled correctly in P-RMD.",
         "rmd_transformations": {
             "proposed": {
                 "id": "ASHRAE229 1",
@@ -70388,7 +70384,6 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 92.90303999999999,
-                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
@@ -87964,7 +87959,6 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 92.90303999999999,
-                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
@@ -105561,7 +105555,6 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "LOBBY_ALL_OTHERS",
                                                         "floor_area": 92.90303999999999,
-                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
@@ -123137,7 +123130,6 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "LOBBY_ALL_OTHERS",
                                                         "floor_area": 92.90303999999999,
-                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
@@ -140735,7 +140727,6 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "LOBBY_ALL_OTHERS",
                                                         "floor_area": 92.90303999999999,
-                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
@@ -158311,7 +158302,6 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "LOBBY_ALL_OTHERS",
                                                         "floor_area": 92.90303999999999,
-                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
@@ -175908,7 +175898,6 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 92.90303999999999,
-                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
@@ -193484,7 +193473,6 @@
                                                         "id": "Space 1",
                                                         "lighting_space_type": "OFFICE_ENCLOSED",
                                                         "floor_area": 92.90303999999999,
-                                                        "function": "OTHER",
                                                         "interior_lighting": [
                                                             {
                                                                 "id": "Lighting 1",
