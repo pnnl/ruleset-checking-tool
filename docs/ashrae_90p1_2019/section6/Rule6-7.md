@@ -1,19 +1,27 @@
-
 # Lighting - Rule 6-7
 
 **Rule ID:** 6-7  
 **Rule Description:** Proposed building is modeled with daylighting controls directly or through schedule adjustments.  
 **Appendix G Section:** Section 6 Lighting  
-**Appendix G Section Reference:** Section G3.1-6(h) Lighting: Modeling Requirements for the Proposed design  
+**Appendix G Section Reference:** Section G3.1-6(h) Lighting: Modeling Requirements for the Proposed design, Table 9.6.1 Minimum Control Requirements
 
-**Applicability:** All required data elements exist for P_RMR  
+**Applicability:** All required data elements exist for P_RMD  
 **Applicability Checks:** None  
 **Manual Check:** Yes  
 **Evaluation Context:** Each Data Element  
 **Data Lookup:** None  
 ## Rule Logic: 
+- List lighting space types that have no daylighting control requirements: `not_applicable_space_types = ["DORMITORY_LIVING_QUARTERS", "FIRE_STATION_SLEEPING_QUARTERS", "HEALTHCARE_FACILITY_OPERATING_ROOM", "OUTPATIENT_HEALTH_CARE_FACILITIES_CLASS_1_IMAGING_ROOMS", "DWELLING_UNIT", "GUEST_ROOM", "STORAGE_ROOM_SMALL", "PARKING_AREA_INTERIOR", "NONE"]`
 
-- Check if each zone has window or skylight in the building segment in the Proposed model: `For zone_p in P_RMR...zones:`
+- Check if each zone has window or skylight in the building segment in the Proposed model: `For zone_p in P_RMD...zones:`
+
+  - Initialize not-applicable space with lighting power flag as FALSE: `na_space_with_lighting_power_flag = FALSE`
+
+  - For each space in zone, compute total lighting power density and set flag if not-applicable space has lighting power:  
+    `if space.lighting_space_type in not_applicable_space_types and sum(lighting.power_per_area for lighting in space.interior_lighting) > 0: na_space_with_lighting_power_flag = TRUE`
+
+  - Check if all spaces in the zone are in the list of not_applicable space types and no not-applicable space has lighting power, if so, skip the zone:  
+    `if all(space.lighting_space_type in not_applicable_space_types for space in zone_p.spaces) and not na_space_with_lighting_power_flag: continue`
 
   - For each surfaces in zone: `surface_p in zone_p.surfaces`
 
@@ -31,20 +39,14 @@
     
 **Rule Assertion:** For each zone in the Proposed model:
 
-    - Case 1, if the zone has window or skylight and daylight control, and daylight control is not modeled using schedule: `if ( daylight_flag_p == TRUE ) AND ( has_daylight_control_flag == TRUE ) AND ( NOT daylight_schedule_adjustment_flag ): UNDETERMINED and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH WINDOW(S) AND/OR SKYLIGHT(S) AND HAVE DAYLIGHTING CONTROLS MODELED EXPLICITLY IN THE SIMULATION TOOL. VERIFY THAT THE MANDATORY LIGHTING CONTROL REQUIREMENTS ARE MET."`
+    - Case 1, if the zone contains a not-applicable space type with lighting power: `if na_space_with_lighting_power_flag: UNDETERMINED and raise_warning "THE ZONE CONTAINS A NOT-APPLICABLE SPACE TYPE WITH LIGHTING POWER. VERIFY THAT THE MANDATORY DAYLIGHTING CONTROL REQUIREMENTS ARE MET, IF APPLICABLE."`
 
-    - Case 2, else if the zone has window or skylight and daylight control, and daylight control is modeled using schedule: `if ( daylight_flag_p == TRUE ) AND ( has_daylight_control_flag == TRUE ) AND ( daylight_schedule_adjustment_flag ): UNDETERMINED and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH WINDOW(S) AND/OR SKYLIGHT(S) AND HAVE DAYLIGHTING CONTROLS MODELED VIA SCHEDULE ADJUSTMENT. VERIFY THAT THE MANDATORY LIGHTING CONTROL REQUIREMENTS ARE MET, AND THAT THE SUPPORTING DOCUMENTATION IS PROVIDED FOR THE SCHEDULE ADJUSTMENT."`
+    - Case 2, if the zone has window or skylight and daylight control, and daylight control is not modeled using schedule: `if ( daylight_flag_p == TRUE ) AND ( has_daylight_control_flag == TRUE ) AND ( NOT daylight_schedule_adjustment_flag ): UNDETERMINED and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH WINDOW(S) AND/OR SKYLIGHT(S) AND HAVE DAYLIGHTING CONTROLS MODELED EXPLICITLY IN THE SIMULATION TOOL. VERIFY THAT THE MANDATORY LIGHTING CONTROL REQUIREMENTS ARE MET."`
 
-    - Case 3, else if the zone has window or skylight and daylight control is not modeled:  `else if ( daylight_flag_p == TRUE ) AND ( has_daylight_control_flag == FALSE ): FAIL and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH FENESTRATION BUT NO DAYLIGHTING CONTROLS. THE DESIGN MUST INCLUDE MANDATORY DAYLIGHTING CONTROLS UNLESS ANY OF THE EXCEPTIONS TO 90.1 SECTION 9.4.1.1(E) APPLY."`
+    - Case 3, else if the zone has window or skylight and daylight control, and daylight control is modeled using schedule: `if ( daylight_flag_p == TRUE ) AND ( has_daylight_control_flag == TRUE ) AND ( daylight_schedule_adjustment_flag ): UNDETERMINED and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH WINDOW(S) AND/OR SKYLIGHT(S) AND HAVE DAYLIGHTING CONTROLS MODELED VIA SCHEDULE ADJUSTMENT. VERIFY THAT THE MANDATORY LIGHTING CONTROL REQUIREMENTS ARE MET, AND THAT THE SUPPORTING DOCUMENTATION IS PROVIDED FOR THE SCHEDULE ADJUSTMENT."`
 
-    - Case 4, else if the zone does not have window or skylight and daylight control is modeled: `else if ( daylight_flag_p == FALSE ) AND ( has_daylight_control_flag == TRUE ): FAIL`
+    - Case 4, else if the zone has window or skylight and daylight control is not modeled:  `else if ( daylight_flag_p == TRUE ) AND ( has_daylight_control_flag == FALSE ): FAIL and raise_warning "SOME OF THE SPACES IN ZONE ARE MODELED WITH FENESTRATION BUT NO DAYLIGHTING CONTROLS. THE DESIGN MUST INCLUDE MANDATORY DAYLIGHTING CONTROLS UNLESS ANY OF THE EXCEPTIONS TO 90.1 SECTION 9.4.1.1(E) APPLY."`
 
-    - Case 5, else, the zone does not have window or skylight and no daylight control is modeled: `else: PASS`
+    - Case 5, else if the zone does not have window or skylight and daylight control is modeled: `else if ( daylight_flag_p == FALSE ) AND ( has_daylight_control_flag == TRUE ): FAIL`
 
-**Notes:**
-  1. Updated the Rule ID from 6-12 to 6-8 on 6/3/2022
-  2. Updated the Rule ID from 6-8 to 6-7 on 6/8/2022
-  3. The rule has been written to apply to user RMR, it should instead be implemented to apply to P-RMR- should discuss
-
-
-**[Back](../_toc.md)**
+    - Case 6, else, the zone does not have window or skylight and no daylight control is modeled: `else: PASS`
