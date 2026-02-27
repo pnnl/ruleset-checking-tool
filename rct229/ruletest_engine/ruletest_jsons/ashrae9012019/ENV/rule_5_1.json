@@ -18,6 +18,10 @@
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229",
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 50000
+                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -28,21 +32,17 @@
                             "unmet_load_hours_cooling": 0,
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
-                            "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 50000
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -85,6 +85,10 @@
             },
             "proposed": {
                 "id": "ASHRAE229",
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 50000
+                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -95,21 +99,17 @@
                             "unmet_load_hours_cooling": 0,
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
-                            "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 50000
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -152,6 +152,10 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 50000
+                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -163,7 +167,6 @@
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
                             "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 50000,
                             "annual_source_results": [
                                 {
                                     "id": "Source Result 1",
@@ -180,15 +183,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -237,7 +237,6 @@
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
                             "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 50000,
                             "annual_source_results": [
                                 {
                                     "id": "Source Result 1",
@@ -254,15 +253,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -311,7 +307,6 @@
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
                             "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 50000,
                             "annual_source_results": [
                                 {
                                     "id": "Source Result 1",
@@ -328,15 +323,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -385,7 +377,6 @@
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
                             "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 50000,
                             "annual_source_results": [
                                 {
                                     "id": "Source Result 1",
@@ -402,15 +393,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -472,6 +460,10 @@
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229",
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 45000
+                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -482,21 +474,17 @@
                             "unmet_load_hours_cooling": 0,
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
-                            "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 45000
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -539,6 +527,10 @@
             },
             "proposed": {
                 "id": "ASHRAE229",
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 45000
+                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -549,21 +541,17 @@
                             "unmet_load_hours_cooling": 0,
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
-                            "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 45000
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -606,6 +594,10 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 45000
+                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -617,7 +609,6 @@
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
                             "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 45000,
                             "annual_source_results": [
                                 {
                                     "id": "Source Result 1",
@@ -634,15 +625,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -704,6 +692,10 @@
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229",
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 99999
+                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -714,21 +706,17 @@
                             "unmet_load_hours_cooling": 0,
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
-                            "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 99999
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -771,6 +759,10 @@
             },
             "proposed": {
                 "id": "ASHRAE229",
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 99999
+                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -781,21 +773,17 @@
                             "unmet_load_hours_cooling": 0,
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
-                            "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 99999
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -838,6 +826,10 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 99999
+                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -849,7 +841,6 @@
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
                             "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 99999,
                             "annual_source_results": [
                                 {
                                     "id": "Source Result 1",
@@ -866,15 +857,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -936,6 +924,10 @@
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229",
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 48000
+                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -946,21 +938,17 @@
                             "unmet_load_hours_cooling": 0,
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
-                            "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 48000
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -1003,6 +991,10 @@
             },
             "proposed": {
                 "id": "ASHRAE229",
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 48000
+                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1013,21 +1005,17 @@
                             "unmet_load_hours_cooling": 0,
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
-                            "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 48000
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -1070,6 +1058,10 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 48000
+                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1081,7 +1073,6 @@
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
                             "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 48000,
                             "annual_source_results": [
                                 {
                                     "id": "Source Result 1",
@@ -1098,15 +1089,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -1155,7 +1143,6 @@
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
                             "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 48000,
                             "annual_source_results": [
                                 {
                                     "id": "Source Result 1",
@@ -1172,15 +1159,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -1229,7 +1213,6 @@
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
                             "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 48000,
                             "annual_source_results": [
                                 {
                                     "id": "Source Result 1",
@@ -1246,15 +1229,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -1303,7 +1283,6 @@
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
                             "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 48000,
                             "annual_source_results": [
                                 {
                                     "id": "Source Result 1",
@@ -1320,15 +1299,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -1391,6 +1367,10 @@
         "rmd_transformations": {
             "user": {
                 "id": "ASHRAE229",
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 48000
+                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1401,21 +1381,17 @@
                             "unmet_load_hours_cooling": 0,
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
-                            "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 48000
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -1458,6 +1434,10 @@
             },
             "proposed": {
                 "id": "ASHRAE229",
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 48000
+                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1468,21 +1448,17 @@
                             "unmet_load_hours_cooling": 0,
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
-                            "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 48000
+                            "building_peak_cooling_load": 25000
                         },
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
@@ -1525,6 +1501,10 @@
             },
             "baseline": {
                 "id": "ASHRAE229",
+                "output": {
+                    "id": "Output 1",
+                    "baseline_building_performance_energy_cost": 48000
+                },
                 "ruleset_model_descriptions": [
                     {
                         "id": "RMD 1",
@@ -1536,7 +1516,6 @@
                             "unmet_occupied_load_hours_heating": 0,
                             "unmet_occupied_load_hours_cooling": 0,
                             "building_peak_cooling_load": 25000,
-                            "baseline_building_performance_energy_cost": 48000,
                             "annual_source_results": [
                                 {
                                     "id": "Source Result 1",
@@ -1553,15 +1532,12 @@
                         "buildings": [
                             {
                                 "id": "Building 1",
-                                "building_open_schedule": "Required Schedule 1",
                                 "building_segments": [
                                     {
                                         "id": "Building Segment 1",
                                         "zones": [
                                             {
                                                 "id": "Zone 1",
-                                                "thermostat_cooling_setpoint_schedule": "Cooling Schedule 1",
-                                                "thermostat_heating_setpoint_schedule": "Heating Schedule 1",
                                                 "surfaces": [
                                                     {
                                                         "id": "Surface 1",
