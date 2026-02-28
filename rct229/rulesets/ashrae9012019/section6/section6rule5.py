@@ -12,12 +12,20 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.normalize_interior_lighting
     normalize_interior_lighting_schedules,
 )
 from rct229.schema.config import ureg
+from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_one_with_field_value
 from rct229.utils.masks import invert_mask
-from rct229.utils.pint_utils import ZERO
+from rct229.utils.pint_utils import ZERO, CalcQ
 
-BUILDING_AREA_CUTTOFF = ureg("5000 ft2")
+BUILDING_AREA_CUTTOFF = 5000 * ureg("ft2")
+SPACE_FUNCTION = SchemaEnums.schema_enums["SpaceFunctionOptions"]
+
+ACCEPTABLE_SPACE_FUNCTION = [
+    SPACE_FUNCTION.CRAWL_SPACE,
+    SPACE_FUNCTION.INTERSTITIAL_SPACE,
+    SPACE_FUNCTION.PLENUM,
+]
 
 
 class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
@@ -172,9 +180,39 @@ class PRM9012019Rule08a45(RuleDefinitionListIndexedBase):
                             mask_schedule=invert_mask(hourly_building_open_schedule_b),
                         )
 
+                        total_space_LPD_b = sum(
+                            [
+                                int_ltg.get("power_per_area", 0 * ureg("W/m2"))
+                                for int_ltg in find_all(
+                                    "$.interior_lighting[*]", space_b
+                                )
+                            ]
+                        )
+                        space_function_b = getattr_(space_b, "spaces", "function")
+
                         return {
-                            "schedule_comparison_result": schedule_comparison_result
+                            "schedule_comparison_result": schedule_comparison_result,
+                            "total_space_LPD_b": CalcQ(
+                                "power_density", total_space_LPD_b
+                            ),
+                            "space_function_b": space_function_b,
                         }
+
+                    def manual_check_required(self, context, calc_vals=None, data=None):
+                        total_space_LPD_b = calc_vals["total_space_LPD_b"]
+                        space_function_b = calc_vals["space_function_b"]
+
+                        return (
+                            total_space_LPD_b > 0 * ureg("W/m2")
+                            and space_function_b in ACCEPTABLE_SPACE_FUNCTION
+                        )
+
+                    def get_manual_check_required_msg(
+                        self, context, calc_vals=None, data=None
+                    ):
+                        space_function_b = calc_vals["space_function_b"]
+
+                        return f"Space function is {space_function_b} and has lighting power modeled. Unable to determine whether this space should be included in the check."
 
                     def rule_check(self, context, calc_vals=None, data=None):
                         schedule_comparison_result = calc_vals[
