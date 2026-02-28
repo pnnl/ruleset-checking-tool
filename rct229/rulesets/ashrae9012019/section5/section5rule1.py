@@ -1,17 +1,15 @@
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import (
-    BASELINE_0,
-)
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
 )
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
 )
-from rct229.utils.assertions import assert_
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.assertions import assert_
 from rct229.utils.jsonpath_utils import find_all, find_one
 from rct229.utils.pint_utils import ZERO
 
@@ -49,6 +47,31 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
             list_path="ruleset_model_descriptions[0]",
         )
 
+    def create_data(self, context, data):
+        rmd_b0 = context.BASELINE_0
+        rmd_b90 = context.BASELINE_90
+        rmd_b180 = context.BASELINE_180
+        rmd_b270 = context.BASELINE_270
+        rmd_p = context.PROPOSED
+        rmd_u = context.USER
+
+        bbp_values = set()
+        for rmd in [rmd_u, rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p]:
+            if rmd is not None:
+                bbp = find_one(
+                    "$.output.baseline_building_performance_energy_cost", rmd
+                )
+                if bbp is not None:
+                    bbp_values.add(bbp)
+
+        # --- BBP uniqueness check ---
+        assert_(
+            len(bbp_values) == 1,
+            "Ruleset expects exactly one BBP value to be used in the project.",
+        )
+
+        return {"bbp_value": next(iter(bbp_values))}
+
     class RMDRule(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(PRM9012019Rule77j30.RMDRule, self).__init__(
@@ -73,23 +96,13 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
             rmd_b90 = context.BASELINE_90
             rmd_b180 = context.BASELINE_180
             rmd_b270 = context.BASELINE_270
-            rmd_p = context.PROPOSED
-            rmd_u = context.USER
-
-            bbp_values = set()
-
-            for rmd in [rmd_u, rmd_b0, rmd_b90, rmd_b180, rmd_b270, rmd_p]:
-                if rmd is not None:
-                    bbp = find_one(
-                        "$.model_output.baseline_building_performance_energy_cost", rmd
-                    )
-                    if bbp is not None:
-                        bbp_values.add(bbp)
 
             baseline_0_total_annual_cost = None
             if rmd_b0 is not None:
                 baseline_0_total_annual_cost = sum(
-                    find_all("$.model_output.source_results[*].annual_cost", rmd_b0)
+                    find_all(
+                        "$.model_output.annual_source_results[*].annual_cost", rmd_b0
+                    )
                 )
 
             baseline_rotation_total_annual_costs = []
@@ -98,19 +111,13 @@ class PRM9012019Rule77j30(RuleDefinitionListIndexedBase):
                     baseline_rotation_total_annual_costs.append(
                         sum(
                             find_all(
-                                "$.model_output.source_results[*].annual_cost", rmd
+                                "$.model_output.annual_source_results[*].annual_cost",
+                                rmd,
                             )
                         )
                     )
 
-            # --- BBP uniqueness check ---
-            assert_(
-                len(bbp_values) == 1,
-                "Ruleset expects exactly one BBP value to be used in the project.",
-            )
-
             return {
-                "bbp_value": next(iter(bbp_values)),
                 "baseline_0_total_annual_cost": baseline_0_total_annual_cost,
                 "baseline_rotation_total_annual_costs": baseline_rotation_total_annual_costs,
             }
