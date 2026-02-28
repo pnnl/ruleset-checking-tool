@@ -10,7 +10,7 @@ from rct229.utils.natural_sort import natural_keys
 from rct229.ruletest_engine.ruletest_jsons import get_ruleset_test_sections
 
 TEST_PATH = "ruletest_jsons"
-
+os.environ["RCT_DISABLE_CACHE"] = "1"
 
 # ============================================================
 # =============== GENERIC TEST RUNNERS =======================
@@ -293,7 +293,7 @@ if __name__ == "__main__":
     # run_schedule_tests_2022()
     # run_service_water_heater_tests_2022()
     #
-    # run_test_one_jsontest_2019("ashrae9012019/section23/rule_23_8.json")
+    # run_test_one_jsontest_2019("ashrae9012019/ENV/rule_5_43.json")
     # run_test_one_jsontest_2022("ashrae9012022/ENV/rule_5_43.json")
     # run_ashrae9012019_tests()
     # run_ashrae9012022_tests()

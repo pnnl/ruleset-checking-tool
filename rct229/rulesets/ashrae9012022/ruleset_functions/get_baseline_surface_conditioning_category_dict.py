@@ -1,6 +1,7 @@
+from rct229.rulesets.ashrae9012022 import BASELINE_0, PROPOSED
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_surface_conditioning_category_dict import (
-    get_building_surface_conditioning_category_dict,
     SurfaceConditioningCategory,
+    get_building_surface_conditioning_category_dict,
 )
 
 
@@ -31,12 +32,12 @@ def get_baseline_surface_conditioning_category_dict(
 
     building_surface_conditioning_category_dict_b = (
         get_building_surface_conditioning_category_dict(
-            climate_zone, building_b, constructions_b
+            climate_zone, building_b, constructions_b, BASELINE_0
         )
     )
     building_surface_conditioning_category_dict_p = (
         get_building_surface_conditioning_category_dict(
-            climate_zone, building_p, constructions_p
+            climate_zone, building_p, constructions_p, PROPOSED
         )
     )
 

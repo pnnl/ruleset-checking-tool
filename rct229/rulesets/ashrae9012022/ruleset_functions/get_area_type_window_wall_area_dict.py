@@ -6,13 +6,14 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type imp
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
 )
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
-    get_building_surface_conditioning_category_dict,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
-from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import ZERO
 
 DOOR = SchemaEnums.schema_enums["SubsurfaceClassificationOptions"].DOOR
@@ -25,7 +26,11 @@ class AreaTypeWindowWallAreaDict:
 
 
 def get_area_type_window_wall_area_dict(
-    climate_zone: str, constructions: list, building: dict
+    climate_zone: str,
+    constructions: list,
+    building: dict,
+    rmd_type,
+    surface_conditioning_category_dict=None,
 ) -> dict[str | Any, dict[str, Any]]:
     """Gets a dictionary mapping building area type to a dictionary of (total area of
     above grade vertical surfaces) and (total area of fenestration)
@@ -38,6 +43,11 @@ def get_area_type_window_wall_area_dict(
         A list of construction objects as defined by the ASHRAE229 schema
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
+    rmd_type : str
+        One of the RMD_TYPE_OPTIONS enumerated values
+    surface_conditioning_category_dict : dict, optional
+        A dictionary that maps surface IDs to their surface conditioning category.
+        If not provided, it will be computed within this function.
 
     Returns
     -------
@@ -53,11 +63,12 @@ def get_area_type_window_wall_area_dict(
         }
     """
     # required fields for this function are coming from the nested functions.
-    scc_dictionary = get_building_surface_conditioning_category_dict(
-        climate_zone, building, constructions
-    )
+    if surface_conditioning_category_dict is None:
+        surface_conditioning_category_dict = get_surface_conditioning_category_dict(
+            climate_zone, building, constructions, rmd_type
+        )
     window_wall_areas_dictionary = {}
-    for building_segment in find_all("building_segments[*]", building):
+    for building_segment in building.get("building_segments", []):
         area_type = building_segment.get("area_type_vertical_fenestration")
         if not area_type:
             area_type = "NONE"
@@ -68,32 +79,33 @@ def get_area_type_window_wall_area_dict(
                 "total_window_area": ZERO.AREA,
             }
 
-        for surface in find_all("zones[*].surfaces[*]", building_segment):
-            if (get_opaque_surface_type(surface) == OST.ABOVE_GRADE_WALL) and (
-                scc_dictionary[surface["id"]]
-                in [
-                    SCC.EXTERIOR_RESIDENTIAL,
-                    SCC.EXTERIOR_NON_RESIDENTIAL,
-                    SCC.EXTERIOR_MIXED,
-                    SCC.SEMI_EXTERIOR,
-                ]
-            ):
-                window_wall_areas_dictionary[area_type]["total_wall_area"] += getattr_(
-                    surface, "surface", "area"
-                )
+        for zone in building_segment.get("zones", []):
+            for surface in zone.get("surfaces", []):
+                if (get_opaque_surface_type(surface) == OST.ABOVE_GRADE_WALL) and (
+                    surface_conditioning_category_dict[surface["id"]]
+                    in [
+                        SCC.EXTERIOR_RESIDENTIAL,
+                        SCC.EXTERIOR_NON_RESIDENTIAL,
+                        SCC.EXTERIOR_MIXED,
+                        SCC.SEMI_EXTERIOR,
+                    ]
+                ):
+                    window_wall_areas_dictionary[area_type][
+                        "total_wall_area"
+                    ] += getattr_(surface, "surface", "area")
 
-                # add sub-surfaces
-                for subsurface in find_all("$.subsurfaces[*]", surface):
-                    glazed_area = getattr_(subsurface, "subsurface", "glazed_area")
-                    opaque_area = getattr_(subsurface, "subsurface", "opaque_area")
-                    if (
-                        getattr_(subsurface, "subsurface", "classification") == DOOR
-                    ) and (glazed_area > opaque_area):
-                        window_wall_areas_dictionary[area_type][
-                            "total_window_area"
-                        ] += (glazed_area + opaque_area)
-                    else:
-                        window_wall_areas_dictionary[area_type][
-                            "total_window_area"
-                        ] += (glazed_area + opaque_area)
+                    # add sub-surfaces
+                    for subsurface in surface.get("subsurfaces", []):
+                        glazed_area = getattr_(subsurface, "subsurface", "glazed_area")
+                        opaque_area = getattr_(subsurface, "subsurface", "opaque_area")
+                        if (
+                            getattr_(subsurface, "subsurface", "classification") == DOOR
+                        ) and (glazed_area > opaque_area):
+                            window_wall_areas_dictionary[area_type][
+                                "total_window_area"
+                            ] += (glazed_area + opaque_area)
+                        else:
+                            window_wall_areas_dictionary[area_type][
+                                "total_window_area"
+                            ] += (glazed_area + opaque_area)
     return window_wall_areas_dictionary

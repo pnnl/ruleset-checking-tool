@@ -1,0 +1,16 @@
+{
+    "lighting_power_density":[
+        {
+            "space_type": "guest room",
+            "w/ft^2": 0.41
+        },
+        {
+            "space_type": "dormitory - living quarters",
+            "w/ft^2": 0.50
+        },
+        {
+            "space_type": "dwelling unit",
+            "w/ft^2": 0.60
+        }
+           ]
+}

@@ -1,3 +1,4 @@
+from pydash import curry
 from rct229.rule_engine.rule_base import RuleDefinitionBase
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
@@ -7,7 +8,6 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_swh_uses_associated_wit
 )
 from rct229.utils.jsonpath_utils import find_all
 from rct229.utils.pint_utils import CalcQ
-from pydash import curry
 
 MANUAL_CHECK_REQUIRED_MSG = (
     "Proposed Service Water Heating Use is less than the baseline. "

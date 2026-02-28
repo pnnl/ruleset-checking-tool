@@ -756,6 +756,7 @@ def test__get_zone_conditioning_category_dict():
         CLIMATE_ZONE,
         TEST_BUILDING,
         constructions=find_all("$.constructions[*]", TEST_RMD),
+        rmd_type="ZCC TEST",
     ) == {
         "zone_1_1": "CONDITIONED MIXED",
         "zone_1_2": "CONDITIONED NON-RESIDENTIAL",

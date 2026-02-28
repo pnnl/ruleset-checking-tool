@@ -1,3 +1,4 @@
+from rct229.rulesets.ashrae9012019 import BASELINE_0, PROPOSED, USER
 from rct229.rulesets.ashrae9012019.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_scc_skylight_roof_ratios_dict import (
     get_building_scc_skylight_roof_ratios_dict,
@@ -526,24 +527,6 @@ TEST_rmd = {
             ],
         }
     ],
-    "constructions": [
-        {
-            "id": "const_1_5_1",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_3_6_1",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_3_5_1",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-        {
-            "id": "const_1_6_1",
-            "u_factor": 0.1,  # W/(m2 * K)
-        },
-    ],
     "type": "BASELINE_0",
 }
 
@@ -711,12 +694,6 @@ TEST_RMD_BRANCH_COVERAGE2 = {
             ],
         }
     ],
-    "constructions": [
-        {
-            "id": "Construction 1",
-            "u_factor": 0.35773064046128095,
-        }
-    ],
 }
 
 
@@ -747,7 +724,7 @@ def test__TEST_RPD__is_valid():
 
 def test__get_building_scc_skylight_roof_ratios_dict():
     assert get_building_scc_skylight_roof_ratios_dict(
-        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING, USER
     ) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.2,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.2,
@@ -758,7 +735,7 @@ def test__get_building_scc_skylight_roof_ratios_dict():
 
 def test__get_building_scc_skylight_roof_ratios_dict__branch_coverage():
     assert get_building_scc_skylight_roof_ratios_dict(
-        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING_BRANCH_COVERAGE
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING_BRANCH_COVERAGE, BASELINE_0
     ) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.0,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.0,
@@ -769,7 +746,7 @@ def test__get_building_scc_skylight_roof_ratios_dict__branch_coverage():
 
 def test__get_building_scc_skylight_roof_ratios_dict__branch_coverage2():
     assert get_building_scc_skylight_roof_ratios_dict(
-        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING_BRANCH_COVERAGE2
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING_BRANCH_COVERAGE2, PROPOSED
     ) == {
         SCC.EXTERIOR_RESIDENTIAL: 0.0,
         SCC.EXTERIOR_NON_RESIDENTIAL: 0.0,

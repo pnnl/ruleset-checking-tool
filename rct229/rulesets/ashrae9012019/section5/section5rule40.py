@@ -14,8 +14,8 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_ca
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
-from rct229.utils.jsonpath_utils import find_one
 from rct229.schema.schema_enums import SchemaEnums
+from rct229.utils.jsonpath_utils import find_one
 from rct229.utils.std_comparisons import std_equal
 
 EXTERIOR = SchemaEnums.schema_enums["SurfaceAdjacencyOptions"].EXTERIOR
@@ -69,7 +69,7 @@ class PRM9012019Rule33l08(RuleDefinitionListIndexedBase):
             building_b = context.BASELINE_0
             return {
                 "scc_dict_b": get_surface_conditioning_category_dict(
-                    data["climate_zone"], building_b, data["constructions"]
+                    data["climate_zone"], building_b, data["constructions"], BASELINE_0
                 ),
             }
 

@@ -1,6 +1,5 @@
 from rct229.rulesets.ashrae9012022.data_fns.table_utils import find_osstd_table_entry
 
-
 FAKE_OSSTD_TABLE = {
     "fake_list": [
         {

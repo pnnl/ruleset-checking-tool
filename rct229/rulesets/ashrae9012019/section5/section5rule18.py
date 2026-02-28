@@ -3,8 +3,6 @@ from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedB
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
 from rct229.rulesets.ashrae9012019 import PROPOSED
 from rct229.schema.schema_enums import SchemaEnums
-from rct229.utils.assertions import assert_
-from rct229.utils.jsonpath_utils import find_all
 
 SUBSURFACE_DYNAMIC_GLAZING = SchemaEnums.schema_enums["SubsurfaceDynamicGlazingOptions"]
 UNDETERMINED_MSG = "SUBSURFACE INCLUDES MANUALLY CONTROLLED DYNAMIC GLAZING IN THE PROPOSED DESIGN. VERIFY THAT SHGC AND VT WERE MODELED AS THE AVERAGE OF THE MINIMUM AND MAXIMUM SHGC AND VT."
@@ -27,16 +25,6 @@ class PRM9012019Rule82y74(RuleDefinitionListIndexedBase):
             is_primary_rule=False,
             list_path="ruleset_model_descriptions[0].buildings[*].building_segments[*].zones[*].surfaces[*].subsurfaces[*]",
         )
-
-    def create_data(self, context, data):
-        rmd_p = context.PROPOSED
-
-        assert_(
-            find_all("$..dynamic_glazing_type", rmd_p),
-            "No subsurfaces in the proposed model contain the 'dynamic_glazing_type' data. ",
-        )
-
-        return {}
 
     class SubsurfaceRule(PartialRuleDefinition):
         def __init__(self):

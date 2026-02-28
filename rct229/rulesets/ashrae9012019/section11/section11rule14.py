@@ -22,7 +22,7 @@ class PRM9012019Rule62z26(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(PRM9012019Rule62z26, self).__init__(
             rmds_used=produce_ruleset_model_description(
-                USER=False, BASELINE_0=True, PROPOSED=True
+                USER=False, BASELINE_0=True, PROPOSED=False
             ),
             each_rule=PRM9012019Rule62z26.RMDRule(),
             index_rmd=BASELINE_0,
@@ -41,7 +41,7 @@ class PRM9012019Rule62z26(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(PRM9012019Rule62z26.RMDRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=False, BASELINE_0=True, PROPOSED=True
+                    USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=PRM9012019Rule62z26.RMDRule.SWHDistributionRule(),
                 index_rmd=BASELINE_0,
@@ -50,16 +50,15 @@ class PRM9012019Rule62z26(RuleDefinitionListIndexedBase):
 
         def is_applicable(self, context, data=None):
             rmd_b = context.BASELINE_0
-            rmd_p = context.PROPOSED
 
             swh_comps_dict_b = (
                 get_swh_equipment_associated_with_each_swh_distribution_system(rmd_b)
             )
 
-            swh_use_has_loads_p = all(
+            swh_use_has_loads_b = all(
                 [
                     find_exactly_one_service_water_heating_use(
-                        rmd_p, swh_dist_sys_id_b
+                        rmd_b, swh_dist_sys_id_b
                     ).get("use", 0.0)
                     > 0.0
                     for swh_dist_id_b in find_all(
@@ -69,7 +68,7 @@ class PRM9012019Rule62z26(RuleDefinitionListIndexedBase):
                 ]
             )
 
-            return swh_use_has_loads_p
+            return swh_use_has_loads_b
 
         def create_data(self, context, data):
             rmd_b = context.BASELINE_0
@@ -135,7 +134,7 @@ class PRM9012019Rule62z26(RuleDefinitionListIndexedBase):
             def __init__(self):
                 super(PRM9012019Rule62z26.RMDRule.SWHDistributionRule, self).__init__(
                     rmds_used=produce_ruleset_model_description(
-                        USER=False, BASELINE_0=True, PROPOSED=True
+                        USER=False, BASELINE_0=True, PROPOSED=False
                     ),
                 )
 

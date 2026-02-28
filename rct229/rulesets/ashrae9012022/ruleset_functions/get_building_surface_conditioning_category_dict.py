@@ -3,6 +3,8 @@ from typing import TypedDict
 import pandas as pd
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     ZoneConditioningCategory as ZCC,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_zone_conditioning_category_dict import (
     get_zone_conditioning_category_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums
@@ -119,7 +121,7 @@ GET_SURFACE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
 
 
 def get_building_surface_conditioning_category_dict(
-    climate_zone, building, constructions
+    climate_zone, building, constructions, rmd_type
 ):
     """Determines the surface conditioning category for every surface in a building
 
@@ -147,7 +149,7 @@ def get_building_surface_conditioning_category_dict(
 
     # Get the conditioning category for all the zones in the building
     zcc_dict = get_zone_conditioning_category_dict(
-        climate_zone, building, constructions
+        climate_zone, building, constructions, rmd_type
     )
 
     # Loop through all the zones in the building

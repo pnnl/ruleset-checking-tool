@@ -1,5 +1,6 @@
-import pytest
 import re
+
+import pytest
 from rct229.rulesets.ashrae9012019.data_fns.table_F_2_fns import table_f_2_lookup
 from rct229.schema.config import ureg
 from rct229.utils.assertions import RCTFailureException

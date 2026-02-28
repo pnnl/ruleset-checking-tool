@@ -93,6 +93,9 @@ class PRM9012019Rule63z32(RuleDefinitionListIndexedBase):
                 )
 
                 return {
+                    "swh_uses_associated_with_this_building_segment": len(
+                        swh_uses_associated_with_this_building_segment
+                    ),
                     "has_swh_loads": has_swh_loads,
                     "swh_bat": swh_bat,
                 }
