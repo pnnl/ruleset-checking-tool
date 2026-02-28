@@ -1,20 +1,20 @@
 from rct229.rule_engine.partial_rule_definition import PartialRuleDefinition
 from rct229.rule_engine.rule_list_indexed_base import RuleDefinitionListIndexedBase
 from rct229.rule_engine.ruleset_model_factory import produce_ruleset_model_description
-from rct229.rulesets.ashrae9012019 import PROPOSED
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022 import PROPOSED
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
 )
-from rct229.rulesets.ashrae9012019.ruleset_functions.get_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     get_surface_conditioning_category_dict,
 )
 
 
-class PRM9012019Rule82e93(RuleDefinitionListIndexedBase):
+class PRM9012022Rule82e93(RuleDefinitionListIndexedBase):
     """Rule 42 of ASHRAE 90.1-2022 Appendix G Section 5 (Envelope)"""
 
     def __init__(self):
-        super(PRM9012019Rule82e93, self).__init__(
+        super(PRM9012022Rule82e93, self).__init__(
             rmds_used=produce_ruleset_model_description(
                 USER=False, BASELINE_0=False, PROPOSED=True
             ),
@@ -24,7 +24,7 @@ class PRM9012019Rule82e93(RuleDefinitionListIndexedBase):
             ruleset_section_title="Envelope",
             standard_section="Section G3.1-5 Building Envelope Modeling Requirements for the Proposed building",
             is_primary_rule=False,
-            each_rule=PRM9012019Rule82e93.BuildingRule(),
+            each_rule=PRM9012022Rule82e93.BuildingRule(),
             index_rmd=PROPOSED,
             list_path="ruleset_model_descriptions[0].buildings[*]",
             required_fields={
@@ -47,12 +47,12 @@ class PRM9012019Rule82e93(RuleDefinitionListIndexedBase):
 
     class BuildingRule(RuleDefinitionListIndexedBase):
         def __init__(self):
-            super(PRM9012019Rule82e93.BuildingRule, self).__init__(
+            super(PRM9012022Rule82e93.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
                     USER=False, BASELINE_0=False, PROPOSED=True
                 ),
                 required_fields={},
-                each_rule=PRM9012019Rule82e93.BuildingRule.SurfaceRule(),
+                each_rule=PRM9012022Rule82e93.BuildingRule.SurfaceRule(),
                 index_rmd=PROPOSED,
                 list_path="$.building_segments[*].zones[*].surfaces[*]",
             )
@@ -63,7 +63,7 @@ class PRM9012019Rule82e93(RuleDefinitionListIndexedBase):
             constructions_p = data["constructions_p"]
 
             scc_dictionary_p = get_surface_conditioning_category_dict(
-                climate_zone_p, building_p, constructions_p
+                climate_zone_p, building_p, constructions_p, PROPOSED
             )
 
             return scc_dictionary_p
@@ -74,14 +74,14 @@ class PRM9012019Rule82e93(RuleDefinitionListIndexedBase):
             constructions_p = data["constructions_p"]
 
             scc_dictionary_p = get_surface_conditioning_category_dict(
-                climate_zone_p, building_p, constructions_p
+                climate_zone_p, building_p, constructions_p, PROPOSED
             )
 
             return {"scc_dictionary_p": scc_dictionary_p}
 
         class SurfaceRule(PartialRuleDefinition):
             def __init__(self):
-                super(PRM9012019Rule82e93.BuildingRule.SurfaceRule, self,).__init__(
+                super(PRM9012022Rule82e93.BuildingRule.SurfaceRule, self,).__init__(
                     rmds_used=produce_ruleset_model_description(
                         USER=False, BASELINE_0=False, PROPOSED=True
                     ),

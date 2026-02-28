@@ -1,0 +1,32 @@
+{
+  "prm_furnace_uh_min_efficiency": [
+    {
+      "equipment_type": "Warm-air furnace, gas-fired",
+      "inclusive_minimum_capacity": 0,
+      "exclusive_maximum_capacity": 225000,
+      "minimum_efficiency": 0.78,
+      "efficiency_metric": "ANNUAL_FUEL_UTILIZATION_EFFICIENCY"
+    },
+    {
+      "equipment_type": "Warm-air furnace, gas-fired",
+      "inclusive_minimum_capacity": 0,
+      "exclusive_maximum_capacity": 225000,
+      "minimum_efficiency": 0.80,
+      "efficiency_metric": "THERMAL_EFFICIENCY"
+    },
+    {
+      "equipment_type": "Warm-air furnace, gas-fired",
+      "inclusive_minimum_capacity": 225000,
+      "exclusive_maximum_capacity": 99999999,
+      "minimum_efficiency": 0.80,
+      "efficiency_metric": "COMBUSTION_EFFICIENCY"
+    },
+    {
+      "equipment_type": "Warm-air unit heaters, gas-fired",
+      "inclusive_minimum_capacity": 0,
+      "exclusive_maximum_capacity": 99999999,
+      "minimum_efficiency": 0.80,
+      "efficiency_metric": "COMBUSTION_EFFICIENCY"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 from pathlib import Path
 
+
 # Identify this ruleset’s root directory
 ROOT_DIR = Path(__file__).parent
 

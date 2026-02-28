@@ -75,7 +75,7 @@ class PRM9012019Rule67j71(RuleDefinitionListIndexedBase):
         def create_data(self, context, data=None):
             building = context.BASELINE_0
             area_type_window_wall_area_dict_b = get_area_type_window_wall_area_dict(
-                data["climate_zone"], data["constructions"], building
+                data["climate_zone"], data["constructions"], building, BASELINE_0
             )
             is_area_type_all_new_dict = {}
             for building_segment in find_all("$.building_segments[*]", building):

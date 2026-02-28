@@ -1,11 +1,15 @@
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
 )
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     ZoneConditioningDataDict,
-    get_building_surface_conditioning_category_dict,
+    get_surface_conditioning_category_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields
@@ -25,7 +29,7 @@ GET_BUILDING_SCC_WINDOW_WALL_RATIO_DICT__REQUIRED_FIELDS = {
 
 
 def get_building_scc_window_wall_ratios_dict(
-    climate_zone: str, constructions: list, building: dict
+    climate_zone: str, constructions: list, building: dict, rmd_type: str
 ) -> ZoneConditioningDataDict:
     """Determines the window to wall ratio for each surface conditioning category
     in a building
@@ -38,6 +42,8 @@ def get_building_scc_window_wall_ratios_dict(
         A list of construction dictionaries as defined by the ASHRAE229 schema
     building : dict
         A dictionary representing a building as defined by the ASHRAE229 schema
+    rmd_type : str
+        One of the RMD_TYPE_OPTIONS enumerated values
 
     Returns
     -------
@@ -50,8 +56,8 @@ def get_building_scc_window_wall_ratios_dict(
     )
 
     # Get the conditioning category for all the surfaces in the building
-    scc_dict = get_building_surface_conditioning_category_dict(
-        climate_zone, building, constructions
+    scc_dict = get_surface_conditioning_category_dict(
+        climate_zone, building, constructions, rmd_type
     )
 
     # Initialize total window areas
@@ -101,19 +107,24 @@ def get_building_scc_window_wall_ratios_dict(
                 assert scc == SCC.UNREGULATED
 
     return {
-        getattr(SCC, "EXTERIOR_RESIDENTIAL"): total_res_window_area
-        / total_res_wall_area
-        if total_res_wall_area > 0
-        else 0,
-        getattr(SCC, "EXTERIOR_NON_RESIDENTIAL"): total_nonres_window_area
-        / total_nonres_wall_area
-        if total_nonres_wall_area > 0
-        else 0,
-        getattr(SCC, "EXTERIOR_MIXED"): total_mixed_window_area / total_mixed_wall_area
-        if total_mixed_wall_area > 0
-        else 0,
-        getattr(SCC, "SEMI_EXTERIOR"): total_semi_exterior_window_area
-        / total_semi_exterior_wall_area
-        if total_semi_exterior_wall_area > 0
-        else 0,
+        getattr(SCC, "EXTERIOR_RESIDENTIAL"): (
+            total_res_window_area / total_res_wall_area
+            if total_res_wall_area > 0
+            else 0
+        ),
+        getattr(SCC, "EXTERIOR_NON_RESIDENTIAL"): (
+            total_nonres_window_area / total_nonres_wall_area
+            if total_nonres_wall_area > 0
+            else 0
+        ),
+        getattr(SCC, "EXTERIOR_MIXED"): (
+            total_mixed_window_area / total_mixed_wall_area
+            if total_mixed_wall_area > 0
+            else 0
+        ),
+        getattr(SCC, "SEMI_EXTERIOR"): (
+            total_semi_exterior_window_area / total_semi_exterior_wall_area
+            if total_semi_exterior_wall_area > 0
+            else 0
+        ),
     }

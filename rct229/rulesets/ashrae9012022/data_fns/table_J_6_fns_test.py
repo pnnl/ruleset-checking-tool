@@ -1,6 +1,4 @@
-from rct229.rulesets.ashrae9012022.data_fns.table_J_6_fns import (
-    table_J_6_lookup,
-)
+from rct229.rulesets.ashrae9012022.data_fns.table_J_6_fns import table_J_6_lookup
 
 
 def test__table_J_6_X_EIR_f_T():

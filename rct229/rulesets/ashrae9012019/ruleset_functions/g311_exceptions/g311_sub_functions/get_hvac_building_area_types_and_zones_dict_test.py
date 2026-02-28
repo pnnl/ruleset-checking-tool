@@ -148,7 +148,7 @@ def test__TEST_RPD__is_valid():
 def test__get_hvac_building_area_types_and_zones_dict__undetermined_predominante_success():
     assert get_hvac_building_area_types_and_zones_dict("CZ4A", TEST_RMD_UNIT) == {
         "OTHER_NON_RESIDENTIAL": {
-            "zone_ids": ["Thermal Zone 2", "Thermal Zone 1"],
+            "zone_ids": ["Thermal Zone 1", "Thermal Zone 2"],
             "floor_area": 300 * ureg("m2").to("ft2"),
         }
     }
@@ -182,7 +182,7 @@ def test__get_hvac_building_area_types_and_zones_dict__public_assembly_predomina
         "CZ4A", test_rmd_unit_residential
     ) == {
         "PUBLIC_ASSEMBLY": {
-            "zone_ids": ["Thermal Zone 1", "Thermal Zone 2"],
+            "zone_ids": ["Thermal Zone 2", "Thermal Zone 1"],
             "floor_area": 300 * ureg("m2").to("ft2"),
         }
     }

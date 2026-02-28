@@ -9,7 +9,7 @@ from rct229.rulesets.ashrae9012019.ruleset_functions.get_zone_target_baseline_sy
 
 
 class PRM9012019Rule00u91(RuleDefinitionListIndexedBase):
-    """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 5 (HVAC - System Zone Assignment)"""
+    """Rule 3 of ASHRAE 90.1-2019 Appendix G Section 18 (HVAC - System Zone Assignment)"""
 
     def __init__(self):
         super(PRM9012019Rule00u91, self).__init__(

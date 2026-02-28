@@ -1,3 +1,4 @@
+from rct229.rulesets.ashrae9012019 import BASELINE_0
 from rct229.rulesets.ashrae9012019.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.rulesets.ashrae9012019.ruleset_functions.get_building_segment_skylight_roof_areas_dict import (
     get_building_segment_skylight_roof_areas_dict,
@@ -25,12 +26,6 @@ CRAWLSPACE_HEIGHT_THRESHOLD = CRAWLSPACE_HEIGHT_THRESHOLD_QUANTITY.to("m").magni
 # This single RMD is intended to exercise all the get_zone_conditioning_category_dict() code
 TEST_RMD = {
     "id": "test_rmd",
-    "constructions": [
-        {
-            "id": "construction_1",
-            "u_factor": 3.2366105565544463,
-        }
-    ],
     "buildings": [
         {
             "id": "bldg_1",
@@ -184,7 +179,7 @@ def test__TEST_RPD__is_valid():
 
 def test__get_building_segment_skylight_roof_areas_dict():
     assert get_building_segment_skylight_roof_areas_dict(
-        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING
+        CLIMATE_ZONE, TEST_CONSTRUCTIONS, TEST_BUILDING, "TEST"
     ) == {
         "bldg_seg_1": {
             "total_envelope_roof_area": 10 * ureg("m2"),

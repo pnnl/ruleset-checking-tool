@@ -58,11 +58,18 @@ class PRM9012019Rule52s13(RuleDefinitionBase):
 
     def get_calc_vals(self, context, data=None):
         rmd_b = context.BASELINE_0
-        num_primary_loops = len(get_primary_secondary_loops_dict(rmd_b))
+        primary_secondary_loops_dict = get_primary_secondary_loops_dict(rmd_b)
+        num_primary_secondary_loops = len(
+            [
+                primary_loop
+                for primary_loop in primary_secondary_loops_dict
+                if len(primary_secondary_loops_dict[primary_loop]) > 0
+            ]
+        )
 
-        return {"num_primary_loops": num_primary_loops}
+        return {"num_primary_secondary_loops": num_primary_secondary_loops}
 
     def rule_check(self, context, calc_vals=None, data=None):
-        num_primary_loops = calc_vals["num_primary_loops"]
+        num_primary_secondary_loops = calc_vals["num_primary_secondary_loops"]
 
-        return num_primary_loops != 0
+        return num_primary_secondary_loops != 0

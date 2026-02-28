@@ -8,11 +8,15 @@ from rct229.rulesets.ashrae9012022.ruleset_functions.get_building_scc_window_wal
 )
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     OpaqueSurfaceType as OST,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_opaque_surface_type import (
     get_opaque_surface_type,
 )
-from rct229.rulesets.ashrae9012022.ruleset_functions.get_baseline_surface_conditioning_category_dict import (
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
     SurfaceConditioningCategory as SCC,
-    get_baseline_surface_conditioning_category_dict,
+)
+from rct229.rulesets.ashrae9012022.ruleset_functions.get_surface_conditioning_category_dict import (
+    get_surface_conditioning_category_dict,
 )
 from rct229.schema.schema_enums import SchemaEnums
 from rct229.utils.assertions import getattr_
@@ -30,7 +34,7 @@ class PRM9012022Rule96n40(RuleDefinitionListIndexedBase):
     def __init__(self):
         super(PRM9012022Rule96n40, self).__init__(
             rmds_used=produce_ruleset_model_description(
-                USER=False, BASELINE_0=True, PROPOSED=True
+                USER=False, BASELINE_0=True, PROPOSED=False
             ),
             required_fields={
                 "$.ruleset_model_descriptions[*]": ["weather"],
@@ -47,25 +51,26 @@ class PRM9012022Rule96n40(RuleDefinitionListIndexedBase):
         )
 
     def create_data(self, context, data=None):
-        rmd_b = context.BASELINE_0
-        rmd_p = context.PROPOSED
-        climate_zone = rmd_b["ruleset_model_descriptions"][0]["weather"]["climate_zone"]
-        constructions_b = rmd_b["ruleset_model_descriptions"][0].get("constructions")
-        constructions_p = rmd_p["ruleset_model_descriptions"][0].get("constructions")
+        rmd_baseline = context.BASELINE_0
+        climate_zone = rmd_baseline["ruleset_model_descriptions"][0]["weather"][
+            "climate_zone"
+        ]
+        constructions = rmd_baseline["ruleset_model_descriptions"][0].get(
+            "constructions"
+        )
 
         # TODO It is determined that later we will modify this function to RMD level -
         # This implementation is temporary
         bldg_scc_wwr_ratio_dict = {
             building_b["id"]: get_building_scc_window_wall_ratios_dict(
-                climate_zone, constructions_b, building_b
+                climate_zone, constructions, building_b, BASELINE_0
             )
-            for building_b in find_all(self.list_path, rmd_b)
+            for building_b in find_all(self.list_path, rmd_baseline)
         }
 
         return {
             "climate_zone": climate_zone,
-            "constructions_b": constructions_b,
-            "constructions_p": constructions_p,
+            "constructions": constructions,
             "bldg_scc_wwr_ratio_dict": bldg_scc_wwr_ratio_dict,
         }
 
@@ -73,7 +78,7 @@ class PRM9012022Rule96n40(RuleDefinitionListIndexedBase):
         def __init__(self):
             super(PRM9012022Rule96n40.BuildingRule, self).__init__(
                 rmds_used=produce_ruleset_model_description(
-                    USER=False, BASELINE_0=True, PROPOSED=True
+                    USER=False, BASELINE_0=True, PROPOSED=False
                 ),
                 each_rule=PRM9012022Rule96n40.BuildingRule.AboveGradeWallRule(),
                 index_rmd=BASELINE_0,
@@ -82,10 +87,8 @@ class PRM9012022Rule96n40(RuleDefinitionListIndexedBase):
 
         def create_data(self, context, data=None):
             building_b = context.BASELINE_0
-            building_p = context.PROPOSED
             climate_zone = data["climate_zone"]
-            constructions_b = data["constructions_b"]
-            constructions_p = data["constructions_p"]
+            constructions = data["constructions"]
             bldg_scc_wwr_ratio = data["bldg_scc_wwr_ratio_dict"][building_b["id"]]
             # manual flag required?
             manual_check_required_flag = bldg_scc_wwr_ratio[
@@ -201,12 +204,8 @@ class PRM9012022Rule96n40(RuleDefinitionListIndexedBase):
             )
             return {
                 # TODO this function will likely need to be revised to RMD level later.
-                "scc_dict_b": get_baseline_surface_conditioning_category_dict(
-                    climate_zone,
-                    building_b,
-                    constructions_b,
-                    building_p,
-                    constructions_p,
+                "scc_dict_b": get_surface_conditioning_category_dict(
+                    climate_zone, building_b, constructions, BASELINE_0
                 ),
                 "manual_check_required_flag": manual_check_required_flag,
                 "target_shgc_mix": target_shgc_mix,

@@ -1,4 +1,5 @@
-from typing import List, Dict
+import os
+from typing import Dict, List
 
 from rct229.rulesets.ashrae9012022.data_fns.table_3_2_fns import table_3_2_lookup
 from rct229.rulesets.ashrae9012022.ruleset_functions.get_hvac_zone_list_w_area_dict import (
@@ -12,8 +13,13 @@ from rct229.utils.assertions import assert_, get_first_attr_, getattr_
 from rct229.utils.jsonpath_utils import find_all, find_exactly_required_fields, find_one
 from rct229.utils.pint_utils import ZERO
 
+_DISABLE_ZONE_COND_CACHE = os.getenv("RCT_DISABLE_CACHE") == "1"
+
 CAPACITY_THRESHOLD = 3.4 * ureg("Btu/(hr * ft2)")
 CRAWLSPACE_HEIGHT_THRESHOLD = 7 * ureg("ft")
+
+# (rmd_type, climate_zone) → { building_id → zone_dict }
+_ZONE_COND_CACHE: dict[tuple[str, str], dict[str, dict]] = {}
 
 
 # Intended for export and internal use
@@ -50,38 +56,12 @@ GET_ZONE_CONDITIONING_CATEGORY_DICT__REQUIRED_FIELDS = {
 }
 
 
-def get_zone_conditioning_category_rmd_dict(
-    climate_zone: str, rmd: dict
+def _get_zone_conditioning_category_dict_uncached(
+    climate_zone: str,
+    building: dict,
+    constructions: list,
 ) -> dict[str, ZoneConditioningCategory]:
-    """
-    Determines the zone conditioning category for every zone in an RMD.
 
-    Parameters
-    ----------
-    climate_zone: str
-        One of the ClimateZoneOptions2019ASHRAE901 enumerated values
-    rmd: dict
-        A dictionary representing a ruleset model description as defined by the ASHRAE229 schema
-    Returns
-    -------
-    dict
-        A dictionary that maps zones to one of the conditioning categories:
-        CONDITIONED_MIXED, CONDITIONED_NON_RESIDENTIAL, CONDITIONED_RESIDENTIAL,
-        SEMI_HEATED, UNCONDITIONED, UNENCOLOSED
-    """
-    zone_conditioning_category_rmd_dict = {}
-    constructions = rmd.get("constructions", [])
-    for building in find_all("$.buildings[*]", rmd):
-        zone_conditioning_category_dict = get_zone_conditioning_category_dict(
-            climate_zone, building, constructions
-        )
-        zone_conditioning_category_rmd_dict.update(zone_conditioning_category_dict)
-    return zone_conditioning_category_rmd_dict
-
-
-def get_zone_conditioning_category_dict(
-    climate_zone: str, building: dict, constructions: list
-) -> dict[str, ZoneConditioningCategory]:
     """Determines the zone conditioning category for every zone in a building
 
     Parameters
@@ -109,7 +89,7 @@ def get_zone_conditioning_category_dict(
     # This will be the return value
     zone_conditioning_category_dict = {}
 
-    # Create a mapping from an hvac system's id to the hvac system itself
+    # Create a mapping from a hvac system's id to the hvac system itself
     hvac_systems_dict = {
         hvac_system["id"]: hvac_system
         for hvac_system in find_all(
@@ -130,7 +110,7 @@ def get_zone_conditioning_category_dict(
                 ]
                 if assert_(
                     hvac_systems_dict.get(hvac_sys_id),
-                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAirConditioningSystems data group.",
                 )
                 and find_one(
                     "$.cooling_system.design_sensible_cool_capacity",
@@ -151,7 +131,7 @@ def get_zone_conditioning_category_dict(
                 hvac_systems_dict[hvac_sys_id]["heating_system"]["design_capacity"]
                 if assert_(
                     hvac_systems_dict.get(hvac_sys_id),
-                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAirConditioningSystems data group.",
                 )
                 and find_one(
                     "$.heating_system.design_capacity", hvac_systems_dict[hvac_sys_id]
@@ -163,7 +143,7 @@ def get_zone_conditioning_category_dict(
                 hvac_systems_dict[hvac_sys_id]["preheat_system"]["design_capacity"]
                 if assert_(
                     hvac_systems_dict.get(hvac_sys_id),
-                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAiConditioningSystems data group.",
+                    f"HVAC system {hvac_sys_id} is missing in the HeatingVentilatingAirConditioningSystems data group.",
                 )
                 and find_one(
                     "$.preheat_system.design_capacity", hvac_systems_dict[hvac_sys_id]
@@ -184,9 +164,17 @@ def get_zone_conditioning_category_dict(
     # Produce a dict that maps each zone id to a {"sensible_cooling", "heating"} dict
     # representing zone capacities
     zone_capacity_dict = {}
-    for zone in find_all("$..zones[*]", building):
+    zones = [
+        zone
+        for bldg_segment in building.get("building_segments", [])
+        for zone in bldg_segment.get("zones", [])
+    ]
+    for zone in zones:
         zone_id = zone["id"]
-        zone_area = sum(find_all("$..floor_area", zone), ZERO.AREA)
+        zone_area = sum(
+            [space.get("floor_area", ZERO.AREA) for space in zone.get("spaces", [])],
+            ZERO.AREA,
+        )
         assert_(zone_area > ZERO.AREA, f"zone:{zone_id} has no floor area")
 
         zone_capacity_dict[zone_id] = zone_capacity = {
@@ -194,7 +182,7 @@ def get_zone_conditioning_category_dict(
             "heating": ZERO.THERMAL_CAPACITY,
         }
         # Note: Allow for there being no terminals field
-        for terminal in find_all("terminals[*]", zone):
+        for terminal in zone.get("terminals", []):
             # Note: there is only one hvac system even though the field name is plural
             # This will change to singular in schema version 0.0.8
             hvac_sys_id = terminal.get(
@@ -214,7 +202,7 @@ def get_zone_conditioning_category_dict(
     # semi-heated zones
     directly_conditioned_zone_ids = []
     semiheated_zone_ids = []
-    for zone in find_all("$..zones[*]", building):
+    for zone in zones:
         zone_id = zone["id"]
 
         if (zone_capacity_dict[zone_id]["sensible_cooling"] > CAPACITY_THRESHOLD) or (
@@ -226,7 +214,7 @@ def get_zone_conditioning_category_dict(
 
     # Determine eligibility for indirectly conditioned zones
     indirectly_conditioned_zone_ids = []
-    for zone in find_all("$..zones[*]", building):
+    for zone in zones:
         zone_id = zone["id"]
 
         if zone_id not in directly_conditioned_zone_ids:
@@ -245,11 +233,9 @@ def get_zone_conditioning_category_dict(
             else:
                 zone_directly_conditioned_ua = ZERO.UA
                 zone_other_ua = ZERO.UA
-                assert_(
-                    find_all("surfaces[*]", zone), f"zone:{zone_id} has no surfaces"
-                )
+                assert_(zone.get("surfaces", []), f"zone:{zone_id} has no surfaces")
                 for surface in zone["surfaces"]:
-                    subsurfaces = find_all("$.subsurfaces[*]", surface)
+                    subsurfaces = surface.get("subsurfaces", [])
                     # Calculate the total area of all subsurfaces
                     subsurfaces_area = sum(
                         [
@@ -298,7 +284,7 @@ def get_zone_conditioning_category_dict(
                     # zone or not
                     if getattr_(surface, "surface", "adjacent_to") == "INTERIOR":
                         if (
-                            len(find_all("$.spaces[*]", zone)) <= 1
+                            len(zone.get("spaces", [])) <= 1
                             and getattr_(surface, "surface", "adjacent_zone")
                             in directly_conditioned_zone_ids
                         ):
@@ -323,8 +309,8 @@ def get_zone_conditioning_category_dict(
     # Taking stock:
     # To this point, we have determined which zones are directly conditioned,
     # semi-heated, or indirectly conditioned.
-    # Next we determine whether the zone is residential, non-residential, or mixed.
-    for building_segment in find_all("building_segments[*]", building):
+    # Next we determine whether the zone is residential, residential-associated, non-residential, or mixed.
+    for building_segment in building.get("building_segments", []):
         # Set building_segment_is_residential and building_segment_is_nonresidential flags
         building_segment_is_residential = False
         building_segment_is_nonresidential = False
@@ -341,7 +327,7 @@ def get_zone_conditioning_category_dict(
         elif building_segment_lighting_building_area_type is not None:
             building_segment_is_nonresidential = True  # bldg_seg_2
 
-        for zone in find_all("zones[*]", building_segment):
+        for zone in building_segment.get("zones", []):
             zone_id = zone["id"]
             if (
                 zone_id in directly_conditioned_zone_ids
@@ -350,7 +336,7 @@ def get_zone_conditioning_category_dict(
                 # Determine zone_has_residential_spaces and zone_has_nonresidential_spaces flags
                 zone_has_residential_spaces = False
                 zone_has_nonresidential_spaces = False
-                for space in find_all("spaces[*]", zone):
+                for space in zone.get("spaces", []):
                     space_lighting_space_type = space.get("lighting_space_type")
                     if space_lighting_space_type in [
                         "DORMITORY_LIVING_QUARTERS",
@@ -452,6 +438,59 @@ def get_zone_conditioning_category_dict(
                     ] = ZoneConditioningCategory.UNCONDITIONED  # zone_1_9
 
     return zone_conditioning_category_dict
+
+
+def get_zone_conditioning_category_rmd_dict(
+    climate_zone: str, rmd: dict
+) -> dict[str, ZoneConditioningCategory]:
+
+    zone_conditioning_category_rmd_dict = {}
+    constructions = rmd.get("constructions", [])
+    rmd_type = rmd.get("type")
+
+    for building in rmd.get("buildings", []):
+        zone_dict = get_zone_conditioning_category_dict(
+            climate_zone,
+            building,
+            constructions,
+            rmd_type,
+        )
+        zone_conditioning_category_rmd_dict.update(zone_dict)
+
+    return zone_conditioning_category_rmd_dict
+
+
+def get_zone_conditioning_category_dict(
+    climate_zone: str,
+    building: dict,
+    constructions: list,
+    rmd_type: str,
+) -> dict[str, ZoneConditioningCategory]:
+
+    if constructions is None:
+        constructions = []
+
+    if _DISABLE_ZONE_COND_CACHE:
+        return _get_zone_conditioning_category_dict_uncached(
+            climate_zone,
+            building,
+            constructions,
+        )
+
+    cache_key = (rmd_type, climate_zone)
+    building_id = building["id"]
+
+    rmd_cache = _ZONE_COND_CACHE.setdefault(cache_key, {})
+
+    if building_id in rmd_cache:
+        return rmd_cache[building_id]
+
+    result = _get_zone_conditioning_category_dict_uncached(
+        climate_zone, building, constructions
+    )
+
+    rmd_cache[building_id] = result
+    return result
 
 
 def find_construction_by_surface(surface: dict, constructions: List[Dict]) -> dict:

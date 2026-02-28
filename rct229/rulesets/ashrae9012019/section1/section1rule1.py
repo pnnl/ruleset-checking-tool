@@ -22,7 +22,7 @@ FAIL_MSG = "More than one BPF value was used in the project."
 
 
 class PRM9012019Rule73j65(RuleDefinitionListIndexedBase):
-    """Rule 73j65 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculations)"""
+    """Rule 1 of ASHRAE 90.1-2019 Appendix G Section 1 (Performance Calculations)"""
 
     def __init__(self):
         super(PRM9012019Rule73j65, self).__init__(

@@ -35,7 +35,7 @@ class RuleDefinitionBase:
         fail_msg: str = "",
         pass_msg: str = "",
         not_applicable_msg: str = "",
-        precision: Mapping[str, RCTPrecision] = None,
+        precision: Mapping[str, dict[str, float]] = None,
     ):
         """Base class for all Rule definitions
 
@@ -176,6 +176,20 @@ class RuleDefinitionBase:
         context_or_string = self.get_context(rmds, data)
         if isinstance(context_or_string, RuleSetModels):
             context = context_or_string
+
+            for ruleset_model in context.get_ruleset_model_types():
+                model_context = context[ruleset_model]
+
+                if isinstance(model_context, dict):
+                    if model_context.get("id"):
+                        outcome["data_group_id"] = model_context["id"]
+                        break
+
+                elif isinstance(model_context, list):
+                    for item in model_context:
+                        if isinstance(item, dict) and item.get("id"):
+                            outcome["data_group_id"] = item["id"]
+                            break
 
             # Check the context for general validity
             context_validity_dict = self.check_context_validity(context, data)

@@ -71,11 +71,12 @@ class PRM9012019Rule31d63(RuleDefinitionBase):
 
     def get_calc_vals(self, context, data=None):
         rmd_b = context.BASELINE_0
+        fluid_loops_b = rmd_b.get("fluid_loops", [])
         hhw_loop_count = len(
-            find_all('$..fluid_loops[*][?(@.type = "HEATING")]', rmd_b)
+            [loop for loop in fluid_loops_b if loop.get("type") == HEATING]
         )
-        return {"hhw_loop_count": hhw_loop_count}
+        return {"primary_hhw_loop_count": hhw_loop_count}
 
     def rule_check(self, context, calc_vals=None, data=None):
-        hhw_loop_count = calc_vals["hhw_loop_count"]
+        hhw_loop_count = calc_vals["primary_hhw_loop_count"]
         return hhw_loop_count == 1
